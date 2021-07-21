@@ -15,10 +15,6 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-div {
-	font-size: 40px;
-}
-
 .container {
 	width: 960px;
 	max-width: 100%;

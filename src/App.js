@@ -6,13 +6,9 @@ import SignIn from "./components/Login/SignIn/SignIn";
 function App() {
 	return (
 		<div>
-			<Route
-				path='/sign_in'
-				render={() => {
-					<SignIn />;
-				}}
-			/>
 			<NavLink to='/sign_in'>Sign in</NavLink>
+
+			<Route path='/sign_in' render={() => <SignIn />} />
 		</div>
 	);
 }
