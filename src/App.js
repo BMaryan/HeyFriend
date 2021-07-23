@@ -1,15 +1,20 @@
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import "./App.css";
-import SignIn from "./components/Login/SignIn/SignIn";
+import SignIn from "./components/Authorization/SignIn/SignIn";
 
 function App() {
 	return (
-		<div>
+		<>
+			<NavLink exact to='/'>
+				Main page
+			</NavLink>
 			<NavLink to='/sign_in'>Sign in</NavLink>
 
-			<Route path='/sign_in' render={() => <SignIn />} />
-		</div>
+			<div className='App'>
+				<Route path='/sign_in' render={() => <SignIn />} />
+			</div>
+		</>
 	);
 }
 
