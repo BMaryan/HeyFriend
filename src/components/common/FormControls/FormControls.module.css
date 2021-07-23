@@ -1,0 +1,57 @@
+.wrapperInputTextarea {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.wrapperInputTextarea input,
+textarea {
+	width: 100%;
+	margin: 12px 0;
+}
+
+/*  */
+
+.wrapper_field {
+	display: flex;
+}
+
+.text_for_field {
+	font-size: 13px;
+	margin: 0 5px;
+}
+
+.wrapper_button {
+	width: 100%;
+	border-radius: 30px;
+	transition: 0.5s;
+}
+
+.wrapper_button button,
+.field {
+	background: rgb(237, 235, 235);
+	border: none;
+	border-radius: 30px;
+	outline: none;
+	padding: 12px 15px;
+	transition: 0.5s;
+}
+
+.wrapper_button button {
+	width: 100%;
+	color: white;
+	background: linear-gradient(#e66465, #9198e5);
+	border: 1px solid white;
+	border-radius: 30px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.wrapper_button button:hover {
+	color: black;
+	background: white;
+	border: 1px solid silver;
+	border-radius: 30px;
+	transition: 0.5s;
+}
