@@ -9,7 +9,7 @@ const FormControls = props => {
 			{props.children && props.children.props.type === "checkbox" ? (
 				<div>{props.children}</div>
 			) : (
-				<div className={styles.wrapperInputTextarea}>{props.children}</div>
+				<div className={styles.wrapperInputAndTextarea}>{props.children}</div>
 			)}
 
 			{props.meta.touched && props.meta.error ? <div className={styles.text_error}>{props.meta.error}</div> : <></>}

@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./SignUp.module.css";
 import { reduxForm } from "redux-form";
 import { wrapperCreateField, Input, wrapperButton } from "../../common/FormControls/FormControls";
-import { maxLengthCreator, phoneNumber } from "../../common/FormControls/validateForms";
 
 const SignUpForm = props => {
 	return (

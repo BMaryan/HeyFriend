@@ -1,14 +1,16 @@
-.wrapperInputTextarea {
+/* wrapper over input and textarea */
+.wrapperInputAndTextarea {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 }
 
-.wrapperInputTextarea input,
+.wrapperInputAndTextarea input,
 textarea {
 	width: 100%;
 }
 
+/* wrapper over field */
 .wrapper_field {
 }
 
@@ -16,11 +18,15 @@ textarea {
 	display: flex;
 }
 
+.field {
+}
+
 .text_for_field {
 	font-size: 13px;
 	margin: 0 5px;
 }
 
+/* wrapper over button */
 .wrapper_button {
 	width: 100%;
 	border-radius: 30px;
@@ -52,6 +58,7 @@ textarea {
 	transition: 0.5s;
 }
 
+/* style for text error */
 .text_error {
 	color: red;
 	text-align: center;
