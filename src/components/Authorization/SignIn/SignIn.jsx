@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { authorizationContainer, informationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import styles from "./SignIn.module.css";
+import commonStyle from "../Authorization.module.css";
 import SignInReduxForm from "./SignInForm";
 
 const SignIn = props => {
@@ -10,22 +11,10 @@ const SignIn = props => {
 	};
 
 	return (
-		<div className={styles.signIn}>
-			<div className={styles.signIn_content}>
-				<div className={styles.signIn_box}>
-					<div className={styles.form_tittle}>Sign In</div>
-					<SignInReduxForm onSubmit={onSubmit} />
-				</div>
-
-				<div className={styles.welcome_box}>
-					<div className={styles.welcome_text}>Hello, Friend!</div>
-					<div className={styles.have_account_text}>Enter your personal details and start journey with us</div>
-					<div>
-						<NavLink className={styles.navLink} to='/sign_up'>
-							Sign Up
-						</NavLink>
-					</div>
-				</div>
+		<div className={commonStyle.authorization}>
+			<div className={commonStyle.authorization_container}>
+				{authorizationContainer("Sign In", <SignInReduxForm onSubmit={onSubmit} />)}
+				{informationContainer("Hello, Friend!", "Enter your personal details and start journey with us", "/sign_up", "Sign Up")}
 			</div>
 		</div>
 	);
