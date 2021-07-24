@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./SignIn.module.css";
@@ -17,8 +18,8 @@ const SignIn = props => {
 				</div>
 
 				<div className={styles.welcome_box}>
-					<div className={styles.welcome_text}>Welcome to login</div>
-					<div className={styles.have_account_text}>Don't have an account?</div>
+					<div className={styles.welcome_text}>Hello, Friend!</div>
+					<div className={styles.have_account_text}>Enter your personal details and start journey with us</div>
 					<div>
 						<NavLink className={styles.navLink} to='/sign_up'>
 							Sign Up

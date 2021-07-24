@@ -4,8 +4,6 @@ import { Field } from "redux-form";
 import styles from "./FormControls.module.css";
 
 const FormControls = props => {
-	console.log(props.children.props.type);
-
 	return (
 		<>
 			{props.children && props.children.props.type === "checkbox" ? (
@@ -14,7 +12,7 @@ const FormControls = props => {
 				<div className={styles.wrapperInputTextarea}>{props.children}</div>
 			)}
 
-			{/* {props.meta.touched && props.meta.error ? <span>{props.meta.error}</span> : <></>} */}
+			{props.meta.touched && props.meta.error ? <div className={styles.text_error}>{props.meta.error}</div> : <></>}
 		</>
 	);
 };
@@ -41,31 +39,28 @@ export const Textarea = props => {
 
 export const wrapperCreateField = (name, type, validate = [], component, placeholder = "", text = "", ...props) => {
 	return (
-		<div className={styles.wrapper_field}>
-			{
-				(type = "checkbox" ? (
-					<Field
-						className={styles.field + " " + styles.field_checkbox}
-						name={name}
-						validate={validate}
-						type={type}
-						placeholder={placeholder}
-						component={component}
-					/>
-				) : (
+		<>
+			{type === "checkbox" ? (
+				<div className={styles.wrapper_field + " " + styles.wrapper_field_checkbox}>
 					<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
-				))
-			}
 
-			<span className={styles.text_for_field}>{text}</span>
-		</div>
+					<span className={styles.text_for_field}>{text}</span>
+				</div>
+			) : (
+				<div className={styles.wrapper_field}>
+					<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
+
+					<span className={styles.text_for_field}>{text}</span>
+				</div>
+			)}
+		</>
 	);
 };
 
-export const wrapperButton = props => {
+export const wrapperButton = (button_text, ...props) => {
 	return (
 		<div className={styles.wrapper_button}>
-			<button>SIGN IN</button>
+			<button>{button_text}</button>
 		</div>
 	);
 };

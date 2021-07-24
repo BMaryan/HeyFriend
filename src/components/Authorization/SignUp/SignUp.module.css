@@ -1,0 +1,70 @@
+.signUp {
+	height: 400px;
+	min-height: 100%;
+	width: 50%;
+	max-width: 100%;
+	margin: 100px auto;
+}
+
+.signUp_content {
+	height: 100%;
+	width: 100%;
+	background: blue;
+	display: flex;
+}
+
+.signUp_box {
+	width: 50%;
+	background: white;
+	padding: 25px;
+}
+
+.form_tittle {
+	color: rgb(138, 138, 138);
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+/* box welcome */
+.welcome_box {
+	width: 50%;
+	background: linear-gradient(#e66465, #9198e5);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: 0.5s;
+}
+
+.welcome_text {
+	color: white;
+	font-size: 25px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.have_account_text {
+	color: white;
+	font-size: 13px;
+	text-align: center;
+	margin: 10px 0 20px 0;
+}
+
+.navLink {
+	color: white;
+	background: transparent;
+	text-decoration: none;
+	font-size: 15px;
+	border: 2px solid white;
+	border-radius: 20px;
+	outline: none;
+	padding: 7px 12px;
+	transition: 0.5s;
+}
+
+.navLink:hover {
+	color: black;
+	background: rgb(255, 255, 255);
+	transition: 0.5s;
+}

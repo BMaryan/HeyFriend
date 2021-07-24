@@ -7,12 +7,13 @@
 .wrapperInputTextarea input,
 textarea {
 	width: 100%;
-	margin: 12px 0;
 }
 
-/*  */
-
 .wrapper_field {
+	/* display: flex; */
+}
+
+.wrapper_field_checkbox {
 	display: flex;
 }
 
@@ -54,4 +55,9 @@ textarea {
 	border: 1px solid silver;
 	border-radius: 30px;
 	transition: 0.5s;
+}
+
+.text_error {
+	color: red;
+	text-align: center;
 }
