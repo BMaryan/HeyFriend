@@ -1,0 +1,8 @@
+.required {
+	/* color: white; */
+	color: var(--errorBackgroundOrColor);
+	/* position: absolute;
+	top: 5px;
+	left: -160px; */
+	/* padding: 5px; */
+}

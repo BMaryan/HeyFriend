@@ -1,3 +1,37 @@
+// export const required = value => (value ? undefined : false);
+// export const required = value => (value ? undefined : "This field is required!");
+import styles from "./FieldValidationForm.module.css";
+
+export const required = value => {
+	if (value) {
+		return undefined;
+	} else {
+		return <div className={styles.required}>This field is required</div>;
+	}
+};
+
 export const maxLengthCreator = maxLength => value => value && value.length > maxLength ? `Max length is ${maxLength} symbols` : undefined;
 
-export const phoneNumber = value => (value && !/^(0|[1-9][0-9]{9})$/i.test(value) ? "Invalid phone number, must be 10 digits" : undefined);
+export const validateFirstAndLastNameCreator = nameField => value => {
+	if (value && !/^[a-z ,.'-]+$/i.test(value)) {
+		return `Enter ${nameField} name`;
+	} else {
+		return undefined;
+	}
+};
+
+export const validatePhoneNumberAndEmail = value => {
+	if (value && !/^([0-9][0-9]{9})$/i.test(value) && value && !/^[\w-.]+@[a-zA-Z]+\.[a-zA-Z]+$/i.test(value)) {
+		return "The email or mobile number you entered isn’t connected to an account.";
+	} else {
+		return undefined;
+	}
+};
+
+export const validatePassword = value => {
+	if (value && !/^[\w.]{8,}$/i.test(value)) {
+		return "Sorry, your password was incorrect. Please double-check your password.";
+	} else {
+		return undefined;
+	}
+};

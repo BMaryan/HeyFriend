@@ -3,6 +3,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	transition: 0.5s;
 }
 
 .wrapperInputAndTextarea input,
@@ -10,15 +11,22 @@ textarea {
 	width: 100%;
 }
 
+.wrapperInputAndTextareaError input,
+textarea {
+	border: 1px solid var(--errorBackgroundOrColor);
+	transition: 0.5s;
+}
+
 /* wrapper over field */
 .wrapper_field {
+	position: relative;
+}
+
+.field {
 }
 
 .wrapper_field_checkbox {
 	display: flex;
-}
-
-.field {
 }
 
 .text_for_field {
@@ -35,10 +43,11 @@ textarea {
 .wrapper_button button,
 .field {
 	background: rgb(237, 235, 235);
-	border: none;
+	border: 1px solid rgb(237, 235, 235);
 	border-radius: 30px;
 	outline: none;
 	padding: 12px 15px;
+	transition: 0.5s;
 }
 
 .wrapper_button button {
@@ -47,7 +56,7 @@ textarea {
 	background: yellowgreen;
 	background: linear-gradient(#e66465, #9198e5);
 	border-radius: 30px;
-	margin-top: 20px;
+	margin-top: 10px;
 	cursor: pointer;
 	transition: 0.5s;
 }
@@ -58,8 +67,16 @@ textarea {
 	transition: 0.5s;
 }
 
-/* style for text error */
-.text_error {
-	color: red;
-	text-align: center;
+/* style for box error */
+.block_error {
+	color: var(--errorBackgroundOrColor);
+	font-size: 13px;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+.block_error svg {
+	color: var(--errorBackgroundOrColor);
+	margin: 0 5px 0 0;
 }

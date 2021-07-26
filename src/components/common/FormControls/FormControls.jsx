@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Field } from "redux-form";
+import { togglePassword } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import styles from "./FormControls.module.css";
 
 const FormControls = props => {
@@ -9,10 +10,32 @@ const FormControls = props => {
 			{props.children && props.children.props.type === "checkbox" ? (
 				<div>{props.children}</div>
 			) : (
-				<div className={styles.wrapperInputAndTextarea}>{props.children}</div>
+				<>
+					{props.meta.touched && props.meta.error ? (
+						<div className={styles.wrapperInputAndTextarea + " " + styles.wrapperInputAndTextareaError}>{props.children}</div>
+					) : (
+						<div className={styles.wrapperInputAndTextarea}>{props.children}</div>
+					)}
+				</>
 			)}
-
-			{props.meta.touched && props.meta.error ? <div className={styles.text_error}>{props.meta.error}</div> : <></>}
+			{props.meta.touched && props.meta.error ? (
+				<div className={styles.block_error}>
+					<svg
+						aria-hidden='true'
+						class='stUf5b LxE1Id'
+						fill='currentColor'
+						focusable='false'
+						width='16px'
+						height='16px'
+						viewBox='0 0 24 24'
+						xmlns='https://www.w3.org/2000/svg'>
+						<path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'></path>
+					</svg>
+					{props.meta.error}
+				</div>
+			) : (
+				<></>
+			)}
 		</>
 	);
 };
@@ -48,7 +71,20 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 				</div>
 			) : (
 				<div className={styles.wrapper_field}>
-					<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
+					{type === "password" ? (
+						<>
+							<Field
+								className={styles.field}
+								name={name}
+								validate={validate}
+								type={type}
+								placeholder={placeholder}
+								component={component}
+							/>
+						</>
+					) : (
+						<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
+					)}
 
 					<span className={styles.text_for_field}>{text}</span>
 				</div>
@@ -57,10 +93,14 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 	);
 };
 
-export const wrapperButton = (button_text, ...props) => {
+export const wrapperButton = (button_text, { ...props }) => {
+	console.log(props);
+
 	return (
 		<div className={styles.wrapper_button}>
-			<button>{button_text}</button>
+			<button type='submit' onClick={props.clearFields} disabled={props.invalid || props.submitting || props.pristine}>
+				{button_text}
+			</button>
 		</div>
 	);
 };

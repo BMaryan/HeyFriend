@@ -6,6 +6,7 @@ import SignUpReduxForm from "./SignUpForm";
 import { authorizationContainer, informationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
 
 const SignUp = props => {
+	console.log(props);
 	let onSubmit = formData => {
 		console.log(formData);
 	};
