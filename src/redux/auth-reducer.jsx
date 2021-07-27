@@ -23,13 +23,13 @@ const AuthReducer = (state = initialState, action) => {
 		case SET_USER_SIGN_IN: {
 			return {
 				...state,
-				...action.data,
+				userSignIn: { id: state.users.length + 1, ...action.data },
 			};
 		}
 		case SET_USER_SIGN_UP: {
 			return {
 				...state,
-				...action.data,
+				userSignUp: { id: state.users.length + 1, ...action.data },
 			};
 		}
 		default: {
@@ -38,14 +38,14 @@ const AuthReducer = (state = initialState, action) => {
 	}
 };
 
-export const setUserSignIn = (id, phone_or_email, password, rememberMe) => ({
+export const setUserSignIn = ({ phone_or_email, password, rememberMe = false }) => ({
 	type: SET_USER_SIGN_IN,
-	data: { id, phone_or_email, password, rememberMe },
+	data: { phone_or_email, password, rememberMe },
 });
 
-export const setUserSignUp = (id, name, surname, phone_or_email, password) => ({
-	type: SET_USER_SIGN_IN,
-	data: { id, name, surname, phone_or_email, password },
+export const setUserSignUp = ({ name, surname, phone_or_email, password }) => ({
+	type: SET_USER_SIGN_UP,
+	data: { name, surname, phone_or_email, password },
 });
 
 export default AuthReducer;

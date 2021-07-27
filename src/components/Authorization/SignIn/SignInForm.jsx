@@ -6,8 +6,6 @@ import { wrapperCreateField, Input, wrapperButton } from "../../common/FormContr
 import { validatePhoneNumberAndEmail, validatePassword, required } from "../../../utils/FieldValidationForm/FieldValidationForm";
 
 const SignInForm = props => {
-	// console.log(props);
-
 	return (
 		<form className={styles.form} onSubmit={props.handleSubmit}>
 			{wrapperCreateField("phone_or_email", "text", [validatePhoneNumberAndEmail, required], Input, "Mobile Number or email", "")}

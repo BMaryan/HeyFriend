@@ -6,7 +6,9 @@ import commonStyle from "../Authorization.module.css";
 import SignInReduxForm from "./SignInForm";
 
 const SignIn = props => {
+	console.log("SIGN IN", props);
 	let onSubmit = formData => {
+		props.setUserSignIn(formData);
 		console.log(formData);
 	};
 

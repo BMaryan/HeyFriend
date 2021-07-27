@@ -1,9 +1,8 @@
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import "./App.css";
-import AuthorizationContainer from "./components/Authorization/AuthorizationContainer";
-import SignIn from "./components/Authorization/SignIn/SignIn";
-import SignUp from "./components/Authorization/SignUp/SignUp";
+import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
+import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
 
 function App() {
 	return (
@@ -11,12 +10,11 @@ function App() {
 			<NavLink exact to='/'>
 				Main page
 			</NavLink>
-			<NavLink to='/authorization'>Authorization</NavLink>
+			<NavLink to='/sign_up'>Sign Up</NavLink>
 
 			<div className='App'>
-				<Route path='/authorization' render={() => <AuthorizationContainer />} />
-				<Route path='/sign_in' render={() => <SignIn />} />
-				<Route path='/sign_up' render={() => <SignUp />} />
+				<Route path='/sign_in' render={() => <SignInContainer />} />
+				<Route path='/sign_up' render={() => <SignUpContainer />} />
 			</div>
 		</>
 	);
