@@ -24,3 +24,17 @@ export const informationContainer = (title, subtitle, linkTo, buttonText, ...pro
 		</div>
 	);
 };
+
+// form data to local storage and push to state
+export const setSignUpDataToLocalStorage = props => {
+	if (props.users && props.userSignUp && props.userSignUp.id) {
+		localStorage.setItem("users", JSON.stringify(props.users));
+		let foundUser = props.users.find(item => {
+			return item.phone_or_email === props.userSignUp.phone_or_email;
+		});
+
+		if (!foundUser) {
+			props.users.push(props.userSignUp);
+		}
+	}
+};

@@ -9,7 +9,7 @@ const SignIn = props => {
 	console.log("SIGN IN", props);
 	let onSubmit = formData => {
 		props.setUserSignIn(formData);
-		console.log(formData);
+		props.checkAuthorization(props.users, props.userSignIn);
 	};
 
 	return (

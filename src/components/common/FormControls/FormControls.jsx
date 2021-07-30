@@ -22,7 +22,7 @@ const FormControls = props => {
 				<div className={styles.block_error}>
 					<svg
 						aria-hidden='true'
-						class='stUf5b LxE1Id'
+						className='stUf5b LxE1Id'
 						fill='currentColor'
 						focusable='false'
 						width='16px'

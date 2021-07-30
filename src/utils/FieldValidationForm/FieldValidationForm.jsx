@@ -1,5 +1,3 @@
-// export const required = value => (value ? undefined : false);
-// export const required = value => (value ? undefined : "This field is required!");
 import styles from "./FieldValidationForm.module.css";
 
 export const required = value => {
@@ -11,6 +9,23 @@ export const required = value => {
 };
 
 export const maxLengthCreator = maxLength => value => value && value.length > maxLength ? `Max length is ${maxLength} symbols` : undefined;
+
+export const validateFindTheSameUserCreator = users => value => {
+	let foundUser;
+	if (users) {
+		foundUser = users.find(item => {
+			return item.phone_or_email === value;
+		});
+	}
+
+	if (!foundUser) {
+		// console.warn("-----------GOOD-------", users);
+		return undefined;
+	} else {
+		// console.error("-----------BAD-------", users);
+		return "The same user";
+	}
+};
 
 export const validateFirstAndLastNameCreator = nameField => value => {
 	if (value && !/^[a-z ,.'-]+$/i.test(value)) {

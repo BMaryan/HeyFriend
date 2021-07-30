@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./SignUp.module.css";
 import commonStyle from "../Authorization.module.css";
 import SignUpReduxForm from "./SignUpForm";
@@ -9,14 +10,13 @@ const SignUp = props => {
 	console.log("SIGN UP", props);
 	let onSubmit = formData => {
 		props.setUserSignUp(formData);
-		console.log(formData);
 	};
 
 	return (
 		<div className={commonStyle.authorization}>
 			<div className={commonStyle.authorization_container}>
 				{informationContainer("Welcome Back!", "Don't have an account?", "/sign_in", "Sign In")}
-				{authorizationContainer("Sign Up", <SignUpReduxForm onSubmit={onSubmit} />)}
+				{authorizationContainer("Sign Up", <SignUpReduxForm onSubmit={onSubmit} users={props.users} userSignUp={props.userSignUp} />)}
 			</div>
 		</div>
 	);
