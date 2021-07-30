@@ -17,7 +17,7 @@ let initialState = {
 		phone_or_email: null,
 		password: null,
 	},
-	profileAuthorizationData: {},
+	profileAuthorizationData: null,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -45,7 +45,13 @@ const AuthReducer = (state = initialState, action) => {
 			return {
 				...state,
 				...state.profileAuthorizationData,
-				// profileAuthorizationData:
+				profileAuthorizationData: action.users.find(user => {
+					if (user.phone_or_email === action.userSignIn.phone_or_email && user.password === action.userSignIn.password) {
+						return { user };
+					} else {
+						return undefined;
+					}
+				}),
 			};
 		}
 		default: {

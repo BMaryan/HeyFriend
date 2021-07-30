@@ -4,13 +4,21 @@ import { authorizationContainer, informationContainer } from "../../../utils/hel
 import styles from "./SignIn.module.css";
 import commonStyle from "../Authorization.module.css";
 import SignInReduxForm from "./SignInForm";
+import { Redirect } from "react-router-dom";
 
 const SignIn = props => {
 	console.log("SIGN IN", props);
 	let onSubmit = formData => {
 		props.setUserSignIn(formData);
-		props.checkAuthorization(props.users, props.userSignIn);
 	};
+
+	if (props.userSignIn && props.userSignIn.phone_or_email) {
+		props.checkAuthorization(props.users, props.userSignIn);
+	}
+
+	if (props.profileAuthorizationData) {
+		return <Redirect to='/profile' />;
+	}
 
 	return (
 		<div className={commonStyle.authorization}>

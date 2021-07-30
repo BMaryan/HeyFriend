@@ -6,6 +6,8 @@ import { setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorizati
 import SignIn from "./SignIn";
 
 const SignInContainer = props => {
+	// console.log("SIGN IN CONTAINER", props);
+
 	setSignUpDataToLocalStorage(props);
 
 	useEffect(() => {
@@ -13,13 +15,22 @@ const SignInContainer = props => {
 		props.setUsers(users);
 	}, []);
 
-	return <SignIn {...props} checkAuthorization={props.checkAuthorization} setUserSignIn={props.setUserSignIn} userSignIn={props.userSignIn} />;
+	return (
+		<SignIn
+			{...props}
+			profileAuthorizationData={props.profileAuthorizationData}
+			checkAuthorization={props.checkAuthorization}
+			setUserSignIn={props.setUserSignIn}
+			userSignIn={props.userSignIn}
+		/>
+	);
 };
 
 const mapStateToProps = state => {
 	return {
 		users: state.auth.users,
 		userSignIn: state.auth.userSignIn,
+		profileAuthorizationData: state.auth.profileAuthorizationData,
 	};
 };
 
