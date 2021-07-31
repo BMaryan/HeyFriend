@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./helperForAuthorization.module.css";
 import { NavLink } from "react-router-dom";
 
-export const authorizationContainer = (title, form, ...props) => {
+export const AuthorizationContainer = (title, form, ...props) => {
 	return (
 		<div className={styles.authorization_content}>
 			<div className={styles.authorization_title}>{title}</div>

@@ -5,7 +5,7 @@ import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
 import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
-function App() {
+function App(props) {
 	return (
 		<>
 			<NavLink exact to='/'>

@@ -45,13 +45,7 @@ const AuthReducer = (state = initialState, action) => {
 			return {
 				...state,
 				...state.profileAuthorizationData,
-				profileAuthorizationData: action.users.find(user => {
-					if (user.phone_or_email === action.userSignIn.phone_or_email && user.password === action.userSignIn.password) {
-						return { user };
-					} else {
-						return undefined;
-					}
-				}),
+				profileAuthorizationData: action.user ? { ...action.user } : null,
 			};
 		}
 		default: {
@@ -75,10 +69,9 @@ export const setUsers = users => ({
 	users,
 });
 
-export const checkAuthorization = (users, userSignIn) => ({
+export const checkAuthorization = user => ({
 	type: CHECK_AUTHORIZATION,
-	users,
-	userSignIn,
+	user,
 });
 
 export default AuthReducer;

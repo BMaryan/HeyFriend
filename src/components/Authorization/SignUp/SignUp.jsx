@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import styles from "./SignUp.module.css";
 import commonStyle from "../Authorization.module.css";
 import SignUpReduxForm from "./SignUpForm";
-import { authorizationContainer, informationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
+import { AuthorizationContainer, informationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
 
 const SignUp = props => {
 	console.log("SIGN UP", props);
@@ -16,7 +16,7 @@ const SignUp = props => {
 		<div className={commonStyle.authorization}>
 			<div className={commonStyle.authorization_container}>
 				{informationContainer("Welcome Back!", "Don't have an account?", "/sign_in", "Sign In")}
-				{authorizationContainer("Sign Up", <SignUpReduxForm onSubmit={onSubmit} users={props.users} userSignUp={props.userSignUp} />)}
+				{AuthorizationContainer("Sign Up", <SignUpReduxForm onSubmit={onSubmit} users={props.users} userSignUp={props.userSignUp} />)}
 			</div>
 		</div>
 	);

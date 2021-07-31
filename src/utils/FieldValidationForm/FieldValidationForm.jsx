@@ -10,19 +10,42 @@ export const required = value => {
 
 export const maxLengthCreator = maxLength => value => value && value.length > maxLength ? `Max length is ${maxLength} symbols` : undefined;
 
+export const validateAuthorizationUserCreator = (users, userSignIn) => value => {
+	let foundUser;
+	if (users) {
+		foundUser = users.find(item => item.phone_or_email === userSignIn.phone_or_email);
+
+		if (foundUser) {
+			console.log("GOOD phone_or_email");
+			return undefined;
+		} else {
+			console.log("ERROR phone_or_email");
+			return "No such user!";
+		}
+	}
+
+	if (users) {
+		foundUser = users.find(item => item.password === value);
+
+		if (foundUser) {
+			console.log("GOOD password");
+			return undefined;
+		} else {
+			console.log("ERROR password");
+			return "No such user!";
+		}
+	}
+};
+
 export const validateFindTheSameUserCreator = users => value => {
 	let foundUser;
 	if (users) {
-		foundUser = users.find(item => {
-			return item.phone_or_email === value;
-		});
+		foundUser = users.find(item => item.phone_or_email === value);
 	}
 
 	if (!foundUser) {
-		// console.warn("-----------GOOD-------", users);
 		return undefined;
 	} else {
-		// console.error("-----------BAD-------", users);
 		return "The same user";
 	}
 };

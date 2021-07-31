@@ -5,16 +5,37 @@ import { setUsers, setUserSignUp } from "../../../redux/auth-reducer";
 import { setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
 
-const SignUpContainer = props => {
-	setSignUpDataToLocalStorage(props);
-
-	React.useEffect(() => {
+class SignUpContainer extends React.Component {
+	componentDidMount() {
 		let users = JSON.parse(localStorage.getItem("users"));
-		props.setUsers(users);
-	}, []);
+		this.props.setUsers(users);
+	}
 
-	return <SignUp {...props} userSignUp={props.userSignUp} setUsers={props.setUsers} setUserSignUp={props.setUserSignUp} users={props.users} />;
-};
+	render() {
+		setSignUpDataToLocalStorage(this.props);
+
+		return (
+			<SignUp
+				{...this.props}
+				userSignUp={this.props.userSignUp}
+				setUsers={this.props.setUsers}
+				setUserSignUp={this.props.setUserSignUp}
+				users={this.props.users}
+			/>
+		);
+	}
+}
+
+// const SignUpContainer = props => {
+// 	setSignUpDataToLocalStorage(props);
+
+// 	React.useEffect(() => {
+// 		let users = JSON.parse(localStorage.getItem("users"));
+// 		props.setUsers(users);
+// 	}, []);
+
+// 	return <SignUp {...props} userSignUp={props.userSignUp} setUsers={props.setUsers} setUserSignUp={props.setUserSignUp} users={props.users} />;
+// };
 
 const mapStateToProps = state => {
 	return {
