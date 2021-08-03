@@ -1,49 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { checkAuthorization, setUsers, setUserSignIn } from "../../../redux/auth-reducer";
-import { setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
+import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignIn from "./SignIn";
 
-class SignInContainer extends React.Component {
-	UNSAFE_componentWillMount() {
+const SignInContainer = props => {
+	React.useEffect(() => {
 		let users = JSON.parse(localStorage.getItem("users"));
-		this.props.setUsers(users);
+		props.setUsers(users);
+	}, [setSignUpDataToLocalStorage(props)]);
+
+	React.useEffect(() => {
+		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
+		props.checkAuthorization(profileUser);
+	}, [props.userSignIn]);
+
+	setSignUpDataToLocalStorage(props);
+	helpCheckAuthorization(props);
+
+	if (props.profileAuthorizationData && props.profileAuthorizationData.phone_or_email) {
+		return <Redirect to='/profile' />;
 	}
 
-	render() {
-		setSignUpDataToLocalStorage(this.props);
-
-		return (
-			<SignIn
-				{...this.props}
-				profileAuthorizationData={this.props.profileAuthorizationData}
-				checkAuthorization={this.props.checkAuthorization}
-				setUserSignIn={this.props.setUserSignIn}
-				userSignIn={this.props.userSignIn}
-			/>
-		);
-	}
-}
-
-// const SignInContainerA = props => {
-// 	setSignUpDataToLocalStorage(props);
-
-// 	React.useEffect(() => {
-// 		let users = JSON.parse(localStorage.getItem("users"));
-// 		props.setUsers(users);
-// 	}, []);
-
-// 	return (
-// 		<SignIn
-// 			{...props}
-// 			profileAuthorizationData={props.profileAuthorizationData}
-// 			checkAuthorization={props.checkAuthorization}
-// 			setUserSignIn={props.setUserSignIn}
-// 			userSignIn={props.userSignIn}
-// 		/>
-// 	);
-// };
+	return (
+		<SignIn
+			{...props}
+			profileAuthorizationData={props.profileAuthorizationData}
+			checkAuthorization={props.checkAuthorization}
+			setUserSignIn={props.setUserSignIn}
+			userSignIn={props.userSignIn}
+		/>
+	);
+};
 
 const mapStateToProps = state => {
 	return {
@@ -58,4 +48,5 @@ export default connect(mapStateToProps, {
 	setSignUpDataToLocalStorage,
 	setUsers,
 	checkAuthorization,
+	helpCheckAuthorization,
 })(SignInContainer);

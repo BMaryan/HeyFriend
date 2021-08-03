@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from "react";
 import styles from "./helperForAuthorization.module.css";
 import { NavLink } from "react-router-dom";
@@ -37,4 +38,18 @@ export const setSignUpDataToLocalStorage = props => {
 			props.users.push(props.userSignUp);
 		}
 	}
+};
+
+// check authorization
+export const helpCheckAuthorization = props => {
+	props.users.find(user => {
+		if (props.userSignIn && props.userSignIn.phone_or_email) {
+			if (user.phone_or_email === props.userSignIn.phone_or_email && user.password === props.userSignIn.password) {
+				console.log("helpCheckAuthorization", user);
+
+				localStorage.setItem("profileAuthorizationData", JSON.stringify(user));
+				return user;
+			}
+		}
+	});
 };

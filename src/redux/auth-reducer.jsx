@@ -37,14 +37,12 @@ const AuthReducer = (state = initialState, action) => {
 		case SET_USERS: {
 			return {
 				...state,
-				...state.users,
 				users: action.users ? [...action.users] : [],
 			};
 		}
 		case CHECK_AUTHORIZATION: {
 			return {
 				...state,
-				...state.profileAuthorizationData,
 				profileAuthorizationData: action.user ? { ...action.user } : null,
 			};
 		}

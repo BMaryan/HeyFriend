@@ -1,18 +1,15 @@
 import React from "react";
-import { NavLink, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./App.css";
 import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
 import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App(props) {
 	return (
 		<>
-			<NavLink exact to='/'>
-				Main page
-			</NavLink>
-			<NavLink to='/sign_up'>Sign Up</NavLink>
-			<NavLink to='/profile'>Profile</NavLink>
+			<HeaderContainer />
 
 			<div className='App'>
 				<Route path='/profile' render={() => <ProfileContainer />} />

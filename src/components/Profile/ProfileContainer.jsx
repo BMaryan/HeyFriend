@@ -19,4 +19,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, null)(ProfileContainer);
+export default connect(mapStateToProps, {})(ProfileContainer);
