@@ -1,0 +1,13 @@
+.navbar {
+	transition: 0.5s;
+}
+
+.nav_link {
+	margin: 0 15px;
+	transition: 0.5s;
+}
+
+.nav_link_active {
+	color: red;
+	transition: 0.5s;
+}

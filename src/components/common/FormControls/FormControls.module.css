@@ -53,8 +53,7 @@ textarea {
 .wrapper_button button {
 	width: 100%;
 	color: white;
-	background: yellowgreen;
-	background: linear-gradient(#e66465, #9198e5);
+	background: linear-gradient(var(--authorizationBackgroundOrColor));
 	border-radius: 30px;
 	margin-top: 10px;
 	cursor: pointer;

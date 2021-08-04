@@ -1,0 +1,10 @@
+.header {
+	background: rgb(235, 235, 235);
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+}
+
+.header > div {
+	margin: 0 10px;
+}
