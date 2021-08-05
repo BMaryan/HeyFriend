@@ -10,10 +10,12 @@ const Header = props => {
 
 	return (
 		<div className={styles.header}>
-			<div>Logo</div>
-			<HeaderReduxForm onSubmit={onsubmit} />
+			<div className='container'>
+				<div>Logo</div>
+				<HeaderReduxForm onSubmit={onsubmit} />
 
-			<Navbar {...props} profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />
+				<Navbar {...props} profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />
+			</div>
 		</div>
 	);
 };

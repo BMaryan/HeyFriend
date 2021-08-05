@@ -24,13 +24,12 @@ code {
 .container {
 	width: 1140px;
 	max-width: 100%;
-	background: cornflowerblue;
+	/* background: cornflowerblue; */
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 	margin: auto;
 }
 
 .container_fluid {
 	width: 100%;
-	/* background: chartreuse; */
 }

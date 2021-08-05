@@ -9,16 +9,16 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 function App(props) {
 	return (
 		<>
-			<div className='container'>
+			<div className='container_fluid'>
 				<HeaderContainer />
 
+				<Route path='/sign_in' render={() => <SignInContainer />} />
+				<Route path='/sign_up' render={() => <SignUpContainer />} />
+			</div>
+			<div className='container'>
 				<div className='App'>
 					<Route path='/profile' render={() => <ProfileContainer />} />
 				</div>
-			</div>
-			<div className='container_fluid'>
-				<Route path='/sign_in' render={() => <SignInContainer />} />
-				<Route path='/sign_up' render={() => <SignUpContainer />} />
 			</div>
 		</>
 	);
