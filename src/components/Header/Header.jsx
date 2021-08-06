@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 import React from "react";
 import Navbar from "./Navbar/Navbar";
 import styles from "./Header.module.css";
@@ -10,10 +11,9 @@ const Header = props => {
 
 	return (
 		<div className={styles.header}>
-			<div className='container'>
+			<div className={"container" + " " + styles.header_container}>
 				<div>Logo</div>
 				<HeaderReduxForm onSubmit={onsubmit} />
-
 				<Navbar {...props} profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />
 			</div>
 		</div>

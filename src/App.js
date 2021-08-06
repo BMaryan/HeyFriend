@@ -7,6 +7,8 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App(props) {
+	console.log("APP", props);
+
 	return (
 		<>
 			<div className='container_fluid'>

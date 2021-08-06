@@ -7,19 +7,6 @@ import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../ut
 import SignIn from "./SignIn";
 
 const SignInContainer = props => {
-	React.useEffect(() => {
-		let users = JSON.parse(localStorage.getItem("users"));
-		props.setUsers(users);
-	}, [setSignUpDataToLocalStorage(props)]);
-
-	React.useEffect(() => {
-		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-		props.checkAuthorization(profileUser);
-	}, [props.userSignIn]);
-
-	setSignUpDataToLocalStorage(props);
-	helpCheckAuthorization(props);
-
 	if (props.profileAuthorizationData && props.profileAuthorizationData.phone_or_email) {
 		return <Redirect to='/profile' />;
 	}

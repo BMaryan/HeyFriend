@@ -8,34 +8,38 @@ import styles from "./Navbar.module.css";
 const Navbar = props => {
 	return (
 		<div className={styles.navbar}>
-			<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} exact to='/'>
-				<FontAwesomeIcon className={styles.icon} icon={faHome} />
-				Main page
-			</NavLink>
-
-			<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/message'>
-				<FontAwesomeIcon className={styles.icon} icon={faFacebookMessenger} />
-			</NavLink>
-
-			<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/profile'>
-				Profile
-			</NavLink>
-
-			{props.profileAuthorizationData ? (
-				<NavLink
-					className={styles.nav_link}
-					activeClassName={styles.nav_link_active}
-					onClick={() => {
-						localStorage.removeItem("profileAuthorizationData");
-					}}
-					to='/sign_up'>
-					Log out
+			<div className={styles.wrapper_nav_link}>
+				<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} exact to='/'>
+					<FontAwesomeIcon className={styles.icon} icon={faHome} />
 				</NavLink>
-			) : (
-				<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/sign_up'>
-					Sign Up
+			</div>
+			<div className={styles.wrapper_nav_link}>
+				<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/message'>
+					<FontAwesomeIcon className={styles.icon} icon={faFacebookMessenger} />
 				</NavLink>
-			)}
+			</div>
+			<div className={styles.wrapper_nav_link}>
+				<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/profile'>
+					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU' alt='' />
+				</NavLink>
+			</div>
+			<div className={styles.wrapper_nav_link}>
+				{props.profileAuthorizationData ? (
+					<NavLink
+						className={styles.nav_link}
+						activeClassName={styles.nav_link_active}
+						onClick={() => {
+							localStorage.removeItem("profileAuthorizationData");
+						}}
+						to='/sign_up'>
+						Log out
+					</NavLink>
+				) : (
+					<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/sign_up'>
+						Sign Up
+					</NavLink>
+				)}
+			</div>
 		</div>
 	);
 };
