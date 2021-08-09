@@ -17,6 +17,7 @@ code {
 /* global removables */
 :root {
 	--authorizationBackgroundOrColor: #e66465, #9198e5;
+	--bodyBackgroundOrColor: rgb(243, 243, 243);
 	--errorBackgroundOrColor: #d93025;
 }
 
@@ -24,7 +25,7 @@ code {
 .container {
 	width: 1140px;
 	max-width: 100%;
-	/* background: cornflowerblue; */
+	background: cornflowerblue;
 	display: flex;
 	margin: 0 auto;
 }

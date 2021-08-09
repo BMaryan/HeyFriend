@@ -12,7 +12,7 @@ const Header = props => {
 	return (
 		<div className={styles.header}>
 			<div className={"container" + " " + styles.header_container}>
-				<div>Logo</div>
+				<div className={styles.header_logo}>Logo</div>
 				<HeaderReduxForm onSubmit={onsubmit} />
 				<Navbar {...props} profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />
 			</div>

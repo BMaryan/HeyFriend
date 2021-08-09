@@ -1,31 +1,45 @@
 .header {
-	height: 50px;
+	height: 35px;
 	min-height: 100%;
 	background: white;
 	display: flex;
 	border-bottom: 1px solid rgb(221, 221, 221);
+	padding: 10px 0;
 }
 
 .header_container {
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	border: 1px solid red;
 }
 
-/* wrapper field */
+/* logo */
+.header_logo {
+	height: 100%;
+}
+
+/* form */
+.form {
+	height: 100%;
+}
+
 .wrapper_field {
+	height: 100%;
 	position: relative;
 }
 
 .field {
+	height: 100%;
 	width: 250px;
 	max-width: 100%;
-	background: rgb(243, 243, 243);
-	font-size: 13px;
+	background: var(--bodyBackgroundOrColor);
+	font-size: 14px;
 	border: none;
 	outline: none;
-	border-radius: 7px;
-	padding: 7px 10px 7px 25px;
+	border-radius: 30px;
+	padding: 0 10px 0 25px;
 }
 
 /* icon */
@@ -33,6 +47,6 @@
 	color: rgb(192, 191, 191);
 	font-size: 11px;
 	position: absolute;
-	top: 7px;
+	top: 12px;
 	left: 7px;
 }
