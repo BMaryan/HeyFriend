@@ -17,7 +17,7 @@ function App(props) {
 			</div>
 			<div className='container'>
 				<div className='App'>
-					<Route exact path='/' render={() => <ProfileContainer />} />
+					<Route exact path='/' render={() => <div>Main page</div>} />
 					<Route path='/profile' render={() => <ProfileContainer />} />
 				</div>
 			</div>

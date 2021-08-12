@@ -4,12 +4,14 @@
 	align-items: center;
 	transition: 0.5s;
 	border: 1px solid green;
+	position: relative;
 }
 
 .wrapper_nav_link {
 	height: 100%;
 	display: flex;
 	transition: 0.5s;
+	/* position: relative; */
 }
 
 .nav_link {
@@ -63,4 +65,17 @@
 	color: rgb(192, 191, 191);
 	font-size: 18px;
 	transition: 0.5s;
+}
+
+/*  */
+.toggleListProfile {
+	height: 100px;
+	width: 100%;
+	background: red;
+	border-radius: 7px;
+	position: absolute;
+	top: 45px;
+	/* left: 0; */
+	right: -20px;
+	padding: 10px;
 }

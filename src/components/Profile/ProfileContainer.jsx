@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 
 const ProfileContainer = props => {
@@ -15,7 +16,7 @@ const ProfileContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		profileAuthorizationData: state.auth.profileAuthorizationData,
+		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};
 };
 

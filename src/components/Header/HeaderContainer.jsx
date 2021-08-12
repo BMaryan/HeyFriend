@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { checkAuthorization } from "../../redux/auth-reducer";
+import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors";
 import Header from "./Header";
 
 const HeaderContainer = props => {
@@ -9,7 +10,7 @@ const HeaderContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		profileAuthorizationData: state.auth.profileAuthorizationData,
+		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};
 };
 
