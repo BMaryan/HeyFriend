@@ -14,7 +14,7 @@ const Header = props => {
 			<div className={"container" + " " + styles.header_container}>
 				<div className={styles.header_logo}>Logo</div>
 				<HeaderReduxForm onSubmit={onsubmit} />
-				<Navbar {...props} profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />
+				<Navbar profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 		</div>
 	);

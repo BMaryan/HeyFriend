@@ -5,7 +5,7 @@ import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors"
 import Header from "./Header";
 
 const HeaderContainer = props => {
-	return <Header {...props} profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />;
+	return <Header {...props} />;
 };
 
 const mapStateToProps = state => {

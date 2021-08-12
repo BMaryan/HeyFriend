@@ -5,8 +5,6 @@ import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors"
 import Profile from "./Profile";
 
 const ProfileContainer = props => {
-	console.log(props);
-
 	if (!props.profileAuthorizationData) {
 		return <Redirect to='/sign_up' />;
 	}

@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import App from "./App";
 import { checkAuthorization, setUsers } from "./redux/auth-reducer";
+import { getProfileAuthorizationDataSelector, getUserSignInSelector, getUserSignUpSelector, getUsersSelector } from "./redux/auth-selectors";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
 
 const AppContainer = props => {
@@ -24,10 +25,10 @@ const AppContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		users: state.auth.users,
-		profileAuthorizationData: state.auth.profileAuthorizationData,
-		userSignIn: state.auth.userSignIn,
-		userSignUp: state.auth.userSignUp,
+		users: getUsersSelector(state),
+		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
+		userSignIn: getUserSignInSelector(state),
+		userSignUp: getUserSignUpSelector(state),
 	};
 };
 

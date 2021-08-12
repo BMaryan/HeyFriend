@@ -12,7 +12,7 @@ const SignUpContainer = props => {
 		return <Redirect to='/profile' />;
 	}
 
-	return <SignUp {...props} userSignUp={props.userSignUp} setUsers={props.setUsers} setUserSignUp={props.setUserSignUp} users={props.users} />;
+	return <SignUp {...props} />;
 };
 
 const mapStateToProps = state => {

@@ -1,17 +1,22 @@
 .navbar {
 	height: 100%;
+	background: green;
 	display: flex;
-	align-items: center;
-	transition: 0.5s;
-	border: 1px solid green;
-	position: relative;
 }
 
+.navbar_content {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+	transition: 0.5s;
+}
+
+/* wrapper nav link */
 .wrapper_nav_link {
 	height: 100%;
 	display: flex;
 	transition: 0.5s;
-	/* position: relative; */
 }
 
 .nav_link {
@@ -19,7 +24,7 @@
 }
 
 .nav_link,
-.nav_link_profile {
+.nav_link_profileList {
 	color: black;
 	border-radius: 30px;
 	text-decoration: none;
@@ -31,22 +36,22 @@
 }
 
 .nav_link_active {
-	/* padding: 0 8px; */
-}
-
-.nav_link_active,
-.nav_link_active_profile {
 	background: rgb(229, 231, 232);
 	border: 1px solid rgb(201, 201, 201);
 	border-radius: 30px;
 	transition: 0.5s;
 }
 
-.wrapper_profile_picture {
+/* nav link profileList */
+.nav_link_profileList {
+	cursor: pointer;
+}
+
+.wrapper_profileList_picture {
 	height: 100%;
 }
 
-.profile_picture {
+.wrapper_profileList_picture img {
 	height: 100%;
 	width: 35px;
 	object-fit: cover;
@@ -54,7 +59,7 @@
 	border-radius: 50%;
 }
 
-.profile_name {
+.profile_login {
 	color: black;
 	text-decoration: none;
 	margin: 0 7px;
@@ -67,7 +72,7 @@
 	transition: 0.5s;
 }
 
-/*  */
+/* toggle list profile (onClick) */
 .toggleListProfile {
 	height: 100px;
 	width: 100%;
@@ -75,7 +80,6 @@
 	border-radius: 7px;
 	position: absolute;
 	top: 45px;
-	/* left: 0; */
 	right: -20px;
 	padding: 10px;
 }

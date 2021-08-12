@@ -12,15 +12,7 @@ const SignInContainer = props => {
 		return <Redirect to='/profile' />;
 	}
 
-	return (
-		<SignIn
-			{...props}
-			profileAuthorizationData={props.profileAuthorizationData}
-			checkAuthorization={props.checkAuthorization}
-			setUserSignIn={props.setUserSignIn}
-			userSignIn={props.userSignIn}
-		/>
-	);
+	return <SignIn {...props} />;
 };
 
 const mapStateToProps = state => {
