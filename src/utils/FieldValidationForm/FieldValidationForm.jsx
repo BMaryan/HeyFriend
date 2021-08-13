@@ -15,23 +15,11 @@ export const validateAuthorizationUserCreator = (users, userSignIn) => value => 
 	if (users) {
 		foundUser = users.find(item => item.phone_or_email === userSignIn.phone_or_email);
 
-		if (foundUser) {
+		if (foundUser && value) {
 			console.log("GOOD phone_or_email");
 			return undefined;
 		} else {
 			console.log("ERROR phone_or_email");
-			return "No such user!";
-		}
-	}
-
-	if (users) {
-		foundUser = users.find(item => item.password === value);
-
-		if (foundUser) {
-			console.log("GOOD password");
-			return undefined;
-		} else {
-			console.log("ERROR password");
 			return "No such user!";
 		}
 	}

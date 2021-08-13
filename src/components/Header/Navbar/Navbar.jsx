@@ -15,6 +15,27 @@ const ToggleProfileList = props => {
 			<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/friends'>
 				Friends
 			</NavLink>
+			<div className={styles.wrapper_nav_link}>
+				{!props.profileAuthorizationData ? (
+					<div className={styles.wrapper_nav_link}>
+						<NavLink
+							className={styles.nav_link}
+							activeClassName={styles.nav_link_active}
+							onClick={() => {
+								localStorage.removeItem("profileAuthorizationData");
+							}}
+							to='/sign_up'>
+							Log out
+						</NavLink>
+					</div>
+				) : (
+					<div className={styles.wrapper_nav_link}>
+						<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/sign_up'>
+							Sign Up
+						</NavLink>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };
@@ -51,28 +72,6 @@ const Navbar = props => {
 					</div>
 				</div>
 				<div>{toggleListProfile ? <ToggleProfileList /> : <></>}</div>
-
-				{/* <div className={styles.wrapper_nav_link}>
-				{props.profileAuthorizationData ? (
-					<div className={styles.wrapper_nav_link}>
-						<NavLink
-							className={styles.nav_link}
-							activeClassName={styles.nav_link_active}
-							onClick={() => {
-								localStorage.removeItem("profileAuthorizationData");
-							}}
-							to='/sign_up'>
-							Log out
-						</NavLink>
-					</div>
-				) : (
-					<div className={styles.wrapper_nav_link}>
-						<NavLink className={styles.nav_link} activeClassName={styles.nav_link_active} to='/sign_up'>
-							Sign Up
-						</NavLink>
-					</div>
-				)}
-			</div> */}
 			</div>
 		</div>
 	);

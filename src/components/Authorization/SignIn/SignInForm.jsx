@@ -3,7 +3,12 @@ import React from "react";
 import styles from "./SignIn.module.css";
 import { reduxForm } from "redux-form";
 import { wrapperCreateField, Input, wrapperButton } from "../../common/FormControls/FormControls";
-import { validatePhoneNumberAndEmail, validatePassword, required } from "../../../utils/FieldValidationForm/FieldValidationForm";
+import {
+	validatePhoneNumberAndEmail,
+	validatePassword,
+	required,
+	validateAuthorizationUserCreator,
+} from "../../../utils/FieldValidationForm/FieldValidationForm";
 
 const SignInForm = props => {
 	return (

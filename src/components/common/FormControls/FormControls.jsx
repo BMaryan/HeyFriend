@@ -93,10 +93,10 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 	);
 };
 
-export const wrapperButton = (button_text, { ...props }) => {
+export const wrapperButton = (button_text, { users, userSignIn, ...props }) => {
 	return (
 		<div className={styles.wrapper_button}>
-			<button type='submit' onClick={props.clearFields} disabled={props.invalid || props.submitting || props.pristine}>
+			<button type='submit' disabled={props.invalid || props.submitting || props.pristine}>
 				{button_text}
 			</button>
 		</div>
