@@ -8,7 +8,7 @@ const ToggleProfileList = props => {
 	return (
 		<div className={styles.toggleProfileList}>
 			<div className={styles.wrapper_nav_linkList}>
-				<NavLink className={styles.nav_linkList} activeClassName={styles.nav_linkList_active} exact to='/profile'>
+				<NavLink className={styles.nav_linkList} activeClassName={styles.nav_linkList_active} to='/profile'>
 					<FontAwesomeIcon className={styles.icon + " " + styles.iconList} icon={faHome} />
 					Profile
 				</NavLink>
