@@ -1,15 +1,82 @@
-.navbar {
+.navbar_row {
 	height: 100%;
-	background: green;
 	display: flex;
 }
 
-.navbar_content {
+.nav_linkRow {
+	border-radius: 30px;
+	padding: 0 8px;
+	margin: 0 10px;
+}
+
+.nav_linkRow_active,
+.nav_link_toggleList:hover {
+	border-radius: 30px;
+	box-shadow: 0 0 1px 0px black;
+}
+
+/* navbar_list */
+.navbar_list {
 	height: 100%;
 	display: flex;
-	align-items: center;
 	position: relative;
 	transition: 0.5s;
+}
+
+.wrapper_nav_linkList {
+	transition: 0.5s;
+}
+
+.wrapper_nav_linkList:hover {
+	background: rgb(238, 238, 238);
+	transition: 0.5s;
+}
+
+.wrapper_nav_linkList:last-child {
+	border-top: 1px solid rgb(220, 220, 220);
+	border-radius: 0 0 5px 5px;
+}
+
+.nav_linkList {
+	padding: 10px;
+}
+
+.iconList {
+	margin: 0 5px 0 0;
+}
+
+/* toggle list (onClick) */
+.toggleProfileList {
+	width: 100%;
+	background: white;
+	box-shadow: 0 1px 1px 0px black;
+	border-radius: 0 0 5px 5px;
+	position: absolute;
+	top: 45px;
+	left: 0;
+	transition: 0.5s;
+}
+
+.nav_link_toggleList {
+	cursor: pointer;
+}
+
+.wrapper_toggleList_picture {
+	height: 100%;
+}
+
+.wrapper_toggleList_picture img {
+	height: 100%;
+	width: 35px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 50%;
+}
+
+.toggleList_login {
+	color: black;
+	text-decoration: none;
+	margin: 0 7px;
 }
 
 /* wrapper nav link */
@@ -19,67 +86,31 @@
 	transition: 0.5s;
 }
 
-.nav_link {
-	padding: 0 8px;
-}
-
-.nav_link,
-.nav_link_profileList {
+.nav_linkRow,
+.nav_linkList,
+.nav_link_toggleList {
 	color: black;
-	border-radius: 30px;
 	text-decoration: none;
 	border: 1px solid transparent;
 	display: flex;
 	align-items: center;
-	margin: 0 0 0 10px;
 	transition: 0.5s;
 }
 
-.nav_link_active {
-	background: rgb(229, 231, 232);
-	border: 1px solid rgb(201, 201, 201);
-	border-radius: 30px;
+.nav_linkRow_active,
+.nav_linkList_active,
+.nav_link_toggleList:hover {
+	background: rgb(245, 245, 245);
 	transition: 0.5s;
 }
 
-/* nav link profileList */
-.nav_link_profileList {
-	cursor: pointer;
-}
-
-.wrapper_profileList_picture {
-	height: 100%;
-}
-
-.wrapper_profileList_picture img {
-	height: 100%;
-	width: 35px;
-	object-fit: cover;
-	object-position: center;
-	border-radius: 50%;
-}
-
-.profile_login {
-	color: black;
-	text-decoration: none;
-	margin: 0 7px;
+.wrapper_nav_linkList:last-child > .nav_linkList_active {
+	border-radius: 5px;
 }
 
 /* icon */
 .icon {
-	color: rgb(192, 191, 191);
+	color: rgb(136, 136, 136);
 	font-size: 18px;
 	transition: 0.5s;
-}
-
-/* toggle list profile (onClick) */
-.toggleListProfile {
-	height: 100px;
-	width: 100%;
-	background: red;
-	border-radius: 7px;
-	position: absolute;
-	top: 45px;
-	right: -20px;
-	padding: 10px;
 }

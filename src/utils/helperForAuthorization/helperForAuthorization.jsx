@@ -45,8 +45,6 @@ export const helpCheckAuthorization = props => {
 	props.users.find(user => {
 		if (props.userSignIn && props.userSignIn.phone_or_email) {
 			if (user.phone_or_email === props.userSignIn.phone_or_email && user.password === props.userSignIn.password) {
-				// console.log("helpCheckAuthorization", user);
-
 				localStorage.setItem("profileAuthorizationData", JSON.stringify(user));
 				return user;
 			}
