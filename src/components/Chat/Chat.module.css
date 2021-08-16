@@ -1,0 +1,27 @@
+.chat {
+	width: 100%;
+	background: rgb(255, 100, 100);
+	/* border-radius: var(--borderRadius); */
+	display: flex;
+	margin-top: var(--marginFromHeader);
+}
+
+/* common */
+.dialogs,
+.messages {
+	/* border-radius: var(--borderRadius); */
+	padding: var(--paddingForMainContent);
+}
+
+.dialogs {
+	width: 25%;
+	background: white;
+	border-right: 1px solid silver;
+	/* background: rosybrown; */
+}
+
+.messages {
+	width: 50%;
+	background: white;
+	/* background: rgb(143, 188, 152); */
+}

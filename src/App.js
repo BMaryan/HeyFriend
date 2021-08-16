@@ -7,6 +7,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import MainContainer from "./components/Main/MainContainer";
 import NotFound from "./components/common/NotFound/NotFound";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import ChatContainer from "./components/Chat/ChatContainer";
 
 function App(props) {
 	return (
@@ -16,6 +17,7 @@ function App(props) {
 				<Switch>
 					<Route exact path='/' render={() => <MainContainer />} />
 					<Route path='/profile' render={() => <ProfileContainer />} />
+					<Route path='/chat' render={() => <ChatContainer />} />
 					<Route path='/sign_in' render={() => <SignInContainer />} />
 					<Route path='/sign_up' render={() => <SignUpContainer />} />
 					<Route path='*' render={() => <NotFound />} />

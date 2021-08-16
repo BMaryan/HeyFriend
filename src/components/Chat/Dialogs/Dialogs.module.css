@@ -1,0 +1,66 @@
+.dialogs {
+}
+
+/* title */
+.title {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+/* wrapper_input */
+.wrapper_input {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
+	transition: 1s;
+}
+
+.wrapper_input input {
+	width: 100%;
+	background: var(--bodyBackgroundOrColor);
+	border: none;
+	outline: none;
+	border-radius: 30px;
+	padding: 10px 10px 10px 35px;
+	transition: 1s;
+}
+
+.search_icon {
+	color: rgb(192, 191, 191);
+	font-size: 13px;
+	position: absolute;
+	left: 0;
+	padding: 0 0 0 13px;
+}
+
+/* chats */
+.chats {
+}
+
+.chat {
+	/* background: red; */
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.wrapper_picture {
+	margin-right: 10px;
+}
+
+.wrapper_picture img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+}
+
+/*  */
+.login {
+}
+
+.message {
+}

@@ -14,7 +14,7 @@ const NavbarRow = props => {
 				</NavLink>
 			</div>
 			<div className={styles.wrapper_nav_link}>
-				<NavLink className={styles.nav_linkRow} activeClassName={styles.nav_linkRow_active} to='/message'>
+				<NavLink className={styles.nav_linkRow} activeClassName={styles.nav_linkRow_active} to='/chat'>
 					<FontAwesomeIcon className={styles.icon} icon={faFacebookMessenger} />
 				</NavLink>
 			</div>
