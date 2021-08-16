@@ -2,7 +2,7 @@
 	width: 100%;
 	/* background: rgb(248, 100, 100); */
 	display: flex;
-	margin: 10px 0;
+	margin-top: var(--marginFromHeader);
 }
 
 .main_sideBar_left {

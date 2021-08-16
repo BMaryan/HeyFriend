@@ -1,7 +1,7 @@
 .create_post {
 	background: white;
 	border-radius: var(--borderRadius);
-	padding: 15px;
+	padding: var(--paddingForMainContent);
 }
 
 /* wrapper_head */

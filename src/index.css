@@ -21,6 +21,8 @@ code {
 	--errorBackgroundOrColor: #d93025;
 	--borderRadius: 10px;
 	--colorIcons: rgb(136, 136, 136);
+	--paddingForMainContent: 15px;
+	--marginFromHeader: 20px;
 }
 
 /* global class */

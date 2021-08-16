@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
+import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors";
 
 const MainContainer = props => {
 	return <Main {...props} />;
@@ -8,7 +9,7 @@ const MainContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		a: "MainContainer",
+		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};
 };
 
