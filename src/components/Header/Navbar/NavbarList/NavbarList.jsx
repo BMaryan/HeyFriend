@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faSortDown, faSignOutAlt, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faSortDown, faSignOutAlt, faCog, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import styles from "../Navbar.module.css";
 
@@ -11,6 +11,12 @@ const ToggleProfileList = props => {
 				<NavLink className={styles.nav_linkList} activeClassName={styles.nav_linkList_active} to='/profile'>
 					<FontAwesomeIcon className={styles.icon + " " + styles.iconList} icon={faHome} />
 					Profile
+				</NavLink>
+			</div>
+			<div className={styles.wrapper_nav_linkList}>
+				<NavLink className={styles.nav_linkList} activeClassName={styles.nav_linkList_active} to='/music'>
+					<FontAwesomeIcon className={styles.icon + " " + styles.iconList} icon={faMusic} />
+					Music
 				</NavLink>
 			</div>
 			<div className={styles.wrapper_nav_linkList}>

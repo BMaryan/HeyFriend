@@ -110,7 +110,7 @@
 
 /* icon */
 .icon {
-	color: rgb(136, 136, 136);
+	color: var(--colorIcons);
 	font-size: 18px;
 	transition: 0.5s;
 }
