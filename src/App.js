@@ -5,7 +5,7 @@ import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
 import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import MainContainer from "./components/Main/MainContainer";
-import NotFound from "./components/NotFound/NotFound";
+import NotFound from "./components/common/NotFound/NotFound";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App(props) {
