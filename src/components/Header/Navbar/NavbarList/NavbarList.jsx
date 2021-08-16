@@ -52,7 +52,7 @@ const NavbarList = props => {
 		<div className={styles.navbar_list}>
 			<div className={styles.wrapper_nav_link}>
 				<div
-					className={styles.nav_link_toggleList}
+					className={toggleListProfile ? styles.nav_link_toggleList_active : styles.nav_link_toggleList}
 					onClick={() => (toggleListProfile ? setToggleListProfile(false) : setToggleListProfile(true))}>
 					<div className={styles.wrapper_toggleList_picture}>
 						<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU' alt='' />

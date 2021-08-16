@@ -1,30 +1,79 @@
 .create_post {
 	background: white;
-	/* background: rgb(90, 205, 161); */
 	border-radius: var(--borderRadius);
 	padding: 15px;
 }
 
-.wrapper_title {
+/* wrapper_head */
+.wrapper_head {
 	display: flex;
-	align-items: center;
+}
+
+.title {
+	font-weight: 500;
 }
 
 .icon {
-	color: var(--colorIcons);
+	color: white;
 	background: rgb(238, 237, 237);
 	border-radius: 50%;
-	padding: 5px 7px;
+	font-size: 14px;
+	padding: 6px 7px;
 	margin: 0 5px 0 0;
 }
 
-/* wrapper_input */
-.wrapper_input {
+/* wrapper_body */
+.wrapper_body {
+	position: relative;
+	margin: 15px 0;
 }
 
-.wrapper_input input {
+.wrapper_input {
+	display: flex;
+}
+
+.input {
 	width: 100%;
-	border-radius: var(--borderRadius);
+	border-radius: 18px;
+	/* border-radius: var(--borderRadius); */
 	border: 1px solid rgb(233, 232, 232);
 	outline: none;
+	padding: 10px 10px 10px 45px;
+}
+
+.picture {
+	height: 100%;
+	width: 39px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 50%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+/* wrapper_footer */
+.wrapper_footer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.wrapper_feature {
+	background: var(--bodyBackgroundOrColor);
+	display: inline-flex;
+	border-radius: 20px;
+	padding: 7px 20px;
+	cursor: pointer;
+}
+
+.icon__blue {
+	background: rgb(45, 107, 240);
+}
+
+.icon__pink {
+	background: rgb(224, 101, 64);
+}
+
+.icon__yellow {
+	background: orange;
 }
