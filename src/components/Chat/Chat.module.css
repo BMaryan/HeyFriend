@@ -1,7 +1,8 @@
 .chat {
 	height: 540px;
 	width: 100%;
-	background: rgb(255, 100, 100);
+	background: white;
+	/* background: rgb(255, 100, 100); */
 	/* border-radius: var(--borderRadius); */
 	display: flex;
 	margin-top: var(--marginFromHeader);

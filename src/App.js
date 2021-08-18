@@ -16,8 +16,8 @@ function App(props) {
 			<div className='container container_margin'>
 				<Switch>
 					<Route exact path='/' render={() => <MainContainer />} />
-					<Route path='/profile' render={() => <ProfileContainer />} />
-					<Route path='/chat' render={() => <ChatContainer />} />
+					<Route path='/profile/:id?' render={() => <ProfileContainer />} />
+					<Route path='/chat/:id?' render={() => <ChatContainer />} />
 					<Route path='/sign_in' render={() => <SignInContainer />} />
 					<Route path='/sign_up' render={() => <SignUpContainer />} />
 					<Route path='*' render={() => <NotFound />} />

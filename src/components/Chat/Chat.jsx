@@ -10,7 +10,7 @@ const Chat = props => {
 				<Dialogs users={props.users} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 			<div className={styles.messages}>
-				<Messages profileAuthorizationData={props.profileAuthorizationData} />
+				<Messages profileAuthorizationData={props.profileAuthorizationData} match={props.match} />
 			</div>
 		</div>
 	);
