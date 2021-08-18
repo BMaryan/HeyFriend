@@ -1,0 +1,52 @@
+.chat {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.chat:hover {
+	background: var(--bodyBackgroundOrColor);
+	transition: 0.5s;
+}
+
+.chat_active {
+	background: var(--bodyBackgroundOrDarkColor);
+	transition: 0.5s;
+}
+
+.wrapper_picture {
+	margin-right: 10px;
+}
+
+.wrapper_picture img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.wrapper_picture .hav_not_picture {
+	height: 50px;
+	width: 50px;
+	color: white;
+	background: tomato;
+	font-weight: bold;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*  */
+.login {
+	color: black;
+	font-weight: 500;
+}
+
+.message {
+	color: rgb(46, 46, 46);
+}

@@ -38,29 +38,3 @@
 /* chats */
 .chats {
 }
-
-.chat {
-	/* background: red; */
-	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
-}
-
-.wrapper_picture {
-	margin-right: 10px;
-}
-
-.wrapper_picture img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-	object-fit: cover;
-	object-position: center;
-}
-
-/*  */
-.login {
-}
-
-.message {
-}

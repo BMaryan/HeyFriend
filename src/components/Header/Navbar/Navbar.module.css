@@ -29,7 +29,7 @@
 }
 
 .wrapper_nav_linkList:hover {
-	background: rgb(238, 238, 238);
+	background: var(--bodyBackgroundOrColor);
 	transition: 0.5s;
 }
 
@@ -48,13 +48,13 @@
 
 /* toggle list (onClick) */
 .toggleProfileList {
-	width: 100%;
 	background: white;
 	box-shadow: 0 1px 1px 0px black;
 	border-radius: 0 0 5px 5px;
 	position: absolute;
 	top: 45px;
-	left: 0;
+	left: -90px;
+	right: 0;
 	transition: 0.5s;
 }
 
@@ -100,9 +100,13 @@
 }
 
 .nav_linkRow_active,
-.nav_linkList_active,
 .nav_link_toggleList_active {
-	background: rgb(245, 245, 245);
+	background: var(--bodyBackgroundOrColor);
+	transition: 0.5s;
+}
+
+.nav_linkList_active {
+	background: var(--bodyBackgroundOrDarkColor);
 	transition: 0.5s;
 }
 

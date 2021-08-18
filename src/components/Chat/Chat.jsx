@@ -7,10 +7,10 @@ const Chat = props => {
 	return (
 		<div className={styles.chat}>
 			<div className={styles.dialogs}>
-				<Dialogs />
+				<Dialogs users={props.users} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 			<div className={styles.messages}>
-				<Messages />
+				<Messages profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 		</div>
 	);

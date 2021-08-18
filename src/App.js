@@ -13,7 +13,7 @@ function App(props) {
 	return (
 		<>
 			<div className='container_fluid'>{props.profileAuthorizationData ? <HeaderContainer /> : undefined}</div>
-			<div className='container'>
+			<div className='container container_margin'>
 				<Switch>
 					<Route exact path='/' render={() => <MainContainer />} />
 					<Route path='/profile' render={() => <ProfileContainer />} />

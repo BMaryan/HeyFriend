@@ -1,10 +1,14 @@
 .header {
 	height: 35px;
-	min-height: 100%;
 	background: white;
 	display: flex;
 	border-bottom: 1px solid rgb(221, 221, 221);
 	padding: 10px 0;
+	/* position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1; */
 }
 
 .header_container {

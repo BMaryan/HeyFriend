@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Dialogs.module.css";
+import Dialog from "./Dialog/Dialog";
 
 const Dialogs = props => {
 	return (
@@ -12,35 +13,9 @@ const Dialogs = props => {
 				<FontAwesomeIcon className={styles.search_icon} icon={faSearch} />
 			</div>
 			<div className={styles.chats}>
-				<div className={styles.chat}>
-					<div className={styles.wrapper_picture}>
-						<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU' alt='' />
-					</div>
-					<div>
-						<div className={styles.login}>Andriy Arbovych</div>
-						<div className={styles.message}>Hello, How are you</div>
-					</div>
-				</div>
-
-				<div className={styles.chat}>
-					<div className={styles.wrapper_picture}>
-						<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU' alt='' />
-					</div>
-					<div>
-						<div className={styles.login}>Andriy Arbovych</div>
-						<div className={styles.message}>Hello, How are you</div>
-					</div>
-				</div>
-
-				<div className={styles.chat}>
-					<div className={styles.wrapper_picture}>
-						<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU' alt='' />
-					</div>
-					<div>
-						<div className={styles.login}>Andriy Arbovych</div>
-						<div className={styles.message}>Hello, How are you</div>
-					</div>
-				</div>
+				{props.users.map(user => (
+					<Dialog key={user.id} user={user} profileAuthorizationData={props.profileAuthorizationData} />
+				))}
 			</div>
 		</div>
 	);
