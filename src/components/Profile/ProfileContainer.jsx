@@ -25,7 +25,7 @@ const ProfileContainer = props => {
 				localStorage.setItem("profile", JSON.stringify(props.profile));
 			}
 		}
-	}, []);
+	}, [props.profileAuthorizationData]);
 
 	if (!props.profileAuthorizationData) {
 		return <Redirect to='/sign_up' />;

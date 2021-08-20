@@ -22,6 +22,7 @@ const Header = props => {
 				</div>
 				<NavbarRow profileAuthorizationData={props.profileAuthorizationData} />
 				<NavbarList
+					profile={props.profile}
 					profileAuthorizationData={props.profileAuthorizationData}
 					checkAuthorization={props.checkAuthorization}
 					getProfileData={props.getProfileData}

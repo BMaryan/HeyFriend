@@ -17,16 +17,12 @@ const AppContainer = props => {
 	React.useEffect(() => {
 		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
 		props.checkAuthorization(profileUser);
-		if (profileUser) {
-			props.getProfileData(profileUser);
-		}
+		props.getProfileData(profileUser);
 	}, [props.userSignIn]);
 
 	React.useEffect(() => {
 		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-		if (profileUser) {
-			props.getProfileData(profileUser);
-		}
+		props.getProfileData(profileUser);
 	}, [props.profileAuthorizationData]);
 
 	React.useEffect(() => {

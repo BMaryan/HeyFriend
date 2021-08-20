@@ -1,14 +1,15 @@
 let GET_PROFILE_DATA = "social_network/profilePage/GET_PROFILE_DATA";
 
 let initialState = {
-	profile: {
-		id: null,
-		name: null,
-		surname: null,
-		img: null,
-		status: null,
-		aboutMe: null,
-	},
+	// profile: {
+	// 	id: null,
+	// 	name: null,
+	// 	surname: null,
+	// 	img: null,
+	// 	status: null,
+	// 	aboutMe: null,
+	// },
+	profile: null,
 };
 
 const ProfileReducer = (state = initialState, action) => {
@@ -16,7 +17,7 @@ const ProfileReducer = (state = initialState, action) => {
 		case GET_PROFILE_DATA: {
 			return {
 				...state,
-				profile: { ...state.profile, ...action.profile },
+				profile: action.profile ? { ...state.profile, ...action.profile } : null,
 			};
 		}
 		default: {
@@ -25,9 +26,9 @@ const ProfileReducer = (state = initialState, action) => {
 	}
 };
 
-export const getProfileData = ({ ...profile }) => ({
+export const getProfileData = profile => ({
 	type: GET_PROFILE_DATA,
-	profile: { id: profile.id, name: profile.name, surname: profile.surname },
+	profile,
 });
 
 export default ProfileReducer;
