@@ -12,7 +12,7 @@ export const AuthorizationContainer = (title, form, ...props) => {
 	);
 };
 
-export const informationContainer = (title, subtitle, linkTo, buttonText, ...props) => {
+export const InformationContainer = (title, subtitle, linkTo, buttonText, ...props) => {
 	return (
 		<div className={styles.information_content}>
 			<div className={styles.information_title}>{title}</div>
@@ -46,8 +46,16 @@ export const helpCheckAuthorization = props => {
 		if (props.userSignIn && props.userSignIn.phone_or_email) {
 			if (user.phone_or_email === props.userSignIn.phone_or_email && user.password === props.userSignIn.password) {
 				localStorage.setItem("profileAuthorizationData", JSON.stringify(user));
+				localStorage.setItem("profile", JSON.stringify(props.profile));
 				return user;
 			}
 		}
 	});
+};
+
+export const deleteAuthorizationUser = props => {
+	if (!props.profileAuthorizationData) {
+		props.checkAuthorization(null);
+		localStorage.removeItem("profileAuthorizationData");
+	}
 };

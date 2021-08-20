@@ -7,20 +7,16 @@ const Profile = props => {
 
 	return (
 		<div style={{ flexDirection: "column" }}>
-			{/* {props.match.params.id ? (
-				props.users.find(user => {
-					console.log(user);
-					return user.id === Number(props.match.params.id);
-				})
-			) : ( */}
-			<>
-				<div>Profile</div>
-				<div>{props.profileAuthorizationData.name}</div>
-				<div>{props.profileAuthorizationData.surname}</div>
-				<div>{props.profileAuthorizationData.phone_or_email}</div>
-				<div>{props.profileAuthorizationData.password}</div>
-			</>
-			{/* // )} */}
+			<div>Profile</div>
+			{props.profile ? (
+				<>
+					<div>{props.profile.id}</div>
+					<div>{props.profile.name}</div>
+					<div>{props.profile.surname}</div>
+				</>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };

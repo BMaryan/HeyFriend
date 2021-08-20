@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import styles from "./SignIn.module.css";
+import commonStyles from "../Authorization.module.css";
 import { reduxForm } from "redux-form";
 import { wrapperCreateField, Input, wrapperButton } from "../../common/FormControls/FormControls";
 import {
@@ -11,10 +12,8 @@ import {
 } from "../../../utils/FieldValidationForm/FieldValidationForm";
 
 const SignInForm = props => {
-	console.log(props);
-
 	return (
-		<form className={styles.form} onSubmit={props.handleSubmit}>
+		<form className={commonStyles.form} onSubmit={props.handleSubmit}>
 			{wrapperCreateField("phone_or_email", "text", [validatePhoneNumberAndEmail, required], Input, "Mobile Number or email", "")}
 			{wrapperCreateField("password", "password", [validatePassword, required], Input, "Password")}
 			{wrapperCreateField("rememberMe", "checkbox", [], Input, "", "Remember Me")}

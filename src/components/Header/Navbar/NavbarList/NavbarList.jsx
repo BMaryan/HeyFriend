@@ -33,7 +33,7 @@ const ToggleProfileList = props => {
 							props.checkAuthorization(null);
 							localStorage.removeItem("profileAuthorizationData");
 						}}
-						className={styles.nav_linkList + " " + styles.delete}
+						className={styles.nav_linkList + " " + styles.logOut}
 						activeClassName={styles.nav_linkList_active}
 						to='/sign_up'>
 						<FontAwesomeIcon className={styles.icon + " " + styles.iconList} icon={faSignOutAlt} />

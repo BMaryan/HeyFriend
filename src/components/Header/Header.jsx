@@ -21,7 +21,11 @@ const Header = props => {
 					<HeaderReduxForm onSubmit={onsubmit} />
 				</div>
 				<NavbarRow profileAuthorizationData={props.profileAuthorizationData} />
-				<NavbarList profileAuthorizationData={props.profileAuthorizationData} checkAuthorization={props.checkAuthorization} />
+				<NavbarList
+					profileAuthorizationData={props.profileAuthorizationData}
+					checkAuthorization={props.checkAuthorization}
+					getProfileData={props.getProfileData}
+				/>
 			</div>
 		</div>
 	);

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { checkAuthorization, setUsers, setUserSignUp } from "../../../redux/auth-reducer";
 import { getProfileAuthorizationDataSelector, getUserSignInSelector, getUserSignUpSelector, getUsersSelector } from "../../../redux/auth-selectors";
-import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
+import { helpCheckAuthorization } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
 
 const SignUpContainer = props => {
@@ -24,6 +24,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { setUserSignUp, setUsers, setSignUpDataToLocalStorage, helpCheckAuthorization, checkAuthorization })(
-	SignUpContainer
-);
+export default connect(mapStateToProps, { setUserSignUp, setUsers, helpCheckAuthorization, checkAuthorization })(SignUpContainer);

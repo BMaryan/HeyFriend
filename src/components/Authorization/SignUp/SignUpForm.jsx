@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import styles from "./SignUp.module.css";
+import commonStyles from "../Authorization.module.css";
 import { reduxForm } from "redux-form";
 import { wrapperCreateField, Input, wrapperButton } from "../../common/FormControls/FormControls";
 import {
@@ -17,7 +18,7 @@ let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localSto
 
 const SignUpForm = props => {
 	return (
-		<form className={styles.form} onSubmit={props.handleSubmit}>
+		<form className={commonStyles.form} onSubmit={props.handleSubmit}>
 			{wrapperCreateField("name", "text", [validateFirstName, required], Input, "Your name")}
 			{wrapperCreateField("surname", "text", [validateLastName, required], Input, "Your surname")}
 			{wrapperCreateField(
