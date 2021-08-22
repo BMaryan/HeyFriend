@@ -1,9 +1,22 @@
 import React from "react";
 import styles from "./Messages.module.css";
 import Message from "./Message/Message";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-const defaultViewMessages = () => {
-	return <div>Default VIew Messages</div>;
+const DefaultViewMessages = props => {
+	return (
+		<div className={styles.default_view_messages}>
+			<div className={styles.wrapper_icon}>
+				<FontAwesomeIcon className={styles.icon} icon={faPaperPlane} />
+			</div>
+			<div className={styles.title}>Your Messages</div>
+			<div className={styles.subtitle}>Send private photos and messages to a friend or group</div>
+			<div className={styles.wrapper_button}>
+				<button>Send Message</button>
+			</div>
+		</div>
+	);
 };
 
 const Messages = props => {
@@ -11,7 +24,11 @@ const Messages = props => {
 
 	return (
 		<div className={styles.messages}>
-			<Message id={id} />
+			{/* <div className={styles.head}>
+				<div>Head</div>
+				<div></div>
+			</div> */}
+			<div className={styles.messages_content}>{id ? <Message id={id} /> : DefaultViewMessages()}</div>
 		</div>
 	);
 };

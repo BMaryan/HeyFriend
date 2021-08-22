@@ -4,8 +4,6 @@ import CreatePost from "../common/CreatePost/CreatePost";
 import styles from "./Main.module.css";
 
 const Main = props => {
-	console.log(props);
-
 	return (
 		<div className={styles.main}>
 			<div className={styles.main_sideBar_left}>Side bar left</div>

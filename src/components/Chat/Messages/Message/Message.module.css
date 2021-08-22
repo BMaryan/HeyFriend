@@ -1,9 +1,7 @@
 /* 		common wrapper container message */
 .wrapper_container_message {
 	width: 100%;
-	/* background: thistle; */
 	display: flex;
-	align-items: center;
 }
 
 /* wrapper container my message */
@@ -42,7 +40,6 @@
 
 /* 		common wrapper message */
 .wrapper_message {
-	height: 100%;
 	display: flex;
 	align-items: center;
 	padding: 0 10px;

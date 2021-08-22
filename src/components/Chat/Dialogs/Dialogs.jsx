@@ -7,7 +7,7 @@ import Dialog from "./Dialog/Dialog";
 const Dialogs = props => {
 	return (
 		<div className={styles.dialogs}>
-			<div className={styles.title}>Chats</div>
+			{/* <div className={styles.title}>Chats</div> */}
 			<div className={styles.wrapper_input}>
 				<input type='search' placeholder='Search contact' />
 				<FontAwesomeIcon className={styles.search_icon} icon={faSearch} />

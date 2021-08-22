@@ -4,26 +4,63 @@
 	background: white;
 	/* background: rgb(255, 100, 100); */
 	/* border-radius: var(--borderRadius); */
+	border: 1px solid rgb(230, 229, 229);
 	display: flex;
 	margin-top: var(--marginFromHeader);
 }
 
-/* common */
-.dialogs,
-.messages {
-	/* border-radius: var(--borderRadius); */
-	padding: var(--paddingForMainContent);
+/* head */
+.head {
+	height: 70px;
+	max-height: 100%;
+	/* background: teal; */
+	border-bottom: 1px solid rgb(230, 229, 229);
+	display: flex;
+	align-items: center;
 }
 
+.head_messages {
+	justify-content: space-between;
+	padding: 0 var(--paddingForMainContent);
+}
+
+.icon {
+	color: var(--colorIcons);
+	font-size: 25px;
+	cursor: pointer;
+}
+
+/* content */
 .dialogs {
 	width: 25%;
 	background: white;
-	border-right: 1px solid silver;
+}
+
+.dialogs_content {
+	height: 100%;
 	overflow-y: scroll;
 }
 
 .messages {
 	width: 50%;
 	background: white;
+}
+
+.messages_content {
+	height: 100%;
 	overflow-y: scroll;
+}
+
+.dialogs,
+.messages {
+	height: 100%;
+	border-right: 1px solid rgb(230, 229, 229);
+	display: flex;
+	flex-direction: column;
+	/* padding: var(--paddingForMainContent); */
+}
+
+.details {
+	width: 25%;
+	background: white;
 }
