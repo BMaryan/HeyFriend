@@ -25,10 +25,8 @@
 	margin-right: 10px;
 }
 
-.wrapper_picture .have_not_picture,
-.have_not_picture_forHead {
-	color: white;
-	background: tomato;
+.wrapper_picture .have_not_picture img,
+.have_not_picture_forHead img {
 	font-weight: bold;
 	border-radius: 50%;
 	display: flex;
@@ -36,12 +34,12 @@
 	align-items: center;
 }
 
-.wrapper_picture .have_not_picture {
+.wrapper_picture .have_not_picture img {
 	height: 50px;
 	width: 50px;
 }
 
-.wrapper_picture .have_not_picture_forHead {
+.wrapper_picture .have_not_picture_forHead img {
 	height: 40px;
 	width: 40px;
 	font-size: 13px;

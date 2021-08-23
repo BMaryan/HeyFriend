@@ -6,6 +6,8 @@ import Messages from "./Messages/Messages";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import defaultAvatar from "../../assets/images/DefaultAvatar.png";
+import ChatReduxForm from "./ChatForm";
 
 const Head = props => {
 	let id = Number(props.match.params.id);
@@ -22,7 +24,7 @@ const Head = props => {
 						return (
 							<NavLink key={user.id} to={"/profile/" + user.id} className={dialogStyles.chat_forHead}>
 								<div className={dialogStyles.wrapper_picture}>
-									<div className={dialogStyles.have_not_picture_forHead}>{user ? user.surname[0] + "" + user.name[0] : <></>}</div>
+									<div className={dialogStyles.have_not_picture_forHead}>{user ? <img src={defaultAvatar} alt='' /> : <></>}</div>
 								</div>
 								<div>
 									<div className={dialogStyles.login}>{user ? user.surname + " " + user.name : <></>}</div>
@@ -33,13 +35,18 @@ const Head = props => {
 				})}
 			</div>
 			<div>
-				<FontAwesomeIcon className={styles.icon} icon={faInfoCircle} />
+				<FontAwesomeIcon
+					onClick={() => (props.toggleDetails ? props.setToggleDetails(false) : props.setToggleDetails(true))}
+					className={styles.icon}
+					icon={faInfoCircle}
+				/>
 			</div>
 		</div>
 	);
 };
 
 const Chat = props => {
+	let [toggleDetails, setToggleDetails] = React.useState(false);
 	let id = Number(props.match.params.id);
 
 	return (
@@ -50,13 +57,29 @@ const Chat = props => {
 					<Dialogs users={props.users} profileAuthorizationData={props.profileAuthorizationData} />
 				</div>
 			</div>
-			<div className={styles.messages}>
-				{id ? <Head {...props} toggleShowContent={false} /> : <></>}
-				<div className={styles.messages_content}>
+			<div className={toggleDetails ? styles.messages_noDetails : styles.messages_details}>
+				{id ? <Head {...props} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
+				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
 					<Messages profileAuthorizationData={props.profileAuthorizationData} match={props.match} />
+					<ChatReduxForm />
 				</div>
+				{id ? (
+					props.users.map(user => {
+						if (user && id && user.id === id) {
+							return (
+								<div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
+									<NavLink key={user.id} to={"/profile/" + user.id} className={styles.contact_link}>
+										<div className={styles.wrapper_picture}>{user ? <img src={defaultAvatar} alt='' /> : <></>}</div>
+										<div className={styles.fullName}>{user ? user.surname + " " + user.name : <></>}</div>
+									</NavLink>
+								</div>
+							);
+						}
+					})
+				) : (
+					<></>
+				)}
 			</div>
-			<div className={styles.details}></div>
 		</div>
 	);
 };

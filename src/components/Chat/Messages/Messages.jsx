@@ -24,10 +24,6 @@ const Messages = props => {
 
 	return (
 		<div className={styles.messages}>
-			{/* <div className={styles.head}>
-				<div>Head</div>
-				<div></div>
-			</div> */}
 			<div className={styles.messages_content}>{id ? <Message id={id} /> : DefaultViewMessages()}</div>
 		</div>
 	);

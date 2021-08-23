@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Dialog.module.css";
 import { NavLink } from "react-router-dom";
+import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Dialog = props => {
 	return (
@@ -8,7 +9,7 @@ const Dialog = props => {
 			<NavLink to={"/chat/" + props.user.id} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
 				<div className={styles.wrapper_picture}>
 					<div className={styles.have_not_picture + " " + styles.have_not_picture_forHead}>
-						{props.user ? props.user.surname[0] + "" + props.user.name[0] : <></>}
+						{props.user ? <img src={defaultAvatar} alt='' /> : <></>}
 					</div>
 				</div>
 				<div>

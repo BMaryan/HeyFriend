@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Message.module.css";
+import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Message = props => {
 	return (
@@ -10,7 +11,7 @@ const Message = props => {
 				to={"/profile/" + props.id}
 				// className={styles.wrapper_picture + " " + styles.wrapper_myPicture + " " + styles.wrapper_otherPicture}
 				className={styles.wrapper_picture + " " + styles.wrapper_otherPicture}>
-				<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjAAwQyKxGO39mWtUYjD0s_uhMSmEi4wXyPg&usqp=CAU' alt='' />
+				<img src={defaultAvatar} alt='' />
 			</NavLink>
 			<div
 				// className={styles.wrapper_message + " " + styles.wrapper_myMessage + " " + styles.wrapper_otherPicture}

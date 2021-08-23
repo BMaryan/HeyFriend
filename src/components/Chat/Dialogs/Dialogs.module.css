@@ -13,7 +13,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 20px 0;
+	/* margin: 20px 0; */
+	/* margin-bottom: 10px; */
+	border-bottom: 1px solid rgb(230, 229, 229);
 	transition: 1s;
 }
 
@@ -22,8 +24,8 @@
 	background: var(--bodyBackgroundOrColor);
 	border: none;
 	outline: none;
-	border-radius: 30px;
-	padding: 10px 10px 10px 35px;
+	/* border-radius: 30px; */
+	padding: 15px 10px 15px 35px;
 	transition: 1s;
 }
 

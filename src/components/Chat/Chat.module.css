@@ -2,18 +2,16 @@
 	height: 540px;
 	width: 100%;
 	background: white;
-	/* background: rgb(255, 100, 100); */
-	/* border-radius: var(--borderRadius); */
 	border: 1px solid rgb(230, 229, 229);
 	display: flex;
 	margin-top: var(--marginFromHeader);
+	position: relative;
 }
 
 /* head */
 .head {
 	height: 70px;
 	max-height: 100%;
-	/* background: teal; */
 	border-bottom: 1px solid rgb(230, 229, 229);
 	display: flex;
 	align-items: center;
@@ -41,26 +39,111 @@
 	overflow-y: scroll;
 }
 
-.messages {
+.messages_noDetails {
+	width: 75%;
+	transition: 1s;
+}
+
+.messages_details {
 	width: 50%;
-	background: white;
+	transition: 1s;
 }
 
 .messages_content {
 	height: 100%;
 	overflow-y: scroll;
+	background: teal;
+	position: relative;
+}
+
+.messages_content_defaultView {
+	height: 100%;
+	position: relative;
 }
 
 .dialogs,
-.messages {
+.messages_noDetails,
+.messages_details {
 	height: 100%;
-	border-right: 1px solid rgb(230, 229, 229);
 	display: flex;
 	flex-direction: column;
-	/* padding: var(--paddingForMainContent); */
 }
 
-.details {
+.dialogs,
+.messages_details {
+	border-right: 1px solid rgb(230, 229, 229);
+}
+
+/* toggle details container (on click) */
+.details_hidden,
+.details_show {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	transition: 1s;
+}
+
+.details_hidden,
+.details_show {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: var(--paddingForMainContent) 0;
+	box-sizing: border-box;
+	transition: 1s;
+}
+
+.details_hidden {
+	width: 0px;
+	overflow: hidden;
+}
+
+.details_show {
 	width: 25%;
-	background: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	transition-delay: 10ms;
+	transition-property: width;
+}
+
+/*  */
+.contact_link {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-decoration: none;
+}
+
+.wrapper_picture img {
+	height: 85px;
+	width: 85px;
+	color: white;
+	font-size: 20px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.fullName {
+	color: black;
+	font-size: 20px;
+}
+
+/* form */
+.form {
+	background: rgb(255, 145, 0);
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.field {
+	width: 100%;
+	padding: 7px 10px;
 }
