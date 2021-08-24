@@ -49,6 +49,18 @@ const Chat = props => {
 	let [toggleDetails, setToggleDetails] = React.useState(false);
 	let id = Number(props.match.params.id);
 
+	// let a = props.chats.map(chat => {
+	// 	if (chat.id === id) {
+	// 		return chat.messages.length + 1;
+	// 	}
+	// });
+
+	// console.log(a);
+
+	let onSubmit = formData => {
+		props.addMessage(id, formData.send_message);
+	};
+
 	return (
 		<div className={styles.chat}>
 			<div className={styles.dialogs}>
@@ -60,8 +72,15 @@ const Chat = props => {
 			<div className={toggleDetails ? styles.messages_noDetails : styles.messages_details}>
 				{id ? <Head {...props} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
 				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
-					<Messages profileAuthorizationData={props.profileAuthorizationData} match={props.match} />
-					<ChatReduxForm />
+					{props.chats.map(chat => {
+						if (chat.id === id) {
+							// console.log(chat);
+							return (
+								<Messages key={chat.id} chat={chat} profileAuthorizationData={props.profileAuthorizationData} match={props.match} />
+							);
+						}
+					})}
+					{id ? <ChatReduxForm onSubmit={onSubmit} /> : <></>}
 				</div>
 				{id ? (
 					props.users.map(user => {

@@ -2,6 +2,7 @@
 .wrapper_container_message {
 	width: 100%;
 	display: flex;
+	margin-bottom: 15px;
 }
 
 /* wrapper container my message */

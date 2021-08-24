@@ -20,11 +20,13 @@ const DefaultViewMessages = props => {
 };
 
 const Messages = props => {
-	let id = props.match.params.id;
+	let id = Number(props.match.params.id);
 
 	return (
 		<div className={styles.messages}>
-			<div className={styles.messages_content}>{id ? <Message id={id} /> : DefaultViewMessages()}</div>
+			<div className={styles.messages_content}>
+				{id ? props.chat.messages.map(el => <Message key={el.id} el={el} id={id} />) : DefaultViewMessages()}
+			</div>
 		</div>
 	);
 };

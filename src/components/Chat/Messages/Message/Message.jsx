@@ -4,6 +4,8 @@ import styles from "./Message.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Message = props => {
+	// console.log(props.el);
+
 	return (
 		<div className={styles.wrapper_container_message + " " + styles.wrapper_container_otherMessage}>
 			{/* className={styles.wrapper_container_message + " " + styles.wrapper_container_myMessage + " " + styles.wrapper_container_otherMessage}> */}
@@ -16,7 +18,7 @@ const Message = props => {
 			<div
 				// className={styles.wrapper_message + " " + styles.wrapper_myMessage + " " + styles.wrapper_otherPicture}
 				className={styles.wrapper_message + " " + styles.wrapper_otherMessage}>
-				<div>Hello, How do you do?</div>
+				<div>{props.el.message}</div>
 			</div>
 		</div>
 	);
