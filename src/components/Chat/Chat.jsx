@@ -58,7 +58,7 @@ const Chat = props => {
 	// console.log(a);
 
 	let onSubmit = formData => {
-		props.addMessage(id, formData.send_message);
+		props.addMessage(id, props.profileAuthorizationData.id, formData.send_message);
 	};
 
 	return (
@@ -74,7 +74,6 @@ const Chat = props => {
 				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
 					{props.chats.map(chat => {
 						if (chat.id === id) {
-							// console.log(chat);
 							return (
 								<Messages key={chat.id} chat={chat} profileAuthorizationData={props.profileAuthorizationData} match={props.match} />
 							);

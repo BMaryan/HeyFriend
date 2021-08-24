@@ -25,7 +25,11 @@ const Messages = props => {
 	return (
 		<div className={styles.messages}>
 			<div className={styles.messages_content}>
-				{id ? props.chat.messages.map(el => <Message key={el.id} el={el} id={id} />) : DefaultViewMessages()}
+				{id ? (
+					props.chat.messages.map(el => <Message key={el.id} el={el} id={id} profileAuthorizationData={props.profileAuthorizationData} />)
+				) : (
+					<DefaultViewMessages />
+				)}
 			</div>
 		</div>
 	);

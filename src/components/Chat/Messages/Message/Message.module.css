@@ -1,5 +1,7 @@
 /* 		common wrapper container message */
-.wrapper_container_message {
+.wrapper_container_message,
+.wrapper_container_myMessage,
+.wrapper_container_otherMessage {
 	width: 100%;
 	display: flex;
 	margin-bottom: 15px;
@@ -17,10 +19,9 @@
 }
 
 /* 		common wrapper picture */
-.wrapper_picture {
-}
-
-.wrapper_picture img {
+.wrapper_picture,
+.wrapper_myPicture img,
+.wrapper_otherPicture img {
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
@@ -40,7 +41,9 @@
 }
 
 /* 		common wrapper message */
-.wrapper_message {
+.wrapper_message,
+.wrapper_myMessage,
+.wrapper_otherMessage {
 	display: flex;
 	align-items: center;
 	padding: 0 10px;
@@ -48,13 +51,13 @@
 
 /* wrapper my message */
 .wrapper_myMessage {
-	background: white;
-	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	background: var(--bodyBackgroundOrColor);
 	border-radius: 20px 20px 0 20px;
 }
 
 /* wrapper other message */
 .wrapper_otherMessage {
-	background: var(--bodyBackgroundOrColor);
+	background: white;
+	border: 1px solid var(--bodyBackgroundOrDarkColor);
 	border-radius: 20px 20px 20px 0px;
 }

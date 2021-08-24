@@ -7,10 +7,17 @@ let initialState = {
 			messages: [
 				{
 					id: 1,
+					userId: 3,
 					message: "Hello, How do you do",
 				},
 				{
 					id: 2,
+					userId: 3,
+					message: "3",
+				},
+				{
+					id: 3,
+					userId: 4,
 					message: "3",
 				},
 			],
@@ -20,11 +27,13 @@ let initialState = {
 			messages: [
 				{
 					id: 1,
+					userId: 5,
 					message: "Good",
 				},
 				{
 					id: 2,
-					message: "5",
+					userId: 7,
+					message: "7",
 				},
 			],
 		},
@@ -33,10 +42,12 @@ let initialState = {
 			messages: [
 				{
 					id: 1,
+					userId: 11,
 					message: "Hello",
 				},
 				{
 					id: 2,
+					userId: 11,
 					message: "11",
 				},
 			],
@@ -46,14 +57,17 @@ let initialState = {
 			messages: [
 				{
 					id: 1,
+					userId: 18,
 					message: "Green",
 				},
 				{
 					id: 2,
+					userId: 18,
 					message: "HEllo",
 				},
 				{
 					id: 3,
+					userId: 18,
 					message: "18",
 				},
 			],
@@ -66,6 +80,7 @@ const ChatReducer = (state = initialState, action) => {
 		case ADD_MESSAGE: {
 			let newMessage = {
 				id: action.id,
+				userId: action.userId,
 				message: action.message,
 			};
 
@@ -82,9 +97,10 @@ const ChatReducer = (state = initialState, action) => {
 	}
 };
 
-export const addMessage = (id, message) => ({
+export const addMessage = (id, userId, message) => ({
 	type: ADD_MESSAGE,
 	id,
+	userId,
 	message,
 });
 

@@ -4,21 +4,91 @@ import styles from "./Message.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Message = props => {
-	// console.log(props.el);
+	console.log(props);
 
 	return (
-		<div className={styles.wrapper_container_message + " " + styles.wrapper_container_otherMessage}>
-			{/* className={styles.wrapper_container_message + " " + styles.wrapper_container_myMessage + " " + styles.wrapper_container_otherMessage}> */}
+		<div
+			className={
+				(props.profileAuthorizationData &&
+					props.id &&
+					props.el.userId &&
+					props.id !== props.el.userId &&
+					props.profileAuthorizationData.id === props.el.userId &&
+					props.id === props.profileAuthorizationData.id) ||
+				(props.profileAuthorizationData &&
+					props.id &&
+					props.el.userId &&
+					props.id === props.profileAuthorizationData.id &&
+					props.id === props.el.userId) ||
+				(props.profileAuthorizationData &&
+					props.id &&
+					props.el.userId &&
+					props.id === props.profileAuthorizationData.id &&
+					props.profileAuthorizationData.id === props.el.userId) ||
+				(props.profileAuthorizationData &&
+					props.id &&
+					props.el.userId &&
+					props.id !== props.profileAuthorizationData.id &&
+					props.profileAuthorizationData.id === props.el.userId)
+					? styles.wrapper_container_myMessage
+					: styles.wrapper_container_otherMessage + " " + styles.wrapper_container_message
+			}>
 			<NavLink
 				to={"/profile/" + props.id}
-				// className={styles.wrapper_picture + " " + styles.wrapper_myPicture + " " + styles.wrapper_otherPicture}
-				className={styles.wrapper_picture + " " + styles.wrapper_otherPicture}>
+				className={
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id !== props.el.userId &&
+						props.profileAuthorizationData.id === props.el.userId &&
+						props.id === props.profileAuthorizationData.id) ||
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id === props.profileAuthorizationData.id &&
+						props.id === props.el.userId) ||
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id === props.profileAuthorizationData.id &&
+						props.profileAuthorizationData.id === props.el.userId) ||
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id !== props.profileAuthorizationData.id &&
+						props.profileAuthorizationData.id === props.el.userId)
+						? styles.wrapper_myPicture
+						: styles.wrapper_otherPicture + " " + styles.wrapper_picture
+				}>
 				<img src={defaultAvatar} alt='' />
 			</NavLink>
 			<div
-				// className={styles.wrapper_message + " " + styles.wrapper_myMessage + " " + styles.wrapper_otherPicture}
-				className={styles.wrapper_message + " " + styles.wrapper_otherMessage}>
-				<div>{props.el.message}</div>
+				className={
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id !== props.el.userId &&
+						props.profileAuthorizationData.id === props.el.userId &&
+						props.id === props.profileAuthorizationData.id) ||
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id === props.profileAuthorizationData.id &&
+						props.id === props.el.userId) ||
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id === props.profileAuthorizationData.id &&
+						props.profileAuthorizationData.id === props.el.userId) ||
+					(props.profileAuthorizationData &&
+						props.id &&
+						props.el.userId &&
+						props.id !== props.profileAuthorizationData.id &&
+						props.profileAuthorizationData.id === props.el.userId)
+						? styles.wrapper_myMessage
+						: styles.wrapper_otherMessage + " " + styles.wrapper_message
+				}>
+				{props.el && props.el.message}
 			</div>
 		</div>
 	);
