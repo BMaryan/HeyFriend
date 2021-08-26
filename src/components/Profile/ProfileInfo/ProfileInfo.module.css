@@ -9,7 +9,7 @@
 .profile_picture_content {
 	display: flex;
 	justify-content: center;
-	margin-top: 80px;
+	/* margin-top: 80px; */
 }
 
 .wrapper_profilePicture,
@@ -118,4 +118,21 @@
 .detail_title {
 	color: rgb(94, 94, 94);
 	font-weight: 500;
+}
+
+/* wrapper button for create new post */
+.wrapper_button {
+	margin: 50px 0;
+}
+
+.wrapper_button button {
+	width: 100%;
+	color: white;
+	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	border-radius: 8px;
+	border: 1px solid silver;
+	outline: none;
+	font-size: 16px;
+	padding: 10px 0;
+	cursor: pointer;
 }

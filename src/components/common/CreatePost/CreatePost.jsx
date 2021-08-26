@@ -3,8 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare, faImages, faGrinBeam } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CreatePost.module.css";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
+import CreatePostReduxForm from "./CreatePostForm";
 
 const CreatePost = props => {
+	let onSubmit = formData => {
+		console.log(formData);
+	};
+
 	return (
 		<div className={styles.create_post}>
 			<div className={styles.wrapper_head}>
@@ -15,7 +20,7 @@ const CreatePost = props => {
 			</div>
 			<div className={styles.wrapper_body}>
 				<div className={styles.wrapper_input}>
-					<input className={styles.input} placeholder="What's on your mind?" />
+					<CreatePostReduxForm onSubmit={onSubmit} />
 				</div>
 				<div>
 					<img className={styles.picture} src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />

@@ -8,7 +8,7 @@ const Main = props => {
 		<div className={styles.main}>
 			<div className={styles.main_sideBar_left}>Side bar left</div>
 			<div className={styles.main_content}>
-				<CreatePost profile={props.profile} />
+				{/* <CreatePost profile={props.profile} /> */}
 				<Stories profile={props.profile} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 			<div className={styles.main_sideBar_right}>Side bar right</div>

@@ -25,3 +25,14 @@
 .stories_content::-webkit-scrollbar {
 	display: none;
 }
+
+/* posts */
+.posts {
+	border-top: 1px solid rgb(216, 216, 216);
+}
+
+.posts_title {
+	color: rgb(39, 39, 39);
+	font-size: 20px;
+	font-weight: 500;
+}

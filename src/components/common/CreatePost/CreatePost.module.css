@@ -77,3 +77,13 @@
 .icon__yellow {
 	background: orange;
 }
+
+/* form */
+.form {
+	width: 100%;
+	display: flex;
+}
+
+.button {
+	padding: 0 20px;
+}

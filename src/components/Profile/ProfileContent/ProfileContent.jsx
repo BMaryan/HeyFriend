@@ -1,6 +1,7 @@
 import React from "react";
 import Stories from "../../common/Stories/Stories";
 import styles from "./ProfileContent.module.css";
+import Posts from "./Posts/Posts";
 
 const ProfileContent = props => {
 	return (
@@ -25,7 +26,10 @@ const ProfileContent = props => {
 					<Stories profile={props.profile} />
 				</div>
 			</div>
-			<div></div>
+			<div className={styles.posts}>
+				<div className={styles.posts_title}>Photo feed</div>
+				<Posts />
+			</div>
 		</div>
 	);
 };

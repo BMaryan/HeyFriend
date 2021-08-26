@@ -94,6 +94,9 @@ const ProfileInfo = props => {
 					<div className={styles.detail_title}>Following</div>
 				</div>
 			</div>
+			<div className={styles.wrapper_button}>
+				<button>Create new post</button>
+			</div>
 		</div>
 	);
 };

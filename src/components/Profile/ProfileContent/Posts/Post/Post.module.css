@@ -1,0 +1,10 @@
+.post {
+	height: 254px;
+	width: 254px;
+	background: red;
+	border: 1px solid white;
+	margin-bottom: 20px;
+}
+
+.wrapper_post {
+}
