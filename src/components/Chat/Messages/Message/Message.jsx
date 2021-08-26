@@ -60,7 +60,7 @@ const Message = props => {
 						? styles.wrapper_myPicture
 						: styles.wrapper_otherPicture + " " + styles.wrapper_picture
 				}>
-				<img src={defaultAvatar} alt='' />
+				<img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
 			</NavLink>
 			<div
 				className={

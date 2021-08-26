@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { addMessage } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
+import { getProfileSelector } from "../../redux/profile-selectors";
 
 const ChatContainer = props => {
 	return <Chat {...props} />;
@@ -15,6 +16,7 @@ const mapStateToProps = state => {
 	return {
 		users: getUsersSelector(state),
 		chats: getChatsSelector(state),
+		profile: getProfileSelector(state),
 		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};
 };

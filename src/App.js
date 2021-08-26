@@ -11,7 +11,7 @@ import ChatContainer from "./components/Chat/ChatContainer";
 
 function App(props) {
 	return (
-		<>
+		<div className='App'>
 			<div className='container_fluid'>{props.profileAuthorizationData ? <HeaderContainer /> : undefined}</div>
 			<div className='container container_margin'>
 				<Switch>
@@ -23,7 +23,7 @@ function App(props) {
 					<Route path='*' render={() => <NotFound />} />
 				</Switch>
 			</div>
-		</>
+		</div>
 	);
 }
 

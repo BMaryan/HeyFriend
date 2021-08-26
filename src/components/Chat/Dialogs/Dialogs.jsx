@@ -14,7 +14,7 @@ const Dialogs = props => {
 			</div>
 			<div className={styles.chats}>
 				{props.users.map(user => (
-					<Dialog key={user.id} user={user} profileAuthorizationData={props.profileAuthorizationData} />
+					<Dialog key={user.id} profile={props.profile} user={user} profileAuthorizationData={props.profileAuthorizationData} />
 				))}
 			</div>
 		</div>

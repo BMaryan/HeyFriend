@@ -29,6 +29,8 @@
 .have_not_picture_forHead img {
 	font-weight: bold;
 	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;

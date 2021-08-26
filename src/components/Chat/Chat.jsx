@@ -66,7 +66,7 @@ const Chat = props => {
 			<div className={styles.dialogs}>
 				<Head {...props} toggleShowContent={true} />
 				<div className={styles.dialogs_content}>
-					<Dialogs users={props.users} profileAuthorizationData={props.profileAuthorizationData} />
+					<Dialogs users={props.users} profile={props.profile} profileAuthorizationData={props.profileAuthorizationData} />
 				</div>
 			</div>
 			<div className={toggleDetails ? styles.messages_noDetails : styles.messages_details}>
@@ -75,7 +75,13 @@ const Chat = props => {
 					{props.chats.map(chat => {
 						if (chat.id === id) {
 							return (
-								<Messages key={chat.id} chat={chat} profileAuthorizationData={props.profileAuthorizationData} match={props.match} />
+								<Messages
+									key={chat.id}
+									chat={chat}
+									profile={props.profile}
+									profileAuthorizationData={props.profileAuthorizationData}
+									match={props.match}
+								/>
 							);
 						}
 					})}

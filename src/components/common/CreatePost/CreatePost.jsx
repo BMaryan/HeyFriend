@@ -2,8 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare, faImages, faGrinBeam } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CreatePost.module.css";
+import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 
-const CreatePost = post => {
+const CreatePost = props => {
 	return (
 		<div className={styles.create_post}>
 			<div className={styles.wrapper_head}>
@@ -17,11 +18,7 @@ const CreatePost = post => {
 					<input className={styles.input} placeholder="What's on your mind?" />
 				</div>
 				<div>
-					<img
-						className={styles.picture}
-						src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU'
-						alt=''
-					/>
+					<img className={styles.picture} src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
 				</div>
 			</div>
 			<div className={styles.wrapper_footer}>

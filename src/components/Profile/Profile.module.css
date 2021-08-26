@@ -1,5 +1,6 @@
 .profile {
 	width: 100%;
 	display: flex;
-	background: thistle;
+	/* background: thistle; */
+	margin-top: var(--marginFromHeader);
 }

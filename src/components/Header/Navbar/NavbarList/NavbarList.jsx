@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faSortDown, faSignOutAlt, faCog, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import styles from "../Navbar.module.css";
+import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const ToggleProfileList = props => {
 	return (
@@ -55,11 +56,9 @@ const NavbarList = props => {
 					className={toggleListProfile ? styles.nav_link_toggleList_active : styles.nav_link_toggleList}
 					onClick={() => (toggleListProfile ? setToggleListProfile(false) : setToggleListProfile(true))}>
 					<div className={styles.wrapper_toggleList_picture}>
-						<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJuLvSlNlo9BFbzHAidNdUQi-yNeo97wWAw&usqp=CAU' alt='' />
+						<img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
 					</div>
-					<div className={styles.toggleList_login}>
-						{props.profileAuthorizationData && props.profileAuthorizationData.name + " " + props.profileAuthorizationData.surname}
-					</div>
+					<div className={styles.toggleList_login}>{props.profile && props.profile.name + " " + props.profile.surname}</div>
 					<div>
 						<FontAwesomeIcon className={styles.icon} icon={faSortDown} />
 					</div>

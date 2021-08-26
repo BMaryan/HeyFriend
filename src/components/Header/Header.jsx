@@ -25,7 +25,6 @@ const Header = props => {
 					profile={props.profile}
 					profileAuthorizationData={props.profileAuthorizationData}
 					checkAuthorization={props.checkAuthorization}
-					getProfileData={props.getProfileData}
 				/>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ const Stories = props => {
 	return (
 		<div className={styles.stories}>
 			<div className={styles.title}>Stories</div>
-			<Story profileAuthorizationData={props.profileAuthorizationData} />
+			<Story profile={props.profile} profileAuthorizationData={props.profileAuthorizationData} />
 		</div>
 	);
 };

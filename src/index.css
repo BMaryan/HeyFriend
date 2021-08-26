@@ -1,6 +1,6 @@
 body {
 	height: 100vh;
-	background: rgb(243, 243, 243);
+	background: var(--backgroundBody);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
 	box-sizing: border-box;
@@ -16,6 +16,7 @@ code {
 
 /* global removables */
 :root {
+	--backgroundBody: rgb(243, 243, 243);
 	--authorizationBackgroundOrColor: #e66465, #9198e5;
 	--bodyBackgroundOrColor: rgb(245, 245, 245);
 	--bodyBackgroundOrDarkColor: rgb(233, 233, 233);

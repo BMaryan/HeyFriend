@@ -1,4 +1,5 @@
 .profile_content {
 	width: 75%;
-	background: tan;
+	background: white;
+	padding: var(--paddingForMainContent);
 }
