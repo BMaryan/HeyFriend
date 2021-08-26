@@ -27,7 +27,7 @@ const AppContainer = props => {
 
 	React.useEffect(() => {
 		props.getProfileData(JSON.parse(localStorage.getItem("profile")));
-	}, [props.profileAuthorizationData]);
+	}, [props.profileAuthorizationData || props.profile]);
 
 	setSignUpDataToLocalStorage(props);
 	helpCheckAuthorization(props);

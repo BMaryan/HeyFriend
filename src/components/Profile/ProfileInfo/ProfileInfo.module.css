@@ -100,3 +100,22 @@
 .wrapper_change_picture input {
 	display: none;
 }
+
+/* profile_details_info_content */
+.profile_details_info_content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.details_info_content {
+	text-align: center;
+}
+
+.detail_number {
+	font-weight: 500;
+}
+
+.detail_title {
+	color: rgb(94, 94, 94);
+	font-weight: 500;
+}
