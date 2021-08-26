@@ -2,4 +2,26 @@
 	width: 75%;
 	background: white;
 	padding: var(--paddingForMainContent);
+	overflow: hidden;
+}
+
+/* stories */
+.stories {
+	display: flex;
+	flex-direction: column;
+}
+
+.stories_title {
+	color: rgb(39, 39, 39);
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.stories_content {
+	overflow-x: auto;
+	display: flex;
+}
+
+.stories_content::-webkit-scrollbar {
+	display: none;
 }

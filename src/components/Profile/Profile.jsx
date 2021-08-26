@@ -7,7 +7,7 @@ const Profile = props => {
 	return (
 		<div className={styles.profile}>
 			<ProfileInfo profile={props.profile} getProfileData={props.getProfileData} />
-			<ProfileContent />
+			<ProfileContent profile={props.profile} />
 		</div>
 	);
 };
