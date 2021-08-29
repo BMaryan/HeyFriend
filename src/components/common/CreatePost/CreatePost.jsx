@@ -40,7 +40,7 @@ const CreatePost = props => {
 			</div>
 			<div className={styles.wrapper_content}>
 				<div className={styles.wrapper_add_picture}>
-					<label onChange={e => onChangeProfilePicture(e)}>
+					<label title='Choose photo' onChange={e => onChangeProfilePicture(e)}>
 						{postPicture ? (
 							<img className={styles.post_img} src={postPicture} alt='' />
 						) : (
@@ -51,8 +51,27 @@ const CreatePost = props => {
 				</div>
 			</div>
 			<div className={styles.wrapper_button_publish}>
-				<button onClick={() => (postPicture ? props.setProfilePosts(postPicture, null, null) && props.setCreateNewPost(false) : <></>)}>
-					{/* onClick={() => (postPicture ? props.getProfileData({ posts: [{ img: postPicture }] }) && props.setCreateNewPost(false) : <></>)}> */}
+				<button
+					onClick={() =>
+						postPicture ? (
+							props.setProfilePosts(postPicture, null, null) &&
+							props.setCreateNewPost(false) &&
+							localStorage.setItem(
+								"profile",
+								JSON.stringify({
+									...props.profile,
+									posts: props.profile &&
+										props.profile.posts && [
+											...props.profile.posts,
+											...props.profile.posts.filter((item, index) => props.profile.posts.indexOf(item) === index),
+										],
+									// : [...props.profile.posts],
+								})
+							)
+						) : (
+							<></>
+						)
+					}>
 					Publish
 				</button>
 			</div>

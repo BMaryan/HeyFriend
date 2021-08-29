@@ -24,6 +24,7 @@ const ProfileReducer = (state = initialState, action) => {
 		}
 		case SET_PROFILE_POSTS: {
 			let newPost = {
+				id: state.profile.posts ? state.profile.posts.length + 1 : null,
 				img: action.img,
 				likes: action.likes,
 				comments: action.comments,
@@ -31,7 +32,7 @@ const ProfileReducer = (state = initialState, action) => {
 
 			return {
 				...state,
-				profile: { ...state.profile, posts: [...state.profile.posts, { ...newPost }] },
+				profile: { ...state.profile, posts: state.profile.posts && newPost ? [...state.profile.posts, { ...newPost }] : [] },
 				// posts: { ...state.profile.posts, newPost },
 			};
 		}

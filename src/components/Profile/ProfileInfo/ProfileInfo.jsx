@@ -57,6 +57,10 @@ const ProfileInfo = props => {
 					<div className={styles.detail_title}>Following</div>
 				</div>
 			</div>
+			{/* test */}
+			{props.id ? <button style={{ width: "100%", padding: "10px 0", marginTop: "20px" }}>Message</button> : <></>}
+			{/* test */}
+
 			<div className={styles.wrapper_button}>
 				<button onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>Create post</button>
 			</div>

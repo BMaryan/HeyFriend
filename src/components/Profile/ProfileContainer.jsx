@@ -31,7 +31,7 @@ const ProfileContainer = props => {
 		return <Redirect to='/sign_up' />;
 	}
 
-	return <Profile {...props} />;
+	return <Profile {...props} id={id} />;
 };
 
 const mapStateToProps = state => {
