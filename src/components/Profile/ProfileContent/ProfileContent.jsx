@@ -19,16 +19,11 @@ const ProfileContent = props => {
 					<Stories profile={props.profile} />
 					<Stories profile={props.profile} />
 					<Stories profile={props.profile} />
-					<Stories profile={props.profile} />
-					<Stories profile={props.profile} />
-					<Stories profile={props.profile} />
-					<Stories profile={props.profile} />
-					<Stories profile={props.profile} />
 				</div>
 			</div>
 			<div className={styles.posts}>
 				<div className={styles.posts_title}>Photo feed</div>
-				<Posts />
+				<Posts profile={props.profile} />
 			</div>
 		</div>
 	);

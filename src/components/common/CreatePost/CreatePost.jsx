@@ -10,14 +10,26 @@ const CreatePost = props => {
 		console.log(formData);
 	};
 
+	let [postPicture, setPostPicture] = React.useState(null);
+
+	let onChangeProfilePicture = e => {
+		if (e.target.files.length) {
+			let file = e.target.files[0];
+			let reader = new FileReader();
+			reader.readAsDataURL(file);
+
+			reader.onloadend = function () {
+				setPostPicture(reader.result);
+				// 	props.getProfileData({ posts: [{ img: reader.result }] });
+				// 	localStorage.setItem("profile", JSON.stringify({ posts: [{ img: reader.result }] }));
+			};
+		}
+	};
+
+	console.log(props);
+
 	return (
 		<div className={styles.create_post}>
-			<div className={styles.wrapper_head}>
-				<div>
-					<FontAwesomeIcon className={styles.icon} icon={faPlusSquare} />
-				</div>
-				<div className={styles.title}>Create post</div>
-			</div>
 			<div className={styles.wrapper_body}>
 				<div className={styles.wrapper_input}>
 					<CreatePostReduxForm onSubmit={onSubmit} />
@@ -26,25 +38,23 @@ const CreatePost = props => {
 					<img className={styles.picture} src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
 				</div>
 			</div>
-			<div className={styles.wrapper_footer}>
-				<div className={styles.wrapper_feature}>
-					<div>
-						<FontAwesomeIcon className={styles.icon + " " + styles.icon__blue} icon={faImages} />
-					</div>
-					<div>Gallery</div>
+			<div className={styles.wrapper_content}>
+				<div className={styles.wrapper_add_picture}>
+					<label onChange={e => onChangeProfilePicture(e)}>
+						{postPicture ? (
+							<img className={styles.post_img} src={postPicture} alt='' />
+						) : (
+							<FontAwesomeIcon className={styles.icon} icon={faPlusSquare} />
+						)}
+						<input type='file' />
+					</label>
 				</div>
-				<div className={styles.wrapper_feature}>
-					<div>
-						<FontAwesomeIcon className={styles.icon + " " + styles.icon__pink} icon={faPlusSquare} />
-					</div>
-					<div>Tag Friends</div>
-				</div>
-				<div className={styles.wrapper_feature}>
-					<div>
-						<FontAwesomeIcon className={styles.icon + " " + styles.icon__yellow} icon={faGrinBeam} />
-					</div>
-					<div>Feeling/Activity</div>
-				</div>
+			</div>
+			<div className={styles.wrapper_button_publish}>
+				<button onClick={() => (postPicture ? props.setProfilePosts(postPicture, null, null) && props.setCreateNewPost(false) : <></>)}>
+					{/* onClick={() => (postPicture ? props.getProfileData({ posts: [{ img: postPicture }] }) && props.setCreateNewPost(false) : <></>)}> */}
+					Publish
+				</button>
 			</div>
 		</div>
 	);

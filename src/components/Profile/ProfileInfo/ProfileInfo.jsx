@@ -3,48 +3,11 @@ import styles from "./ProfileInfo.module.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
-
-const ChangeProfilePictureContainer = props => {
-	let onChangeProfilePicture = e => {
-		if (e.target.files.length) {
-			let file = e.target.files[0];
-			let reader = new FileReader();
-			reader.readAsDataURL(file);
-
-			reader.onloadend = function () {
-				props.getProfileData({ img: reader.result });
-				localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
-			};
-		}
-	};
-
-	let removeProfilePicture = () => {
-		return props.getProfileData({ img: null });
-	};
-
-	return (
-		<div className={styles.change_profile_picture_container}>
-			<div className={styles.change_profile_picture_content}>
-				<div className={styles.title}>Change profile photo</div>
-				<div className={styles.wrapper_change_picture}>
-					<label htmlFor='file-upload'>Upload photo</label>
-					<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
-				</div>
-				<div
-					className={styles.wrapper_change_picture}
-					onClick={() => removeProfilePicture() && localStorage.setItem("profile", JSON.stringify({ img: null }))}>
-					Remove current photo
-				</div>
-				<div onClick={() => props.setChangeProfilePicture(false)} className={styles.wrapper_change_picture}>
-					Cancel
-				</div>
-			</div>
-		</div>
-	);
-};
+import { ChangeProfilePictureContainer, CreateNewPostContainer } from "../../../utils/helperForProfile/helperForProfile";
 
 const ProfileInfo = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
+	let [createNewPost, setCreateNewPost] = React.useState(false);
 
 	// React.useEffect(() => {
 	// 	if (changeProfilePicture === true) {
@@ -82,7 +45,7 @@ const ProfileInfo = props => {
 			<div className={styles.profile_aboutYou}>I am {props.profile.name}. I want to do application network and start working in job!</div>
 			<div className={styles.profile_details_info_content}>
 				<div className={styles.details_info_content}>
-					<div className={styles.detail_number}>174</div>
+					<div className={styles.detail_number}>{props.profile && props.profile.posts ? props.profile.posts.length : 0}</div>
 					<div className={styles.detail_title}>Posts</div>
 				</div>
 				<div className={styles.details_info_content}>
@@ -95,7 +58,19 @@ const ProfileInfo = props => {
 				</div>
 			</div>
 			<div className={styles.wrapper_button}>
-				<button>Create new post</button>
+				<button onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>Create post</button>
+			</div>
+			<div>
+				{createNewPost ? (
+					<CreateNewPostContainer
+						setProfilePosts={props.setProfilePosts}
+						getProfileData={props.getProfileData}
+						profile={props.profile}
+						setCreateNewPost={setCreateNewPost}
+					/>
+				) : (
+					<></>
+				)}
 			</div>
 		</div>
 	);

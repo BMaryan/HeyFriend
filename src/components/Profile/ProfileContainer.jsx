@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getProfileSelector } from "../../redux/profile-selectors";
-import { getProfileData } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts } from "../../redux/profile-reducer";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
@@ -42,4 +42,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { getProfileData }), withRouter)(ProfileContainer);
+export default compose(connect(mapStateToProps, { getProfileData, setProfilePosts }), withRouter)(ProfileContainer);

@@ -4,7 +4,7 @@ import styles from "./Post.module.css";
 const Post = props => {
 	return (
 		<div className={styles.post}>
-			<div className={styles.wrapper_post}></div>
+			<div className={styles.wrapper_post}>{props.post ? <img src={props.post.img} alt='' /> : <></>}</div>
 		</div>
 	);
 };

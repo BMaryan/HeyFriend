@@ -2,9 +2,20 @@
 	height: 254px;
 	width: 254px;
 	background: red;
-	border: 1px solid white;
+	border: 1px solid silver;
 	margin-bottom: 20px;
 }
 
 .wrapper_post {
+	height: 100%;
+	display: flex;
+}
+
+.wrapper_post img {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	object-fit: cover;
+	object-position: center;
+	cursor: pointer;
 }

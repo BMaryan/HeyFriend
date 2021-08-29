@@ -6,11 +6,13 @@ const Posts = props => {
 	return (
 		<div className={styles.posts}>
 			<div className={styles.wrapper_posts}>
-				<Post />
-				<Post />
-				<Post />
-				<Post />
-				<Post />
+				{props.profile && props.profile.posts && props.profile.posts.length > 0 ? (
+					props.profile.posts.map(post => {
+						return <Post key={post.id} post={post} profile={props.profile} />;
+					})
+				) : (
+					<></>
+				)}
 			</div>
 		</div>
 	);
