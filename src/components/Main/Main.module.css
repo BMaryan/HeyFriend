@@ -1,24 +1,24 @@
 .main {
 	width: 100%;
-	/* background: rgb(248, 100, 100); */
 	display: flex;
 	margin-top: var(--marginFromHeader);
 }
 
 .main_sideBar_left {
 	width: 25%;
-	background: white;
-	/* background: rgb(238, 238, 132); */
 }
 
 .main_content {
 	width: 50%;
-	/* background: green; */
 	margin: 0 20px;
 }
 
 .main_sideBar_right {
 	width: 25%;
+}
+
+.main_sideBar_left,
+.main_content,
+.main_sideBar_right {
 	background: white;
-	/* background: rgb(111, 111, 238); */
 }
