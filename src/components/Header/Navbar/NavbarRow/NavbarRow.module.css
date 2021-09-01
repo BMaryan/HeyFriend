@@ -1,0 +1,18 @@
+.navbar_row {
+	height: 100%;
+	display: flex;
+}
+
+/* wrapper nav link */
+.wrapper_nav_link {
+	height: 100%;
+	display: flex;
+	transition: 0.5s;
+}
+
+/* nav link */
+.nav_linkRow {
+	border-radius: 30px;
+	padding: 0 8px;
+	margin: 0 10px;
+}

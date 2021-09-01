@@ -1,0 +1,33 @@
+.navbar_list {
+	height: 100%;
+	display: flex;
+	position: relative;
+	transition: 0.5s;
+}
+
+/* wrapper nav link */
+.wrapper_nav_link {
+	height: 100%;
+	display: flex;
+	transition: 0.5s;
+}
+
+/* wrapper picture */
+.wrapper_toggleList_picture {
+	height: 100%;
+}
+
+.wrapper_toggleList_picture img {
+	height: 100%;
+	width: 35px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 50%;
+}
+
+/* full name */
+.toggleList_fullName {
+	color: black;
+	text-decoration: none;
+	margin: 0 7px;
+}
