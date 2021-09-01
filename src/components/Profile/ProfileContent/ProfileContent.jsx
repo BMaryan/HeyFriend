@@ -6,6 +6,7 @@ import Posts from "./Posts/Posts";
 const ProfileContent = props => {
 	return (
 		<div className={styles.profile_content}>
+			{/* stories */}
 			<div className={styles.stories}>
 				<div className={styles.stories_title}>Actual stories</div>
 
@@ -21,6 +22,8 @@ const ProfileContent = props => {
 					<Stories profile={props.profile} />
 				</div>
 			</div>
+
+			{/* posts */}
 			<div className={styles.posts}>
 				<div className={styles.posts_title}>Photo feed</div>
 				<Posts profile={props.profile} />

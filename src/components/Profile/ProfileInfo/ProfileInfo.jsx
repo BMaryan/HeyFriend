@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { ChangeProfilePictureContainer, CreateNewPostContainer } from "../../../utils/helperForProfile/helperForProfile";
 import { NavLink } from "react-router-dom";
@@ -23,7 +21,7 @@ const ProfileInfo = props => {
 
 	return (
 		<div className={styles.profile_info}>
-			<div className={styles.profile_picture_content}>
+			<div className={styles.profile_picture}>
 				<div className={changeProfilePicture ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
 					<img
 						onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
@@ -32,18 +30,18 @@ const ProfileInfo = props => {
 						alt=''
 					/>
 				</div>
-				<div className={styles.wrapper_icon}>{/* <FontAwesomeIcon className={styles.icon} icon={faCamera} /> */}</div>
-				<div>
-					{changeProfilePicture ? (
-						<ChangeProfilePictureContainer getProfileData={props.getProfileData} setChangeProfilePicture={setChangeProfilePicture} />
-					) : (
-						<></>
-					)}
-				</div>
 			</div>
+
+			{/* full name */}
 			<div className={styles.profile_fullName}>{props.profile ? props.profile.surname + " " + props.profile.name : <></>}</div>
+
+			{/* status */}
 			<div className={styles.profile_status}>New York, NY</div>
-			<div className={styles.profile_aboutYou}>I am {props.profile.name}. I want to do application network and start working in job!</div>
+
+			{/* about me */}
+			<div className={styles.profile_aboutMe}>I am {props.profile.name}. I want to do application network and start working in job!</div>
+
+			{/* details info content */}
 			<div className={styles.profile_details_info_content}>
 				<div className={styles.details_info_content}>
 					<div className={styles.detail_number}>{props.profile && props.profile.posts ? props.profile.posts.length : 0}</div>
@@ -58,19 +56,38 @@ const ProfileInfo = props => {
 					<div className={styles.detail_title}>Following</div>
 				</div>
 			</div>
-			{/* test */}
+
+			{/* button message not for my profile */}
 			{props.id ? (
-				<button onClick={() => props.addChat(props.id)} style={{ width: "100%", padding: "10px 0", marginTop: "20px" }}>
-					<NavLink to={"/chat/" + props.id}>Message</NavLink>
-				</button>
+				<div className={styles.wrapper_button_message}>
+					<button className={styles.button_message} onClick={() => props.addChat(props.id)}>
+						<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
+							Message
+						</NavLink>
+					</button>
+				</div>
 			) : (
 				<></>
 			)}
-			{/* test */}
 
-			<div className={styles.wrapper_button}>
-				<button onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>Create post</button>
+			{/* button create post */}
+			<div className={styles.wrapper_button_createPost}>
+				<button className={styles.button_createPost} onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>
+					Create post
+				</button>
 			</div>
+
+			{/* toggle show container for change something in profile */}
+			{/* change picture */}
+			<div>
+				{changeProfilePicture ? (
+					<ChangeProfilePictureContainer getProfileData={props.getProfileData} setChangeProfilePicture={setChangeProfilePicture} />
+				) : (
+					<></>
+				)}
+			</div>
+
+			{/* create post */}
 			<div>
 				{createNewPost ? (
 					<CreateNewPostContainer

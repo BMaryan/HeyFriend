@@ -1,0 +1,68 @@
+/* change profile picture container */
+.change_profile_picture_container {
+	width: 350px;
+	background: tomato;
+	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	border-radius: var(--borderRadius);
+	position: fixed;
+	top: 220px;
+	left: 490px;
+	z-index: 10;
+}
+
+.change_profile_picture_content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* title */
+.title {
+	color: rgb(38, 38, 38);
+	font-weight: 500;
+	font-size: 20px;
+	padding: var(--paddingForMainContent) 0;
+}
+
+/* wrapper change picture */
+.wrapper_change_picture {
+	width: 100%;
+	border-top: 1px solid var(--bodyBackgroundOrDarkColor);
+	display: flex;
+	justify-content: center;
+	padding: 12px 0;
+	cursor: pointer;
+}
+
+/* get picture  */
+.wrapper_change_picture label {
+	cursor: pointer;
+}
+
+.wrapper_change_picture input {
+	display: none;
+}
+
+/* create new post container */
+.create_new_post_container {
+	height: 500px;
+	width: 500px;
+	background: white;
+	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	border-radius: var(--borderRadius);
+	position: fixed;
+	top: 100px;
+	left: 490px;
+	box-sizing: border-box;
+	padding: var(--paddingForMainContent);
+	z-index: 10;
+}
+
+/* title */
+.create_post_title {
+	color: rgb(39, 39, 39);
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+}

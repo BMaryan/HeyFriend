@@ -11,12 +11,14 @@
 	flex-direction: column;
 }
 
+/* title */
 .stories_title {
 	color: rgb(39, 39, 39);
 	font-size: 20px;
 	font-weight: 500;
 }
 
+/* stories content */
 .stories_content {
 	overflow-x: auto;
 	display: flex;
@@ -32,6 +34,7 @@
 	margin-top: 50px;
 }
 
+/* title */
 .posts_title {
 	color: rgb(39, 39, 39);
 	font-size: 20px;

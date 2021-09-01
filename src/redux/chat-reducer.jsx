@@ -79,7 +79,6 @@ let initialState = {
 const ChatReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_CHAT: {
-			// debugger;
 			let newChat = {
 				id: action.id,
 				messages: [],

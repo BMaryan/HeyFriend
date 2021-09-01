@@ -33,7 +33,6 @@ const ProfileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				profile: { ...state.profile, posts: state.profile.posts && newPost ? [...state.profile.posts, { ...newPost }] : [] },
-				// posts: { ...state.profile.posts, newPost },
 			};
 		}
 		default: {

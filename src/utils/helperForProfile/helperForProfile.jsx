@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../components/Profile/ProfileInfo/ProfileInfo.module.css";
+import styles from "./helperForProfile.module.css";
 import CreatePost from "../../components/common/CreatePost/CreatePost";
 
 export const ChangeProfilePictureContainer = props => {
@@ -30,11 +30,13 @@ export const ChangeProfilePictureContainer = props => {
 					<label htmlFor='file-upload'>Upload photo</label>
 					<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
 				</div>
+
 				<div
 					className={styles.wrapper_change_picture}
 					onClick={() => removeProfilePicture() && localStorage.setItem("profile", JSON.stringify({ img: null }))}>
 					Remove current photo
 				</div>
+
 				<div onClick={() => props.setChangeProfilePicture(false)} className={styles.wrapper_change_picture}>
 					Cancel
 				</div>
@@ -47,6 +49,7 @@ export const CreateNewPostContainer = props => {
 	return (
 		<div className={styles.create_new_post_container}>
 			<div className={styles.create_post_title}>Create new post</div>
+
 			<div>
 				<CreatePost
 					setProfilePosts={props.setProfilePosts}
