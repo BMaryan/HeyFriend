@@ -4,6 +4,7 @@ import styles from "./ProfileInfo.module.css";
 // import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { ChangeProfilePictureContainer, CreateNewPostContainer } from "../../../utils/helperForProfile/helperForProfile";
+import { NavLink } from "react-router-dom";
 
 const ProfileInfo = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
@@ -58,7 +59,13 @@ const ProfileInfo = props => {
 				</div>
 			</div>
 			{/* test */}
-			{props.id ? <button style={{ width: "100%", padding: "10px 0", marginTop: "20px" }}>Message</button> : <></>}
+			{props.id ? (
+				<button onClick={() => props.addChat(props.id)} style={{ width: "100%", padding: "10px 0", marginTop: "20px" }}>
+					<NavLink to={"/chat/" + props.id}>Message</NavLink>
+				</button>
+			) : (
+				<></>
+			)}
 			{/* test */}
 
 			<div className={styles.wrapper_button}>

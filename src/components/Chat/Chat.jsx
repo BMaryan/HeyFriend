@@ -72,19 +72,23 @@ const Chat = props => {
 			<div className={toggleDetails ? styles.messages_noDetails : styles.messages_details}>
 				{id ? <Head {...props} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
 				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
-					{props.chats.map(chat => {
-						if (chat.id === id) {
-							return (
-								<Messages
-									key={chat.id}
-									chat={chat}
-									profile={props.profile}
-									profileAuthorizationData={props.profileAuthorizationData}
-									match={props.match}
-								/>
-							);
-						}
-					})}
+					{props.chats ? (
+						props.chats.map(chat => {
+							if (chat.id === id) {
+								return (
+									<Messages
+										key={chat.id}
+										chat={chat}
+										profile={props.profile}
+										profileAuthorizationData={props.profileAuthorizationData}
+										match={props.match}
+									/>
+								);
+							}
+						})
+					) : (
+						<></>
+					)}
 					{id ? <ChatReduxForm onSubmit={onSubmit} /> : <></>}
 				</div>
 				{id ? (

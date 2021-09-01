@@ -4,8 +4,6 @@ import styles from "./Message.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Message = props => {
-	console.log(props);
-
 	return (
 		<div
 			className={

@@ -8,6 +8,7 @@ import MainContainer from "./components/Main/MainContainer";
 import NotFound from "./components/common/NotFound/NotFound";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import ChatContainer from "./components/Chat/ChatContainer";
+import FriendsContainer from "./components/Friends/FriendsContainer";
 
 function App(props) {
 	return (
@@ -18,6 +19,7 @@ function App(props) {
 					<Route exact path='/' render={() => <MainContainer />} />
 					<Route path='/profile/:id?' render={() => <ProfileContainer />} />
 					<Route path='/chat/:id?' render={() => <ChatContainer />} />
+					<Route path='/friends/:id?' render={() => <FriendsContainer />} />
 					<Route path='/sign_in' render={() => <SignInContainer />} />
 					<Route path='/sign_up' render={() => <SignUpContainer />} />
 					<Route path='*' render={() => <NotFound />} />

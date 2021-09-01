@@ -7,6 +7,7 @@ import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../red
 import Profile from "./Profile";
 import { getProfileSelector } from "../../redux/profile-selectors";
 import { getProfileData, setProfilePosts } from "../../redux/profile-reducer";
+import { addChat } from "../../redux/chat-reducer";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
@@ -42,4 +43,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { getProfileData, setProfilePosts }), withRouter)(ProfileContainer);
+export default compose(connect(mapStateToProps, { getProfileData, setProfilePosts, addChat }), withRouter)(ProfileContainer);
