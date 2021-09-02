@@ -6,7 +6,10 @@ import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 const Dialog = props => {
 	return (
 		<>
-			<NavLink to={"/chat/" + props.user.id} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
+			<NavLink
+				to={props.chat ? "/chat/" + props.chat.id : ""}
+				className={styles.chat + " " + styles.chat_forHead}
+				activeClassName={styles.chat_active}>
 				<div className={styles.wrapper_picture}>
 					<div className={styles.have_not_picture + " " + styles.have_not_picture_forHead}>
 						{props.user ? <img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' /> : <></>}

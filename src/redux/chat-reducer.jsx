@@ -16,11 +16,6 @@ let initialState = {
 					userId: 3,
 					message: "3",
 				},
-				{
-					id: 3,
-					userId: 4,
-					message: "3",
-				},
 			],
 		},
 		{
@@ -92,7 +87,7 @@ const ChatReducer = (state = initialState, action) => {
 		}
 		case ADD_MESSAGE: {
 			let newMessage = {
-				id: action.id,
+				id: state.chats.map(chat => (chat.id === action.id ? chat.messages.length : undefined)),
 				userId: action.userId,
 				message: action.message,
 			};

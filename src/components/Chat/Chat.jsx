@@ -1,61 +1,15 @@
 import React from "react";
 import styles from "./Chat.module.css";
-import dialogStyles from "./Dialogs/Dialog/Dialog.module.css";
 import Dialogs from "./Dialogs/Dialogs";
 import Messages from "./Messages/Messages";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import ChatReduxForm from "./ChatForm";
-
-const Head = props => {
-	let id = Number(props.match.params.id);
-
-	return props.toggleShowContent ? (
-		<div className={styles.head}>
-			<div>Head</div>
-		</div>
-	) : (
-		<div className={styles.head + " " + styles.head_messages}>
-			<div>
-				{props.users.map(user => {
-					if (user && id && user.id === id) {
-						return (
-							<NavLink key={user.id} to={"/profile/" + user.id} className={dialogStyles.chat_forHead}>
-								<div className={dialogStyles.wrapper_picture}>
-									<div className={dialogStyles.have_not_picture_forHead}>{user ? <img src={defaultAvatar} alt='' /> : <></>}</div>
-								</div>
-								<div>
-									<div className={dialogStyles.login}>{user ? user.surname + " " + user.name : <></>}</div>
-								</div>
-							</NavLink>
-						);
-					}
-				})}
-			</div>
-			<div>
-				<FontAwesomeIcon
-					onClick={() => (props.toggleDetails ? props.setToggleDetails(false) : props.setToggleDetails(true))}
-					className={styles.icon}
-					icon={faInfoCircle}
-				/>
-			</div>
-		</div>
-	);
-};
+import { Head } from "../../utils/helperForChat/helperForChat";
 
 const Chat = props => {
 	let [toggleDetails, setToggleDetails] = React.useState(false);
 	let id = Number(props.match.params.id);
-
-	// let a = props.chats.map(chat => {
-	// 	if (chat.id === id) {
-	// 		return chat.messages.length + 1;
-	// 	}
-	// });
-
-	// console.log(a);
 
 	let onSubmit = formData => {
 		props.addMessage(id, props.profileAuthorizationData.id, formData.send_message);
@@ -66,13 +20,20 @@ const Chat = props => {
 			<div className={styles.dialogs}>
 				<Head {...props} toggleShowContent={true} />
 				<div className={styles.dialogs_content}>
-					<Dialogs users={props.users} profile={props.profile} profileAuthorizationData={props.profileAuthorizationData} />
+					<Dialogs
+						users={props.users}
+						profile={props.profile}
+						chats={props.chats}
+						profileAuthorizationData={props.profileAuthorizationData}
+					/>
 				</div>
 			</div>
+
 			<div className={toggleDetails ? styles.messages_noDetails : styles.messages_details}>
 				{id ? <Head {...props} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
+
 				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
-					{props.chats ? (
+					{props.chats && props.chats.length ? (
 						props.chats.map(chat => {
 							if (chat.id === id) {
 								return (
@@ -89,8 +50,10 @@ const Chat = props => {
 					) : (
 						<></>
 					)}
+
 					{id ? <ChatReduxForm onSubmit={onSubmit} /> : <></>}
 				</div>
+
 				{id ? (
 					props.users.map(user => {
 						if (user && id && user.id === id) {

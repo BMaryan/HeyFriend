@@ -17,6 +17,7 @@ code {
 /* global removables */
 :root {
 	--backgroundBody: rgb(243, 243, 243);
+	--backgroundBodyForShowContainer: rgba(0, 0, 0, 0.6);
 	--authorizationBackgroundOrColor: #e66465, #9198e5;
 	--bodyBackgroundOrColor: rgb(245, 245, 245);
 	--bodyBackgroundOrDarkColor: rgb(233, 233, 233);

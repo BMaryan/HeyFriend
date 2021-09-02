@@ -48,15 +48,21 @@ export const ChangeProfilePictureContainer = props => {
 export const CreateNewPostContainer = props => {
 	return (
 		<div className={styles.create_new_post_container}>
-			<div className={styles.create_post_title}>Create new post</div>
+			<div className={styles.create_new_post_content}>
+				<div className={styles.create_post_title}>Create new post</div>
 
-			<div>
-				<CreatePost
-					setProfilePosts={props.setProfilePosts}
-					getProfileData={props.getProfileData}
-					profile={props.profile}
-					setCreateNewPost={props.setCreateNewPost}
-				/>
+				<div>
+					<CreatePost
+						setProfilePosts={props.setProfilePosts}
+						getProfileData={props.getProfileData}
+						profile={props.profile}
+						setCreateNewPost={props.setCreateNewPost}
+					/>
+				</div>
+
+				<button style={{ width: "100%", padding: "5px 0" }} onClick={() => props.setCreateNewPost(false)}>
+					x
+				</button>
 			</div>
 		</div>
 	);

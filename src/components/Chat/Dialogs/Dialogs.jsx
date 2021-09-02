@@ -13,9 +13,25 @@ const Dialogs = props => {
 				<FontAwesomeIcon className={styles.search_icon} icon={faSearch} />
 			</div>
 			<div className={styles.chats}>
-				{props.users.map(user => (
-					<Dialog key={user.id} profile={props.profile} user={user} profileAuthorizationData={props.profileAuthorizationData} />
-				))}
+				{props.chats && props.chats.length > 0 ? (
+					props.chats.map(chat => {
+						return props.users.map(user => {
+							if (chat.id === user.id) {
+								return (
+									<Dialog
+										key={chat.id}
+										chat={chat}
+										user={user}
+										profile={props.profile}
+										profileAuthorizationData={props.profileAuthorizationData}
+									/>
+								);
+							}
+						});
+					})
+				) : (
+					<></>
+				)}
 			</div>
 		</div>
 	);

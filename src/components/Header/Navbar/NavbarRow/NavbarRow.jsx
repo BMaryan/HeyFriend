@@ -23,7 +23,7 @@ const DuplicateCodeFunc = props => {
 const NavbarRow = props => {
 	return (
 		<div className={styles.navbar_row}>
-			<DuplicateCodeFunc path='/' icon={faHome} exact='exact' />
+			<DuplicateCodeFunc path='/' icon={faHome} exact />
 			<DuplicateCodeFunc path='/chat' icon={faFacebookMessenger} />
 			<DuplicateCodeFunc path='/friends' icon={faUserFriends} />
 		</div>

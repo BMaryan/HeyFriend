@@ -1,17 +1,31 @@
-/* change profile picture container */
-.change_profile_picture_container {
-	width: 350px;
-	background: tomato;
+/* common */
+.change_profile_picture_container,
+.create_new_post_container {
+	background: var(--backgroundBodyForShowContainer);
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+}
+
+.change_profile_picture_content,
+.create_new_post_content {
+	background: white;
 	border: 1px solid var(--bodyBackgroundOrDarkColor);
 	border-radius: var(--borderRadius);
-	position: fixed;
-	top: 220px;
-	left: 490px;
-	z-index: 10;
+}
+
+/* change profile picture container */
+.change_profile_picture_container {
 }
 
 .change_profile_picture_content {
-	width: 100%;
+	width: 30vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -46,17 +60,11 @@
 
 /* create new post container */
 .create_new_post_container {
-	height: 500px;
-	width: 500px;
-	background: white;
-	border: 1px solid var(--bodyBackgroundOrDarkColor);
-	border-radius: var(--borderRadius);
-	position: fixed;
-	top: 100px;
-	left: 490px;
-	box-sizing: border-box;
+}
+
+.create_new_post_content {
+	width: 30vw;
 	padding: var(--paddingForMainContent);
-	z-index: 10;
 }
 
 /* title */
