@@ -11,7 +11,7 @@ export const Head = props => {
 
 	return props.toggleShowContent ? (
 		<div className={styles.head}>
-			<div>Head</div>
+			<div>Find Friends</div>
 		</div>
 	) : (
 		<div className={styles.head + " " + styles.head_messages}>
@@ -19,9 +19,14 @@ export const Head = props => {
 				{props.users.map(user => {
 					if (user && id && user.id === id) {
 						return (
-							<NavLink key={user.id} to={"/profile/" + user.id} className={dialogStyles.chat_forHead}>
+							<NavLink
+								key={user.id}
+								to={props.profileAuthorizationData && props.profileAuthorizationData.id !== id ? "/profile/" + user.id : "/profile"}
+								className={dialogStyles.chat_forHead}>
 								<div className={dialogStyles.wrapper_picture}>
-									<div className={dialogStyles.have_not_picture_forHead}>{user ? <img src={defaultAvatar} alt='' /> : <></>}</div>
+									<div className={dialogStyles.have_not_picture_forHead}>
+										{user ? <img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' /> : <></>}
+									</div>
 								</div>
 								<div>
 									<div className={dialogStyles.login}>{user ? user.surname + " " + user.name : <></>}</div>

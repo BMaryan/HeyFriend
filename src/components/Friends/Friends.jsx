@@ -5,7 +5,9 @@ const Friends = props => {
 	return (
 		<div>
 			{props.users.map(user => (
-				<NavLink key={user.id} to={"/profile/" + user.id}>
+				<NavLink
+					key={user.id}
+					to={props.profileAuthorizationData && props.profileAuthorizationData.id !== user.id ? "/profile/" + user.id : "/profile"}>
 					<div>{user.surname + " " + user.name}</div>
 				</NavLink>
 			))}

@@ -26,7 +26,8 @@
 }
 
 .wrapper_picture .have_not_picture img,
-.have_not_picture_forHead img {
+.have_not_picture_forHead img,
+.wrapper_icon {
 	font-weight: bold;
 	border-radius: 50%;
 	object-fit: cover;
@@ -41,10 +42,16 @@
 	width: 50px;
 }
 
-.wrapper_picture .have_not_picture_forHead img {
+.wrapper_picture .have_not_picture_forHead img,
+.wrapper_icon {
 	height: 40px;
 	width: 40px;
-	font-size: 13px;
+}
+
+.wrapper_icon {
+	color: white;
+	background: rgb(103, 200, 238);
+	font-size: 18px;
 }
 
 /*  */

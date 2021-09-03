@@ -32,7 +32,7 @@ const Message = props => {
 					: styles.wrapper_container_otherMessage + " " + styles.wrapper_container_message
 			}>
 			<NavLink
-				to={"/profile/" + props.id}
+				to={props.profileAuthorizationData && props.profileAuthorizationData.id !== props.id ? "/profile/" + props.id : "/profile"}
 				className={
 					(props.profileAuthorizationData &&
 						props.id &&

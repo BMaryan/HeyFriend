@@ -58,7 +58,7 @@ const ProfileInfo = props => {
 			</div>
 
 			{/* button message not for my profile */}
-			{props.id ? (
+			{props.id && props.profileAuthorizationData.id !== props.id ? (
 				<div className={styles.wrapper_button_message}>
 					<button className={styles.button_message} onClick={() => props.addChat(props.id)}>
 						<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>

@@ -12,6 +12,7 @@ const Profile = props => {
 				getProfileData={props.getProfileData}
 				setProfilePosts={props.setProfilePosts}
 				id={props.id}
+				profileAuthorizationData={props.profileAuthorizationData}
 			/>
 			<ProfileContent profile={props.profile} />
 		</div>
