@@ -14,7 +14,7 @@ const Profile = props => {
 				id={props.id}
 				profileAuthorizationData={props.profileAuthorizationData}
 			/>
-			<ProfileContent profile={props.profile} />
+			<ProfileContent profile={props.profile} profiles={props.profiles} profileAuthorizationData={props.profileAuthorizationData} />
 		</div>
 	);
 };

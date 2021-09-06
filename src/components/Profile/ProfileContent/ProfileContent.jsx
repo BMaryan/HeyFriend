@@ -26,7 +26,7 @@ const ProfileContent = props => {
 			{/* posts */}
 			<div className={styles.posts}>
 				<div className={styles.posts_title}>Photo feed</div>
-				<Posts profile={props.profile} />
+				<Posts profile={props.profile} profiles={props.profiles} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 		</div>
 	);

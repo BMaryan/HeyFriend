@@ -10,8 +10,9 @@ export const ChangeProfilePictureContainer = props => {
 			reader.readAsDataURL(file);
 
 			reader.onloadend = function () {
-				props.getProfileData({ img: reader.result });
+				props.getProfileData({ ...props.profile, img: reader.result });
 				localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
+				// localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
 				props.setChangeProfilePicture(false);
 			};
 		}

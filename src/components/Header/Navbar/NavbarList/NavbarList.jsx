@@ -30,7 +30,13 @@ const NavbarList = props => {
 				</div>
 			</div>
 
-			<div>{toggleListProfile ? <ToggleProfileList checkAuthorization={props.checkAuthorization} /> : <></>}</div>
+			<div>
+				{toggleListProfile ? (
+					<ToggleProfileList checkAuthorization={props.checkAuthorization} getProfileData={props.getProfileData} />
+				) : (
+					<></>
+				)}
+			</div>
 		</div>
 	);
 };

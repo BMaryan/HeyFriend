@@ -21,13 +21,20 @@ const AppContainer = props => {
 	}, [props.userSignIn]);
 
 	React.useEffect(() => {
+		if (!props.profileAuthorizationData) {
+			props.checkAuthorization(null);
+			props.getProfileData({});
+			localStorage.removeItem("profileAuthorizationData");
+			localStorage.removeItem("profile");
+		}
+
 		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
 		props.getProfileData(profileUser);
 	}, [props.profileAuthorizationData]);
 
 	React.useEffect(() => {
 		props.getProfileData(JSON.parse(localStorage.getItem("profile")));
-	}, [props.profileAuthorizationData || props.profile]);
+	}, [props.profileAuthorizationData]);
 
 	setSignUpDataToLocalStorage(props);
 	helpCheckAuthorization(props);

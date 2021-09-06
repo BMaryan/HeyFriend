@@ -105,16 +105,16 @@ const ChatReducer = (state = initialState, action) => {
 	}
 };
 
+export const addChat = id => ({
+	type: ADD_CHAT,
+	id,
+});
+
 export const addMessage = (id, userId, message) => ({
 	type: ADD_MESSAGE,
 	id,
 	userId,
 	message,
-});
-
-export const addChat = id => ({
-	type: ADD_CHAT,
-	id,
 });
 
 export default ChatReducer;

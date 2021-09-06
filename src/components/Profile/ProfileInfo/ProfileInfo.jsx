@@ -81,7 +81,11 @@ const ProfileInfo = props => {
 			{/* change picture */}
 			<div>
 				{changeProfilePicture ? (
-					<ChangeProfilePictureContainer getProfileData={props.getProfileData} setChangeProfilePicture={setChangeProfilePicture} />
+					<ChangeProfilePictureContainer
+						profile={props.profile}
+						getProfileData={props.getProfileData}
+						setChangeProfilePicture={setChangeProfilePicture}
+					/>
 				) : (
 					<></>
 				)}

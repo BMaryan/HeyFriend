@@ -26,8 +26,6 @@ const CreatePost = props => {
 		}
 	};
 
-	console.log(props);
-
 	return (
 		<div className={styles.create_post}>
 			<div className={styles.wrapper_body}>

@@ -5,7 +5,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
-import { getProfileSelector } from "../../redux/profile-selectors";
+import { getProfileSelector, getProfilesSelector } from "../../redux/profile-selectors";
 import { getProfileData, setProfilePosts } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 
@@ -37,6 +37,7 @@ const ProfileContainer = props => {
 
 const mapStateToProps = state => {
 	return {
+		profiles: getProfilesSelector(state),
 		profile: getProfileSelector(state),
 		users: getUsersSelector(state),
 		profileAuthorizationData: getProfileAuthorizationDataSelector(state),

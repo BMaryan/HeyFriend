@@ -6,7 +6,7 @@ import { getProfileSelector } from "../../redux/profile-selectors";
 import { Redirect } from "react-router-dom";
 
 const MainContainer = props => {
-	if (!props.profileAuthorizationData && !props.profile) {
+	if (!props.profileAuthorizationData) {
 		return <Redirect to='/sign_up' />;
 	}
 
