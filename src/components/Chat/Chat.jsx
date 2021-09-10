@@ -80,7 +80,11 @@ const Chat = props => {
 								<div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
 									<NavLink
 										key={user.id}
-										to={props.profileAuthorizationData.id !== id ? "/profile/" + user.id : "/profile"}
+										to={
+											props.profileAuthorizationData && props.profileAuthorizationData.id !== id
+												? "/profile/" + user.id
+												: "/profile"
+										}
 										className={styles.contact_link}>
 										<div className={styles.wrapper_picture}>
 											{user ? (

@@ -7,8 +7,13 @@ import { compose } from "redux";
 import { addMessage } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { getProfileSelector } from "../../redux/profile-selectors";
+import { Redirect } from "react-router-dom";
 
 const ChatContainer = props => {
+	if (!props.profileAuthorizationData) {
+		return <Redirect to='/sign_up' />;
+	}
+
 	return <Chat {...props} />;
 };
 

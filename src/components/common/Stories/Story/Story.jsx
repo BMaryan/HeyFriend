@@ -3,6 +3,10 @@ import styles from "./Story.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Story = props => {
+	// let foundMyProfile = props.profiles.find(profile =>
+	// 	profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
+	// );
+
 	return (
 		<div className={styles.story}>
 			<div className={styles.wrapper_content}>
@@ -11,7 +15,10 @@ const Story = props => {
 
 			<div className={styles.wrapper_footer}>
 				{/* <div className={styles.wrapper_picture}>
-					<img className={styles.picture} src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
+					<img className={styles.picture} src={foundMyProfile && foundMyProfile.profile &&  foundMyProfile.profile.img ? foundMyProfile.profile.img : defaultAvatar} alt='' />
+				</div> */}
+				{/* <div className={styles.fullName}>
+					{foundMyProfile && foundMyProfile.profile ? foundMyProfile.profile.surname + " " + foundMyProfile.profile.name : <></>}
 				</div> */}
 				<div className={styles.fullName}>{props.profile ? props.profile.surname + " " + props.profile.name : <></>}</div>
 			</div>

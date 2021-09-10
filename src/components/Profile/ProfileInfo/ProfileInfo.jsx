@@ -8,43 +8,82 @@ const ProfileInfo = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
 	let [createNewPost, setCreateNewPost] = React.useState(false);
 
-	// React.useEffect(() => {
-	// 	if (changeProfilePicture === true) {
-	// 		// document.querySelector(".App").style.background = "red";
-	// 		// document.body.style.background = "red";
-	// 	} else {
-	// 		document.querySelector(".App").style.background = "black";
-
-	// 		// document.body.style.background = `var(--backgroundBody)`;
-	// 	}
-	// }, [changeProfilePicture]);
+	let foundMyProfile = props.profiles.find(profile =>
+		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
+	);
+	let foundOtherProfile = props.profiles.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 
 	return (
 		<div className={styles.profile_info}>
 			<div className={styles.profile_picture}>
-				<div className={changeProfilePicture ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
-					<img
-						onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
-						src={props.profile && props.profile.img ? props.profile.img : defaultAvatar}
-						title='Change profile photo'
-						alt=''
-					/>
+				<div className={changeProfilePicture && !props.id ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
+					{foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.img && !props.id ? (
+						<img
+							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							src={foundMyProfile.profile.img}
+							title='Change profile photo'
+							alt=''
+						/>
+					) : foundOtherProfile && foundOtherProfile.profile && foundOtherProfile.profile.img && props.id ? (
+						<img
+							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							src={foundOtherProfile.profile.img}
+							alt=''
+						/>
+					) : (
+						<img
+							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							src={defaultAvatar}
+							title='Change profile photo'
+							alt=''
+						/>
+					)}
 				</div>
 			</div>
 
 			{/* full name */}
-			<div className={styles.profile_fullName}>{props.profile ? props.profile.surname + " " + props.profile.name : <></>}</div>
+			<div className={styles.profile_fullName}>
+				{foundOtherProfile && foundOtherProfile.profile ? (
+					foundOtherProfile.profile.surname + " " + foundOtherProfile.profile.name
+				) : foundMyProfile && foundMyProfile.profile ? (
+					foundMyProfile.profile.surname + " " + foundMyProfile.profile.name
+				) : (
+					<></>
+				)}
+			</div>
 
 			{/* status */}
-			<div className={styles.profile_status}>New York, NY</div>
+			<div className={styles.profile_status}>
+				{foundOtherProfile && foundOtherProfile.profile ? (
+					foundOtherProfile.profile.status
+				) : foundMyProfile && foundMyProfile.profile ? (
+					foundMyProfile.profile.status
+				) : (
+					<></>
+				)}
+			</div>
 
 			{/* about me */}
-			<div className={styles.profile_aboutMe}>I am {props.profile.name}. I want to do application network and start working in job!</div>
+			<div className={styles.profile_aboutMe}>
+				{foundOtherProfile && foundOtherProfile.profile ? (
+					foundOtherProfile.profile.aboutMe
+				) : foundMyProfile && foundMyProfile.profile ? (
+					foundMyProfile.profile.aboutMe
+				) : (
+					<></>
+				)}
+			</div>
 
 			{/* details info content */}
 			<div className={styles.profile_details_info_content}>
 				<div className={styles.details_info_content}>
-					<div className={styles.detail_number}>{props.profile && props.profile.posts ? props.profile.posts.length : 0}</div>
+					<div className={styles.detail_number}>
+						{foundOtherProfile && foundOtherProfile.profile && foundOtherProfile.profile.posts.length > 0
+							? foundOtherProfile.profile.posts.length
+							: 0 || (foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.posts.length > 0)
+							? foundMyProfile.profile.posts.length
+							: 0}
+					</div>
 					<div className={styles.detail_title}>Posts</div>
 				</div>
 				<div className={styles.details_info_content}>
@@ -71,39 +110,51 @@ const ProfileInfo = props => {
 			)}
 
 			{/* button create post */}
-			<div className={styles.wrapper_button_createPost}>
-				<button className={styles.button_createPost} onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>
-					Create post
-				</button>
-			</div>
+			{!props.id && props.profileAuthorizationData.id !== props.id ? (
+				<div className={styles.wrapper_button_createPost}>
+					<button className={styles.button_createPost} onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>
+						Create post
+					</button>
+				</div>
+			) : (
+				<></>
+			)}
 
 			{/* toggle show container for change something in profile */}
 			{/* change picture */}
-			<div>
-				{changeProfilePicture ? (
-					<ChangeProfilePictureContainer
-						profile={props.profile}
-						getProfileData={props.getProfileData}
-						setChangeProfilePicture={setChangeProfilePicture}
-					/>
-				) : (
-					<></>
-				)}
-			</div>
+			{!props.id && props.profileAuthorizationData.id !== props.id ? (
+				<div>
+					{changeProfilePicture ? (
+						<ChangeProfilePictureContainer
+							profile={props.profile}
+							getProfileData={props.getProfileData}
+							setChangeProfilePicture={setChangeProfilePicture}
+						/>
+					) : (
+						<></>
+					)}
+				</div>
+			) : (
+				<></>
+			)}
 
 			{/* create post */}
-			<div>
-				{createNewPost ? (
-					<CreateNewPostContainer
-						setProfilePosts={props.setProfilePosts}
-						getProfileData={props.getProfileData}
-						profile={props.profile}
-						setCreateNewPost={setCreateNewPost}
-					/>
-				) : (
-					<></>
-				)}
-			</div>
+			{!props.id && props.profileAuthorizationData.id !== props.id ? (
+				<div>
+					{createNewPost ? (
+						<CreateNewPostContainer
+							setProfilePosts={props.setProfilePosts}
+							getProfileData={props.getProfileData}
+							profile={props.profile}
+							setCreateNewPost={setCreateNewPost}
+						/>
+					) : (
+						<></>
+					)}
+				</div>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };

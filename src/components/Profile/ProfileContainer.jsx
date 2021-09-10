@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import { getProfileSelector, getProfilesSelector } from "../../redux/profile-selectors";
 import { getProfileData, setProfilePosts } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
+import { getChatsSelector } from "../../redux/chat-selectors";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
@@ -40,6 +41,7 @@ const mapStateToProps = state => {
 		profiles: getProfilesSelector(state),
 		profile: getProfileSelector(state),
 		users: getUsersSelector(state),
+		chats: getChatsSelector(state),
 		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};
 };

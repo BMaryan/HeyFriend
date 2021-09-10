@@ -13,7 +13,9 @@ const SignUpContainer = props => {
 	React.useEffect(() => {
 		if (props.users && props.userSignUp && props.userSignUp.name) {
 			let res = props.profiles.find(item => {
-				return item.id === props.users.length;
+				if (item && props.users) {
+					return item.id === props.users.length;
+				}
 			});
 
 			if (!res) {

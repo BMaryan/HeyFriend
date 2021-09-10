@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { checkAuthorization } from "../../redux/auth-reducer";
 import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors";
 import Header from "./Header";
-import { getProfileSelector } from "../../redux/profile-selectors";
+import { getProfileSelector, getProfilesSelector } from "../../redux/profile-selectors";
 import { getProfileData } from "../../redux/profile-reducer";
 
 const HeaderContainer = props => {
@@ -12,6 +12,7 @@ const HeaderContainer = props => {
 
 const mapStateToProps = state => {
 	return {
+		profiles: getProfilesSelector(state),
 		profile: getProfileSelector(state),
 		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};

@@ -3,7 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import styles from "./CreatePost.module.css";
 
 const CreatePost = props => {
-	console.log(props);
 	return (
 		<form className={styles.form} onSubmit={props.handleSubmit}>
 			<Field name='create_post' type='text' className={styles.input} component='input' />

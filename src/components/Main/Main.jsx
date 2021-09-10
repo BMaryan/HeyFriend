@@ -10,7 +10,7 @@ const Main = props => {
 
 			{/* content */}
 			<div className={styles.main_content}>
-				<Stories profile={props.profile} profileAuthorizationData={props.profileAuthorizationData} />
+				<Stories profile={props.profile} profiles={props.profiles} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 
 			{/* sideBar right */}
