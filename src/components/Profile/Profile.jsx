@@ -17,7 +17,12 @@ const Profile = props => {
 				chats={props.chats}
 				setProfileChats={props.setProfileChats}
 			/>
-			<ProfileContent profile={props.profile} profiles={props.profiles} profileAuthorizationData={props.profileAuthorizationData} />
+			<ProfileContent
+				profile={props.profile}
+				id={props.id}
+				profiles={props.profiles}
+				profileAuthorizationData={props.profileAuthorizationData}
+			/>
 		</div>
 	);
 };

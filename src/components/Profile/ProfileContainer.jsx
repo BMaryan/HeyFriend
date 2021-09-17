@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getProfileSelector, getProfilesSelector } from "../../redux/profile-selectors";
-import { getProfileData, setProfilePosts } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 
@@ -33,6 +33,14 @@ const ProfileContainer = props => {
 		return <Redirect to='/sign_up' />;
 	}
 
+	if (id) {
+		props.getParamsId(id);
+		props.getAuthorizationId(null);
+	} else {
+		props.getParamsId(null);
+		props.getAuthorizationId(props.profileAuthorizationData.id);
+	}
+
 	return <Profile {...props} id={id} />;
 };
 
@@ -46,4 +54,7 @@ const mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { getProfileData, setProfilePosts, addChat }), withRouter)(ProfileContainer);
+export default compose(
+	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId }),
+	withRouter
+)(ProfileContainer);

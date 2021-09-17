@@ -6,8 +6,8 @@ import App from "./App";
 import { checkAuthorization, setUsers } from "./redux/auth-reducer";
 import { getProfileAuthorizationDataSelector, getUserSignInSelector, getUserSignUpSelector, getUsersSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
-import { getProfileData, setProfileChats } from "./redux/profile-reducer";
-import { getProfileSelector } from "./redux/profile-selectors";
+import { getProfileData, setProfileChats, addProfile } from "./redux/profile-reducer";
+import { getProfileSelector, getProfilesSelector } from "./redux/profile-selectors";
 import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
 
 const AppContainer = props => {
@@ -26,6 +26,8 @@ const AppContainer = props => {
 		if (!props.profileAuthorizationData) {
 			props.checkAuthorization(null);
 			props.getProfileData({});
+			localStorage.setItem("profileAuthorizationData", null);
+			localStorage.setItem("profile", null);
 			localStorage.removeItem("profileAuthorizationData");
 			localStorage.removeItem("profile");
 		}
@@ -56,6 +58,7 @@ const mapStateToProps = state => {
 	return {
 		users: getUsersSelector(state),
 		chats: getChatsSelector(state),
+		profiles: getProfilesSelector(state),
 		profile: getProfileSelector(state),
 		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 		userSignIn: getUserSignInSelector(state),
@@ -71,4 +74,5 @@ export default connect(mapStateToProps, {
 	getProfileData,
 	deleteAuthorizationUser,
 	setProfileChats,
+	addProfile,
 })(AppContainer);

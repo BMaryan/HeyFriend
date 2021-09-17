@@ -5,3 +5,7 @@ export const getProfilesSelector = state => {
 export const getProfileSelector = state => {
 	return state.profilePage.profile;
 };
+
+export const getAuthorizationIdSelector = state => {
+	return state.profilePage.id;
+};

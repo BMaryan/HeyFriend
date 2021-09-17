@@ -2,6 +2,8 @@ let GET_PROFILE_DATA = "social_network/profilePage/GET_PROFILE_DATA";
 let SET_PROFILE_POSTS = "social_network/profilePage/SET_PROFILE_POSTS";
 let SET_PROFILE_CHATS = "social_network/profilePage/SET_PROFILE_CHATS";
 let ADD_PROFILE = "social_network/chatPage/ADD_PROFILE";
+let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
+let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 
 let initialState = {
 	profiles: [],
@@ -15,30 +17,25 @@ let initialState = {
 		posts: [],
 		chats: [],
 	},
-	// profile: null,
+	authorizationId: null,
+	paramsId: null,
 };
 
 const ProfileReducer = (state = initialState, action) => {
-	let foundProfile =
+	let myProfile =
 		state.profiles && state.profiles.length
-			? state.profiles.find(profile => (profile && profile.profile ? profile.id === profile.profile.id : undefined))
+			? state.profiles.find(profile => (profile && state.authorizationId && !state.paramsId ? profile.id === state.authorizationId : undefined))
 			: undefined;
-	let getProfileData =
+	let otherProfile =
 		state.profiles && state.profiles.length
-			? state.profiles.find(profile => (profile && action.profile ? profile.id === action.profile.id : undefined))
-			: undefined;
-	let noMyProfile =
-		state.profiles && state.profiles.length
-			? state.profiles.find(profile => (profile && profile.profile && action.profile ? profile.profile.id === action.profile.id : undefined))
+			? state.profiles.find(profile => (profile && state.paramsId && !state.authorizationId ? profile.id === state.paramsId : undefined))
 			: undefined;
 	let arrayNoCurrentProfiles =
 		state.profiles && state.profiles.length
-			? state.profiles.filter(profile => {
-					if (profile && action.profile && profile.id !== action.profile.id) {
-						return profile;
-					}
-			  })
-			: console.log("Empty");
+			? state.profiles.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
+			: undefined;
+
+	// console.log("myProfile", myProfile);
 
 	switch (action.type) {
 		case ADD_PROFILE: {
@@ -65,34 +62,14 @@ const ProfileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				profile: action.profile ? { ...state.profile, ...action.profile } : null,
-				profiles: getProfileData
-					? [...arrayNoCurrentProfiles, { ...getProfileData, profile: { ...getProfileData.profile, ...action.profile } }]
-					: noMyProfile
-					? [{ ...noMyProfile, profile: { ...noMyProfile.profile, ...action.profile } }]
-					: state.profiles && state.profiles.length
-					? state.profiles.map(profile => ({ ...profile }))
-					: [],
-
-				// profiles: getProfileData
-				// 	? [{ ...getProfileData, profile: { ...getProfileData.profile, ...action.profile } }]
-				// 	: noMyProfile
-				// 	? [{ ...noMyProfile, profile: { ...noMyProfile.profile, ...action.profile } }]
-				// 	: state.profiles
-				// 	? state.profiles.map(profile => ({ ...profile }))
-				// 	: [],
-
-				// profiles: [
-				// 	getProfileData
-				// 		? { ...getProfileData, profile: { ...getProfileData.profile, ...action.profile } }
-				// 		: { ...getProfileData, profile: { ...getProfileData.profile } },
-				// ],
-				// profiles:
-				// 	state.profiles &&
-				// 	state.profiles.map(item => {
-				// 		return item && action.profile && item.id === action.profile.id && getProfileData
-				// 			? item && { ...item, profile: { ...item.profile, ...action.profile } }
-				// 			: item && { ...item, profile: { ...item.profile } };
-				// 	}),
+				profiles:
+					myProfile && !otherProfile
+						? [...arrayNoCurrentProfiles, { ...myProfile, profile: { ...myProfile.profile, ...action.profile } }]
+						: otherProfile && !myProfile
+						? [...arrayNoCurrentProfiles, { ...otherProfile, profile: { ...otherProfile.profile, ...action.profile } }]
+						: state.profiles && state.profiles.length
+						? state.profiles.map(profile => ({ ...profile }))
+						: [],
 			};
 		}
 		case SET_PROFILE_POSTS: {
@@ -102,88 +79,67 @@ const ProfileReducer = (state = initialState, action) => {
 				likes: action.likes,
 				comments: action.comments,
 			};
-
-			console.log(arrayNoCurrentProfiles);
+			let arrayProfiles = state.profiles
+				? state.profiles.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
+				: undefined;
 
 			return {
 				...state,
 				profile: { ...state.profile, posts: state.profile.posts && newPost ? [...state.profile.posts, { ...newPost }] : [] },
-				// profiles:
-				// 	state.profiles &&
-				// 	state.profiles.map(profile => {
-				// 		return {
-				// 			...profile,
-				// 			profile: {
-				// 				...profile.profile,
-				// 				posts: foundProfile && profile.id === profile.profile.id ? [...profile.profile.posts, { ...newPost }] : [],
-				// 			},
-				// 		};
-				// 	}),
-
-				profiles: arrayNoCurrentProfiles
+				profiles: arrayProfiles
 					? [
-							...arrayNoCurrentProfiles,
+							...arrayProfiles,
 							{
-								...foundProfile,
-								profile: { ...foundProfile.profile, posts: foundProfile ? [...foundProfile.profile.posts, { ...newPost }] : [] },
+								...myProfile,
+								profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
 							},
 					  ]
 					: [
 							{
-								...foundProfile,
-								profile: { ...foundProfile.profile, posts: foundProfile ? [...foundProfile.profile.posts, { ...newPost }] : [] },
+								...myProfile,
+								profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
 							},
 					  ],
-				// profiles:
-				// 	state.profiles &&
-				// 	state.profiles.map(item => {
-				// 		return {
-				// 			...item,
-				// 			profile: {
-				// 				...item.profile,
-				// 				posts:
-				// 					item && item.profile && item.id === item.profile.id
-				// 						? item && item.profile && [...item.profile.posts, { ...newPost }]
-				// 						: [],
-				// 			},
-				// 		};
-				// 	}),
 			};
 		}
 		case SET_PROFILE_CHATS: {
-			// console.log(foundProfile);
+			let arrayProfiles = state.profiles
+				? state.profiles.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
+				: undefined;
+			// console.log(arrayProfiles);
+			// console.log("myProfile", myProfile);
+			console.log("otherProfile", otherProfile);
 
 			return {
 				...state,
-				profiles: foundProfile
-					? arrayNoCurrentProfiles
+				profiles: myProfile
+					? arrayProfiles && myProfile
 						? [
-								...arrayNoCurrentProfiles,
+								...arrayProfiles,
 								{
-									...foundProfile,
-									profile: { ...foundProfile.profile, chats: foundProfile ? action.chats.map(chat => ({ ...chat })) : [] },
+									...myProfile,
+									profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
 								},
 						  ]
-						: {
-								...foundProfile,
-								profile: { ...foundProfile.profile, chats: foundProfile ? action.chats.map(chat => ({ ...chat })) : [] },
+						: myProfile
+						? {
+								...myProfile,
+								profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
 						  }
+						: undefined
 					: state.profiles.map(profile => ({ ...profile })),
-
-				// profiles:
-				// 	state.profiles &&
-				// 	state.profiles.map(item => {
-				// 		return {
-				// 			...item,
-				// 			profile: {
-				// 				...item.profile,
-				// 				chats:
-				// 					item && item.profile && item.id === item.profile.id
-				// 						? item && item.profile && action.chats.map(chat => ({ ...chat }))
-				// 						: [],
-				// 			},
-				// 		};
-				// 	}),
+			};
+		}
+		case GET_AUTHORIZATION_ID: {
+			return {
+				...state,
+				authorizationId: action.id,
+			};
+		}
+		case GET_PARAMS_ID: {
+			return {
+				...state,
+				paramsId: action.id,
 			};
 		}
 		default: {
@@ -212,6 +168,16 @@ export const setProfilePosts = (img, likes, comments) => ({
 export const setProfileChats = chats => ({
 	type: SET_PROFILE_CHATS,
 	chats,
+});
+
+export const getAuthorizationId = id => ({
+	type: GET_AUTHORIZATION_ID,
+	id,
+});
+
+export const getParamsId = id => ({
+	type: GET_PARAMS_ID,
+	id,
 });
 
 export default ProfileReducer;

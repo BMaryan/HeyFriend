@@ -5,6 +5,12 @@ import styles from "./Dialogs.module.css";
 import Dialog from "./Dialog/Dialog";
 
 const Dialogs = props => {
+	let myProfile = props.profiles
+		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
+		: undefined;
+
+	console.log(myProfile);
+
 	return (
 		<div className={styles.dialogs}>
 			{/* <div className={styles.title}>Chats</div> */}
@@ -13,25 +19,17 @@ const Dialogs = props => {
 				<FontAwesomeIcon className={styles.search_icon} icon={faSearch} />
 			</div>
 			<div className={styles.chats}>
-				{props.chats && props.chats.length > 0 ? (
-					props.chats.map(chat => {
-						return props.users.map(user => {
-							if (chat.id === user.id) {
-								return (
-									<Dialog
-										key={chat.id}
-										chat={chat}
-										user={user}
-										profile={props.profile}
-										profileAuthorizationData={props.profileAuthorizationData}
-									/>
-								);
-							}
-						});
-					})
-				) : (
-					<></>
-				)}
+				{myProfile
+					? myProfile.profile.chats.map(chat => (
+							<Dialog
+								key={chat.id}
+								users={props.users}
+								chat={chat}
+								profile={props.profile}
+								profileAuthorizationData={props.profileAuthorizationData}
+							/>
+					  ))
+					: undefined}
 			</div>
 		</div>
 	);

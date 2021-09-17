@@ -30,6 +30,7 @@ export const InformationContainer = (title, subtitle, linkTo, buttonText, ...pro
 export const setSignUpDataToLocalStorage = props => {
 	if (props.users && props.userSignUp && props.userSignUp.id) {
 		localStorage.setItem("users", JSON.stringify(props.users));
+		localStorage.setItem("profiles", JSON.stringify(props.profiles));
 		let foundUser = props.users.find(item => {
 			return item.phone_or_email === props.userSignUp.phone_or_email;
 		});

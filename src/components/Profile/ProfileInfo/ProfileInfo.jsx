@@ -80,7 +80,7 @@ const ProfileInfo = props => {
 					<div className={styles.detail_number}>
 						{foundOtherProfile && foundOtherProfile.profile && foundOtherProfile.profile.posts.length > 0
 							? foundOtherProfile.profile.posts.length
-							: 0 || (foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.posts.length > 0)
+							: 0 || (foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.posts.length > 0 && !props.id)
 							? foundMyProfile.profile.posts.length
 							: 0}
 					</div>

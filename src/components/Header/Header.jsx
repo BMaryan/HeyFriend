@@ -33,6 +33,8 @@ const Header = props => {
 					checkAuthorization={props.checkAuthorization}
 					getProfileData={props.getProfileData}
 					profiles={props.profiles}
+					getAuthorizationId={props.getAuthorizationId}
+					getParamsId={props.getParamsId}
 				/>
 			</div>
 		</div>

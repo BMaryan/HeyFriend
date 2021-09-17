@@ -41,7 +41,10 @@ export const ToggleProfileList = props => {
 					<NavLink
 						onClick={() => {
 							props.checkAuthorization(null);
+							localStorage.setItem("profileAuthorizationData", null);
 							localStorage.removeItem("profileAuthorizationData");
+							props.getAuthorizationId(null);
+							props.getParamsId(null);
 						}}
 						className={styles.nav_linkList + " " + commonStyles.common_nav_linkList + " " + commonStyles.logOut}
 						activeClassName={styles.nav_linkList_active}

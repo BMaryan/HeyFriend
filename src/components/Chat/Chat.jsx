@@ -40,6 +40,7 @@ const Chat = props => {
 					<Dialogs
 						users={props.users}
 						profile={props.profile}
+						profiles={props.profiles}
 						chats={props.chats}
 						profileAuthorizationData={props.profileAuthorizationData}
 					/>

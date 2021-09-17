@@ -12,7 +12,6 @@ export const ChangeProfilePictureContainer = props => {
 			reader.onloadend = function () {
 				props.getProfileData({ ...props.profile, img: reader.result });
 				localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
-				// localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
 				props.setChangeProfilePicture(false);
 			};
 		}
@@ -20,7 +19,7 @@ export const ChangeProfilePictureContainer = props => {
 
 	let removeProfilePicture = () => {
 		props.setChangeProfilePicture(false);
-		return props.getProfileData({ img: null });
+		return props.getProfileData({ ...props.profile, img: null });
 	};
 
 	return (
