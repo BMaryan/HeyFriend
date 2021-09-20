@@ -3,6 +3,10 @@ import styles from "./helperForProfile.module.css";
 import CreatePost from "../../components/common/CreatePost/CreatePost";
 
 export const ChangeProfilePictureContainer = props => {
+	let myProfile = props.profiles
+		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
+		: undefined;
+
 	let onChangeProfilePicture = e => {
 		if (e.target.files.length) {
 			let file = e.target.files[0];
@@ -10,17 +14,19 @@ export const ChangeProfilePictureContainer = props => {
 			reader.readAsDataURL(file);
 
 			reader.onloadend = function () {
-				props.getProfileData({ ...props.profile, img: reader.result });
-				localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
+				props.getProfileData({ ...myProfile.profile, img: reader.result });
+				// localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
 				props.setChangeProfilePicture(false);
 			};
 		}
 	};
 
 	let removeProfilePicture = () => {
+		props.getProfileData({ ...myProfile.profile, img: null });
 		props.setChangeProfilePicture(false);
-		return props.getProfileData({ ...props.profile, img: null });
 	};
+
+	console.log(myProfile);
 
 	return (
 		<div className={styles.change_profile_picture_container}>
@@ -31,9 +37,8 @@ export const ChangeProfilePictureContainer = props => {
 					<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
 				</div>
 
-				<div
-					className={styles.wrapper_change_picture}
-					onClick={() => removeProfilePicture() && localStorage.setItem("profile", JSON.stringify({ img: null }))}>
+				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
+					{/* onClick={() => removeProfilePicture() && localStorage.setItem("profile", JSON.stringify({ img: null }))}> */}
 					Remove current photo
 				</div>
 

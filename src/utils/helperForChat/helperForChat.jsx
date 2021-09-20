@@ -8,6 +8,7 @@ import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 
 export const Head = props => {
 	let id = Number(props.match.params.id);
+	let otherProfile = props.profiles ? props.profiles.find(profile => (id ? profile.id === id : undefined)) : undefined;
 
 	return props.toggleShowContent ? (
 		<div className={styles.head}>
@@ -25,7 +26,11 @@ export const Head = props => {
 								className={dialogStyles.chat_forHead}>
 								<div className={dialogStyles.wrapper_picture}>
 									<div className={dialogStyles.have_not_picture_forHead}>
-										{user ? <img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' /> : <></>}
+										{user ? (
+											<img src={otherProfile && otherProfile.profile.img ? otherProfile.profile.img : defaultAvatar} alt='' />
+										) : (
+											<></>
+										)}
 									</div>
 								</div>
 								<div>

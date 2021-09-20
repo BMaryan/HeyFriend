@@ -59,6 +59,7 @@ const Chat = props => {
 										key={chat.id}
 										chat={chat}
 										profile={props.profile}
+										profiles={props.profiles}
 										profileAuthorizationData={props.profileAuthorizationData}
 										match={props.match}
 									/>

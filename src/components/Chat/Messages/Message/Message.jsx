@@ -30,6 +30,15 @@ const Message = props => {
 	let myProfile = props.profiles
 		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
 		: undefined;
+	let otherProfile = props.profiles
+		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id !== props.profileAuthorizationData.id : undefined))
+		: undefined;
+	// let otherProfile =
+	// 	myProfile && myProfile.profile && myProfile.profile.chats
+	// 		? myProfile.profile.chats.find(chat =>
+	// 				props.id && props.profileAuthorizationData.id ? chat.id !== props.profileAuthorizationData.id && chat.id === props.id : undefined
+	// 		  )
+	// 		: undefined;
 
 	return (
 		<div
@@ -39,7 +48,16 @@ const Message = props => {
 			<NavLink
 				to={props.profileAuthorizationData && props.profileAuthorizationData.id !== props.id ? "/profile/" + props.id : "/profile"}
 				className={checkMessage ? styles.wrapper_myPicture : styles.wrapper_otherPicture + " " + styles.wrapper_picture}>
-				<img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
+				<img
+					src={
+						myProfile && myProfile.profile.img
+							? myProfile.profile.img
+							: otherProfile && otherProfile.profile
+							? otherProfile.profile.img
+							: defaultAvatar
+					}
+					alt=''
+				/>
 			</NavLink>
 			<div className={checkMessage ? styles.wrapper_myMessage : styles.wrapper_otherMessage + " " + styles.wrapper_message}>
 				{props.el && props.el.message}

@@ -6,46 +6,67 @@ import App from "./App";
 import { checkAuthorization, setUsers } from "./redux/auth-reducer";
 import { getProfileAuthorizationDataSelector, getUserSignInSelector, getUserSignUpSelector, getUsersSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
-import { getProfileData, setProfileChats, addProfile } from "./redux/profile-reducer";
+import { getProfileData, setProfileChats, addProfile, setProfiles } from "./redux/profile-reducer";
 import { getProfileSelector, getProfilesSelector } from "./redux/profile-selectors";
 import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
 
 const AppContainer = props => {
 	React.useEffect(() => {
 		let users = JSON.parse(localStorage.getItem("users"));
+		let profiles = JSON.parse(localStorage.getItem("profiles"));
 		props.setUsers(users);
-	}, [setSignUpDataToLocalStorage(props)]);
+		props.setProfiles(profiles);
+	}, [props.userSignUp]);
 
 	React.useEffect(() => {
 		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-		props.checkAuthorization(profileUser);
-		props.getProfileData(profileUser);
+
+		if (profileUser) {
+			props.checkAuthorization(profileUser);
+		}
 	}, [props.userSignIn]);
 
 	React.useEffect(() => {
-		if (!props.profileAuthorizationData) {
-			props.checkAuthorization(null);
-			props.getProfileData({});
-			localStorage.setItem("profileAuthorizationData", null);
-			localStorage.setItem("profile", null);
-			localStorage.removeItem("profileAuthorizationData");
-			localStorage.removeItem("profile");
-		}
+		localStorage.setItem("profiles", JSON.stringify(props.profiles));
+	}, [props.profiles]);
 
-		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-		props.getProfileData(profileUser);
-	}, [props.profileAuthorizationData]);
+	// React.useEffect(() => {
+	// 	// localStorage.setItem("profileAuthorizationData", JSON.stringify(props.profileAuthorizationData));
 
-	React.useEffect(() => {
-		props.getProfileData(JSON.parse(localStorage.getItem("profile")));
-	}, [props.profileAuthorizationData]);
+	// 	if (props.profileAuthorizationData) {
+	// 		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
+	// 		props.checkAuthorization(profileUser);
+	// 	}
+	// }, [props.profileAuthorizationData]);
+	//
+	// React.useEffect(() => {
+	// 	let users = JSON.parse(localStorage.getItem("users"));
+	// 	props.setUsers(users);
+	// }, [setSignUpDataToLocalStorage(props)]);
 
-	React.useEffect(() => {
-		props.setProfileChats(props.chats);
-	}, [props.chats]);
+	// React.useEffect(() => {
+	// 	let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
+	// 	props.checkAuthorization(profileUser);
+	// 	props.getProfileData(profileUser);
+	// }, [props.userSignIn]);
+
+	// React.useEffect(() => {
+	// 	let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
+	// 	props.getProfileData(profileUser);
+	// }, [props.profileAuthorizationData]);
+
+	// React.useEffect(() => {
+	// 	props.getProfileData(JSON.parse(localStorage.getItem("profile")));
+	// }, [props.profileAuthorizationData]);
+
+	// React.useEffect(() => {
+	// 	props.setProfileChats(props.chats);
+	// }, [props.chats]);
+	//
 
 	setSignUpDataToLocalStorage(props);
-	helpCheckAuthorization(props);
+
+	// helpCheckAuthorization(props);
 
 	if (!props.profileAuthorizationData) {
 		<Redirect to='/sign_up' />;
@@ -75,4 +96,5 @@ export default connect(mapStateToProps, {
 	deleteAuthorizationUser,
 	setProfileChats,
 	addProfile,
+	setProfiles,
 })(AppContainer);

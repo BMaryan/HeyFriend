@@ -8,6 +8,7 @@ import { AuthorizationContainer, InformationContainer } from "../../../utils/hel
 
 const SignUp = props => {
 	let onSubmit = formData => {
+		console.log(formData);
 		props.setUserSignUp(formData);
 	};
 

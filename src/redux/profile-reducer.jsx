@@ -4,6 +4,7 @@ let SET_PROFILE_CHATS = "social_network/profilePage/SET_PROFILE_CHATS";
 let ADD_PROFILE = "social_network/chatPage/ADD_PROFILE";
 let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
+let SET_PROFILES = "social_network/chatPage/SET_PROFILES";
 
 let initialState = {
 	profiles: [],
@@ -35,9 +36,13 @@ const ProfileReducer = (state = initialState, action) => {
 			? state.profiles.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
 			: undefined;
 
-	// console.log("myProfile", myProfile);
-
 	switch (action.type) {
+		case SET_PROFILES: {
+			return {
+				...state,
+				profiles: action.profiles ? [...action.profiles] : [],
+			};
+		}
 		case ADD_PROFILE: {
 			let newProfile = {
 				id: action.id,
@@ -106,8 +111,6 @@ const ProfileReducer = (state = initialState, action) => {
 			let arrayProfiles = state.profiles
 				? state.profiles.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
 				: undefined;
-			// console.log(arrayProfiles);
-			// console.log("myProfile", myProfile);
 			console.log("otherProfile", otherProfile);
 
 			return {
@@ -147,6 +150,11 @@ const ProfileReducer = (state = initialState, action) => {
 		}
 	}
 };
+
+export const setProfiles = profiles => ({
+	type: SET_PROFILES,
+	profiles,
+});
 
 export const addProfile = id => ({
 	type: ADD_PROFILE,

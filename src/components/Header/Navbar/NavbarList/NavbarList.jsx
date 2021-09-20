@@ -45,6 +45,7 @@ const NavbarList = props => {
 						checkAuthorization={props.checkAuthorization}
 						getProfileData={props.getProfileData}
 						getParamsId={props.getParamsId}
+						profileAuthorizationData={props.profileAuthorizationData}
 					/>
 				) : (
 					<></>

@@ -8,6 +8,18 @@ import SignInReduxForm from "./SignInForm";
 const SignIn = props => {
 	let onSubmit = formData => {
 		props.setUserSignIn(formData);
+
+		if (formData) {
+			props.users.find(user => {
+				if (formData && formData.phone_or_email) {
+					if (user.phone_or_email === formData.phone_or_email && user.password === formData.password) {
+						props.checkAuthorization(user);
+						return user;
+					}
+				}
+			});
+		}
+		console.log(formData);
 	};
 
 	return (

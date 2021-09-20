@@ -127,7 +127,9 @@ const ProfileInfo = props => {
 					{changeProfilePicture ? (
 						<ChangeProfilePictureContainer
 							profile={props.profile}
+							profiles={props.profiles}
 							getProfileData={props.getProfileData}
+							profileAuthorizationData={props.profileAuthorizationData}
 							setChangeProfilePicture={setChangeProfilePicture}
 						/>
 					) : (

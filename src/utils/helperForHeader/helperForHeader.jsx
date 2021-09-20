@@ -36,13 +36,11 @@ export const ToggleProfileList = props => {
 				</NavLink>
 			</div>
 
-			{!props.profileAuthorizationData ? (
+			{props.profileAuthorizationData ? (
 				<div className={styles.wrapper_nav_linkList}>
 					<NavLink
 						onClick={() => {
 							props.checkAuthorization(null);
-							localStorage.setItem("profileAuthorizationData", null);
-							localStorage.removeItem("profileAuthorizationData");
 							props.getAuthorizationId(null);
 							props.getParamsId(null);
 						}}

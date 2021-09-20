@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { setUserSignUp } from "../../../redux/auth-reducer";
 import { getProfileAuthorizationDataSelector, getUserSignUpSelector, getUsersSelector } from "../../../redux/auth-selectors";
 import { addProfile } from "../../../redux/profile-reducer";
-import { helpCheckAuthorization } from "../../../utils/helperForAuthorization/helperForAuthorization";
+import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
 import { getProfilesSelector } from "../../../redux/profile-selectors";
 
@@ -19,10 +19,16 @@ const SignUpContainer = props => {
 			});
 
 			if (!res) {
-				props.addProfile(props.users[props.users.length - 1].id);
+				props.addProfile(props.users && props.users.length > 0 ? props.users[props.users.length - 1].id : undefined);
 			}
 		}
 	}, [props.userSignUp]);
+
+	React.useEffect(() => {
+		if (!props.profileAuthorizationData) {
+			localStorage.removeItem("profileAuthorizationData");
+		}
+	}, [props.profileAuthorizationData]);
 
 	if (props.profileAuthorizationData && props.profileAuthorizationData.phone_or_email) {
 		return <Redirect to='/profile' />;
@@ -40,4 +46,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { setUserSignUp, helpCheckAuthorization, addProfile })(SignUpContainer);
+export default connect(mapStateToProps, { setUserSignUp, helpCheckAuthorization, addProfile, setSignUpDataToLocalStorage })(SignUpContainer);

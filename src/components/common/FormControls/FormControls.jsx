@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Field } from "redux-form";
-import { togglePassword } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import styles from "./FormControls.module.css";
 
 const FormControls = props => {
