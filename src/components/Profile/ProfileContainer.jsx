@@ -18,13 +18,11 @@ const ProfileContainer = props => {
 			props.users.find(user => {
 				if (user.id === id && props.profileAuthorizationData.id !== id) {
 					props.getProfileData(user);
-					// localStorage.setItem("profile", JSON.stringify(props.profile));
 				}
 			});
 		} else {
 			if (props.profileAuthorizationData) {
 				props.getProfileData(props.profileAuthorizationData);
-				// localStorage.setItem("profile", JSON.stringify(props.profile));
 			}
 		}
 	}, [props.profileAuthorizationData]);

@@ -1,6 +1,14 @@
+/* common styles */
+:root {
+	--paddingForCoverAndDetailsTop: 7px;
+	--paddingForCoverAndDetailsRight: 30px;
+	--paddingForCoverAndDetailsBottom: 7px;
+	--paddingForCoverAndDetailsLeft: 180px;
+}
+
 .profile {
 	width: 100%;
 	display: flex;
-	/* background: thistle; */
+	flex-direction: column;
 	margin-top: var(--marginFromHeader);
 }

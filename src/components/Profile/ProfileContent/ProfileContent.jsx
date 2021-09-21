@@ -7,7 +7,7 @@ const ProfileContent = props => {
 	return (
 		<div className={styles.profile_content}>
 			{/* stories */}
-			<div className={styles.stories}>
+			{/* <div className={styles.stories}>
 				<div className={styles.stories_title}>Actual stories</div>
 
 				<div className={styles.stories_content}>
@@ -21,13 +21,14 @@ const ProfileContent = props => {
 					<Stories profile={props.profile} />
 					<Stories profile={props.profile} />
 				</div>
-			</div>
-
+			</div> */}
+			<div className={styles.side_bar_left}>Side bar left</div>
 			{/* posts */}
 			<div className={styles.posts}>
 				<div className={styles.posts_title}>Photo feed</div>
 				<Posts profile={props.profile} profiles={props.profiles} id={props.id} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
+			<div className={styles.side_bar_right}>Side bar right</div>
 		</div>
 	);
 };
