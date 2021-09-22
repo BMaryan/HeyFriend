@@ -33,9 +33,9 @@ const ProfileInfo = props => {
 					{/* status */}
 					<div className={styles.profile_status}>
 						{foundOtherProfile && foundOtherProfile.profile && foundOtherProfile.profile.status ? (
-							foundOtherProfile.profile.status
+							<div>{foundOtherProfile.profile.status}</div>
 						) : foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.status ? (
-							foundMyProfile.profile.status
+							<div>{foundMyProfile.profile.status}</div>
 						) : (
 							<div>I'm good today, but I wasn't good yesterday!</div>
 						)}
@@ -93,7 +93,14 @@ const ProfileInfo = props => {
 
 					<div className={styles.wrapper_button}>
 						{props.id ? (
-							<button type='submit'>Follow</button>
+							<>
+								<button onClick={() => props.addChat(props.id)}>
+									<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
+										Message
+									</NavLink>
+								</button>
+								<button type='submit'>Follow</button>
+							</>
 						) : (
 							<button type='submit'>
 								<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
@@ -146,24 +153,6 @@ const ProfileInfo = props => {
 };
 
 export default ProfileInfo;
-
-// {
-// 	/* about me */
-// }
-// {
-// 	/* <div className={styles.profile_aboutMe}>
-// 							{foundOtherProfile && foundOtherProfile.profile && foundOtherProfile.profile.aboutMe ? (
-// 								foundOtherProfile.profile.aboutMe
-// 							) : foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.aboutMe ? (
-// 								foundMyProfile.profile.aboutMe
-// 							) : (
-// 								<div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. At, praesentium!</div>
-// 							)}
-// 						</div> */
-// }
-// {
-// 	/* </div> */
-// }
 
 // {
 // 	/* </div> */

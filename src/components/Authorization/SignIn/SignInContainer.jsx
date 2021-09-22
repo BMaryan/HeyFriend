@@ -11,6 +11,8 @@ const SignInContainer = props => {
 	React.useEffect(() => {
 		if (props.profileAuthorizationData) {
 			localStorage.setItem("profileAuthorizationData", JSON.stringify(props.profileAuthorizationData));
+		} else {
+			localStorage.removeItem("profileAuthorizationData");
 		}
 	}, [props.profileAuthorizationData]);
 

@@ -1,46 +1,47 @@
 .create_post {
 	background: white;
-	border-radius: var(--borderRadius);
-	padding: var(--paddingForMainContent);
+	padding: var(--paddingForContent);
 }
 
 .icon {
-	color: white;
+	color: var(--colorIcons);
 	background: rgb(238, 237, 237);
 	border-radius: 50%;
-	font-size: 30px;
-	padding: 10px 12px;
-	/* margin: 0 5px 0 0; */
+	font-size: 16px;
+	margin: 0 5px;
+	cursor: pointer;
 }
 
 /* wrapper_body */
 .wrapper_body {
 	position: relative;
-	margin: 15px 0;
 }
 
 .wrapper_input {
 	display: flex;
+	align-items: center;
 }
 
 .input {
 	width: 100%;
-	border-radius: 18px;
-	/* border-radius: var(--borderRadius); */
 	border: 1px solid rgb(233, 232, 232);
 	outline: none;
-	padding: 10px 10px 10px 45px;
+	padding: 10px 75px 10px 10px;
+	cursor: pointer;
 }
 
-.picture {
-	height: 100%;
-	width: 39px;
-	object-fit: cover;
-	object-position: center;
-	border-radius: 50%;
+.features {
+	display: flex;
+	align-items: center;
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	right: 10px;
+}
+
+.features_picture label {
+}
+
+.features_picture input {
+	display: none;
 }
 
 /* wrapper content */
@@ -79,23 +80,4 @@
 .form {
 	width: 100%;
 	display: flex;
-}
-
-.button {
-	padding: 0 20px;
-}
-
-/* wrapper_button_publish */
-.wrapper_button_publish {
-	margin-top: 30px;
-	transition: 1s;
-}
-
-.wrapper_button_publish button {
-	width: 100%;
-	background: linear-gradient(var(--authorizationBackgroundOrColor));
-	border-radius: 18px;
-	padding: 10px 0;
-	cursor: pointer;
-	transition: 1s;
 }

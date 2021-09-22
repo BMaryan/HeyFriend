@@ -13,8 +13,8 @@ const SignIn = props => {
 			props.users.find(user => {
 				if (formData && formData.phone_or_email) {
 					if (user.phone_or_email === formData.phone_or_email && user.password === formData.password) {
-						props.checkAuthorization(user);
-						return user;
+						let rememberMe = formData.rememberMe ? formData.rememberMe : false;
+						props.checkAuthorization({ ...user, rememberMe });
 					}
 				}
 			});

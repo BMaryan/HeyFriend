@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./helperForProfile.module.css";
-import CreatePost from "../../components/common/CreatePost/CreatePost";
+import CreatePostReduxForm from "../../components/common/CreatePost/CreatePostForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const ChangeProfilePictureContainer = props => {
 	let myProfile = props.profiles
@@ -15,7 +17,6 @@ export const ChangeProfilePictureContainer = props => {
 
 			reader.onloadend = function () {
 				props.getProfileData({ ...myProfile.profile, img: reader.result });
-				// localStorage.setItem("profile", JSON.stringify({ img: reader.result }));
 				props.setChangeProfilePicture(false);
 			};
 		}
@@ -25,8 +26,6 @@ export const ChangeProfilePictureContainer = props => {
 		props.getProfileData({ ...myProfile.profile, img: null });
 		props.setChangeProfilePicture(false);
 	};
-
-	console.log(myProfile);
 
 	return (
 		<div className={styles.change_profile_picture_container}>
@@ -38,7 +37,6 @@ export const ChangeProfilePictureContainer = props => {
 				</div>
 
 				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
-					{/* onClick={() => removeProfilePicture() && localStorage.setItem("profile", JSON.stringify({ img: null }))}> */}
 					Remove current photo
 				</div>
 
@@ -51,23 +49,50 @@ export const ChangeProfilePictureContainer = props => {
 };
 
 export const CreateNewPostContainer = props => {
+	let onSubmit = formData => {
+		console.log(formData);
+	};
+
 	return (
 		<div className={styles.create_new_post_container}>
 			<div className={styles.create_new_post_content}>
 				<div className={styles.create_post_title}>Create new post</div>
 
 				<div>
-					<CreatePost
-						setProfilePosts={props.setProfilePosts}
-						getProfileData={props.getProfileData}
-						profile={props.profile}
-						setCreateNewPost={props.setCreateNewPost}
-					/>
+					<CreatePostReduxForm onSubmit={onSubmit} />
 				</div>
 
-				<button style={{ width: "100%", padding: "5px 0" }} onClick={() => props.setCreateNewPost(false)}>
-					x
-				</button>
+				<div className={styles.wrapper_content}>
+					<div className={styles.wrapper_add_picture}>
+						<label title='Add photo' onChange={e => props.onChangeProfilePicture(e)}>
+							{props.postPicture ? (
+								<img className={styles.post_img} src={props.postPicture} alt='' />
+							) : (
+								<FontAwesomeIcon className={styles.icon} icon={faPlusSquare} />
+							)}
+							<input type='file' />
+						</label>
+
+						{props.postPicture ? (
+							<div className={styles.wrapper_button_delete}>
+								<button onClick={() => props.setPostPicture(false)}>x</button>
+							</div>
+						) : undefined}
+					</div>
+				</div>
+
+				<div className={styles.wrapper_button_publish}>
+					<button
+						onClick={() =>
+							props.postPicture ? props.setProfilePosts(props.postPicture, null, null) && props.setCreatePostContainer(false) : <></>
+						}>
+						Publish
+					</button>
+				</div>
+
+				<div className={styles.wrapper_button_close}>
+					<button onClick={() => props.setCreatePostContainer(false)}>x</button>
+				</div>
 			</div>
 		</div>
 	);

@@ -65,6 +65,7 @@
 .create_new_post_content {
 	width: 30vw;
 	padding: var(--paddingForMainContent);
+	position: relative;
 }
 
 /* title */
@@ -73,4 +74,90 @@
 	font-size: 20px;
 	font-weight: 500;
 	text-align: center;
+	margin-bottom: 20px;
+}
+
+/* wrapper content */
+.wrapper_content {
+	height: 250px;
+	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	margin: 20px 0;
+}
+
+.wrapper_add_picture {
+	height: 100%;
+	position: relative;
+}
+
+.wrapper_add_picture label {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.wrapper_add_picture input {
+	display: none;
+}
+
+.post_img {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	color: var(--colorIcons);
+	font-size: 30px;
+}
+
+/* wrapper button delete */
+.wrapper_button_delete {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+/* wrapper button publish */
+.wrapper_button_publish {
+	transition: 1s;
+}
+
+.wrapper_button_publish button {
+	width: 100%;
+	color: white;
+	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	border: 1px solid silver;
+	border-radius: var(--borderRadius);
+	outline: none;
+	padding: 10px 0;
+	cursor: pointer;
+	transition: 1s;
+}
+
+/* wrapper button close */
+.wrapper_button_close {
+}
+
+.wrapper_button_close button,
+.wrapper_button_delete button {
+	font-size: 15px;
+	border: 1px solid silver;
+	border-radius: 50%;
+	position: absolute;
+	top: var(--paddingForMainContent);
+	right: var(--paddingForMainContent);
+	padding: 4px 9px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.wrapper_button_close button:hover,
+.wrapper_button_delete button:hover {
+	background: rgb(225, 225, 225);
+	transition: 0.5s;
 }

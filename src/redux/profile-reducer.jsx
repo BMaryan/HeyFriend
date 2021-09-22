@@ -79,7 +79,8 @@ const ProfileReducer = (state = initialState, action) => {
 		}
 		case SET_PROFILE_POSTS: {
 			let newPost = {
-				id: state.profile.posts ? (state.profile.posts.length !== 0 ? state.profile.posts.length + 2 : 2) : 1,
+				id: state.profile.posts.length + 1,
+				// id: state.profile.posts ? (state.profile.posts.length !== 0 ? state.profile.posts.length + 2 : 2) : 1,
 				img: action.img,
 				likes: action.likes,
 				comments: action.comments,

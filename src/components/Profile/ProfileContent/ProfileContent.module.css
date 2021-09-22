@@ -1,45 +1,42 @@
 .profile_content {
 	width: 100%;
-	background: white;
 	box-sizing: border-box;
 	display: flex;
 	overflow: hidden;
 	padding: 0 var(--paddingForCoverAndDetailsRight) 0 var(--paddingForCoverAndDetailsRight);
 }
 
-/* stories */
-/* .stories {
-	display: flex;
-	flex-direction: column;
-} */
-
-/* title */
-/* .stories_title {
-	color: rgb(39, 39, 39);
-	font-size: 20px;
-	font-weight: 500;
-} */
-
-/* stories content */
-/* .stories_content {
-	overflow-x: auto;
-	display: flex;
-}
-
-.stories_content::-webkit-scrollbar {
-	display: none;
-} */
-
 /* side_bar_left */
 .side_bar_left {
-	width: 25%;
+	width: 35%;
 	background: steelblue;
+	margin-bottom: var(--marginBetweenProfileContainers);
+}
+
+/* about me container */
+.aboutMe_container {
+	width: 100%;
+	color: rgb(39, 39, 39);
+	background: white;
+	font-size: 15px;
+	box-sizing: border-box;
+	padding: var(--paddingForContent);
+}
+
+.aboutMe {
+}
+
+/* content */
+.content {
+	width: 65%;
+	background: skyblue;
+	margin: 0 0 var(--marginBetweenProfileContainers) var(--marginBetweenProfileContainers);
+	/* margin: 0 var(--marginBetweenProfileContainers) var(--marginBetweenProfileContainers) var(--marginBetweenProfileContainers); */
 }
 
 /* posts */
 .posts {
-	width: 50%;
-	background: skyblue;
+	/* background: red; */
 }
 
 /* title */
@@ -50,7 +47,8 @@
 }
 
 /* side_bar_right */
-.side_bar_right {
+/* .side_bar_right {
 	width: 25%;
 	background: thistle;
-}
+	margin-bottom: var(--marginBetweenProfileContainers);
+} */

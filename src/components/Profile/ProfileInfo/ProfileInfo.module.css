@@ -114,7 +114,13 @@
 	border-radius: var(--borderRadius);
 	outline: none;
 	padding: 7px 40px;
+	margin-left: 20px;
 	cursor: pointer;
+}
+
+.navLink_message {
+	color: white;
+	text-decoration: none;
 }
 
 .icon {
@@ -135,22 +141,6 @@
 .profile_aboutMe {
 	font-size: 14px;
 	margin: 10px 0;
-}
-
-/* wrapper button message not for my profile */
-.wrapper_button_message {
-	margin-top: 20px;
-}
-
-.button_message {
-	width: 100%;
-	padding: 10px 0;
-	cursor: pointer;
-}
-
-.navLink_message {
-	color: black;
-	text-decoration: none;
 }
 
 /* wrapper button for create new post */

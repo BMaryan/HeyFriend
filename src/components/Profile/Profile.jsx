@@ -11,7 +11,6 @@ const Profile = props => {
 				profile={props.profile}
 				addChat={props.addChat}
 				getProfileData={props.getProfileData}
-				setProfilePosts={props.setProfilePosts}
 				id={props.id}
 				profileAuthorizationData={props.profileAuthorizationData}
 				chats={props.chats}
@@ -19,9 +18,10 @@ const Profile = props => {
 			/>
 			<ProfileContent
 				profile={props.profile}
-				id={props.id}
 				profiles={props.profiles}
 				profileAuthorizationData={props.profileAuthorizationData}
+				setProfilePosts={props.setProfilePosts}
+				id={props.id}
 			/>
 		</div>
 	);

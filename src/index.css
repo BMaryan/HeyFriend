@@ -26,6 +26,8 @@ code {
 	--colorIcons: rgb(136, 136, 136);
 	--paddingForMainContent: 15px;
 	--marginFromHeader: 20px;
+	--marginBetweenProfileContainers: 20px;
+	--paddingForContent: 15px;
 }
 
 /* global class */

@@ -1,15 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusSquare, faImages, faGrinBeam } from "@fortawesome/free-solid-svg-icons";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CreatePost.module.css";
-import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
-import CreatePostReduxForm from "./CreatePostForm";
+import { CreateNewPostContainer } from "../../../utils/helperForProfile/helperForProfile";
 
 const CreatePost = props => {
-	let onSubmit = formData => {
-		console.log(formData);
-	};
-
+	let [createPostContainer, setCreatePostContainer] = React.useState(false);
 	let [postPicture, setPostPicture] = React.useState(null);
 
 	let onChangeProfilePicture = e => {
@@ -20,8 +16,6 @@ const CreatePost = props => {
 
 			reader.onloadend = function () {
 				setPostPicture(reader.result);
-				// 	props.getProfileData({ posts: [{ img: reader.result }] });
-				// 	localStorage.setItem("profile", JSON.stringify({ posts: [{ img: reader.result }] }));
 			};
 		}
 	};
@@ -30,49 +24,44 @@ const CreatePost = props => {
 		<div className={styles.create_post}>
 			<div className={styles.wrapper_body}>
 				<div className={styles.wrapper_input}>
-					<CreatePostReduxForm onSubmit={onSubmit} />
-				</div>
-				<div>
-					<img className={styles.picture} src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
+					<input
+						onChange={() => undefined}
+						onClick={() => setCreatePostContainer(true)}
+						className={styles.input}
+						type='text'
+						value=''
+						placeholder="What's on your mind?"
+					/>
+					{/* <div className={styles.features}>
+						<div className={styles.features_picture}>
+							<label title='Add photo' onChange={e => onChangeProfilePicture(e)}>
+								{postPicture && !createPostContainer ? (
+									<CreateNewPostContainer
+										setProfilePosts={props.setProfilePosts}
+										onChangeProfilePicture={onChangeProfilePicture}
+										postPicture={postPicture}
+										setPostPicture={setPostPicture}
+										setCreatePostContainer={setCreatePostContainer}
+									/>
+								) : undefined}
+								<FontAwesomeIcon className={styles.icon} icon={faImage} />
+
+								<input type='file' />
+							</label>
+						</div>
+					</div> */}
 				</div>
 			</div>
-			<div className={styles.wrapper_content}>
-				<div className={styles.wrapper_add_picture}>
-					<label title='Choose photo' onChange={e => onChangeProfilePicture(e)}>
-						{postPicture ? (
-							<img className={styles.post_img} src={postPicture} alt='' />
-						) : (
-							<FontAwesomeIcon className={styles.icon} icon={faPlusSquare} />
-						)}
-						<input type='file' />
-					</label>
-				</div>
-			</div>
-			<div className={styles.wrapper_button_publish}>
-				<button
-					onClick={() =>
-						postPicture ? (
-							props.setProfilePosts(postPicture, null, null) &&
-							props.setCreateNewPost(false) &&
-							localStorage.setItem(
-								"profile",
-								JSON.stringify({
-									...props.profile,
-									posts: props.profile &&
-										props.profile.posts && [
-											...props.profile.posts,
-											...props.profile.posts.filter((item, index) => props.profile.posts.indexOf(item) === index),
-										],
-									// : [...props.profile.posts],
-								})
-							)
-						) : (
-							<></>
-						)
-					}>
-					Publish
-				</button>
-			</div>
+
+			{createPostContainer ? (
+				<CreateNewPostContainer
+					setProfilePosts={props.setProfilePosts}
+					onChangeProfilePicture={onChangeProfilePicture}
+					postPicture={postPicture}
+					setPostPicture={setPostPicture}
+					setCreatePostContainer={setCreatePostContainer}
+				/>
+			) : undefined}
 		</div>
 	);
 };
