@@ -30,20 +30,13 @@ const ProfileContent = props => {
 
 			{/* content */}
 			<div className={styles.content}>
-				<div className={styles.posts}>
-					<CreatePost profiles={props.profiles} setProfilePosts={props.setProfilePosts} />
-					{/* <div className={styles.posts_title}>Photo feed</div> */}
-					<Posts
-						profile={props.profile}
-						profiles={props.profiles}
-						id={props.id}
-						profileAuthorizationData={props.profileAuthorizationData}
-					/>
-				</div>
+				<CreatePost myProfile={myProfile} otherProfile={otherProfile} profiles={props.profiles} setProfilePosts={props.setProfilePosts} />
+
+				<Posts profile={props.profile} profiles={props.profiles} id={props.id} profileAuthorizationData={props.profileAuthorizationData} />
 			</div>
 
 			{/* side bar right */}
-			{/* <div className={styles.side_bar_right}>Side bar right</div> */}
+			<div className={styles.side_bar_right}>Side bar right</div>
 		</div>
 	);
 };

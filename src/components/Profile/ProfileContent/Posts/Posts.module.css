@@ -1,5 +1,6 @@
 .posts {
-	margin-top: 15px;
+	/* padding: var(--paddingForContent); */
+	margin-top: var(--marginBetweenProfileContainers);
 }
 
 .wrapper_posts {

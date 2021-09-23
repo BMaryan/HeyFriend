@@ -49,8 +49,10 @@ export const ChangeProfilePictureContainer = props => {
 };
 
 export const CreateNewPostContainer = props => {
+	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
+
 	let onSubmit = formData => {
-		console.log(formData);
+		setSaveOwnerPost(formData.create_post);
 	};
 
 	return (
@@ -59,7 +61,7 @@ export const CreateNewPostContainer = props => {
 				<div className={styles.create_post_title}>Create new post</div>
 
 				<div>
-					<CreatePostReduxForm onSubmit={onSubmit} />
+					<CreatePostReduxForm onChange={onSubmit} />
 				</div>
 
 				<div className={styles.wrapper_content}>
@@ -84,7 +86,13 @@ export const CreateNewPostContainer = props => {
 				<div className={styles.wrapper_button_publish}>
 					<button
 						onClick={() =>
-							props.postPicture ? props.setProfilePosts(props.postPicture, null, null) && props.setCreatePostContainer(false) : <></>
+							props.postPicture ? (
+								props.setProfilePosts(props.postPicture, null, null, saveOwnerPost ? saveOwnerPost : null) &&
+								props.setCreatePostContainer(false) &&
+								props.postPicture(null)
+							) : (
+								<></>
+							)
 						}>
 						Publish
 					</button>

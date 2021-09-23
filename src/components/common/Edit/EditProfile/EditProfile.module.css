@@ -1,0 +1,90 @@
+.edit_profile {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	padding: var(--paddingForContent);
+}
+
+.wrapper_profile_contact {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.wrapper_picture {
+	margin-right: var(--paddingForContent);
+}
+
+.wrapper_picture > img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	object-position: center;
+	object-fit: cover;
+	cursor: pointer;
+}
+
+.wrapper_info {
+}
+
+.fullName {
+	font-weight: 500;
+}
+
+.change_picture {
+	color: rgb(116, 116, 116);
+	font-size: 14px;
+}
+
+.change_picture label {
+	cursor: pointer;
+}
+
+.change_picture input {
+	display: none;
+}
+
+/* form */
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper_block {
+	/* background: red; */
+	display: flex;
+	margin-bottom: var(--paddingForContent);
+}
+
+.key {
+	color: rgb(48, 48, 48);
+	font-weight: 500;
+}
+
+.action {
+	width: 100%;
+	display: flex;
+	justify-content: right;
+}
+
+.field {
+	width: 350px;
+	max-width: 100%;
+	border: 1px solid silver;
+	outline: none;
+	padding: 7px 10px;
+}
+
+.wrapper_button {
+	display: flex;
+	justify-content: center;
+}
+
+.wrapper_button button {
+	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	padding: 10px 100px;
+	cursor: pointer;
+}

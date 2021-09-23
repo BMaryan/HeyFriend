@@ -10,6 +10,7 @@ export const ToggleProfileList = props => {
 		<div className={styles.toggleProfileList}>
 			<div className={styles.wrapper_nav_linkList}>
 				<NavLink
+					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
 					to='/profile'>
@@ -19,6 +20,7 @@ export const ToggleProfileList = props => {
 			</div>
 			<div className={styles.wrapper_nav_linkList}>
 				<NavLink
+					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
 					to='/music'>
@@ -28,6 +30,7 @@ export const ToggleProfileList = props => {
 			</div>
 			<div className={styles.wrapper_nav_linkList}>
 				<NavLink
+					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
 					to='/settings'>

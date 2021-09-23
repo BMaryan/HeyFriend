@@ -94,18 +94,18 @@ const ProfileInfo = props => {
 					<div className={styles.wrapper_button}>
 						{props.id ? (
 							<>
-								<button onClick={() => props.addChat(props.id)}>
-									<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
-										Message
-									</NavLink>
-								</button>
+								<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
+									<button onClick={() => props.addChat(props.id)}>Message</button>
+								</NavLink>
 								<button type='submit'>Follow</button>
 							</>
 						) : (
-							<button type='submit'>
-								<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
-								Edit profile
-							</button>
+							<NavLink className={styles.navLink_message} to='/edit/profile'>
+								<button type='submit'>
+									<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
+									Edit profile
+								</button>
+							</NavLink>
 						)}
 					</div>
 				</div>

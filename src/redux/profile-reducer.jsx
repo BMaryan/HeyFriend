@@ -84,6 +84,7 @@ const ProfileReducer = (state = initialState, action) => {
 				img: action.img,
 				likes: action.likes,
 				comments: action.comments,
+				ownerCommentToPost: action.ownerCommentToPost,
 			};
 			let arrayProfiles = state.profiles
 				? state.profiles.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
@@ -167,11 +168,12 @@ export const getProfileData = profile => ({
 	profile,
 });
 
-export const setProfilePosts = (img, likes, comments) => ({
+export const setProfilePosts = (img, likes, comments, ownerCommentToPost) => ({
 	type: SET_PROFILE_POSTS,
 	img,
 	likes,
 	comments,
+	ownerCommentToPost,
 });
 
 export const setProfileChats = chats => ({
