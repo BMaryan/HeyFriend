@@ -7,6 +7,10 @@ import ChangePassword from "./ChangePassword/ChangePassword";
 import Default from "./Default/Default";
 
 const Edit = props => {
+	let myProfile = props.profiles.find(profile =>
+		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
+	);
+
 	return (
 		<div className={styles.edit}>
 			<div className={styles.edit_menu}>
@@ -30,8 +34,8 @@ const Edit = props => {
 			</div>
 
 			<div className={styles.edit_content}>
-				<Route exact path='/edit/profile' render={() => <EditProfile {...props} />} />
-				<Route exact path='/edit/password' render={() => <ChangePassword {...props} />} />
+				<Route exact path='/edit/profile' render={() => <EditProfile {...props} myProfile={myProfile} />} />
+				<Route exact path='/edit/password' render={() => <ChangePassword {...props} myProfile={myProfile} />} />
 				<Route exact path='/edit' render={() => <Default />} />
 			</div>
 		</div>

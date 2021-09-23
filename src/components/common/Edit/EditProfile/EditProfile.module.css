@@ -37,14 +37,7 @@
 .change_picture {
 	color: rgb(116, 116, 116);
 	font-size: 14px;
-}
-
-.change_picture label {
 	cursor: pointer;
-}
-
-.change_picture input {
-	display: none;
 }
 
 /* form */

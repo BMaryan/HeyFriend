@@ -2,41 +2,81 @@ import React from "react";
 import styles from "./EditProfile.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import EditProfileReduxForm from "./EditProfileForm";
+import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
 
 const EditProfile = props => {
-	let onSubmit = formData => {
-		console.log(formData);
-	};
+	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
 
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
-	let oftenCheck = myProfile && myProfile.profile;
+	let onSubmit = formData => {
+		props.checkAuthorization({
+			...props.profileAuthorizationData,
+			name: formData.name ? formData.name : props.profileAuthorizationData.name,
+			surname: formData.surname ? formData.surname : props.profileAuthorizationData.surname,
+			phone_or_email: formData.phone_or_email ? formData.phone_or_email : props.profileAuthorizationData.phone_or_email,
+		});
+		props.getProfileData({ ...props.myProfile, ...formData });
+
+		if (props.users) {
+			let user = props.users.find(user => (props.myProfile ? props.myProfile.id === user.id : undefined));
+			let users = props.users.filter(user => (props.myProfile ? props.myProfile.id !== user.id : undefined));
+
+			if (users) {
+				user = {
+					id: user.id,
+					name: formData.name ? formData.name : user.name,
+					surname: formData.surname ? formData.surname : user.surname,
+					phone_or_email: formData.phone_or_email ? formData.phone_or_email : user.phone_or_email,
+					password: props.profileAuthorizationData.password,
+				};
+				props.setUsers([...users, user]);
+			}
+		}
+	};
+	let oftenCheck = props.myProfile && props.myProfile.profile;
 
 	return (
 		<div className={styles.edit_profile}>
 			<div className={styles.wrapper_profile_contact}>
 				<div className={styles.wrapper_picture}>
-					{oftenCheck && myProfile.profile.img ? (
-						<img src={myProfile.profile.img} title='Change photo' alt='' />
+					{oftenCheck && props.myProfile.profile.img ? (
+						<img
+							src={props.myProfile.profile.img}
+							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							title='Change photo'
+							alt=''
+						/>
 					) : (
-						<img src={defaultAvatar} title='Change photo' alt='' />
+						<img
+							src={defaultAvatar}
+							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							title='Change photo'
+							alt=''
+						/>
 					)}
 				</div>
 				<div className={styles.wrapper_info}>
-					<div className={styles.fullName}>{oftenCheck ? myProfile.profile.surname + " " + myProfile.profile.name : undefined}</div>
-					<div className={styles.change_picture}>
-						<label>
-							Change profile photo
-							<input type='file' />
-						</label>
+					<div className={styles.fullName}>
+						{oftenCheck ? props.myProfile.profile.surname + " " + props.myProfile.profile.name : undefined}
+					</div>
+					<div
+						className={styles.change_picture}
+						onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}>
+						Change profile photo
 					</div>
 				</div>
 			</div>
 
 			<div>
-				<EditProfileReduxForm onSubmit={onSubmit} myProfile={myProfile} />
+				<EditProfileReduxForm onSubmit={onSubmit} myProfile={props.myProfile} />
 			</div>
+
+			{changeProfilePicture ? (
+				<ChangeProfilePictureContainer
+					{...props}
+					changeProfilePicture={changeProfilePicture}
+					setChangeProfilePicture={setChangeProfilePicture}
+				/>
+			) : undefined}
 		</div>
 	);
 };

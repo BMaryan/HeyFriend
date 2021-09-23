@@ -32,8 +32,10 @@ export const ChangeProfilePictureContainer = props => {
 			<div className={styles.change_profile_picture_content}>
 				<div className={styles.title}>Change profile photo</div>
 				<div className={styles.wrapper_change_picture}>
-					<label htmlFor='file-upload'>Upload photo</label>
-					<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
+					<label>
+						Upload photo
+						<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
+					</label>
 				</div>
 
 				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
@@ -47,6 +49,60 @@ export const ChangeProfilePictureContainer = props => {
 		</div>
 	);
 };
+
+// 						test
+
+export const ContainerCoverProfile = props => {
+	let myProfile = props.profiles
+		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
+		: undefined;
+
+	let onChangeProfilePicture = e => {
+		if (e.target.files.length) {
+			let file = e.target.files[0];
+			let reader = new FileReader();
+			reader.readAsDataURL(file);
+
+			reader.onloadend = function () {
+				props.getProfileData({ ...myProfile.profile, coverPhoto: reader.result });
+				props.setToggleCoverContainer(false);
+			};
+		}
+	};
+
+	let removeProfilePicture = () => {
+		props.getProfileData({ ...myProfile.profile, coverPhoto: null });
+		props.setToggleCoverContainer(false);
+	};
+
+	return (
+		<div className={styles.change_profile_picture_container}>
+			<div className={styles.change_profile_picture_content}>
+				<div className={styles.title}>Change profile cover photo</div>
+				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
+					Choose cover photo
+				</div>
+
+				<div className={styles.wrapper_change_picture}>
+					<label>
+						Upload cover photo
+						<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
+					</label>
+				</div>
+
+				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
+					Remove cover photo
+				</div>
+
+				<div onClick={() => props.setToggleCoverContainer(false)} className={styles.wrapper_change_picture}>
+					Cancel
+				</div>
+			</div>
+		</div>
+	);
+};
+
+// 						test
 
 export const CreateNewPostContainer = props => {
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);

@@ -5,7 +5,32 @@ import ChangePasswordReduxForm from "./ChangePasswordForm";
 
 const ChangePassword = props => {
 	let onSubmit = formData => {
-		console.log(formData);
+		if (
+			formData.old_password !== formData.new_password &&
+			formData.old_password !== formData.confirm_new_password &&
+			formData.new_password === formData.confirm_new_password &&
+			formData.old_password === props.profileAuthorizationData.password
+		) {
+			console.log(formData);
+			props.checkAuthorization({
+				...props.profileAuthorizationData,
+				password: formData.new_password,
+			});
+			props.getProfileData({ ...props.myProfile, password: formData.new_password });
+			if (props.users) {
+				let user = props.users.find(user => (props.myProfile ? props.myProfile.id === user.id : undefined));
+				let users = props.users.filter(user => (props.myProfile ? props.myProfile.id !== user.id : undefined));
+				if (users) {
+					user = {
+						...user,
+						password: formData.new_password,
+					};
+					props.setUsers([...users, user]);
+				}
+			}
+		} else {
+			console.log("False");
+		}
 	};
 
 	let myProfile = props.profiles.find(profile =>

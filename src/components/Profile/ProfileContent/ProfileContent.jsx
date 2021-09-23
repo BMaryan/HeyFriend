@@ -21,9 +21,7 @@ const ProfileContent = props => {
 							<div>{otherProfile.profile.aboutMe}</div>
 						) : myProfile && myProfile.profile && myProfile.profile.aboutMe ? (
 							<div>{myProfile.profile.aboutMe}</div>
-						) : (
-							<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit totam beatae vel repellat voluptate</div>
-						)}
+						) : undefined}
 					</div>
 				</div>
 			</div>

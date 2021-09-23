@@ -6,8 +6,8 @@
 .profile_cover {
 	height: 250px;
 	max-height: 100%;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-		url("https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc0ee8c57-0789-439c-8fd2-704aa26b9a4a_4066x2711.jpeg");
+	/* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+		url("https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc0ee8c57-0789-439c-8fd2-704aa26b9a4a_4066x2711.jpeg"); */
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -32,6 +32,19 @@
 .profile_status {
 	color: rgb(235, 235, 235);
 	font-size: 15px;
+}
+
+/* wrapper change cover */
+.wrapper_change_cover {
+	/* background: red; */
+	position: absolute;
+	top: var(--paddingForContent);
+	right: var(--paddingForContent);
+}
+
+.icon_change_cover {
+	color: white;
+	cursor: pointer;
 }
 
 /* profile info line */
