@@ -17,6 +17,8 @@ const ProfileInfo = props => {
 	let otherProfile = props.profiles.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let coverPhoto = myProfile && myProfile.profile && myProfile.profile.coverPhoto ? myProfile.profile.coverPhoto : undefined;
 
+	console.log(myProfile);
+
 	return (
 		<div className={styles.profile_info}>
 			<div
@@ -45,13 +47,15 @@ const ProfileInfo = props => {
 				</div>
 
 				{/* change cover img */}
-				<div className={styles.wrapper_change_cover}>
-					<FontAwesomeIcon
-						onClick={() => (toggleCoverContainer ? setToggleCoverContainer(false) : setToggleCoverContainer(true))}
-						className={styles.icon_change_cover}
-						icon={faCamera}
-					/>
-				</div>
+				{!props.id ? (
+					<div className={styles.wrapper_change_cover}>
+						<FontAwesomeIcon
+							onClick={() => (toggleCoverContainer ? setToggleCoverContainer(false) : setToggleCoverContainer(true))}
+							className={styles.icon_change_cover}
+							icon={faCamera}
+						/>
+					</div>
+				) : undefined}
 			</div>
 
 			{/* 				profile info line				 */}
@@ -93,11 +97,15 @@ const ProfileInfo = props => {
 							<div className={styles.detail_title}>Posts</div>
 						</div>
 						<div className={styles.details_info}>
-							<div className={styles.detail_number}>261k</div>
+							<div className={styles.detail_number}>
+								{myProfile && myProfile.profile && myProfile.profile.followers.length > 0 ? myProfile.profile.followers.length : 0}
+							</div>
 							<div className={styles.detail_title}>Followers</div>
 						</div>
 						<div className={styles.details_info}>
-							<div className={styles.detail_number}>674</div>
+							<div className={styles.detail_number}>
+								{myProfile && myProfile.profile && myProfile.profile.following.length > 0 ? myProfile.profile.following.length : 0}
+							</div>
 							<div className={styles.detail_title}>Following</div>
 						</div>
 					</div>
@@ -183,18 +191,3 @@ const ProfileInfo = props => {
 };
 
 export default ProfileInfo;
-
-// {
-// 	/* button create post */
-// }
-// {
-// 	/* {!props.id && props.profileAuthorizationData.id !== props.id ? (
-// 				<div className={styles.wrapper_button_createPost}>
-// 					<button className={styles.button_createPost} onClick={() => (createNewPost ? setCreateNewPost(false) : setCreateNewPost(true))}>
-// 						Create post
-// 					</button>
-// 				</div>
-// 			) : (
-// 				<></>
-// 			)} */
-// }

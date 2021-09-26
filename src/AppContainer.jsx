@@ -30,43 +30,11 @@ const AppContainer = props => {
 		localStorage.setItem("profiles", JSON.stringify(props.profiles));
 	}, [props.profiles]);
 
-	// React.useEffect(() => {
-	// 	// localStorage.setItem("profileAuthorizationData", JSON.stringify(props.profileAuthorizationData));
-
-	// 	if (props.profileAuthorizationData) {
-	// 		let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-	// 		props.checkAuthorization(profileUser);
-	// 	}
-	// }, [props.profileAuthorizationData]);
-	//
-	// React.useEffect(() => {
-	// 	let users = JSON.parse(localStorage.getItem("users"));
-	// 	props.setUsers(users);
-	// }, [setSignUpDataToLocalStorage(props)]);
-
-	// React.useEffect(() => {
-	// 	let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-	// 	props.checkAuthorization(profileUser);
-	// 	props.getProfileData(profileUser);
-	// }, [props.userSignIn]);
-
-	// React.useEffect(() => {
-	// 	let profileUser = JSON.parse(localStorage.getItem("profileAuthorizationData"));
-	// 	props.getProfileData(profileUser);
-	// }, [props.profileAuthorizationData]);
-
-	// React.useEffect(() => {
-	// 	props.getProfileData(JSON.parse(localStorage.getItem("profile")));
-	// }, [props.profileAuthorizationData]);
-
-	// React.useEffect(() => {
-	// 	props.setProfileChats(props.chats);
-	// }, [props.chats]);
-	//
+	React.useEffect(() => {
+		props.setProfileChats(props.chats);
+	}, [props.chats]);
 
 	setSignUpDataToLocalStorage(props);
-
-	// helpCheckAuthorization(props);
 
 	if (!props.profileAuthorizationData) {
 		<Redirect to='/sign_up' />;

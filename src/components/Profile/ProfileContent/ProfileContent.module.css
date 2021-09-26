@@ -9,7 +9,7 @@
 /* side_bar_left */
 .side_bar_left {
 	width: 25%;
-	background: steelblue;
+	/* background: steelblue; */
 	margin-bottom: var(--marginBetweenProfileContainers);
 }
 
@@ -36,6 +36,6 @@
 /* side_bar_right */
 .side_bar_right {
 	width: 25%;
-	background: thistle;
+	background: white;
 	margin-bottom: var(--marginBetweenProfileContainers);
 }

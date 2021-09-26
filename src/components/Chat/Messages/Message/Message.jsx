@@ -52,7 +52,7 @@ const Message = props => {
 					src={
 						myProfile && myProfile.profile.img
 							? myProfile.profile.img
-							: otherProfile && otherProfile.profile
+							: otherProfile && otherProfile.profile.img
 							? otherProfile.profile.img
 							: defaultAvatar
 					}

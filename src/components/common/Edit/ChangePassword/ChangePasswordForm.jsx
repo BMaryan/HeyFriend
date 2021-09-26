@@ -24,7 +24,7 @@ const ChangePasswordForm = props => {
 				</div>
 			</div>
 
-			<div className={styles.wrapper_button}>{wrapperButton("SIGN IN", { ...props })}</div>
+			<div className={styles.wrapper_button}>{wrapperButton("Submit", { ...props })}</div>
 		</form>
 	);
 };

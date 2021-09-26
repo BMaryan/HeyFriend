@@ -5,6 +5,7 @@ let ADD_PROFILE = "social_network/chatPage/ADD_PROFILE";
 let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let SET_PROFILES = "social_network/chatPage/SET_PROFILES";
+let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
 
 let initialState = {
 	profiles: [],
@@ -57,6 +58,8 @@ const ProfileReducer = (state = initialState, action) => {
 					aboutMe: null,
 					posts: [],
 					chats: [],
+					followers: [],
+					following: [],
 				},
 			};
 
@@ -82,7 +85,6 @@ const ProfileReducer = (state = initialState, action) => {
 		case SET_PROFILE_POSTS: {
 			let newPost = {
 				id: state.profile.posts.length + 1,
-				// id: state.profile.posts ? (state.profile.posts.length !== 0 ? state.profile.posts.length + 2 : 2) : 1,
 				img: action.img,
 				likes: action.likes,
 				comments: action.comments,
@@ -149,6 +151,11 @@ const ProfileReducer = (state = initialState, action) => {
 				paramsId: action.id,
 			};
 		}
+		case PUT_LIKE: {
+			return {
+				...state,
+			};
+		}
 		default: {
 			return state;
 		}
@@ -189,6 +196,11 @@ export const getAuthorizationId = id => ({
 });
 
 export const getParamsId = id => ({
+	type: GET_PARAMS_ID,
+	id,
+});
+
+export const putLike = id => ({
 	type: GET_PARAMS_ID,
 	id,
 });

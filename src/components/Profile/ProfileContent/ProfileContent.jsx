@@ -34,7 +34,7 @@ const ProfileContent = props => {
 			</div>
 
 			{/* side bar right */}
-			<div className={styles.side_bar_right}>Side bar right</div>
+			<div className={styles.side_bar_right}></div>
 		</div>
 	);
 };

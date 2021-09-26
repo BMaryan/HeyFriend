@@ -49,7 +49,7 @@ const EditProfileForm = props => {
 				<div className={styles.action}>{wrapperCreateField("aboutMe", "text", [], Textarea, "About you")}</div>
 			</div>
 
-			<div className={styles.wrapper_button}>{wrapperButton("SIGN UP", { ...props })}</div>
+			<div className={styles.wrapper_button}>{wrapperButton("Submit", { ...props })}</div>
 		</form>
 	);
 };
