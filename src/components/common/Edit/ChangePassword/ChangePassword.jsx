@@ -16,10 +16,10 @@ const ChangePassword = props => {
 				...props.account,
 				password: formData.new_password,
 			});
-			props.getProfileData({ ...props.myProfile, password: formData.new_password });
+			props.getProfileData({ ...props.account, password: formData.new_password });
 			if (props.users) {
-				let user = props.users.find(user => (props.myProfile ? props.myProfile.id === user.id : undefined));
-				let users = props.users.filter(user => (props.myProfile ? props.myProfile.id !== user.id : undefined));
+				let user = props.users.find(user => (props.account ? props.account.id === user.id : undefined));
+				let users = props.users.filter(user => (props.account ? props.account.id !== user.id : undefined));
 				if (users) {
 					user = {
 						...user,
@@ -33,16 +33,19 @@ const ChangePassword = props => {
 		}
 	};
 
-	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
-	let oftenCheck = myProfile && myProfile.profile;
+	let oftenCheck = props.account && props.account.profile;
 
 	return (
 		<div className={styles.change_password}>
 			<div className={styles.wrapper_profile_contact}>
 				<div className={styles.wrapper_picture}>
-					{oftenCheck && myProfile.profile.img ? <img src={myProfile.profile.img} alt='' /> : <img src={defaultAvatar} alt='' />}
+					{oftenCheck && props.account.profile.avatar ? (
+						<img src={props.account.profile.avatar} alt='' />
+					) : (
+						<img src={defaultAvatar} alt='' />
+					)}
 				</div>
-				<div className={styles.fullName}>{oftenCheck ? myProfile.profile.surname + " " + myProfile.profile.name : undefined}</div>
+				<div className={styles.fullName}>{oftenCheck ? props.account.profile.surname + " " + props.account.profile.name : undefined}</div>
 			</div>
 
 			<div>

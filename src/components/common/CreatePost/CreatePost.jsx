@@ -55,7 +55,7 @@ const CreatePost = props => {
 
 			{createPostContainer ? (
 				<CreateNewPostContainer
-					myProfile={props.myProfile}
+					account={props.account}
 					otherProfile={props.otherProfile}
 					setProfilePosts={props.setProfilePosts}
 					onChangeProfilePicture={onChangeProfilePicture}

@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const ChangeProfilePictureContainer = props => {
-	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
-
 	let onChangeProfilePicture = e => {
 		if (e.target.files.length) {
 			let file = e.target.files[0];
@@ -14,14 +12,14 @@ export const ChangeProfilePictureContainer = props => {
 			reader.readAsDataURL(file);
 
 			reader.onloadend = function () {
-				props.getProfileData({ ...myProfile.profile, img: reader.result });
+				props.getProfileData({ ...props.account.profile, avatar: reader.result });
 				props.setChangeProfilePicture(false);
 			};
 		}
 	};
 
 	let removeProfilePicture = () => {
-		props.getProfileData({ ...myProfile.profile, img: null });
+		props.getProfileData({ ...props.account.profile, avatar: null });
 		props.setChangeProfilePicture(false);
 	};
 
@@ -51,8 +49,6 @@ export const ChangeProfilePictureContainer = props => {
 // 						test
 
 export const ContainerCoverProfile = props => {
-	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
-
 	let onChangeProfilePicture = e => {
 		if (e.target.files.length) {
 			let file = e.target.files[0];
@@ -60,14 +56,14 @@ export const ContainerCoverProfile = props => {
 			reader.readAsDataURL(file);
 
 			reader.onloadend = function () {
-				props.getProfileData({ ...myProfile.profile, coverPhoto: reader.result });
+				props.getProfileData({ ...props.account.profile, coverPhoto: reader.result });
 				props.setToggleCoverContainer(false);
 			};
 		}
 	};
 
 	let removeProfilePicture = () => {
-		props.getProfileData({ ...myProfile.profile, coverPhoto: null });
+		props.getProfileData({ ...props.account.profile, coverPhoto: null });
 		props.setToggleCoverContainer(false);
 	};
 

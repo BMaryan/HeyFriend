@@ -43,7 +43,8 @@ export const ToggleProfileList = props => {
 					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
-					to='/settings'>
+					to='/account/edit'
+					exact>
 					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faCog} />
 					Settings
 				</NavLink>

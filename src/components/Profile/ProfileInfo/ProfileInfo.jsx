@@ -11,9 +11,15 @@ const ProfileInfo = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
 	let [createNewPost, setCreateNewPost] = React.useState(false);
 
-	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
-	let coverPhoto = myProfile && myProfile.profile && myProfile.profile.coverPhoto ? myProfile.profile.coverPhoto : undefined;
+	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
+	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
+	let coverPhoto =
+		oftenCheckMyProfile && props.account.profile.coverPhoto
+			? props.account.profile.coverPhoto
+			: oftenCheckOtherProfile && otherProfile.profile.coverPhoto
+			? otherProfile.profile.coverPhoto
+			: undefined;
 
 	return (
 		<div className={styles.profile_info}>
@@ -23,10 +29,10 @@ const ProfileInfo = props => {
 				<div className={styles.profile_cover_line}>
 					{/* full name */}
 					<div className={styles.profile_fullName}>
-						{otherProfile && otherProfile.profile ? (
+						{oftenCheckOtherProfile ? (
 							otherProfile.profile.surname + " " + otherProfile.profile.name
-						) : myProfile && myProfile.profile ? (
-							myProfile.profile.surname + " " + myProfile.profile.name
+						) : oftenCheckMyProfile ? (
+							props.account.profile.surname + " " + props.account.profile.name
 						) : (
 							<></>
 						)}
@@ -34,10 +40,10 @@ const ProfileInfo = props => {
 
 					{/* status */}
 					<div className={styles.profile_status}>
-						{otherProfile && otherProfile.profile && otherProfile.profile.status ? (
+						{oftenCheckOtherProfile && otherProfile.profile.status ? (
 							<div>{otherProfile.profile.status}</div>
-						) : myProfile && myProfile.profile && myProfile.profile.status ? (
-							<div>{myProfile.profile.status}</div>
+						) : oftenCheckMyProfile && props.account.profile.status ? (
+							<div>{props.account.profile.status}</div>
 						) : undefined}
 					</div>
 				</div>
@@ -58,15 +64,15 @@ const ProfileInfo = props => {
 			<div className={styles.profile_info_line}>
 				{/* wrapper picture */}
 				<div className={changeProfilePicture && !props.id ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
-					{myProfile && myProfile.profile && myProfile.profile.img && !props.id ? (
+					{oftenCheckMyProfile && props.account.profile.avatar ? (
 						<img
 							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
-							src={myProfile.profile.img}
+							src={props.account.profile.avatar}
 							title='Change profile photo'
 							alt=''
 						/>
-					) : otherProfile && otherProfile.profile && otherProfile.profile.img && props.id ? (
-						<img src={otherProfile.profile.img} alt='' />
+					) : oftenCheckOtherProfile && otherProfile.profile.avatar ? (
+						<img src={otherProfile.profile.avatar} alt='' />
 					) : !props.id ? (
 						<img
 							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
@@ -84,27 +90,30 @@ const ProfileInfo = props => {
 					<div className={styles.details_info_content}>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
-								{otherProfile && otherProfile.profile && otherProfile.profile.posts && otherProfile.profile.posts.length > 0
+								{oftenCheckOtherProfile && otherProfile.profile.posts && otherProfile.profile.posts.length > 0
 									? otherProfile.profile.posts.length
-									: 0 ||
-									  (myProfile && myProfile.profile && myProfile.profile.posts && myProfile.profile.posts.length > 0 && !props.id)
-									? myProfile.profile.posts.length
+									: 0 || (oftenCheckMyProfile && props.account.profile.posts && props.account.profile.posts.length > 0)
+									? props.account.profile.posts.length
 									: 0}
 							</div>
 							<div className={styles.detail_title}>Posts</div>
 						</div>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
-								{myProfile && myProfile.profile && myProfile.profile.followers && myProfile.profile.followers.length > 0
-									? myProfile.profile.followers.length
+								{oftenCheckOtherProfile && otherProfile.profile.followers && otherProfile.profile.followers.length > 0
+									? otherProfile.profile.followers.length
+									: 0 || (oftenCheckMyProfile && props.account.profile.followers && props.account.profile.followers.length > 0)
+									? props.account.profile.followers.length
 									: 0}
 							</div>
 							<div className={styles.detail_title}>Followers</div>
 						</div>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
-								{myProfile && myProfile.profile && myProfile.profile.following && myProfile.profile.following.length > 0
-									? myProfile.profile.following.length
+								{oftenCheckOtherProfile && otherProfile.profile.following && otherProfile.profile.following.length > 0
+									? otherProfile.profile.following.length
+									: 0 || (oftenCheckMyProfile && props.account.profile.following && props.account.profile.following.length > 0)
+									? props.account.profile.following.length
 									: 0}
 							</div>
 							<div className={styles.detail_title}>Following</div>
@@ -120,7 +129,7 @@ const ProfileInfo = props => {
 								<button type='submit'>Follow</button>
 							</>
 						) : (
-							<NavLink className={styles.navLink_message} to='/edit/profile'>
+							<NavLink className={styles.navLink_message} to='/account/edit/profile'>
 								<button type='submit'>
 									<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
 									Edit profile

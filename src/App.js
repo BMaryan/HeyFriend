@@ -21,7 +21,7 @@ function App(props) {
 					<Route path='/profile/:id?' render={() => <ProfileContainer />} />
 					<Route path='/chat/:id?' render={() => <ChatContainer />} />
 					<Route path='/friends/:id?' render={() => <FriendsContainer />} />
-					<Route path='/edit' render={() => <EditContainer />} />
+					<Route path='/account/edit' render={() => <EditContainer />} />
 					<Route path='/sign_in' render={() => <SignInContainer />} />
 					<Route path='/sign_up' render={() => <SignUpContainer />} />
 					<Route path='*' render={() => <NotFound />} />

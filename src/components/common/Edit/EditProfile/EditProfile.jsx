@@ -14,11 +14,11 @@ const EditProfile = props => {
 			surname: formData.surname ? formData.surname : props.account.surname,
 			phone_or_email: formData.phone_or_email ? formData.phone_or_email : props.account.phone_or_email,
 		});
-		props.getProfileData({ ...props.myProfile, ...formData });
+		props.getProfileData({ ...props.account, ...formData });
 
 		if (props.users) {
-			let user = props.users.find(user => (props.myProfile ? props.myProfile.id === user.id : undefined));
-			let users = props.users.filter(user => (props.myProfile ? props.myProfile.id !== user.id : undefined));
+			let user = props.users.find(user => (props.account ? props.account.id === user.id : undefined));
+			let users = props.users.filter(user => (props.account ? props.account.id !== user.id : undefined));
 
 			if (users) {
 				user = {
@@ -32,15 +32,15 @@ const EditProfile = props => {
 			}
 		}
 	};
-	let oftenCheck = props.myProfile && props.myProfile.profile;
+	let oftenCheck = props.account && props.account.profile;
 
 	return (
 		<div className={styles.edit_profile}>
 			<div className={styles.wrapper_profile_contact}>
 				<div className={styles.wrapper_picture}>
-					{oftenCheck && props.myProfile.profile.img ? (
+					{oftenCheck && props.account.profile.avatar ? (
 						<img
-							src={props.myProfile.profile.img}
+							src={props.account.profile.avatar}
 							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
 							title='Change photo'
 							alt=''
@@ -55,9 +55,7 @@ const EditProfile = props => {
 					)}
 				</div>
 				<div className={styles.wrapper_info}>
-					<div className={styles.fullName}>
-						{oftenCheck ? props.myProfile.profile.surname + " " + props.myProfile.profile.name : undefined}
-					</div>
+					<div className={styles.fullName}>{oftenCheck ? props.account.profile.surname + " " + props.account.profile.name : undefined}</div>
 					<div
 						className={styles.change_picture}
 						onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}>
@@ -67,7 +65,7 @@ const EditProfile = props => {
 			</div>
 
 			<div>
-				<EditProfileReduxForm onSubmit={onSubmit} myProfile={props.myProfile} />
+				<EditProfileReduxForm onSubmit={onSubmit} account={props.account} />
 			</div>
 
 			{changeProfilePicture ? (

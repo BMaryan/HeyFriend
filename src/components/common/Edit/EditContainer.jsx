@@ -14,12 +14,6 @@ const EditContainer = props => {
 		}
 	}, [props.account]);
 
-	// React.useEffect(() => {
-	// 	if (props.users && props.accounts.length > 0) {
-	// 		localStorage.setItem("users", JSON.stringify(props.users));
-	// 	}
-	// }, [props.users]);
-
 	React.useEffect(() => {
 		if (props.accounts && props.accounts.length > 0) {
 			localStorage.setItem(accounts, JSON.stringify(props.accounts));
@@ -27,7 +21,6 @@ const EditContainer = props => {
 	}, [props.accounts]);
 
 	let id = Number(props.match.params.id);
-	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 
 	return <Edit {...props} id={id} />;
 };

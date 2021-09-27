@@ -20,20 +20,22 @@ const ProfileReducer = (state = initialState, action) => {
 		state.accounts && state.accounts.length
 			? state.accounts.find(profile => (profile && state.authorizationId && !state.paramsId ? profile.id === state.authorizationId : undefined))
 			: undefined;
-	let otherProfile =
-		state.accounts && state.accounts.length
-			? state.accounts.find(profile => (profile && state.paramsId && !state.authorizationId ? profile.id === state.paramsId : undefined))
-			: undefined;
-	let arrayNoCurrentAccounts =
-		state.accounts && state.accounts.length
-			? state.accounts.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
-			: undefined;
+	// let otherProfile =
+	// 	state.accounts && state.accounts.length
+	// 		? state.accounts.find(profile => (profile && state.paramsId && !state.authorizationId ? profile.id === state.paramsId : undefined))
+	// 		: undefined;
+	// let arrayNoCurrentAccounts =
+	// 	state.accounts && state.accounts.length
+	// 		? state.accounts.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
+	// 		: undefined;
 
 	switch (action.type) {
 		case SET_ACCOUNTS: {
 			return {
 				...state,
-				accounts: action.accounts ? action.accounts.filter(profile => (profile && profile.profile.name ? profile : undefined)) : [],
+				accounts: action.accounts ? action.accounts.filter((v, i, a) => a.findIndex(t => t.card_id === v.id) === i) : [],
+				// accounts: action.accounts ? action.accounts.filter(profile => (profile && profile.profile.name ? profile : undefined)) : [],
+				// cars.filter((v, i, a) => a.findIndex(t => (t.card_id === v.id)) === i)
 			};
 		}
 		case ADD_ACCOUNT: {
