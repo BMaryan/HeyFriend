@@ -5,10 +5,8 @@ import Posts from "./Posts/Posts";
 import CreatePost from "../../common/CreatePost/CreatePost";
 
 const ProfileContent = props => {
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
-	let otherProfile = props.profiles.find(profile => (profile && props.id ? profile.id === props.id : undefined));
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
+	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 
 	return (
 		<div className={styles.profile_content}>
@@ -28,9 +26,9 @@ const ProfileContent = props => {
 
 			{/* content */}
 			<div className={styles.content}>
-				<CreatePost myProfile={myProfile} otherProfile={otherProfile} profiles={props.profiles} setProfilePosts={props.setProfilePosts} />
+				<CreatePost myProfile={myProfile} otherProfile={otherProfile} accounts={props.accounts} setProfilePosts={props.setProfilePosts} />
 
-				<Posts profile={props.profile} profiles={props.profiles} id={props.id} profileAuthorizationData={props.profileAuthorizationData} />
+				<Posts profile={props.profile} accounts={props.accounts} id={props.id} account={props.account} />
 			</div>
 
 			{/* side bar right */}

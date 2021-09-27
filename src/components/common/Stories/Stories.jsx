@@ -5,7 +5,7 @@ import Story from "./Story/Story";
 const Stories = props => {
 	return (
 		<div className={styles.stories}>
-			<Story profile={props.profile} profiles={props.profiles} profileAuthorizationData={props.profileAuthorizationData} />
+			<Story accounts={props.accounts} account={props.account} />
 		</div>
 	);
 };

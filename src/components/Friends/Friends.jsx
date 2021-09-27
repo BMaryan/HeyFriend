@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 const Friends = props => {
 	return (
 		<div>
-			{props.users.map(user => (
-				<NavLink
-					key={user.id}
-					to={props.profileAuthorizationData && props.profileAuthorizationData.id !== user.id ? "/profile/" + user.id : "/profile"}>
-					<div>{user.surname + " " + user.name}</div>
-				</NavLink>
-			))}
+			{props.accounts.map(profile =>
+				profile.id !== props.account.id ? (
+					<NavLink key={profile.id} to={"/profile/" + profile.id}>
+						<div>{profile.profile.surname + " " + profile.profile.name}</div>
+					</NavLink>
+				) : undefined
+			)}
 		</div>
 	);
 };

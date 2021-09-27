@@ -8,8 +8,11 @@ import { AuthorizationContainer, InformationContainer } from "../../../utils/hel
 
 const SignUp = props => {
 	let onSubmit = formData => {
-		console.log(formData);
 		props.setUserSignUp(formData);
+
+		if (formData) {
+			props.isAccount({ id: props.accounts ? props.accounts.length + 1 : undefined, profile: { ...formData } });
+		}
 	};
 
 	return (

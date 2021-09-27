@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Friends from "./Friends";
 import { withRouter } from "react-router-dom";
-import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../redux/auth-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 
 const FriendsContainer = props => {
 	return <Friends {...props} />;
@@ -11,8 +11,8 @@ const FriendsContainer = props => {
 
 let mapStateToProps = state => {
 	return {
-		users: getUsersSelector(state),
-		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
+		accounts: getAccountsSelector(state),
+		account: getAccountSelector(state),
 	};
 };
 

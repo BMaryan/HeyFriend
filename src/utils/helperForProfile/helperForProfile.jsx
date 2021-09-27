@@ -5,9 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const ChangeProfilePictureContainer = props => {
-	let myProfile = props.profiles
-		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
-		: undefined;
+	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
 
 	let onChangeProfilePicture = e => {
 		if (e.target.files.length) {
@@ -53,9 +51,7 @@ export const ChangeProfilePictureContainer = props => {
 // 						test
 
 export const ContainerCoverProfile = props => {
-	let myProfile = props.profiles
-		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
-		: undefined;
+	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
 
 	let onChangeProfilePicture = e => {
 		if (e.target.files.length) {

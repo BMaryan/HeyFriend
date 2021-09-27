@@ -3,8 +3,8 @@ import styles from "./Story.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Story = props => {
-	// let foundMyProfile = props.profiles.find(profile =>
-	// 	profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
+	// let foundMyProfile = props.accounts.find(profile =>
+	// 	profile && props.account ? profile.id === props.account.id : undefined
 	// );
 
 	return (
@@ -20,7 +20,7 @@ const Story = props => {
 				{/* <div className={styles.fullName}>
 					{foundMyProfile && foundMyProfile.profile ? foundMyProfile.profile.surname + " " + foundMyProfile.profile.name : <></>}
 				</div> */}
-				<div className={styles.fullName}>{props.profile ? props.profile.surname + " " + props.profile.name : <></>}</div>
+				<div className={styles.fullName}>{props.account ? props.account.profile.surname + " " + props.account.profile.name : <></>}</div>
 			</div>
 		</div>
 	);

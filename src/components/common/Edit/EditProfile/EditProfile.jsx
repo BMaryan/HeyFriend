@@ -8,11 +8,11 @@ const EditProfile = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
 
 	let onSubmit = formData => {
-		props.checkAuthorization({
-			...props.profileAuthorizationData,
-			name: formData.name ? formData.name : props.profileAuthorizationData.name,
-			surname: formData.surname ? formData.surname : props.profileAuthorizationData.surname,
-			phone_or_email: formData.phone_or_email ? formData.phone_or_email : props.profileAuthorizationData.phone_or_email,
+		props.isAccount({
+			...props.account,
+			name: formData.name ? formData.name : props.account.name,
+			surname: formData.surname ? formData.surname : props.account.surname,
+			phone_or_email: formData.phone_or_email ? formData.phone_or_email : props.account.phone_or_email,
 		});
 		props.getProfileData({ ...props.myProfile, ...formData });
 
@@ -26,7 +26,7 @@ const EditProfile = props => {
 					name: formData.name ? formData.name : user.name,
 					surname: formData.surname ? formData.surname : user.surname,
 					phone_or_email: formData.phone_or_email ? formData.phone_or_email : user.phone_or_email,
-					password: props.profileAuthorizationData.password,
+					password: props.account.password,
 				};
 				props.setUsers([...users, user]);
 			}

@@ -8,7 +8,7 @@ import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 
 export const Head = props => {
 	let id = Number(props.match.params.id);
-	let otherProfile = props.profiles ? props.profiles.find(profile => (id ? profile.id === id : undefined)) : undefined;
+	let otherProfile = props.accounts ? props.accounts.find(profile => (id ? profile.id === id : undefined)) : undefined;
 
 	return props.toggleShowContent ? (
 		<div className={styles.head}>
@@ -22,7 +22,7 @@ export const Head = props => {
 						return (
 							<NavLink
 								key={user.id}
-								to={props.profileAuthorizationData && props.profileAuthorizationData.id !== id ? "/profile/" + user.id : "/profile"}
+								to={props.account && props.account.id !== id ? "/profile/" + user.id : "/profile"}
 								className={dialogStyles.chat_forHead}>
 								<div className={dialogStyles.wrapper_picture}>
 									<div className={dialogStyles.have_not_picture_forHead}>

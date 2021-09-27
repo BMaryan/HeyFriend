@@ -14,7 +14,7 @@ import EditContainer from "./components/common/Edit/EditContainer";
 function App(props) {
 	return (
 		<div className='App'>
-			<div className='container_fluid'>{props.profileAuthorizationData ? <HeaderContainer /> : undefined}</div>
+			<div className='container_fluid'>{props.account ? <HeaderContainer /> : undefined}</div>
 			<div className='container container_margin'>
 				<Switch>
 					<Route exact path='/' render={() => <MainContainer />} />

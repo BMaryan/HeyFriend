@@ -3,9 +3,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../redux/auth-selectors";
+import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
-import { getProfileSelector, getProfilesSelector } from "../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
@@ -13,30 +13,30 @@ import { getChatsSelector } from "../../redux/chat-selectors";
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
 
-	React.useEffect(() => {
-		if (id) {
-			props.users.find(user => {
-				if (user.id === id && props.profileAuthorizationData.id !== id) {
-					props.getProfileData(user);
-				}
-			});
-		} else {
-			if (props.profileAuthorizationData) {
-				props.getProfileData(props.profileAuthorizationData);
-			}
-		}
-	}, [props.profileAuthorizationData]);
+	// React.useEffect(() => {
+	// 	if (id) {
+	// 		props.accounts.find(profile => {
+	// 			if (profile.id === id && props.account.id !== id) {
+	// 				props.getProfileData(profile.profile);
+	// 			}
+	// 		});
+	// 	} else {
+	// 		if (props.account && props.account.profile) {
+	// 			props.getProfileData({ ...props.SignUp });
+	// 		}
+	// 	}
+	// }, [props.SignUp]);
 
-	if (!props.profileAuthorizationData) {
+	if (!props.account) {
 		return <Redirect to='/sign_up' />;
 	}
 
-	if (id) {
+	if (!id && props.account && props.account.id) {
+		props.getParamsId(null);
+		props.getAuthorizationId(props.account.id);
+	} else {
 		props.getParamsId(id);
 		props.getAuthorizationId(null);
-	} else {
-		props.getParamsId(null);
-		props.getAuthorizationId(props.profileAuthorizationData.id);
 	}
 
 	return <Profile {...props} id={id} />;
@@ -44,11 +44,11 @@ const ProfileContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		profiles: getProfilesSelector(state),
-		profile: getProfileSelector(state),
-		users: getUsersSelector(state),
+		accounts: getAccountsSelector(state),
+		account: getAccountSelector(state),
 		chats: getChatsSelector(state),
-		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
+		userSignIn: getUserSignInSelector(state),
+		userSignUp: getUserSignUpSelector(state),
 	};
 };
 

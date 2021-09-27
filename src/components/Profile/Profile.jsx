@@ -7,22 +7,15 @@ const Profile = props => {
 	return (
 		<div className={styles.profile}>
 			<ProfileInfo
-				profiles={props.profiles}
-				profile={props.profile}
+				accounts={props.accounts}
 				addChat={props.addChat}
 				getProfileData={props.getProfileData}
 				id={props.id}
-				profileAuthorizationData={props.profileAuthorizationData}
+				account={props.account}
 				chats={props.chats}
 				setProfileChats={props.setProfileChats}
 			/>
-			<ProfileContent
-				profile={props.profile}
-				profiles={props.profiles}
-				profileAuthorizationData={props.profileAuthorizationData}
-				setProfilePosts={props.setProfilePosts}
-				id={props.id}
-			/>
+			<ProfileContent accounts={props.accounts} account={props.account} setProfilePosts={props.setProfilePosts} id={props.id} />
 		</div>
 	);
 };

@@ -1,86 +1,80 @@
+let SET_ACCOUNTS = "social_network/chatPage/SET_ACCOUNTS";
+let ADD_ACCOUNT = "social_network/chatPage/ADD_ACCOUNT";
+let IS_ACCOUNT = "social_network/auth/IS_ACCOUNT";
 let GET_PROFILE_DATA = "social_network/profilePage/GET_PROFILE_DATA";
 let SET_PROFILE_POSTS = "social_network/profilePage/SET_PROFILE_POSTS";
 let SET_PROFILE_CHATS = "social_network/profilePage/SET_PROFILE_CHATS";
-let ADD_PROFILE = "social_network/chatPage/ADD_PROFILE";
 let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
-let SET_PROFILES = "social_network/chatPage/SET_PROFILES";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
 
 let initialState = {
-	profiles: [],
-	profile: {
-		id: null,
-		name: null,
-		surname: null,
-		coverPhoto: null,
-		img: null,
-		status: null,
-		aboutMe: null,
-		posts: [],
-		chats: [],
-	},
+	accounts: [],
+	account: null,
 	authorizationId: null,
 	paramsId: null,
 };
 
 const ProfileReducer = (state = initialState, action) => {
 	let myProfile =
-		state.profiles && state.profiles.length
-			? state.profiles.find(profile => (profile && state.authorizationId && !state.paramsId ? profile.id === state.authorizationId : undefined))
+		state.accounts && state.accounts.length
+			? state.accounts.find(profile => (profile && state.authorizationId && !state.paramsId ? profile.id === state.authorizationId : undefined))
 			: undefined;
 	let otherProfile =
-		state.profiles && state.profiles.length
-			? state.profiles.find(profile => (profile && state.paramsId && !state.authorizationId ? profile.id === state.paramsId : undefined))
+		state.accounts && state.accounts.length
+			? state.accounts.find(profile => (profile && state.paramsId && !state.authorizationId ? profile.id === state.paramsId : undefined))
 			: undefined;
-	let arrayNoCurrentProfiles =
-		state.profiles && state.profiles.length
-			? state.profiles.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
+	let arrayNoCurrentAccounts =
+		state.accounts && state.accounts.length
+			? state.accounts.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
 			: undefined;
 
 	switch (action.type) {
-		case SET_PROFILES: {
+		case SET_ACCOUNTS: {
 			return {
 				...state,
-				profiles: action.profiles ? [...action.profiles] : [],
+				accounts: action.accounts ? action.accounts.filter(profile => (profile && profile.profile.name ? profile : undefined)) : [],
 			};
 		}
-		case ADD_PROFILE: {
+		case ADD_ACCOUNT: {
 			let newProfile = {
 				id: action.id,
-				profile: {
-					id: null,
-					name: null,
-					surname: null,
-					coverPhoto: null,
-					img: null,
-					status: null,
-					aboutMe: null,
-					posts: [],
-					chats: [],
-					followers: [],
-					following: [],
-				},
+				profile: { ...action.profile },
 			};
 
 			return {
 				...state,
-				profiles: state.profiles && newProfile && newProfile.id ? [...state.profiles, { ...newProfile }] : [...state.profiles],
+				accounts: state.accounts && newProfile && newProfile.id ? [...state.accounts, { ...newProfile }] : [...state.accounts],
+			};
+		}
+		case IS_ACCOUNT: {
+			return {
+				...state,
+				account: action.profile ? { ...action.profile } : null,
 			};
 		}
 		case GET_PROFILE_DATA: {
 			return {
 				...state,
-				profile: action.profile ? { ...state.profile, ...action.profile } : null,
-				profiles:
-					myProfile && !otherProfile
-						? [...arrayNoCurrentProfiles, { ...myProfile, profile: { ...myProfile.profile, ...action.profile } }]
-						: otherProfile && !myProfile
-						? [...arrayNoCurrentProfiles, { ...otherProfile, profile: { ...otherProfile.profile, ...action.profile } }]
-						: state.profiles && state.profiles.length
-						? state.profiles.map(profile => ({ ...profile }))
-						: [],
+				account: {
+					...state.account,
+					profile:
+						state.account && state.account.profile && action.profile
+							? { ...state.account.profile, ...action.profile }
+							: { ...state.account.profile },
+				},
 			};
+			// return {
+			// 	...state,
+			// 	accounts:
+			// 		myProfile && !otherProfile
+			// 			? [...arrayNoCurrentAccounts, { ...myProfile, profile: { ...myProfile.profile, ...action.profile } }]
+			// 			: otherProfile && !myProfile
+			// 			? [...arrayNoCurrentAccounts, { ...otherProfile, profile: { ...otherProfile.profile, ...action.profile } }]
+			// 			: state.accounts && state.accounts.length
+			// 			? state.accounts.map(profile => ({ ...profile }))
+			// 			: [],
+			// };
 		}
 		case SET_PROFILE_POSTS: {
 			let newPost = {
@@ -90,16 +84,15 @@ const ProfileReducer = (state = initialState, action) => {
 				comments: action.comments,
 				ownerCommentToPost: action.ownerCommentToPost,
 			};
-			let arrayProfiles = state.profiles
-				? state.profiles.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
+			let arrayAccounts = state.accounts
+				? state.accounts.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
 				: undefined;
 
 			return {
 				...state,
-				profile: { ...state.profile, posts: state.profile.posts && newPost ? [...state.profile.posts, { ...newPost }] : [] },
-				profiles: arrayProfiles
+				accounts: arrayAccounts
 					? [
-							...arrayProfiles,
+							...arrayAccounts,
 							{
 								...myProfile,
 								profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
@@ -114,17 +107,16 @@ const ProfileReducer = (state = initialState, action) => {
 			};
 		}
 		case SET_PROFILE_CHATS: {
-			let arrayProfiles = state.profiles
-				? state.profiles.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
+			let arrayAccounts = state.accounts
+				? state.accounts.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
 				: undefined;
-			console.log("otherProfile", otherProfile);
 
 			return {
 				...state,
-				profiles: myProfile
-					? arrayProfiles && myProfile
+				accounts: myProfile
+					? arrayAccounts && myProfile
 						? [
-								...arrayProfiles,
+								...arrayAccounts,
 								{
 									...myProfile,
 									profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
@@ -136,7 +128,7 @@ const ProfileReducer = (state = initialState, action) => {
 								profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
 						  }
 						: undefined
-					: state.profiles.map(profile => ({ ...profile })),
+					: state.accounts.map(profile => ({ ...profile })),
 			};
 		}
 		case GET_AUTHORIZATION_ID: {
@@ -162,14 +154,20 @@ const ProfileReducer = (state = initialState, action) => {
 	}
 };
 
-export const setProfiles = profiles => ({
-	type: SET_PROFILES,
-	profiles,
+export const setAccounts = accounts => ({
+	type: SET_ACCOUNTS,
+	accounts,
 });
 
-export const addProfile = id => ({
-	type: ADD_PROFILE,
+export const addAccount = (id, profile) => ({
+	type: ADD_ACCOUNT,
 	id,
+	profile,
+});
+
+export const isAccount = profile => ({
+	type: IS_ACCOUNT,
+	profile,
 });
 
 export const getProfileData = profile => ({

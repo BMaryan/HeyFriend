@@ -6,6 +6,16 @@ import commonStyles from "../../components/Header/Navbar/Navbar.module.css";
 import styles from "./helperForHeader.module.css";
 
 export const ToggleProfileList = props => {
+	let dataFromAccountToAccounts = () => {
+		if (props.accounts) {
+			props.accounts.find(account => {
+				if (account.id === props.account.id) {
+					return (props.accounts[account.id - 1] = { ...props.account });
+				}
+			});
+		}
+	};
+
 	return (
 		<div className={styles.toggleProfileList}>
 			<div className={styles.wrapper_nav_linkList}>
@@ -39,11 +49,12 @@ export const ToggleProfileList = props => {
 				</NavLink>
 			</div>
 
-			{props.profileAuthorizationData ? (
+			{props.account ? (
 				<div className={styles.wrapper_nav_linkList}>
 					<NavLink
 						onClick={() => {
-							props.checkAuthorization(null);
+							dataFromAccountToAccounts();
+							props.isAccount(null);
 							props.getAuthorizationId(null);
 							props.getParamsId(null);
 						}}

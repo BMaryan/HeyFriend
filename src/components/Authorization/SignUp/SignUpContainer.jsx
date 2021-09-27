@@ -3,34 +3,37 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { setUserSignUp } from "../../../redux/auth-reducer";
-import { getProfileAuthorizationDataSelector, getUserSignUpSelector, getUsersSelector } from "../../../redux/auth-selectors";
-import { addProfile } from "../../../redux/profile-reducer";
+import { getUserSignUpSelector } from "../../../redux/auth-selectors";
+import { addAccount, isAccount } from "../../../redux/profile-reducer";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
-import { getProfilesSelector } from "../../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
+import { account, accounts } from "../../../core/constants/constantsLocalStorage";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 
 const SignUpContainer = props => {
 	React.useEffect(() => {
-		if (props.users && props.userSignUp && props.userSignUp.name) {
-			let res = props.profiles.find(item => {
-				if (item && props.users) {
-					return item.id === props.users.length;
-				}
-			});
+		if (props.accounts) {
+			localStorage.setItem(accounts, JSON.stringify(props.accounts));
+		}
+	}, [props.accounts]);
 
-			if (!res) {
-				props.addProfile(props.users && props.users.length > 0 ? props.users[props.users.length - 1].id : undefined);
-			}
+	React.useEffect(() => {
+		if (props.account) {
+			localStorage.setItem(account, JSON.stringify(props.account));
+		} else {
+			localStorage.removeItem(account);
+		}
+	}, [props.account]);
+
+	React.useEffect(() => {
+		if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
+			props.addAccount(props.accounts.length + 1, props.account.profile);
 		}
 	}, [props.userSignUp]);
 
-	React.useEffect(() => {
-		if (!props.profileAuthorizationData) {
-			localStorage.removeItem("profileAuthorizationData");
-		}
-	}, [props.profileAuthorizationData]);
-
-	if (props.profileAuthorizationData && props.profileAuthorizationData.phone_or_email) {
+	if (props.account && props.account.id) {
 		return <Redirect to='/profile' />;
 	}
 
@@ -39,11 +42,19 @@ const SignUpContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		profiles: getProfilesSelector(state),
-		users: getUsersSelector(state),
+		accounts: getAccountsSelector(state),
+		account: getAccountSelector(state),
 		userSignUp: getUserSignUpSelector(state),
-		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
 	};
 };
 
-export default connect(mapStateToProps, { setUserSignUp, helpCheckAuthorization, addProfile, setSignUpDataToLocalStorage })(SignUpContainer);
+export default compose(
+	connect(mapStateToProps, {
+		setUserSignUp,
+		helpCheckAuthorization,
+		addAccount,
+		setSignUpDataToLocalStorage,
+		isAccount,
+	}),
+	withRouter
+)(SignUpContainer);

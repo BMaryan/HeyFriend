@@ -6,7 +6,7 @@ import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Dialog = props => {
-	let save = props.profileAuthorizationData && props.chat && props.profileAuthorizationData.id;
+	let save = props.account && props.chat && props.account.id;
 	let foundUser = props.users ? props.users.find(user => props.chat.id === user.id) : undefined;
 
 	return (

@@ -29,7 +29,7 @@ const Chat = props => {
 	let id = Number(props.match.params.id);
 
 	let onSubmit = formData => {
-		props.addMessage(id, props.profileAuthorizationData.id, formData.send_message);
+		props.addMessage(id, props.account.id, formData.send_message);
 	};
 
 	return (
@@ -37,13 +37,7 @@ const Chat = props => {
 			<div className={styles.dialogs}>
 				<Head {...props} toggleShowContent={true} />
 				<div className={styles.dialogs_content}>
-					<Dialogs
-						users={props.users}
-						profile={props.profile}
-						profiles={props.profiles}
-						chats={props.chats}
-						profileAuthorizationData={props.profileAuthorizationData}
-					/>
+					<Dialogs users={props.users} accounts={props.accounts} chats={props.chats} account={props.account} />
 				</div>
 			</div>
 
@@ -54,16 +48,7 @@ const Chat = props => {
 					{props.chats && props.chats.length ? (
 						props.chats.map(chat => {
 							if (chat.id === id) {
-								return (
-									<Messages
-										key={chat.id}
-										chat={chat}
-										profile={props.profile}
-										profiles={props.profiles}
-										profileAuthorizationData={props.profileAuthorizationData}
-										match={props.match}
-									/>
-								);
+								return <Messages key={chat.id} chat={chat} accounts={props.accounts} account={props.account} match={props.match} />;
 							}
 						})
 					) : (
@@ -82,15 +67,11 @@ const Chat = props => {
 								<div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
 									<NavLink
 										key={user.id}
-										to={
-											props.profileAuthorizationData && props.profileAuthorizationData.id !== id
-												? "/profile/" + user.id
-												: "/profile"
-										}
+										to={props.account && props.account.id !== id ? "/profile/" + user.id : "/profile"}
 										className={styles.contact_link}>
 										<div className={styles.wrapper_picture}>
 											{user ? (
-												<img src={props.profile && props.profile.img ? props.profile.img : defaultAvatar} alt='' />
+												<img src={props.account && props.account.img ? props.account.img : defaultAvatar} alt='' />
 											) : (
 												<></>
 											)}

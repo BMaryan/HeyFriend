@@ -10,16 +10,13 @@ const SignIn = props => {
 		props.setUserSignIn(formData);
 
 		if (formData) {
-			props.users.find(user => {
-				if (formData && formData.phone_or_email) {
-					if (user.phone_or_email === formData.phone_or_email && user.password === formData.password) {
-						let rememberMe = formData.rememberMe ? formData.rememberMe : false;
-						props.checkAuthorization({ ...user, rememberMe });
+			props.accounts &&
+				props.accounts.find(profile => {
+					if (profile.profile.phone_or_email === formData.phone_or_email && profile.profile.password === formData.password) {
+						props.isAccount({ ...profile });
 					}
-				}
-			});
+				});
 		}
-		console.log(formData);
 	};
 
 	return (

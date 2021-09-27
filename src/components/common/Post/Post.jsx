@@ -5,10 +5,8 @@ import { faEllipsisH, faHeart, faComment, faPaperPlane, faBookmark } from "@fort
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 
 const Post = props => {
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
-	let otherProfile = props.profiles.find(profile => (profile && props.id ? profile.id === props.id : undefined));
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
+	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckMyProfile = myProfile && myProfile.profile && !props.id;
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
 

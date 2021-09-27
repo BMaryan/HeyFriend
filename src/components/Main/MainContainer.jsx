@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
-import { getProfileAuthorizationDataSelector } from "../../redux/auth-selectors";
-import { getProfileSelector, getProfilesSelector } from "../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { Redirect } from "react-router-dom";
 
 const MainContainer = props => {
-	if (!props.profileAuthorizationData) {
+	if (!props.account) {
 		return <Redirect to='/sign_up' />;
 	}
 
@@ -15,9 +14,8 @@ const MainContainer = props => {
 
 const mapStateToProps = state => {
 	return {
-		profiles: getProfilesSelector(state),
-		profile: getProfileSelector(state),
-		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
+		accounts: getAccountsSelector(state),
+		account: getAccountSelector(state),
 	};
 };
 

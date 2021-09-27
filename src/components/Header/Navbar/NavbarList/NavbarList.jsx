@@ -8,9 +8,7 @@ import { ToggleProfileList } from "../../../../utils/helperForHeader/helperForHe
 
 const NavbarList = props => {
 	let [toggleListProfile, setToggleListProfile] = React.useState(false);
-	let foundMyProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 
 	return (
 		<div className={styles.navbar_list}>
@@ -20,15 +18,12 @@ const NavbarList = props => {
 					onClick={() => (toggleListProfile ? setToggleListProfile(false) : setToggleListProfile(true))}>
 					{/* wrapper */}
 					<div className={styles.wrapper_toggleList_picture}>
-						<img
-							src={foundMyProfile && foundMyProfile.profile && foundMyProfile.profile.img ? foundMyProfile.profile.img : defaultAvatar}
-							alt=''
-						/>
+						<img src={myProfile && myProfile.profile && myProfile.profile.img ? myProfile.profile.img : defaultAvatar} alt='' />
 					</div>
 
 					{/* full name */}
 					<div className={styles.toggleList_fullName}>
-						{foundMyProfile && foundMyProfile.profile ? foundMyProfile.profile.surname + " " + foundMyProfile.profile.name : <></>}
+						{myProfile && myProfile.profile ? myProfile.profile.surname + " " + myProfile.profile.name : <></>}
 					</div>
 
 					{/* icon */}
@@ -41,12 +36,13 @@ const NavbarList = props => {
 			<div>
 				{toggleListProfile ? (
 					<ToggleProfileList
+						accounts={props.accounts}
+						account={props.account}
 						setToggleListProfile={setToggleListProfile}
 						getAuthorizationId={props.getAuthorizationId}
-						checkAuthorization={props.checkAuthorization}
+						isAccount={props.isAccount}
 						getProfileData={props.getProfileData}
 						getParamsId={props.getParamsId}
-						profileAuthorizationData={props.profileAuthorizationData}
 					/>
 				) : (
 					<></>

@@ -1,46 +1,42 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getProfileAuthorizationDataSelector, getUsersSelector } from "../../../redux/auth-selectors";
-import { getProfilesSelector } from "../../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
 import Edit from "./Edit";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { getProfileData } from "../../../redux/profile-reducer";
-import { checkAuthorization, setUsers } from "../../../redux/auth-reducer";
+import { getProfileData, isAccount } from "../../../redux/profile-reducer";
+import { accounts, account } from "../../../core/constants/constantsLocalStorage";
 
 const EditContainer = props => {
 	React.useEffect(() => {
-		if (props.profileAuthorizationData) {
-			localStorage.setItem("profileAuthorizationData", JSON.stringify(props.profileAuthorizationData));
+		if (props.account) {
+			localStorage.setItem(account, JSON.stringify(props.account));
 		}
-	}, [props.profileAuthorizationData]);
+	}, [props.account]);
+
+	// React.useEffect(() => {
+	// 	if (props.users && props.accounts.length > 0) {
+	// 		localStorage.setItem("users", JSON.stringify(props.users));
+	// 	}
+	// }, [props.users]);
 
 	React.useEffect(() => {
-		if (props.users && props.profiles.length > 0) {
-			localStorage.setItem("users", JSON.stringify(props.users));
+		if (props.accounts && props.accounts.length > 0) {
+			localStorage.setItem(accounts, JSON.stringify(props.accounts));
 		}
-	}, [props.users]);
-
-	React.useEffect(() => {
-		if (props.profiles && props.profiles.length > 0) {
-			localStorage.setItem("profiles", JSON.stringify(props.profiles));
-		}
-	}, [props.profiles]);
+	}, [props.accounts]);
 
 	let id = Number(props.match.params.id);
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 
 	return <Edit {...props} id={id} />;
 };
 
 let mapStateToProps = state => {
 	return {
-		profiles: getProfilesSelector(state),
-		profileAuthorizationData: getProfileAuthorizationDataSelector(state),
-		users: getUsersSelector(state),
+		accounts: getAccountsSelector(state),
+		account: getAccountSelector(state),
 	};
 };
 
-export default compose(connect(mapStateToProps, { getProfileData, checkAuthorization, setUsers }), withRouter)(EditContainer);
+export default compose(connect(mapStateToProps, { getProfileData, isAccount }), withRouter)(EditContainer);

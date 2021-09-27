@@ -9,16 +9,7 @@ const Messages = props => {
 		<div className={styles.messages}>
 			<div className={styles.messages_content}>
 				{id ? (
-					props.chat.messages.map(el => (
-						<Message
-							key={el.id}
-							el={el}
-							profiles={props.profiles}
-							profile={props.profile}
-							id={id}
-							profileAuthorizationData={props.profileAuthorizationData}
-						/>
-					))
+					props.chat.messages.map(el => <Message key={el.id} el={el} accounts={props.accounts} id={id} account={props.account} />)
 				) : (
 					<></>
 				)}

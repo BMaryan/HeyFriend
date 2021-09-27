@@ -5,38 +5,22 @@ import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 
 const Message = props => {
 	let checkMessage =
-		(props.profileAuthorizationData &&
+		(props.account &&
 			props.id &&
 			props.el.userId &&
 			props.id !== props.el.userId &&
-			props.profileAuthorizationData.id === props.el.userId &&
-			props.id === props.profileAuthorizationData.id) ||
-		(props.profileAuthorizationData &&
-			props.id &&
-			props.el.userId &&
-			props.id === props.profileAuthorizationData.id &&
-			props.id === props.el.userId) ||
-		(props.profileAuthorizationData &&
-			props.id &&
-			props.el.userId &&
-			props.id === props.profileAuthorizationData.id &&
-			props.profileAuthorizationData.id === props.el.userId) ||
-		(props.profileAuthorizationData &&
-			props.id &&
-			props.el.userId &&
-			props.id !== props.profileAuthorizationData.id &&
-			props.profileAuthorizationData.id === props.el.userId);
+			props.account.id === props.el.userId &&
+			props.id === props.account.id) ||
+		(props.account && props.id && props.el.userId && props.id === props.account.id && props.id === props.el.userId) ||
+		(props.account && props.id && props.el.userId && props.id === props.account.id && props.account.id === props.el.userId) ||
+		(props.account && props.id && props.el.userId && props.id !== props.account.id && props.account.id === props.el.userId);
 
-	let myProfile = props.profiles
-		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined))
-		: undefined;
-	let otherProfile = props.profiles
-		? props.profiles.find(profile => (props.profileAuthorizationData ? profile.id !== props.profileAuthorizationData.id : undefined))
-		: undefined;
+	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
+	let otherProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id !== props.account.id : undefined)) : undefined;
 	// let otherProfile =
 	// 	myProfile && myProfile.profile && myProfile.profile.chats
 	// 		? myProfile.profile.chats.find(chat =>
-	// 				props.id && props.profileAuthorizationData.id ? chat.id !== props.profileAuthorizationData.id && chat.id === props.id : undefined
+	// 				props.id && props.account.id ? chat.id !== props.account.id && chat.id === props.id : undefined
 	// 		  )
 	// 		: undefined;
 
@@ -46,7 +30,7 @@ const Message = props => {
 				checkMessage ? styles.wrapper_container_myMessage : styles.wrapper_container_otherMessage + " " + styles.wrapper_container_message
 			}>
 			<NavLink
-				to={props.profileAuthorizationData && props.profileAuthorizationData.id !== props.id ? "/profile/" + props.id : "/profile"}
+				to={props.account && props.account.id !== props.id ? "/profile/" + props.id : "/profile"}
 				className={checkMessage ? styles.wrapper_myPicture : styles.wrapper_otherPicture + " " + styles.wrapper_picture}>
 				<img
 					src={

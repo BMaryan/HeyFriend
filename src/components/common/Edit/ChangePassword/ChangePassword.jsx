@@ -9,11 +9,11 @@ const ChangePassword = props => {
 			formData.old_password !== formData.new_password &&
 			formData.old_password !== formData.confirm_new_password &&
 			formData.new_password === formData.confirm_new_password &&
-			formData.old_password === props.profileAuthorizationData.password
+			formData.old_password === props.account.password
 		) {
 			console.log(formData);
-			props.checkAuthorization({
-				...props.profileAuthorizationData,
+			props.isAccount({
+				...props.account,
 				password: formData.new_password,
 			});
 			props.getProfileData({ ...props.myProfile, password: formData.new_password });
@@ -33,9 +33,7 @@ const ChangePassword = props => {
 		}
 	};
 
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 	let oftenCheck = myProfile && myProfile.profile;
 
 	return (

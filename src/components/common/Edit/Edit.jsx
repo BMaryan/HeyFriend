@@ -7,9 +7,7 @@ import ChangePassword from "./ChangePassword/ChangePassword";
 import Default from "./Default/Default";
 
 const Edit = props => {
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 
 	return (
 		<div className={styles.edit}>

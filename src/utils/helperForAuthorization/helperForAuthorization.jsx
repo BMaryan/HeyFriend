@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./helperForAuthorization.module.css";
 import { NavLink } from "react-router-dom";
+import { accounts, account } from "../../core/constants/constantsLocalStorage";
 
 export const AuthorizationContainer = (title, form, ...props) => {
 	return (
@@ -28,19 +29,18 @@ export const InformationContainer = (title, subtitle, linkTo, buttonText, ...pro
 
 // form data to local storage and push to state
 export const setSignUpDataToLocalStorage = props => {
-	if (props.users && props.userSignUp && props.userSignUp.id) {
-		localStorage.setItem("users", JSON.stringify(props.users));
-
-		let foundUser = props.users.find(item => {
-			return item.phone_or_email === props.userSignUp.phone_or_email;
-		});
-
-		if (!foundUser) {
-			props.users.push(props.userSignUp);
-		}
-		if (props.profiles && props.profiles.length > 0) {
-			localStorage.setItem("profiles", JSON.stringify(props.profiles));
-		}
+	// if (props.users && props.userSignUp && props.userSignUp.id) {
+	// 	localStorage.setItem("users", JSON.stringify(props.users));
+	// 	localStorage.setItem(accounts, JSON.stringify(props.accounts));
+	// 	let foundUser = props.users.find(item => {
+	// 		return item.phone_or_email === props.userSignUp.phone_or_email;
+	// 	});
+	// 	if (!foundUser) {
+	// 		props.users.push(props.userSignUp);
+	// 	}
+	// }
+	if (props.accounts && props.userSignUp && props.userSignUp.id) {
+		localStorage.setItem(accounts, JSON.stringify(props.accounts));
 	}
 };
 
@@ -49,11 +49,6 @@ export const helpCheckAuthorization = props => {
 	props.users.find(user => {
 		if (props.userSignIn && props.userSignIn.phone_or_email) {
 			if (user.phone_or_email === props.userSignIn.phone_or_email && user.password === props.userSignIn.password) {
-				// if (props.profileAuthorizationData) {
-				// 	localStorage.setItem("profileAuthorizationData", JSON.stringify(props.profileAuthorizationData));
-				// } else {
-				// 	props.checkAuthorization(user);
-				// }
 				return user;
 			}
 		}
@@ -61,8 +56,8 @@ export const helpCheckAuthorization = props => {
 };
 
 export const deleteAuthorizationUser = props => {
-	if (!props.profileAuthorizationData) {
-		props.checkAuthorization(null);
-		localStorage.removeItem("profileAuthorizationData");
+	if (!props.account) {
+		props.isAccount(null);
+		localStorage.removeItem(account);
 	}
 };

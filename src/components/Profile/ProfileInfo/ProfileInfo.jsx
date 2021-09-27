@@ -11,13 +11,9 @@ const ProfileInfo = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
 	let [createNewPost, setCreateNewPost] = React.useState(false);
 
-	let myProfile = props.profiles.find(profile =>
-		profile && props.profileAuthorizationData ? profile.id === props.profileAuthorizationData.id : undefined
-	);
-	let otherProfile = props.profiles.find(profile => (profile && props.id ? profile.id === props.id : undefined));
+	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
+	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let coverPhoto = myProfile && myProfile.profile && myProfile.profile.coverPhoto ? myProfile.profile.coverPhoto : undefined;
-
-	console.log(myProfile);
 
 	return (
 		<div className={styles.profile_info}>
@@ -88,9 +84,10 @@ const ProfileInfo = props => {
 					<div className={styles.details_info_content}>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
-								{otherProfile && otherProfile.profile && otherProfile.profile.posts.length > 0
+								{otherProfile && otherProfile.profile && otherProfile.profile.posts && otherProfile.profile.posts.length > 0
 									? otherProfile.profile.posts.length
-									: 0 || (myProfile && myProfile.profile && myProfile.profile.posts.length > 0 && !props.id)
+									: 0 ||
+									  (myProfile && myProfile.profile && myProfile.profile.posts && myProfile.profile.posts.length > 0 && !props.id)
 									? myProfile.profile.posts.length
 									: 0}
 							</div>
@@ -98,13 +95,17 @@ const ProfileInfo = props => {
 						</div>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
-								{myProfile && myProfile.profile && myProfile.profile.followers.length > 0 ? myProfile.profile.followers.length : 0}
+								{myProfile && myProfile.profile && myProfile.profile.followers && myProfile.profile.followers.length > 0
+									? myProfile.profile.followers.length
+									: 0}
 							</div>
 							<div className={styles.detail_title}>Followers</div>
 						</div>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
-								{myProfile && myProfile.profile && myProfile.profile.following.length > 0 ? myProfile.profile.following.length : 0}
+								{myProfile && myProfile.profile && myProfile.profile.following && myProfile.profile.following.length > 0
+									? myProfile.profile.following.length
+									: 0}
 							</div>
 							<div className={styles.detail_title}>Following</div>
 						</div>
@@ -132,14 +133,14 @@ const ProfileInfo = props => {
 
 			{/* toggle show container for change something in profile */}
 			{/* toggle cover container */}
-			{!props.id && props.profileAuthorizationData.id !== props.id ? (
+			{!props.id && props.account.id !== props.id ? (
 				<div>
 					{toggleCoverContainer ? (
 						<ContainerCoverProfile
 							profile={props.profile}
-							profiles={props.profiles}
+							accounts={props.accounts}
 							getProfileData={props.getProfileData}
-							profileAuthorizationData={props.profileAuthorizationData}
+							account={props.account}
 							setToggleCoverContainer={setToggleCoverContainer}
 						/>
 					) : (
@@ -151,14 +152,14 @@ const ProfileInfo = props => {
 			)}
 
 			{/* change picture */}
-			{!props.id && props.profileAuthorizationData.id !== props.id ? (
+			{!props.id && props.account.id !== props.id ? (
 				<div>
 					{changeProfilePicture ? (
 						<ChangeProfilePictureContainer
 							profile={props.profile}
-							profiles={props.profiles}
+							accounts={props.accounts}
 							getProfileData={props.getProfileData}
-							profileAuthorizationData={props.profileAuthorizationData}
+							account={props.account}
 							setChangeProfilePicture={setChangeProfilePicture}
 						/>
 					) : (
@@ -170,7 +171,7 @@ const ProfileInfo = props => {
 			)}
 
 			{/* create post */}
-			{!props.id && props.profileAuthorizationData.id !== props.id ? (
+			{!props.id && props.account.id !== props.id ? (
 				<div>
 					{createNewPost ? (
 						<CreateNewPostContainer
