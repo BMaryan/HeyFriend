@@ -6,6 +6,7 @@ import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { getProfileData, isAccount } from "../../../redux/profile-reducer";
 import { accounts, account } from "../../../core/constants/constantsLocalStorage";
+import { Redirect } from "react-router-dom";
 
 const EditContainer = props => {
 	React.useEffect(() => {
@@ -21,6 +22,10 @@ const EditContainer = props => {
 	}, [props.accounts]);
 
 	let id = Number(props.match.params.id);
+
+	if (!props.account) {
+		return <Redirect to='/sign_up' />;
+	}
 
 	return <Edit {...props} id={id} />;
 };

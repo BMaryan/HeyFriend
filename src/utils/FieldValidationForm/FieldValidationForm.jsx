@@ -25,10 +25,10 @@ export const validateAuthorizationUserCreator = (users, userSignIn) => value => 
 	}
 };
 
-export const validateFindTheSameUserCreator = users => value => {
+export const validateFindTheSameUserCreator = accounts => value => {
 	let foundUser;
-	if (users) {
-		foundUser = users.find(item => item.phone_or_email === value);
+	if (accounts) {
+		foundUser = accounts.find(item => item.phone_or_email === value);
 	}
 
 	if (!foundUser) {

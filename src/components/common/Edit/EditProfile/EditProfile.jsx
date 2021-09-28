@@ -8,29 +8,7 @@ const EditProfile = props => {
 	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
 
 	let onSubmit = formData => {
-		props.isAccount({
-			...props.account,
-			name: formData.name ? formData.name : props.account.name,
-			surname: formData.surname ? formData.surname : props.account.surname,
-			phone_or_email: formData.phone_or_email ? formData.phone_or_email : props.account.phone_or_email,
-		});
-		props.getProfileData({ ...props.account, ...formData });
-
-		if (props.users) {
-			let user = props.users.find(user => (props.account ? props.account.id === user.id : undefined));
-			let users = props.users.filter(user => (props.account ? props.account.id !== user.id : undefined));
-
-			if (users) {
-				user = {
-					id: user.id,
-					name: formData.name ? formData.name : user.name,
-					surname: formData.surname ? formData.surname : user.surname,
-					phone_or_email: formData.phone_or_email ? formData.phone_or_email : user.phone_or_email,
-					password: props.account.password,
-				};
-				props.setUsers([...users, user]);
-			}
-		}
+		props.getProfileData(formData);
 	};
 	let oftenCheck = props.account && props.account.profile;
 

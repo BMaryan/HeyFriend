@@ -26,7 +26,7 @@ const CreatePost = props => {
 				<div className={styles.wrapper_input}>
 					<input
 						onChange={() => undefined}
-						onClick={() => setCreatePostContainer(true)}
+						onClick={() => (props.otherProfile ? setCreatePostContainer(false) : setCreatePostContainer(true))}
 						className={styles.input}
 						type='text'
 						value=''

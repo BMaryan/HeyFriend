@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "./Default.module.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
+
 const Default = props => {
 	return (
 		<div className={styles.default}>
-			<div>Сhoose</div>
-			<div>what you want to change</div>
+			<div>
+				<FontAwesomeIcon className={styles.icon} icon={faUserEdit} />
+			</div>
+			<div className={styles.title}>Your editor</div>
+			<div className={styles.subtitle}>Choose what you want to edit</div>
 		</div>
 	);
 };

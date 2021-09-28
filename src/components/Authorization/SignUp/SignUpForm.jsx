@@ -4,6 +4,7 @@ import styles from "./SignUp.module.css";
 import commonStyles from "../Authorization.module.css";
 import { reduxForm } from "redux-form";
 import { wrapperCreateField, Input, wrapperButton } from "../../common/FormControls/FormControls";
+import { accounts } from "../../../core/constants/constantsLocalStorage";
 import {
 	validatePhoneNumberAndEmail,
 	validatePassword,
@@ -14,7 +15,7 @@ import {
 
 let validateFirstName = validateFirstAndLastNameCreator("first");
 let validateLastName = validateFirstAndLastNameCreator("last");
-let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localStorage.getItem("users")));
+let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localStorage.getItem(accounts)));
 
 const SignUpForm = props => {
 	return (
