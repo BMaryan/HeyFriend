@@ -126,7 +126,9 @@ const ProfileInfo = props => {
 								<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
 									<button onClick={() => props.addChat(props.id)}>Message</button>
 								</NavLink>
-								<button type='submit'>Follow</button>
+								<button type='submit' onClick={() => props.follow(props.id)}>
+									Follow
+								</button>
 							</>
 						) : (
 							<NavLink className={styles.navLink_message} to='/account/edit/profile'>

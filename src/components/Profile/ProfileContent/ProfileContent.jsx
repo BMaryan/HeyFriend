@@ -1,8 +1,13 @@
 import React from "react";
-// import Stories from "../../common/Stories/Stories";
 import styles from "./ProfileContent.module.css";
 import Posts from "./Posts/Posts";
 import CreatePost from "../../common/CreatePost/CreatePost";
+import { NavLink } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBorderAll, faInfo, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import Information from "./Information/Information";
+import Saved from "./Saved/Saved";
 
 const ProfileContent = props => {
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
@@ -11,25 +16,55 @@ const ProfileContent = props => {
 	return (
 		<div className={styles.profile_content}>
 			{/* side bar left */}
-			<div className={styles.side_bar_left}>
-				<div className={styles.aboutMe_container}>
-					<div className={styles.title}>About me</div>
-					{/* about me  */}
-					<div className={styles.aboutMe}>
-						{oftenCheckOtherProfile && otherProfile.profile.aboutMe ? (
-							<div>{otherProfile.profile.aboutMe}</div>
-						) : props.account && props.account.profile && props.account.profile.aboutMe ? (
-							<div>{props.account.profile.aboutMe}</div>
-						) : undefined}
-					</div>
-				</div>
-			</div>
+			<div className={styles.side_bar_left}></div>
 
 			{/* content */}
 			<div className={styles.content}>
-				<CreatePost account={props.account} otherProfile={otherProfile} accounts={props.accounts} setProfilePosts={props.setProfilePosts} />
+				<div className={styles.navigation}>
+					<NavLink exact to='/profile' className={styles.item} activeClassName={styles.item_active}>
+						<FontAwesomeIcon className={styles.icon} icon={faBorderAll} />
+						Posts
+					</NavLink>
+					<NavLink to='/profile/information' className={styles.item} activeClassName={styles.item_active}>
+						<FontAwesomeIcon className={styles.icon} icon={faInfo} />
+						Information
+					</NavLink>
+					<NavLink exact to='/profile/saved' className={styles.item} activeClassName={styles.item_active}>
+						<FontAwesomeIcon className={styles.icon} icon={faBookmark} />
+						Saved
+					</NavLink>
+				</div>
 
-				<Posts profile={props.profile} accounts={props.accounts} id={props.id} account={props.account} />
+				<Route
+					exact
+					path='/profile'
+					render={() => {
+						return (
+							<>
+								<CreatePost
+									account={props.account}
+									otherProfile={otherProfile}
+									accounts={props.accounts}
+									setProfilePosts={props.setProfilePosts}
+								/>
+								<Posts accounts={props.accounts} id={props.id} account={props.account} />
+							</>
+						);
+					}}
+				/>
+				<Route
+					path='/profile/information'
+					render={() => (
+						<Information
+							accounts={props.accounts}
+							id={props.id}
+							account={props.account}
+							otherProfile={otherProfile}
+							oftenCheckOtherProfile={oftenCheckOtherProfile}
+						/>
+					)}
+				/>
+				<Route exact path='/profile/saved' render={() => <Saved accounts={props.accounts} id={props.id} account={props.account} />} />
 			</div>
 
 			{/* side bar right */}

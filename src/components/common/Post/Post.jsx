@@ -5,12 +5,9 @@ import { faEllipsisH, faHeart, faComment, faPaperPlane, faBookmark } from "@fort
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 
 const Post = props => {
-	let myProfile = props.accounts.find(profile => (profile && props.account ? profile.id === props.account.id : undefined));
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
-	let oftenCheckMyProfile = myProfile && myProfile.profile && !props.id;
+	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
-
-	console.log(props);
 
 	return (
 		<div className={styles.wrapper_post}>
@@ -19,10 +16,10 @@ const Post = props => {
 					<div className={styles.wrapper_details}>
 						<div className={styles.details_position}>
 							<div className={styles.wrapper_profile_img}>
-								{oftenCheckMyProfile && myProfile.profile.img ? (
-									<img src={myProfile.profile.img} alt='' />
-								) : oftenCheckOtherProfile && otherProfile.profile.img ? (
-									<img src={otherProfile.profile.img} alt='' />
+								{oftenCheckMyProfile && props.account.profile.avatar ? (
+									<img src={props.account.profile.avatar} alt='' />
+								) : oftenCheckOtherProfile && otherProfile.profile.avatar ? (
+									<img src={otherProfile.profile.avatar} alt='' />
 								) : (
 									<img src={defaultAvatar} alt='' />
 								)}
@@ -30,7 +27,7 @@ const Post = props => {
 							<div className={styles.details}>
 								<div className={styles.fullName}>
 									{oftenCheckMyProfile
-										? myProfile.profile.surname + " " + myProfile.profile.name
+										? props.account.profile.surname + " " + props.account.profile.name
 										: oftenCheckOtherProfile
 										? otherProfile.profile.surname + " " + otherProfile.profile.name
 										: undefined}
@@ -48,7 +45,7 @@ const Post = props => {
 						<div className={styles.commentOwnerOfPost}>{props.post.ownerCommentToPost}</div>
 					) : undefined}
 				</div>
-				<div className={styles.body}>{props.post && props.post.img ? <img src={props.post.img} alt='' /> : <></>}</div>
+				<div className={styles.body}>{props.post && props.post.avatar ? <img src={props.post.avatar} alt='' /> : <></>}</div>
 				<div className={styles.footer}>
 					<div className={styles.features}>
 						<div className={styles.features_left}>

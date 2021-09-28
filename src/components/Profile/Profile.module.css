@@ -10,5 +10,5 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-top: var(--marginFromHeader);
+	margin: var(--marginFromHeader) 0;
 }

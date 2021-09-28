@@ -14,6 +14,7 @@ const Profile = props => {
 				account={props.account}
 				chats={props.chats}
 				setProfileChats={props.setProfileChats}
+				follow={props.follow}
 			/>
 			<ProfileContent accounts={props.accounts} account={props.account} setProfilePosts={props.setProfilePosts} id={props.id} />
 		</div>

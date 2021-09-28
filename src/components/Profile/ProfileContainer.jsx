@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 
@@ -53,6 +53,6 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId }),
+	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow }),
 	withRouter
 )(ProfileContainer);

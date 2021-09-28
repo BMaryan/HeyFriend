@@ -1,12 +1,12 @@
 .wrapper_post {
 	width: 100%;
 	/* border: 1px solid silver; */
-	display: flex;
+	/* display: flex; */
 	flex-wrap: wrap;
 }
 
 .post {
-	/* height: 100%; */
+	height: 100%;
 	background: white;
 	display: flex;
 	flex-direction: column;

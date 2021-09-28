@@ -7,6 +7,7 @@ let SET_PROFILE_CHATS = "social_network/profilePage/SET_PROFILE_CHATS";
 let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
+let FOLLOW = "social_network/chatPage/FOLLOW";
 
 let initialState = {
 	accounts: [],
@@ -81,32 +82,45 @@ const ProfileReducer = (state = initialState, action) => {
 		}
 		case SET_PROFILE_POSTS: {
 			let newPost = {
-				id: state.profile.posts.length + 1,
-				img: action.img,
+				id: state.account && state.account.profile && state.account.profile.posts ? state.account.profile.posts.length + 1 : null,
+				avatar: action.avatar,
 				likes: action.likes,
 				comments: action.comments,
 				ownerCommentToPost: action.ownerCommentToPost,
 			};
-			let arrayAccounts = state.accounts
-				? state.accounts.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
-				: undefined;
+			// let arrayAccounts = state.accounts
+			// 	? state.accounts.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
+			// 	: undefined;
 
 			return {
 				...state,
-				accounts: arrayAccounts
-					? [
-							...arrayAccounts,
-							{
-								...myProfile,
-								profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
-							},
-					  ]
-					: [
-							{
-								...myProfile,
-								profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
-							},
-					  ],
+				account: {
+					...state.account,
+					profile:
+						state.account && state.account.profile
+							? {
+									...state.account.profile,
+									posts:
+										state.account && state.account.profile && state.account.profile.posts
+											? [...state.account.profile.posts, { ...newPost }]
+											: [{ ...newPost }],
+							  }
+							: { ...state.account.profile },
+					// accounts: arrayAccounts
+					// 	? [
+					// 			...arrayAccounts,
+					// 			{
+					// 				...myProfile,
+					// 				profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
+					// 			},
+					// 	  ]
+					// 	: [
+					// 			{
+					// 				...myProfile,
+					// 				profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
+					// 			},
+					// 	  ],
+				},
 			};
 		}
 		case SET_PROFILE_CHATS: {
@@ -151,6 +165,24 @@ const ProfileReducer = (state = initialState, action) => {
 				...state,
 			};
 		}
+		case FOLLOW: {
+			return {
+				...state,
+				account: {
+					...state.account,
+					profile:
+						state.account && state.account.profile && action.id
+							? {
+									...state.account.profile,
+									following:
+										state.account && state.account.profile && state.account.profile.following
+											? [...state.account.profile.following, { id: action.id }]
+											: [{ id: action.id }],
+							  }
+							: { ...state.account.profile },
+				},
+			};
+		}
 		default: {
 			return state;
 		}
@@ -178,9 +210,9 @@ export const getProfileData = profile => ({
 	profile,
 });
 
-export const setProfilePosts = (img, likes, comments, ownerCommentToPost) => ({
+export const setProfilePosts = (avatar, likes, comments, ownerCommentToPost) => ({
 	type: SET_PROFILE_POSTS,
-	img,
+	avatar,
 	likes,
 	comments,
 	ownerCommentToPost,
@@ -203,6 +235,11 @@ export const getParamsId = id => ({
 
 export const putLike = id => ({
 	type: GET_PARAMS_ID,
+	id,
+});
+
+export const follow = id => ({
+	type: FOLLOW,
 	id,
 });
 

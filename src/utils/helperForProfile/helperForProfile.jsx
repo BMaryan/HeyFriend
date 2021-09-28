@@ -103,6 +103,8 @@ export const CreateNewPostContainer = props => {
 		setSaveOwnerPost(formData.create_post);
 	};
 
+	console.log(props);
+
 	return (
 		<div className={styles.create_new_post_container}>
 			<div className={styles.create_new_post_content}>
@@ -136,9 +138,10 @@ export const CreateNewPostContainer = props => {
 						onClick={() =>
 							props.postPicture ? (
 								props.setProfilePosts(props.postPicture, null, null, saveOwnerPost ? saveOwnerPost : null) &&
-								props.setCreatePostContainer(false) &&
-								props.postPicture(null)
+								props.setCreatePostContainer(false)
 							) : (
+								// &&
+								// props.postPicture(null)
 								<></>
 							)
 						}>
