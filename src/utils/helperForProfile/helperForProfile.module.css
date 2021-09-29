@@ -1,6 +1,7 @@
 /* common */
 .change_profile_picture_container,
-.create_new_post_container {
+.create_new_post_container,
+.toggle_show_post_container {
 	background: var(--backgroundBodyForShowContainer);
 	position: fixed;
 	top: 0;
@@ -156,4 +157,29 @@
 .wrapper_button_delete button:hover {
 	background: rgb(225, 225, 225);
 	transition: 0.5s;
+}
+
+/* toggle show current post container */
+.create_new_post_container {
+}
+
+.toggle_show_post_content {
+	height: 500px;
+	width: 75vw;
+	background: white;
+	display: flex;
+	position: relative;
+}
+
+.postPhoto {
+	width: 65%;
+	margin: 0;
+}
+
+.content {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: var(--paddingForContent);
 }

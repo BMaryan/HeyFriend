@@ -5,6 +5,7 @@ import { ChangeProfilePictureContainer, CreateNewPostContainer, ContainerCoverPr
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
+import Button from "@mui/material/Button";
 
 const ProfileInfo = props => {
 	let [toggleCoverContainer, setToggleCoverContainer] = React.useState(false);
@@ -124,18 +125,20 @@ const ProfileInfo = props => {
 						{props.id ? (
 							<>
 								<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
-									<button onClick={() => props.addChat(props.id)}>Message</button>
+									<Button onClick={() => props.addChat(props.id)} variant='contained'>
+										Message
+									</Button>
 								</NavLink>
-								<button type='submit' onClick={() => props.follow(props.id)}>
+								<Button onClick={() => props.follow(props.id)} variant='contained'>
 									Follow
-								</button>
+								</Button>
 							</>
 						) : (
 							<NavLink className={styles.navLink_message} to='/account/edit/profile'>
-								<button type='submit'>
+								<Button variant='contained'>
 									<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
 									Edit profile
-								</button>
+								</Button>
 							</NavLink>
 						)}
 					</div>

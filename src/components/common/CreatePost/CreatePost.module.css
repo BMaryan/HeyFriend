@@ -1,6 +1,7 @@
 .create_post {
 	background: white;
 	padding: var(--paddingForContent);
+	margin-bottom: var(--marginBetweenProfileContainers);
 }
 
 .icon {

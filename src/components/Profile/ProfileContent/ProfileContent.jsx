@@ -8,8 +8,10 @@ import { faBorderAll, faInfo, faBookmark } from "@fortawesome/free-solid-svg-ico
 import Information from "./Information/Information";
 import Saved from "./Saved/Saved";
 import BodyPost from "../../common/Post/BodyPost/BodyPost";
+import { ToggleShowCurrentPostContainer } from "../../../utils/helperForProfile/helperForProfile";
 
 const ProfileContent = props => {
+	let [toggleShowPhotoContainer, setToggleShowPhotoContainer] = React.useState(false);
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
 
@@ -52,15 +54,19 @@ const ProfileContent = props => {
 									<div className={styles.wrapper_posts}>
 										{props.account && props.account.profile && props.account.profile.posts
 											? props.account.profile.posts.map(post => (
-													<div className={styles.post}>
+													<div
+														onClick={() =>
+															toggleShowPhotoContainer
+																? setToggleShowPhotoContainer(false)
+																: setToggleShowPhotoContainer(true)
+														}
+														className={styles.post}>
 														<BodyPost key={post.id} post={post} />
 													</div>
 											  ))
 											: undefined}
 									</div>
 								</div>
-
-								{/* <Posts accounts={props.accounts} id={props.id} account={props.account} /> */}
 							</>
 						);
 					}}
@@ -82,6 +88,16 @@ const ProfileContent = props => {
 
 			{/* side bar right */}
 			<div className={styles.side_bar_right}></div>
+
+			{/* toggle show container */}
+			{toggleShowPhotoContainer ? (
+				<ToggleShowCurrentPostContainer
+					setToggleShowPhotoContainer={setToggleShowPhotoContainer}
+					post={props.account.profile.posts[0]}
+					accounts={props.accounts}
+					account={props.account}
+				/>
+			) : undefined}
 		</div>
 	);
 };

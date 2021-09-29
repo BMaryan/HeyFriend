@@ -3,6 +3,9 @@ import styles from "./helperForProfile.module.css";
 import CreatePostReduxForm from "../../components/common/CreatePost/CreatePostForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import BodyPost from "../../components/common/Post/BodyPost/BodyPost";
+import HeadPost from "../../components/common/Post/HeadPost/HeadPost";
+import FooterPost from "../../components/common/Post/FooterPost/FooterPost";
 
 export const ChangeProfilePictureContainer = props => {
 	let onChangeProfilePicture = e => {
@@ -99,8 +102,6 @@ export const CreateNewPostContainer = props => {
 		setSaveOwnerPost(formData.create_post);
 	};
 
-	console.log(props);
-
 	return (
 		<div className={styles.create_new_post_container}>
 			<div className={styles.create_new_post_content}>
@@ -148,6 +149,26 @@ export const CreateNewPostContainer = props => {
 				<div className={styles.wrapper_button_close}>
 					<button onClick={() => props.setCreatePostContainer(false)}>x</button>
 				</div>
+			</div>
+		</div>
+	);
+};
+
+export let ToggleShowCurrentPostContainer = props => {
+	return (
+		<div className={styles.toggle_show_post_container}>
+			<div className={styles.toggle_show_post_content}>
+				<div className={styles.postPhoto}>
+					<BodyPost {...props} />
+				</div>
+				<div className={styles.content}>
+					<HeadPost {...props} />
+					<FooterPost {...props} />
+				</div>
+			</div>
+
+			<div className={styles.wrapper_button_close}>
+				<button onClick={() => props.setToggleShowPhotoContainer(false)}>x</button>
 			</div>
 		</div>
 	);
