@@ -13,6 +13,8 @@ import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
 const AppContainer = props => {
+	let id = Number(props.match.params.id);
+
 	React.useEffect(() => {
 		let accountsP = JSON.parse(localStorage.getItem(accounts));
 		let accountP = JSON.parse(localStorage.getItem(account));
@@ -45,7 +47,7 @@ const AppContainer = props => {
 		<Redirect to='/sign_up' />;
 	}
 
-	return <App {...props} />;
+	return <App {...props} id={id} />;
 };
 
 const mapStateToProps = state => {

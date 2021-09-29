@@ -1,14 +1,28 @@
 import React from "react";
 import styles from "./About.module.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faBorderAll, faInfo, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const About = props => {
 	return (
-		<div className={styles.aboutMe}>
-			{props.oftenCheckOtherProfile && props.otherProfile.profile.aboutMe ? (
-				<div>{props.otherProfile.profile.aboutMe}</div>
-			) : props.account && props.account.profile && props.account.profile.aboutMe ? (
-				<div>{props.account.profile.aboutMe}</div>
-			) : undefined}
+		<div>
+			<div className={styles.wrapper_item}>
+				<div className={styles.title}>About you</div>
+				{props.oftenCheckOtherProfile && props.otherProfile.profile.aboutMe && props.id ? (
+					<div>{props.otherProfile.profile.aboutMe}</div>
+				) : props.account && props.account.profile && props.account.profile.aboutMe && !props.id ? (
+					<div>{props.account.profile.aboutMe}</div>
+				) : undefined}
+			</div>
+
+			<div className={styles.wrapper_item}>
+				<div className={styles.title}>Status</div>
+				{props.oftenCheckOtherProfile && props.otherProfile.profile.status && props.id ? (
+					<div>{props.otherProfile.profile.status}</div>
+				) : props.account && props.account.profile && props.account.profile.status && !props.id ? (
+					<div>{props.account.profile.status}</div>
+				) : undefined}
+			</div>
 		</div>
 	);
 };

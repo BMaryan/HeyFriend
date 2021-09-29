@@ -71,10 +71,6 @@ export const ContainerCoverProfile = props => {
 		<div className={styles.change_profile_picture_container}>
 			<div className={styles.change_profile_picture_content}>
 				<div className={styles.title}>Change profile cover photo</div>
-				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
-					Choose cover photo
-				</div>
-
 				<div className={styles.wrapper_change_picture}>
 					<label>
 						Upload cover photo

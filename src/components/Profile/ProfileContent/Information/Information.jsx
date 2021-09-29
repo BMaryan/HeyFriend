@@ -27,9 +27,9 @@ const Information = props => {
 				</div>
 
 				<div className={styles.content}>
-					<Route exact path='/profile/information' render={() => <Review />} />
-					<Route exact path='/profile/information/about' render={() => <About />} />
-					<Route exact path='/profile/information/contacts' render={() => <Contacts />} />
+					<Route exact path='/profile/information' render={() => <Review {...props} />} />
+					<Route exact path='/profile/information/about' render={() => <About {...props} />} />
+					<Route exact path='/profile/information/contacts' render={() => <Contacts {...props} />} />
 				</div>
 			</div>
 		</div>

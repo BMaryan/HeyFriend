@@ -15,16 +15,9 @@ const Main = props => {
 						if (props.account && props.account.profile && props.account.profile.following) {
 							return props.account.profile.following.map(user => {
 								if (accountProfiles.id === user.id) {
-									console.log(accountProfiles);
-									console.log(user);
-									return (
-										<Post
-											key={accountProfiles.id}
-											post={accountProfiles.profile.posts[0]}
-											accounts={props.accounts}
-											account={accountProfiles}
-										/>
-									);
+									return accountProfiles.profile.posts.map(post => {
+										return <Post key={post.id} post={post} accounts={props.accounts} account={accountProfiles} />;
+									});
 								}
 							});
 						}

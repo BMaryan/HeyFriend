@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./ProfileContent.module.css";
-import Posts from "./Posts/Posts";
 import CreatePost from "../../common/CreatePost/CreatePost";
 import { NavLink } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -8,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBorderAll, faInfo, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import Information from "./Information/Information";
 import Saved from "./Saved/Saved";
+import BodyPost from "../../common/Post/BodyPost/BodyPost";
 
 const ProfileContent = props => {
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
@@ -47,7 +47,20 @@ const ProfileContent = props => {
 									accounts={props.accounts}
 									setProfilePosts={props.setProfilePosts}
 								/>
-								<Posts accounts={props.accounts} id={props.id} account={props.account} />
+
+								<div className={styles.posts}>
+									<div className={styles.wrapper_posts}>
+										{props.account && props.account.profile && props.account.profile.posts
+											? props.account.profile.posts.map(post => (
+													<div className={styles.post}>
+														<BodyPost key={post.id} post={post} />
+													</div>
+											  ))
+											: undefined}
+									</div>
+								</div>
+
+								{/* <Posts accounts={props.accounts} id={props.id} account={props.account} /> */}
 							</>
 						);
 					}}

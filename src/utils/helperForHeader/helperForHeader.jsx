@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faSignOutAlt, faCog, faMusic } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faSignOutAlt, faCog, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import commonStyles from "../../components/Header/Navbar/Navbar.module.css";
 import styles from "./helperForHeader.module.css";
@@ -23,7 +23,7 @@ export const ToggleProfileList = props => {
 					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
-					to='/profile'>
+					to={`/profile`}>
 					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faHome} />
 					Profile
 				</NavLink>
@@ -33,9 +33,9 @@ export const ToggleProfileList = props => {
 					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
-					to='/music'>
-					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faMusic} />
-					Music
+					to='/profile/saved'>
+					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faBookmark} />
+					Saved
 				</NavLink>
 			</div>
 			<div className={styles.wrapper_nav_linkList}>
