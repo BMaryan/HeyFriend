@@ -28,7 +28,7 @@ const ProfileContainer = props => {
 	// }, [props.SignUp]);
 
 	if (!props.account) {
-		return <Redirect to='/sign_up' />;
+		return <Redirect to='/authorization' />;
 	}
 
 	if (!id && props.account && props.account.id) {

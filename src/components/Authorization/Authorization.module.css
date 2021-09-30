@@ -1,25 +1,43 @@
+.wrapper_authorization {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	/* background: red; */
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	transition: 1s;
+}
+
 /* authorization */
 .authorization {
-	height: 380px;
-	min-height: 100%;
-	width: 70%;
+	height: 450px;
+	width: 80%;
+	background: darkcyan;
 	max-width: 100%;
 	display: flex;
-	margin: 100px auto;
+	transition: 1s;
+}
+
+.authorization_container,
+.authorization_container_position {
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	transition: 1s;
 }
 
 .authorization_container {
-	height: 100%;
-	width: 100%;
-	/* background: blue; */
-	display: flex;
-	transition: 1s;
+}
+
+.authorization_container_position {
+	flex-direction: row-reverse;
 }
 
 /* common form */
 .form {
 	height: 100%;
-	/* background: thistle; */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

@@ -61,7 +61,7 @@ export const ToggleProfileList = props => {
 						}}
 						className={styles.nav_linkList + " " + commonStyles.common_nav_linkList + " " + commonStyles.logOut}
 						activeClassName={styles.nav_linkList_active}
-						to='/sign_up'>
+						to='/authorization'>
 						<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faSignOutAlt} />
 						Log Out
 					</NavLink>

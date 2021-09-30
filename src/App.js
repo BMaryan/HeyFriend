@@ -10,6 +10,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import ChatContainer from "./components/Chat/ChatContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
 import EditContainer from "./components/common/Edit/EditContainer";
+import AuthorizationContainer from "./components/Authorization/AuthorizationContainer";
 
 function App(props) {
 	return (
@@ -22,8 +23,9 @@ function App(props) {
 					<Route path='/chat/:id?' render={() => <ChatContainer />} />
 					<Route path='/friends/:id?' render={() => <FriendsContainer />} />
 					<Route path='/account/edit' render={() => <EditContainer />} />
-					<Route path='/sign_in' render={() => <SignInContainer />} />
-					<Route path='/sign_up' render={() => <SignUpContainer />} />
+					{/* <Route path='/sign_in' render={() => <SignInContainer />} />
+					<Route path='/sign_up' render={() => <SignUpContainer />} /> */}
+					<Route path='/authorization' render={() => <AuthorizationContainer />} />
 					<Route path='*' render={() => <NotFound />} />
 				</Switch>
 			</div>

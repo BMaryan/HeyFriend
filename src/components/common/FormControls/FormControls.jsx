@@ -2,6 +2,9 @@
 import React from "react";
 import { Field } from "redux-form";
 import styles from "./FormControls.module.css";
+import Button from "@mui/material/Button";
+import { pink } from "@mui/material/colors";
+import Checkbox from "@mui/material/Checkbox";
 
 const FormControls = props => {
 	return (
@@ -64,9 +67,27 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 		<>
 			{type === "checkbox" ? (
 				<div className={styles.wrapper_field + " " + styles.wrapper_field_checkbox}>
-					<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
-
-					{text ? <span className={styles.text_for_field}>{text}</span> : <></>}
+					{/* <Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} /> */}
+					{text ? (
+						<span className={styles.text_for_field}>
+							<Checkbox
+								className={styles.field}
+								name={name}
+								type={type}
+								placeholder={placeholder}
+								sx={{
+									color: pink[300],
+									"&.Mui-checked": {
+										color: pink[300],
+									},
+									"& .MuiSvgIcon-root": { fontSize: 20 },
+								}}
+							/>
+							{text}
+						</span>
+					) : (
+						<></>
+					)}
 				</div>
 			) : (
 				<div className={styles.wrapper_field}>
@@ -95,9 +116,9 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 export const wrapperButton = (button_text, { users, userSignIn, ...props }) => {
 	return (
 		<div className={styles.wrapper_button}>
-			<button type='submit' disabled={props.invalid || props.submitting || props.pristine}>
+			<Button type='submit' disabled={props.invalid || props.submitting || props.pristine} variant='contained'>
 				{button_text}
-			</button>
+			</Button>
 		</div>
 	);
 };

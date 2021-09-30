@@ -24,7 +24,7 @@ const EditContainer = props => {
 	let id = Number(props.match.params.id);
 
 	if (!props.account) {
-		return <Redirect to='/sign_up' />;
+		return <Redirect to='/authorization' />;
 	}
 
 	return <Edit {...props} id={id} />;

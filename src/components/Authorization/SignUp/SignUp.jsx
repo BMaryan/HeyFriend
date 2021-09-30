@@ -4,7 +4,8 @@ import React, { useEffect } from "react";
 import styles from "./SignUp.module.css";
 import commonStyle from "../Authorization.module.css";
 import SignUpReduxForm from "./SignUpForm";
-import { AuthorizationContainer, InformationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
+import { AuthorizationHelperContainer, InformationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
+import { Redirect } from "react-router";
 
 const SignUp = props => {
 	let onSubmit = formData => {
@@ -13,13 +14,27 @@ const SignUp = props => {
 		if (formData) {
 			props.isAccount({ id: props.accounts ? props.accounts.length + 1 : undefined, profile: { ...formData } });
 		}
+		console.log(formData);
 	};
+
+	if (props.account && props.account.id) {
+		return <Redirect to='/profile' />;
+	}
 
 	return (
 		<div className={commonStyle.authorization}>
-			<div className={commonStyle.authorization_container}>
-				{InformationContainer("Welcome Back!", "Don't have an account?", "/sign_in", "Sign In")}
-				{AuthorizationContainer("Sign Up", <SignUpReduxForm onSubmit={onSubmit} users={props.users} userSignUp={props.userSignUp} />)}
+			<div className={props.toggleShowSign ? commonStyle.authorization_container : commonStyle.authorization_container_position}>
+				<AuthorizationHelperContainer
+					title={"Sign Up"}
+					form={<SignUpReduxForm onSubmit={onSubmit} users={props.users} userSignUp={props.userSignUp} />}
+				/>
+				<InformationContainer
+					title={"Welcome Back!"}
+					subtitle={"Don't have an account?"}
+					linkTo='/authorization'
+					buttonText={"Sign In"}
+					setToggleShowSign={props.setToggleShowSign}
+				/>
 			</div>
 		</div>
 	);

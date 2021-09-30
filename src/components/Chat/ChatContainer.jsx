@@ -11,7 +11,7 @@ import { getAuthorizationId, getParamsId } from "../../redux/profile-reducer";
 
 const ChatContainer = props => {
 	if (!props.account) {
-		return <Redirect to='/sign_up' />;
+		return <Redirect to='/authorization' />;
 	} else {
 		props.getAuthorizationId(props.account.id);
 		props.getParamsId(null);

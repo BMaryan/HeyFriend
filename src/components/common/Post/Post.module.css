@@ -1,9 +1,8 @@
 .wrapper_post {
-	height: 100%;
+	height: 800px;
+	max-height: 100%;
 	width: 100%;
 	background: white;
-	/* border: 1px solid silver; */
-	/* display: flex; */
 	flex-wrap: wrap;
 	margin-bottom: 50px;
 }
@@ -90,7 +89,7 @@
 
 /* footer */
 .footer {
-	margin-top: var(--paddingForContent);
+	/* margin-top: var(--paddingForContent); */
 }
 
 .features {
@@ -100,7 +99,7 @@
 }
 
 .features_left > .icon {
-	margin-right: 15px;
+	margin-right: 5px;
 }
 
 .features_right {

@@ -9,6 +9,7 @@
 
 .wrapperInputAndTextarea input,
 textarea {
+	border: 1px solid silver;
 	width: 100%;
 }
 
@@ -28,24 +29,28 @@ textarea {
 
 .wrapper_field_checkbox {
 	display: flex;
+	align-content: center;
+	/* background: red; */
 }
 
 .text_for_field {
-	font-size: 13px;
+	font-size: 14px;
 	margin: 0 5px;
 }
 
 /* wrapper over button */
 .wrapper_button {
 	width: 100%;
-	border-radius: 30px;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 .wrapper_button button,
 .field {
-	background: rgb(237, 235, 235);
+	background: white;
+	/* background: rgb(237, 235, 235); */
 	border: 1px solid rgb(237, 235, 235);
-	border-radius: 30px;
+	border-radius: 10px;
 	outline: none;
 	padding: 12px 15px;
 	transition: 0.5s;
@@ -55,15 +60,8 @@ textarea {
 	width: 100%;
 	color: white;
 	background: linear-gradient(var(--authorizationBackgroundOrColor));
-	border-radius: 30px;
 	margin-top: 10px;
 	cursor: pointer;
-	transition: 0.5s;
-}
-
-.wrapper_button button:hover {
-	color: black;
-	border-radius: 30px;
 	transition: 0.5s;
 }
 
@@ -74,8 +72,6 @@ textarea {
 	display: flex;
 	justify-content: left;
 	align-items: center;
-	/* position: absolute;
-	bottom: 0; */
 }
 
 .block_error svg {

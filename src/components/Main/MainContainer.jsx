@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 
 const MainContainer = props => {
 	if (!props.account) {
-		return <Redirect to='/sign_up' />;
+		return <Redirect to='/authorization' />;
 	}
 
 	return <Main {...props} />;
