@@ -1,7 +1,7 @@
 .stories {
 	/* background: teal; */
 	border-radius: var(--borderRadius);
-	padding: var(--paddingForMainContent) 0;
+	padding: var(--pdContent) 0;
 	margin-right: 20px;
 }
 

@@ -1,5 +1,5 @@
 .profile_info {
-	margin-bottom: var(--marginFromHeader);
+	margin-bottom: var(--mgFromHeader);
 }
 
 /* profile cover */
@@ -38,8 +38,8 @@
 .wrapper_change_cover {
 	/* background: red; */
 	position: absolute;
-	top: var(--paddingForContent);
-	right: var(--paddingForContent);
+	top: var(--pdContent);
+	right: var(--pdContent);
 }
 
 .icon_change_cover {
@@ -64,7 +64,7 @@
 .wrapper_profilePicture,
 .wrapper_profilePicture_active {
 	border-radius: 50%;
-	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	border: 1px solid var(--bgWhite233);
 	display: inline-flex;
 	position: absolute;
 	left: var(--paddingForCoverAndDetailsRight);
@@ -121,7 +121,7 @@
 
 .wrapper_button button {
 	color: white;
-	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	background: linear-gradient(var(--mainBg));
 	font-size: 14px;
 	border: 1px solid silver;
 	border-radius: var(--borderRadius);
@@ -164,7 +164,7 @@
 .button_createPost {
 	width: 100%;
 	color: white;
-	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	background: linear-gradient(var(--mainBg));
 	border-radius: 6px;
 	border: 1px solid silver;
 	outline: none;

@@ -5,7 +5,7 @@
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-	padding: var(--paddingForContent);
+	padding: var(--pdContent);
 }
 
 .wrapper_profile_contact {
@@ -15,7 +15,7 @@
 }
 
 .wrapper_picture {
-	margin-right: var(--paddingForContent);
+	margin-right: var(--pdContent);
 }
 
 .wrapper_picture > img {
@@ -51,7 +51,7 @@
 	width: 100%;
 	/* background: red; */
 	display: flex;
-	margin-bottom: var(--paddingForContent);
+	margin-bottom: var(--pdContent);
 }
 
 .key {
@@ -84,7 +84,7 @@
 
 .wrapper_button button {
 	width: 100%;
-	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	background: linear-gradient(var(--mainBg));
 	padding: 10px 100px;
 	cursor: pointer;
 }

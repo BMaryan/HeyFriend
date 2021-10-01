@@ -51,13 +51,13 @@
 
 /* wrapper my message */
 .wrapper_myMessage {
-	background: var(--bodyBackgroundOrColor);
+	background: var(--bgWhite245);
 	border-radius: 20px 20px 0 20px;
 }
 
 /* wrapper other message */
 .wrapper_otherMessage {
 	background: white;
-	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	border: 1px solid var(--bgWhite233);
 	border-radius: 20px 20px 20px 0px;
 }

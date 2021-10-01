@@ -6,7 +6,7 @@
 	/* background: skyblue; */
 	border: 1px solid rgb(208, 208, 208);
 	display: flex;
-	margin-top: var(--marginFromHeader);
+	margin-top: var(--mgFromHeader);
 	overflow: hidden;
 }
 
@@ -41,12 +41,12 @@
 }
 
 .item:hover {
-	background: var(--bodyBackgroundOrColor);
+	background: var(--bgWhite245);
 	transition: border-left 1s;
 }
 
 .item_active {
-	border-left-color: rgba(var(--f75, 38, 38, 38), 1);
+	border-left-color: rgba(var(38, 38, 38), 1);
 	font-weight: 600;
 	transition: border-left 1s;
 }

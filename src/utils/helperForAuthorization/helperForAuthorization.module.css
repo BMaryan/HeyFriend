@@ -31,7 +31,7 @@
 /* information content */
 .information_content,
 .information_content_hidden {
-	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	background: linear-gradient(var(--mainBg));
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

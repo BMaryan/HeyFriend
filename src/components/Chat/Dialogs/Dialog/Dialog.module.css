@@ -12,12 +12,12 @@
 }
 
 .chat:hover {
-	background: var(--bodyBackgroundOrColor);
+	background: var(--bgWhite245);
 	transition: 0.5s;
 }
 
 .chat_active {
-	background: var(--bodyBackgroundOrDarkColor);
+	background: var(--bgWhite233);
 	transition: 0.5s;
 }
 

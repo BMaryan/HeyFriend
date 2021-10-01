@@ -15,7 +15,7 @@ textarea {
 
 .wrapperInputAndTextareaError input,
 textarea {
-	border: 1px solid var(--errorBackgroundOrColor);
+	border: 1px solid var(--errorBgOrC);
 	transition: 0.5s;
 }
 
@@ -66,7 +66,7 @@ textarea {
 .wrapper_button button {
 	width: 100%;
 	color: white;
-	background: linear-gradient(var(--authorizationBackgroundOrColor));
+	background: linear-gradient(var(--mainBg));
 	padding: 10px 0;
 	margin-top: 10px;
 	cursor: pointer;
@@ -75,7 +75,7 @@ textarea {
 
 /* style for box error */
 .block_error {
-	color: var(--errorBackgroundOrColor);
+	color: var(--errorBgOrC);
 	font-size: 13px;
 	display: flex;
 	justify-content: left;
@@ -84,6 +84,6 @@ textarea {
 }
 
 .block_error svg {
-	color: var(--errorBackgroundOrColor);
+	color: var(--errorBgOrC);
 	margin: 0 5px 0 0;
 }

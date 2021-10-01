@@ -1,6 +1,6 @@
 .required {
 	/* color: white; */
-	color: var(--errorBackgroundOrColor);
+	color: var(--errorBgOrC);
 	/* position: absolute;
 	top: 5px;
 	left: -160px; */

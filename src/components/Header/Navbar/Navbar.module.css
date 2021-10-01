@@ -24,7 +24,7 @@
 
 .nav_linkRow_active,
 .nav_link_toggleList_active {
-	background: var(--bodyBackgroundOrColor);
+	background: var(--bgWhite245);
 	transition: 0.5s;
 }
 

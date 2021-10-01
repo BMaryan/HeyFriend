@@ -2,7 +2,7 @@
 	height: 200px;
 	width: 100%;
 	background: white;
-	margin: var(--marginFromHeader) 0;
+	margin: var(--mgFromHeader) 0;
 }
 
 .wrapper_friends {
@@ -17,7 +17,7 @@
 	border-right: 1px solid silver;
 	/* background: gold; */
 	box-sizing: border-box;
-	padding: var(--paddingForContent);
+	padding: var(--pdContent);
 }
 
 .title {
@@ -36,7 +36,7 @@
 	height: 100%;
 	flex: 1;
 	box-sizing: border-box;
-	padding: var(--paddingForContent);
+	padding: var(--pdContent);
 }
 
 .navLink {

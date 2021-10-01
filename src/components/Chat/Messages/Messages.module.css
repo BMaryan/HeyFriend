@@ -5,5 +5,5 @@
 .messages_content {
 	display: flex;
 	flex-direction: column;
-	padding: var(--paddingForMainContent);
+	padding: var(--pdContent);
 }

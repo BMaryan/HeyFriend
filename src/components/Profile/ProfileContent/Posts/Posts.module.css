@@ -1,6 +1,6 @@
 .posts {
-	/* padding: var(--paddingForContent); */
-	margin-top: var(--marginBetweenProfileContainers);
+	/* padding: var(--pdContent); */
+	margin-top: var(--mgBetweenContainers);
 }
 
 .wrapper_posts {

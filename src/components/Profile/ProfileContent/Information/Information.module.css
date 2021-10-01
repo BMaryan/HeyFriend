@@ -6,7 +6,7 @@
 	box-sizing: border-box;
 	display: flex;
 	flex: 1;
-	padding: var(--paddingForContent);
+	padding: var(--pdContent);
 }
 
 /* menu */
@@ -43,5 +43,5 @@
 .content {
 	/* background: greenyellow; */
 	flex: 1;
-	padding-left: var(--paddingForContent);
+	padding-left: var(--pdContent);
 }

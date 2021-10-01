@@ -1,6 +1,6 @@
 body {
 	height: 100vh;
-	background: var(--backgroundBody);
+	background: var(--bgBody);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
 	box-sizing: border-box;
@@ -16,18 +16,18 @@ code {
 
 /* global removables */
 :root {
-	--backgroundBody: rgb(243, 243, 243);
-	--backgroundBodyForShowContainer: rgba(0, 0, 0, 0.6);
-	--authorizationBackgroundOrColor: #e66465, #9198e5;
-	--bodyBackgroundOrColor: rgb(245, 245, 245);
-	--bodyBackgroundOrDarkColor: rgb(233, 233, 233);
-	--errorBackgroundOrColor: #d93025;
+	--bgBody: rgb(243, 243, 243);
+	--bgBodyForToggleContainer: rgba(0, 0, 0, 0.6);
+	--mainBg: #e66465, #9198e5;
+	--bgWhite245: rgb(245, 245, 245);
+	--bgWhite233: rgb(233, 233, 233);
+	--errorBgOrC: #d93025;
 	--borderRadius: 10px;
 	--colorIcons: rgb(136, 136, 136);
-	--paddingForMainContent: 15px;
-	--marginFromHeader: 20px;
-	--marginBetweenProfileContainers: 20px;
-	--paddingForContent: 15px;
+	--colorIconsChecked: #262626;
+	--pdContent: 15px;
+	--mgFromHeader: 20px;
+	--mgBetweenContainers: 20px;
 }
 
 /* global class */

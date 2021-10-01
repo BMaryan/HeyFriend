@@ -20,7 +20,7 @@
 
 .wrapper_input input {
 	width: 100%;
-	/* background: var(--bodyBackgroundOrColor); */
+	/* background: var(--bgWhite245); */
 	border: none;
 	outline: none;
 	padding: 15px 10px 15px 35px;

@@ -1,7 +1,7 @@
 .create_post {
 	background: white;
-	padding: var(--paddingForContent);
-	margin-bottom: var(--marginBetweenProfileContainers);
+	padding: var(--pdContent);
+	margin-bottom: var(--mgBetweenContainers);
 }
 
 .icon {
@@ -48,7 +48,7 @@
 /* wrapper content */
 .wrapper_content {
 	height: 250px;
-	border: 1px solid var(--bodyBackgroundOrDarkColor);
+	border: 1px solid var(--bgWhite233);
 }
 
 .wrapper_add_picture {
