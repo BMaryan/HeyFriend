@@ -8,6 +8,7 @@ import ChatReduxForm from "./ChatForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { Head } from "../../utils/helperForChat/helperForChat";
+import { profileConstant } from "../../core/constants/constants";
 
 const DefaultViewMessages = props => {
 	return (
@@ -67,7 +68,7 @@ const Chat = props => {
 								<div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
 									<NavLink
 										key={user.id}
-										to={props.account && props.account.id !== id ? "/profile/" + user.id : "/profile"}
+										to={props.account && props.account.id !== id ? `${profileConstant}/` + user.id : `${profileConstant}`}
 										className={styles.contact_link}>
 										<div className={styles.wrapper_picture}>
 											{user ? (

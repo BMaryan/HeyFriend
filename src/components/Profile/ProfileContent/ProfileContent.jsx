@@ -9,6 +9,7 @@ import Information from "./Information/Information";
 import Saved from "./Saved/Saved";
 import BodyPost from "../../common/Post/BodyPost/BodyPost";
 import { ToggleShowCurrentPostContainer } from "../../../utils/helperForProfile/helperForProfile";
+import { profileConstant } from "../../../core/constants/constants";
 
 const ProfileContent = props => {
 	let [toggleShowPhotoContainer, setToggleShowPhotoContainer] = React.useState(false);
@@ -23,15 +24,15 @@ const ProfileContent = props => {
 			{/* content */}
 			<div className={styles.content}>
 				<div className={styles.navigation}>
-					<NavLink exact to='/profile' className={styles.item} activeClassName={styles.item_active}>
+					<NavLink exact to={`${profileConstant}`} className={styles.item} activeClassName={styles.item_active}>
 						<FontAwesomeIcon className={styles.icon} icon={faBorderAll} />
 						Posts
 					</NavLink>
-					<NavLink to='/profile/information' className={styles.item} activeClassName={styles.item_active}>
+					<NavLink to={`${profileConstant}/information`} className={styles.item} activeClassName={styles.item_active}>
 						<FontAwesomeIcon className={styles.icon} icon={faInfo} />
 						Information
 					</NavLink>
-					<NavLink exact to='/profile/saved' className={styles.item} activeClassName={styles.item_active}>
+					<NavLink exact to={`${profileConstant}/saved`} className={styles.item} activeClassName={styles.item_active}>
 						<FontAwesomeIcon className={styles.icon} icon={faBookmark} />
 						Saved
 					</NavLink>
@@ -39,7 +40,7 @@ const ProfileContent = props => {
 
 				<Route
 					exact
-					path='/profile'
+					path={`${profileConstant}`}
 					render={() => {
 						return (
 							<>
@@ -55,7 +56,7 @@ const ProfileContent = props => {
 										{props.account && props.account.profile && props.account.profile.posts
 											? props.account.profile.posts.map(post => (
 													<div
-													key={post.id}
+														key={post.id}
 														onClick={() =>
 															toggleShowPhotoContainer
 																? setToggleShowPhotoContainer(false)
@@ -73,7 +74,7 @@ const ProfileContent = props => {
 					}}
 				/>
 				<Route
-					path='/profile/information'
+					path={`${profileConstant}/information`}
 					render={() => (
 						<Information
 							accounts={props.accounts}
@@ -84,7 +85,11 @@ const ProfileContent = props => {
 						/>
 					)}
 				/>
-				<Route exact path='/profile/saved' render={() => <Saved accounts={props.accounts} id={props.id} account={props.account} />} />
+				<Route
+					exact
+					path={`${profileConstant}/saved`}
+					render={() => <Saved accounts={props.accounts} id={props.id} account={props.account} />}
+				/>
 			</div>
 
 			{/* side bar right */}

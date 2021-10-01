@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
-import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import MainContainer from "./components/Main/MainContainer";
 import NotFound from "./components/common/NotFound/NotFound";
@@ -11,6 +9,7 @@ import ChatContainer from "./components/Chat/ChatContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
 import EditContainer from "./components/common/Edit/EditContainer";
 import AuthorizationContainer from "./components/Authorization/AuthorizationContainer";
+import { authorizationConstant, chatConstant, editConstant, friendsConstant, profileConstant } from "./core/constants/constants";
 
 function App(props) {
 	return (
@@ -19,13 +18,11 @@ function App(props) {
 			<div className='container container_margin'>
 				<Switch>
 					<Route exact path='/' render={() => <MainContainer />} />
-					<Route path='/profile/:id?' render={() => <ProfileContainer />} />
-					<Route path='/chat/:id?' render={() => <ChatContainer />} />
-					<Route path='/friends/:id?' render={() => <FriendsContainer />} />
-					<Route path='/account/edit' render={() => <EditContainer />} />
-					{/* <Route path='/sign_in' render={() => <SignInContainer />} />
-					<Route path='/sign_up' render={() => <SignUpContainer />} /> */}
-					<Route path='/authorization' render={() => <AuthorizationContainer />} />
+					<Route path={`${profileConstant}/:id?`} render={() => <ProfileContainer />} />
+					<Route path={`${chatConstant}/:id?`} render={() => <ChatContainer />} />
+					<Route path={`${friendsConstant}/:id?`} render={() => <FriendsContainer />} />
+					<Route path={`${editConstant}`} render={() => <EditContainer />} />
+					<Route path={`${authorizationConstant}`} render={() => <AuthorizationContainer />} />
 					<Route path='*' render={() => <NotFound />} />
 				</Switch>
 			</div>

@@ -5,6 +5,7 @@ import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.css
 import styles from "./helperForChat.module.css";
 import { NavLink } from "react-router-dom";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
+import { profileConstant } from "../../core/constants/constants";
 
 export const Head = props => {
 	let id = Number(props.match.params.id);
@@ -22,7 +23,7 @@ export const Head = props => {
 						return (
 							<NavLink
 								key={user.id}
-								to={props.account && props.account.id !== id ? "/profile/" + user.id : "/profile"}
+								to={props.account && props.account.id !== id ? `${profileConstant}/` + user.id : `${profileConstant}`}
 								className={dialogStyles.chat_forHead}>
 								<div className={dialogStyles.wrapper_picture}>
 									<div className={dialogStyles.have_not_picture_forHead}>

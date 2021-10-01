@@ -1,0 +1,67 @@
+.friends {
+	height: 200px;
+	width: 100%;
+	background: white;
+	margin: var(--marginFromHeader) 0;
+}
+
+.wrapper_friends {
+	height: 100%;
+	display: flex;
+}
+
+/* menu */
+.menu {
+	height: 100%;
+	width: 30%;
+	border-right: 1px solid silver;
+	/* background: gold; */
+	box-sizing: border-box;
+	padding: var(--paddingForContent);
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.wrapper_menu {
+}
+
+.item {
+}
+
+/* content */
+.content {
+	height: 100%;
+	flex: 1;
+	box-sizing: border-box;
+	padding: var(--paddingForContent);
+}
+
+.navLink {
+}
+
+.card {
+}
+
+.wrapper_card {
+	width: 40%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 10px 20px 0;
+}
+
+.wrapper_avatar img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+	margin-right: 5px;
+}
+
+.full_name {
+	color: black;
+}

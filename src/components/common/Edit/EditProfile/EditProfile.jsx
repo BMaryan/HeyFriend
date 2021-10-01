@@ -42,9 +42,7 @@ const EditProfile = props => {
 				</div>
 			</div>
 
-			<div>
-				<EditProfileReduxForm onSubmit={onSubmit} account={props.account} />
-			</div>
+			<EditProfileReduxForm onSubmit={onSubmit} account={props.account} />
 
 			{changeProfilePicture ? (
 				<ChangeProfilePictureContainer

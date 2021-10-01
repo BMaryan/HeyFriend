@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
+import { chatConstant } from "../../../../core/constants/constants";
 
 const Dialog = props => {
 	let save = props.account && props.chat && props.account.id;
@@ -12,7 +13,7 @@ const Dialog = props => {
 	return (
 		<>
 			<NavLink
-				to={foundUser ? "/chat/" + foundUser.id : ""}
+				to={foundUser ? `${chatConstant}/` + foundUser.id : ""}
 				className={styles.chat + " " + styles.chat_forHead}
 				activeClassName={styles.chat_active}>
 				<div className={styles.wrapper_picture}>

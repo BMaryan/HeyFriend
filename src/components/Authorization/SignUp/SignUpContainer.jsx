@@ -11,6 +11,7 @@ import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-
 import { account, accounts } from "../../../core/constants/constantsLocalStorage";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
+import { profileConstant } from "../../../core/constants/constants";
 
 const SignUpContainer = props => {
 	// React.useEffect(() => {
@@ -31,7 +32,7 @@ const SignUpContainer = props => {
 	// 	}
 	// }, [props.userSignUp]);
 	// if (props.account && props.account.id) {
-	// 	return <Redirect to='/profile' />;
+	// 	return <Redirect to={`${profileConstant}`} />;
 	// }
 	// return <SignUp {...props} />;
 };

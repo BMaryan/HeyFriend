@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
+import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 
 const ProfileInfo = props => {
 	let [toggleCoverContainer, setToggleCoverContainer] = React.useState(false);
@@ -128,7 +129,7 @@ const ProfileInfo = props => {
 					<div className={styles.wrapper_button}>
 						{props.id ? (
 							<>
-								<NavLink className={styles.navLink_message} to={"/chat/" + props.id}>
+								<NavLink className={styles.navLink_message} to={`${chatConstant}/` + props.id}>
 									<Button onClick={() => props.addChat(props.id)} variant='contained'>
 										Message
 									</Button>
@@ -143,7 +144,7 @@ const ProfileInfo = props => {
 								)}
 							</>
 						) : (
-							<NavLink className={styles.navLink_message} to='/account/edit/profile'>
+							<NavLink className={styles.navLink_message} to={`${editConstant}${profileConstant}`}>
 								<Button variant='contained'>
 									<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
 									Edit profile

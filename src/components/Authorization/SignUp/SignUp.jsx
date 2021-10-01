@@ -6,6 +6,7 @@ import commonStyle from "../Authorization.module.css";
 import SignUpReduxForm from "./SignUpForm";
 import { AuthorizationHelperContainer, InformationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import { Redirect } from "react-router";
+import { profileConstant } from "../../../core/constants/constants";
 
 const SignUp = props => {
 	let onSubmit = formData => {
@@ -17,7 +18,7 @@ const SignUp = props => {
 	};
 
 	if (props.account && props.account.id) {
-		return <Redirect to='/profile' />;
+		return <Redirect to={`${profileConstant}`} />;
 	}
 
 	return (

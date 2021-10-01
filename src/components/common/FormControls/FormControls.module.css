@@ -21,6 +21,7 @@ textarea {
 
 /* wrapper over field */
 .wrapper_field {
+	width: 100%;
 	position: relative;
 }
 

@@ -28,9 +28,7 @@ const ChangePassword = props => {
 				<div className={styles.fullName}>{oftenCheck ? props.account.profile.surname + " " + props.account.profile.name : undefined}</div>
 			</div>
 
-			<div>
-				<ChangePasswordReduxForm onSubmit={onSubmit} />
-			</div>
+			<ChangePasswordReduxForm onSubmit={onSubmit} />
 		</div>
 	);
 };

@@ -4,6 +4,7 @@ import { faHome, faSignOutAlt, faCog, faBookmark } from "@fortawesome/free-solid
 import { NavLink } from "react-router-dom";
 import commonStyles from "../../components/Header/Navbar/Navbar.module.css";
 import styles from "./helperForHeader.module.css";
+import { authorizationConstant, editConstant, profileConstant } from "../../core/constants/constants";
 
 export const ToggleProfileList = props => {
 	let dataFromAccountToAccounts = () => {
@@ -23,7 +24,7 @@ export const ToggleProfileList = props => {
 					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
-					to={`/profile`}>
+					to={`${profileConstant}`}>
 					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faHome} />
 					Profile
 				</NavLink>
@@ -33,7 +34,7 @@ export const ToggleProfileList = props => {
 					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
-					to='/profile/saved'>
+					to={`${profileConstant}/saved`}>
 					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faBookmark} />
 					Saved
 				</NavLink>
@@ -43,7 +44,7 @@ export const ToggleProfileList = props => {
 					onClick={() => props.setToggleListProfile(false)}
 					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
 					activeClassName={styles.nav_linkList_active}
-					to='/account/edit'
+					to={`${editConstant}`}
 					exact>
 					<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faCog} />
 					Settings
@@ -61,7 +62,7 @@ export const ToggleProfileList = props => {
 						}}
 						className={styles.nav_linkList + " " + commonStyles.common_nav_linkList + " " + commonStyles.logOut}
 						activeClassName={styles.nav_linkList_active}
-						to='/authorization'>
+						to={`${authorizationConstant}`}>
 						<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faSignOutAlt} />
 						Log Out
 					</NavLink>

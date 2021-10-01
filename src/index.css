@@ -34,7 +34,6 @@ code {
 .container {
 	width: 992px;
 	max-width: 100%;
-	/* background: cornflowerblue; */
 	display: flex;
 	margin: 0 auto;
 }

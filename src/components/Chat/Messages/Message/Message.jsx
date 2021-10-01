@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Message.module.css";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
+import { profileConstant } from "../../../../core/constants/constants";
 
 const Message = props => {
 	let checkMessage =
@@ -17,12 +18,6 @@ const Message = props => {
 
 	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
 	let otherProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id !== props.account.id : undefined)) : undefined;
-	// let otherProfile =
-	// 	myProfile && myProfile.profile && myProfile.profile.chats
-	// 		? myProfile.profile.chats.find(chat =>
-	// 				props.id && props.account.id ? chat.id !== props.account.id && chat.id === props.id : undefined
-	// 		  )
-	// 		: undefined;
 
 	return (
 		<div
@@ -30,7 +25,7 @@ const Message = props => {
 				checkMessage ? styles.wrapper_container_myMessage : styles.wrapper_container_otherMessage + " " + styles.wrapper_container_message
 			}>
 			<NavLink
-				to={props.account && props.account.id !== props.id ? "/profile/" + props.id : "/profile"}
+				to={props.account && props.account.id !== props.id ? `${profileConstant}/` + props.id : `${profileConstant}`}
 				className={checkMessage ? styles.wrapper_myPicture : styles.wrapper_otherPicture + " " + styles.wrapper_picture}>
 				<img
 					src={

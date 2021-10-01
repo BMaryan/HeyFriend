@@ -5,6 +5,7 @@ import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
 import commonStyles from "../Navbar.module.css";
 import styles from "./NavbarRow.module.css";
+import { chatConstant, friendsConstant } from "../../../../core/constants/constants";
 
 const DuplicateCodeFunc = props => {
 	return (
@@ -24,8 +25,8 @@ const NavbarRow = props => {
 	return (
 		<div className={styles.navbar_row}>
 			<DuplicateCodeFunc path='/' icon={faHome} exact />
-			<DuplicateCodeFunc path='/chat' icon={faFacebookMessenger} />
-			<DuplicateCodeFunc path='/friends' icon={faUserFriends} />
+			<DuplicateCodeFunc path={`${chatConstant}`} icon={faFacebookMessenger} />
+			<DuplicateCodeFunc path={`${friendsConstant}`} icon={faUserFriends} />
 		</div>
 	);
 };

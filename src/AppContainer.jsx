@@ -11,6 +11,7 @@ import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalSt
 import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
+import { authorizationConstant } from "./core/constants/constants";
 
 const AppContainer = props => {
 	let id = Number(props.match.params.id);
@@ -44,7 +45,7 @@ const AppContainer = props => {
 	setSignUpDataToLocalStorage(props);
 
 	if (!props.account) {
-		<Redirect to='/sign_up' />;
+		<Redirect to={`${authorizationConstant}`} />;
 	}
 
 	return <App {...props} id={id} />;

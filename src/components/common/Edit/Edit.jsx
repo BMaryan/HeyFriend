@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import EditProfile from "./EditProfile/EditProfile";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import Default from "./Default/Default";
+import { editConstant } from "../../../core/constants/constants";
 
 const Edit = props => {
 	return (
@@ -12,17 +13,17 @@ const Edit = props => {
 			<div className={styles.edit_menu}>
 				<ul className={styles.menu}>
 					<li className={styles.edit_item}>
-						<NavLink exact to='/account/edit/profile' className={styles.item} activeClassName={styles.item_active}>
+						<NavLink exact to={`${editConstant}/profile`} className={styles.item} activeClassName={styles.item_active}>
 							Edit profile
 						</NavLink>
 					</li>
 					<li className={styles.edit_item}>
-						<NavLink exact to='/account/edit/password' className={styles.item} activeClassName={styles.item_active}>
+						<NavLink exact to={`${editConstant}/password`} className={styles.item} activeClassName={styles.item_active}>
 							Change password
 						</NavLink>
 					</li>
 					<li className={styles.edit_item}>
-						<NavLink to='/account/edit/manage_access' className={styles.item} activeClassName={styles.item_active}>
+						<NavLink to={`${editConstant}/manage_access`} className={styles.item} activeClassName={styles.item_active}>
 							Apps and Websites
 						</NavLink>
 					</li>
@@ -30,9 +31,9 @@ const Edit = props => {
 			</div>
 
 			<div className={styles.edit_content}>
-				<Route exact path='/account/edit/profile' render={() => <EditProfile {...props} />} />
-				<Route exact path='/account/edit/password' render={() => <ChangePassword {...props} />} />
-				<Route exact path='/account/edit' render={() => <Default />} />
+				<Route exact path={`${editConstant}/profile`} render={() => <EditProfile {...props} />} />
+				<Route exact path={`${editConstant}/password`} render={() => <ChangePassword {...props} />} />
+				<Route exact path={`${editConstant}`} render={() => <Default />} />
 			</div>
 		</div>
 	);
