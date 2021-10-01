@@ -1,4 +1,5 @@
 import styles from "./FieldValidationForm.module.css";
+import { accounts } from "../../core/constants/constantsLocalStorage";
 
 export const required = value => {
 	if (value) {
@@ -28,13 +29,13 @@ export const validateAuthorizationUserCreator = (users, userSignIn) => value => 
 export const validateFindTheSameUserCreator = accounts => value => {
 	let foundUser;
 	if (accounts) {
-		foundUser = accounts.find(item => item.phone_or_email === value);
+		foundUser = accounts.find(account => account.profile.phone_or_email === value);
 	}
 
 	if (!foundUser) {
 		return undefined;
 	} else {
-		return "The same user";
+		return "An account already exists with this email.";
 	}
 };
 

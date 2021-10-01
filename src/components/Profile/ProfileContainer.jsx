@@ -13,11 +13,11 @@ import { getChatsSelector } from "../../redux/chat-selectors";
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
 
-	React.useEffect(() => {
-		if (props.chats) {
-			props.setProfileChats(props.chats);
-		}
-	}, [props.chats]);
+	// React.useEffect(() => {
+	// 	if (props.chats) {
+	// 		props.setProfileChats(props.chats);
+	// 	}
+	// }, [props.chats]);
 
 	if (!props.account) {
 		return <Redirect to='/authorization' />;

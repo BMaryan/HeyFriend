@@ -25,7 +25,7 @@ const SignUpForm = props => {
 			{WrapperCreateField(
 				"phone_or_email",
 				"text",
-				[validatePhoneNumberAndEmail, required, validateFindTheSameUser],
+				[validatePhoneNumberAndEmail, validateFindTheSameUser, required],
 				Input,
 				"Mobile Number or email"
 			)}

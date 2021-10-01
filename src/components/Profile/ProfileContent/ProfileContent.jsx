@@ -55,6 +55,7 @@ const ProfileContent = props => {
 										{props.account && props.account.profile && props.account.profile.posts
 											? props.account.profile.posts.map(post => (
 													<div
+													key={post.id}
 														onClick={() =>
 															toggleShowPhotoContainer
 																? setToggleShowPhotoContainer(false)

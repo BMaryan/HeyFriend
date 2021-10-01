@@ -14,7 +14,6 @@ const SignUp = props => {
 		if (formData) {
 			props.isAccount({ id: props.accounts ? props.accounts.length + 1 : undefined, profile: { ...formData } });
 		}
-		console.log(formData);
 	};
 
 	if (props.account && props.account.id) {
@@ -26,7 +25,7 @@ const SignUp = props => {
 			<div className={props.toggleShowSign ? commonStyle.authorization_container : commonStyle.authorization_container_position}>
 				<AuthorizationHelperContainer
 					title={"Sign Up"}
-					form={<SignUpReduxForm onSubmit={onSubmit} users={props.users} userSignUp={props.userSignUp} />}
+					form={<SignUpReduxForm onSubmit={onSubmit} accounts={props.accounts} userSignUp={props.userSignUp} />}
 				/>
 				<InformationContainer
 					title={"Welcome Back!"}

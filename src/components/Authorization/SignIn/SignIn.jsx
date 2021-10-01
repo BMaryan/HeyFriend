@@ -18,7 +18,6 @@ const SignIn = props => {
 					}
 				});
 		}
-		console.log(formData);
 	};
 
 	if (props.account && props.account.id) {

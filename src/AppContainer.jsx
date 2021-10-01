@@ -37,9 +37,9 @@ const AppContainer = props => {
 		}
 	}, [props.account]);
 
-	React.useEffect(() => {
-		props.setProfileChats(props.chats);
-	}, [props.chats]);
+	// React.useEffect(() => {
+	// 	props.setProfileChats(props.chats);
+	// }, [props.chats]);
 
 	setSignUpDataToLocalStorage(props);
 

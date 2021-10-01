@@ -9,8 +9,12 @@ import {
 	validatePassword,
 	required,
 	validateAuthorizationUserCreator,
+	validateFindTheSameUserCreator,
 } from "../../../utils/FieldValidationForm/FieldValidationForm";
 import TextField from "@mui/material/TextField";
+import { accounts } from "../../../core/constants/constantsLocalStorage";
+
+let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localStorage.getItem(accounts)));
 
 const SignInForm = props => {
 	return (

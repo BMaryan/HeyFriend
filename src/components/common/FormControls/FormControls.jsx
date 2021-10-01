@@ -129,20 +129,18 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 							/>
 
 							{values.password !== "" ? (
-								<InputAdornment className={styles.toggle_show_password_button}>
+								<InputAdornment position='end' className={styles.toggle_show_password_button}>
 									<IconButton
-										sx={{
-											"& .MuiTextField-root": { m: 1, size: "10px" },
-										}}
 										className={styles.toggle_show_password_icon}
 										aria-label='toggle password visibility'
 										onClick={handleClickShowPassword}
-										onMouseDown={handleMouseDownPassword}
-										edge='end'>
+										onMouseDown={handleMouseDownPassword}>
 										{values.showPassword ? <VisibilityOff /> : <Visibility />}
 									</IconButton>
 								</InputAdornment>
-							) : undefined}
+							) : (
+								<></>
+							)}
 						</>
 					) : (
 						<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
@@ -155,7 +153,7 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 	);
 };
 
-export const wrapperButton = (button_text, { users, userSignIn, ...props }) => {
+export const wrapperButton = (button_text, { userSignIn, ...props }) => {
 	return (
 		<div className={styles.wrapper_button}>
 			<Button type='submit' disabled={props.invalid || props.submitting || props.pristine} variant='contained'>
