@@ -45,8 +45,8 @@ const Chat = props => {
 				{id ? <Head {...props} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
 
 				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
-					{props.chats && props.chats.length ? (
-						props.chats.map(chat => {
+					{props.chats && props.chats.length > 0 ? (
+						props.chats.find(chat => {
 							if (chat.id === id) {
 								return <Messages key={chat.id} chat={chat} accounts={props.accounts} account={props.account} match={props.match} />;
 							}

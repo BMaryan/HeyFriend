@@ -42,16 +42,27 @@
 
 /* wrapper change picture */
 .wrapper_change_picture {
+	padding: 12px 0;
+}
+
+.wrapper_change_picture,
+.wrapper_upload_picture {
 	width: 100%;
 	text-align: center;
 	border-top: 1px solid var(--bodyBackgroundOrDarkColor);
 	display: flex;
 	justify-content: center;
+	cursor: pointer;
+}
+
+.wrapper_upload_picture label {
+	height: 100%;
+	width: 100%;
 	padding: 12px 0;
 	cursor: pointer;
 }
 
-.wrapper_change_picture input {
+.wrapper_upload_picture input {
 	display: none;
 }
 

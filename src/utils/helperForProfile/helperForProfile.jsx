@@ -30,7 +30,7 @@ export const ChangeProfilePictureContainer = props => {
 		<div className={styles.change_profile_picture_container}>
 			<div className={styles.change_profile_picture_content}>
 				<div className={styles.title}>Change profile photo</div>
-				<div className={styles.wrapper_change_picture}>
+				<div className={styles.wrapper_upload_picture}>
 					<label>
 						Upload photo
 						<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
@@ -74,7 +74,7 @@ export const ContainerCoverProfile = props => {
 		<div className={styles.change_profile_picture_container}>
 			<div className={styles.change_profile_picture_content}>
 				<div className={styles.title}>Change profile cover photo</div>
-				<div className={styles.wrapper_change_picture}>
+				<div className={styles.wrapper_upload_picture}>
 					<label>
 						Upload cover photo
 						<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />

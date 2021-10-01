@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./EditProfile.module.css";
 import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
-import { wrapperCreateField, Input, Textarea, wrapperButton } from "../../../common/FormControls/FormControls";
+import { WrapperCreateField, Input, Textarea, wrapperButton } from "../../../common/FormControls/FormControls";
 import {
 	validatePhoneNumberAndEmail,
 	validatePassword,
@@ -21,17 +21,17 @@ const EditProfileForm = props => {
 		<form className={styles.form} onSubmit={props.handleSubmit}>
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>Name</div>
-				<div className={styles.action}>{wrapperCreateField("name", "text", [validateFirstName], Input, "Your name")}</div>
+				<div className={styles.action}>{WrapperCreateField("name", "text", [validateFirstName], Input, "Your name")}</div>
 			</div>
 
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>Surname</div>
-				<div className={styles.action}>{wrapperCreateField("surname", "text", [validateLastName], Input, "Your surname")}</div>
+				<div className={styles.action}>{WrapperCreateField("surname", "text", [validateLastName], Input, "Your surname")}</div>
 			</div>
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>Email or Phone</div>
 				<div className={styles.action}>
-					{wrapperCreateField(
+					{WrapperCreateField(
 						"phone_or_email",
 						"text",
 						[validatePhoneNumberAndEmail, validateFindTheSameUser],
@@ -42,11 +42,11 @@ const EditProfileForm = props => {
 			</div>
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>Status</div>
-				<div className={styles.action}>{wrapperCreateField("status", "text", [], Input, "Your status")}</div>
+				<div className={styles.action}>{WrapperCreateField("status", "text", [], Input, "Your status")}</div>
 			</div>
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>About</div>
-				<div className={styles.action}>{wrapperCreateField("aboutMe", "text", [], Textarea, "About you")}</div>
+				<div className={styles.action}>{WrapperCreateField("aboutMe", "text", [], Textarea, "About you")}</div>
 			</div>
 
 			<div className={styles.wrapper_button}>{wrapperButton("Submit", { ...props })}</div>

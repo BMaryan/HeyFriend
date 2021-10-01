@@ -37,22 +37,21 @@
 	border-left: 2px solid transparent;
 	padding: 16px 16px 16px 30px;
 	cursor: pointer;
-	transition: 1s;
+	transition: border-left 1s;
 }
 
 .item:hover {
 	background: var(--bodyBackgroundOrColor);
-	transition: 1s;
+	transition: border-left 1s;
 }
 
 .item_active {
 	border-left-color: rgba(var(--f75, 38, 38, 38), 1);
 	font-weight: 600;
-	transition: 1s;
+	transition: border-left 1s;
 }
 
 /* edit content */
 .edit_content {
 	width: 75%;
-	/* background: rgb(255, 199, 199); */
 }

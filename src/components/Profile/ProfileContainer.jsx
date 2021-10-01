@@ -6,26 +6,18 @@ import { compose } from "redux";
 import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow, setProfileChats } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
 
-	// React.useEffect(() => {
-	// 	if (id) {
-	// 		props.accounts.find(profile => {
-	// 			if (profile.id === id && props.account.id !== id) {
-	// 				props.getProfileData(profile.profile);
-	// 			}
-	// 		});
-	// 	} else {
-	// 		if (props.account && props.account.profile) {
-	// 			props.getProfileData({ ...props.SignUp });
-	// 		}
-	// 	}
-	// }, [props.SignUp]);
+	React.useEffect(() => {
+		if (props.chats) {
+			props.setProfileChats(props.chats);
+		}
+	}, [props.chats]);
 
 	if (!props.account) {
 		return <Redirect to='/authorization' />;
@@ -53,6 +45,6 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow }),
+	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow, setProfileChats }),
 	withRouter
 )(ProfileContainer);

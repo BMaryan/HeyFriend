@@ -21,6 +21,10 @@ const ProfileInfo = props => {
 			: oftenCheckOtherProfile && otherProfile.profile.coverPhoto
 			? otherProfile.profile.coverPhoto
 			: undefined;
+	let checkFollow =
+		props.account && props.account.profile && props.account.profile.following
+			? props.account.profile.following.find(account => account.id === props.id)
+			: undefined;
 
 	return (
 		<div className={styles.profile_info}>
@@ -129,9 +133,14 @@ const ProfileInfo = props => {
 										Message
 									</Button>
 								</NavLink>
-								<Button onClick={() => props.follow(props.id)} variant='contained'>
-									Follow
-								</Button>
+
+								{checkFollow ? (
+									<Button variant='contained'>Unfollow</Button>
+								) : (
+									<Button onClick={() => props.follow(props.id)} variant='contained'>
+										Follow
+									</Button>
+								)}
 							</>
 						) : (
 							<NavLink className={styles.navLink_message} to='/account/edit/profile'>

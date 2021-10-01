@@ -21,14 +21,6 @@ const ProfileReducer = (state = initialState, action) => {
 		state.accounts && state.accounts.length
 			? state.accounts.find(profile => (profile && state.authorizationId && !state.paramsId ? profile.id === state.authorizationId : undefined))
 			: undefined;
-	// let otherProfile =
-	// 	state.accounts && state.accounts.length
-	// 		? state.accounts.find(profile => (profile && state.paramsId && !state.authorizationId ? profile.id === state.paramsId : undefined))
-	// 		: undefined;
-	// let arrayNoCurrentAccounts =
-	// 	state.accounts && state.accounts.length
-	// 		? state.accounts.filter(profile => (profile && action.profile ? profile.id !== action.profile.id : undefined))
-	// 		: undefined;
 
 	switch (action.type) {
 		case SET_ACCOUNTS: {
@@ -88,9 +80,6 @@ const ProfileReducer = (state = initialState, action) => {
 				comments: action.comments,
 				ownerCommentToPost: action.ownerCommentToPost,
 			};
-			// let arrayAccounts = state.accounts
-			// 	? state.accounts.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
-			// 	: undefined;
 
 			return {
 				...state,
@@ -106,20 +95,6 @@ const ProfileReducer = (state = initialState, action) => {
 											: [{ ...newPost }],
 							  }
 							: { ...state.account.profile },
-					// accounts: arrayAccounts
-					// 	? [
-					// 			...arrayAccounts,
-					// 			{
-					// 				...myProfile,
-					// 				profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
-					// 			},
-					// 	  ]
-					// 	: [
-					// 			{
-					// 				...myProfile,
-					// 				profile: { ...myProfile.profile, posts: myProfile ? [...myProfile.profile.posts, { ...newPost }] : [] },
-					// 			},
-					// 	  ],
 				},
 			};
 		}
@@ -130,22 +105,38 @@ const ProfileReducer = (state = initialState, action) => {
 
 			return {
 				...state,
-				accounts: myProfile
-					? arrayAccounts && myProfile
-						? [
-								...arrayAccounts,
-								{
-									...myProfile,
-									profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
-								},
-						  ]
-						: myProfile
+				account:
+					state.account && state.account.profile
 						? {
-								...myProfile,
-								profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
+								...state.account,
+								profile:
+									state.account && state.account.profile
+										? {
+												...state.account.profile,
+												chats:
+													state.account && state.account.profile && state.account.profile.chats
+														? [...state.account.profile.chats, ...action.chats]
+														: [...action.chats],
+										  }
+										: null,
 						  }
-						: undefined
-					: state.accounts.map(profile => ({ ...profile })),
+						: null,
+				// accounts: myProfile
+				// 	? arrayAccounts && myProfile
+				// 		? [
+				// 				...arrayAccounts,
+				// 				{
+				// 					...myProfile,
+				// 					profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
+				// 				},
+				// 		  ]
+				// 		: myProfile
+				// 		? {
+				// 				...myProfile,
+				// 				profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
+				// 		  }
+				// 		: undefined
+				// 	: state.accounts.map(profile => ({ ...profile })),
 			};
 		}
 		case GET_AUTHORIZATION_ID: {

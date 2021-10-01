@@ -5,6 +5,10 @@ import styles from "./FormControls.module.css";
 import Button from "@mui/material/Button";
 import { pink } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
 
 const FormControls = props => {
 	return (
@@ -62,7 +66,27 @@ export const Textarea = props => {
 	);
 };
 
-export const wrapperCreateField = (name, type, validate = [], component, placeholder = "", text = "", ...props) => {
+export const WrapperCreateField = (name, type, validate = [], component, placeholder = "", text = "", ...props) => {
+	const [values, setValues] = React.useState({
+		password: "",
+		showPassword: false,
+	});
+
+	const handleChange = prop => event => {
+		setValues({ ...values, [prop]: event.target.value });
+	};
+
+	const handleClickShowPassword = () => {
+		setValues({
+			...values,
+			showPassword: !values.showPassword,
+		});
+	};
+
+	const handleMouseDownPassword = event => {
+		event.preventDefault();
+	};
+
 	return (
 		<>
 			{type === "checkbox" ? (
@@ -76,7 +100,7 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 								type={type}
 								placeholder={placeholder}
 								sx={{
-									color: pink[300],
+									color: pink[2000],
 									"&.Mui-checked": {
 										color: pink[300],
 									},
@@ -97,10 +121,28 @@ export const wrapperCreateField = (name, type, validate = [], component, placeho
 								className={styles.field}
 								name={name}
 								validate={validate}
-								type={type}
+								type={values.showPassword ? "text" : type}
+								value={values.password}
+								onChange={handleChange("password")}
 								placeholder={placeholder}
 								component={component}
 							/>
+
+							{values.password !== "" ? (
+								<InputAdornment className={styles.toggle_show_password_button}>
+									<IconButton
+										sx={{
+											"& .MuiTextField-root": { m: 1, size: "10px" },
+										}}
+										className={styles.toggle_show_password_icon}
+										aria-label='toggle password visibility'
+										onClick={handleClickShowPassword}
+										onMouseDown={handleMouseDownPassword}
+										edge='end'>
+										{values.showPassword ? <VisibilityOff /> : <Visibility />}
+									</IconButton>
+								</InputAdornment>
+							) : undefined}
 						</>
 					) : (
 						<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
