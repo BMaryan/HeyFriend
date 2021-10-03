@@ -9,7 +9,7 @@ import { getAccountsSelector, getAccountSelector } from "../../redux/profile-sel
 import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow, setProfileChats } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { authorizationConstant } from "../../core/constants/constants";
+import { signUpConstant } from "../../core/constants/constants";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
@@ -21,7 +21,7 @@ const ProfileContainer = props => {
 	// }, [props.chats]);
 
 	if (!props.account) {
-		return <Redirect to={`${authorizationConstant}`} />;
+		return <Redirect to={`${signUpConstant}`} />;
 	}
 
 	if (!id && props.account && props.account.id) {

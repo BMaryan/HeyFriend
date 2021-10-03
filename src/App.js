@@ -8,8 +8,9 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import ChatContainer from "./components/Chat/ChatContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
 import EditContainer from "./components/common/Edit/EditContainer";
-import AuthorizationContainer from "./components/Authorization/AuthorizationContainer";
-import { authorizationConstant, chatConstant, editConstant, friendsConstant, profileConstant } from "./core/constants/constants";
+import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
+import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
+import { chatConstant, editConstant, friendsConstant, profileConstant, signInConstant, signUpConstant } from "./core/constants/constants";
 
 function App(props) {
 	return (
@@ -22,7 +23,8 @@ function App(props) {
 					<Route path={`${chatConstant}/:id?`} render={() => <ChatContainer />} />
 					<Route path={`${friendsConstant}/:id?`} render={() => <FriendsContainer />} />
 					<Route path={`${editConstant}`} render={() => <EditContainer />} />
-					<Route path={`${authorizationConstant}`} render={() => <AuthorizationContainer />} />
+					<Route path={`${signInConstant}`} render={() => <SignInContainer />} />
+					<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
 					<Route path='*' render={() => <NotFound />} />
 				</Switch>
 			</div>

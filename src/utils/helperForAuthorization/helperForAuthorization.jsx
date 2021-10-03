@@ -6,7 +6,7 @@ import { accounts, account } from "../../core/constants/constantsLocalStorage";
 
 export const AuthorizationHelperContainer = props => {
 	return (
-		<div className={props.toggleShowSign ? styles.authorization_content : styles.authorization_content_hidden}>
+		<div className={styles.authorization_content}>
 			<div className={styles.authorization_title}>{props.title}</div>
 			{props.form}
 		</div>
@@ -15,23 +15,13 @@ export const AuthorizationHelperContainer = props => {
 
 export const InformationContainer = props => {
 	return (
-		<div className={props.toggleShowSign ? styles.information_content : styles.information_content_hidden}>
+		<div className={styles.information_content}>
 			<div className={styles.information_title}>{props.title}</div>
 			<div className={styles.information_subtitle}>{props.subtitle}</div>
 			<div>
-				{props.buttonText === "Sign Up" ? (
-					// <NavLink onClick={() => props.setToggleShowSign(false)} className={styles.information_navLink} to={props.linkTo}>
-					<div onClick={() => props.setToggleShowSign(false)} className={styles.information_navLink}>
-						{props.buttonText}
-					</div>
-				) : (
-					// {/* </NavLink> */}
-					// <NavLink onClick={() => props.setToggleShowSign(true)} className={styles.information_navLink} to={props.linkTo}>
-					<div onClick={() => props.setToggleShowSign(true)} className={styles.information_navLink}>
-						{props.buttonText}
-					</div>
-					// {/* </NavLink> */}
-				)}
+				<NavLink className={styles.information_navLink} to={props.linkTo}>
+					{props.buttonText}
+				</NavLink>
 			</div>
 		</div>
 	);

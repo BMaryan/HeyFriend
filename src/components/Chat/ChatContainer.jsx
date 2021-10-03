@@ -8,11 +8,11 @@ import { getChatsSelector } from "../../redux/chat-selectors";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { Redirect } from "react-router-dom";
 import { getAuthorizationId, getParamsId } from "../../redux/profile-reducer";
-import { authorizationConstant } from "../../core/constants/constants";
+import { signUpConstant } from "../../core/constants/constants";
 
 const ChatContainer = props => {
 	if (!props.account) {
-		return <Redirect to={`${authorizationConstant}`} />;
+		return <Redirect to={`${signUpConstant}`} />;
 	} else {
 		props.getAuthorizationId(props.account.id);
 		props.getParamsId(null);

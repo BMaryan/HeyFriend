@@ -14,27 +14,27 @@ import { compose } from "redux";
 import { profileConstant } from "../../../core/constants/constants";
 
 const SignUpContainer = props => {
-	// React.useEffect(() => {
-	// 	if (props.accounts) {
-	// 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
-	// 	}
-	// }, [props.accounts]);
-	// React.useEffect(() => {
-	// 	if (props.account) {
-	// 		localStorage.setItem(account, JSON.stringify(props.account));
-	// 	} else {
-	// 		localStorage.removeItem(account);
-	// 	}
-	// }, [props.account]);
-	// React.useEffect(() => {
-	// 	if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
-	// 		props.addAccount(props.accounts.length + 1, props.account.profile);
-	// 	}
-	// }, [props.userSignUp]);
-	// if (props.account && props.account.id) {
-	// 	return <Redirect to={`${profileConstant}`} />;
-	// }
-	// return <SignUp {...props} />;
+	React.useEffect(() => {
+		if (props.accounts) {
+			localStorage.setItem(accounts, JSON.stringify(props.accounts));
+		}
+	}, [props.accounts]);
+	React.useEffect(() => {
+		if (props.account) {
+			localStorage.setItem(account, JSON.stringify(props.account));
+		} else {
+			localStorage.removeItem(account);
+		}
+	}, [props.account]);
+	React.useEffect(() => {
+		if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
+			props.addAccount(props.accounts.length + 1, props.account.profile);
+		}
+	}, [props.userSignUp]);
+	if (props.account && props.account.id) {
+		return <Redirect to={`${profileConstant}`} />;
+	}
+	return <SignUp {...props} />;
 };
 
 const mapStateToProps = state => {
@@ -45,13 +45,13 @@ const mapStateToProps = state => {
 	};
 };
 
-// export default compose(
-// 	connect(mapStateToProps, {
-// 		setUserSignUp,
-// 		helpCheckAuthorization,
-// 		addAccount,
-// 		setSignUpDataToLocalStorage,
-// 		isAccount,
-// 	}),
-// 	withRouter
-// )(SignUpContainer);
+export default compose(
+	connect(mapStateToProps, {
+		setUserSignUp,
+		helpCheckAuthorization,
+		addAccount,
+		setSignUpDataToLocalStorage,
+		isAccount,
+	}),
+	withRouter
+)(SignUpContainer);

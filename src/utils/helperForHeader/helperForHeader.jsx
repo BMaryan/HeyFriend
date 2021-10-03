@@ -4,7 +4,7 @@ import { faHome, faSignOutAlt, faCog, faBookmark } from "@fortawesome/free-solid
 import { NavLink } from "react-router-dom";
 import commonStyles from "../../components/Header/Navbar/Navbar.module.css";
 import styles from "./helperForHeader.module.css";
-import { authorizationConstant, editConstant, profileConstant } from "../../core/constants/constants";
+import { signUpConstant, editConstant, profileConstant } from "../../core/constants/constants";
 
 export const ToggleProfileList = props => {
 	let dataFromAccountToAccounts = () => {
@@ -62,7 +62,7 @@ export const ToggleProfileList = props => {
 						}}
 						className={styles.nav_linkList + " " + commonStyles.common_nav_linkList + " " + commonStyles.logOut}
 						activeClassName={styles.nav_linkList_active}
-						to={`${authorizationConstant}`}>
+						to={`${signUpConstant}`}>
 						<FontAwesomeIcon className={commonStyles.icon + " " + styles.iconList} icon={faSignOutAlt} />
 						Log Out
 					</NavLink>

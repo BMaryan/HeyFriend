@@ -3,4 +3,5 @@ export const profileConstant = "/profile";
 export const chatConstant = "/chat";
 export const friendsConstant = "/friends";
 export const editConstant = "/account/edit";
-export const authorizationConstant = "/authorization";
+export const signUpConstant = "/sign_up";
+export const signInConstant = "/sign_in";

@@ -5,6 +5,7 @@ import styles from "./SignIn.module.css";
 import commonStyle from "../Authorization.module.css";
 import SignInReduxForm from "./SignInForm";
 import { Redirect } from "react-router";
+import { signUpConstant } from "../../../core/constants/constants";
 
 const SignIn = props => {
 	let onSubmit = formData => {
@@ -26,14 +27,13 @@ const SignIn = props => {
 
 	return (
 		<div className={commonStyle.authorization}>
-			<div className={props.toggleShowSign ? commonStyle.authorization_container : commonStyle.authorization_container_position}>
+			<div className={commonStyle.authorization_container}>
 				<AuthorizationHelperContainer title={"Sign In"} form={<SignInReduxForm onSubmit={onSubmit} {...props} />} />
 				<InformationContainer
 					title={"Hello, Friend!"}
 					subtitle={"Enter your personal details and start journey with us"}
-					linkTo={"/authorization"}
+					linkTo={`${signUpConstant}`}
 					buttonText={"Sign Up"}
-					setToggleShowSign={props.setToggleShowSign}
 				/>
 			</div>
 		</div>
