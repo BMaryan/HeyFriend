@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
-import { ChangeProfilePictureContainer, CreateNewPostContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
+import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
@@ -9,9 +9,8 @@ import Button from "@mui/material/Button";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 
 const ProfileInfo = props => {
-	let [toggleCoverContainer, setToggleCoverContainer] = React.useState(false);
-	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
-	let [createNewPost, setCreateNewPost] = React.useState(false);
+	const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
+	const [openModalCoverProfile, setOpenModalCoverProfile] = React.useState(false);
 
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
@@ -58,7 +57,7 @@ const ProfileInfo = props => {
 				{!props.id ? (
 					<div className={styles.wrapper_change_cover}>
 						<FontAwesomeIcon
-							onClick={() => (toggleCoverContainer ? setToggleCoverContainer(false) : setToggleCoverContainer(true))}
+							onClick={() => (openModalCoverProfile ? setOpenModalCoverProfile(false) : setOpenModalCoverProfile(true))}
 							className={styles.icon_change_cover}
 							icon={faCamera}
 						/>
@@ -69,10 +68,10 @@ const ProfileInfo = props => {
 			{/* 				profile info line				 */}
 			<div className={styles.profile_info_line}>
 				{/* wrapper picture */}
-				<div className={changeProfilePicture && !props.id ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
+				<div className={openModalAvatarProfile && !props.id ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
 					{oftenCheckMyProfile && props.account.profile.avatar ? (
 						<img
-							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}
 							src={props.account.profile.avatar}
 							title='Change profile photo'
 							alt=''
@@ -81,7 +80,7 @@ const ProfileInfo = props => {
 						<img src={otherProfile.profile.avatar} alt='' />
 					) : !props.id ? (
 						<img
-							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}
 							src={defaultAvatar}
 							title='Change profile photo'
 							alt=''
@@ -159,13 +158,14 @@ const ProfileInfo = props => {
 			{/* toggle cover container */}
 			{!props.id && props.account.id !== props.id ? (
 				<div>
-					{toggleCoverContainer ? (
+					{openModalCoverProfile ? (
 						<ContainerCoverProfile
 							profile={props.profile}
 							accounts={props.accounts}
 							getProfileData={props.getProfileData}
 							account={props.account}
-							setToggleCoverContainer={setToggleCoverContainer}
+							openModalCoverProfile={openModalCoverProfile}
+							setOpenModalCoverProfile={setOpenModalCoverProfile}
 						/>
 					) : (
 						<></>
@@ -178,31 +178,14 @@ const ProfileInfo = props => {
 			{/* change picture */}
 			{!props.id && props.account.id !== props.id ? (
 				<div>
-					{changeProfilePicture ? (
+					{openModalAvatarProfile ? (
 						<ChangeProfilePictureContainer
 							profile={props.profile}
 							accounts={props.accounts}
 							getProfileData={props.getProfileData}
 							account={props.account}
-							setChangeProfilePicture={setChangeProfilePicture}
-						/>
-					) : (
-						<></>
-					)}
-				</div>
-			) : (
-				<></>
-			)}
-
-			{/* create post */}
-			{!props.id && props.account.id !== props.id ? (
-				<div>
-					{createNewPost ? (
-						<CreateNewPostContainer
-							setProfilePosts={props.setProfilePosts}
-							getProfileData={props.getProfileData}
-							profile={props.profile}
-							setCreateNewPost={setCreateNewPost}
+							openModalAvatarProfile={openModalAvatarProfile}
+							setOpenModalAvatarProfile={setOpenModalAvatarProfile}
 						/>
 					) : (
 						<></>

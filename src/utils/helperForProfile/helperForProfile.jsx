@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./helperForProfile.module.css";
-import CreatePostReduxForm from "../../components/common/CreatePost/CreatePostForm";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import BodyPost from "../../components/common/Post/BodyPost/BodyPost";
 import HeadPost from "../../components/common/Post/HeadPost/HeadPost";
 import FooterPost from "../../components/common/Post/FooterPost/FooterPost";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
 
 export const ChangeProfilePictureContainer = props => {
 	let onChangeProfilePicture = e => {
@@ -16,40 +17,51 @@ export const ChangeProfilePictureContainer = props => {
 
 			reader.onloadend = function () {
 				props.getProfileData({ ...props.account.profile, avatar: reader.result });
-				props.setChangeProfilePicture(false);
+				props.setOpenModalAvatarProfile(false);
 			};
 		}
 	};
 
 	let removeProfilePicture = () => {
 		props.getProfileData({ ...props.account.profile, avatar: null });
-		props.setChangeProfilePicture(false);
+		props.setOpenModalAvatarProfile(false);
 	};
 
 	return (
-		<div className={styles.change_profile_picture_container}>
-			<div className={styles.change_profile_picture_content}>
-				<div className={styles.title}>Change profile photo</div>
-				<div className={styles.wrapper_upload_picture}>
-					<label>
-						Upload photo
-						<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
-					</label>
-				</div>
+		<Modal
+			aria-labelledby='transition-modal-title'
+			aria-describedby='transition-modal-description'
+			open={props.openModalAvatarProfile}
+			onClose={() => props.setOpenModalAvatarProfile(false)}
+			closeAfterTransition
+			BackdropComponent={Backdrop}
+			BackdropProps={{
+				timeout: 500,
+			}}>
+			<Fade in={props.openModalAvatarProfile}>
+				<Box className={styles.change_profile_picture_container}>
+					<div className={styles.change_profile_picture_content}>
+						<div className={styles.title}>Change profile photo</div>
+						<div className={styles.wrapper_upload_picture}>
+							<label>
+								Upload photo
+								<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
+							</label>
+						</div>
 
-				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
-					Remove current photo
-				</div>
+						<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
+							Remove current photo
+						</div>
 
-				<div onClick={() => props.setChangeProfilePicture(false)} className={styles.wrapper_change_picture}>
-					Cancel
-				</div>
-			</div>
-		</div>
+						<div onClick={() => props.setOpenModalAvatarProfile(false)} className={styles.wrapper_change_picture}>
+							Cancel
+						</div>
+					</div>
+				</Box>
+			</Fade>
+		</Modal>
 	);
 };
-
-// 						test
 
 export const ContainerCoverProfile = props => {
 	let onChangeProfilePicture = e => {
@@ -60,116 +72,84 @@ export const ContainerCoverProfile = props => {
 
 			reader.onloadend = function () {
 				props.getProfileData({ ...props.account.profile, coverPhoto: reader.result });
-				props.setToggleCoverContainer(false);
+				props.setOpenModalCoverProfile(false);
 			};
 		}
 	};
 
 	let removeProfilePicture = () => {
 		props.getProfileData({ ...props.account.profile, coverPhoto: null });
-		props.setToggleCoverContainer(false);
+		props.setOpenModalCoverProfile(false);
 	};
 
 	return (
-		<div className={styles.change_profile_picture_container}>
-			<div className={styles.change_profile_picture_content}>
-				<div className={styles.title}>Change profile cover photo</div>
-				<div className={styles.wrapper_upload_picture}>
-					<label>
-						Upload cover photo
-						<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
-					</label>
-				</div>
+		<Modal
+			aria-labelledby='transition-modal-title'
+			aria-describedby='transition-modal-description'
+			open={props.openModalCoverProfile}
+			onClose={() => props.setOpenModalCoverProfile(false)}
+			closeAfterTransition
+			BackdropComponent={Backdrop}
+			BackdropProps={{
+				timeout: 500,
+			}}>
+			<Fade in={props.openModalCoverProfile}>
+				<Box className={styles.change_profile_picture_container}>
+					<div className={styles.change_profile_picture_content}>
+						<div className={styles.title}>Change profile cover photo</div>
+						<div className={styles.wrapper_upload_picture}>
+							<label>
+								Upload cover photo
+								<input onChange={e => onChangeProfilePicture(e)} id='file-upload' type='file' />
+							</label>
+						</div>
 
-				<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
-					Remove cover photo
-				</div>
+						<div className={styles.wrapper_change_picture} onClick={() => removeProfilePicture()}>
+							Remove cover photo
+						</div>
 
-				<div onClick={() => props.setToggleCoverContainer(false)} className={styles.wrapper_change_picture}>
-					Cancel
-				</div>
-			</div>
-		</div>
-	);
-};
-
-// 						test
-
-export const CreateNewPostContainer = props => {
-	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
-
-	let onSubmit = formData => {
-		setSaveOwnerPost(formData.create_post);
-	};
-
-	return (
-		<div className={styles.create_new_post_container}>
-			<div className={styles.create_new_post_content}>
-				<div className={styles.create_post_title}>Create new post</div>
-
-				<div>
-					<CreatePostReduxForm onChange={onSubmit} />
-				</div>
-
-				<div className={styles.wrapper_content}>
-					<div className={styles.wrapper_add_picture}>
-						<label title='Add photo' onChange={e => props.onChangeProfilePicture(e)}>
-							{props.postPicture ? (
-								<img className={styles.post_img} src={props.postPicture} alt='' />
-							) : (
-								<FontAwesomeIcon className={styles.icon} icon={faPlusSquare} />
-							)}
-							<input type='file' />
-						</label>
-
-						{props.postPicture ? (
-							<div className={styles.wrapper_button_delete}>
-								<button onClick={() => props.setPostPicture(false)}>x</button>
-							</div>
-						) : undefined}
+						<div onClick={() => props.setOpenModalCoverProfile(false)} className={styles.wrapper_change_picture}>
+							Cancel
+						</div>
 					</div>
-				</div>
-
-				<div className={styles.wrapper_button_publish}>
-					<button
-						onClick={() =>
-							props.postPicture ? (
-								props.setProfilePosts(props.postPicture, null, null, saveOwnerPost ? saveOwnerPost : null) &&
-								props.setCreatePostContainer(false)
-							) : (
-								// &&
-								// props.postPicture(null)
-								<></>
-							)
-						}>
-						Publish
-					</button>
-				</div>
-
-				<div className={styles.wrapper_button_close}>
-					<button onClick={() => props.setCreatePostContainer(false)}>x</button>
-				</div>
-			</div>
-		</div>
+				</Box>
+			</Fade>
+		</Modal>
 	);
 };
 
 export let ToggleShowCurrentPostContainer = props => {
 	return (
-		<div className={styles.toggle_show_post_container}>
-			<div className={styles.toggle_show_post_content}>
-				<div className={styles.postPhoto}>
-					<BodyPost {...props} />
-				</div>
-				<div className={styles.content}>
-					<HeadPost {...props} />
-					<FooterPost {...props} />
-				</div>
-			</div>
+		<>
+			<Modal
+				className={styles.modal}
+				aria-labelledby='transition-modal-title'
+				aria-describedby='transition-modal-description'
+				open={props.openModalCurrentPost}
+				onClose={() => props.setOpenModalCurrentPost(false)}
+				closeAfterTransition
+				BackdropComponent={Backdrop}
+				BackdropProps={{
+					timeout: 500,
+				}}>
+				<Fade in={props.openModalCurrentPost}>
+					<Box className={styles.modal_current_post_container}>
+						<div className={styles.toggle_show_post_content}>
+							<div className={styles.postPhoto}>
+								<BodyPost {...props} post={props.account.profile.posts[4]} />
+							</div>
+							<div className={styles.content}>
+								<HeadPost {...props} />
+								<FooterPost {...props} />
+							</div>
+						</div>
 
-			<div className={styles.wrapper_button_close}>
-				<button onClick={() => props.setToggleShowPhotoContainer(false)}>x</button>
-			</div>
-		</div>
+						{/* <div className={styles.wrapper_button_close}>
+							<button onClick={() => props.setOpenModalCurrentPost(false)}>x</button>
+						</div> */}
+					</Box>
+				</Fade>
+			</Modal>
+		</>
 	);
 };

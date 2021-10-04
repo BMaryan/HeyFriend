@@ -1,11 +1,15 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faUserFriends } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
 import commonStyles from "../Navbar.module.css";
 import styles from "./NavbarRow.module.css";
 import { chatConstant, friendsConstant } from "../../../../core/constants/constants";
+import Checkbox from "@mui/material/Checkbox";
+import Home from "@mui/icons-material/Home";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 
 const DuplicateCodeFunc = props => {
 	return (
@@ -15,7 +19,10 @@ const DuplicateCodeFunc = props => {
 				activeClassName={commonStyles.nav_linkRow_active}
 				to={props.path}
 				exact={props.exact}>
-				<FontAwesomeIcon className={commonStyles.icon} icon={props.icon} />
+				<div>
+					{console.log(props)}
+					{props.icon}
+				</div>
 			</NavLink>
 		</div>
 	);
@@ -24,9 +31,17 @@ const DuplicateCodeFunc = props => {
 const NavbarRow = props => {
 	return (
 		<div className={styles.navbar_row}>
-			<DuplicateCodeFunc path='/' icon={faHome} exact />
-			<DuplicateCodeFunc path={`${chatConstant}`} icon={faFacebookMessenger} />
-			<DuplicateCodeFunc path={`${friendsConstant}`} icon={faUserFriends} />
+			<DuplicateCodeFunc path='/' icon={<Checkbox icon={<HomeOutlinedIcon />} checkedIcon={<Home color='action' />} />} exact />
+			<DuplicateCodeFunc
+				path={`${chatConstant}`}
+				icon={<Checkbox icon={<ChatOutlinedIcon />} checkedIcon={<ChatRoundedIcon color='action' />} />}
+				exact
+			/>
+			<DuplicateCodeFunc
+				path={`${friendsConstant}`}
+				icon={<Checkbox icon={<PeopleOutlineIcon />} checkedIcon={<PeopleRoundedIcon color='action' />} />}
+				exact
+			/>
 		</div>
 	);
 };

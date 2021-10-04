@@ -16,7 +16,13 @@ const Profile = props => {
 				setProfileChats={props.setProfileChats}
 				follow={props.follow}
 			/>
-			<ProfileContent accounts={props.accounts} account={props.account} setProfilePosts={props.setProfilePosts} id={props.id} />
+			<ProfileContent
+				accounts={props.accounts}
+				account={props.account}
+				setProfilePosts={props.setProfilePosts}
+				id={props.id}
+				getProfileData={props.getProfileData}
+			/>
 		</div>
 	);
 };

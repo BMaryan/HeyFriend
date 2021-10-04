@@ -1,7 +1,6 @@
 .navbar_list {
 	height: 100%;
 	display: flex;
-	position: relative;
 	transition: 0.5s;
 }
 
@@ -9,6 +8,7 @@
 .wrapper_nav_link {
 	height: 100%;
 	display: flex;
+	position: relative;
 	transition: 0.5s;
 }
 
@@ -30,4 +30,33 @@
 	color: black;
 	text-decoration: none;
 	margin: 0 7px;
+}
+
+/* menu */
+
+.menu > div ul {
+	min-width: 200px;
+	background: white;
+	position: absolute;
+	right: 0;
+	border-radius: 3px;
+	padding: 0px;
+}
+
+/* menu_item */
+.menu > div ul li {
+	width: 100%;
+	padding-top: 9px;
+	padding-bottom: 9px;
+}
+
+.menu_item {
+}
+
+.nav_linkList {
+	font-size: 15px;
+}
+
+.nav_linkList svg {
+	font-size: 21px;
 }
