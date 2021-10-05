@@ -6,13 +6,22 @@ import { compose } from "redux";
 import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow, setProfileChats } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow, setProfileChats, addAccount } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { signUpConstant } from "../../core/constants/constants";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
+
+	React.useEffect(() => {
+		if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
+			let foundTheSameAccount = props.accounts.find(account => account.id === props.account.id);
+			if (!foundTheSameAccount) {
+				props.addAccount(props.accounts.length + 1, props.account.profile);
+			}
+		}
+	}, [props.userSignUp]);
 
 	// React.useEffect(() => {
 	// 	if (props.chats) {
@@ -46,6 +55,6 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow, setProfileChats }),
+	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow, setProfileChats, addAccount }),
 	withRouter
 )(ProfileContainer);

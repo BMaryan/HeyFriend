@@ -6,14 +6,10 @@ import { compose } from "redux";
 import { addMessage } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { Redirect } from "react-router-dom";
 import { getAuthorizationId, getParamsId } from "../../redux/profile-reducer";
-import { signUpConstant } from "../../core/constants/constants";
 
 const ChatContainer = props => {
-	if (!props.account) {
-		return <Redirect to={`${signUpConstant}`} />;
-	} else {
+	if (props.account) {
 		props.getAuthorizationId(props.account.id);
 		props.getParamsId(null);
 	}

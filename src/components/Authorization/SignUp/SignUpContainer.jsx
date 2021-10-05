@@ -19,6 +19,7 @@ const SignUpContainer = props => {
 			localStorage.setItem(accounts, JSON.stringify(props.accounts));
 		}
 	}, [props.accounts]);
+
 	React.useEffect(() => {
 		if (props.account) {
 			localStorage.setItem(account, JSON.stringify(props.account));
@@ -26,11 +27,7 @@ const SignUpContainer = props => {
 			localStorage.removeItem(account);
 		}
 	}, [props.account]);
-	React.useEffect(() => {
-		if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
-			props.addAccount(props.accounts.length + 1, props.account.profile);
-		}
-	}, [props.userSignUp]);
+
 	if (props.account && props.account.id) {
 		return <Redirect to={`${profileConstant}`} />;
 	}

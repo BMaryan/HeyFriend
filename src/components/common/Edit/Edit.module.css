@@ -46,7 +46,7 @@
 }
 
 .item_active {
-	border-left-color: rgba(var(38, 38, 38), 1);
+	border-left-color: rgb(107, 107, 107);
 	font-weight: 600;
 	transition: border-left 1s;
 }

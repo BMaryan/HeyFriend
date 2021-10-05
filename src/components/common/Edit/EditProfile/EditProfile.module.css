@@ -70,7 +70,6 @@
 
 .field {
 	width: 100%;
-	/* width: 350px; */
 	max-width: 100%;
 	border: 1px solid silver;
 	outline: none;
@@ -82,9 +81,12 @@
 	margin: auto;
 }
 
+.wrapper_button > div {
+	cursor: no-drop;
+}
+
 .wrapper_button button {
 	width: 100%;
 	background: linear-gradient(var(--mainBg));
 	padding: 10px 100px;
-	cursor: pointer;
 }

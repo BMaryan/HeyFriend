@@ -74,8 +74,11 @@ const ProfileReducer = (state = initialState, action) => {
 		}
 		case SET_PROFILE_POSTS: {
 			let newPost = {
-				id: state.account && state.account.profile && state.account.profile.posts ? state.account.profile.posts.length + 1 : null,
-				avatar: action.avatar,
+				id:
+					state.account && state.account.profile && state.account.profile.posts && state.account.profile.posts.length
+						? state.account.profile.posts.length + 1
+						: 1,
+				postPhoto: action.postPhoto,
 				likes: action.likes,
 				comments: action.comments,
 				ownerCommentToPost: action.ownerCommentToPost,
@@ -201,9 +204,9 @@ export const getProfileData = profile => ({
 	profile,
 });
 
-export const setProfilePosts = (avatar, likes, comments, ownerCommentToPost) => ({
+export const setProfilePosts = (postPhoto, likes, comments, ownerCommentToPost) => ({
 	type: SET_PROFILE_POSTS,
-	avatar,
+	postPhoto,
 	likes,
 	comments,
 	ownerCommentToPost,

@@ -12,9 +12,6 @@ const Review = props => {
 			<div className={styles.wrapper_item}>
 				<div className={styles.title}>Login</div>
 				<div className={styles.wrapper_content}>
-					<div>
-						<FontAwesomeIcon className={styles.icon} icon={faPhoneAlt} />
-					</div>
 					<div className={styles.value}>{props.account.profile.surname + " " + props.account.profile.name}</div>
 				</div>
 			</div>

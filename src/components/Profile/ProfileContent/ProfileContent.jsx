@@ -78,13 +78,7 @@ const ProfileContent = props => {
 					render={() => {
 						return (
 							<>
-								<CreatePost
-									account={props.account}
-									otherProfile={otherProfile}
-									accounts={props.accounts}
-									setProfilePosts={props.setProfilePosts}
-									handleOpen={handleOpen}
-								/>
+								<CreatePost account={props.account} otherProfile={otherProfile} accounts={props.accounts} handleOpen={handleOpen} />
 
 								<div className={styles.posts}>
 									<div className={styles.wrapper_posts}>

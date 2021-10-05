@@ -19,10 +19,7 @@ const DuplicateCodeFunc = props => {
 				activeClassName={commonStyles.nav_linkRow_active}
 				to={props.path}
 				exact={props.exact}>
-				<div>
-					{console.log(props)}
-					{props.icon}
-				</div>
+				<div>{props.icon}</div>
 			</NavLink>
 		</div>
 	);
