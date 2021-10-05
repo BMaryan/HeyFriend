@@ -1,10 +1,20 @@
 import React from "react";
 import styles from "../Post.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
+import IconButton from "@mui/material/IconButton";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import { NavLink } from "react-router-dom";
+import { profileConstant } from "../../../../core/constants/constants";
 
 const HeadPost = props => {
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
@@ -23,25 +33,56 @@ const HeadPost = props => {
 						)}
 					</div>
 					<div className={styles.details}>
-						<div className={styles.fullName}>
+						<NavLink to={`${profileConstant}/${props.account.id}`} className={styles.fullName}>
 							{oftenCheckMyProfile
 								? props.account.profile.surname + " " + props.account.profile.name
 								: oftenCheckOtherProfile
 								? otherProfile.profile.surname + " " + otherProfile.profile.name
 								: undefined}
-						</div>
+						</NavLink>
 						<div className={styles.date}>24 June 2018 at 7:36 pm</div>
 					</div>
 				</div>
 
 				<div>
-					<FontAwesomeIcon className={styles.icon} icon={faEllipsisH} />
+					<IconButton onClick={handleOpen} className={styles.button_icon}>
+						<MoreHorizIcon className={styles.icon} />
+					</IconButton>
 				</div>
-			</div>
 
-			{props.post && props.post.ownerCommentToPost ? (
-				<div className={styles.commentOwnerOfPost}>{props.post.ownerCommentToPost}</div>
-			) : undefined}
+				<>
+					<Modal
+						aria-labelledby='transition-modal-title'
+						aria-describedby='transition-modal-description'
+						open={open}
+						onClose={handleClose}
+						closeAfterTransition
+						BackdropComponent={Backdrop}
+						BackdropProps={{
+							timeout: 500,
+						}}>
+						<Fade in={open}>
+							<Box className={styles.modalPostActions}>
+								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
+									<div className={styles.item}>Report</div>
+								</div>
+								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
+									<div className={styles.item}>Unfollow</div>
+								</div>
+								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
+									<div className={styles.item}>Share to...</div>
+								</div>
+								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
+									<div className={styles.item}>Copy link</div>
+								</div>
+								<div onClick={handleClose} className={styles.wrapper_item}>
+									<div>Cancel</div>
+								</div>
+							</Box>
+						</Fade>
+					</Modal>
+				</>
+			</div>
 		</div>
 	);
 };

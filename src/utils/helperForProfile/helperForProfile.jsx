@@ -113,7 +113,10 @@ export let ToggleShowCurrentPostContainer = props => {
 		<DuplicateCodeFunc
 			{...props}
 			open={props.openModalCurrentPost}
-			close={() => props.setOpenModalCurrentPost(false)}
+			close={() => {
+				props.setOpenModalCurrentPost(false);
+				props.history.goBack();
+			}}
 			class={styles.modal_current_post_container}>
 			<div className={styles.toggle_show_post_content}>
 				<div className={styles.postPhoto}>

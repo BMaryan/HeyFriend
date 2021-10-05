@@ -80,7 +80,6 @@
 	flex: 1;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: var(--pdContent);
 }
 
 .wrapper_button_close {

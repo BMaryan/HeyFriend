@@ -1,0 +1,41 @@
+.comment {
+	width: 100%;
+	/* background: rgb(255, 147, 147); */
+}
+
+/* form */
+.form {
+	height: 100%;
+	width: 100%;
+	/* background: red; */
+	border-top: 1px solid var(--bgWhite233);
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	padding: var(--pdContent);
+}
+
+.button_icon {
+	padding: 0;
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.icon svg {
+	font-size: 300px;
+}
+
+.input {
+	flex: 1;
+	font-size: 15px;
+	border: none;
+	outline: none;
+	padding: 5px 0;
+}
+
+.button_post button:disabled {
+	padding: 0;
+	cursor: no-drop;
+}

@@ -20,8 +20,10 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { ToggleShowCurrentPostContainer } from "../../../utils/helperForProfile/helperForProfile";
+import { useHistory } from "react-router-dom";
 
 const ProfileContent = props => {
+	let history = useHistory();
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
@@ -84,14 +86,27 @@ const ProfileContent = props => {
 									<div className={styles.wrapper_posts}>
 										{props.account && props.account.profile && props.account.profile.posts
 											? props.account.profile.posts.map(post => (
-													<div
+													<NavLink
 														key={post.id}
+														to={`?postId=${post.id}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
 														className={styles.post}>
 														<BodyPost key={post.id} post={post} />
-													</div>
+													</NavLink>
+											  ))
+											: oftenCheckOtherProfile && otherProfile && otherProfile.profile.posts
+											? otherProfile.profile.posts.map(post => (
+													<NavLink
+														key={post.id}
+														to={`?postId=${post.id}`}
+														onClick={() =>
+															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
+														}
+														className={styles.post}>
+														<BodyPost key={post.id} post={post} />
+													</NavLink>
 											  ))
 											: undefined}
 									</div>
@@ -186,6 +201,7 @@ const ProfileContent = props => {
 					{...props}
 					openModalCurrentPost={openModalCurrentPost}
 					setOpenModalCurrentPost={setOpenModalCurrentPost}
+					history={history}
 				/>
 			) : undefined}
 		</div>

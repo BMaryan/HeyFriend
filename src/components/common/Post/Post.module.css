@@ -1,5 +1,5 @@
 .wrapper_post {
-	height: 800px;
+	height: 910px;
 	max-height: 100%;
 	width: 100%;
 	background: white;
@@ -12,12 +12,11 @@
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
-	padding: var(--pdContent);
 }
 
 /* head */
 .head {
-	margin-bottom: var(--pdContent);
+	padding: var(--pdContent);
 }
 
 .wrapper_details {
@@ -48,7 +47,13 @@
 }
 
 .fullName {
+	color: black;
+	text-decoration: none;
 	font-weight: 500;
+}
+
+.fullName:hover {
+	text-decoration: underline;
 }
 
 .date {
@@ -58,15 +63,12 @@
 
 .icon {
 	color: var(--colorIcons);
-	font-size: 20px;
+	font-size: 25px;
 	cursor: pointer;
 }
 
-/* comment owner of post */
-.commentOwnerOfPost {
-	color: rgb(46, 46, 46);
-	font-size: 15px;
-	margin-top: var(--pdContent);
+.button_icon {
+	padding: 0;
 }
 
 /* body */
@@ -74,11 +76,9 @@
 	height: 100%;
 	width: 100%;
 	display: flex;
-	/* margin: var(--pdContent) 0; */
 }
 
 .bodyPhoto {
-	/* height: 450px; */
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -89,24 +89,77 @@
 
 /* footer */
 .footer {
-	/* margin-top: var(--pdContent); */
+}
+
+.footer_head {
+	padding: var(--pdContent) var(--pdContent) 0 var(--pdContent);
 }
 
 .features {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	/* border: 1px solid red; */
 }
 
 .features_left > .icon {
-	margin-right: 5px;
+	margin: 0px 15px 0px 0px;
 }
 
-.features_right {
+.features_left > .icon,
+.features_right > .icon {
+	padding: 0px;
 }
 
-/* number of comments */
-.numberOfComments {
+.commentOwnerOfPost {
+	color: rgb(46, 46, 46);
 	font-size: 15px;
-	/* margin-bottom: var(--pdContent); */
+	padding: 0 var(--pdContent) var(--pdContent) var(--pdContent);
+}
+
+.full_name_comment {
+	color: black;
+	text-decoration: none;
+	font-weight: 500;
+	margin-right: 5px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.full_name_comment:hover {
+	text-decoration: underline;
+	transition: 0.5s;
+}
+
+/* number of likes */
+.numberOfLikes {
+	font-size: 15px;
+	margin: 10px 0;
+}
+
+/* modal post actions */
+.modalPostActions {
+	width: 30vw;
+	background: white;
+	border-radius: var(--borderRadius);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.wrapper_item {
+	display: flex;
+	justify-content: center;
+	padding: 15px;
+	cursor: pointer;
+}
+
+.wrapper_item__border {
+	border-bottom: 1px solid var(--bgWhite233);
+}
+
+.item {
+	color: rgb(33, 33, 33);
+	font-size: 15px;
 }
