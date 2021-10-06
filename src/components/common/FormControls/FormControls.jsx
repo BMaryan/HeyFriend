@@ -157,7 +157,8 @@ export const wrapperButton = (button_text, { userSignIn, ...props }) => {
 	return (
 		<div className={styles.wrapper_button}>
 			<Button type='submit' disabled={props.invalid || props.submitting || props.pristine} variant='contained'>
-				{button_text}
+				{button_text[0]}
+				<span style={{ textTransform: "lowercase" }}>{button_text.slice(1)}</span>
 			</Button>
 		</div>
 	);

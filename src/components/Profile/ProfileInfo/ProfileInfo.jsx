@@ -130,7 +130,7 @@ const ProfileInfo = props => {
 							<>
 								<NavLink className={styles.navLink_message} to={`${chatConstant}/` + props.id}>
 									<Button onClick={() => props.addChat(props.id)} variant='contained'>
-										Message
+										M<span style={{ textTransform: "lowercase" }}>essage</span>
 									</Button>
 								</NavLink>
 
@@ -138,15 +138,15 @@ const ProfileInfo = props => {
 									<Button variant='contained'>Unfollow</Button>
 								) : (
 									<Button onClick={() => props.follow(props.id)} variant='contained'>
-										Follow
+										F<span style={{ textTransform: "lowercase" }}>ollow</span>
 									</Button>
 								)}
 							</>
 						) : (
 							<NavLink className={styles.navLink_message} to={`${editConstant}${profileConstant}`}>
 								<Button variant='contained'>
-									<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
-									Edit profile
+									<FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />E
+									<span style={{ textTransform: "lowercase" }}>dit profile</span>
 								</Button>
 							</NavLink>
 						)}
