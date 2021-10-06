@@ -9,6 +9,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { NavLink } from "react-router-dom";
 import { profileConstant } from "../../../../core/constants/constants";
+import Button from "@mui/material/Button";
 
 const HeadPost = props => {
 	const [open, setOpen] = React.useState(false);
@@ -63,21 +64,21 @@ const HeadPost = props => {
 						}}>
 						<Fade in={open}>
 							<Box className={styles.modalPostActions}>
-								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
-									<div className={styles.item}>Report</div>
-								</div>
-								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
-									<div className={styles.item}>Unfollow</div>
-								</div>
-								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
-									<div className={styles.item}>Share to...</div>
-								</div>
-								<div className={styles.wrapper_item + " " + styles.wrapper_item__border}>
-									<div className={styles.item}>Copy link</div>
-								</div>
-								<div onClick={handleClose} className={styles.wrapper_item}>
-									<div>Cancel</div>
-								</div>
+								<Button variant='text' className={styles.item + " " + styles.item__border}>
+									R<span style={{ textTransform: "lowercase" }}>eport</span>
+								</Button>
+								<Button variant='text' className={styles.item + " " + styles.item__border}>
+									U<span style={{ textTransform: "lowercase" }}>nfollow</span>
+								</Button>
+								<Button variant='text' className={styles.item + " " + styles.item__border}>
+									S<span style={{ textTransform: "lowercase" }}>hare to...</span>
+								</Button>
+								<Button variant='text' className={styles.item + " " + styles.item__border}>
+									C <span style={{ textTransform: "lowercase" }}>opy link</span>
+								</Button>
+								<Button variant='text' className={styles.item}>
+									C<span style={{ textTransform: "lowercase" }}>ancel</span>
+								</Button>
 							</Box>
 						</Fade>
 					</Modal>

@@ -81,6 +81,7 @@ const ProfileReducer = (state = initialState, action) => {
 				postPhoto: action.postPhoto,
 				likes: action.likes,
 				comments: action.comments,
+				createPostDate: action.createPostDate,
 				ownerCommentToPost: action.ownerCommentToPost,
 			};
 
@@ -204,11 +205,12 @@ export const getProfileData = profile => ({
 	profile,
 });
 
-export const setProfilePosts = (postPhoto, likes, comments, ownerCommentToPost) => ({
+export const setProfilePosts = (postPhoto, likes, comments, createPostDate, ownerCommentToPost) => ({
 	type: SET_PROFILE_POSTS,
 	postPhoto,
 	likes,
 	comments,
+	createPostDate,
 	ownerCommentToPost,
 });
 

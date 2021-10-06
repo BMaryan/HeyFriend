@@ -13,8 +13,14 @@
 .change_profile_picture_content {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+}
+
+.change_profile_picture_content button {
+	color: rgb(41, 41, 41);
+	border-top: 1px solid var(--bgWhite220);
+	border-radius: 0;
+	padding: 12px 0;
 }
 
 /* title */
@@ -22,22 +28,22 @@
 	color: rgb(38, 38, 38);
 	font-weight: 500;
 	font-size: 20px;
-	padding: var(--pdContent);
+	padding: var(--pdContent) 0;
 }
 
 /* wrapper change picture */
-.wrapper_change_picture {
-	padding: 12px 0;
-}
-
-.wrapper_change_picture,
-.wrapper_upload_picture {
+.wrapper_item {
+	height: 100%;
 	width: 100%;
 	text-align: center;
-	border-top: 1px solid var(--bgWhite220);
-	display: flex;
-	justify-content: center;
-	cursor: pointer;
+}
+
+.wrapper_item:last-child {
+	border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+}
+
+.wrapper_upload_picture {
+	padding: 0 !important;
 }
 
 .wrapper_upload_picture label {

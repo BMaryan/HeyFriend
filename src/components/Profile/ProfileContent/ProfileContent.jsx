@@ -180,7 +180,11 @@ const ProfileContent = props => {
 								variant='contained'
 								disabled={!postPhoto}
 								onClick={() => {
-									postPhoto ? props.setProfilePosts(postPhoto, null, null, saveOwnerPost ? saveOwnerPost : null) : <></>;
+									postPhoto ? (
+										props.setProfilePosts(postPhoto, null, null, "01.01.01", saveOwnerPost ? saveOwnerPost : null)
+									) : (
+										<></>
+									);
 									handleClose();
 								}}>
 								Publish

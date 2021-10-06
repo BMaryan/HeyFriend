@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { getPictureBase64, removePicture } from "../../core/methods/methods";
+import Button from "@mui/material/Button";
 
 const DuplicateCodeFunc = props => {
 	return (
@@ -37,9 +38,9 @@ export const ChangeProfilePictureContainer = props => {
 			class={styles.change_profile_picture_container}>
 			<div className={styles.change_profile_picture_content}>
 				<div className={styles.title}>Change profile photo</div>
-				<div className={styles.wrapper_upload_picture}>
+				<Button className={styles.wrapper_item + " " + styles.wrapper_upload_picture}>
 					<label>
-						Upload photo
+						U<span style={{ textTransform: "lowercase" }}>pload photo</span>
 						<input
 							onChange={e => {
 								getPictureBase64(e, props.getProfileData, props.account, "avatar");
@@ -49,20 +50,20 @@ export const ChangeProfilePictureContainer = props => {
 							type='file'
 						/>
 					</label>
-				</div>
+				</Button>
 
-				<div
-					className={styles.wrapper_change_picture}
+				<Button
+					className={styles.wrapper_item}
 					onClick={() => {
 						removePicture(props.getProfileData, props.account, "avatar");
 						props.setOpenModalAvatarProfile(false);
 					}}>
-					Remove current photo
-				</div>
+					R<span style={{ textTransform: "lowercase" }}>emove current photo</span>
+				</Button>
 
-				<div onClick={() => props.setOpenModalAvatarProfile(false)} className={styles.wrapper_change_picture}>
-					Cancel
-				</div>
+				<Button className={styles.wrapper_item} onClick={() => props.setOpenModalAvatarProfile(false)}>
+					C<span style={{ textTransform: "lowercase" }}>ancel</span>
+				</Button>
 			</div>
 		</DuplicateCodeFunc>
 	);
@@ -77,9 +78,9 @@ export const ContainerCoverProfile = props => {
 			class={styles.change_profile_picture_container}>
 			<div className={styles.change_profile_picture_content}>
 				<div className={styles.title}>Change profile cover photo</div>
-				<div className={styles.wrapper_upload_picture}>
+				<Button className={styles.wrapper_item + " " + styles.wrapper_upload_picture}>
 					<label>
-						Upload cover photo
+						U<span style={{ textTransform: "lowercase" }}>pload cover photo</span>
 						<input
 							onChange={e => {
 								getPictureBase64(e, props.getProfileData, props.account, "coverPhoto");
@@ -89,20 +90,20 @@ export const ContainerCoverProfile = props => {
 							type='file'
 						/>
 					</label>
-				</div>
+				</Button>
 
-				<div
-					className={styles.wrapper_change_picture}
+				<Button
+					className={styles.wrapper_item}
 					onClick={() => {
 						removePicture(props.getProfileData, props.account, "coverPhoto");
 						props.setOpenModalCoverProfile(false);
 					}}>
-					Remove cover photo
-				</div>
+					R<span style={{ textTransform: "lowercase" }}>emove cover photo</span>
+				</Button>
 
-				<div onClick={() => props.setOpenModalCoverProfile(false)} className={styles.wrapper_change_picture}>
-					Cancel
-				</div>
+				<Button className={styles.wrapper_item} onClick={() => props.setOpenModalCoverProfile(false)}>
+					C<span style={{ textTransform: "lowercase" }}>ancel</span>
+				</Button>
 			</div>
 		</DuplicateCodeFunc>
 	);

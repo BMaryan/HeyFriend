@@ -149,17 +149,25 @@
 }
 
 .wrapper_item {
-	display: flex;
-	justify-content: center;
-	padding: 15px;
-	cursor: pointer;
-}
-
-.wrapper_item__border {
-	border-bottom: 1px solid var(--bgWhite233);
 }
 
 .item {
+	height: 100%;
+	width: 100%;
 	color: rgb(33, 33, 33);
-	font-size: 15px;
+	font-size: 14px;
+	border-radius: 0;
+	padding: 12px;
+}
+
+.item:first-child {
+	border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+}
+
+.item:last-child {
+	border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+}
+
+.item__border {
+	border-bottom: 1px solid var(--bgWhite233);
 }
