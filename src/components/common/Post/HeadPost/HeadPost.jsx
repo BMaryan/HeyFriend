@@ -51,38 +51,36 @@ const HeadPost = props => {
 					</IconButton>
 				</div>
 
-				<>
-					<Modal
-						aria-labelledby='transition-modal-title'
-						aria-describedby='transition-modal-description'
-						open={open}
-						onClose={handleClose}
-						closeAfterTransition
-						BackdropComponent={Backdrop}
-						BackdropProps={{
-							timeout: 500,
-						}}>
-						<Fade in={open}>
-							<Box className={styles.modalPostActions}>
-								<Button variant='text' className={styles.item + " " + styles.item__border}>
-									R<span style={{ textTransform: "lowercase" }}>eport</span>
-								</Button>
-								<Button variant='text' className={styles.item + " " + styles.item__border}>
-									U<span style={{ textTransform: "lowercase" }}>nfollow</span>
-								</Button>
-								<Button variant='text' className={styles.item + " " + styles.item__border}>
-									S<span style={{ textTransform: "lowercase" }}>hare to...</span>
-								</Button>
-								<Button variant='text' className={styles.item + " " + styles.item__border}>
-									C <span style={{ textTransform: "lowercase" }}>opy link</span>
-								</Button>
-								<Button onClick={handleClose} variant='text' className={styles.item}>
-									C<span style={{ textTransform: "lowercase" }}>ancel</span>
-								</Button>
-							</Box>
-						</Fade>
-					</Modal>
-				</>
+				<Modal
+					aria-labelledby='transition-modal-title'
+					aria-describedby='transition-modal-description'
+					open={open}
+					onClose={handleClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 500,
+					}}>
+					<Fade in={open}>
+						<Box className={styles.modalPostActions}>
+							<Button variant='text' className={styles.item + " " + styles.item__border}>
+								R<span style={{ textTransform: "lowercase" }}>eport</span>
+							</Button>
+							<Button variant='text' className={styles.item + " " + styles.item__border}>
+								U<span style={{ textTransform: "lowercase" }}>nfollow</span>
+							</Button>
+							<Button variant='text' className={styles.item + " " + styles.item__border}>
+								S<span style={{ textTransform: "lowercase" }}>hare to...</span>
+							</Button>
+							<Button variant='text' className={styles.item + " " + styles.item__border}>
+								C <span style={{ textTransform: "lowercase" }}>opy link</span>
+							</Button>
+							<Button onClick={handleClose} variant='text' className={styles.item}>
+								C<span style={{ textTransform: "lowercase" }}>ancel</span>
+							</Button>
+						</Box>
+					</Fade>
+				</Modal>
 			</div>
 		</div>
 	);

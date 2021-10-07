@@ -20,4 +20,6 @@
 /* wrapper content */
 .wrapper_content {
 	width: 35%;
+	display: flex;
+	flex-direction: column;
 }

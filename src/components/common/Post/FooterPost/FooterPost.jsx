@@ -11,11 +11,13 @@ import { red } from "@mui/material/colors";
 import Comments from "../Comments/Comments";
 import { NavLink } from "react-router-dom";
 import { profileConstant } from "../../../../core/constants/constants";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, useParams } from "react-router-dom";
 
 const FooterPost = props => {
 	let location = useLocation();
 	let history = useHistory();
+	let slug = useParams();
+
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
@@ -23,17 +25,20 @@ const FooterPost = props => {
 	let idPost = location && location.search ? location.search.slice(pos + 1) : "";
 
 	let checkCurrentPost =
-		props.account &&
-		props.account.profile.posts &&
-		props.account.profile.posts.find(post => {
-			if (idPost && idPost === post.uniqueId) {
-				return post;
-			}
-		});
+		props.account && props.account.profile.posts
+			? props.account.profile.posts.find(post => {
+					if ((idPost && idPost === post.uniqueId) || (slug && slug.id === post.uniqueId)) {
+						return post;
+					}
+			  })
+			: undefined;
+
+	console.log(checkCurrentPost);
+	console.log(slug);
 
 	return (
-		<div className={styles.footer}>
-			{checkCurrentPost && checkCurrentPost.ownerCommentToPost && props.modal ? (
+		<div className={props.modal ? styles.footer : styles.footer_modal}>
+			{checkCurrentPost && props.modal ? (
 				<div className={props.modal ? styles.commentOwnerOfPost__modal : styles.commentOwnerOfPost}>
 					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
 						{oftenCheckMyProfile
@@ -42,7 +47,7 @@ const FooterPost = props => {
 							? otherProfile.profile.surname + " " + otherProfile.profile.name
 							: undefined}
 					</NavLink>
-					{checkCurrentPost.ownerCommentToPost}
+					{checkCurrentPost.ownerCommentToPost ? checkCurrentPost.ownerCommentToPost : undefined}
 				</div>
 			) : undefined}
 
@@ -92,7 +97,7 @@ const FooterPost = props => {
 				</div>
 			</div>
 
-			{/* {checkCurrentPost && checkCurrentPost.ownerCommentToPost && !props.modal ? (
+			{props.post && !props.modal ? (
 				<div className={styles.commentOwnerOfPost}>
 					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
 						{oftenCheckMyProfile
@@ -101,24 +106,9 @@ const FooterPost = props => {
 							? otherProfile.profile.surname + " " + otherProfile.profile.name
 							: undefined}
 					</NavLink>
-					{checkCurrentPost.ownerCommentToPost}
-				</div>
-			) : undefined} */}
-
-			{props.post && props.post.ownerCommentToPost && !props.modal ? (
-				<div className={styles.commentOwnerOfPost}>
-					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
-						{oftenCheckMyProfile
-							? props.account.profile.surname + " " + props.account.profile.name
-							: oftenCheckOtherProfile
-							? otherProfile.profile.surname + " " + otherProfile.profile.name
-							: undefined}
-					</NavLink>
-					{props.post.ownerCommentToPost}
+					{props.post.ownerCommentToPost ? props.post.ownerCommentToPost : undefined}
 				</div>
 			) : undefined}
-
-			{/* {props.post.uniqueId} */}
 
 			<Comments account={props.account} />
 		</div>

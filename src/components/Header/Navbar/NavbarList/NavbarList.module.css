@@ -4,6 +4,11 @@
 	transition: 0.5s;
 }
 
+.navbar_list div {
+	height: 100%;
+	/* background: red; */
+}
+
 /* wrapper nav link */
 .wrapper_nav_link {
 	height: 100%;

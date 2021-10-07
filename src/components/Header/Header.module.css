@@ -60,7 +60,8 @@
 	height: 100%;
 	width: 250px;
 	max-width: 100%;
-	background: var(--bgWhite245);
+	border: 1px solid var(--bgWhite245);
+	/* background: var(--bgWhite245); */
 	border: none;
 	outline: none;
 	border-radius: 30px;
@@ -69,14 +70,16 @@
 }
 
 .showField {
-	width: 250px;
-	font-size: 15px;
+	width: 220px;
+	font-size: 14px;
+	border: 1px solid var(--bgWhite233);
 	padding: 0 10px 0 50px;
 }
 
 .hiddenField {
 	width: 50px;
 	font-size: 0;
+	border: 1px solid var(--bgWhite233);
 	padding: 0 0 0 50px;
 	pointer-events: none;
 }

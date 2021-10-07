@@ -89,9 +89,17 @@
 
 /* footer */
 .footer {
-	/* height: 100%; */
+	height: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+.footer_modal {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .footer_head {
@@ -102,7 +110,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	/* border: 1px solid red; */
 }
 
 .features_left > .icon {
@@ -115,13 +122,20 @@
 }
 
 .commentOwnerOfPost__modal {
+	/* background: red; */
 	border-top: 1px solid var(--bgWhite220);
 	border-bottom: 1px solid var(--bgWhite220);
 	flex: 1;
 	padding: var(--pdContent);
+	overflow-y: scroll;
+}
+
+.commentOwnerOfPost__modal::-webkit-scrollbar {
+	width: 0;
 }
 
 .commentOwnerOfPost {
+	/* background: blue; */
 	color: rgb(46, 46, 46);
 	font-size: 15px;
 	padding: 0 var(--pdContent) var(--pdContent) var(--pdContent);

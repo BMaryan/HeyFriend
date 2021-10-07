@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
+import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 
 const ProfileInfo = props => {
 	const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
@@ -56,10 +57,10 @@ const ProfileInfo = props => {
 				{/* change cover img */}
 				{!props.id ? (
 					<div className={styles.wrapper_change_cover}>
-						<FontAwesomeIcon
+						<PhotoCameraOutlinedIcon
 							onClick={() => (openModalCoverProfile ? setOpenModalCoverProfile(false) : setOpenModalCoverProfile(true))}
 							className={styles.icon_change_cover}
-							icon={faCamera}
+							fontSize='medium'
 						/>
 					</div>
 				) : undefined}

@@ -10,8 +10,7 @@ const Post = props => {
 			<div className={styles.post}>
 				<HeadPost {...props} />
 				<BodyPost {...props} />
-				<FooterPost {...props} />
-				{/* <div>{props.post.uniqueId}</div> */}
+				<FooterPost {...props} modal={false} />
 			</div>
 		</div>
 	);
