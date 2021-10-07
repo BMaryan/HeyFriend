@@ -135,7 +135,9 @@ const ProfileInfo = props => {
 								</NavLink>
 
 								{checkFollow ? (
-									<Button variant='contained'>Unfollow</Button>
+									<Button variant='contained'>
+										U<span style={{ textTransform: "lowercase" }}>nfollow</span>
+									</Button>
 								) : (
 									<Button onClick={() => props.follow(props.id)} variant='contained'>
 										F<span style={{ textTransform: "lowercase" }}>ollow</span>

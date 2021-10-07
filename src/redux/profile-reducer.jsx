@@ -78,6 +78,7 @@ const ProfileReducer = (state = initialState, action) => {
 					state.account && state.account.profile && state.account.profile.posts && state.account.profile.posts.length
 						? state.account.profile.posts.length + 1
 						: 1,
+				uniqueId: action.uniqueId,
 				postPhoto: action.postPhoto,
 				likes: action.likes,
 				comments: action.comments,
@@ -161,6 +162,8 @@ const ProfileReducer = (state = initialState, action) => {
 			};
 		}
 		case FOLLOW: {
+			console.log(action.id);
+
 			return {
 				...state,
 				account: {
@@ -205,9 +208,10 @@ export const getProfileData = profile => ({
 	profile,
 });
 
-export const setProfilePosts = (postPhoto, likes, comments, createPostDate, ownerCommentToPost) => ({
+export const setProfilePosts = (postPhoto, uniqueId, likes, comments, createPostDate, ownerCommentToPost) => ({
 	type: SET_PROFILE_POSTS,
 	postPhoto,
+	uniqueId,
 	likes,
 	comments,
 	createPostDate,

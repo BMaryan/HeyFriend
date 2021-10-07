@@ -11,6 +11,7 @@ const Post = props => {
 				<HeadPost {...props} />
 				<BodyPost {...props} />
 				<FooterPost {...props} />
+				{/* <div>{props.post.uniqueId}</div> */}
 			</div>
 		</div>
 	);

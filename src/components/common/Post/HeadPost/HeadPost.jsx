@@ -41,11 +41,11 @@ const HeadPost = props => {
 								? otherProfile.profile.surname + " " + otherProfile.profile.name
 								: undefined}
 						</NavLink>
-						<div className={styles.date}>24 June 2018 at 7:36 pm</div>
+						{props.post && props.post.createPostDate ? <div className={styles.date}>{props.post.createPostDate}</div> : undefined}
 					</div>
 				</div>
 
-				<div>
+				<div className={styles.wrapper_button}>
 					<IconButton onClick={handleOpen} className={styles.button_icon}>
 						<MoreHorizIcon className={styles.icon} />
 					</IconButton>
@@ -76,7 +76,7 @@ const HeadPost = props => {
 								<Button variant='text' className={styles.item + " " + styles.item__border}>
 									C <span style={{ textTransform: "lowercase" }}>opy link</span>
 								</Button>
-								<Button variant='text' className={styles.item}>
+								<Button onClick={handleClose} variant='text' className={styles.item}>
 									C<span style={{ textTransform: "lowercase" }}>ancel</span>
 								</Button>
 							</Box>

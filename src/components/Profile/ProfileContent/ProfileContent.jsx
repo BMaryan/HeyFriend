@@ -20,15 +20,17 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { ToggleShowCurrentPostContainer } from "../../../utils/helperForProfile/helperForProfile";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const ProfileContent = props => {
 	let history = useHistory();
+	let location = useLocation();
+
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	let [postPhoto, setPostPhoto] = React.useState(null);
-	const [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
+	let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
 
 	let onSubmit = formData => {
 		setSaveOwnerPost(formData.create_post);
@@ -52,6 +54,18 @@ const ProfileContent = props => {
 			};
 		}
 	};
+
+	function makeid(length) {
+		var result = "";
+		var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		var charactersLength = characters.length;
+		for (var i = 0; i < length; i++) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+
+		console.log(result);
+		return result;
+	}
 
 	return (
 		<div className={styles.profile_content}>
@@ -88,7 +102,7 @@ const ProfileContent = props => {
 											? props.account.profile.posts.map(post => (
 													<NavLink
 														key={post.id}
-														to={`?postId=${post.id}`}
+														to={`?postId=${post.uniqueId}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
@@ -100,7 +114,7 @@ const ProfileContent = props => {
 											? otherProfile.profile.posts.map(post => (
 													<NavLink
 														key={post.id}
-														to={`?postId=${post.id}`}
+														to={`?postId=${post.uniqueId}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
@@ -181,13 +195,13 @@ const ProfileContent = props => {
 								disabled={!postPhoto}
 								onClick={() => {
 									postPhoto ? (
-										props.setProfilePosts(postPhoto, null, null, "01.01.01", saveOwnerPost ? saveOwnerPost : null)
+										props.setProfilePosts(postPhoto, makeid(11), null, null, "01.01.01", saveOwnerPost ? saveOwnerPost : null)
 									) : (
 										<></>
 									);
 									handleClose();
 								}}>
-								Publish
+								P<span style={{ textTransform: "lowercase" }}>ublish</span>
 							</Button>
 						</div>
 
@@ -206,6 +220,7 @@ const ProfileContent = props => {
 					openModalCurrentPost={openModalCurrentPost}
 					setOpenModalCurrentPost={setOpenModalCurrentPost}
 					history={history}
+					location={location}
 				/>
 			) : undefined}
 		</div>

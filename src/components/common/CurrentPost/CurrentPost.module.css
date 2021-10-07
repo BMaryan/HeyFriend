@@ -1,0 +1,23 @@
+.current_post {
+	height: 540px;
+	width: 100%;
+	background: white;
+	margin-top: var(--mgFromHeader);
+}
+
+.current_post_content {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* wrapper post photo */
+.wrapper_post_photo {
+	height: 100%;
+	width: 100%;
+}
+
+/* wrapper content */
+.wrapper_content {
+	width: 35%;
+}

@@ -110,6 +110,18 @@ export const ContainerCoverProfile = props => {
 };
 
 export let ToggleShowCurrentPostContainer = props => {
+	let pos = props.location.search.indexOf("=");
+	let idPost = props.location.search.slice(pos + 1);
+
+	let checkCurrentPost =
+		props.account &&
+		props.account.profile.posts &&
+		props.account.profile.posts.find(post => {
+			if (idPost && idPost === post.uniqueId) {
+				return post;
+			}
+		});
+
 	return (
 		<DuplicateCodeFunc
 			{...props}
@@ -121,12 +133,12 @@ export let ToggleShowCurrentPostContainer = props => {
 			class={styles.modal_current_post_container}>
 			<div className={styles.toggle_show_post_content}>
 				<div className={styles.postPhoto}>
-					<BodyPost {...props} post={props.account.profile.posts[0]} />
+					<BodyPost {...props} post={checkCurrentPost} />
 				</div>
 
 				<div className={styles.content}>
 					<HeadPost {...props} />
-					<FooterPost {...props} />
+					<FooterPost {...props} modal={true} />
 				</div>
 			</div>
 

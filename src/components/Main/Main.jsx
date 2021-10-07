@@ -16,7 +16,7 @@ const Main = props => {
 							return props.account.profile.following.map(user => {
 								if (accountProfiles.id === user.id) {
 									return accountProfiles.profile.posts.map(post => {
-										return <Post key={post.id} post={post} accounts={props.accounts} account={accountProfiles} />;
+										return <Post key={post.id} modal={false} post={post} accounts={props.accounts} account={accountProfiles} />;
 									});
 								}
 							});

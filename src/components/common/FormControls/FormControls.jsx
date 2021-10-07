@@ -91,7 +91,6 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 		<>
 			{type === "checkbox" ? (
 				<div className={styles.wrapper_field + " " + styles.wrapper_field_checkbox}>
-					{/* <Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} /> */}
 					{text ? (
 						<span className={styles.text_for_field}>
 							<Checkbox

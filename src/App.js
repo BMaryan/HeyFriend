@@ -12,6 +12,7 @@ import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
 import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
 import { chatConstant, editConstant, friendsConstant, profileConstant, signInConstant, signUpConstant } from "./core/constants/constants";
 import { Redirect } from "react-router";
+import CurrentPostContainer from "./components/common/CurrentPost/CurrentPostContainer";
 
 function App(props) {
 	return (
@@ -21,6 +22,7 @@ function App(props) {
 				{props.account ? (
 					<Switch>
 						<Route exact path='/' render={() => <MainContainer />} />
+						<Route exact path={`/photo/:id`} render={() => <CurrentPostContainer />} />
 						<Route path={`${profileConstant}/:id?`} render={() => <ProfileContainer />} />
 						<Route path={`${chatConstant}/:id?`} render={() => <ChatContainer />} />
 						<Route path={`${friendsConstant}/:id?`} render={() => <FriendsContainer />} />
