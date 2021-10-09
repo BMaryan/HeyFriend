@@ -41,7 +41,7 @@ const HeadPost = props => {
 								? otherProfile.profile.surname + " " + otherProfile.profile.name
 								: undefined}
 						</NavLink>
-						{props.post && props.post.createPostDate ? <div className={styles.date}>{props.post.createPostDate}</div> : undefined}
+						{props.post && props.post.dateCreated ? <div className={styles.date}>{props.post.dateCreated}</div> : undefined}
 					</div>
 				</div>
 

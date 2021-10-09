@@ -10,13 +10,13 @@ import Comment from "@mui/icons-material/CommentOutlined";
 import { red } from "@mui/material/colors";
 import Comments from "../Comments/Comments";
 import { NavLink } from "react-router-dom";
-import { profileConstant } from "../../../../core/constants/constants";
+import { photoConstant, profileConstant } from "../../../../core/constants/constants";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 
 const FooterPost = props => {
 	let location = useLocation();
 	let history = useHistory();
-	let slug = useParams();
+	let params = useParams();
 
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
@@ -27,7 +27,7 @@ const FooterPost = props => {
 	let checkCurrentPost =
 		props.account && props.account.profile.posts
 			? props.account.profile.posts.find(post => {
-					if ((idPost && idPost === post.uniqueId) || (slug && slug.id === post.uniqueId)) {
+					if ((idPost && idPost === post.id) || (params && params.id === post.id)) {
 						return post;
 					}
 			  })
@@ -35,7 +35,7 @@ const FooterPost = props => {
 
 	return (
 		<div className={props.modal ? styles.footer : styles.footer_modal}>
-			{checkCurrentPost && props.modal ? (
+			{checkCurrentPost && checkCurrentPost.description && props.modal ? (
 				<div className={props.modal ? styles.commentOwnerOfPost__modal : styles.commentOwnerOfPost}>
 					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
 						{oftenCheckMyProfile
@@ -44,7 +44,7 @@ const FooterPost = props => {
 							? otherProfile.profile.surname + " " + otherProfile.profile.name
 							: undefined}
 					</NavLink>
-					{checkCurrentPost.ownerCommentToPost ? checkCurrentPost.ownerCommentToPost : undefined}
+					{checkCurrentPost.description ? checkCurrentPost.description : undefined}
 				</div>
 			) : undefined}
 
@@ -63,7 +63,7 @@ const FooterPost = props => {
 							checkedIcon={<Favorite />}
 						/>
 						<Checkbox
-							onClick={() => history.push(`/photo/${props.post.uniqueId}`)}
+							onClick={() => history.push(`${photoConstant}/${props.post.id}`)}
 							className={styles.icon}
 							color='default'
 							size='medium'
@@ -90,11 +90,11 @@ const FooterPost = props => {
 					</div>
 				</div>
 				<div className={styles.numberOfLikes}>
-					{props.post && props.post.likes ? props.post.likes : 0} <span>likes</span>
+					{props.post && props.post.likes && props.post.likes.length ? props.post.likes.length : 0} <span>likes</span>
 				</div>
 			</div>
 
-			{props.post && !props.modal ? (
+			{props.post && props.post.description && !props.modal ? (
 				<div className={styles.commentOwnerOfPost}>
 					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
 						{oftenCheckMyProfile
@@ -103,7 +103,7 @@ const FooterPost = props => {
 							? otherProfile.profile.surname + " " + otherProfile.profile.name
 							: undefined}
 					</NavLink>
-					{props.post.ownerCommentToPost ? props.post.ownerCommentToPost : undefined}
+					{props.post.description ? props.post.description : undefined}
 				</div>
 			) : undefined}
 

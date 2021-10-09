@@ -12,7 +12,7 @@ const CurrentPost = props => {
 		? props.accounts.find(account => {
 				if (account.profile && account.profile.posts) {
 					return account.profile.posts.find(post => {
-						if (params && post.uniqueId === params.id) {
+						if (params && post.id === params.id) {
 							return post;
 						}
 					});
@@ -23,7 +23,7 @@ const CurrentPost = props => {
 	let currentPost =
 		foundAccount && foundAccount.profile.posts ? (
 			foundAccount.profile.posts.find(post => {
-				if (post.uniqueId === params.id) {
+				if (post.id === params.id) {
 					return post;
 				}
 			})

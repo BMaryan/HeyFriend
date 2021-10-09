@@ -66,8 +66,7 @@ const ProfileContent = props => {
 			result += characters.charAt(Math.floor(Math.random() * charactersLength));
 		}
 
-		let searchTheSameId =
-			props.account && props.account.profile.posts ? props.account.profile.posts.find(post => post.uniqueId === result) : undefined;
+		let searchTheSameId = props.account && props.account.profile.posts ? props.account.profile.posts.find(post => post.id === result) : undefined;
 
 		if (!searchTheSameId) {
 			return result;
@@ -128,7 +127,7 @@ const ProfileContent = props => {
 												<ImageListItem key={post.id} className={styles.wrapper_posts}>
 													<NavLink
 														key={post.id}
-														to={`${profileConstant}${photoConstant}/${post.uniqueId}`}
+														to={`${profileConstant}${photoConstant}/${post.id}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
@@ -142,7 +141,7 @@ const ProfileContent = props => {
 												<ImageListItem key={post.id} className={styles.wrapper_posts}>
 													<NavLink
 														key={post.id}
-														to={`${profileConstant}/${props.id}${photoConstant}/${post.uniqueId}`}
+														to={`${profileConstant}/${props.id}${photoConstant}/${post.id}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
@@ -224,7 +223,14 @@ const ProfileContent = props => {
 								disabled={!postPhoto}
 								onClick={() => {
 									postPhoto ? (
-										props.setProfilePosts(postPhoto, makeid(11), null, null, "01.01.01", saveOwnerPost ? saveOwnerPost : null)
+										props.setProfilePosts({
+											id: makeid(11),
+											photo: postPhoto,
+											likes: [],
+											comments: [],
+											dateCreated: "01.01.01",
+											description: saveOwnerPost,
+										})
 									) : (
 										<></>
 									);

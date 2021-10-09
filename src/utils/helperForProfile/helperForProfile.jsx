@@ -111,9 +111,9 @@ export const ContainerCoverProfile = props => {
 
 export let ToggleShowCurrentPostContainer = props => {
 	let checkCurrentPost =
-		props.account && props.account.profile.posts && props.id
+		props.account && props.account.profile.posts
 			? props.account.profile.posts.find(post => {
-					if (props.params && props.params.id && props.params.id === post.uniqueId) {
+					if (props.params && props.params.id && props.params.id === post.id) {
 						return post;
 					}
 			  })
@@ -121,8 +121,7 @@ export let ToggleShowCurrentPostContainer = props => {
 			? props.accounts.find(account =>
 					account.profile.posts
 						? account.profile.posts.find(post => {
-								if (props.params && props.params.id && props.params.id === post.uniqueId) {
-									console.log(post);
+								if (props.params && props.params.id && props.params.id === post.id) {
 									return post;
 								}
 						  })
@@ -131,11 +130,9 @@ export let ToggleShowCurrentPostContainer = props => {
 			: undefined;
 
 	let otherCurrentPost =
-		checkCurrentPost.profile && checkCurrentPost.profile.posts
-			? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.uniqueId : undefined))
+		checkCurrentPost && checkCurrentPost.profile && checkCurrentPost.profile.posts
+			? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.id : undefined))
 			: undefined;
-
-	console.log(checkCurrentPost);
 
 	return (
 		<DuplicateCodeFunc
@@ -148,7 +145,7 @@ export let ToggleShowCurrentPostContainer = props => {
 			class={styles.modal_current_post_container}>
 			<div className={styles.toggle_show_post_content}>
 				<div className={styles.postPhoto}>
-					<BodyPost {...props} post={props.id ? checkCurrentPost : otherCurrentPost} />
+					<BodyPost {...props} post={checkCurrentPost} />
 				</div>
 
 				<div className={styles.content}>
