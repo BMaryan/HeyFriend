@@ -4,7 +4,7 @@ import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";

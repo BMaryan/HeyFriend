@@ -6,13 +6,13 @@ import FooterPost from "../../common/Post/FooterPost/FooterPost";
 import { useParams } from "react-router-dom";
 
 const CurrentPost = props => {
-	let slug = useParams();
+	let params = useParams();
 
 	let foundAccount = props.accounts
 		? props.accounts.find(account => {
 				if (account.profile && account.profile.posts) {
 					return account.profile.posts.find(post => {
-						if (slug && post.uniqueId === slug.id) {
+						if (params && post.uniqueId === params.id) {
 							return post;
 						}
 					});
@@ -23,7 +23,7 @@ const CurrentPost = props => {
 	let currentPost =
 		foundAccount && foundAccount.profile.posts ? (
 			foundAccount.profile.posts.find(post => {
-				if (post.uniqueId === slug.id) {
+				if (post.uniqueId === params.id) {
 					return post;
 				}
 			})

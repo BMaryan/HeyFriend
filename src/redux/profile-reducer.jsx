@@ -8,6 +8,7 @@ let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
 let FOLLOW = "social_network/chatPage/FOLLOW";
+let SAVE_POST = "social_network/chatPage/SAVE_POST";
 
 let initialState = {
 	accounts: [],
@@ -181,6 +182,24 @@ const ProfileReducer = (state = initialState, action) => {
 				},
 			};
 		}
+		case SAVE_POST: {
+			return {
+				...state,
+				account: {
+					...state.account,
+					profile:
+						state.account && state.account.profile
+							? {
+									...state.account.profile,
+									savedPosts:
+										state.account && state.account.profile && state.account.profile.savedPosts
+											? [...state.account.profile.savedPosts, { ...action.id }]
+											: [{ ...action.id }],
+							  }
+							: { ...state.account.profile },
+				},
+			};
+		}
 		default: {
 			return state;
 		}
@@ -234,12 +253,17 @@ export const getParamsId = id => ({
 });
 
 export const putLike = id => ({
-	type: GET_PARAMS_ID,
+	type: PUT_LIKE,
 	id,
 });
 
 export const follow = id => ({
 	type: FOLLOW,
+	id,
+});
+
+export const savePost = id => ({
+	type: SAVE_POST,
 	id,
 });
 

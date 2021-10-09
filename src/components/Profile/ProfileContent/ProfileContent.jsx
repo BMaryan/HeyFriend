@@ -6,7 +6,7 @@ import { Route } from "react-router-dom";
 import Information from "./Information/Information";
 import Saved from "./Saved/Saved";
 import BodyPost from "../../common/Post/BodyPost/BodyPost";
-import { profileConstant } from "../../../core/constants/constants";
+import { photoConstant, profileConstant } from "../../../core/constants/constants";
 import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -20,14 +20,14 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { ToggleShowCurrentPostContainer } from "../../../utils/helperForProfile/helperForProfile";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
 const ProfileContent = props => {
 	let history = useHistory();
-	let location = useLocation();
-
-	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
-	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
+	let params = useParams();
+	const [open, setOpen] = React.useState(false);
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	let [postPhoto, setPostPhoto] = React.useState(null);
 	let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
@@ -36,7 +36,9 @@ const ProfileContent = props => {
 		setSaveOwnerPost(formData.create_post);
 	};
 
-	const [open, setOpen] = React.useState(false);
+	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
+	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
+
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
 		setOpen(false);
@@ -56,81 +58,107 @@ const ProfileContent = props => {
 	};
 
 	function makeid(length) {
-		var result = "";
-		var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		var charactersLength = characters.length;
-		for (var i = 0; i < length; i++) {
+		let result = props.account.id + "";
+		let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		let charactersLength = characters.length;
+
+		for (let i = 0; i < length; i++) {
 			result += characters.charAt(Math.floor(Math.random() * charactersLength));
 		}
 
-		console.log(result);
-		return result;
+		let searchTheSameId =
+			props.account && props.account.profile.posts ? props.account.profile.posts.find(post => post.uniqueId === result) : undefined;
+
+		if (!searchTheSameId) {
+			return result;
+		} else {
+			return result + props.account.profile.posts.length;
+		}
 	}
 
 	return (
 		<div className={styles.profile_content}>
-			{/* side bar left */}
-			<div className={styles.side_bar_left}></div>
-			{/* content */}
 			<div className={styles.content}>
 				<div className={styles.navigation}>
-					<NavLink exact to={`${profileConstant}`} className={styles.item} activeClassName={styles.item_active}>
+					<NavLink
+						exact
+						to={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`}
+						className={styles.item}
+						activeClassName={styles.item_active}>
 						<BorderAllRoundedIcon className={styles.icon} />
 						Posts
 					</NavLink>
-					<NavLink to={`${profileConstant}/information`} className={styles.item} activeClassName={styles.item_active}>
+					<NavLink
+						to={props.id ? `${profileConstant}/${props.id}/information` : `${profileConstant}/information`}
+						className={styles.item}
+						activeClassName={styles.item_active}>
 						<InfoOutlinedIcon className={styles.icon} />
 						Information
 					</NavLink>
-					<NavLink exact to={`${profileConstant}/saved`} className={styles.item} activeClassName={styles.item_active}>
-						<BookmarkBorderIcon className={styles.icon} />
-						Saved
-					</NavLink>
+					{!props.id ? (
+						<NavLink
+							exact
+							to={props.id ? `${profileConstant}/${props.id}/saved` : `${profileConstant}/saved`}
+							className={styles.item}
+							activeClassName={styles.item_active}>
+							<BookmarkBorderIcon className={styles.icon} />
+							Saved
+						</NavLink>
+					) : undefined}
 				</div>
 
 				<Route
 					exact
-					path={`${profileConstant}`}
+					path={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`}
 					render={() => {
 						return (
 							<>
-								<CreatePost account={props.account} otherProfile={otherProfile} accounts={props.accounts} handleOpen={handleOpen} />
+								{!props.id ? (
+									<CreatePost
+										account={props.account}
+										otherProfile={otherProfile}
+										accounts={props.accounts}
+										handleOpen={handleOpen}
+									/>
+								) : undefined}
 
-								<div className={styles.posts}>
-									<div className={styles.wrapper_posts}>
-										{props.account && props.account.profile && props.account.profile.posts
-											? props.account.profile.posts.map(post => (
+								<ImageList className={styles.posts}>
+									{props.account && props.account.profile && props.account.profile.posts && !props.id
+										? props.account.profile.posts.map(post => (
+												<ImageListItem key={post.id} className={styles.wrapper_posts}>
 													<NavLink
 														key={post.id}
-														to={`?postId=${post.uniqueId}`}
+														to={`${profileConstant}${photoConstant}/${post.uniqueId}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
 														className={styles.post}>
 														<BodyPost key={post.id} post={post} />
 													</NavLink>
-											  ))
-											: oftenCheckOtherProfile && otherProfile && otherProfile.profile.posts
-											? otherProfile.profile.posts.map(post => (
+												</ImageListItem>
+										  ))
+										: oftenCheckOtherProfile && otherProfile.profile.posts
+										? otherProfile.profile.posts.map(post => (
+												<ImageListItem key={post.id} className={styles.wrapper_posts}>
 													<NavLink
 														key={post.id}
-														to={`?postId=${post.uniqueId}`}
+														to={`${profileConstant}/${props.id}${photoConstant}/${post.uniqueId}`}
 														onClick={() =>
 															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
 														}
 														className={styles.post}>
 														<BodyPost key={post.id} post={post} />
 													</NavLink>
-											  ))
-											: undefined}
-									</div>
-								</div>
+												</ImageListItem>
+										  ))
+										: undefined}
+								</ImageList>
 							</>
 						);
 					}}
 				/>
 				<Route
-					path={`${profileConstant}/information`}
+					path={props.id ? `${profileConstant}/${props.id}/information` : `${profileConstant}/information`}
 					render={() => (
 						<Information
 							accounts={props.accounts}
@@ -141,14 +169,15 @@ const ProfileContent = props => {
 						/>
 					)}
 				/>
-				<Route
-					exact
-					path={`${profileConstant}/saved`}
-					render={() => <Saved accounts={props.accounts} id={props.id} account={props.account} />}
-				/>
+				{!props.id ? (
+					<Route
+						exact
+						path={props.id ? `${profileConstant}/${props.id}/saved` : `${profileConstant}/saved`}
+						render={() => <Saved accounts={props.accounts} id={props.id} account={props.account} />}
+					/>
+				) : undefined}
 			</div>
-			{/* side bar right */}
-			<div className={styles.side_bar_right}></div>
+
 			{/* toggle show container */}
 			<Modal
 				aria-labelledby='transition-modal-title'
@@ -219,8 +248,10 @@ const ProfileContent = props => {
 					{...props}
 					openModalCurrentPost={openModalCurrentPost}
 					setOpenModalCurrentPost={setOpenModalCurrentPost}
+					otherProfile={otherProfile}
+					id={props.id}
 					history={history}
-					location={location}
+					params={params}
 				/>
 			) : undefined}
 		</div>

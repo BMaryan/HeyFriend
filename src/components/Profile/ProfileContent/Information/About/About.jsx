@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./About.module.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBorderAll, faInfo, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const About = props => {
 	return (

@@ -33,9 +33,6 @@ const FooterPost = props => {
 			  })
 			: undefined;
 
-	console.log(checkCurrentPost);
-	console.log(slug);
-
 	return (
 		<div className={props.modal ? styles.footer : styles.footer_modal}>
 			{checkCurrentPost && props.modal ? (

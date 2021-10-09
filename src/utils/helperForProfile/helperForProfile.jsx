@@ -110,17 +110,32 @@ export const ContainerCoverProfile = props => {
 };
 
 export let ToggleShowCurrentPostContainer = props => {
-	let pos = props.location.search.indexOf("=");
-	let idPost = props.location.search.slice(pos + 1);
-
 	let checkCurrentPost =
-		props.account &&
-		props.account.profile.posts &&
-		props.account.profile.posts.find(post => {
-			if (idPost && idPost === post.uniqueId) {
-				return post;
-			}
-		});
+		props.account && props.account.profile.posts && props.id
+			? props.account.profile.posts.find(post => {
+					if (props.params && props.params.id && props.params.id === post.uniqueId) {
+						return post;
+					}
+			  })
+			: props.accounts
+			? props.accounts.find(account =>
+					account.profile.posts
+						? account.profile.posts.find(post => {
+								if (props.params && props.params.id && props.params.id === post.uniqueId) {
+									console.log(post);
+									return post;
+								}
+						  })
+						: undefined
+			  )
+			: undefined;
+
+	let otherCurrentPost =
+		checkCurrentPost.profile && checkCurrentPost.profile.posts
+			? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.uniqueId : undefined))
+			: undefined;
+
+	console.log(checkCurrentPost);
 
 	return (
 		<DuplicateCodeFunc
@@ -133,7 +148,7 @@ export let ToggleShowCurrentPostContainer = props => {
 			class={styles.modal_current_post_container}>
 			<div className={styles.toggle_show_post_content}>
 				<div className={styles.postPhoto}>
-					<BodyPost {...props} post={checkCurrentPost} />
+					<BodyPost {...props} post={props.id ? checkCurrentPost : otherCurrentPost} />
 				</div>
 
 				<div className={styles.content}>
@@ -141,10 +156,6 @@ export let ToggleShowCurrentPostContainer = props => {
 					<FooterPost {...props} modal={true} />
 				</div>
 			</div>
-
-			{/* <div className={styles.wrapper_button_close}>
-							<button onClick={() => props.setOpenModalCurrentPost(false)}>x</button>
-					</div> */}
 		</DuplicateCodeFunc>
 	);
 };

@@ -29,9 +29,9 @@ const ProfileContainer = props => {
 	// 	}
 	// }, [props.chats]);
 
-	if (!props.account) {
-		return <Redirect to={`${signUpConstant}`} />;
-	}
+	// if (!props.account) {
+	// 	return <Redirect to={`${signUpConstant}`} />;
+	// }
 
 	if (!id && props.account && props.account.id) {
 		props.getParamsId(null);
