@@ -1,10 +1,22 @@
 .posts {
-	/* padding: var(--pdContent); */
-	margin-top: var(--mgBetweenContainers);
+	/* background: red; */
+	grid-template-columns: repeat(3, 1fr) !important;
+	gap: 15px !important;
+	grid-auto-flow: dense;
 }
 
 .wrapper_posts {
-	display: flex;
-	flex-wrap: wrap;
-	flex: 1;
+	height: 100%;
+}
+
+.post {
+	height: auto;
+	max-height: 300px;
+	min-height: 280px;
+	background: green;
+	cursor: pointer;
+}
+
+.post:hover {
+	opacity: 0.8;
 }

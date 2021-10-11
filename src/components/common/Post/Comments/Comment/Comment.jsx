@@ -1,17 +1,17 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { profileConstant } from "../../../../../core/constants/constants";
 import styles from "./Comment.module.css";
-import CommentReduxForm from "./CommentForm";
 
 const Comment = props => {
-	let onSubmit = formData => {
-		console.log(formData);
-	};
-
-	console.log(props);
-
 	return (
 		<div className={styles.comment}>
-			<CommentReduxForm onSubmit={onSubmit} />
+			<div className={!props.modal ? styles.description : styles.description_modal}>
+				<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.currentAccount.id}`}>
+					{props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
+				</NavLink>
+				{props.post.description ? props.post.description : undefined}
+			</div>
 		</div>
 	);
 };

@@ -16,30 +16,20 @@ const HeadPost = props => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
-	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
-	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
-
 	return (
 		<div className={styles.head}>
 			<div className={styles.wrapper_details}>
 				<div className={styles.details_position}>
 					<div className={styles.wrapper_profile_img}>
-						{oftenCheckMyProfile && props.account.profile.avatar ? (
-							<img src={props.account.profile.avatar} alt='' />
-						) : oftenCheckOtherProfile && otherProfile.profile.avatar ? (
-							<img src={otherProfile.profile.avatar} alt='' />
+						{props.currentAccount && props.currentAccount.profile.avatar ? (
+							<img src={props.currentAccount.profile.avatar} alt='' />
 						) : (
 							<img src={defaultAvatar} alt='' />
 						)}
 					</div>
 					<div className={styles.details}>
-						<NavLink to={`${profileConstant}/${props.account.id}`} className={styles.fullName}>
-							{oftenCheckMyProfile
-								? props.account.profile.surname + " " + props.account.profile.name
-								: oftenCheckOtherProfile
-								? otherProfile.profile.surname + " " + otherProfile.profile.name
-								: undefined}
+						<NavLink to={`${profileConstant}/${props.currentAccount.id}`} className={styles.fullName}>
+							{props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
 						</NavLink>
 						{props.post && props.post.dateCreated ? <div className={styles.date}>{props.post.dateCreated}</div> : undefined}
 					</div>

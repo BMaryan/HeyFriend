@@ -9,6 +9,8 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { getPictureBase64, removePicture } from "../../core/methods/methods";
 import Button from "@mui/material/Button";
+import PostContainer from "../../components/common/Post/PostContainer";
+import { modalPostConstant } from "../../core/constants/constantsPost";
 
 const DuplicateCodeFunc = props => {
 	return (
@@ -110,29 +112,29 @@ export const ContainerCoverProfile = props => {
 };
 
 export let ToggleShowCurrentPostContainer = props => {
-	let checkCurrentPost =
-		props.account && props.account.profile.posts
-			? props.account.profile.posts.find(post => {
-					if (props.params && props.params.id && props.params.id === post.id) {
-						return post;
-					}
-			  })
-			: props.accounts
-			? props.accounts.find(account =>
-					account.profile.posts
-						? account.profile.posts.find(post => {
-								if (props.params && props.params.id && props.params.id === post.id) {
-									return post;
-								}
-						  })
-						: undefined
-			  )
-			: undefined;
+	// let checkCurrentPost =
+	// 	props.account && props.account.profile.posts
+	// 		? props.account.profile.posts.find(post => {
+	// 				if (props.params && props.params.id && props.params.id === post.id) {
+	// 					return post;
+	// 				}
+	// 		  })
+	// 		: props.accounts
+	// 		? props.accounts.find(account =>
+	// 				account.profile.posts
+	// 					? account.profile.posts.find(post => {
+	// 							if (props.params && props.params.id && props.params.id === post.id) {
+	// 								return post;
+	// 							}
+	// 					  })
+	// 					: undefined
+	// 		  )
+	// 		: undefined;
 
-	let otherCurrentPost =
-		checkCurrentPost && checkCurrentPost.profile && checkCurrentPost.profile.posts
-			? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.id : undefined))
-			: undefined;
+	// let otherCurrentPost =
+	// 	checkCurrentPost && checkCurrentPost.profile && checkCurrentPost.profile.posts
+	// 		? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.id : undefined))
+	// 		: undefined;
 
 	return (
 		<DuplicateCodeFunc
@@ -143,16 +145,7 @@ export let ToggleShowCurrentPostContainer = props => {
 				props.history.goBack();
 			}}
 			class={styles.modal_current_post_container}>
-			<div className={styles.toggle_show_post_content}>
-				<div className={styles.postPhoto}>
-					<BodyPost {...props} post={checkCurrentPost} />
-				</div>
-
-				<div className={styles.content}>
-					<HeadPost {...props} />
-					<FooterPost {...props} modal={true} />
-				</div>
-			</div>
+			<PostContainer kindOfPost={modalPostConstant} account={props.currentAccount} post={props.currentPost} modal={true} />
 		</DuplicateCodeFunc>
 	);
 };

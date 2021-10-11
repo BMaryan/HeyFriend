@@ -7,7 +7,6 @@ const BodyPost = props => {
 			{props.post && props.post.photo ? (
 				<div className={styles.bodyPhoto} style={{ backgroundImage: `url(${props.post.photo})` }}></div>
 			) : (
-				// style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${props.post.avatar})` }}></div>
 				<></>
 			)}
 		</div>

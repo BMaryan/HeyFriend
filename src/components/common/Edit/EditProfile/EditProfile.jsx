@@ -5,7 +5,7 @@ import EditProfileReduxForm from "./EditProfileForm";
 import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
 
 const EditProfile = props => {
-	let [changeProfilePicture, setChangeProfilePicture] = React.useState(false);
+	let [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
 
 	let onSubmit = formData => {
 		props.getProfileData(formData);
@@ -19,14 +19,14 @@ const EditProfile = props => {
 					{oftenCheck && props.account.profile.avatar ? (
 						<img
 							src={props.account.profile.avatar}
-							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}
 							title='Change photo'
 							alt=''
 						/>
 					) : (
 						<img
 							src={defaultAvatar}
-							onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}
+							onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}
 							title='Change photo'
 							alt=''
 						/>
@@ -36,7 +36,7 @@ const EditProfile = props => {
 					<div className={styles.fullName}>{oftenCheck ? props.account.profile.surname + " " + props.account.profile.name : undefined}</div>
 					<div
 						className={styles.change_picture}
-						onClick={() => (changeProfilePicture ? setChangeProfilePicture(false) : setChangeProfilePicture(true))}>
+						onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}>
 						Change profile photo
 					</div>
 				</div>
@@ -44,11 +44,11 @@ const EditProfile = props => {
 
 			<EditProfileReduxForm onSubmit={onSubmit} account={props.account} />
 
-			{changeProfilePicture ? (
+			{openModalAvatarProfile ? (
 				<ChangeProfilePictureContainer
 					{...props}
-					changeProfilePicture={changeProfilePicture}
-					setChangeProfilePicture={setChangeProfilePicture}
+					openModalAvatarProfile={openModalAvatarProfile}
+					setOpenModalAvatarProfile={setOpenModalAvatarProfile}
 				/>
 			) : undefined}
 		</div>

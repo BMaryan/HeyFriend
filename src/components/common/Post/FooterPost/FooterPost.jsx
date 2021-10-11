@@ -9,44 +9,17 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Comment from "@mui/icons-material/CommentOutlined";
 import { red } from "@mui/material/colors";
 import Comments from "../Comments/Comments";
-import { NavLink } from "react-router-dom";
-import { photoConstant, profileConstant } from "../../../../core/constants/constants";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { photoConstant } from "../../../../core/constants/constants";
+import FooterPostReduxForm from "./FooterPostForm";
 
 const FooterPost = props => {
-	let location = useLocation();
-	let history = useHistory();
-	let params = useParams();
-
-	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
-	let oftenCheckMyProfile = props.account && props.account.profile && !props.id;
-	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
-	let pos = location && location.search ? location.search.indexOf("=") : "";
-	let idPost = location && location.search ? location.search.slice(pos + 1) : "";
-
-	let checkCurrentPost =
-		props.account && props.account.profile.posts
-			? props.account.profile.posts.find(post => {
-					if ((idPost && idPost === post.id) || (params && params.id === post.id)) {
-						return post;
-					}
-			  })
-			: undefined;
+	let onSubmit = formData => {
+		console.log(formData);
+	};
 
 	return (
 		<div className={props.modal ? styles.footer : styles.footer_modal}>
-			{checkCurrentPost && checkCurrentPost.description && props.modal ? (
-				<div className={props.modal ? styles.commentOwnerOfPost__modal : styles.commentOwnerOfPost}>
-					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
-						{oftenCheckMyProfile
-							? props.account.profile.surname + " " + props.account.profile.name
-							: oftenCheckOtherProfile
-							? otherProfile.profile.surname + " " + otherProfile.profile.name
-							: undefined}
-					</NavLink>
-					{checkCurrentPost.description ? checkCurrentPost.description : undefined}
-				</div>
-			) : undefined}
+			{props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} /> : undefined}
 
 			<div className={styles.footer_head}>
 				<div className={styles.features}>
@@ -63,7 +36,7 @@ const FooterPost = props => {
 							checkedIcon={<Favorite />}
 						/>
 						<Checkbox
-							onClick={() => history.push(`${photoConstant}/${props.post.id}`)}
+							onClick={() => props.history.push(`${photoConstant}/${props.post.id}`)}
 							className={styles.icon}
 							color='default'
 							size='medium'
@@ -94,20 +67,9 @@ const FooterPost = props => {
 				</div>
 			</div>
 
-			{props.post && props.post.description && !props.modal ? (
-				<div className={styles.commentOwnerOfPost}>
-					<NavLink className={styles.full_name_comment} to={`${profileConstant}/${props.account.id}`}>
-						{oftenCheckMyProfile
-							? props.account.profile.surname + " " + props.account.profile.name
-							: oftenCheckOtherProfile
-							? otherProfile.profile.surname + " " + otherProfile.profile.name
-							: undefined}
-					</NavLink>
-					{props.post.description ? props.post.description : undefined}
-				</div>
-			) : undefined}
+			{!props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} /> : undefined}
 
-			<Comments account={props.account} />
+			<FooterPostReduxForm onSubmit={onSubmit} />
 		</div>
 	);
 };

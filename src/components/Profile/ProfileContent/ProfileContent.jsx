@@ -1,12 +1,10 @@
 import React from "react";
 import styles from "./ProfileContent.module.css";
-import CreatePost from "../../common/CreatePost/CreatePost";
 import { NavLink } from "react-router-dom";
 import { Route } from "react-router-dom";
 import Information from "./Information/Information";
 import Saved from "./Saved/Saved";
-import BodyPost from "../../common/Post/BodyPost/BodyPost";
-import { photoConstant, profileConstant } from "../../../core/constants/constants";
+import { profileConstant } from "../../../core/constants/constants";
 import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -19,18 +17,14 @@ import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import { ToggleShowCurrentPostContainer } from "../../../utils/helperForProfile/helperForProfile";
-import { useHistory, useParams } from "react-router-dom";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import Posts from "./Posts/Posts";
+import { useParams } from "react-router-dom";
 
 const ProfileContent = props => {
-	let history = useHistory();
 	let params = useParams();
 	const [open, setOpen] = React.useState(false);
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	let [postPhoto, setPostPhoto] = React.useState(null);
-	let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
 
 	let onSubmit = formData => {
 		setSaveOwnerPost(formData.create_post);
@@ -110,50 +104,7 @@ const ProfileContent = props => {
 					exact
 					path={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`}
 					render={() => {
-						return (
-							<>
-								{!props.id ? (
-									<CreatePost
-										account={props.account}
-										otherProfile={otherProfile}
-										accounts={props.accounts}
-										handleOpen={handleOpen}
-									/>
-								) : undefined}
-
-								<ImageList className={styles.posts}>
-									{props.account && props.account.profile && props.account.profile.posts && !props.id
-										? props.account.profile.posts.map(post => (
-												<ImageListItem key={post.id} className={styles.wrapper_posts}>
-													<NavLink
-														key={post.id}
-														to={`${profileConstant}${photoConstant}/${post.id}`}
-														onClick={() =>
-															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
-														}
-														className={styles.post}>
-														<BodyPost key={post.id} post={post} />
-													</NavLink>
-												</ImageListItem>
-										  ))
-										: oftenCheckOtherProfile && otherProfile.profile.posts
-										? otherProfile.profile.posts.map(post => (
-												<ImageListItem key={post.id} className={styles.wrapper_posts}>
-													<NavLink
-														key={post.id}
-														to={`${profileConstant}/${props.id}${photoConstant}/${post.id}`}
-														onClick={() =>
-															openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true)
-														}
-														className={styles.post}>
-														<BodyPost key={post.id} post={post} />
-													</NavLink>
-												</ImageListItem>
-										  ))
-										: undefined}
-								</ImageList>
-							</>
-						);
+						return <Posts {...props} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} />;
 					}}
 				/>
 				<Route
@@ -248,18 +199,6 @@ const ProfileContent = props => {
 					</Box>
 				</Fade>
 			</Modal>
-
-			{openModalCurrentPost ? (
-				<ToggleShowCurrentPostContainer
-					{...props}
-					openModalCurrentPost={openModalCurrentPost}
-					setOpenModalCurrentPost={setOpenModalCurrentPost}
-					otherProfile={otherProfile}
-					id={props.id}
-					history={history}
-					params={params}
-				/>
-			) : undefined}
 		</div>
 	);
 };

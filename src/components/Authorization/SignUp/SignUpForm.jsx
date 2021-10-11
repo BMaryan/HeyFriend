@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import styles from "./SignUp.module.css";
 import commonStyles from "../Authorization.module.css";
 import { reduxForm } from "redux-form";
-import { WrapperCreateField, Input, wrapperButton } from "../../common/FormControls/FormControls";
+import { WrapperCreateField, Input, WrapperButton } from "../../common/FormControls/FormControls";
 import { accounts } from "../../../core/constants/constantsLocalStorage";
 import {
 	validatePhoneNumberAndEmail,
@@ -20,17 +20,17 @@ let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localSto
 const SignUpForm = props => {
 	return (
 		<form className={commonStyles.form} onSubmit={props.handleSubmit}>
-			{WrapperCreateField("name", "text", [validateFirstName, required], Input, "Your name")}
-			{WrapperCreateField("surname", "text", [validateLastName, required], Input, "Your surname")}
-			{WrapperCreateField(
-				"phone_or_email",
-				"text",
-				[validatePhoneNumberAndEmail, validateFindTheSameUser, required],
-				Input,
-				"Mobile Number or email"
-			)}
-			{WrapperCreateField("password", "password", [validatePassword, required], Input, "Password")}
-			{wrapperButton("SIGN UP", { ...props })}
+			<WrapperCreateField name='name' type='text' validate={[validateFirstName, required]} component={Input} placeholder='Your name' />
+			<WrapperCreateField name='surname' type='text' validate={[validateLastName, required]} component={Input} placeholder='Your surname' />
+			<WrapperCreateField
+				name='phone_or_email'
+				type='text'
+				validate={[validatePhoneNumberAndEmail, validateFindTheSameUser, required]}
+				component={Input}
+				placeholder='Mobile Number or email'
+			/>
+			<WrapperCreateField name='password' type='password' validate={[validatePassword, required]} component={Input} placeholder='Password' />
+			<WrapperButton {...props} button_text='SIGN UP' />
 		</form>
 	);
 };

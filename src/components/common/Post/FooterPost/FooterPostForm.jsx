@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./Comment.module.css";
+import styles from "../Post.module.css";
 import { Field, reduxForm } from "redux-form";
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 
-const CommentForm = props => {
+const FooterPostForm = props => {
 	let [value, setValue] = React.useState(undefined);
 
 	return (
@@ -27,6 +27,6 @@ const CommentForm = props => {
 	);
 };
 
-const CommentReduxForm = reduxForm({ form: "comment" })(CommentForm);
+const FooterPostReduxForm = reduxForm({ form: "comment" })(FooterPostForm);
 
-export default CommentReduxForm;
+export default FooterPostReduxForm;

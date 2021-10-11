@@ -66,7 +66,7 @@ export const Textarea = props => {
 	);
 };
 
-export const WrapperCreateField = (name, type, validate = [], component, placeholder = "", text = "", ...props) => {
+export const WrapperCreateField = props => {
 	const [values, setValues] = React.useState({
 		password: "",
 		showPassword: false,
@@ -89,15 +89,15 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 
 	return (
 		<>
-			{type === "checkbox" ? (
+			{props.type === "checkbox" ? (
 				<div className={styles.wrapper_field + " " + styles.wrapper_field_checkbox}>
-					{text ? (
+					{props.text ? (
 						<span className={styles.text_for_field}>
 							<Checkbox
 								className={styles.field}
-								name={name}
-								type={type}
-								placeholder={placeholder}
+								name={props.name}
+								type={props.type}
+								placeholder={props.placeholder}
 								sx={{
 									color: pink[2000],
 									"&.Mui-checked": {
@@ -106,7 +106,7 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 									"& .MuiSvgIcon-root": { fontSize: 20 },
 								}}
 							/>
-							{text}
+							{props.text}
 						</span>
 					) : (
 						<></>
@@ -114,17 +114,17 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 				</div>
 			) : (
 				<div className={styles.wrapper_field}>
-					{type === "password" ? (
+					{props.type === "password" ? (
 						<>
 							<Field
 								className={styles.field}
-								name={name}
-								validate={validate}
-								type={values.showPassword ? "text" : type}
+								name={props.name}
+								validate={props.validate}
+								type={values.showPassword ? "text" : props.type}
 								value={values.password}
 								onChange={handleChange("password")}
-								placeholder={placeholder}
-								component={component}
+								placeholder={props.placeholder}
+								component={props.component}
 							/>
 
 							{values.password !== "" ? (
@@ -142,22 +142,29 @@ export const WrapperCreateField = (name, type, validate = [], component, placeho
 							)}
 						</>
 					) : (
-						<Field className={styles.field} name={name} validate={validate} type={type} placeholder={placeholder} component={component} />
+						<Field
+							className={styles.field}
+							name={props.name}
+							validate={props.validate}
+							type={props.type}
+							placeholder={props.placeholder}
+							component={props.component}
+						/>
 					)}
 
-					{text ? <span className={styles.text_for_field}>{text}</span> : <></>}
+					{props.text ? <span className={styles.text_for_field}>{props.text}</span> : <></>}
 				</div>
 			)}
 		</>
 	);
 };
 
-export const wrapperButton = (button_text, { userSignIn, ...props }) => {
+export const WrapperButton = props => {
 	return (
 		<div className={styles.wrapper_button}>
 			<Button type='submit' disabled={props.invalid || props.submitting || props.pristine} variant='contained'>
-				{button_text[0]}
-				<span style={{ textTransform: "lowercase" }}>{button_text.slice(1)}</span>
+				{props.button_text[0]}
+				<span style={{ textTransform: "lowercase" }}>{props.button_text.slice(1)}</span>
 			</Button>
 		</div>
 	);

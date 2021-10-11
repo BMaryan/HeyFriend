@@ -48,32 +48,13 @@
 	transition: border-top 1s;
 }
 
+.item_active svg {
+	color: var(--colorIconsChecked);
+}
+
 .icon {
 	font-size: 14px;
 	margin-right: 10px;
-}
-
-.posts {
-	/* background: red; */
-	grid-template-columns: repeat(3, 1fr) !important;
-	gap: 15px !important;
-	grid-auto-flow: dense;
-}
-
-.wrapper_posts {
-	height: 100%;
-}
-
-.post {
-	height: auto;
-	max-height: 300px;
-	min-height: 280px;
-	background: green;
-	cursor: pointer;
-}
-
-.post:hover {
-	opacity: 0.8;
 }
 
 /* side_bar_right */
