@@ -1,5 +1,4 @@
 import styles from "./FieldValidationForm.module.css";
-import { accounts } from "../../core/constants/constantsLocalStorage";
 
 export const required = value => {
 	if (value) {
@@ -11,17 +10,15 @@ export const required = value => {
 
 export const maxLengthCreator = maxLength => value => value && value.length > maxLength ? `Max length is ${maxLength} symbols` : undefined;
 
-export const validateAuthorizationUserCreator = (users, userSignIn) => value => {
-	let foundUser;
-	if (users) {
-		foundUser = users.find(item => item.phone_or_email === userSignIn.phone_or_email);
+export const validateAuthorizationUserCreator = (accounts, userSignIn) => {
+	let foundAccount;
+	if (accounts) {
+		foundAccount = accounts.find(account => account.phone_or_email === userSignIn.phone_or_email && account.password === userSignIn.password);
 
-		if (foundUser && value) {
-			console.log("GOOD phone_or_email");
+		if (foundAccount) {
 			return undefined;
 		} else {
-			console.log("ERROR phone_or_email");
-			return "No such user!";
+			return "No such account found. You can check the correctness of data entry or register.";
 		}
 	}
 };

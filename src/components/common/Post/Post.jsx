@@ -6,22 +6,14 @@ import FooterPost from "./FooterPost/FooterPost";
 import { defaultPostConstant, modalPostConstant, onlyBodyPostConstant } from "../../../core/constants/constantsPost";
 
 const Post = props => {
-	let currentAccount =
-		props.accounts &&
-		props.accounts.find(account =>
-			account && account.profile && account.profile.posts
-				? account.profile.posts.find(post => (post && props.post && post.id ? post.id === props.post.id : undefined))
-				: props.account
-		);
-
 	return (
 		<div className={styles.wrapper_post}>
 			<div className={styles.post}>
 				{props.kindOfPost === defaultPostConstant ? (
 					<>
-						<HeadPost {...props} currentAccount={currentAccount} />
+						<HeadPost {...props} />
 						<BodyPost {...props} />
-						<FooterPost {...props} currentAccount={currentAccount} />
+						<FooterPost {...props} />
 					</>
 				) : props.kindOfPost === modalPostConstant ? (
 					<div className={styles.toggle_show_post_content}>
@@ -30,8 +22,8 @@ const Post = props => {
 						</div>
 
 						<div className={styles.content}>
-							<HeadPost {...props} currentAccount={currentAccount} />
-							<FooterPost {...props} currentAccount={currentAccount} />
+							<HeadPost {...props} />
+							<FooterPost {...props} />
 						</div>
 					</div>
 				) : props.kindOfPost === onlyBodyPostConstant ? (

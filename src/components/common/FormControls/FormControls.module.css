@@ -9,8 +9,12 @@
 
 .wrapperInputAndTextarea input,
 textarea {
-	border: 1px solid silver;
 	width: 100%;
+	border: 1px solid silver;
+}
+
+.wrapperInputAndTextarea textarea {
+	resize: vertical;
 }
 
 .wrapperInputAndTextareaError input,
@@ -43,15 +47,15 @@ textarea {
 }
 
 .text_for_field {
-	font-size: 14px;
-	margin: 0 5px;
+	color: rgb(138, 138, 138);
+	font-size: 13.5px;
 }
 
 /* wrapper over button */
 .wrapper_button {
 	width: 100%;
 	border-radius: 10px;
-	cursor: pointer;
+	margin-top: 10px;
 }
 
 .wrapper_button button,
@@ -68,13 +72,19 @@ textarea {
 	color: white;
 	background: linear-gradient(var(--mainBg));
 	padding: 10px 0;
-	margin-top: 10px;
 	cursor: pointer;
 	transition: 0.5s;
 }
 
+.wrapper_button button:disabled {
+	pointer-events: auto;
+	cursor: no-drop;
+}
+
 /* style for box error */
-.block_error {
+
+.block_error,
+.common_error {
 	color: var(--errorBgOrC);
 	font-size: 13px;
 	display: flex;

@@ -65,7 +65,7 @@ const EditProfileForm = props => {
 			</div>
 
 			<div className={styles.wrapper_button}>
-				<WrapperButton {...props} button_text='Submit' />
+				<WrapperButton {...props} button_text='Submit' onClick={() => console.log("YEs")} />
 			</div>
 		</form>
 	);

@@ -28,7 +28,7 @@ const SignInForm = props => {
 			/>
 			<WrapperCreateField name='password' type='password' validate={[validatePassword, required]} component={Input} placeholder='Password' />
 			<WrapperCreateField name='rememberMe' type='checkbox' validate={[]} component={Input} placeholder='' text='Remember Me' />
-			<WrapperButton {...props} button_text='SIGN IN' />
+			<WrapperButton {...props} button_text='SIGN IN' isSignIn={true} />
 		</form>
 	);
 };

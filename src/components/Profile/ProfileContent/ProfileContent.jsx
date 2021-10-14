@@ -25,6 +25,7 @@ const ProfileContent = props => {
 	const [open, setOpen] = React.useState(false);
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	let [postPhoto, setPostPhoto] = React.useState(null);
+	let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
 
 	let onSubmit = formData => {
 		setSaveOwnerPost(formData.create_post);
@@ -104,9 +105,20 @@ const ProfileContent = props => {
 					exact
 					path={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`}
 					render={() => {
-						return <Posts {...props} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} />;
+						return (
+							<Posts
+								{...props}
+								handleOpen={handleOpen}
+								handleClose={handleClose}
+								oftenCheckOtherProfile={oftenCheckOtherProfile}
+								params={params}
+								openModalCurrentPost={openModalCurrentPost}
+								setOpenModalCurrentPost={setOpenModalCurrentPost}
+							/>
+						);
 					}}
 				/>
+
 				<Route
 					path={props.id ? `${profileConstant}/${props.id}/information` : `${profileConstant}/information`}
 					render={() => (
@@ -123,7 +135,15 @@ const ProfileContent = props => {
 					<Route
 						exact
 						path={props.id ? `${profileConstant}/${props.id}/saved` : `${profileConstant}/saved`}
-						render={() => <Saved accounts={props.accounts} id={props.id} account={props.account} />}
+						render={() => (
+							<Saved
+								openModalCurrentPost={openModalCurrentPost}
+								setOpenModalCurrentPost={setOpenModalCurrentPost}
+								accounts={props.accounts}
+								id={props.id}
+								account={props.account}
+							/>
+						)}
 					/>
 				) : undefined}
 			</div>

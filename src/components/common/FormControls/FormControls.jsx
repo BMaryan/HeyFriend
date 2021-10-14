@@ -9,6 +9,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
+import { validateAuthorizationUserCreator } from "../../../utils/FieldValidationForm/FieldValidationForm";
 
 const FormControls = props => {
 	return (
@@ -94,7 +95,7 @@ export const WrapperCreateField = props => {
 					{props.text ? (
 						<span className={styles.text_for_field}>
 							<Checkbox
-								className={styles.field}
+								className={styles.checkbox}
 								name={props.name}
 								type={props.type}
 								placeholder={props.placeholder}
@@ -103,7 +104,9 @@ export const WrapperCreateField = props => {
 									"&.Mui-checked": {
 										color: pink[300],
 									},
-									"& .MuiSvgIcon-root": { fontSize: 20 },
+									"& .MuiSvgIcon-root": { fontSize: 18 },
+									padding: 0,
+									marginRight: "5px",
 								}}
 							/>
 							{props.text}
@@ -160,12 +163,22 @@ export const WrapperCreateField = props => {
 };
 
 export const WrapperButton = props => {
+	let [error, setError] = React.useState(false);
+
 	return (
-		<div className={styles.wrapper_button}>
-			<Button type='submit' disabled={props.invalid || props.submitting || props.pristine} variant='contained'>
-				{props.button_text[0]}
-				<span style={{ textTransform: "lowercase" }}>{props.button_text.slice(1)}</span>
-			</Button>
-		</div>
+		<>
+			{props.isSignIn && error ? <div className={styles.common_error}>{error}</div> : undefined}
+
+			<div className={styles.wrapper_button}>
+				<Button
+					onClick={() => setError(validateAuthorizationUserCreator(props.accounts, props.userSignIn))}
+					type='submit'
+					disabled={props.invalid || props.submitting || props.pristine}
+					variant='contained'>
+					{props.button_text[0]}
+					<span style={{ textTransform: "lowercase" }}>{props.button_text.slice(1)}</span>
+				</Button>
+			</div>
+		</>
 	);
 };

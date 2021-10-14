@@ -36,7 +36,7 @@ const CurrentPost = props => {
 	return (
 		<div className={styles.current_post}>
 			<div className={styles.current_post_content}>
-				<PostContainer modal={true} kindOfPost={modalPostConstant} post={currentPost} account={foundAccount} />
+				<PostContainer modal={true} kindOfPost={modalPostConstant} post={currentPost} currentAccount={foundAccount} />
 				{/* <div className={styles.wrapper_post_photo}> */}
 				{/* <BodyPost {...props} /> */}
 				{/* <BodyPost {...props} account={foundAccount} post={currentPost} /> */}

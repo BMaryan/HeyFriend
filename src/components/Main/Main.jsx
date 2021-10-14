@@ -20,7 +20,7 @@ const Main = props => {
 												modal={false}
 												post={post}
 												kindOfPost={defaultPostConstant}
-												account={accountProfiles}
+												currentAccount={accountProfiles}
 											/>
 										);
 									});

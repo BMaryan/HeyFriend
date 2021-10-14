@@ -1,8 +1,5 @@
 import React from "react";
 import styles from "./helperForProfile.module.css";
-import BodyPost from "../../components/common/Post/BodyPost/BodyPost";
-import HeadPost from "../../components/common/Post/HeadPost/HeadPost";
-import FooterPost from "../../components/common/Post/FooterPost/FooterPost";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -11,6 +8,11 @@ import { getPictureBase64, removePicture } from "../../core/methods/methods";
 import Button from "@mui/material/Button";
 import PostContainer from "../../components/common/Post/PostContainer";
 import { modalPostConstant } from "../../core/constants/constantsPost";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import { NavLink } from "react-router-dom";
+import { profileConstant, photoConstant } from "../../core/constants/constants";
+import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
 
 const DuplicateCodeFunc = props => {
 	return (
@@ -136,6 +138,9 @@ export let ToggleShowCurrentPostContainer = props => {
 	// 		? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.id : undefined))
 	// 		: undefined;
 
+	console.log(props.currentPost);
+	console.log(props.currentAccount);
+
 	return (
 		<DuplicateCodeFunc
 			{...props}
@@ -147,5 +152,87 @@ export let ToggleShowCurrentPostContainer = props => {
 			class={styles.modal_current_post_container}>
 			<PostContainer kindOfPost={modalPostConstant} account={props.currentAccount} post={props.currentPost} modal={true} />
 		</DuplicateCodeFunc>
+	);
+};
+
+export let ReturnImageList = props => {
+	return (
+		<ImageList className={styles.posts}>
+			{props.account && props.account.profile && props.account.profile.posts && !props.id && props.logicOfPagePost
+				? props.account.profile.posts.map(post => (
+						<ImageListItem key={post && post.id ? post.id : undefined} className={styles.wrapper_posts}>
+							<NavLink
+								exact
+								key={post && post.id ? post.id : undefined}
+								onClick={() =>
+									props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true)
+								}
+								to={`${profileConstant}${photoConstant}/${post && post.id ? post.id : undefined}`}
+								className={styles.post}>
+								<PostContainer
+									key={post && post.id ? post.id : undefined}
+									post={post}
+									currentAccount={props.account}
+									kindOfPost={onlyBodyPostConstant}
+								/>
+							</NavLink>
+						</ImageListItem>
+				  ))
+				: props.oftenCheckOtherProfile && props.otherProfile.profile.posts && props.logicOfPagePost
+				? props.otherProfile.profile.posts.map(post => (
+						<ImageListItem key={post && post.id ? post.id : undefined} className={styles.wrapper_posts}>
+							<NavLink
+								exact
+								key={post && post.id ? post.id : undefined}
+								onClick={() =>
+									props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true)
+								}
+								to={`${profileConstant}/${props.id}${photoConstant}/${post && post.id ? post.id : undefined}`}
+								className={styles.post}>
+								<PostContainer
+									key={post && post.id ? post.id : undefined}
+									post={post}
+									currentAccount={props.otherProfile}
+									kindOfPost={onlyBodyPostConstant}
+								/>
+							</NavLink>
+						</ImageListItem>
+				  ))
+				: !props.logicOfPagePost && props.accounts
+				? props.accounts.map(account =>
+						account && account.profile && account.profile.posts
+							? account.profile.posts.map(post =>
+									props.account && props.account.profile && props.account.profile.savedPosts
+										? props.account.profile.savedPosts.map(savedPostID =>
+												post.id === savedPostID ? (
+													<ImageListItem key={post && post.id ? post.id : undefined} className={styles.wrapper_posts}>
+														<NavLink
+															exact
+															key={post && post.id ? post.id : undefined}
+															onClick={() =>
+																props.openModalCurrentPost
+																	? props.setOpenModalCurrentPost(false)
+																	: props.setOpenModalCurrentPost(true)
+															}
+															to={`${profileConstant}/${props.id}${photoConstant}/${
+																post && post.id ? post.id : undefined
+															}`}
+															className={styles.post}>
+															<PostContainer
+																key={post && post.id ? post.id : undefined}
+																post={post}
+																currentAccount={account}
+																kindOfPost={onlyBodyPostConstant}
+															/>
+														</NavLink>
+													</ImageListItem>
+												) : undefined
+										  )
+										: undefined
+							  )
+							: undefined
+				  )
+				: undefined}
+		</ImageList>
 	);
 };

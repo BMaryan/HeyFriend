@@ -9,6 +9,7 @@ let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
 let FOLLOW = "social_network/chatPage/FOLLOW";
 let SAVE_POST = "social_network/chatPage/SAVE_POST";
+let DELETE_POST = "social_network/chatPage/DELETE_POST";
 
 let initialState = {
 	accounts: [],
@@ -153,14 +154,34 @@ const ProfileReducer = (state = initialState, action) => {
 				paramsId: action.id,
 			};
 		}
-		case PUT_LIKE: {
-			return {
-				...state,
-			};
-		}
+		// case PUT_LIKE: {
+		// 	return {
+		// 		...state,
+		// 		account: {
+		// 			...state.account,
+		// 			profile:
+		// 				state.account && state.account.profile && action.id
+		// 					? {
+		// 							...state.account.profile,
+		// 							posts: state.accounts
+		// 								? state.accounts.map(account =>
+		// 										account && account.profile && account.profile.posts
+		// 											? account.profile.posts.find(post =>
+		// 													post.id === action.id
+		// 														? [...account.profile.posts, { ...post, likes: [action.id] }]
+		// 														: [...account.profile.posts]
+		// 											  )
+		// 											: account.profile.posts
+		// 											? [...account.profile.posts]
+		// 											: []
+		// 								  )
+		// 								: [],
+		// 					  }
+		// 					: { ...state.account.profile },
+		// 		},
+		// 	};
+		// }
 		case FOLLOW: {
-			console.log(action.id);
-
 			return {
 				...state,
 				account: {
@@ -189,8 +210,26 @@ const ProfileReducer = (state = initialState, action) => {
 									...state.account.profile,
 									savedPosts:
 										state.account && state.account.profile && state.account.profile.savedPosts
-											? [...state.account.profile.savedPosts, { ...action.id }]
-											: [{ ...action.id }],
+											? [...state.account.profile.savedPosts, action.id]
+											: [action.id],
+							  }
+							: { ...state.account.profile },
+				},
+			};
+		}
+		case DELETE_POST: {
+			return {
+				...state,
+				account: {
+					...state.account,
+					profile:
+						state.account && state.account.profile
+							? {
+									...state.account.profile,
+									savedPosts:
+										state.account && state.account.profile && state.account.profile.savedPosts
+											? state.account.profile.savedPosts.filter(idPost => idPost !== action.id)
+											: [],
 							  }
 							: { ...state.account.profile },
 				},
@@ -255,6 +294,11 @@ export const follow = id => ({
 
 export const savePost = id => ({
 	type: SAVE_POST,
+	id,
+});
+
+export const deletePost = id => ({
+	type: DELETE_POST,
 	id,
 });
 

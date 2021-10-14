@@ -97,3 +97,33 @@
 .wrapper_button_close button {
 	cursor: pointer;
 }
+
+/* return image list */
+.posts {
+	/* background: red; */
+	grid-template-columns: repeat(3, 1fr) !important;
+	gap: 15px !important;
+	grid-auto-flow: dense;
+}
+
+.wrapper_posts {
+	height: 100%;
+}
+
+.post {
+	height: auto;
+	max-height: 300px;
+	min-height: 280px;
+	background: green;
+	cursor: pointer;
+}
+
+.post:hover {
+	opacity: 0.8;
+}
+
+.saved_default_title {
+	display: contents;
+	font-size: 18px;
+	text-align: center;
+}

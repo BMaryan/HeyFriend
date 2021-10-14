@@ -1,17 +1,10 @@
 import React from "react";
 import styles from "./Posts.module.css";
-import PostContainer from "../../../common/Post/PostContainer";
-import { onlyBodyPostConstant } from "../../../../core/constants/constantsPost";
 import CreatePost from "../../../common/CreatePost/CreatePost";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import { photoConstant, profileConstant } from "../../../../core/constants/constants";
-import { NavLink } from "react-router-dom";
-import { ToggleShowCurrentPostContainer } from "../../../../utils/helperForProfile/helperForProfile";
+import { ReturnImageList, ToggleShowCurrentPostContainer } from "../../../../utils/helperForProfile/helperForProfile";
 import { useHistory, useParams } from "react-router-dom";
 
 const Posts = props => {
-	let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
 	let history = useHistory();
 	let params = useParams();
 
@@ -28,7 +21,9 @@ const Posts = props => {
 	let currentPost =
 		currentAccount && currentAccount.profile && currentAccount.profile.posts
 			? currentAccount.profile.posts.find(post => (post && props.params.id ? post.id === props.params.id : undefined))
-			: props.account.profile.posts.find(post => (post && props.params.id ? post.id === props.params.id : undefined));
+			: props.account && props.account.profile && props.account.profile.posts
+			? props.account.profile.posts.find(post => (post && props.params.id ? post.id === props.params.id : undefined))
+			: undefined;
 
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 
@@ -36,43 +31,31 @@ const Posts = props => {
 		<div className={styles.posts}>
 			<div className={styles.wrapper_posts}>
 				{!props.id ? (
-					<CreatePost account={props.account} otherProfile={otherProfile} accounts={props.accounts} handleOpen={props.handleOpen} />
+					<CreatePost
+						account={props.account}
+						otherProfile={otherProfile}
+						accounts={props.accounts}
+						handleOpen={props.handleOpen}
+						handleClose={props.handleClose}
+					/>
 				) : undefined}
-				<ImageList className={styles.posts}>
-					{props.account && props.account.profile && props.account.profile.posts && !props.id
-						? props.account.profile.posts.map(post => (
-								<ImageListItem key={post.id} className={styles.wrapper_posts}>
-									<NavLink
-										exact
-										key={post.id}
-										onClick={() => (openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true))}
-										to={`${profileConstant}${photoConstant}/${post.id}`}
-										className={styles.post}>
-										<PostContainer key={post.id} post={post} kindOfPost={onlyBodyPostConstant} />
-									</NavLink>
-								</ImageListItem>
-						  ))
-						: props.oftenCheckOtherProfile && otherProfile.profile.posts
-						? otherProfile.profile.posts.map(post => (
-								<ImageListItem key={post.id} className={styles.wrapper_posts}>
-									<NavLink
-										exact
-										key={post.id}
-										onClick={() => (openModalCurrentPost ? setOpenModalCurrentPost(false) : setOpenModalCurrentPost(true))}
-										to={`${profileConstant}/${props.id}${photoConstant}/${post.id}`}
-										className={styles.post}>
-										<PostContainer key={post.id} post={post} kindOfPost={onlyBodyPostConstant} />
-									</NavLink>
-								</ImageListItem>
-						  ))
-						: undefined}
-				</ImageList>
 
-				{openModalCurrentPost ? (
+				<ReturnImageList
+					accounts={props.accounts}
+					account={props.account}
+					openModalCurrentPost={props.openModalCurrentPost}
+					setOpenModalCurrentPost={props.setOpenModalCurrentPost}
+					otherProfile={otherProfile}
+					oftenCheckOtherProfile={props.oftenCheckOtherProfile}
+					id={props.id}
+					logicOfPagePost={true}
+				/>
+
+				{props.openModalCurrentPost ? (
 					<ToggleShowCurrentPostContainer
 						{...props}
-						openModalCurrentPost={openModalCurrentPost}
-						setOpenModalCurrentPost={setOpenModalCurrentPost}
+						openModalCurrentPost={props.openModalCurrentPost}
+						setOpenModalCurrentPost={props.setOpenModalCurrentPost}
 						otherProfile={otherProfile}
 						id={props.id}
 						history={history}

@@ -16,6 +16,8 @@ const HeadPost = props => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
+	// console.log(props);
+
 	return (
 		<div className={styles.head}>
 			<div className={styles.wrapper_details}>
@@ -28,7 +30,9 @@ const HeadPost = props => {
 						)}
 					</div>
 					<div className={styles.details}>
-						<NavLink to={`${profileConstant}/${props.currentAccount.id}`} className={styles.fullName}>
+						<NavLink
+							to={`${profileConstant}/${props.currentAccount && props.currentAccount.id ? props.currentAccount.id : undefined}`}
+							className={styles.fullName}>
 							{props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
 						</NavLink>
 						{props.post && props.post.dateCreated ? <div className={styles.date}>{props.post.dateCreated}</div> : undefined}

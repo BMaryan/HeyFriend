@@ -23,8 +23,8 @@ function App(props) {
 					<Switch>
 						<Route exact path='/' render={() => <MainContainer />} />
 						<Route exact path={`/photo/:id`} render={() => <CurrentPostContainer />} />
-						{/* <Route path={`${profileConstant}/photo/:id`} render={() => <ProfileContainer />} /> */}
-						{/* <Route path={`${profileConstant}/:id?/photo/:id`} render={() => <ProfileContainer />} /> */}
+						<Route path={`${profileConstant}/photo/:id`} render={() => <ProfileContainer />} />
+						<Route path={`${profileConstant}/:id?/photo/:id`} render={() => <ProfileContainer />} />
 						<Route path={`${profileConstant}/:id?`} render={() => <ProfileContainer />} />
 						<Route path={`${chatConstant}/:id?`} render={() => <ChatContainer />} />
 						<Route path={`${friendsConstant}/:id?`} render={() => <FriendsContainer />} />

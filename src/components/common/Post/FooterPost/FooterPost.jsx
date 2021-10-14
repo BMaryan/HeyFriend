@@ -17,6 +17,15 @@ const FooterPost = props => {
 		console.log(formData);
 	};
 
+	let checkClickBookmarkIcon =
+		props.account && props.account.profile && props.account.profile.savedPosts
+			? props.account.profile.savedPosts.find(postId => {
+					if (postId && props.post && props.post.id && postId === props.post.id) {
+						return postId;
+					}
+			  })
+			: undefined;
+
 	return (
 		<div className={props.modal ? styles.footer : styles.footer_modal}>
 			{props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} /> : undefined}
@@ -55,10 +64,11 @@ const FooterPost = props => {
 					<div className={styles.features_right}>
 						<Checkbox
 							className={styles.icon}
+							onClick={() => (!checkClickBookmarkIcon ? props.savePost(props.post.id) : props.deletePost(props.post.id))}
 							color='default'
 							size='medium'
-							icon={<BookmarkBorderIcon />}
-							checkedIcon={<BookmarkIcon />}
+							icon={!checkClickBookmarkIcon ? <BookmarkBorderIcon /> : <BookmarkIcon />}
+							checkedIcon={checkClickBookmarkIcon ? <BookmarkIcon /> : <BookmarkBorderIcon />}
 						/>
 					</div>
 				</div>
