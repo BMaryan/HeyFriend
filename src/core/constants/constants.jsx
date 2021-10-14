@@ -5,4 +5,4 @@ export const friendsConstant = "/friends";
 export const editConstant = "/account/edit";
 export const signUpConstant = "/sign_up";
 export const signInConstant = "/sign_in";
-export const photoConstant = "/photo";
+export const photoConstant = "/post";

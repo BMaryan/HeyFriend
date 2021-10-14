@@ -1,8 +1,5 @@
 import React from "react";
 import styles from "./CurrentPost.module.css";
-import BodyPost from "../../common/Post/BodyPost/BodyPost";
-import HeadPost from "../../common/Post/HeadPost/HeadPost";
-import FooterPost from "../../common/Post/FooterPost/FooterPost";
 import { useParams } from "react-router-dom";
 import PostContainer from "../Post/PostContainer";
 import { modalPostConstant } from "../../../core/constants/constantsPost";
@@ -23,30 +20,25 @@ const CurrentPost = props => {
 		: undefined;
 
 	let currentPost =
-		foundAccount && foundAccount.profile.posts ? (
-			foundAccount.profile.posts.find(post => {
-				if (post.id === params.id) {
-					return post;
-				}
-			})
-		) : (
-			<></>
-		);
+		foundAccount && foundAccount.profile && foundAccount.profile.posts
+			? foundAccount.profile.posts.find(post => {
+					if (post.id === params.id) {
+						return post;
+					}
+			  })
+			: props.account && props.account.profile && props.account.profile.posts
+			? props.account.profile.posts.find(post => post.id === params.id)
+			: undefined;
 
 	return (
 		<div className={styles.current_post}>
 			<div className={styles.current_post_content}>
-				<PostContainer modal={true} kindOfPost={modalPostConstant} post={currentPost} currentAccount={foundAccount} />
-				{/* <div className={styles.wrapper_post_photo}> */}
-				{/* <BodyPost {...props} /> */}
-				{/* <BodyPost {...props} account={foundAccount} post={currentPost} /> */}
-				{/* </div>
-				<div className={styles.wrapper_content}>
-					<HeadPost currentAccount={foundAccount} /> */}
-				{/* <HeadPost {...props} account={foundAccount} post={currentPost} /> */}
-				{/* <FooterPost {...props} /> */}
-				{/* <FooterPost {...props} account={foundAccount} post={currentPost} modal={true} /> */}
-				{/* </div> */}
+				<PostContainer
+					modal={true}
+					kindOfPost={modalPostConstant}
+					post={currentPost}
+					currentAccount={foundAccount ? foundAccount : props.account}
+				/>
 			</div>
 		</div>
 	);

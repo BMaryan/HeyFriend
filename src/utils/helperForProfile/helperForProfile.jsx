@@ -167,7 +167,7 @@ export let ReturnImageList = props => {
 								onClick={() =>
 									props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true)
 								}
-								to={`${profileConstant}${photoConstant}/${post && post.id ? post.id : undefined}`}
+								to={`${photoConstant}/${post && post.id ? post.id : undefined}`}
 								className={styles.post}>
 								<PostContainer
 									key={post && post.id ? post.id : undefined}
@@ -187,7 +187,7 @@ export let ReturnImageList = props => {
 								onClick={() =>
 									props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true)
 								}
-								to={`${profileConstant}/${props.id}${photoConstant}/${post && post.id ? post.id : undefined}`}
+								to={`${photoConstant}/${post && post.id ? post.id : undefined}`}
 								className={styles.post}>
 								<PostContainer
 									key={post && post.id ? post.id : undefined}
@@ -214,9 +214,7 @@ export let ReturnImageList = props => {
 																	? props.setOpenModalCurrentPost(false)
 																	: props.setOpenModalCurrentPost(true)
 															}
-															to={`${profileConstant}/${props.id}${photoConstant}/${
-																post && post.id ? post.id : undefined
-															}`}
+															to={`${photoConstant}/${post && post.id ? post.id : undefined}`}
 															className={styles.post}>
 															<PostContainer
 																key={post && post.id ? post.id : undefined}
