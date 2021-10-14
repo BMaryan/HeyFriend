@@ -9,23 +9,23 @@ import {
 	validatePassword,
 	required,
 	validateFirstAndLastNameCreator,
-	validateFindTheSameUserCreator,
 } from "../../../../utils/FieldValidationForm/FieldValidationForm";
 
 let validateFirstName = validateFirstAndLastNameCreator("first");
 let validateLastName = validateFirstAndLastNameCreator("last");
-let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localStorage.getItem("users")));
 
 const EditProfileForm = props => {
-	let [value, setValue] = React.useState({
-		name: props.account.profile.name,
-		surname: props.account.profile.surname,
-		phone_or_email: props.account.profile.phone_or_email,
-		password: props.account.profile.password,
-	});
+	// const props.initialValues = {
+	// 	name: props.account.profile.name,
+	// 	surname: props.account.profile.surname,
+	// 	phone_or_email: props.account.profile.phone_or_email,
+	// 	password: props.account.profile.password,
+	// };
+
+	console.log(props);
 
 	return (
-		<form className={styles.form} onSubmit={props.handleSubmit}>
+		<form initialValues={props.initialize} className={styles.form} onSubmit={props.handleSubmit}>
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>Name</div>
 				<div className={styles.action}>
@@ -45,7 +45,7 @@ const EditProfileForm = props => {
 					<WrapperCreateField
 						name='phone_or_email'
 						type='text'
-						validate={[validatePhoneNumberAndEmail, validateFindTheSameUser]}
+						validate={[validatePhoneNumberAndEmail]}
 						component={Input}
 						placeholder='Your email or phone'
 					/>
@@ -65,7 +65,7 @@ const EditProfileForm = props => {
 			</div>
 
 			<div className={styles.wrapper_button}>
-				<WrapperButton {...props} button_text='Submit' onClick={() => console.log("YEs")} />
+				<WrapperButton {...props} button_text='Submit' isEditProfile={true} />
 			</div>
 		</form>
 	);

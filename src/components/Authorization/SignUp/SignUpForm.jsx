@@ -10,12 +10,10 @@ import {
 	validatePassword,
 	required,
 	validateFirstAndLastNameCreator,
-	validateFindTheSameUserCreator,
 } from "../../../utils/FieldValidationForm/FieldValidationForm";
 
 let validateFirstName = validateFirstAndLastNameCreator("first");
 let validateLastName = validateFirstAndLastNameCreator("last");
-let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localStorage.getItem(accounts)));
 
 const SignUpForm = props => {
 	return (
@@ -25,12 +23,12 @@ const SignUpForm = props => {
 			<WrapperCreateField
 				name='phone_or_email'
 				type='text'
-				validate={[validatePhoneNumberAndEmail, validateFindTheSameUser, required]}
+				validate={[validatePhoneNumberAndEmail, required]}
 				component={Input}
 				placeholder='Mobile Number or email'
 			/>
 			<WrapperCreateField name='password' type='password' validate={[validatePassword, required]} component={Input} placeholder='Password' />
-			<WrapperButton {...props} button_text='SIGN UP' />
+			<WrapperButton {...props} button_text='SIGN UP' isSignUp={true} />
 		</form>
 	);
 };

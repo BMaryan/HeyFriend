@@ -12,7 +12,7 @@ import { isAccount } from "../../../redux/profile-reducer";
 
 const SignInContainer = props => {
 	React.useEffect(() => {
-		if (props.accounts) {
+		if (props.accounts && props.accounts.length > 0) {
 			localStorage.setItem(accounts, JSON.stringify(props.accounts));
 		}
 	}, [props.accounts]);
@@ -20,8 +20,6 @@ const SignInContainer = props => {
 	React.useEffect(() => {
 		if (props.account) {
 			localStorage.setItem(account, JSON.stringify(props.account));
-		} else {
-			localStorage.removeItem(account);
 		}
 	}, [props.account]);
 

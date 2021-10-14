@@ -4,17 +4,9 @@ import styles from "./SignIn.module.css";
 import commonStyles from "../Authorization.module.css";
 import { reduxForm } from "redux-form";
 import { WrapperCreateField, Input, WrapperButton } from "../../common/FormControls/FormControls";
-import {
-	validatePhoneNumberAndEmail,
-	validatePassword,
-	required,
-	validateAuthorizationUserCreator,
-	validateFindTheSameUserCreator,
-} from "../../../utils/FieldValidationForm/FieldValidationForm";
+import { validatePhoneNumberAndEmail, validatePassword, required } from "../../../utils/FieldValidationForm/FieldValidationForm";
 import TextField from "@mui/material/TextField";
 import { accounts } from "../../../core/constants/constantsLocalStorage";
-
-let validateFindTheSameUser = validateFindTheSameUserCreator(JSON.parse(localStorage.getItem(accounts)));
 
 const SignInForm = props => {
 	return (

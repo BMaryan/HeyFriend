@@ -26,9 +26,9 @@ const AppContainer = props => {
 	}, [props.userSignUp]);
 
 	React.useEffect(() => {
-		if (props.accounts) {
-			localStorage.setItem(accounts, JSON.stringify(props.accounts));
-		}
+		// if (props.accounts) {
+		localStorage.setItem(accounts, JSON.stringify(props.accounts));
+		// }
 	}, [props.accounts]);
 
 	React.useEffect(() => {

@@ -29,9 +29,6 @@ const ProfileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				accounts: action.accounts ? [...action.accounts] : [],
-				// accounts: action.accounts ? action.accounts.filter((v, i, a) => a.findIndex(t => t.card_id === v.id) === i) : [],
-				// accounts: action.accounts ? action.accounts.filter(profile => (profile && profile.profile.name ? profile : undefined)) : [],
-				// cars.filter((v, i, a) => a.findIndex(t => (t.card_id === v.id)) === i)
 			};
 		}
 		case ADD_ACCOUNT: {

@@ -13,7 +13,15 @@ export const maxLengthCreator = maxLength => value => value && value.length > ma
 export const validateAuthorizationUserCreator = (accounts, userSignIn) => {
 	let foundAccount;
 	if (accounts) {
-		foundAccount = accounts.find(account => account.phone_or_email === userSignIn.phone_or_email && account.password === userSignIn.password);
+		foundAccount =
+			accounts &&
+			accounts.find(
+				account =>
+					(account.phone_or_email === userSignIn.phone_or_email && account.password === userSignIn.password) ||
+					(account.profile &&
+						account.profile.phone_or_email === userSignIn.phone_or_email &&
+						account.profile.password === userSignIn.password)
+			);
 
 		if (foundAccount) {
 			return undefined;
@@ -23,16 +31,20 @@ export const validateAuthorizationUserCreator = (accounts, userSignIn) => {
 	}
 };
 
-export const validateFindTheSameUserCreator = accounts => value => {
+export const validateFindTheSameUserCreator = (accounts, userSignUp) => {
 	let foundUser;
 	if (accounts) {
-		foundUser = accounts.find(account => account.profile.phone_or_email === value);
-	}
+		foundUser = accounts.find(
+			account =>
+				account.phone_or_email === userSignUp.phone_or_email ||
+				(account.profile && account.profile.phone_or_email === userSignUp.phone_or_email)
+		);
 
-	if (!foundUser) {
-		return undefined;
-	} else {
-		return "An account already exists with this email.";
+		if (!foundUser) {
+			return undefined;
+		} else {
+			return "An account already exists with this email.";
+		}
 	}
 };
 
