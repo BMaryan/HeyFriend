@@ -27,6 +27,7 @@ textarea {
 .wrapper_field {
 	width: 100%;
 	position: relative;
+	margin-bottom: 10px;
 }
 
 .field {
@@ -77,8 +78,10 @@ textarea {
 }
 
 .wrapper_button button:disabled {
+	color: white;
 	pointer-events: auto;
 	cursor: no-drop;
+	opacity: 0.7;
 }
 
 /* style for box error */

@@ -10,20 +10,12 @@ import {
 	required,
 	validateFirstAndLastNameCreator,
 } from "../../../../utils/FieldValidationForm/FieldValidationForm";
+import { connect } from "react-redux";
 
 let validateFirstName = validateFirstAndLastNameCreator("first");
 let validateLastName = validateFirstAndLastNameCreator("last");
 
 const EditProfileForm = props => {
-	// const props.initialValues = {
-	// 	name: props.account.profile.name,
-	// 	surname: props.account.profile.surname,
-	// 	phone_or_email: props.account.profile.phone_or_email,
-	// 	password: props.account.profile.password,
-	// };
-
-	console.log(props);
-
 	return (
 		<form initialValues={props.initialize} className={styles.form} onSubmit={props.handleSubmit}>
 			<div className={styles.wrapper_block}>
@@ -73,4 +65,10 @@ const EditProfileForm = props => {
 
 const EditProfileReduxForm = reduxForm({ form: "edit_profile" })(EditProfileForm);
 
-export default EditProfileReduxForm;
+const mapStateToProps = state => {
+	return {
+		initialValues: state?.profilePage?.account?.profile,
+	};
+};
+
+export default connect(mapStateToProps, {})(EditProfileReduxForm);

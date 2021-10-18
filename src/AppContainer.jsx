@@ -26,18 +26,30 @@ const AppContainer = props => {
 	}, [props.userSignUp]);
 
 	React.useEffect(() => {
-		// if (props.accounts) {
 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
-		// }
 	}, [props.accounts]);
 
 	React.useEffect(() => {
 		if (props.account) {
-			localStorage.setItem(account, JSON.stringify(props.account));
+			try {
+				localStorage.setItem(account, JSON.stringify(props.account));
+			} catch (e) {
+				console.log(e.message);
+
+				return e.name;
+			}
 		} else {
 			localStorage.removeItem(account);
 		}
 	}, [props.account]);
+
+	// React.useEffect(() => {
+	// 	if (props.account) {
+	// 		localStorage.setItem(account, JSON.stringify(props.account));
+	// 	} else {
+	// 		localStorage.removeItem(account);
+	// 	}
+	// }, [props.account]);
 
 	// React.useEffect(() => {
 	// 	props.setProfileChats(props.chats);

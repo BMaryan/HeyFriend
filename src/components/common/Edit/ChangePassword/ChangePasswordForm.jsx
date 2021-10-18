@@ -53,6 +53,6 @@ const ChangePasswordForm = props => {
 	);
 };
 
-const ChangePasswordReduxForm = reduxForm({ form: "edit_profile" })(ChangePasswordForm);
+const ChangePasswordReduxForm = reduxForm({ form: "edit_password" })(ChangePasswordForm);
 
 export default ChangePasswordReduxForm;
