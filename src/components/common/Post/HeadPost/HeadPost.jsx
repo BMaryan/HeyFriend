@@ -16,8 +16,6 @@ const HeadPost = props => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	// console.log(props);
-
 	return (
 		<div className={styles.head}>
 			<div className={styles.wrapper_details}>
@@ -58,19 +56,19 @@ const HeadPost = props => {
 					<Fade in={open}>
 						<Box className={styles.modalPostActions}>
 							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								R<span style={{ textTransform: "lowercase" }}>eport</span>
+								Report
 							</Button>
 							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								U<span style={{ textTransform: "lowercase" }}>nfollow</span>
+								Unfollow
 							</Button>
 							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								S<span style={{ textTransform: "lowercase" }}>hare to...</span>
+								Share to...
 							</Button>
 							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								C <span style={{ textTransform: "lowercase" }}>opy link</span>
+								Copy link
 							</Button>
 							<Button onClick={handleClose} variant='text' className={styles.item}>
-								C<span style={{ textTransform: "lowercase" }}>ancel</span>
+								Cancel
 							</Button>
 						</Box>
 					</Fade>

@@ -18,6 +18,7 @@
 
 .change_profile_picture_content button {
 	color: rgb(41, 41, 41);
+	text-transform: none;
 	border-top: 1px solid var(--bgWhite220);
 	border-radius: 0;
 	padding: 12px 0;
@@ -35,6 +36,7 @@
 .wrapper_item {
 	height: 100%;
 	width: 100%;
+	text-transform: capitalize;
 	text-align: center;
 }
 

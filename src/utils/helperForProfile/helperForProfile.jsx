@@ -11,7 +11,7 @@ import { modalPostConstant } from "../../core/constants/constantsPost";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { NavLink } from "react-router-dom";
-import { profileConstant, photoConstant } from "../../core/constants/constants";
+import { photoConstant } from "../../core/constants/constants";
 import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
 
 const DuplicateCodeFunc = props => {
@@ -44,7 +44,7 @@ export const ChangeProfilePictureContainer = props => {
 				<div className={styles.title}>Change profile photo</div>
 				<Button className={styles.wrapper_item + " " + styles.wrapper_upload_picture}>
 					<label>
-						U<span style={{ textTransform: "lowercase" }}>pload photo</span>
+						Upload photo
 						<input
 							onChange={e => {
 								getPictureBase64(e, props.getProfileData, props.account, "avatar");
@@ -62,11 +62,11 @@ export const ChangeProfilePictureContainer = props => {
 						removePicture(props.getProfileData, props.account, "avatar");
 						props.setOpenModalAvatarProfile(false);
 					}}>
-					R<span style={{ textTransform: "lowercase" }}>emove current photo</span>
+					Remove current photo
 				</Button>
 
 				<Button className={styles.wrapper_item} onClick={() => props.setOpenModalAvatarProfile(false)}>
-					C<span style={{ textTransform: "lowercase" }}>ancel</span>
+					Cancel
 				</Button>
 			</div>
 		</DuplicateCodeFunc>
@@ -84,7 +84,7 @@ export const ContainerCoverProfile = props => {
 				<div className={styles.title}>Change profile cover photo</div>
 				<Button className={styles.wrapper_item + " " + styles.wrapper_upload_picture}>
 					<label>
-						U<span style={{ textTransform: "lowercase" }}>pload cover photo</span>
+						Upload cover photo
 						<input
 							onChange={e => {
 								getPictureBase64(e, props.getProfileData, props.account, "coverPhoto");
@@ -102,11 +102,11 @@ export const ContainerCoverProfile = props => {
 						removePicture(props.getProfileData, props.account, "coverPhoto");
 						props.setOpenModalCoverProfile(false);
 					}}>
-					R<span style={{ textTransform: "lowercase" }}>emove cover photo</span>
+					Remove cover photo
 				</Button>
 
 				<Button className={styles.wrapper_item} onClick={() => props.setOpenModalCoverProfile(false)}>
-					C<span style={{ textTransform: "lowercase" }}>ancel</span>
+					Cancel
 				</Button>
 			</div>
 		</DuplicateCodeFunc>
@@ -114,33 +114,6 @@ export const ContainerCoverProfile = props => {
 };
 
 export let ToggleShowCurrentPostContainer = props => {
-	// let checkCurrentPost =
-	// 	props.account && props.account.profile.posts
-	// 		? props.account.profile.posts.find(post => {
-	// 				if (props.params && props.params.id && props.params.id === post.id) {
-	// 					return post;
-	// 				}
-	// 		  })
-	// 		: props.accounts
-	// 		? props.accounts.find(account =>
-	// 				account.profile.posts
-	// 					? account.profile.posts.find(post => {
-	// 							if (props.params && props.params.id && props.params.id === post.id) {
-	// 								return post;
-	// 							}
-	// 					  })
-	// 					: undefined
-	// 		  )
-	// 		: undefined;
-
-	// let otherCurrentPost =
-	// 	checkCurrentPost && checkCurrentPost.profile && checkCurrentPost.profile.posts
-	// 		? checkCurrentPost.profile.posts.find(post => (props.params && props.params.id ? props.params.id === post.id : undefined))
-	// 		: undefined;
-
-	console.log(props.currentPost);
-	console.log(props.currentAccount);
-
 	return (
 		<DuplicateCodeFunc
 			{...props}

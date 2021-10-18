@@ -142,6 +142,7 @@
 	height: 100%;
 	width: 100%;
 	color: rgb(33, 33, 33);
+	text-transform: capitalize;
 	font-size: 14px;
 	border-radius: 0;
 	padding: 12px;

@@ -192,6 +192,7 @@ const ProfileContent = props => {
 							<Button
 								variant='contained'
 								disabled={!postPhoto}
+								style={{ textTransform: "capitalize" }}
 								onClick={() => {
 									postPhoto ? (
 										props.setProfilePosts({
@@ -207,7 +208,7 @@ const ProfileContent = props => {
 									);
 									handleClose();
 								}}>
-								P<span style={{ textTransform: "lowercase" }}>ublish</span>
+								Publish
 							</Button>
 						</div>
 
