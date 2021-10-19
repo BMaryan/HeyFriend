@@ -10,15 +10,12 @@ import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import { useLocation } from "react-router-dom";
 
 const DuplicateCodeFunc = props => {
 	return (
 		<div className={styles.wrapper_nav_link}>
-			<NavLink
-				className={styles.nav_linkRow + " " + commonStyles.common_nav_linkRow}
-				activeClassName={commonStyles.nav_linkRow_active}
-				to={props.path}
-				exact={props.exact}>
+			<NavLink className={styles.nav_linkRow + " " + commonStyles.common_nav_linkRow} to={props.path} exact={props.exact}>
 				<div>{props.icon}</div>
 			</NavLink>
 		</div>
@@ -26,17 +23,38 @@ const DuplicateCodeFunc = props => {
 };
 
 const NavbarRow = props => {
+	let location = useLocation();
+
 	return (
 		<div className={styles.navbar_row}>
-			<DuplicateCodeFunc path='/' icon={<Checkbox icon={<HomeOutlinedIcon />} checkedIcon={<Home color='action' />} />} exact />
+			<DuplicateCodeFunc
+				path='/'
+				icon={
+					<Checkbox
+						icon={location.pathname !== "/" ? <HomeOutlinedIcon /> : <Home color='action' />}
+						sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }}
+					/>
+				}
+				exact
+			/>
 			<DuplicateCodeFunc
 				path={`${chatConstant}`}
-				icon={<Checkbox icon={<ChatOutlinedIcon />} checkedIcon={<ChatRoundedIcon color='action' />} />}
+				icon={
+					<Checkbox
+						icon={location.pathname !== chatConstant ? <ChatOutlinedIcon /> : <ChatRoundedIcon color='action' />}
+						sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }}
+					/>
+				}
 				exact
 			/>
 			<DuplicateCodeFunc
 				path={`${friendsConstant}`}
-				icon={<Checkbox icon={<PeopleOutlineIcon />} checkedIcon={<PeopleRoundedIcon color='action' />} />}
+				icon={
+					<Checkbox
+						icon={location.pathname !== friendsConstant ? <PeopleOutlineIcon /> : <PeopleRoundedIcon color='action' />}
+						sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }}
+					/>
+				}
 				exact
 			/>
 		</div>

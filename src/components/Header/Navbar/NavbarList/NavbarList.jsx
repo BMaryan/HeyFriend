@@ -41,31 +41,6 @@ const NavbarList = props => {
 	return (
 		<div className={styles.navbar_list}>
 			<div className={styles.wrapper_nav_link}>
-				{/* <IconButton
-					onClick={handleClick}
-					sx={{ padding: "0px", fontSize: "17px", borderRadius: "15px" }}
-					className={commonStyles.nav_link_toggleList}> */}
-				{/* wrapper */}
-				{/* <div className={styles.wrapper_toggleList_picture}>
-						<img
-							src={
-								props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar
-							}
-							alt=''
-						/>
-					</div> */}
-
-				{/* full name */}
-				{/* <div className={styles.toggleList_fullName}>
-						{props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : <></>}
-					</div> */}
-
-				{/* icon */}
-				{/* <div>
-						<ArrowDropDownRoundedIcon sx={{ fontSize: 32 }} className={commonStyles.icon} />
-					</div> */}
-				{/* </IconButton> */}
-
 				<Chip
 					onClick={handleClick}
 					sx={{ fontSize: "15px" }}

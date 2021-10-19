@@ -94,3 +94,16 @@
 	padding: 0 13px 0 13px;
 	cursor: pointer;
 }
+
+/* media */
+@media (max-width: 719.98px) {
+	.form {
+		display: none;
+	}
+}
+
+@media (max-width: 539.98px) {
+	.navbar_row {
+		display: none;
+	}
+}

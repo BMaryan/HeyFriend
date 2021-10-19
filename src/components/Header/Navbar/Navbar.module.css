@@ -33,3 +33,7 @@
 	font-size: 18px;
 	transition: 0.5s;
 }
+
+/* media */
+@media (max-width: 539.98px) {
+}

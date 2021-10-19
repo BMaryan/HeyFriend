@@ -207,3 +207,35 @@
 	padding: 0;
 	cursor: no-drop;
 }
+
+/* media */
+@media (max-width: 991.98px) {
+	.wrapper_post {
+	}
+
+	.modalPostActions {
+		width: 50vw;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.wrapper_post {
+		height: 800px;
+	}
+}
+
+@media (max-width: 424.98px) {
+	.wrapper_post {
+		height: 700px;
+	}
+}
+
+@media (max-width: 319.98px) {
+	.wrapper_post {
+		height: 600px;
+	}
+
+	.input {
+		width: 100%;
+	}
+}
