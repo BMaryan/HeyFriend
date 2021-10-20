@@ -10,6 +10,7 @@ import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follo
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { signUpConstant } from "../../core/constants/constants";
+import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
@@ -56,5 +57,6 @@ const mapStateToProps = state => {
 
 export default compose(
 	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow, setProfileChats, addAccount }),
-	withRouter
+	withRouter,
+	withBottomNavigation
 )(ProfileContainer);

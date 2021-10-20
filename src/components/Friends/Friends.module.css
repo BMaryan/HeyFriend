@@ -1,11 +1,10 @@
 .friends {
-	height: 540px;
-	min-height: 100%;
+	min-height: 540px;
 	width: 100%;
 	background: white;
 	border: 1px solid rgb(208, 208, 208);
 	display: flex;
-	margin-top: var(--mgFromHeader);
+	margin: var(--mgFromHeader) 0;
 	overflow: hidden;
 }
 
@@ -17,11 +16,10 @@
 /* friends menu */
 .friends_menu {
 	height: 100%;
-	width: 25%;
+	min-width: 20%;
 	border-right: 1px solid rgb(208, 208, 208);
 	display: flex;
 	flex-direction: column;
-	/* background: red; */
 }
 
 .menu {
@@ -43,23 +41,111 @@
 	border-left: 2px solid transparent;
 	padding: 16px 16px 16px 30px;
 	cursor: pointer;
-	/* transition: border-left 0.5s; */
 }
 
 .item:hover {
 	background: var(--bgWhite245);
-	/* transition: border-left 0.5s; */
 }
 
 .item_active {
 	border-left-color: rgb(107, 107, 107);
 	font-weight: 600;
-	/* transition: border-left 0.5s; */
 }
 
 /* friends content */
 .friends_content {
 	height: 100%;
-	width: 75%;
-	/* background: green; */
+	display: flex;
+	flex: 1;
+	box-sizing: border-box;
+	position: relative;
+	padding: var(--pdContent, 15px) 0 50px 0;
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card {
+	width: 29%;
+	/* min-width: 100%; */
+	display: flex;
+	flex-direction: column;
+	margin: 0 var(--pdContent, 15px) var(--pdContent, 15px) var(--pdContent, 15px);
+}
+
+.navLink {
+	text-decoration: none;
+}
+
+.head {
+}
+
+.wrapper_avatar {
+	height: 220px;
+}
+
+.head_content {
+}
+
+.full_name {
+	color: black;
+	font-size: 19px;
+}
+
+.subtitle {
+	color: rgb(104, 104, 104);
+}
+
+.footer {
+	display: flex;
+	justify-content: center;
+}
+
+.footer button {
+	width: 100%;
+	background: linear-gradient(var(--mainBg));
+	font-size: 14px;
+	text-transform: capitalize;
+}
+
+.navigation_bottom {
+	display: none;
+}
+
+/* media */
+@media (min-width: 767.98px) and (max-width: 959.98px) {
+	.card {
+		width: 42%;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.friends_menu {
+	}
+
+	.navigation_bottom {
+		display: block;
+	}
+
+	.card {
+		width: 100%;
+	}
+}
+
+@media (max-width: 575.98px) {
+	/* .friends_menu {
+		min-width: 35%;
+	} */
+}
+
+@media (max-width: 449.98px) {
+	.friends_menu {
+		display: none;
+	}
+
+	.friends_content {
+		width: 100%;
+	}
 }

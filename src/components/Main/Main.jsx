@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
+import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
 
 const Main = props => {
 	return (
@@ -106,4 +107,4 @@ const Main = props => {
 	);
 };
 
-export default Main;
+export default withBottomNavigation(Main);

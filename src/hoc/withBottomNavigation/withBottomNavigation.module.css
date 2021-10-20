@@ -1,0 +1,22 @@
+.paper {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.paper_bottom_navigation {
+}
+
+/* media */
+@media (max-width: 539.98px) {
+	.paper {
+		display: block;
+	}
+}
+
+@media (min-width: 540px) {
+	.paper {
+		display: none;
+	}
+}

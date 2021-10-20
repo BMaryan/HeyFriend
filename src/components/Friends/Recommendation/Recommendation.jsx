@@ -1,22 +1,22 @@
 import React from "react";
-import styles from "../Friends.module.css";
 import { NavLink } from "react-router-dom";
 import { profileConstant } from "../../../core/constants/constants";
+import styles from "../Friends.module.css";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Button, CardActionArea, CardActions } from "@mui/material";
 
-const Following = props => {
+const Recommendation = props => {
 	return (
 		<div className={styles.content}>
 			{props.accounts
 				? props.accounts.map(account =>
 						props.account && props.account.profile && props.account.profile.following
 							? props.account.profile.following.map(followedAccount => {
-									if (account.id === followedAccount.id) {
+									if (account.id !== followedAccount.id) {
 										return (
 											<Card className={styles.card}>
 												<CardActionArea className={styles.head}>
@@ -37,6 +37,12 @@ const Following = props => {
 														</CardContent>
 													</NavLink>
 												</CardActionArea>
+
+												<CardActions className={styles.footer}>
+													<Button variant='contained' color='primary'>
+														Follow
+													</Button>
+												</CardActions>
 											</Card>
 										);
 									}
@@ -48,4 +54,4 @@ const Following = props => {
 	);
 };
 
-export default Following;
+export default Recommendation;

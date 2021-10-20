@@ -46,6 +46,7 @@ const NavbarList = props => {
 					sx={{ fontSize: "15px" }}
 					className={commonStyles.nav_link_toggleList}
 					variant='outlined'
+					// label=''
 					label={props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}
 					avatar={
 						<Avatar
