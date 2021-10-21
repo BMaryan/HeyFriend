@@ -73,30 +73,26 @@ const Main = props => {
 						? props.accounts
 								.map(account =>
 									account.id !== props.account.id ? (
-										<>
-											<ListItem className={styles.wrapper_item}>
-												<ListItemAvatar>
-													<Avatar
-														src={
-															account && account.profile && account.profile.avatar
-																? account.profile.avatar
-																: defaultAvatar
-														}
-														alt=''
-													/>
-												</ListItemAvatar>
-												<ListItemText
-													primary={
-														account && account.profile ? account.profile.surname + " " + account.profile.name : undefined
+										<ListItem key={account.id} className={styles.wrapper_item}>
+											<ListItemAvatar>
+												<Avatar
+													src={
+														account && account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar
 													}
-													secondary={
-														<React.Fragment>
-															Followed by {account.profile.surname + " " + account.profile.name}
-														</React.Fragment>
-													}
+													alt=''
 												/>
-											</ListItem>
-										</>
+											</ListItemAvatar>
+											<ListItemText
+												primary={
+													account && account.profile ? account.profile.surname + " " + account.profile.name : undefined
+												}
+												secondary={
+													<React.Fragment>
+														Followed by {account.profile.surname + " " + account.profile.name}
+													</React.Fragment>
+												}
+											/>
+										</ListItem>
 									) : undefined
 								)
 								.slice(-5)

@@ -11,8 +11,9 @@
 
 /* content */
 .dialogs {
-	width: 25%;
+	min-width: 25%;
 	background: white;
+	/* background: red; */
 }
 
 .dialogs_content {
@@ -172,7 +173,29 @@
 }
 
 .wrapper_button button {
-	/* background: var(--bgWhite233); */
 	padding: 7px 25px;
 	cursor: pointer;
+}
+
+/* media */
+@media (max-width: 767.98px) {
+	.dialogs {
+		min-width: 30%;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.dialogs {
+		min-width: 35%;
+	}
+}
+
+@media (max-width: 399.98px) {
+	.dialogs {
+		min-width: 100%;
+	}
+
+	.default_view_messages {
+		display: none;
+	}
 }

@@ -54,6 +54,32 @@ const ProfileInfo = props => {
 					</div>
 				</div>
 
+				{/* wrapper picture */}
+				<div
+					className={
+						openModalAvatarProfile && !props.id ? styles.wrapper_profilePicture_active__center : styles.wrapper_profilePicture__center
+					}>
+					{oftenCheckMyProfile && props.account.profile.avatar ? (
+						<img
+							onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}
+							src={props.account.profile.avatar}
+							title='Change profile photo'
+							alt=''
+						/>
+					) : oftenCheckOtherProfile && otherProfile.profile.avatar ? (
+						<img src={otherProfile.profile.avatar} alt='' />
+					) : !props.id ? (
+						<img
+							onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}
+							src={defaultAvatar}
+							title='Change profile photo'
+							alt=''
+						/>
+					) : (
+						<img src={defaultAvatar} alt='' />
+					)}
+				</div>
+
 				{/* change cover img */}
 				{!props.id ? (
 					<div className={styles.wrapper_change_cover}>

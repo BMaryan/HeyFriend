@@ -142,10 +142,10 @@
 
 @media (max-width: 449.98px) {
 	.friends_menu {
-		display: none;
+		/* display: none; */
 	}
 
 	.friends_content {
-		width: 100%;
+		/* width: 100%; */
 	}
 }

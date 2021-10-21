@@ -2,7 +2,68 @@ let ADD_MESSAGE = "social_network/chatPage/ADD_MESSAGE";
 let ADD_CHAT = "social_network/chatPage/ADD_CHAT";
 
 let initialState = {
-	chats: [],
+	chats: [
+		// {
+		// 	id: 1,
+		// 	messages: [
+		// 		{
+		// 			id: 2,
+		// 			userId: 3,
+		// 			message: "HEllo",
+		// 		},
+		// 		{
+		// 			id: 1,
+		// 			userId: 3,
+		// 			message: "How are you",
+		// 		},
+		// 		{
+		// 			id: 1,
+		// 			userId: 1,
+		// 			message: "I'm good",
+		// 		},
+		// 	],
+		// },
+		// {
+		// 	id: 2,
+		// 	messages: [
+		// 		{
+		// 			id: 2,
+		// 			userId: 2,
+		// 			message: "HEllo",
+		// 		},
+		// 		{
+		// 			id: 2,
+		// 			userId: 2,
+		// 			message: "How are you",
+		// 		},
+		// 		{
+		// 			id: 2,
+		// 			userId: 1,
+		// 			message: "I'm good",
+		// 		},
+		// 	],
+		// },
+		// {
+		// 	id: 3,
+		// 	messages: [
+		// 		{
+		// 			id: 3,
+		// 			userId: 2,
+		// 			message: "HEllo",
+		// 		},
+		// 		{
+		// 			id: 3,
+		// 			userId: 2,
+		// 			message: "How are you",
+		// 		},
+		// 		{
+		// 			id: 3,
+		// 			userId: 3,
+		// 			message: "I'm good",
+		// 		},
+		// 	],
+		// },
+	],
 };
 
 const ChatReducer = (state = initialState, action) => {

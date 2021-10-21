@@ -10,6 +10,8 @@ const Dialog = props => {
 	let save = props.account && props.chat && props.account.id;
 	let foundUser = props.users ? props.users.find(user => props.chat.id === user.id) : undefined;
 
+	console.log(foundUser);
+
 	return (
 		<>
 			<NavLink

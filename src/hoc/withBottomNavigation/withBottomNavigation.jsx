@@ -28,19 +28,24 @@ export let withBottomNavigation = Component => props => {
 					onChange={(event, newValue) => {
 						setValue(newValue);
 					}}>
-					<NavLink to={`/`} exact={props.exact}>
-						<BottomNavigationAction icon={location.pathname !== "/" ? <HomeOutlinedIcon /> : <Home color='action' />} />
-					</NavLink>
-					<NavLink to={`${chatConstant}`} exact={props.exact}>
-						<BottomNavigationAction
-							icon={location.pathname !== chatConstant ? <ChatOutlinedIcon /> : <ChatRoundedIcon color='action' />}
-						/>
-					</NavLink>
-					<NavLink to={`${friendsConstant}`} exact={props.exact}>
-						<BottomNavigationAction
-							icon={location.pathname !== friendsConstant ? <PeopleOutlineIcon /> : <PeopleRoundedIcon color='action' />}
-						/>
-					</NavLink>
+					<BottomNavigationAction
+						component={NavLink}
+						to={`/`}
+						label=''
+						icon={location.pathname !== "/" ? <HomeOutlinedIcon color='action' /> : <Home color='action' />}
+					/>
+					<BottomNavigationAction
+						component={NavLink}
+						to={`${chatConstant}`}
+						label=''
+						icon={location.pathname !== chatConstant ? <ChatOutlinedIcon color='action' /> : <ChatRoundedIcon color='action' />}
+					/>
+					<BottomNavigationAction
+						component={NavLink}
+						to={`${friendsConstant}`}
+						label=''
+						icon={location.pathname !== friendsConstant ? <PeopleOutlineIcon color='action' /> : <PeopleRoundedIcon color='action' />}
+					/>
 				</BottomNavigation>
 			</Paper>
 		</>

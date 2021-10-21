@@ -5,7 +5,8 @@
 	right: 0;
 }
 
-.paper_bottom_navigation {
+.paper_bottom_navigation a {
+	color: rgb(128, 128, 128);
 }
 
 /* media */

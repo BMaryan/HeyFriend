@@ -18,7 +18,7 @@ const Following = props => {
 							? props.account.profile.following.map(followedAccount => {
 									if (account.id === followedAccount.id) {
 										return (
-											<Card className={styles.card}>
+											<Card key={account.id} className={styles.card}>
 												<CardActionArea className={styles.head}>
 													<NavLink className={styles.navLink} key={account.id} to={`${profileConstant}/` + account.id}>
 														<CardMedia
