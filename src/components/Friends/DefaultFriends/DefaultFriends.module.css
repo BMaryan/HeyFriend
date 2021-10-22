@@ -1,0 +1,39 @@
+.default_friends {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.default_friends div {
+	margin: 10px 0;
+}
+
+.wrapper_icon {
+	border: 2px solid black;
+	border-radius: 50%;
+	padding: 30px 35px;
+}
+
+.wrapper_icon .icon {
+	font-size: 40px;
+}
+
+.title {
+	font-size: 28px;
+}
+
+.subtitle {
+	color: rgb(60, 60, 60);
+	font-size: 18px;
+	text-align: center;
+}
+
+/* media */
+@media (max-width: 399.98px) {
+	.default_friends {
+		display: none;
+	}
+}

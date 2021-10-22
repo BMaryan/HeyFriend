@@ -1,5 +1,5 @@
 .edit {
-	min-height: 540px;
+	height: calc(100vh - 100px);
 	width: 100%;
 	background: white;
 	border: 1px solid rgb(208, 208, 208);
@@ -10,7 +10,7 @@
 
 /* edit menu */
 .edit_menu {
-	width: 25%;
+	min-width: 25%;
 	border-right: 1px solid rgb(208, 208, 208);
 	display: flex;
 	flex-direction: column;
@@ -49,4 +49,30 @@
 /* edit content */
 .edit_content {
 	width: 75%;
+}
+
+/* media */
+@media (max-width: 399.98px) {
+	/* edit menu */
+	.edit_menu {
+		width: 100%;
+	}
+
+	.edit_item {
+		text-align: center;
+	}
+
+	.item {
+		border-bottom: 2px solid var(--bgWhite233);
+	}
+
+	.item_active {
+		border-left: none;
+		border-bottom-color: rgb(107, 107, 107);
+	}
+
+	/* edit content */
+	.edit_content {
+		display: none;
+	}
 }

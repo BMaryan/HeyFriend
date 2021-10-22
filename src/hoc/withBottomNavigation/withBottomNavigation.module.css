@@ -5,6 +5,10 @@
 	right: 0;
 }
 
+.paper_bottom_navigation {
+	box-shadow: 0px -1px 10px rgb(209, 209, 209);
+}
+
 .paper_bottom_navigation a {
 	color: rgb(128, 128, 128);
 }

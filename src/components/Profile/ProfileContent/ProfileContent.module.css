@@ -157,3 +157,21 @@
 	cursor: pointer;
 	transition: 0.5s;
 }
+
+/* media */
+@media (max-width: 479.98px) {
+	.icon {
+		font-size: 20px !important;
+		margin: 0;
+	}
+
+	.item {
+		display: flex;
+		justify-content: center;
+		flex: 1;
+	}
+
+	.item_active {
+		border-bottom: 1px solid var(--colorIconsChecked);
+	}
+}

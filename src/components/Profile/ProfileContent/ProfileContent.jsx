@@ -19,6 +19,7 @@ import Button from "@mui/material/Button";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Posts from "./Posts/Posts";
 import { useParams } from "react-router-dom";
+import Media from "react-media";
 
 const ProfileContent = props => {
 	let params = useParams();
@@ -79,15 +80,39 @@ const ProfileContent = props => {
 						to={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`}
 						className={styles.item}
 						activeClassName={styles.item_active}>
-						<BorderAllRoundedIcon className={styles.icon} />
-						Posts
+						<Media queries={{ small: "(max-width: 480px)" }}>
+							{matches =>
+								!matches.small ? (
+									<>
+										<BorderAllRoundedIcon className={styles.icon} />
+										Posts
+									</>
+								) : (
+									<>
+										<BorderAllRoundedIcon className={styles.icon} />
+									</>
+								)
+							}
+						</Media>
 					</NavLink>
 					<NavLink
 						to={props.id ? `${profileConstant}/${props.id}/information` : `${profileConstant}/information`}
 						className={styles.item}
 						activeClassName={styles.item_active}>
-						<InfoOutlinedIcon className={styles.icon} />
-						Information
+						<Media queries={{ small: "(max-width: 480px)" }}>
+							{matches =>
+								!matches.small ? (
+									<>
+										<InfoOutlinedIcon className={styles.icon} />
+										Information
+									</>
+								) : (
+									<>
+										<InfoOutlinedIcon className={styles.icon} />
+									</>
+								)
+							}
+						</Media>
 					</NavLink>
 					{!props.id ? (
 						<NavLink
@@ -95,8 +120,20 @@ const ProfileContent = props => {
 							to={props.id ? `${profileConstant}/${props.id}/saved` : `${profileConstant}/saved`}
 							className={styles.item}
 							activeClassName={styles.item_active}>
-							<BookmarkBorderIcon className={styles.icon} />
-							Saved
+							<Media queries={{ small: "(max-width: 480px)" }}>
+								{matches =>
+									!matches.small ? (
+										<>
+											<BookmarkBorderIcon className={styles.icon} />
+											Saved
+										</>
+									) : (
+										<>
+											<BookmarkBorderIcon className={styles.icon} />
+										</>
+									)
+								}
+							</Media>
 						</NavLink>
 					) : undefined}
 				</div>

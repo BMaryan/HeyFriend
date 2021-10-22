@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./CurrentPost.module.css";
 import { useParams } from "react-router-dom";
 import PostContainer from "../Post/PostContainer";
-import { modalPostConstant } from "../../../core/constants/constantsPost";
+import { modalPostConstant, defaultPostConstant } from "../../../core/constants/constantsPost";
+import Media from "react-media";
 
 const CurrentPost = props => {
 	let params = useParams();
@@ -33,12 +34,25 @@ const CurrentPost = props => {
 	return (
 		<div className={styles.current_post}>
 			<div className={styles.current_post_content}>
-				<PostContainer
-					modal={true}
-					kindOfPost={modalPostConstant}
-					post={currentPost}
-					currentAccount={foundAccount ? foundAccount : props.account}
-				/>
+				<Media query={{ maxWidth: 720 }}>
+					{matches =>
+						matches ? (
+							<PostContainer
+								modal={false}
+								kindOfPost={defaultPostConstant}
+								post={currentPost}
+								currentAccount={foundAccount ? foundAccount : props.account}
+							/>
+						) : (
+							<PostContainer
+								modal={true}
+								kindOfPost={modalPostConstant}
+								post={currentPost}
+								currentAccount={foundAccount ? foundAccount : props.account}
+							/>
+						)
+					}
+				</Media>
 			</div>
 		</div>
 	);

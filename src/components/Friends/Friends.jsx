@@ -6,6 +6,7 @@ import { friendsConstant } from "../../core/constants/constants";
 import Following from "./Following/Following";
 import Followers from "./Followers/Followers";
 import Recommendation from "./Recommendation/Recommendation";
+import DefaultFriends from "./DefaultFriends/DefaultFriends";
 
 const Friends = props => {
 	return (
@@ -14,7 +15,7 @@ const Friends = props => {
 				<div className={styles.friends_menu}>
 					<ul className={styles.menu}>
 						<li className={styles.friends_item}>
-							<NavLink exact to={`${friendsConstant}`} className={styles.item} activeClassName={styles.item_active}>
+							<NavLink exact to={`${friendsConstant}/following`} className={styles.item} activeClassName={styles.item_active}>
 								Following
 							</NavLink>
 						</li>
@@ -32,9 +33,10 @@ const Friends = props => {
 				</div>
 
 				<div className={styles.friends_content}>
-					<Route exact path={`${friendsConstant}`} render={() => <Following {...props} />} />
+					<Route exact path={`${friendsConstant}/following`} render={() => <Following {...props} />} />
 					<Route exact path={`${friendsConstant}/followers`} render={() => <Followers {...props} />} />
 					<Route exact path={`${friendsConstant}/recommendation`} render={() => <Recommendation {...props} />} />
+					<Route exact path={`${friendsConstant}`} render={() => <DefaultFriends {...props} />} />
 				</div>
 			</div>
 		</div>
@@ -42,3 +44,5 @@ const Friends = props => {
 };
 
 export default Friends;
+
+// DefaultFriends
