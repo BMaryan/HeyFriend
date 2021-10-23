@@ -7,25 +7,36 @@ import Following from "./Following/Following";
 import Followers from "./Followers/Followers";
 import Recommendation from "./Recommendation/Recommendation";
 import DefaultFriends from "./DefaultFriends/DefaultFriends";
+import { useLocation } from "react-router-dom";
 
 const Friends = props => {
+	let location = useLocation();
+
+	const following = "following";
+	const followers = "followers";
+	const recommendation = "recommendation";
+
+	let checkFollowing = location.pathname.includes(following);
+	let checkFollowers = location.pathname.includes(followers);
+	let checkRecommendation = location.pathname.includes(recommendation);
+
 	return (
 		<div className={styles.friends}>
 			<div className={styles.wrapper_friends}>
-				<div className={styles.friends_menu}>
+				<div className={!(checkFollowing || checkFollowers || checkRecommendation) ? styles.friends_menu : styles.friends_menu__none}>
 					<ul className={styles.menu}>
 						<li className={styles.friends_item}>
-							<NavLink exact to={`${friendsConstant}/following`} className={styles.item} activeClassName={styles.item_active}>
+							<NavLink exact to={`${friendsConstant}/${following}`} className={styles.item} activeClassName={styles.item_active}>
 								Following
 							</NavLink>
 						</li>
 						<li className={styles.friends_item}>
-							<NavLink to={`${friendsConstant}/followers`} className={styles.item} activeClassName={styles.item_active}>
+							<NavLink to={`${friendsConstant}/${followers}`} className={styles.item} activeClassName={styles.item_active}>
 								Followers
 							</NavLink>
 						</li>
 						<li className={styles.friends_item}>
-							<NavLink to={`${friendsConstant}/recommendation`} className={styles.item} activeClassName={styles.item_active}>
+							<NavLink to={`${friendsConstant}/${recommendation}`} className={styles.item} activeClassName={styles.item_active}>
 								Recommendation
 							</NavLink>
 						</li>
@@ -33,9 +44,9 @@ const Friends = props => {
 				</div>
 
 				<div className={styles.friends_content}>
-					<Route exact path={`${friendsConstant}/following`} render={() => <Following {...props} />} />
-					<Route exact path={`${friendsConstant}/followers`} render={() => <Followers {...props} />} />
-					<Route exact path={`${friendsConstant}/recommendation`} render={() => <Recommendation {...props} />} />
+					<Route exact path={`${friendsConstant}/${following}`} render={() => <Following {...props} />} />
+					<Route exact path={`${friendsConstant}/${followers}`} render={() => <Followers {...props} />} />
+					<Route exact path={`${friendsConstant}/${recommendation}`} render={() => <Recommendation {...props} />} />
 					<Route exact path={`${friendsConstant}`} render={() => <DefaultFriends {...props} />} />
 				</div>
 			</div>
@@ -44,5 +55,3 @@ const Friends = props => {
 };
 
 export default Friends;
-
-// DefaultFriends

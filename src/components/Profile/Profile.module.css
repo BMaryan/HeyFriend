@@ -12,3 +12,13 @@
 	flex-direction: column;
 	margin: var(--mgFromHeader) 0;
 }
+
+/* media */
+@media (max-width: 399.98px) {
+	:root {
+		--paddingForCoverAndDetailsTop: 0;
+		--paddingForCoverAndDetailsRight: 0;
+		--paddingForCoverAndDetailsBottom: 0;
+		--paddingForCoverAndDetailsLeft: 0;
+	}
+}

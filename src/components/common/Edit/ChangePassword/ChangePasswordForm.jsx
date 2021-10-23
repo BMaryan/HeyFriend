@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import styles from "./ChangePassword.module.css";
+import styles from "../Edit.module.css";
 import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
 import { WrapperCreateField, Input, WrapperButton } from "../../FormControls/FormControls";

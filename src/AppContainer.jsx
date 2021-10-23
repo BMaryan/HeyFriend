@@ -14,6 +14,7 @@ import { withRouter } from "react-router-dom";
 
 const AppContainer = props => {
 	let id = Number(props.match.params.id);
+	let [myAccount, setMtAccount] = React.useState(props.account);
 
 	React.useEffect(() => {
 		let accountsP = JSON.parse(localStorage.getItem(accounts));
@@ -29,12 +30,30 @@ const AppContainer = props => {
 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
 	}, [props.accounts]);
 
+	// React.useEffect(() => {
+	// 	if (props.account) {
+	// 		try {
+	// 			console.log("GOOD");
+	// 			return "good";
+	// 			// localStorage.setItem(account, JSON.stringify(props.account));
+	// 		} catch (e) {
+	// 			console.log(e.message);
+	// 			return e.name;
+	// 		}
+	// 	} else {
+	// 		localStorage.removeItem(account);
+	// 	}
+	// }, [props.account]);
+
 	React.useEffect(() => {
+		// console.log(props.account);
+
 		if (props.account) {
+			console.log(localStorage);
 			try {
 				localStorage.setItem(account, JSON.stringify(props.account));
 			} catch (e) {
-				console.log(e.message);
+				// console.log(e.message);
 
 				return e.name;
 			}

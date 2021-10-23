@@ -191,6 +191,12 @@
 	}
 }
 
+@media (max-width: 539.98px) {
+	.chat {
+		height: calc(100vh - 150px);
+	}
+}
+
 @media (max-width: 399.98px) {
 	.dialogs {
 		min-width: 100%;

@@ -1,8 +1,6 @@
 .edit_profile {
-	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
 	padding: var(--pdContent);
@@ -38,55 +36,4 @@
 	color: rgb(116, 116, 116);
 	font-size: 14px;
 	cursor: pointer;
-}
-
-/* form */
-.form {
-	width: 65%;
-	display: flex;
-	flex-direction: column;
-}
-
-.wrapper_block {
-	width: 100%;
-	/* background: red; */
-	display: flex;
-	margin-bottom: var(--pdContent);
-}
-
-.key {
-	width: 40%;
-	color: rgb(48, 48, 48);
-	font-weight: 500;
-	/* text-align: right; */
-	margin-right: 10px;
-}
-
-.action {
-	width: 100%;
-	display: flex;
-	justify-content: right;
-}
-
-.field {
-	width: 100%;
-	max-width: 100%;
-	border: 1px solid silver;
-	outline: none;
-	padding: 7px 10px;
-}
-
-.wrapper_button {
-	width: 70%;
-	margin: auto;
-}
-
-.wrapper_button > div {
-	cursor: no-drop;
-}
-
-.wrapper_button button {
-	width: 100%;
-	background: linear-gradient(var(--mainBg));
-	padding: 10px 100px;
 }

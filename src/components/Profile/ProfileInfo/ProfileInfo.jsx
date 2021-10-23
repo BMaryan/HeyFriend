@@ -119,6 +119,17 @@ const ProfileInfo = props => {
 
 				{/* wrapper profile details info line */}
 				<div className={styles.wrapper_profile_details_info_line}>
+					{/* full name */}
+					<div className={styles.profile_fullName__media}>
+						{oftenCheckOtherProfile ? (
+							otherProfile.profile.surname + " " + otherProfile.profile.name
+						) : oftenCheckMyProfile ? (
+							props.account.profile.surname + " " + props.account.profile.name
+						) : (
+							<></>
+						)}
+					</div>
+
 					<div className={styles.details_info_content}>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>

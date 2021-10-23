@@ -10,13 +10,18 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 
 const Recommendation = props => {
+	let checkFollow =
+		props.account && props.account.profile && props.account.profile.following
+			? props.account.profile.following.find(account => account.id === props.id)
+			: undefined;
+
 	return (
 		<div className={styles.content}>
 			{props.accounts
 				? props.accounts.map(account =>
 						props.account && props.account.profile && props.account.profile.following ? (
 							props.account.profile.following.map(followedAccount => {
-								if (account.id !== followedAccount.id) {
+								if (account.id !== followedAccount.id && account.id !== props.account.id) {
 									return (
 										<Card key={account.id} className={styles.card}>
 											<CardActionArea className={styles.head}>
@@ -39,9 +44,18 @@ const Recommendation = props => {
 											</CardActionArea>
 
 											<CardActions className={styles.footer}>
-												<Button variant='contained' color='primary'>
-													Follow
-												</Button>
+												{checkFollow ? (
+													<Button style={{ textTransform: "capitalize" }} variant='contained'>
+														Unfollow
+													</Button>
+												) : (
+													<Button
+														style={{ textTransform: "capitalize" }}
+														onClick={() => props.follow(account.id)}
+														variant='contained'>
+														Follow
+													</Button>
+												)}
 											</CardActions>
 										</Card>
 									);
@@ -69,9 +83,15 @@ const Recommendation = props => {
 								</CardActionArea>
 
 								<CardActions className={styles.footer}>
-									<Button variant='contained' color='primary'>
-										Follow
-									</Button>
+									{checkFollow ? (
+										<Button style={{ textTransform: "capitalize" }} variant='contained'>
+											Unfollow
+										</Button>
+									) : (
+										<Button style={{ textTransform: "capitalize" }} onClick={() => props.follow(account.id)} variant='contained'>
+											Follow
+										</Button>
+									)}
 								</CardActions>
 							</Card>
 						)

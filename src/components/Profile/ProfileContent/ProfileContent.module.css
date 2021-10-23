@@ -7,12 +7,6 @@
 	padding: 0 var(--paddingForCoverAndDetailsRight) 0 var(--paddingForCoverAndDetailsRight);
 }
 
-/* side_bar_left */
-.side_bar_left {
-	margin-bottom: var(--mgBetweenContainers);
-	overflow: hidden;
-}
-
 /* content */
 .content {
 	flex: 1;
@@ -55,13 +49,6 @@
 .icon {
 	font-size: 14px;
 	margin-right: 10px;
-}
-
-/* side_bar_right */
-.side_bar_right {
-	/* width: 25%; */
-	background: white;
-	margin-bottom: var(--mgBetweenContainers);
 }
 
 /* modal create post */
@@ -159,6 +146,12 @@
 }
 
 /* media */
+@media (max-width: 539.98px) {
+	.profile_content {
+		margin-bottom: var(--paddingForCoverAndDetailsRight);
+	}
+}
+
 @media (max-width: 479.98px) {
 	.icon {
 		font-size: 20px !important;
