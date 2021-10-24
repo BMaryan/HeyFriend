@@ -51,11 +51,10 @@ const NavbarRow = props => {
 				path={`${friendsConstant}`}
 				icon={
 					<Checkbox
-						icon={location.pathname !== friendsConstant ? <PeopleOutlineIcon /> : <PeopleRoundedIcon color='action' />}
+						icon={!location.pathname.includes(friendsConstant) ? <PeopleOutlineIcon /> : <PeopleRoundedIcon color='action' />}
 						sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }}
 					/>
 				}
-				exact
 			/>
 		</div>
 	);

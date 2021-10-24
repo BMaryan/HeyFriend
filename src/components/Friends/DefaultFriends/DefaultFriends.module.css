@@ -18,16 +18,16 @@
 }
 
 .wrapper_icon .icon {
-	font-size: 40px;
+	font-size: calc(40px + (42 - 40) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .title {
-	font-size: 28px;
+	font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .subtitle {
 	color: rgb(60, 60, 60);
-	font-size: 18px;
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 }
 

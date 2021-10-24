@@ -11,8 +11,9 @@
 
 /* menu */
 .menu {
-	width: 30%;
+	min-width: 30%;
 	border-right: 1px solid #262626;
+	padding-right: 5px;
 }
 
 .title {
@@ -55,6 +56,38 @@
 
 @media (max-width: 399.98px) {
 	.information_container {
+		flex-direction: column;
 		margin-bottom: 50px;
+		padding: 0;
+	}
+
+	/* menu */
+	.menu {
+		width: 100%;
+		border-right: none;
+		border-bottom: 1px solid #dbdbdb;
+	}
+
+	.title {
+		display: none;
+	}
+
+	.navigation {
+		flex-direction: row;
+		flex: 1;
+	}
+
+	.item {
+		flex: 1;
+		text-align: center;
+	}
+
+	.item_active {
+		border-bottom: 1px solid #262626;
+	}
+
+	/* content */
+	.content {
+		padding: var(--pdContent);
 	}
 }

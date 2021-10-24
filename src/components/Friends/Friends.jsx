@@ -31,12 +31,12 @@ const Friends = props => {
 							</NavLink>
 						</li>
 						<li className={styles.friends_item}>
-							<NavLink to={`${friendsConstant}/${followers}`} className={styles.item} activeClassName={styles.item_active}>
+							<NavLink exact to={`${friendsConstant}/${followers}`} className={styles.item} activeClassName={styles.item_active}>
 								Followers
 							</NavLink>
 						</li>
 						<li className={styles.friends_item}>
-							<NavLink to={`${friendsConstant}/${recommendation}`} className={styles.item} activeClassName={styles.item_active}>
+							<NavLink exact to={`${friendsConstant}/${recommendation}`} className={styles.item} activeClassName={styles.item_active}>
 								Recommendation
 							</NavLink>
 						</li>

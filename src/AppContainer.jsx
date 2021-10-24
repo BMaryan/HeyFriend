@@ -46,15 +46,10 @@ const AppContainer = props => {
 	// }, [props.account]);
 
 	React.useEffect(() => {
-		// console.log(props.account);
-
 		if (props.account) {
-			console.log(localStorage);
 			try {
 				localStorage.setItem(account, JSON.stringify(props.account));
 			} catch (e) {
-				// console.log(e.message);
-
 				return e.name;
 			}
 		} else {

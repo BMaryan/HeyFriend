@@ -185,7 +185,7 @@ const ProfileContent = props => {
 				) : undefined}
 			</div>
 
-			{/* toggle show container */}
+			{/* toggle show create post container */}
 			<Modal
 				aria-labelledby='transition-modal-title'
 				aria-describedby='transition-modal-description'

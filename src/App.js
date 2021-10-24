@@ -33,7 +33,7 @@ function App(props) {
 						<Route exact path={`${photoConstant}/:id`} render={() => <CurrentPostContainer />} />
 						<Route path={`${profileConstant}/:id?`} render={() => <ProfileContainer />} />
 						<Route path={`${chatConstant}/:id?`} render={() => <ChatContainer />} />
-						<Route path={`${friendsConstant}/:id?`} render={() => <FriendsContainer />} />
+						<Route path={`${friendsConstant}`} render={() => <FriendsContainer />} />
 						<Route path={`${editConstant}`} render={() => <EditContainer />} />
 						<Route path={`${signInConstant}`} render={() => <SignInContainer />} />
 						<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />

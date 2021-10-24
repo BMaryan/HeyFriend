@@ -6,6 +6,7 @@ import Review from "./Review/Review";
 import About from "./About/About";
 import Contacts from "./Contacts/Contacts";
 import { profileConstant } from "../../../../core/constants/constants";
+import Media from "react-media";
 
 const Information = props => {
 	return (
@@ -27,14 +28,14 @@ const Information = props => {
 							to={props.id ? `${profileConstant}/${props.id}/information/about` : `${profileConstant}/information/about`}
 							className={styles.item}
 							activeClassName={styles.item_active}>
-							Details about you
+							<Media query={{ maxWidth: 600 }}>{matches => (!matches ? <>Details about you</> : <>Details</>)}</Media>
 						</NavLink>
 						<NavLink
 							exact
 							to={props.id ? `${profileConstant}/${props.id}/information/contacts` : `${profileConstant}/information/contacts`}
 							className={styles.item}
 							activeClassName={styles.item_active}>
-							Contacts and basic information
+							<Media query={{ maxWidth: 600 }}>{matches => (!matches ? <>Contacts and basic information</> : <>Contacts</>)}</Media>
 						</NavLink>
 					</div>
 				</div>
