@@ -94,9 +94,8 @@
 }
 
 .post {
-	height: auto;
+	height: calc(100px + (300 - 50) * ((100vw - 300px) / (1600 - 300)));
 	max-height: 300px;
-	min-height: 280px;
 	background: green;
 	cursor: pointer;
 }
@@ -116,11 +115,12 @@
 	.change_profile_picture_container {
 		width: 40vw;
 	}
+}
 
-	.change_profile_picture_content {
-	}
-
-	.change_profile_picture_content button {
+@media (max-width: 767.98px) {
+	/* return image list */
+	.posts {
+		gap: 5px !important;
 	}
 }
 

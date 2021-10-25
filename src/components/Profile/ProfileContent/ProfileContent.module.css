@@ -55,6 +55,7 @@
 .create_new_post_content {
 	width: 30vw;
 	background: white;
+	border-radius: var(--borderRadius, 10px);
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -201,6 +202,10 @@
 }
 
 @media (max-width: 399.98px) {
+	.profile_content {
+		margin-bottom: 20px;
+	}
+
 	/* modal create post */
 	.create_new_post_content {
 		width: 55vw;

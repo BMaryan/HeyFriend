@@ -13,7 +13,7 @@ export const Head = props => {
 
 	return props.toggleShowContent ? (
 		<div className={styles.head}>
-			<div>Find Friends</div>
+			<div>{props.account.profile.surname + " " + props.account.profile.name}</div>
 		</div>
 	) : (
 		<div className={styles.head + " " + styles.head_messages}>
