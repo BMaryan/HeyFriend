@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Posts.module.css";
-import CreatePost from "../../../common/CreatePost/CreatePost";
 import { ReturnImageList, ToggleShowCurrentPostContainer } from "../../../../utils/helperForProfile/helperForProfile";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -31,13 +30,16 @@ const Posts = props => {
 		<div className={styles.posts}>
 			<div className={styles.wrapper_posts}>
 				{!props.id ? (
-					<CreatePost
-						account={props.account}
-						otherProfile={otherProfile}
-						accounts={props.accounts}
-						handleOpen={props.handleOpen}
-						handleClose={props.handleClose}
-					/>
+					<div className={styles.wrapper_input}>
+						<input
+							className={styles.input}
+							onClick={() => props.handleOpen()}
+							type='text'
+							value=''
+							onChange={() => undefined}
+							placeholder="What's on your mind?"
+						/>
+					</div>
 				) : undefined}
 
 				<ReturnImageList

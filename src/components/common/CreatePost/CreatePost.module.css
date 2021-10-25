@@ -1,80 +1,99 @@
-.create_post {
+/* modal create post */
+.create_new_post_container {
+	min-width: 30vw;
 	background: white;
-	padding: var(--pdContent);
-	margin-bottom: var(--mgBetweenContainers);
-}
-
-.icon {
-	color: var(--colorIcons);
-	background: rgb(238, 237, 237);
-	border-radius: 50%;
-	font-size: 16px;
-	margin: 0 5px;
-	cursor: pointer;
-}
-
-/* wrapper_body */
-.wrapper_body {
-	position: relative;
-}
-
-.wrapper_input {
-	display: flex;
-	align-items: center;
-}
-
-.input {
-	width: 100%;
-	border: 1px solid rgb(233, 232, 232);
-	outline: none;
-	padding: 10px 75px 10px 10px;
-	cursor: pointer;
-}
-
-.features {
-	display: flex;
-	align-items: center;
+	border-radius: var(--borderRadius, 10px);
 	position: absolute;
-	right: 10px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
 }
 
-.features_picture label {
-}
-
-.features_picture input {
-	display: none;
-}
-
-/* wrapper content */
-.wrapper_content {
-	height: 250px;
-	border: 1px solid var(--bgWhite233);
-}
-
-.wrapper_add_picture {
-	height: 100%;
-}
-
-.wrapper_add_picture label {
+.create_new_post_content {
 	height: 100%;
 	width: 100%;
-	/* background: teal; */
+}
+
+/* head */
+.create_post_head {
+	border-bottom: 1px solid var(--bgWhite233);
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
+	justify-content: space-between;
+	padding: var(--pdContent);
 }
 
-.wrapper_add_picture input {
-	display: none;
+.head_title {
+	color: rgb(39, 39, 39);
+	font-size: 18px;
+	font-weight: 500;
 }
 
-.post_img {
+.head_title__default {
+	text-align: center;
+	border-bottom: 1px solid var(--bgWhite233);
+	padding: var(--pdContent);
+}
+
+.create_post_head button {
+	text-transform: capitalize;
+	padding: 0;
+	margin: 0;
+}
+
+/* content */
+.create_post_content {
+	height: 65vh;
+	width: 100%;
+	display: flex;
+}
+
+/* content media */
+.content_media {
+	height: 100%;
+	width: 30vw;
+}
+
+.content_media img {
 	height: 100%;
 	width: 100%;
 	display: flex;
 	object-fit: cover;
 	object-position: center;
+}
+
+/* content wrapper content */
+.content_wrapper_content {
+	display: flex;
+	flex: 1;
+}
+
+/* content default */
+.create_post_content__default {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.create_post_content__default div {
+	margin: 10px 0;
+}
+
+.content_media_icon svg {
+	color: rgb(75, 75, 75);
+	font-size: 70px;
+}
+
+.content_subtitle {
+	color: rgb(119, 119, 119);
+	font-size: 17px;
+}
+
+.content_wrapper_button {
+}
+
+.content_wrapper_button input {
+	display: none;
 }
 
 /* form */

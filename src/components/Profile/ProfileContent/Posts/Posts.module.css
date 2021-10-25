@@ -1,0 +1,17 @@
+.wrapper_input {
+	background: white;
+	display: flex;
+	align-items: center;
+	padding: var(--pdContent, 15px);
+}
+
+.input {
+	padding: 10px 75px 10px 10px;
+	cursor: pointer;
+}
+
+.input {
+	width: 100%;
+	border: 1px solid rgb(233, 232, 232);
+	outline: none;
+}

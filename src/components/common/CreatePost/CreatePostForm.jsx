@@ -5,14 +5,7 @@ import styles from "./CreatePost.module.css";
 const CreatePost = props => {
 	return (
 		<form className={styles.form} onSubmit={props.handleSubmit}>
-			<Field
-				// onClick={() => props.setCreatePostContainer(true)}
-				name='create_post'
-				type='text'
-				className={styles.input}
-				placeholder="What's on your mind?"
-				component='input'
-			/>
+			<Field name='create_post' type='text' className={styles.field} placeholder="What's on your mind?" component='textarea' />
 		</form>
 	);
 };

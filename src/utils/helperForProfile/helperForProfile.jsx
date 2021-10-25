@@ -34,6 +34,8 @@ const DuplicateCodeFunc = props => {
 };
 
 export const ChangeProfilePictureContainer = props => {
+	let result = "";
+
 	return (
 		<DuplicateCodeFunc
 			{...props}
@@ -46,8 +48,8 @@ export const ChangeProfilePictureContainer = props => {
 					<label>
 						Upload photo
 						<input
-							onChange={e => {
-								getPictureBase64(e, props.getProfileData, props.account, "avatar");
+							onChange={event => {
+								getPictureBase64({ event: event, method: props.getProfileData, account: props.account, key: "avatar" });
 								props.setOpenModalAvatarProfile(false);
 							}}
 							id='file-upload'
@@ -59,7 +61,7 @@ export const ChangeProfilePictureContainer = props => {
 				<Button
 					className={styles.wrapper_item}
 					onClick={() => {
-						removePicture(props.getProfileData, props.account, "avatar");
+						removePicture({ method: props.getProfileData, account: props.account, key: "avatar" });
 						props.setOpenModalAvatarProfile(false);
 					}}>
 					Remove current photo
@@ -86,8 +88,8 @@ export const ContainerCoverProfile = props => {
 					<label>
 						Upload cover photo
 						<input
-							onChange={e => {
-								getPictureBase64(e, props.getProfileData, props.account, "coverPhoto");
+							onChange={event => {
+								getPictureBase64({ event: event, method: props.getProfileData, account: props.account, key: "coverPhoto" });
 								props.setOpenModalCoverProfile(false);
 							}}
 							id='file-upload'
@@ -99,7 +101,7 @@ export const ContainerCoverProfile = props => {
 				<Button
 					className={styles.wrapper_item}
 					onClick={() => {
-						removePicture(props.getProfileData, props.account, "coverPhoto");
+						removePicture({ method: props.getProfileData, account: props.account, key: "coverPhoto" });
 						props.setOpenModalCoverProfile(false);
 					}}>
 					Remove cover photo

@@ -8,29 +8,17 @@ import { profileConstant } from "../../../core/constants/constants";
 import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import CreatePostReduxForm from "../../common/CreatePost/CreatePostForm";
-import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
-import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Posts from "./Posts/Posts";
 import { useParams } from "react-router-dom";
 import Media from "react-media";
+import CreatePost from "../../common/CreatePost/CreatePost";
+import { getUniqueGeneratedIdPost } from "../../../core/methods/methods";
 
 const ProfileContent = props => {
 	let params = useParams();
-	const [open, setOpen] = React.useState(false);
-	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	let [postPhoto, setPostPhoto] = React.useState(null);
 	let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
-
-	let onSubmit = formData => {
-		setSaveOwnerPost(formData.create_post);
-	};
+	const [open, setOpen] = React.useState(false);
 
 	let otherProfile = props.accounts.find(profile => (profile && props.id ? profile.id === props.id : undefined));
 	let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
@@ -40,36 +28,6 @@ const ProfileContent = props => {
 		setOpen(false);
 		setPostPhoto(null);
 	};
-
-	let onChangeProfilePicture = e => {
-		if (e.target.files.length) {
-			let file = e.target.files[0];
-			let reader = new FileReader();
-			reader.readAsDataURL(file);
-
-			reader.onloadend = function () {
-				setPostPhoto(reader.result);
-			};
-		}
-	};
-
-	function makeid(length) {
-		let result = props.account.id + "";
-		let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		let charactersLength = characters.length;
-
-		for (let i = 0; i < length; i++) {
-			result += characters.charAt(Math.floor(Math.random() * charactersLength));
-		}
-
-		let searchTheSameId = props.account && props.account.profile.posts ? props.account.profile.posts.find(post => post.id === result) : undefined;
-
-		if (!searchTheSameId) {
-			return result;
-		} else {
-			return result + props.account.profile.posts.length;
-		}
-	}
 
 	return (
 		<div className={styles.profile_content}>
@@ -186,77 +144,15 @@ const ProfileContent = props => {
 			</div>
 
 			{/* toggle show create post container */}
-			<Modal
-				aria-labelledby='transition-modal-title'
-				aria-describedby='transition-modal-description'
+			<CreatePost
+				account={props.account}
 				open={open}
-				onClose={handleClose}
-				closeAfterTransition
-				BackdropComponent={Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}>
-				<Fade in={open}>
-					<Box className={styles.create_new_post_content}>
-						<div className={styles.create_post_title}>Create new post</div>
-
-						<div>
-							<CreatePostReduxForm onChange={onSubmit} />
-						</div>
-
-						<div className={styles.wrapper_content}>
-							<div className={styles.wrapper_add_picture}>
-								<label title='Add photo' onChange={e => onChangeProfilePicture(e)}>
-									{postPhoto ? (
-										<img className={styles.post_img} src={postPhoto} alt='' />
-									) : (
-										<AddAPhotoOutlinedIcon className={styles.icon} />
-									)}
-									<input type='file' />
-								</label>
-
-								{postPhoto ? (
-									<div className={styles.wrapper_button_delete}>
-										<IconButton onClick={() => setPostPhoto(false)} aria-label='Example'>
-											<CancelOutlinedIcon />
-										</IconButton>
-									</div>
-								) : undefined}
-							</div>
-						</div>
-
-						<div className={styles.wrapper_button_publish}>
-							<Button
-								variant='contained'
-								disabled={!postPhoto}
-								style={{ textTransform: "capitalize" }}
-								onClick={() => {
-									postPhoto ? (
-										props.setProfilePosts({
-											id: makeid(11),
-											photo: postPhoto,
-											likes: [],
-											comments: [],
-											dateCreated: "01.01.01",
-											description: saveOwnerPost,
-										})
-									) : (
-										<></>
-									);
-									handleClose();
-								}}>
-								Publish
-							</Button>
-						</div>
-
-						<div onClick={() => handleClose()} className={styles.wrapper_button_close}>
-							<IconButton aria-label='Example'>
-								<CancelOutlinedIcon />
-							</IconButton>
-						</div>
-					</Box>
-				</Fade>
-			</Modal>
+				postPhoto={postPhoto}
+				handleClose={handleClose}
+				setProfilePosts={props.setProfilePosts}
+				getUniqueGeneratedIdPost={getUniqueGeneratedIdPost}
+				setPostPhoto={setPostPhoto}
+			/>
 		</div>
 	);
 };

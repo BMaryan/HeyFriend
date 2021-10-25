@@ -4,7 +4,13 @@
 	flex: 1;
 }
 
-.description_modal {
+.comment_content {
+	display: flex;
+	padding: 0 var(--pdContent) var(--pdContent) var(--pdContent);
+}
+
+.comment_content_modal {
+	word-break: break-all;
 	border-top: 1px solid var(--bgWhite220);
 	border-bottom: 1px solid var(--bgWhite220);
 	flex: 1;
@@ -12,14 +18,8 @@
 	overflow-y: scroll;
 }
 
-.description_modal::-webkit-scrollbar {
+.comment_content_modal::-webkit-scrollbar {
 	width: 0;
-}
-
-.description {
-	color: rgb(46, 46, 46);
-	font-size: 15px;
-	padding: 0 var(--pdContent) var(--pdContent) var(--pdContent);
 }
 
 .full_name_comment {
@@ -34,4 +34,10 @@
 .full_name_comment:hover {
 	text-decoration: underline;
 	transition: 0.5s;
+}
+
+.description {
+	color: rgb(46, 46, 46);
+	font-size: 15px;
+	word-break: break-all;
 }

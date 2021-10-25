@@ -56,7 +56,16 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-	connect(mapStateToProps, { getProfileData, setProfilePosts, addChat, getParamsId, getAuthorizationId, follow, setProfileChats, addAccount }),
+	connect(mapStateToProps, {
+		getProfileData,
+		setProfilePosts,
+		addChat,
+		getParamsId,
+		getAuthorizationId,
+		follow,
+		setProfileChats,
+		addAccount,
+	}),
 	withRouter,
 	withBottomNavigation
 )(ProfileContainer);

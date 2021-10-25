@@ -1,15 +1,34 @@
-export let getPictureBase64 = (e, getProfileData, account, key) => {
-	if (e.target.files.length) {
-		let file = e.target.files[0];
+export let getUniqueGeneratedIdPost = props => {
+	let result = props.account.id + "";
+	let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	let charactersLength = characters.length;
+
+	for (let i = 0; i < props.length; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+
+	let searchTheSameId = props.account && props.account.profile.posts ? props.account.profile.posts.find(post => post.id === result) : undefined;
+
+	if (!searchTheSameId) {
+		console.log(typeof result);
+		return result;
+	} else {
+		return result + props.account.profile.posts.length;
+	}
+};
+
+export let getPictureBase64 = props => {
+	if (props.event.target.files.length) {
+		let file = props.event.target.files[0];
 		let reader = new FileReader();
 		reader.readAsDataURL(file);
 
 		reader.onloadend = function () {
-			getProfileData({ ...account.profile, [key]: reader.result });
+			props.method(props.account && props.key ? { ...props.account.profile, [props.key]: reader.result } : reader.result);
 		};
 	}
 };
 
-export let removePicture = (getProfileData, account, key) => {
-	getProfileData({ ...account.profile, [key]: null });
+export let removePicture = props => {
+	props.method({ ...props.account.profile, [props.key]: null });
 };
