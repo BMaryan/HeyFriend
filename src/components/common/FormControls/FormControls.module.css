@@ -34,12 +34,20 @@ textarea {
 	padding: 15px 15px;
 }
 
+.field__password {
+	padding-right: 50px;
+}
+
 /* toggle_show_password_button */
 .toggle_show_password_button {
 	position: absolute;
 	top: 25px;
-	right: 15px;
+	right: 12px;
 	transition: 1s;
+}
+
+.toggle_show_password_button button {
+	padding: 0;
 }
 
 .wrapper_field_checkbox {

@@ -10,9 +10,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import { validateAuthorizationUserCreator } from "../../../utils/FieldValidationForm/FieldValidationForm";
-import Stack from "@mui/material/Stack";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 
 const FormControls = props => {
 	return (
@@ -123,7 +120,7 @@ export const WrapperCreateField = props => {
 					{props.type === "password" ? (
 						<>
 							<Field
-								className={styles.field}
+								className={styles.field + " " + styles.field__password}
 								name={props.name}
 								validate={props.validate}
 								type={values.showPassword ? "text" : props.type}
@@ -167,23 +164,6 @@ export const WrapperCreateField = props => {
 
 export const WrapperButton = props => {
 	let [errorSignIn, setErrorSignIn] = React.useState(false);
-	const [open, setOpen] = React.useState(false);
-
-	const handleClick = () => {
-		setOpen(true);
-	};
-
-	const handleClose = (event, reason) => {
-		if (reason === "clickaway") {
-			return;
-		}
-
-		setOpen(false);
-	};
-
-	const Alert = React.forwardRef(function Alert(props, ref) {
-		return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
-	});
 
 	return (
 		<>
@@ -191,13 +171,7 @@ export const WrapperButton = props => {
 
 			<div className={styles.wrapper_button}>
 				<Button
-					onClick={() =>
-						props.isSignIn
-							? setErrorSignIn(validateAuthorizationUserCreator(props.accounts, props.userSignIn))
-							: props.isEditProfile
-							? handleClick()
-							: undefined
-					}
+					onClick={() => (props.isSignIn ? setErrorSignIn(validateAuthorizationUserCreator(props.accounts, props.userSignIn)) : undefined)}
 					type='submit'
 					disabled={props.invalid || props.submitting || props.pristine}
 					variant='contained'>
@@ -205,10 +179,6 @@ export const WrapperButton = props => {
 					<span style={{ textTransform: "lowercase" }}>{props.button_text.slice(1)}</span>
 				</Button>
 			</div>
-
-			<Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-				<Alert severity='success'>You were able to successfully edit the data!</Alert>
-			</Snackbar>
 		</>
 	);
 };

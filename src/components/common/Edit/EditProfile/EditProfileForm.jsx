@@ -2,22 +2,21 @@
 import React from "react";
 import styles from "../Edit.module.css";
 import { reduxForm } from "redux-form";
-import { Field } from "redux-form";
 import { WrapperCreateField, Input, Textarea, WrapperButton } from "../../../common/FormControls/FormControls";
+import { connect } from "react-redux";
 import {
 	validatePhoneNumberAndEmail,
 	validatePassword,
 	required,
 	validateFirstAndLastNameCreator,
 } from "../../../../utils/FieldValidationForm/FieldValidationForm";
-import { connect } from "react-redux";
 
 let validateFirstName = validateFirstAndLastNameCreator("first");
 let validateLastName = validateFirstAndLastNameCreator("last");
 
 const EditProfileForm = props => {
 	return (
-		<form initialValues={props.initialize} className={styles.form} onSubmit={props.handleSubmit}>
+		<form className={styles.form} onSubmit={props.handleSubmit}>
 			<div className={styles.wrapper_block}>
 				<div className={styles.key}>Name</div>
 				<div className={styles.action}>
@@ -63,7 +62,7 @@ const EditProfileForm = props => {
 	);
 };
 
-const EditProfileReduxForm = reduxForm({ form: "edit_profile" })(EditProfileForm);
+const EditProfileReduxForm = reduxForm({ form: "edit_profile", enableReinitialize: true })(EditProfileForm);
 
 const mapStateToProps = state => {
 	return {
