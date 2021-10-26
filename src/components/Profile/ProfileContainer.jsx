@@ -6,11 +6,20 @@ import { compose } from "redux";
 import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follow, setProfileChats, addAccount } from "../../redux/profile-reducer";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { signUpConstant } from "../../core/constants/constants";
 import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
+import {
+	getProfileData,
+	setProfilePosts,
+	getParamsId,
+	getAuthorizationId,
+	follow,
+	setProfileChats,
+	addAccount,
+	unFollow,
+} from "../../redux/profile-reducer";
 
 const ProfileContainer = props => {
 	let id = Number(props.match.params.id);
@@ -65,6 +74,7 @@ export default compose(
 		follow,
 		setProfileChats,
 		addAccount,
+		unFollow,
 	}),
 	withRouter,
 	withBottomNavigation

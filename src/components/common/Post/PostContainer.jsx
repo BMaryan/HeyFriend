@@ -5,7 +5,7 @@ import Post from "./Post";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { deletePost, savePost, putLike } from "../../../redux/profile-reducer";
+import { savePost, putLike, deleteSavedPost } from "../../../redux/profile-reducer";
 
 const PostContainer = props => {
 	let id = Number(props.match.params.id);
@@ -23,4 +23,4 @@ let mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { savePost, deletePost, putLike }), withRouter)(PostContainer);
+export default compose(connect(mapStateToProps, { savePost, putLike, deleteSavedPost }), withRouter)(PostContainer);

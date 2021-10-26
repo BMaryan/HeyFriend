@@ -64,7 +64,7 @@ const FooterPost = props => {
 					<div className={styles.features_right}>
 						<Checkbox
 							className={styles.icon}
-							onClick={() => (!checkClickBookmarkIcon ? props.savePost(props.post.id) : props.deletePost(props.post.id))}
+							onClick={() => (!checkClickBookmarkIcon ? props.savePost(props.post.id) : props.deleteSavedPost(props.post.id))}
 							color='default'
 							size='medium'
 							icon={!checkClickBookmarkIcon ? <BookmarkBorderIcon /> : <BookmarkIcon />}

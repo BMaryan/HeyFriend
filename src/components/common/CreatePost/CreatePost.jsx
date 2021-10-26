@@ -15,12 +15,12 @@ const CreatePost = props => {
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [skipped, setSkipped] = React.useState(new Set());
+	const steps = ["Crop", "Edit", "Create new post"];
+	const hiddenFileInput = React.useRef(null);
 
 	let onSubmit = formData => {
 		setSaveOwnerPost(formData.create_post);
 	};
-
-	const steps = ["Crop", "Edit", "Create new post"];
 
 	const isStepSkipped = step => {
 		return skipped.has(step);
@@ -40,8 +40,6 @@ const CreatePost = props => {
 	const handleBack = () => {
 		setActiveStep(prevActiveStep => prevActiveStep - 1);
 	};
-
-	const hiddenFileInput = React.useRef(null);
 
 	const handleClick = event => {
 		hiddenFileInput.current.click();
@@ -177,7 +175,7 @@ const CreatePost = props => {
 								</div>
 								<div className={styles.content_subtitle}>Drag photos and videos here</div>
 								<div className={styles.content_wrapper_button}>
-									<Button onClick={handleClick} variant='contained' style={{ textTransform: "capitalize" }}>
+									<Button className={styles.content_button} onClick={handleClick} variant='contained'>
 										Select
 									</Button>
 									<input

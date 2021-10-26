@@ -8,8 +8,9 @@ let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
 let FOLLOW = "social_network/chatPage/FOLLOW";
+let UNFOLLOW = "social_network/chatPage/UNFOLLOW";
 let SAVE_POST = "social_network/chatPage/SAVE_POST";
-let DELETE_POST = "social_network/chatPage/DELETE_POST";
+let DELETE_SAVED_POST = "social_network/chatPage/DELETE_SAVED_POST";
 
 let initialState = {
 	accounts: [],
@@ -196,6 +197,24 @@ const ProfileReducer = (state = initialState, action) => {
 				},
 			};
 		}
+		case UNFOLLOW: {
+			return {
+				...state,
+				account: {
+					...state.account,
+					profile:
+						state.account && state.account.profile && action.id
+							? {
+									...state.account.profile,
+									following:
+										state.account && state.account.profile && state.account.profile.following
+											? state.account.profile.following.filter(followingAc => followingAc.id !== action.id)
+											: [],
+							  }
+							: { ...state.account.profile },
+				},
+			};
+		}
 		case SAVE_POST: {
 			return {
 				...state,
@@ -214,7 +233,7 @@ const ProfileReducer = (state = initialState, action) => {
 				},
 			};
 		}
-		case DELETE_POST: {
+		case DELETE_SAVED_POST: {
 			return {
 				...state,
 				account: {
@@ -289,13 +308,18 @@ export const follow = id => ({
 	id,
 });
 
+export const unFollow = id => ({
+	type: UNFOLLOW,
+	id,
+});
+
 export const savePost = id => ({
 	type: SAVE_POST,
 	id,
 });
 
-export const deletePost = id => ({
-	type: DELETE_POST,
+export const deleteSavedPost = id => ({
+	type: DELETE_SAVED_POST,
 	id,
 });
 

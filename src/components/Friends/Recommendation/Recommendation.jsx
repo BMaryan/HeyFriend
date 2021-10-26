@@ -19,13 +19,51 @@ const Recommendation = props => {
 		<div className={styles.content}>
 			{props.accounts
 				? props.accounts.map(account =>
+						account.id !== props.account.id ? (
+							<Card key={account.id} className={styles.card}>
+								<CardActionArea className={styles.head}>
+									<NavLink className={styles.navLink} to={`${profileConstant}/` + account.id}>
+										<CardMedia
+											className={styles.wrapper_avatar}
+											component='img'
+											image={account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar}
+											alt=''
+										/>
+										<CardContent className={styles.head_content}>
+											<Typography className={styles.full_name} component='div'>
+												{account.profile.surname + " " + account.profile.name}
+											</Typography>
+											<Typography variant='body2' className={styles.subtitle}>
+												3 common friends.
+											</Typography>
+										</CardContent>
+									</NavLink>
+								</CardActionArea>
+
+								<CardActions className={styles.footer}>
+									{checkFollow ? (
+										<Button style={{ textTransform: "capitalize" }} variant='contained'>
+											Unfollow
+										</Button>
+									) : (
+										<Button style={{ textTransform: "capitalize" }} onClick={() => props.follow(account.id)} variant='contained'>
+											Follow
+										</Button>
+									)}
+								</CardActions>
+							</Card>
+						) : undefined
+				  )
+				: undefined}
+			{/* {props.accounts
+				? props.accounts.map(account =>
 						props.account && props.account.profile && props.account.profile.following ? (
 							props.account.profile.following.map(followedAccount => {
 								if (account.id !== followedAccount.id && account.id !== props.account.id) {
 									return (
-										<Card key={account.id} className={styles.card}>
+										<Card key={followedAccount.id} className={styles.card}>
 											<CardActionArea className={styles.head}>
-												<NavLink className={styles.navLink} key={account.id} to={`${profileConstant}/` + account.id}>
+												<NavLink className={styles.navLink} to={`${profileConstant}/` + account.id}>
 													<CardMedia
 														className={styles.wrapper_avatar}
 														component='img'
@@ -61,10 +99,10 @@ const Recommendation = props => {
 									);
 								}
 							})
-						) : (
+						) : account.id !== props.account.id ? (
 							<Card key={account.id} className={styles.card}>
 								<CardActionArea className={styles.head}>
-									<NavLink className={styles.navLink} key={account.id} to={`${profileConstant}/` + account.id}>
+									<NavLink className={styles.navLink} to={`${profileConstant}/` + account.id}>
 										<CardMedia
 											className={styles.wrapper_avatar}
 											component='img'
@@ -94,9 +132,9 @@ const Recommendation = props => {
 									)}
 								</CardActions>
 							</Card>
-						)
+						) : undefined
 				  )
-				: undefined}
+				: undefined} */}
 		</div>
 	);
 };

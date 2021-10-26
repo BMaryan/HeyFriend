@@ -92,6 +92,13 @@
 .content_wrapper_button {
 }
 
+.content_button {
+	background: linear-gradient(var(--mainBg));
+	font-size: 15px;
+	text-transform: capitalize;
+	padding: 6px 30px;
+}
+
 .content_wrapper_button input {
 	display: none;
 }

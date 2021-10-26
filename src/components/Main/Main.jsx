@@ -21,17 +21,22 @@ const Main = props => {
 						if (props.account && props.account.profile && props.account.profile.following) {
 							return props.account.profile.following.map(user => {
 								if (accountProfiles.id === user.id) {
-									return accountProfiles.profile.posts.map(post => {
-										return (
-											<PostContainer
-												key={post.id}
-												modal={false}
-												post={post}
-												kindOfPost={defaultPostConstant}
-												currentAccount={accountProfiles}
-											/>
-										);
-									});
+									return (
+										accountProfiles &&
+										accountProfiles.profile &&
+										accountProfiles.profile.posts &&
+										accountProfiles.profile.posts.map(post => {
+											return (
+												<PostContainer
+													key={post.id}
+													modal={false}
+													post={post}
+													kindOfPost={defaultPostConstant}
+													currentAccount={accountProfiles}
+												/>
+											);
+										})
+									);
 								}
 							});
 						}
