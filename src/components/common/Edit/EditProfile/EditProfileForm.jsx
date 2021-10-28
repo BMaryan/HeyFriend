@@ -31,14 +31,14 @@ const EditProfileForm = props => {
 				</div>
 			</div>
 			<div className={styles.wrapper_block}>
-				<div className={styles.key}>Email or Phone</div>
+				<div className={styles.key}>Email or Phone *</div>
 				<div className={styles.action}>
 					<WrapperCreateField
 						name='phone_or_email'
 						type='text'
-						validate={[validatePhoneNumberAndEmail]}
+						validate={[validatePhoneNumberAndEmail, required]}
 						component={Input}
-						placeholder='Your email or phone'
+						placeholder='Your email or phone *'
 					/>
 				</div>
 			</div>

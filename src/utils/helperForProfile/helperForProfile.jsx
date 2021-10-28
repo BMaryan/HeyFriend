@@ -54,6 +54,7 @@ export const ChangeProfilePictureContainer = props => {
 							}}
 							id='file-upload'
 							type='file'
+							accept='image/*'
 						/>
 					</label>
 				</Button>
@@ -94,6 +95,7 @@ export const ContainerCoverProfile = props => {
 							}}
 							id='file-upload'
 							type='file'
+							accept='image/*'
 						/>
 					</label>
 				</Button>

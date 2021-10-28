@@ -183,6 +183,7 @@ const CreatePost = props => {
 										onChange={event => getPictureBase64({ event: event, method: props.setPostPhoto })}
 										id='inputFile'
 										type='file'
+										accept='image/*'
 									/>
 								</div>
 							</div>

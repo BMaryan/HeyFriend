@@ -1,4 +1,7 @@
 .dialogs {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 /* title */
@@ -14,13 +17,11 @@
 	justify-content: center;
 	align-items: center;
 	border-bottom: 1px solid rgb(230, 229, 229);
-	/* padding: 10px 20px; */
 	transition: 1s;
 }
 
 .wrapper_input input {
 	width: 100%;
-	/* background: var(--bgWhite245); */
 	border: none;
 	outline: none;
 	padding: 15px 10px 15px 35px;
@@ -37,4 +38,33 @@
 
 /* chats */
 .chats {
+	flex: 1;
+	overflow: hidden;
 }
+
+.chats_wrapper_text {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	/* color: red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; */
+}
+
+.chats_wrapper_text img {
+	height: 30px;
+	width: 100%;
+}
+
+/* 
+
+.chats_wrapper_title {
+	font-size: 30px;
+}
+
+.chats_wrapper_subtitle {
+	font-size: 20px;
+} */
