@@ -15,7 +15,10 @@ import { useLocation } from "react-router-dom";
 const DuplicateCodeFunc = props => {
 	return (
 		<div className={styles.wrapper_nav_link}>
-			<NavLink className={styles.nav_linkRow + " " + commonStyles.common_nav_linkRow} to={props.path} exact={props.exact}>
+			<NavLink
+				className={!props.isBottomNavigation ? styles.nav_linkRow : styles.nav_linkRow__bottom + " " + commonStyles.common_nav_linkRow}
+				to={props.path}
+				exact={props.exact}>
 				<div>{props.icon}</div>
 			</NavLink>
 		</div>
@@ -26,7 +29,7 @@ const NavbarRow = props => {
 	let location = useLocation();
 
 	return (
-		<div className={styles.navbar_row}>
+		<div className={!props.isBottomNavigation ? styles.navbar_row : styles.navbar_row_bottom}>
 			<DuplicateCodeFunc
 				path='/'
 				icon={

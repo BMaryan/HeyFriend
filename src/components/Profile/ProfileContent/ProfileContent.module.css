@@ -4,11 +4,12 @@
 	display: flex;
 	flex: 1;
 	overflow: hidden;
-	padding: 0 var(--paddingForCoverAndDetailsRight) 0 var(--paddingForCoverAndDetailsRight);
+	padding: 0 var(--paddingForCoverAndDetailsRight);
 }
 
 /* content */
 .content {
+	box-sizing: border-box;
 	flex: 1;
 }
 
@@ -102,12 +103,6 @@
 	}
 }
 
-@media (max-width: 539.98px) {
-	.profile_content {
-		margin-bottom: var(--paddingForCoverAndDetailsRight);
-	}
-}
-
 @media (max-width: 479.98px) {
 	.icon {
 		font-size: 20px !important;
@@ -126,10 +121,6 @@
 }
 
 @media (max-width: 399.98px) {
-	.profile_content {
-		margin-bottom: 20px;
-	}
-
 	/* modal create post */
 	.create_new_post_content {
 		width: 55vw;

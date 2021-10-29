@@ -21,6 +21,7 @@ import {
 } from "./core/constants/constants";
 import { Redirect } from "react-router";
 import CurrentPostContainer from "./components/common/CurrentPost/CurrentPostContainer";
+import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
 
 function App(props) {
 	return (
@@ -46,6 +47,10 @@ function App(props) {
 						<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
 					</>
 				)}
+			</div>
+
+			<div className='paper'>
+				<NavbarRow {...props} isBottomNavigation={true} />
 			</div>
 		</div>
 	);

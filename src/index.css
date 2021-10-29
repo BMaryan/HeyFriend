@@ -29,6 +29,7 @@ code {
 	--pdContent: 15px;
 	--mgFromHeader: 20px;
 	--mgBetweenContainers: 20px;
+	--hBottomNavigation: 45px;
 }
 
 /* global class */
@@ -47,5 +48,11 @@ code {
 @media (max-width: 575.98px) {
 	.container {
 		max-width: 100%;
+	}
+}
+
+@media (max-width: 539.98px) {
+	.container {
+		padding-bottom: calc(var(--hBottomNavigation, 45px) + var(--mgFromHeader, 20px));
 	}
 }

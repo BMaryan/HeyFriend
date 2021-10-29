@@ -42,22 +42,14 @@
 
 /* content */
 .content {
-	/* background: greenyellow; */
 	flex: 1;
 	padding-left: var(--pdContent);
 }
 
 /* media */
-@media (max-width: 539.98px) {
-	.information_container {
-		margin-bottom: 20px;
-	}
-}
-
 @media (max-width: 399.98px) {
 	.information_container {
 		flex-direction: column;
-		margin-bottom: 50px;
 		padding: 0;
 	}
 

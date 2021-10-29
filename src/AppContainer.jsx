@@ -11,6 +11,7 @@ import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalSt
 import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
+import { withBottomNavigation } from "./hoc/withBottomNavigation/withBottomNavigation";
 
 const AppContainer = props => {
 	let id = Number(props.match.params.id);

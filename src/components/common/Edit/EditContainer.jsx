@@ -33,4 +33,4 @@ let mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { getProfileData, isAccount }), withRouter, withBottomNavigation)(EditContainer);
+export default compose(connect(mapStateToProps, { getProfileData, isAccount }), withRouter)(EditContainer);

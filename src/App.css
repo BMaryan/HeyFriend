@@ -1,3 +1,22 @@
-.container_margin {
-	/* margin-top: 55px; */
+.paper {
+	height: var(--hBottomNavigation, 45px);
+	background: white;
+	box-shadow: 0px -1px 10px rgb(209, 209, 209);
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+/* media */
+@media (min-width: 540px) {
+	.paper {
+		display: none;
+	}
+}
+
+@media (max-width: 539.98px) {
+	.paper {
+		display: block;
+	}
 }

@@ -4,7 +4,7 @@
 	background: white;
 	border: 1px solid rgb(208, 208, 208);
 	display: flex;
-	margin: var(--mgFromHeader) 0;
+	margin-top: var(--mgFromHeader);
 	overflow: hidden;
 }
 
@@ -147,7 +147,7 @@
 
 @media (max-width: 539.98px) {
 	.friends {
-		height: calc(100vh - 150px);
+		height: calc(100vh - (var(--hBottomNavigation, 45px) + 100px));
 	}
 }
 

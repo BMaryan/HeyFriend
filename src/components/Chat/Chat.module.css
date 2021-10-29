@@ -14,7 +14,6 @@
 .dialogs {
 	min-width: 25%;
 	background: white;
-	/* background: red; */
 }
 
 .dialogs_content {
@@ -194,7 +193,7 @@
 
 @media (max-width: 539.98px) {
 	.chat {
-		height: calc(100vh - 150px);
+		height: calc(100vh - (var(--hBottomNavigation, 45px) + 100px));
 	}
 }
 
@@ -207,5 +206,3 @@
 		display: none;
 	}
 }
-
-/* font-size: calc(40px + (42 - 40) * ((100vw - 300px) / (1600 - 300))); */

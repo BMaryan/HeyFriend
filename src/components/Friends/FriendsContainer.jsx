@@ -18,4 +18,4 @@ let mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { follow }), withRouter, withBottomNavigation)(FriendsContainer);
+export default compose(connect(mapStateToProps, { follow }), withRouter)(FriendsContainer);

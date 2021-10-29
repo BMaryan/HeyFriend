@@ -26,4 +26,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { addMessage, getAuthorizationId, getParamsId }), withRouter, withBottomNavigation)(ChatContainer);
+export default compose(connect(mapStateToProps, { addMessage, getAuthorizationId, getParamsId }), withRouter)(ChatContainer);

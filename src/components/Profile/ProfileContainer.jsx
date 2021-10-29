@@ -76,6 +76,5 @@ export default compose(
 		addAccount,
 		unFollow,
 	}),
-	withRouter,
-	withBottomNavigation
+	withRouter
 )(ProfileContainer);

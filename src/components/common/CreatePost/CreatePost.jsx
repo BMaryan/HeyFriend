@@ -97,10 +97,7 @@ const CreatePost = props => {
 											Back
 										</Button>
 										<Stepper activeStep={activeStep}>
-											<Step className={styles.head_title}>
-												{console.log(steps[activeStep])}
-												{activeStep ? steps[activeStep] : steps[0]}
-											</Step>
+											<Step className={styles.head_title}>{activeStep ? steps[activeStep] : steps[0]}</Step>
 										</Stepper>
 										<Button onClick={handleNext}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
 									</div>

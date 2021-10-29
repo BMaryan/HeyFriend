@@ -108,3 +108,9 @@
 	width: 100%;
 	display: flex;
 }
+
+.field {
+	border: none;
+	outline: none;
+	resize: none;
+}

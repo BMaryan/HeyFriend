@@ -4,7 +4,11 @@
 	width: 100%;
 	background: white;
 	flex-wrap: wrap;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
+}
+
+.wrapper_post:last-child {
+	margin: 0;
 }
 
 .post {

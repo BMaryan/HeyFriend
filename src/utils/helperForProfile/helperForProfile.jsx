@@ -34,8 +34,6 @@ const DuplicateCodeFunc = props => {
 };
 
 export const ChangeProfilePictureContainer = props => {
-	let result = "";
-
 	return (
 		<DuplicateCodeFunc
 			{...props}

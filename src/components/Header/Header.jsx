@@ -25,7 +25,7 @@ const Header = props => {
 
 				{/* navBar row */}
 				<div className={styles.navbar_row}>
-					<NavbarRow account={props.account} />
+					<NavbarRow account={props.account} isTopNavigation={true} />
 				</div>
 
 				{/* navBar list */}
