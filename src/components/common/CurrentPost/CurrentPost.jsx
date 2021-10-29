@@ -49,6 +49,7 @@ const CurrentPost = props => {
 								kindOfPost={modalPostConstant}
 								post={currentPost}
 								currentAccount={foundAccount ? foundAccount : props.account}
+								isCurrentPost={true}
 							/>
 						)
 					}

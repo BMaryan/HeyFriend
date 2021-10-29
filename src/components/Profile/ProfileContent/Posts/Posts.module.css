@@ -3,6 +3,7 @@
 	display: flex;
 	align-items: center;
 	padding: var(--pdContent, 15px);
+	margin-bottom: var(--mgBetweenContainers, 20px);
 }
 
 .input {

@@ -175,8 +175,7 @@ export const WrapperButton = props => {
 					type='submit'
 					disabled={props.invalid || props.submitting || props.pristine}
 					variant='contained'>
-					{props.button_text[0]}
-					<span style={{ textTransform: "lowercase" }}>{props.button_text.slice(1)}</span>
+					<span style={{ textTransform: "capitalize" }}>{props.button_text}</span>
 				</Button>
 			</div>
 		</>

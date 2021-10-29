@@ -26,8 +26,8 @@ import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
 function App(props) {
 	return (
 		<div className='App'>
-			<div className='container_fluid'>{props.account ? <HeaderContainer /> : undefined}</div>
-			<div className='container container_margin'>
+			<div className='container_fluid container_fluid__position'>{props.account ? <HeaderContainer /> : undefined}</div>
+			<div className='container'>
 				{props.account ? (
 					<Switch>
 						<Route exact path='/' render={() => <MainContainer />} />
@@ -49,7 +49,7 @@ function App(props) {
 				)}
 			</div>
 
-			<div className='paper'>
+			<div className='container_fluid container_fluid__paper'>
 				<NavbarRow {...props} isBottomNavigation={true} />
 			</div>
 		</div>

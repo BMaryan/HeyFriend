@@ -26,3 +26,10 @@
 	font-size: calc(14px + (18 - 12) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 }
+
+/* media */
+@media (max-width: 399.98px) {
+	.default {
+		display: none;
+	}
+}

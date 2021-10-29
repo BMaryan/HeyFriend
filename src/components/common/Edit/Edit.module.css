@@ -9,7 +9,8 @@
 }
 
 /* edit menu */
-.edit_menu {
+.edit_menu,
+.edit_menu__none {
 	min-width: 25%;
 	border-right: 1px solid rgb(208, 208, 208);
 	display: flex;
@@ -138,9 +139,17 @@
 }
 
 @media (max-width: 399.98px) {
+	.edit {
+		flex-direction: column;
+	}
+
 	/* edit menu */
 	.edit_menu {
 		width: 100%;
+	}
+
+	.edit_menu__none {
+		display: none;
 	}
 
 	.edit_item {
@@ -158,6 +167,5 @@
 
 	/* edit content */
 	.edit_content {
-		display: none;
 	}
 }

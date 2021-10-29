@@ -61,21 +61,20 @@
 	flex: 1;
 	box-sizing: border-box;
 	position: relative;
-	padding: var(--pdContent, 15px) 0 var(--pdContent, 15px) 0;
+	padding: var(--pdContent, 15px);
 	overflow-y: scroll;
 }
 
 .content {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: var(--pdContent, 15px);
+	grid-row-gap: var(--pdContent, 15px);
 }
 
 .card {
-	width: 29%;
-	/* min-width: 100%; */
 	display: flex;
 	flex-direction: column;
-	margin: 0 var(--pdContent, 15px) var(--pdContent, 15px) var(--pdContent, 15px);
 }
 
 .navLink {
@@ -86,7 +85,7 @@
 }
 
 .wrapper_avatar {
-	height: 220px;
+	height: calc(120px + (150 - 50) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .head_content {
@@ -118,30 +117,13 @@
 }
 
 /* media */
-@media (min-width: 767.98px) and (max-width: 959.98px) {
-	.card {
-		min-width: 30%;
-		flex-wrap: wrap;
-		flex: 1;
-		margin: 0 2% var(--pdContent, 15px) 2%;
-	}
-}
-
 @media (max-width: 767.98px) {
+	.content {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
 	.navigation_bottom {
 		display: block;
-	}
-
-	.card {
-		width: 45%;
-		margin: 0 2% var(--pdContent, 15px) 2%;
-	}
-}
-
-@media (max-width: 575.98px) {
-	.card {
-		width: 100%;
-		margin: 0 2% var(--pdContent, 15px) 2%;
 	}
 }
 
@@ -149,9 +131,18 @@
 	.friends {
 		height: calc(100vh - (var(--hBottomNavigation, 45px) + 100px));
 	}
+
+	/* content */
+	.content {
+		grid-template-columns: repeat(1, 1fr);
+	}
 }
 
 @media (max-width: 399.98px) {
+	.wrapper_friends {
+		flex-direction: column;
+	}
+
 	/* menu */
 	.friends_menu {
 		width: 100%;
@@ -178,9 +169,6 @@
 	.friends_content {
 		display: flex;
 		flex: 1;
-	}
-
-	.card {
-		width: 100%;
+		padding: 0;
 	}
 }
