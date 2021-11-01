@@ -22,12 +22,23 @@ import {
 import { Redirect } from "react-router";
 import CurrentPostContainer from "./components/common/CurrentPost/CurrentPostContainer";
 import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
+import { useLocation } from "react-router-dom";
 
 function App(props) {
+	let location = useLocation();
+
+	let checkSignIn = location.pathname.includes(signInConstant);
+	let checkSignUp = location.pathname.includes(signUpConstant);
+
 	return (
 		<div className='App'>
-			<div className='container_fluid container_fluid__position'>{props.account ? <HeaderContainer /> : undefined}</div>
-			<div className='container'>
+			{props.account ? (
+				<div className='container_fluid container_fluid__position'>
+					<HeaderContainer />
+				</div>
+			) : undefined}
+
+			<div className={props.account ? `container` : "container__auth"}>
 				{props.account ? (
 					<Switch>
 						<Route exact path='/' render={() => <MainContainer />} />
@@ -42,16 +53,18 @@ function App(props) {
 					</Switch>
 				) : (
 					<>
-						<Route path='*' render={() => <Redirect to={signUpConstant} />} />
+						{/* <Route path='*' render={() => <Redirect to={signUpConstant} />} /> */}
 						<Route path={`${signInConstant}`} render={() => <SignInContainer />} />
 						<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
 					</>
 				)}
 			</div>
 
-			<div className='container_fluid container_fluid__paper'>
-				<NavbarRow {...props} isBottomNavigation={true} />
-			</div>
+			{!(checkSignIn || checkSignUp) ? (
+				<div className='container_fluid container_fluid__paper'>
+					<NavbarRow {...props} isBottomNavigation={true} />
+				</div>
+			) : undefined}
 		</div>
 	);
 }

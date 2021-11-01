@@ -10,6 +10,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { getPictureBase64 } from "../../../core/methods/methods";
+import betaVershion from "../../../assets/images/betaVershion.png";
 
 const CreatePost = props => {
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
@@ -49,6 +50,8 @@ const CreatePost = props => {
 		setActiveStep(0);
 	};
 
+	console.log(props.postPhoto);
+
 	return (
 		<Modal
 			aria-labelledby='transition-modal-title'
@@ -76,10 +79,7 @@ const CreatePost = props => {
 											Back
 										</Button>
 										<Stepper activeStep={activeStep}>
-											<Step className={styles.head_title}>
-												{console.log(steps[activeStep])}
-												{activeStep ? steps[activeStep] : steps[0]}
-											</Step>
+											<Step className={styles.head_title}>{activeStep ? steps[activeStep] : steps[0]}</Step>
 										</Stepper>
 										<Button onClick={handleNext}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
 									</div>
@@ -107,12 +107,13 @@ const CreatePost = props => {
 											<img className={styles.post_img} src={props.postPhoto} alt='' />
 										</div>
 
+										{/* Temporary */}
 										<div className={styles.content_wrapper_content}>
-											<div>
-												Lorem, ipsum dodam doloremque adipisci eius rerum, error, possimus maxime at dolorum culpa neque
-												itaque ad animi sed vero saepe odit hic! Doloremque, autem commodi? Ad laboriosam accusantium magni.
+											<div className={styles.temporary_beta_vershion}>
+												<img className={styles.temporary_beta_vershion_img} src={betaVershion} alt='' />
 											</div>
 										</div>
+										{/* Temporary */}
 									</div>
 								</React.Fragment>
 							) : activeStep === 2 ? (
@@ -123,10 +124,7 @@ const CreatePost = props => {
 												Back
 											</Button>
 											<Stepper activeStep={activeStep}>
-												<Step className={styles.head_title}>
-													{console.log(steps[activeStep])}
-													{activeStep ? steps[activeStep] : steps[0]}
-												</Step>
+												<Step className={styles.head_title}>{activeStep ? steps[activeStep] : steps[0]}</Step>
 											</Stepper>
 											<Button
 												onClick={() => {

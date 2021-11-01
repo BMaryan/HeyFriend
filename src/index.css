@@ -33,7 +33,8 @@ code {
 }
 
 /* global class */
-.container {
+.container,
+.container__auth {
 	width: 992px;
 	max-width: 97%;
 	display: flex;

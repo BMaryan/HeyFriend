@@ -30,7 +30,6 @@ const AuthReducer = (state = initialState, action) => {
 				userSignUp: { ...action.data },
 			};
 		}
-
 		default: {
 			return state;
 		}

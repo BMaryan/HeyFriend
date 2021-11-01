@@ -1,24 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { signUpConstant } from "../../core/constants/constants";
-import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
 import {
 	getProfileData,
 	setProfilePosts,
 	getParamsId,
 	getAuthorizationId,
-	follow,
+	following,
 	setProfileChats,
 	addAccount,
-	unFollow,
+	unFollowing,
+	followers,
 } from "../../redux/profile-reducer";
 
 const ProfileContainer = props => {
@@ -71,10 +70,11 @@ export default compose(
 		addChat,
 		getParamsId,
 		getAuthorizationId,
-		follow,
+		following,
 		setProfileChats,
 		addAccount,
-		unFollow,
+		unFollowing,
+		followers,
 	}),
 	withRouter
 )(ProfileContainer);

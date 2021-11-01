@@ -11,11 +11,10 @@ import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalSt
 import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { withBottomNavigation } from "./hoc/withBottomNavigation/withBottomNavigation";
+import { signInConstant, profileConstant } from "./core/constants/constants";
 
 const AppContainer = props => {
 	let id = Number(props.match.params.id);
-	let [myAccount, setMtAccount] = React.useState(props.account);
 
 	React.useEffect(() => {
 		let accountsP = JSON.parse(localStorage.getItem(accounts));
@@ -31,21 +30,6 @@ const AppContainer = props => {
 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
 	}, [props.accounts]);
 
-	// React.useEffect(() => {
-	// 	if (props.account) {
-	// 		try {
-	// 			console.log("GOOD");
-	// 			return "good";
-	// 			// localStorage.setItem(account, JSON.stringify(props.account));
-	// 		} catch (e) {
-	// 			console.log(e.message);
-	// 			return e.name;
-	// 		}
-	// 	} else {
-	// 		localStorage.removeItem(account);
-	// 	}
-	// }, [props.account]);
-
 	React.useEffect(() => {
 		if (props.account) {
 			try {
@@ -55,16 +39,11 @@ const AppContainer = props => {
 			}
 		} else {
 			localStorage.removeItem(account);
+			if (!props.account) {
+				props.history.replace(signInConstant);
+			}
 		}
 	}, [props.account]);
-
-	// React.useEffect(() => {
-	// 	if (props.account) {
-	// 		localStorage.setItem(account, JSON.stringify(props.account));
-	// 	} else {
-	// 		localStorage.removeItem(account);
-	// 	}
-	// }, [props.account]);
 
 	// React.useEffect(() => {
 	// 	props.setProfileChats(props.chats);

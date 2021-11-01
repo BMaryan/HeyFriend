@@ -114,3 +114,14 @@
 	outline: none;
 	resize: none;
 }
+
+/* temporary beta vershion */
+.temporary_beta_vershion {
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.temporary_beta_vershion_img {
+	height: 130px;
+	transform: rotate(45deg);
+}

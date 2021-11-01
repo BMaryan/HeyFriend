@@ -4,8 +4,7 @@ import { compose } from "redux";
 import Friends from "./Friends";
 import { withRouter } from "react-router-dom";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
-import { follow } from "../../redux/profile-reducer";
+import { following } from "../../redux/profile-reducer";
 
 const FriendsContainer = props => {
 	return <Friends {...props} />;
@@ -18,4 +17,4 @@ let mapStateToProps = state => {
 	};
 };
 
-export default compose(connect(mapStateToProps, { follow }), withRouter)(FriendsContainer);
+export default compose(connect(mapStateToProps, { following }), withRouter)(FriendsContainer);

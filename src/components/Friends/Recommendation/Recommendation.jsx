@@ -19,19 +19,19 @@ const Recommendation = props => {
 		<div className={styles.content}>
 			{props.accounts
 				? props.accounts.map(account =>
-						account.id !== props.account.id ? (
-							<Card key={account.id} className={styles.card}>
+						account?.id !== props?.account?.id ? (
+							<Card key={account?.id} className={styles.card}>
 								<CardActionArea className={styles.head}>
-									<NavLink className={styles.navLink} to={`${profileConstant}/` + account.id}>
+									<NavLink className={styles.navLink} to={`${profileConstant}/` + account?.id}>
 										<CardMedia
 											className={styles.wrapper_avatar}
 											component='img'
-											image={account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar}
+											image={account?.profile?.avatar ? account.profile.avatar : defaultAvatar}
 											alt=''
 										/>
 										<CardContent className={styles.head_content}>
 											<Typography className={styles.full_name} component='div'>
-												{account.profile.surname + " " + account.profile.name}
+												{account?.profile?.surname + " " + account?.profile?.name}
 											</Typography>
 											<Typography variant='body2' className={styles.subtitle}>
 												3 common friends.
@@ -46,7 +46,10 @@ const Recommendation = props => {
 											Unfollow
 										</Button>
 									) : (
-										<Button style={{ textTransform: "capitalize" }} onClick={() => props.follow(account.id)} variant='contained'>
+										<Button
+											style={{ textTransform: "capitalize" }}
+											onClick={() => props.following(account.id)}
+											variant='contained'>
 											Follow
 										</Button>
 									)}
@@ -89,7 +92,7 @@ const Recommendation = props => {
 												) : (
 													<Button
 														style={{ textTransform: "capitalize" }}
-														onClick={() => props.follow(account.id)}
+														onClick={() => props.following(account.id)}
 														variant='contained'>
 														Follow
 													</Button>
@@ -126,7 +129,7 @@ const Recommendation = props => {
 											Unfollow
 										</Button>
 									) : (
-										<Button style={{ textTransform: "capitalize" }} onClick={() => props.follow(account.id)} variant='contained'>
+										<Button style={{ textTransform: "capitalize" }} onClick={() => props.following(account.id)} variant='contained'>
 											Follow
 										</Button>
 									)}

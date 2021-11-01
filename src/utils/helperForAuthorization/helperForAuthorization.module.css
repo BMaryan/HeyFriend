@@ -1,6 +1,5 @@
 /* authorization_content */
 .authorization_content {
-	/* height: 100%; */
 	width: 50%;
 	background: white;
 	display: flex;
@@ -20,7 +19,6 @@
 
 /* information content */
 .information_content {
-	/* height: 100%; */
 	width: 50%;
 	background: linear-gradient(var(--mainBg));
 	display: flex;
@@ -69,21 +67,11 @@
 @media (max-width: 767.98px) {
 	/* authorization_content */
 	.authorization_content {
-		width: 70%;
-	}
-
-	.information_content {
-		width: 70%;
-	}
-}
-
-@media (max-width: 575.98px) {
-	/* authorization_content */
-	.authorization_content {
 		width: 100%;
 	}
 
 	.information_content {
 		width: 100%;
+		border-radius: 0 0 var(--borderRadius, 15px) var(--borderRadius, 15px);
 	}
 }

@@ -7,10 +7,14 @@ let SET_PROFILE_CHATS = "social_network/profilePage/SET_PROFILE_CHATS";
 let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
-let FOLLOW = "social_network/chatPage/FOLLOW";
-let UNFOLLOW = "social_network/chatPage/UNFOLLOW";
+let FOLLOWING = "social_network/chatPage/FOLLOWING";
+let UNFOLLOWING = "social_network/chatPage/UNFOLLOWING";
 let SAVE_POST = "social_network/chatPage/SAVE_POST";
 let DELETE_SAVED_POST = "social_network/chatPage/DELETE_SAVED_POST";
+
+// in progress
+let FOLLOWERS = "social_network/chatPage/FOLLOWERS";
+let UNFOLLOWERS = "social_network/chatPage/UNFOLLOWERS";
 
 let initialState = {
 	accounts: [],
@@ -152,34 +156,7 @@ const ProfileReducer = (state = initialState, action) => {
 				paramsId: action.id,
 			};
 		}
-		// case PUT_LIKE: {
-		// 	return {
-		// 		...state,
-		// 		account: {
-		// 			...state.account,
-		// 			profile:
-		// 				state.account && state.account.profile && action.id
-		// 					? {
-		// 							...state.account.profile,
-		// 							posts: state.accounts
-		// 								? state.accounts.map(account =>
-		// 										account && account.profile && account.profile.posts
-		// 											? account.profile.posts.find(post =>
-		// 													post.id === action.id
-		// 														? [...account.profile.posts, { ...post, likes: [action.id] }]
-		// 														: [...account.profile.posts]
-		// 											  )
-		// 											: account.profile.posts
-		// 											? [...account.profile.posts]
-		// 											: []
-		// 								  )
-		// 								: [],
-		// 					  }
-		// 					: { ...state.account.profile },
-		// 		},
-		// 	};
-		// }
-		case FOLLOW: {
+		case FOLLOWING: {
 			return {
 				...state,
 				account: {
@@ -197,7 +174,7 @@ const ProfileReducer = (state = initialState, action) => {
 				},
 			};
 		}
-		case UNFOLLOW: {
+		case UNFOLLOWING: {
 			return {
 				...state,
 				account: {
@@ -249,6 +226,31 @@ const ProfileReducer = (state = initialState, action) => {
 							  }
 							: { ...state.account.profile },
 				},
+			};
+		}
+		case FOLLOWERS: {
+			let accounts = state.accounts.filter(account => account.id !== action.id);
+
+			console.log(action.id);
+
+			return {
+				...state,
+				accounts: [
+					...accounts,
+					state.accounts.find(account =>
+						account?.id === action?.id
+							? {
+									...account,
+									profile: {
+										...account.profile,
+										followers: account?.profile?.followers
+											? [...account.profile.followers, { id: action.id }]
+											: [{ id: action.id }],
+									},
+							  }
+							: {}
+					),
+				],
 			};
 		}
 		default: {
@@ -303,13 +305,13 @@ export const putLike = id => ({
 	id,
 });
 
-export const follow = id => ({
-	type: FOLLOW,
+export const following = id => ({
+	type: FOLLOWING,
 	id,
 });
 
-export const unFollow = id => ({
-	type: UNFOLLOW,
+export const unFollowing = id => ({
+	type: UNFOLLOWING,
 	id,
 });
 
@@ -320,6 +322,11 @@ export const savePost = id => ({
 
 export const deleteSavedPost = id => ({
 	type: DELETE_SAVED_POST,
+	id,
+});
+
+export const followers = id => ({
+	type: FOLLOWERS,
 	id,
 });
 

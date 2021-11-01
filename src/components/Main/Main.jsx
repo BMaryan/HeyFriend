@@ -9,38 +9,44 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
-import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
+import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 
 const Main = props => {
 	return (
 		<div className={styles.main}>
 			{/* content */}
 			<div className={styles.main_content}>
-				{props.accounts &&
-					props.accounts.map(accountProfiles => {
-						if (props.account && props.account.profile && props.account.profile.following) {
-							return props.account.profile.following.map(user => {
-								if (accountProfiles.id === user.id) {
+				{props?.accounts.map(accountProfiles => {
+					if (props?.account?.profile?.following?.length > 0) {
+						return props?.account?.profile?.following.map(user => {
+							if (accountProfiles?.id === user?.id) {
+								return accountProfiles?.profile?.posts.map(post => {
 									return (
-										accountProfiles &&
-										accountProfiles.profile &&
-										accountProfiles.profile.posts &&
-										accountProfiles.profile.posts.map(post => {
-											return (
-												<PostContainer
-													key={post.id}
-													modal={false}
-													post={post}
-													kindOfPost={defaultPostConstant}
-													currentAccount={accountProfiles}
-												/>
-											);
-										})
+										<PostContainer
+											key={post.id}
+											modal={false}
+											post={post}
+											kindOfPost={defaultPostConstant}
+											currentAccount={accountProfiles}
+										/>
 									);
-								}
-							});
+								});
+							}
+						});
+					} else {
+						if (accountProfiles && accountProfiles.id === 1) {
+							return (
+								<div className={styles.default_content}>
+									<div className={styles.default_content__wrapper_icon}>
+										<DynamicFeedIcon />
+									</div>
+									<div className={styles.default_content__title}>News Feed</div>
+									<div className={styles.default_content__subtitle}>Here will be the posts of your friends that you follow</div>
+								</div>
+							);
 						}
-					})}
+					}
+				})}
 			</div>
 
 			{/* sideBar right */}
@@ -49,21 +55,10 @@ const Main = props => {
 					<>
 						<ListItem className={styles.wrapper_item}>
 							<ListItemAvatar>
-								<Avatar
-									src={
-										props.account && props.account.profile && props.account.profile.avatar
-											? props.account.profile.avatar
-											: defaultAvatar
-									}
-									alt=''
-								/>
+								<Avatar src={props?.account?.profile?.avatar ? props.account.profile.avatar : defaultAvatar} alt='' />
 							</ListItemAvatar>
 							<ListItemText
-								primary={
-									props.account && props.account.profile
-										? props.account.profile.surname + " " + props.account.profile.name
-										: undefined
-								}
+								primary={props?.account?.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}
 								secondary={
 									<React.Fragment>Followed by {props.account.profile.surname + " " + props.account.profile.name}</React.Fragment>
 								}
@@ -77,20 +72,13 @@ const Main = props => {
 					{props.accounts
 						? props.accounts
 								.map(account =>
-									account.id !== props.account.id ? (
+									account && props.account && account.id !== props.account.id ? (
 										<ListItem key={account.id} className={styles.wrapper_item}>
 											<ListItemAvatar>
-												<Avatar
-													src={
-														account && account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar
-													}
-													alt=''
-												/>
+												<Avatar src={account?.profile?.avatar ? account.profile.avatar : defaultAvatar} alt='' />
 											</ListItemAvatar>
 											<ListItemText
-												primary={
-													account && account.profile ? account.profile.surname + " " + account.profile.name : undefined
-												}
+												primary={account?.profile ? account.profile.surname + " " + account.profile.name : undefined}
 												secondary={
 													<React.Fragment>
 														Followed by {account.profile.surname + " " + account.profile.name}
@@ -108,4 +96,4 @@ const Main = props => {
 	);
 };
 
-export default withBottomNavigation(Main);
+export default Main;

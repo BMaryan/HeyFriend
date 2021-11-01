@@ -173,11 +173,17 @@ const ProfileInfo = props => {
 								</NavLink>
 
 								{checkFollow ? (
-									<Button style={{ textTransform: "capitalize" }} onClick={() => props.unFollow(props.id)} variant='contained'>
+									<Button style={{ textTransform: "capitalize" }} onClick={() => props.unFollowing(props.id)} variant='contained'>
 										Unfollow
 									</Button>
 								) : (
-									<Button style={{ textTransform: "capitalize" }} onClick={() => props.follow(props.id)} variant='contained'>
+									<Button
+										style={{ textTransform: "capitalize" }}
+										onClick={() => {
+											props.following(props.id);
+											// props.followers(props.id);
+										}}
+										variant='contained'>
 										Follow
 									</Button>
 								)}

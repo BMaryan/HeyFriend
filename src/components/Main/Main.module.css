@@ -29,6 +29,37 @@
 .wrapper_item {
 }
 
+/* default_content */
+.default_content {
+	/* background: cornflowerblue; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.default_content div {
+	margin: 5px 0;
+}
+
+.default_content__wrapper_icon {
+}
+
+.default_content__wrapper_icon svg {
+	color: rgb(24, 24, 24);
+	font-size: 60px;
+}
+
+.default_content__title {
+	font-size: 25px;
+}
+
+.default_content__subtitle {
+	color: rgb(55, 55, 55);
+	font-size: 17px;
+	text-align: center;
+}
+
 /* media */
 @media (max-width: 991.98px) {
 	.main {
