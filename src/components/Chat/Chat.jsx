@@ -47,11 +47,11 @@ const Chat = props => {
 
 				<div className={id ? styles.messages_content : styles.messages_content_defaultView}>
 					{props.chats && props.chats.length > 0 ? (
-						props.chats.find(chat => {
-							if (chat.id === id) {
-								return <Messages key={chat.id} chat={chat} accounts={props.accounts} account={props.account} match={props.match} />;
-							}
-						})
+						props.chats.find(chat =>
+							chat.id === id ? (
+								<Messages key={chat.id} chat={chat} accounts={props.accounts} account={props.account} match={props.match} />
+							) : undefined
+						)
 					) : (
 						<></>
 					)}
@@ -62,27 +62,21 @@ const Chat = props => {
 
 				{/* toggle container which shows when onClick on button  */}
 				{id ? (
-					props.users.map(user => {
-						if (user && id && user.id === id) {
-							return (
-								<div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
-									<NavLink
-										key={user.id}
-										to={props.account && props.account.id !== id ? `${profileConstant}/` + user.id : `${profileConstant}`}
-										className={styles.contact_link}>
-										<div className={styles.wrapper_picture}>
-											{user ? (
-												<img src={props.account && props.account.img ? props.account.img : defaultAvatar} alt='' />
-											) : (
-												<></>
-											)}
-										</div>
-										<div className={styles.fullName}>{user ? user.surname + " " + user.name : <></>}</div>
-									</NavLink>
-								</div>
-							);
-						}
-					})
+					props.users.map(user =>
+						user && id && user.id === id ? (
+							<div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
+								<NavLink
+									key={user.id}
+									to={props.account && props.account.id !== id ? `${profileConstant}/` + user.id : `${profileConstant}`}
+									className={styles.contact_link}>
+									<div className={styles.wrapper_picture}>
+										{user ? <img src={props.account && props.account.img ? props.account.img : defaultAvatar} alt='' /> : <></>}
+									</div>
+									<div className={styles.fullName}>{user ? user.surname + " " + user.name : <></>}</div>
+								</NavLink>
+							</div>
+						) : undefined
+					)
 				) : (
 					<></>
 				)}

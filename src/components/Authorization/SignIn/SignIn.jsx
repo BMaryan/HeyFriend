@@ -14,11 +14,11 @@ const SignIn = props => {
 
 		if (formData) {
 			props.accounts &&
-				props.accounts.find(profile => {
-					if (profile.profile.phone_or_email === formData.phone_or_email && profile.profile.password === formData.password) {
-						props.isAccount({ ...profile });
-					}
-				});
+				props.accounts.find(profile =>
+					profile.profile.phone_or_email === formData.phone_or_email && profile.profile.password === formData.password
+						? props.isAccount({ ...profile })
+						: undefined
+				);
 		}
 	};
 

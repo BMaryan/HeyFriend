@@ -7,7 +7,6 @@ import { addMessage } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { getAuthorizationId, getParamsId } from "../../redux/profile-reducer";
-import { withBottomNavigation } from "../../hoc/withBottomNavigation/withBottomNavigation";
 
 const ChatContainer = props => {
 	if (props.account) {

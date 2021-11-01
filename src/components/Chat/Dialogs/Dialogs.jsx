@@ -6,7 +6,7 @@ import Dialog from "./Dialog/Dialog";
 import workInProgress from "../../../assets/images/workInProgress.png";
 
 const Dialogs = props => {
-	let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
+	// let myProfile = props.accounts ? props.accounts.find(profile => (props.account ? profile.id === props.account.id : undefined)) : undefined;
 
 	return (
 		<div className={styles.dialogs}>

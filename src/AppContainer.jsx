@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import App from "./App";
 import { getUserSignInSelector, getUserSignUpSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
@@ -11,7 +11,7 @@ import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalSt
 import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { signInConstant, profileConstant } from "./core/constants/constants";
+import { signInConstant } from "./core/constants/constants";
 
 const AppContainer = props => {
 	let id = Number(props.match.params.id);

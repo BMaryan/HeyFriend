@@ -15,32 +15,30 @@ const Following = props => {
 			{props.accounts
 				? props.accounts.map(account =>
 						props.account && props.account.profile && props.account.profile.following
-							? props.account.profile.following.map(followedAccount => {
-									if (account.id === followedAccount.id) {
-										return (
-											<Card key={account.id} className={styles.card}>
-												<CardActionArea className={styles.head}>
-													<NavLink className={styles.navLink} key={account.id} to={`${profileConstant}/` + account.id}>
-														<CardMedia
-															className={styles.wrapper_avatar}
-															component='img'
-															image={account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar}
-															alt=''
-														/>
-														<CardContent className={styles.head_content}>
-															<Typography className={styles.full_name} component='div'>
-																{account.profile.surname + " " + account.profile.name}
-															</Typography>
-															<Typography variant='body2' className={styles.subtitle}>
-																3 common friends.
-															</Typography>
-														</CardContent>
-													</NavLink>
-												</CardActionArea>
-											</Card>
-										);
-									}
-							  })
+							? props.account.profile.following.map(followedAccount =>
+									account.id === followedAccount.id ? (
+										<Card key={account.id} className={styles.card}>
+											<CardActionArea className={styles.head}>
+												<NavLink className={styles.navLink} key={account.id} to={`${profileConstant}/` + account.id}>
+													<CardMedia
+														className={styles.wrapper_avatar}
+														component='img'
+														image={account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar}
+														alt=''
+													/>
+													<CardContent className={styles.head_content}>
+														<Typography className={styles.full_name} component='div'>
+															{account.profile.surname + " " + account.profile.name}
+														</Typography>
+														<Typography variant='body2' className={styles.subtitle}>
+															3 common friends.
+														</Typography>
+													</CardContent>
+												</NavLink>
+											</CardActionArea>
+										</Card>
+									) : undefined
+							  )
 							: undefined
 				  )
 				: undefined}

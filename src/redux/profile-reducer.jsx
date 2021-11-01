@@ -14,7 +14,7 @@ let DELETE_SAVED_POST = "social_network/chatPage/DELETE_SAVED_POST";
 
 // in progress
 let FOLLOWERS = "social_network/chatPage/FOLLOWERS";
-let UNFOLLOWERS = "social_network/chatPage/UNFOLLOWERS";
+// let UNFOLLOWERS = "social_network/chatPage/UNFOLLOWERS";
 
 let initialState = {
 	accounts: [],
@@ -24,11 +24,6 @@ let initialState = {
 };
 
 const ProfileReducer = (state = initialState, action) => {
-	let myProfile =
-		state.accounts && state.accounts.length
-			? state.accounts.find(profile => (profile && state.authorizationId && !state.paramsId ? profile.id === state.authorizationId : undefined))
-			: undefined;
-
 	switch (action.type) {
 		case SET_ACCOUNTS: {
 			return {
@@ -64,17 +59,6 @@ const ProfileReducer = (state = initialState, action) => {
 							: { ...state.account.profile },
 				},
 			};
-			// return {
-			// 	...state,
-			// 	accounts:
-			// 		myProfile && !otherProfile
-			// 			? [...arrayNoCurrentAccounts, { ...myProfile, profile: { ...myProfile.profile, ...action.profile } }]
-			// 			: otherProfile && !myProfile
-			// 			? [...arrayNoCurrentAccounts, { ...otherProfile, profile: { ...otherProfile.profile, ...action.profile } }]
-			// 			: state.accounts && state.accounts.length
-			// 			? state.accounts.map(profile => ({ ...profile }))
-			// 			: [],
-			// };
 		}
 		case SET_PROFILE_POSTS: {
 			let newPost = {
@@ -104,10 +88,6 @@ const ProfileReducer = (state = initialState, action) => {
 			};
 		}
 		case SET_PROFILE_CHATS: {
-			let arrayAccounts = state.accounts
-				? state.accounts.filter(profile => (myProfile ? profile.id !== myProfile.profile.id : undefined))
-				: undefined;
-
 			return {
 				...state,
 				account:
@@ -126,22 +106,6 @@ const ProfileReducer = (state = initialState, action) => {
 										: null,
 						  }
 						: null,
-				// accounts: myProfile
-				// 	? arrayAccounts && myProfile
-				// 		? [
-				// 				...arrayAccounts,
-				// 				{
-				// 					...myProfile,
-				// 					profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
-				// 				},
-				// 		  ]
-				// 		: myProfile
-				// 		? {
-				// 				...myProfile,
-				// 				profile: { ...myProfile.profile, chats: myProfile ? action.chats.map(chat => ({ ...chat })) : [] },
-				// 		  }
-				// 		: undefined
-				// 	: state.accounts.map(profile => ({ ...profile })),
 			};
 		}
 		case GET_AUTHORIZATION_ID: {
@@ -230,8 +194,6 @@ const ProfileReducer = (state = initialState, action) => {
 		}
 		case FOLLOWERS: {
 			let accounts = state.accounts.filter(account => account.id !== action.id);
-
-			console.log(action.id);
 
 			return {
 				...state,

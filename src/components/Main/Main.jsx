@@ -18,10 +18,9 @@ const Main = props => {
 			<div className={styles.main_content}>
 				{props?.accounts.map(accountProfiles => {
 					if (props?.account?.profile?.following?.length > 0) {
-						return props?.account?.profile?.following.map(user => {
-							if (accountProfiles?.id === user?.id) {
-								return accountProfiles?.profile?.posts.map(post => {
-									return (
+						return props.account.profile.following.map(user =>
+							accountProfiles?.id === user?.id
+								? accountProfiles?.profile?.posts.map(post => (
 										<PostContainer
 											key={post.id}
 											modal={false}
@@ -29,22 +28,19 @@ const Main = props => {
 											kindOfPost={defaultPostConstant}
 											currentAccount={accountProfiles}
 										/>
-									);
-								});
-							}
-						});
+								  ))
+								: undefined
+						);
 					} else {
-						if (accountProfiles && accountProfiles.id === 1) {
-							return (
-								<div className={styles.default_content}>
-									<div className={styles.default_content__wrapper_icon}>
-										<DynamicFeedIcon />
-									</div>
-									<div className={styles.default_content__title}>News Feed</div>
-									<div className={styles.default_content__subtitle}>Here will be the posts of your friends that you follow</div>
+						return accountProfiles && accountProfiles.id === 1 ? (
+							<div className={styles.default_content}>
+								<div className={styles.default_content__wrapper_icon}>
+									<DynamicFeedIcon />
 								</div>
-							);
-						}
+								<div className={styles.default_content__title}>News Feed</div>
+								<div className={styles.default_content__subtitle}>Here will be the posts of your friends that you follow</div>
+							</div>
+						) : undefined;
 					}
 				})}
 			</div>

@@ -19,11 +19,9 @@ const FooterPost = props => {
 
 	let checkClickBookmarkIcon =
 		props.account && props.account.profile && props.account.profile.savedPosts
-			? props.account.profile.savedPosts.find(postId => {
-					if (postId && props.post && props.post.id && postId === props.post.id) {
-						return postId;
-					}
-			  })
+			? props.account.profile.savedPosts.find(postId =>
+					postId && props.post && props.post.id && postId === props.post.id ? postId : undefined
+			  )
 			: undefined;
 
 	return (

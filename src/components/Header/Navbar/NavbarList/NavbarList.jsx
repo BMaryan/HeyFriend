@@ -5,14 +5,12 @@ import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import IconButton from "@mui/material/IconButton";
 import Person from "@mui/icons-material/PersonOutline";
 import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
 import Settings from "@mui/icons-material/SettingsOutlined";
 import Logout from "@mui/icons-material/Logout";
 import { NavLink } from "react-router-dom";
 import { profileConstant, editConstant } from "../../../../core/constants/constants";
-import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 
@@ -23,9 +21,7 @@ const NavbarList = props => {
 	let dataFromAccountToAccounts = () => {
 		if (props.accounts) {
 			props.accounts.find(account => {
-				if (account.id === props.account.id) {
-					return (props.accounts[account.id - 1] = { ...props.account });
-				}
+				return account.id === props.account.id ? (props.accounts[account.id - 1] = { ...props.account }) : undefined;
 			});
 		}
 	};

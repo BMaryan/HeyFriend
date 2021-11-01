@@ -22,29 +22,27 @@ export const Head = props => {
 	) : (
 		<div className={styles.head + " " + styles.head_messages}>
 			<div>
-				{props.accounts.map(account => {
-					if (account && id && account.id === id) {
-						return (
-							<NavLink
-								key={account.id}
-								to={props.account && props.account.id !== id ? `${profileConstant}/` + account.id : `${profileConstant}`}
-								className={dialogStyles.chat_forHead}>
-								<div className={dialogStyles.wrapper_picture}>
-									<div className={dialogStyles.have_not_picture_forHead}>
-										{account ? (
-											<img src={otherProfile && otherProfile.profile.img ? otherProfile.profile.img : defaultAvatar} alt='' />
-										) : (
-											<></>
-										)}
-									</div>
+				{props.accounts.map(account =>
+					account && id && account.id === id ? (
+						<NavLink
+							key={account.id}
+							to={props.account && props.account.id !== id ? `${profileConstant}/` + account.id : `${profileConstant}`}
+							className={dialogStyles.chat_forHead}>
+							<div className={dialogStyles.wrapper_picture}>
+								<div className={dialogStyles.have_not_picture_forHead}>
+									{account ? (
+										<img src={otherProfile && otherProfile.profile.img ? otherProfile.profile.img : defaultAvatar} alt='' />
+									) : (
+										<></>
+									)}
 								</div>
-								<div>
-									<div className={dialogStyles.login}>{account ? account.surname + " " + account.name : <></>}</div>
-								</div>
-							</NavLink>
-						);
-					}
-				})}
+							</div>
+							<div>
+								<div className={dialogStyles.login}>{account ? account.surname + " " + account.name : <></>}</div>
+							</div>
+						</NavLink>
+					) : undefined
+				)}
 			</div>
 			<div>
 				<FontAwesomeIcon

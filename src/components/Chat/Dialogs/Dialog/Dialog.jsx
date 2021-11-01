@@ -7,10 +7,8 @@ import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { chatConstant } from "../../../../core/constants/constants";
 
 const Dialog = props => {
-	let save = props.account && props.chat && props.account.id;
+	// let save = props.account && props.chat && props.account.id;
 	let foundUser = props.users ? props.users.find(user => props.chat.id === user.id) : undefined;
-
-	console.log(foundUser);
 
 	return (
 		<>
@@ -46,7 +44,3 @@ const Dialog = props => {
 };
 
 export default Dialog;
-
-{
-}
-// <i class="far faBookmark"></i>

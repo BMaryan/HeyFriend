@@ -6,7 +6,6 @@ import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { getProfileData, isAccount } from "../../../redux/profile-reducer";
 import { accounts, account } from "../../../core/constants/constantsLocalStorage";
-import { withBottomNavigation } from "../../../hoc/withBottomNavigation/withBottomNavigation";
 
 const EditContainer = props => {
 	React.useEffect(() => {

@@ -9,24 +9,16 @@ const CurrentPost = props => {
 	let params = useParams();
 
 	let foundAccount = props.accounts
-		? props.accounts.find(account => {
-				if (account.profile && account.profile.posts) {
-					return account.profile.posts.find(post => {
-						if (params && post.id === params.id) {
-							return post;
-						}
-					});
-				}
-		  })
+		? props.accounts.find(account =>
+				account.profile && account.profile.posts
+					? account.profile.posts.find(post => (params && post.id === params.id ? post : undefined))
+					: undefined
+		  )
 		: undefined;
 
 	let currentPost =
 		foundAccount && foundAccount.profile && foundAccount.profile.posts
-			? foundAccount.profile.posts.find(post => {
-					if (post.id === params.id) {
-						return post;
-					}
-			  })
+			? foundAccount.profile.posts.find(post => (post.id === params.id ? post : undefined))
 			: props.account && props.account.profile && props.account.profile.posts
 			? props.account.profile.posts.find(post => post.id === params.id)
 			: undefined;
