@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
+import { unFollowing, following } from "../../redux/profile-reducer";
 
 const MainContainer = props => {
 	return <Main {...props} />;
@@ -14,4 +15,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, null)(MainContainer);
+export default connect(mapStateToProps, { unFollowing, following })(MainContainer);

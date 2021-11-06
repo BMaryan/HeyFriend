@@ -83,15 +83,24 @@
 
 /* return image list */
 .posts {
-	/* background: red; */
-	grid-template-columns: repeat(3, 1fr) !important;
-	gap: 15px !important;
+	grid-template-columns: repeat(3, 1fr);
+	margin-bottom: var(--mgFromHeader);
+}
+
+.posts,
+.posts__columns {
+	display: grid;
+	gap: 15px;
 	grid-auto-flow: dense;
-	margin: 0;
+}
+
+.posts__columns {
+	grid-template-columns: 1fr;
 }
 
 .wrapper_posts {
 	height: 100%;
+	display: grid;
 }
 
 .post {
@@ -108,6 +117,42 @@
 .saved_default_title {
 	display: contents;
 	font-size: 18px;
+	text-align: center;
+}
+
+/* default content images list */
+.default_content_images_list {
+	/* background: red; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: var(--mgFromHeader, 20px);
+}
+
+.default_content_images_list div {
+	margin: 5px 0;
+}
+
+.default_content_wrapper_icon {
+	border: 2px solid black;
+	border-radius: 50%;
+	padding: 30px 35px;
+}
+
+.default_content_wrapper_icon svg {
+	font-size: calc(20px + (30 - 10) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.default_content_title {
+	font-size: calc(16px + (28 - 20) * ((100vw - 300px) / (1600 - 300)));
+	text-align: center;
+}
+
+.default_content_subtitle,
+.default_content_subSubTitle {
+	color: rgb(60, 60, 60);
+	font-size: calc(12px + (20 - 15) * ((100vw - 300px) / (1600 - 300)));
 	text-align: center;
 }
 
@@ -128,6 +173,13 @@
 @media (min-width: 540px) and (max-width: 767.98px) {
 	.change_profile_picture_container {
 		width: 50vw;
+	}
+}
+
+@media (max-width: 539.98px) {
+	/* return image list */
+	.posts {
+		margin-bottom: 0;
 	}
 }
 

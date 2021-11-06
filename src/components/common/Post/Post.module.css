@@ -38,7 +38,7 @@
 	margin-right: var(--pdContent);
 }
 
-.wrapper_profile_img > img {
+.profile_avatar {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
@@ -195,8 +195,8 @@
 }
 
 .button_icon {
-	padding: 0;
-	margin-right: 5px;
+	padding: 0 !important;
+	margin-right: 5px !important;
 }
 
 .input {
@@ -205,6 +205,10 @@
 	border: none;
 	outline: none;
 	padding: 5px 0;
+}
+
+.button_post {
+	text-transform: capitalize !important;
 }
 
 .button_post button:disabled {

@@ -8,25 +8,33 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { NavLink } from "react-router-dom";
-import { profileConstant } from "../../../../core/constants/constants";
+import { photoConstant, profileConstant } from "../../../../core/constants/constants";
 import Button from "@mui/material/Button";
+import { useHistory } from "react-router-dom";
 
 const HeadPost = props => {
+	let history = useHistory();
 	const [open, setOpen] = React.useState(false);
+
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+
+	let myProfilePosts = props.account.profile.posts ? props.account.profile.posts.map(post => post.id) : undefined;
 
 	return (
 		<div className={styles.head}>
 			<div className={styles.wrapper_details}>
 				<div className={styles.details_position}>
-					<div className={styles.wrapper_profile_img}>
-						{props.currentAccount && props.currentAccount.profile.avatar ? (
-							<img src={props.currentAccount.profile.avatar} alt='' />
-						) : (
-							<img src={defaultAvatar} alt='' />
-						)}
-					</div>
+					<NavLink to={`${profileConstant}/${props.currentAccount.id}`}>
+						<div className={styles.wrapper_profile_img}>
+							{props.currentAccount && props.currentAccount.profile.avatar ? (
+								<img className={styles.profile_avatar} src={props.currentAccount.profile.avatar} alt='' />
+							) : (
+								<img className={styles.profile_avatar} src={defaultAvatar} alt='' />
+							)}
+						</div>
+					</NavLink>
+
 					<div className={styles.details}>
 						<NavLink
 							to={`${profileConstant}/${props.currentAccount && props.currentAccount.id ? props.currentAccount.id : undefined}`}
@@ -55,21 +63,43 @@ const HeadPost = props => {
 					}}>
 					<Fade in={open}>
 						<Box className={styles.modalPostActions}>
-							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								Report
-							</Button>
-							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								Unfollow
-							</Button>
-							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								Share to...
-							</Button>
-							<Button variant='text' className={styles.item + " " + styles.item__border}>
-								Copy link
-							</Button>
-							<Button onClick={handleClose} variant='text' className={styles.item}>
-								Cancel
-							</Button>
+							{props?.post?.id === String(myProfilePosts) ? (
+								<>
+									<Button variant='text' className={styles.item + " " + styles.item__border}>
+										Delete
+									</Button>
+									<Button
+										variant='text'
+										className={styles.item + " " + styles.item__border}
+										onClick={() => history.push(`${photoConstant}/${props.post.id}`)}>
+										Go to post
+									</Button>
+									<Button onClick={handleClose} variant='text' className={styles.item}>
+										Cancel
+									</Button>
+								</>
+							) : (
+								<>
+									<Button variant='text' className={styles.item + " " + styles.item__border}>
+										Report
+									</Button>
+									<Button
+										variant='text'
+										className={styles.item + " " + styles.item__border}
+										onClick={() => props.unFollowing(props.currentAccount.id)}>
+										Unfollow
+									</Button>
+									<Button variant='text' className={styles.item + " " + styles.item__border}>
+										Share to...
+									</Button>
+									<Button variant='text' className={styles.item + " " + styles.item__border}>
+										Copy link
+									</Button>
+									<Button onClick={handleClose} variant='text' className={styles.item}>
+										Cancel
+									</Button>
+								</>
+							)}
 						</Box>
 					</Fade>
 				</Modal>

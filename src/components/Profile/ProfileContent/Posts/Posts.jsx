@@ -42,16 +42,31 @@ const Posts = props => {
 					</div>
 				) : undefined}
 
-				<ReturnImageList
-					accounts={props.accounts}
-					account={props.account}
-					openModalCurrentPost={props.openModalCurrentPost}
-					setOpenModalCurrentPost={props.setOpenModalCurrentPost}
-					otherProfile={otherProfile}
-					oftenCheckOtherProfile={props.oftenCheckOtherProfile}
-					id={props.id}
-					logicOfPagePost={true}
-				/>
+				{!props.id ? (
+					<ReturnImageList
+						accounts={props.accounts}
+						account={props.account}
+						openModalCurrentPost={props.openModalCurrentPost}
+						setOpenModalCurrentPost={props.setOpenModalCurrentPost}
+						otherProfile={otherProfile}
+						oftenCheckOtherProfile={props.oftenCheckOtherProfile}
+						id={props.id}
+						logicOfPagePost={true}
+						isMyProfile={true}
+					/>
+				) : (
+					<ReturnImageList
+						accounts={props.accounts}
+						account={props.account}
+						openModalCurrentPost={props.openModalCurrentPost}
+						setOpenModalCurrentPost={props.setOpenModalCurrentPost}
+						otherProfile={otherProfile}
+						oftenCheckOtherProfile={props.oftenCheckOtherProfile}
+						id={props.id}
+						logicOfPagePost={true}
+						isOtherProfile={true}
+					/>
+				)}
 
 				{props.openModalCurrentPost ? (
 					<ToggleShowCurrentPostContainer

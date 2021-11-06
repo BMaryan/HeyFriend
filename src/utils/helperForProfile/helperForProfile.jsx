@@ -8,11 +8,12 @@ import { getPictureBase64, removePicture } from "../../core/methods/methods";
 import Button from "@mui/material/Button";
 import PostContainer from "../../components/common/Post/PostContainer";
 import { modalPostConstant } from "../../core/constants/constantsPost";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import { NavLink } from "react-router-dom";
 import { photoConstant } from "../../core/constants/constants";
 import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
+import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
+import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
 const DuplicateCodeFunc = props => {
 	return (
@@ -130,82 +131,103 @@ export let ToggleShowCurrentPostContainer = props => {
 	);
 };
 
+const DuplicateCodeReturnImageList = props => {
+	return (
+		// <div className={styles.posts}>
+		<div className={styles.wrapper_posts}>
+			<NavLink
+				exact
+				onClick={() => (props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true))}
+				to={`${photoConstant}/${props?.post?.id ? props.post.id : undefined}`}
+				className={styles.post}>
+				<PostContainer post={props.post} currentAccount={props.currentAccount} kindOfPost={onlyBodyPostConstant} />
+			</NavLink>
+		</div>
+		// {/* </div> */}
+	);
+};
+
+const ReturnDefaultContentForImageList = props => {
+	return (
+		<div className={styles.default_content_images_list}>
+			{props.icon ? <div className={styles.default_content_wrapper_icon}>{props.icon}</div> : undefined}
+			{props.title ? <div className={styles.default_content_title}>{props.title}</div> : undefined}
+			{props.subtitle ? <div className={styles.default_content_subtitle}>{props.subtitle}</div> : undefined}
+			{props.subSubTitle ? <div className={styles.default_content_subSubTitle}>{props.subSubTitle}</div> : undefined}
+		</div>
+	);
+};
+
 export let ReturnImageList = props => {
 	return (
-		<ImageList className={styles.posts}>
-			{props.account && props.account.profile && props.account.profile.posts && !props.id && props.logicOfPagePost
-				? props.account.profile.posts.map(post => (
-						<ImageListItem key={post && post.id ? post.id : undefined} className={styles.wrapper_posts}>
-							<NavLink
-								exact
-								key={post && post.id ? post.id : undefined}
-								onClick={() =>
-									props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true)
-								}
-								to={`${photoConstant}/${post && post.id ? post.id : undefined}`}
-								className={styles.post}>
-								<PostContainer
-									key={post && post.id ? post.id : undefined}
-									post={post}
-									currentAccount={props.account}
-									kindOfPost={onlyBodyPostConstant}
-								/>
-							</NavLink>
-						</ImageListItem>
-				  ))
-				: props.oftenCheckOtherProfile && props.otherProfile.profile.posts && props.logicOfPagePost
-				? props.otherProfile.profile.posts.map(post => (
-						<ImageListItem key={post && post.id ? post.id : undefined} className={styles.wrapper_posts}>
-							<NavLink
-								exact
-								key={post && post.id ? post.id : undefined}
-								onClick={() =>
-									props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true)
-								}
-								to={`${photoConstant}/${post && post.id ? post.id : undefined}`}
-								className={styles.post}>
-								<PostContainer
-									key={post && post.id ? post.id : undefined}
-									post={post}
-									currentAccount={props.otherProfile}
-									kindOfPost={onlyBodyPostConstant}
-								/>
-							</NavLink>
-						</ImageListItem>
-				  ))
-				: !props.logicOfPagePost && props.accounts
-				? props.accounts.map(account =>
-						account && account.profile && account.profile.posts
-							? account.profile.posts.map(post =>
-									props.account && props.account.profile && props.account.profile.savedPosts
-										? props.account.profile.savedPosts.map(savedPostID =>
-												post.id === savedPostID ? (
-													<ImageListItem key={post && post.id ? post.id : undefined} className={styles.wrapper_posts}>
-														<NavLink
-															exact
-															key={post && post.id ? post.id : undefined}
-															onClick={() =>
-																props.openModalCurrentPost
-																	? props.setOpenModalCurrentPost(false)
-																	: props.setOpenModalCurrentPost(true)
-															}
-															to={`${photoConstant}/${post && post.id ? post.id : undefined}`}
-															className={styles.post}>
-															<PostContainer
-																key={post && post.id ? post.id : undefined}
-																post={post}
-																currentAccount={account}
-																kindOfPost={onlyBodyPostConstant}
-															/>
-														</NavLink>
-													</ImageListItem>
-												) : undefined
-										  )
-										: undefined
-							  )
-							: undefined
-				  )
-				: undefined}
-		</ImageList>
+		<>
+			{/* return my profile images list */}
+			{props.isMyProfile ? (
+				props?.account?.profile?.posts && props.logicOfPagePost ? (
+					<div className={styles.posts}>
+						{props.account.profile.posts.map(post => (
+							<DuplicateCodeReturnImageList key={post.id} {...props} post={post} currentAccount={props.account} />
+						))}
+					</div>
+				) : (
+					<ReturnDefaultContentForImageList
+						icon={<AddAPhotoOutlinedIcon />}
+						title={"Share Photos and Videos"}
+						subtitle={"When you share photos and videos, they'll appear on your profile."}
+					/>
+				)
+			) : undefined}
+
+			{/* return other profile images list */}
+			{props.isOtherProfile ? (
+				props?.otherProfile?.profile?.posts && props.logicOfPagePost ? (
+					<div className={styles.posts}>
+						{props.otherProfile.profile.posts.map(post => (
+							<DuplicateCodeReturnImageList key={post.id} {...props} post={post} currentAccount={props.otherProfile} />
+						))}
+					</div>
+				) : (
+					<ReturnDefaultContentForImageList icon={<PhotoCameraOutlinedIcon />} title={"No posts yet"} />
+				)
+			) : undefined}
+
+			{/* return saved images list */}
+			{props.isSaved ? (
+				!props.logicOfPagePost && props.accounts ? (
+					<div
+						className={
+							props.account.profile.savedPosts && props.account.profile.savedPosts.length > 0 ? styles.posts : styles.posts__columns
+						}>
+						{props.accounts.map((account, index, array) =>
+							account?.profile?.posts
+								? account.profile.posts.map(post =>
+										props?.account?.profile?.savedPosts
+											? props.account.profile.savedPosts.map(savedPostID =>
+													post?.id === savedPostID ? (
+														<DuplicateCodeReturnImageList
+															key={account.id}
+															{...props}
+															post={post}
+															currentAccount={account}
+														/>
+													) : undefined
+											  )
+											: undefined
+								  )
+								: undefined
+						)}
+
+						{!props.account.profile.savedPosts || props.account.profile.savedPosts.length < 1 ? (
+							<ReturnDefaultContentForImageList
+								icon={<BookmarkBorderOutlinedIcon />}
+								title={"Save"}
+								subtitle={"Save photos and videos that you want to see again."}
+								subSubTitle={"Only you can see what you have saved."}
+							/>
+						) : undefined}
+					</div>
+				) : undefined
+			) : undefined}
+		</>
 	);
 };
