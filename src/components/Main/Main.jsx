@@ -24,6 +24,8 @@ const Main = props => {
 		  )
 		: undefined;
 
+	props.getDefaultAccount(null);
+
 	return (
 		<div className={styles.main}>
 			{/* // content */}

@@ -28,7 +28,7 @@ const SignUpForm = props => {
 				placeholder='Mobile Number or email'
 			/>
 			<WrapperCreateField name='password' type='password' validate={[validatePassword, required]} component={Input} placeholder='Password' />
-			<WrapperButton {...props} button_text='SIGN UP' isSignUp={true} />
+			<WrapperButton {...props} button_text='Sign Up' isSignUp={true} />
 		</form>
 	);
 };

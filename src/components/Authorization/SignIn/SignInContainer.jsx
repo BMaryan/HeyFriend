@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { setUserSignIn } from "../../../redux/auth-reducer";
+import { getDefaultAccount, setUserSignIn } from "../../../redux/auth-reducer";
 import { getUserSignInSelector } from "../../../redux/auth-selectors";
 import { helpCheckAuthorization } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignIn from "./SignIn";
@@ -46,4 +46,5 @@ export default connect(mapStateToProps, {
 	helpCheckAuthorization,
 	isAccount,
 	setAccounts,
+	getDefaultAccount,
 })(SignInContainer);

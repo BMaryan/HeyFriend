@@ -63,6 +63,40 @@
 	transition: 0.5s;
 }
 
+/* modal autocomplete default accounts */
+.modal_autocomplete_default_accounts {
+	width: 50vw;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.list {
+	background: white;
+	border-radius: var(--borderRadius, 10px);
+	padding: 0 !important;
+	overflow: hidden;
+}
+
+.list_title {
+	text-align: center;
+	font-size: 25px;
+	padding-top: 15px;
+}
+
+.list_subtitle {
+	color: rgb(58, 58, 58);
+	font-size: 14px;
+	text-align: center;
+	border-bottom: 1px solid var(--bgWhite233, rgb(208, 208, 208));
+	padding: 5px 0 15px 0;
+}
+
+.list_item {
+	padding: 0 !important;
+}
+
 /* media */
 @media (max-width: 767.98px) {
 	/* authorization_content */
@@ -73,5 +107,17 @@
 	.information_content {
 		width: 100%;
 		border-radius: 0 0 var(--borderRadius, 15px) var(--borderRadius, 15px);
+	}
+
+	/* modal autocomplete default accounts */
+	.modal_autocomplete_default_accounts {
+		width: 70vw;
+	}
+}
+
+@media (max-width: 399.98px) {
+	/* modal autocomplete default accounts */
+	.modal_autocomplete_default_accounts {
+		width: 90vw;
 	}
 }

@@ -1,5 +1,6 @@
 let SET_USER_SIGN_IN = "social_network/auth/SET_USER_SIGN_IN";
 let SET_USER_SIGN_UP = "social_network/auth/SET_USER_SIGN_UP";
+let GET_DEFAULT_ACCOUNT = "social_network/auth/GET_DEFAULT_ACCOUNT";
 
 let initialState = {
 	userSignIn: {
@@ -14,6 +15,7 @@ let initialState = {
 		phone_or_email: null,
 		password: null,
 	},
+	defaultAccount: null,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -30,6 +32,12 @@ const AuthReducer = (state = initialState, action) => {
 				userSignUp: { ...action.data },
 			};
 		}
+		case GET_DEFAULT_ACCOUNT: {
+			return {
+				...state,
+				defaultAccount: action.account ? action.account : null,
+			};
+		}
 		default: {
 			return state;
 		}
@@ -44,6 +52,11 @@ export const setUserSignIn = ({ phone_or_email, password, rememberMe = false }) 
 export const setUserSignUp = ({ name, surname, phone_or_email, password }) => ({
 	type: SET_USER_SIGN_UP,
 	data: { name, surname, phone_or_email, password },
+});
+
+export const getDefaultAccount = account => ({
+	type: GET_DEFAULT_ACCOUNT,
+	account,
 });
 
 export default AuthReducer;

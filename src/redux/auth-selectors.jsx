@@ -5,3 +5,7 @@ export const getUserSignInSelector = state => {
 export const getUserSignUpSelector = state => {
 	return state.auth.userSignUp;
 };
+
+export const getDefaultAccountSelector = state => {
+	return state.auth.defaultAccount;
+};

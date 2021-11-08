@@ -173,7 +173,7 @@ export const WrapperButton = props => {
 				<Button
 					onClick={() => (props.isSignIn ? setErrorSignIn(validateAuthorizationUserCreator(props.accounts, props.userSignIn)) : undefined)}
 					type='submit'
-					disabled={props.invalid || props.submitting || props.pristine}
+					disabled={props.invalid || props.submitting}
 					variant='contained'>
 					<span style={{ textTransform: "capitalize" }}>{props.button_text}</span>
 				</Button>
