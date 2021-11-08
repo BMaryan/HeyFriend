@@ -32,16 +32,6 @@ const ProfileContainer = props => {
 		}
 	}, [props.userSignUp]);
 
-	// React.useEffect(() => {
-	// 	if (props.chats) {
-	// 		props.setProfileChats(props.chats);
-	// 	}
-	// }, [props.chats]);
-
-	// if (!props.account) {
-	// 	return <Redirect to={`${signUpConstant}`} />;
-	// }
-
 	if (!id && props.account && props.account.id) {
 		props.getParamsId(null);
 		props.getAuthorizationId(props.account.id);

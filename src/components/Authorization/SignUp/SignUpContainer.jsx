@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { setUserSignUp } from "../../../redux/auth-reducer";
 import { getUserSignUpSelector } from "../../../redux/auth-selectors";
-import { addAccount, isAccount } from "../../../redux/profile-reducer";
+import { addAccount, isAccount, setAccounts } from "../../../redux/profile-reducer";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
@@ -12,11 +12,14 @@ import { account, accounts } from "../../../core/constants/constantsLocalStorage
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { profileConstant } from "../../../core/constants/constants";
+import defaultAccounts from "../../../defaultAccounts/defaultAccounts";
 
 const SignUpContainer = props => {
 	React.useEffect(() => {
 		if (props.accounts && props.accounts.length > 0) {
 			localStorage.setItem(accounts, JSON.stringify(props.accounts));
+		} else {
+			props.setAccounts([...defaultAccounts]);
 		}
 	}, [props.accounts]);
 
@@ -45,6 +48,7 @@ export default compose(
 		setUserSignUp,
 		helpCheckAuthorization,
 		addAccount,
+		setAccounts,
 		setSignUpDataToLocalStorage,
 		isAccount,
 	}),

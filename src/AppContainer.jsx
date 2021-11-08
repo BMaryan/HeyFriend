@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { connect } from "react-redux";
-// import { Redirect } from "react-router-dom";
 import App from "./App";
 import { getUserSignInSelector, getUserSignUpSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
@@ -32,11 +31,7 @@ const AppContainer = props => {
 
 	React.useEffect(() => {
 		if (props.account) {
-			try {
-				localStorage.setItem(account, JSON.stringify(props.account));
-			} catch (e) {
-				return e.name;
-			}
+			localStorage.setItem(account, JSON.stringify(props.account));
 		} else {
 			localStorage.removeItem(account);
 			if (!props.account) {
@@ -44,10 +39,6 @@ const AppContainer = props => {
 			}
 		}
 	}, [props.account]);
-
-	// React.useEffect(() => {
-	// 	props.setProfileChats(props.chats);
-	// }, [props.chats]);
 
 	setSignUpDataToLocalStorage(props);
 

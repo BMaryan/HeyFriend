@@ -8,12 +8,15 @@ import { helpCheckAuthorization } from "../../../utils/helperForAuthorization/he
 import SignIn from "./SignIn";
 import { account, accounts } from "../../../core/constants/constantsLocalStorage";
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
-import { isAccount } from "../../../redux/profile-reducer";
+import { isAccount, setAccounts } from "../../../redux/profile-reducer";
+import defaultAccounts from "../../../defaultAccounts/defaultAccounts";
 
 const SignInContainer = props => {
 	React.useEffect(() => {
 		if (props.accounts && props.accounts.length > 0) {
 			localStorage.setItem(accounts, JSON.stringify(props.accounts));
+		} else {
+			props.setAccounts([...defaultAccounts]);
 		}
 	}, [props.accounts]);
 
@@ -42,4 +45,5 @@ export default connect(mapStateToProps, {
 	setUserSignIn,
 	helpCheckAuthorization,
 	isAccount,
+	setAccounts,
 })(SignInContainer);

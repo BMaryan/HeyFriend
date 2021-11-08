@@ -28,7 +28,7 @@ const Information = props => {
 							to={props.id ? `${profileConstant}/${props.id}/information/about` : `${profileConstant}/information/about`}
 							className={styles.item}
 							activeClassName={styles.item_active}>
-							<Media query={{ maxWidth: 600 }}>{matches => (!matches ? <>Details about you</> : <>Details</>)}</Media>
+							<Media query={{ maxWidth: 600 }}>{matches => (!matches ? <>Details about me</> : <>Details</>)}</Media>
 						</NavLink>
 						<NavLink
 							exact

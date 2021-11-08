@@ -5,7 +5,7 @@ const About = props => {
 	return (
 		<div>
 			<div className={styles.wrapper_item}>
-				<div className={styles.title}>About you</div>
+				<div className={styles.title}>About me</div>
 				{props.oftenCheckOtherProfile && props.otherProfile.profile.aboutMe && props.id ? (
 					<div>{props.otherProfile.profile.aboutMe}</div>
 				) : props.account && props.account.profile && props.account.profile.aboutMe && !props.id ? (

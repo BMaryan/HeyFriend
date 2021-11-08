@@ -130,6 +130,15 @@ const ProfileInfo = props => {
 						)}
 					</div>
 
+					{/* status */}
+					<div className={styles.profile_status__media}>
+						{oftenCheckOtherProfile && otherProfile.profile.status ? (
+							<div>{otherProfile.profile.status}</div>
+						) : oftenCheckMyProfile && props.account.profile.status ? (
+							<div>{props.account.profile.status}</div>
+						) : undefined}
+					</div>
+
 					<div className={styles.details_info_content}>
 						<div className={styles.details_info}>
 							<div className={styles.detail_number}>
