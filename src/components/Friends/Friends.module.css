@@ -42,6 +42,14 @@
 	border-left: 2px solid transparent;
 	padding: 16px 16px 16px 30px;
 	cursor: pointer;
+	position: relative;
+}
+
+.item_picture {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 2px;
 }
 
 .item:hover {
