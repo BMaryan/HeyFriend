@@ -34,7 +34,13 @@ const SignInForm = props => {
 			</div>
 
 			{/* modal for autocomplete auth data */}
-			<ModalDefaultAccounts open={open} handleOpen={handleOpen} handleClose={handleClose} getDefaultAccount={props.getDefaultAccount} />
+			<ModalDefaultAccounts
+				open={open}
+				handleOpen={handleOpen}
+				handleClose={handleClose}
+				getDefaultAccount={props.getDefaultAccount}
+				accounts={props.accounts}
+			/>
 		</form>
 	);
 };

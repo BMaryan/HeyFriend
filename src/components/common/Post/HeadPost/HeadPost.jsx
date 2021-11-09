@@ -63,7 +63,7 @@ const HeadPost = props => {
 					}}>
 					<Fade in={open}>
 						<Box className={styles.modalPostActions}>
-							{props?.post?.id === String(myProfilePosts) ? (
+							{props.account && props.currentAccount && props.account.id === props.currentAccount.id ? (
 								<>
 									<Button variant='text' className={styles.item + " " + styles.item__border}>
 										Delete

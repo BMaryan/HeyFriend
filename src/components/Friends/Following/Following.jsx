@@ -13,8 +13,6 @@ import { CardActionArea } from "@mui/material";
 const Following = props => {
 	let checkFollowing = props.account.profile.following ? props.account.profile.following.map(following => following) : undefined;
 
-	console.log(checkFollowing);
-
 	return (
 		<React.Fragment>
 			<div className={styles.content}>
@@ -36,9 +34,6 @@ const Following = props => {
 															<Typography className={styles.full_name} component='div'>
 																{account.profile.surname + " " + account.profile.name}
 															</Typography>
-															<Typography variant='body2' className={styles.subtitle}>
-																3 common friends.
-															</Typography>
 														</CardContent>
 													</NavLink>
 												</CardActionArea>
@@ -50,7 +45,7 @@ const Following = props => {
 					: undefined}
 			</div>
 
-			{checkFollowing && checkFollowing.length < 1 ? (
+			{(checkFollowing && checkFollowing.length < 1) || !checkFollowing ? (
 				<div className={ownStyles.content__flex}>
 					<div className={ownStyles.title}>Following</div>
 					<div className={ownStyles.subtitle}>The people you are following will be displayed here</div>

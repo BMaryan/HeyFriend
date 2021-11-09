@@ -7,7 +7,6 @@ import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { chatConstant } from "../../../../core/constants/constants";
 
 const Dialog = props => {
-	// let save = props.account && props.chat && props.account.id;
 	let foundUser = props.users ? props.users.find(user => props.chat.id === user.id) : undefined;
 
 	return (
@@ -29,7 +28,6 @@ const Dialog = props => {
 				</div>
 				<div>
 					<div className={styles.login}>{foundUser ? foundUser.surname + " " + foundUser.name : undefined}</div>
-					{/* <div className={styles.login}>{save ? "Saved Messages" : props.user.surname + " " + props.user.name}</div> */}
 					<div className={styles.message}>
 						{props.chat && props.chat.messages && props.chat.messages.length > 0 ? (
 							props.chat.messages[props.chat.messages.length - 1].message

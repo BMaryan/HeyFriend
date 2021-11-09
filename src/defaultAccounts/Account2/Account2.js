@@ -7,14 +7,14 @@ import post3 from "./assets/images/post3.jpg";
 export const account2 = {
 	id: 2,
 	profile: {
-		name: "Account2",
-		surname: "Account2",
-		phone_or_email: "account2@gmail.com",
+		name: "Marie",
+		surname: "Bennett",
+		phone_or_email: "MarieBennett@gmail.com",
 		password: "12345678",
 		coverPhoto: coverPhoto,
 		avatar: avatar,
 		status: "Do not confuse laziness with rest!",
-		aboutMe: "People who can't find time to rest will sooner or later be forced to find time to get sick.",
+		aboutMe: "Currently living in Colorado. Lover of art, languages and travelling.",
 		posts: [
 			{
 				comments: [],

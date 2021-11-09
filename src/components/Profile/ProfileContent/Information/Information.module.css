@@ -7,6 +7,7 @@
 	display: flex;
 	flex: 1;
 	padding: var(--pdContent);
+	margin-bottom: var(--mgBetweenContainers);
 }
 
 /* menu */
@@ -47,6 +48,12 @@
 }
 
 /* media */
+@media (max-width: 539.98px) {
+	.information_container {
+		margin-bottom: 0;
+	}
+}
+
 @media (max-width: 399.98px) {
 	.information_container {
 		flex-direction: column;

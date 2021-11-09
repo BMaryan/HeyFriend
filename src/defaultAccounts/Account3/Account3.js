@@ -7,15 +7,14 @@ import post3 from "./assets/images/post3.jpg";
 export const account3 = {
 	id: 3,
 	profile: {
-		name: "Account3",
-		surname: "Account3",
-		phone_or_email: "account3@gmail.com",
+		name: "Diana",
+		surname: "Wells",
+		phone_or_email: "DianaWells@gmail.com",
 		password: "12345678",
 		coverPhoto: coverPhoto,
 		avatar: avatar,
 		status: "Two things fly by the sea especially fast - time and money.",
-		aboutMe:
-			"I think it is better to dream of beauty than to live nearby and not feel… He is the people of the Black Sea coast, because they do not notice the sea or heat, for them it is life.",
+		aboutMe: "Living in Athens, Greece. I love black and white classics, chillout music and green tea.",
 		posts: [
 			{
 				comments: [],

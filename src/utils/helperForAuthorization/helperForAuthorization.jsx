@@ -40,6 +40,11 @@ export const InformationContainer = props => {
 };
 
 export const ModalDefaultAccounts = props => {
+	let filterDefaultAccounts =
+		defaultAccounts && props.accounts
+			? props.accounts.filter(account => defaultAccounts.map(defaultAccount => account.id === defaultAccount.id))
+			: undefined;
+
 	return (
 		<Modal
 			aria-labelledby='transition-modal-title'
@@ -57,8 +62,8 @@ export const ModalDefaultAccounts = props => {
 						<div className={styles.list_title}>Default accounts</div>
 						<div className={styles.list_subtitle}>Autofill will work by selecting an account</div>
 
-						{defaultAccounts
-							? defaultAccounts.map(account => (
+						{filterDefaultAccounts
+							? filterDefaultAccounts.map(account => (
 									<ListItem className={styles.list_item} key={account.id}>
 										<ListItemButton
 											onClick={() => {

@@ -8,15 +8,14 @@ import post4 from "./assets/images/post4.jpg";
 export const account1 = {
 	id: 1,
 	profile: {
-		name: "Account1",
-		surname: "Account1",
-		phone_or_email: "account1@gmail.com",
+		name: "Christopher",
+		surname: "Pierce",
+		phone_or_email: "ChristopherPierce@gmail.com",
 		password: "12345678",
 		coverPhoto: coverPhoto,
 		avatar: avatar,
 		status: "Everyone is wrong. Admits a mistake - worthy. Apologizes - courageous. Restores the relationship - strong.",
-		aboutMe:
-			"Often people work on something that is not worth the effort. Working on the right product is probably more important than just working hard. Catherine Fake, co-founder of Flickr.",
+		aboutMe: "Based in Chicago. I love playing tennis and loud music. I have a persistent enthusiasm to create new things.",
 		posts: [
 			{
 				comments: [],
