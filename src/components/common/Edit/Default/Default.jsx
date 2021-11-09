@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Default.module.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
 

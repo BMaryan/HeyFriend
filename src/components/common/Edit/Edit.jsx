@@ -61,11 +61,6 @@ const Edit = props => {
 							{title.password}
 						</NavLink>
 					</li>
-					<li className={styles.edit_item}>
-						<NavLink to={`${editConstant}/${path.manageAccess}`} className={styles.item} activeClassName={styles.item_active}>
-							{title.appsAndWeb}
-						</NavLink>
-					</li>
 				</ul>
 			</div>
 

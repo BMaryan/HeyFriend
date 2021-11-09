@@ -11,10 +11,10 @@ let FOLLOWING = "social_network/chatPage/FOLLOWING";
 let UNFOLLOWING = "social_network/chatPage/UNFOLLOWING";
 let SAVE_POST = "social_network/chatPage/SAVE_POST";
 let DELETE_SAVED_POST = "social_network/chatPage/DELETE_SAVED_POST";
+let DELETE_POST = "social_network/profilePage/DELETE_POST";
 
 // in progress
 let FOLLOWERS = "social_network/chatPage/FOLLOWERS";
-// let UNFOLLOWERS = "social_network/chatPage/UNFOLLOWERS";
 
 let initialState = {
 	accounts: [],
@@ -215,6 +215,21 @@ const ProfileReducer = (state = initialState, action) => {
 				],
 			};
 		}
+		case DELETE_POST: {
+			return {
+				...state,
+				account: {
+					...state.account,
+					profile: {
+						...state.account.profile,
+						posts:
+							state.account && state.account.profile && state.account.profile.posts
+								? state.account.profile.posts.filter(post => post.id !== action.id)
+								: [],
+					},
+				},
+			};
+		}
 		default: {
 			return state;
 		}
@@ -289,6 +304,11 @@ export const deleteSavedPost = id => ({
 
 export const followers = id => ({
 	type: FOLLOWERS,
+	id,
+});
+
+export const deletePost = id => ({
+	type: DELETE_POST,
 	id,
 });
 

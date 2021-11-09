@@ -10,13 +10,13 @@ import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { getPictureBase64 } from "../../../core/methods/methods";
-import betaVershion from "../../../assets/images/betaVershion.png";
+import Media from "react-media";
 
 const CreatePost = props => {
 	let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [skipped, setSkipped] = React.useState(new Set());
-	const steps = ["Crop", "Edit", "Create new post"];
+	const steps = ["Crop", "Edit", <Media query={{ maxWidth: 540 }}>{matches => (!matches ? "Create new post" : "Create")}</Media>];
 	const hiddenFileInput = React.useRef(null);
 
 	let onSubmit = formData => {
@@ -49,6 +49,8 @@ const CreatePost = props => {
 	const handleReset = () => {
 		setActiveStep(0);
 	};
+
+	console.log(props.postPhoto);
 
 	return (
 		<Modal
@@ -105,13 +107,10 @@ const CreatePost = props => {
 											<img className={styles.post_img} src={props.postPhoto} alt='' />
 										</div>
 
-										{/* Temporary */}
 										<div className={styles.content_wrapper_content}>
-											<div className={styles.temporary_beta_vershion}>
-												<img className={styles.temporary_beta_vershion_img} src={betaVershion} alt='' />
-											</div>
+											<div className={styles.title}>Work in progress</div>
+											<div className={styles.subtitle}>Sorry, this content is not yet available</div>
 										</div>
-										{/* Temporary */}
 									</div>
 								</React.Fragment>
 							) : activeStep === 2 ? (

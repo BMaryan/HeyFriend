@@ -19,8 +19,6 @@ const HeadPost = props => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	let myProfilePosts = props.account.profile.posts ? props.account.profile.posts.map(post => post.id) : undefined;
-
 	return (
 		<div className={styles.head}>
 			<div className={styles.wrapper_details}>
@@ -65,13 +63,22 @@ const HeadPost = props => {
 						<Box className={styles.modalPostActions}>
 							{props.account && props.currentAccount && props.account.id === props.currentAccount.id ? (
 								<>
-									<Button variant='text' className={styles.item + " " + styles.item__border}>
+									<Button
+										onClick={() => {
+											props.deletePost(props.post.id);
+											history.push(`${profileConstant}`);
+										}}
+										className={styles.item + " " + styles.item__border}
+										variant='text'>
 										Delete
 									</Button>
 									<Button
 										variant='text'
 										className={styles.item + " " + styles.item__border}
-										onClick={() => history.push(`${photoConstant}/${props.post.id}`)}>
+										onClick={() => {
+											history.push(`${photoConstant}/${props.post.id}`);
+											handleClose();
+										}}>
 										Go to post
 									</Button>
 									<Button onClick={handleClose} variant='text' className={styles.item}>
@@ -86,7 +93,10 @@ const HeadPost = props => {
 									<Button
 										variant='text'
 										className={styles.item + " " + styles.item__border}
-										onClick={() => props.unFollowing(props.currentAccount.id)}>
+										onClick={() => {
+											props.unFollowing(props.currentAccount.id);
+											handleClose();
+										}}>
 										Unfollow
 									</Button>
 									<Button variant='text' className={styles.item + " " + styles.item__border}>
