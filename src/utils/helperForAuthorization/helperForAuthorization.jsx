@@ -76,7 +76,7 @@ export const ModalDefaultAccounts = props => {
 											<ListItemText
 												primary={account.profile.surname + " " + account.profile.name}
 												secondary={
-													account.profile.status.length > 70
+													account.profile.status && account.profile.status.length > 70
 														? account.profile.status.slice(0, 70) + "..."
 														: account.profile.status
 												}

@@ -50,8 +50,6 @@ const CreatePost = props => {
 		setActiveStep(0);
 	};
 
-	console.log(props.postPhoto);
-
 	return (
 		<Modal
 			aria-labelledby='transition-modal-title'

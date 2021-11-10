@@ -3,7 +3,6 @@ import coverPhoto from "./assets/images/coverPhoto16.jpg";
 import post1 from "./assets/images/post1.jpg";
 import post2 from "./assets/images/post2.jpg";
 import post3 from "./assets/images/post3.jpg";
-import { ac2PostsId } from "../Account2/Account2";
 
 export const ac3PostsId = {
 	id1: "3cBgОyLhh04M",

@@ -7,14 +7,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 
 const Recommendation = props => {
-	let checkFollow =
-		props.account && props.account.profile && props.account.profile.following
-			? props.account.profile.following.map(followingAccount => followingAccount.id)
-			: undefined;
-
 	return (
 		<div className={styles.content}>
 			{props.accounts
