@@ -17,6 +17,14 @@ const Main = props => {
 		  )
 		: undefined;
 
+	let followedByNotMe = followedAccounts
+		? followedAccounts.filter(account =>
+				account.profile.following && account.profile.following.length > 0
+					? account.profile.following.find(followedAccount => followedAccount.id !== props.account.id)
+					: undefined
+		  )
+		: undefined;
+
 	let checkPosts = followedAccounts
 		? followedAccounts.filter(account => (account.profile.posts ? account.profile.posts.map(post => post) : undefined))
 		: undefined;
@@ -141,7 +149,7 @@ const Main = props => {
 						: undefined}
 
 					{/* default content */}
-					{(checkFollowing && checkFollowing.length === 0) || !checkFollowing ? (
+					{(checkFollowing && checkFollowing.length === 0) || !checkFollowing || followedByNotMe.length === 0 || !followedByNotMe ? (
 						<div className={styles.default_content}>
 							<div className={styles.default_content__wrapper_icon}>
 								<PeopleOutlineIcon />
