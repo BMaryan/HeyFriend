@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import { photoConstant, profileConstant } from "../../../../core/constants/constants";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
+import betaVershion from "../../../../assets/images/betaVershion.png";
 
 const HeadPost = props => {
 	let history = useHistory();
@@ -68,7 +69,7 @@ const HeadPost = props => {
 											props.deletePost(props.post.id);
 											history.push(`${profileConstant}`);
 										}}
-										className={styles.item + " " + styles.item__border}
+										className={styles.item + " " + styles.item__border + " " + styles.item__red}
 										variant='text'>
 										Delete
 									</Button>
@@ -87,12 +88,13 @@ const HeadPost = props => {
 								</>
 							) : (
 								<>
-									<Button variant='text' className={styles.item + " " + styles.item__border}>
+									<Button variant='text' className={styles.item + " " + styles.item__border + " " + styles.item__red}>
+										<img className={styles.item_beta_vershion_picture} src={betaVershion} alt='' />
 										Report
 									</Button>
 									<Button
 										variant='text'
-										className={styles.item + " " + styles.item__border}
+										className={styles.item + " " + styles.item__border + " " + styles.item__red}
 										onClick={() => {
 											props.unFollowing(props.currentAccount.id);
 											handleClose();
@@ -100,9 +102,11 @@ const HeadPost = props => {
 										Unfollow
 									</Button>
 									<Button variant='text' className={styles.item + " " + styles.item__border}>
+										<img className={styles.item_beta_vershion_picture} src={betaVershion} alt='' />
 										Share to...
 									</Button>
 									<Button variant='text' className={styles.item + " " + styles.item__border}>
+										<img className={styles.item_beta_vershion_picture} src={betaVershion} alt='' />
 										Copy link
 									</Button>
 									<Button onClick={handleClose} variant='text' className={styles.item}>

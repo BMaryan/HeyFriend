@@ -156,12 +156,23 @@
 	border-bottom: 1px solid var(--bgWhite233);
 }
 
+.modalPostActions .item__red {
+	color: red;
+}
+
 .item:first-child {
 	border-radius: var(--borderRadius) var(--borderRadius) 0 0;
 }
 
 .item:last-child {
 	border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+}
+
+.item_beta_vershion_picture {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 /*  */
