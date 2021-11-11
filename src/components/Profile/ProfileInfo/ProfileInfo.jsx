@@ -8,6 +8,7 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
+import betaVershion from "../../../assets/images/betaVershion.png";
 
 const ProfileInfo = props => {
 	const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
@@ -175,11 +176,16 @@ const ProfileInfo = props => {
 					<div className={styles.wrapper_button}>
 						{props.id ? (
 							<>
-								<NavLink className={styles.navLink_message} to={`${chatConstant}/` + props.id}>
-									<Button onClick={() => props.addChat(props.id)} variant='contained'>
-										Message
-									</Button>
-								</NavLink>
+								{/* <NavLink className={styles.navLink_message} to={`${chatConstant}/` + props.id}> */}
+								<Button
+									className={styles.button}
+									style={{ textTransform: "capitalize" }}
+									// onClick={() => props.addChat(props.id)}
+									variant='contained'>
+									Message
+									<img className={styles.beta_vershion_picture} src={betaVershion} alt='' />
+								</Button>
+								{/* </NavLink> */}
 
 								{checkFollow ? (
 									<Button style={{ textTransform: "capitalize" }} onClick={() => props.unFollowing(props.id)} variant='contained'>
