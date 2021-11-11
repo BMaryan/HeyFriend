@@ -10,7 +10,6 @@ export let getUniqueGeneratedIdPost = props => {
 	let searchTheSameId = props.account && props.account.profile.posts ? props.account.profile.posts.find(post => post.id === result) : undefined;
 
 	if (!searchTheSameId) {
-		console.log(typeof result);
 		return result;
 	} else {
 		return result + props.account.profile.posts.length;

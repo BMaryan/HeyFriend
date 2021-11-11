@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = props => {
 	const onsubmit = formData => {
-		console.log(formData);
+		return formData;
 	};
 
 	return (

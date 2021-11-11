@@ -36,13 +36,9 @@ export const validateFindTheSameUserCreator = (accounts, userSignUp) => {
 	if (accounts) {
 		foundUser = accounts && accounts.find(account => (account.profile.phone_or_email === userSignUp.phone_or_email ? account : undefined));
 
-		console.log(foundUser);
-
 		if (!foundUser) {
-			console.log("GOOD");
 			return undefined;
 		} else {
-			console.log("ERROR");
 			return "An account already exists with this email.";
 		}
 	}
