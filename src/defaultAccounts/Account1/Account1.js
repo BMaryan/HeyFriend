@@ -1,9 +1,7 @@
 import avatar from "./assets/images/avatar1.jpg";
-import coverPhoto from "./assets/images/coverPhoto6.jpg";
-import post1 from "./assets/images/post1.jpg";
-import post2 from "./assets/images/post2.jpg";
-import post3 from "./assets/images/post3.jpg";
-import post4 from "./assets/images/post4.jpg";
+import coverPhoto from "./assets/images/coverPhoto.jpg";
+import postPhoto1 from "./assets/images/postPhoto1.jpg";
+import postPhoto2 from "./assets/images/postPhoto2.jpg";
 import { ac2PostsId } from "../Account2/Account2";
 import { ac3PostsId } from "../Account3/Account3";
 
@@ -33,7 +31,7 @@ export const account1 = {
 				description: `Rest after active brain activity does not mean that you do not need to do anything else, you just need to change things: physical work is not only nice, but also a fairly healthy rest after mental work. Konstantin Ushinsky`,
 				id: ac1PostsId.id1,
 				likes: [],
-				photo: post1,
+				photo: postPhoto1,
 			},
 			{
 				comments: [],
@@ -42,23 +40,7 @@ export const account1 = {
 					"“Turn your large-scale thoughts into large-scale actions as soon as possible. Don't let false excuses slow you down. Excuses are symptoms of fear. ”",
 				id: ac1PostsId.id2,
 				likes: [],
-				photo: post2,
-			},
-			{
-				comments: [],
-				dateCreated: "01.01.01",
-				description: "The pinnacle of ideality is simplicity.",
-				id: ac1PostsId.id3,
-				likes: [],
-				photo: post3,
-			},
-			{
-				comments: [],
-				dateCreated: "01.01.01",
-				description: "Everyone sympathizes with the misfortunes of their friends, and only a few rejoice in their success. Oscar Wilde",
-				id: ac1PostsId.id4,
-				likes: [],
-				photo: post4,
+				photo: postPhoto2,
 			},
 		],
 		savedPosts: [ac2PostsId.id1, ac3PostsId.id2],

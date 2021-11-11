@@ -1,8 +1,8 @@
 import avatar from "./assets/images/avatar3.jpg";
-import coverPhoto from "./assets/images/coverPhoto16.jpg";
-import post1 from "./assets/images/post1.jpg";
-import post2 from "./assets/images/post2.jpg";
-import post3 from "./assets/images/post3.jpg";
+import coverPhoto from "./assets/images/coverPhoto.jpg";
+import postPhoto1 from "./assets/images/postPhoto1.jpg";
+import postPhoto2 from "./assets/images/postPhoto2.jpg";
+import postPhoto3 from "./assets/images/postPhoto3.jpg";
 
 export const ac3PostsId = {
 	id1: "3cBgОyLhh04M",
@@ -29,7 +29,7 @@ export const account3 = {
 				description: `Time, like the sea, unties any knots. Iris Murdoch`,
 				id: ac3PostsId.id1,
 				likes: [],
-				photo: post1,
+				photo: postPhoto1,
 			},
 			{
 				comments: [],
@@ -37,7 +37,7 @@ export const account3 = {
 				description: `The sea attracts people with its magical beauty and mysterious grandeur.`,
 				id: ac3PostsId.id2,
 				likes: [],
-				photo: post2,
+				photo: postPhoto2,
 			},
 			{
 				comments: [],
@@ -45,7 +45,7 @@ export const account3 = {
 				description: `No matter how, no matter where - the sea will always be waiting for you. Alessandro Barrico.`,
 				id: ac3PostsId.id3,
 				likes: [],
-				photo: post3,
+				photo: postPhoto3,
 			},
 		],
 	},

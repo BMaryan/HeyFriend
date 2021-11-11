@@ -1,8 +1,8 @@
 import avatar from "./assets/images/avatar2.jpg";
-import coverPhoto from "./assets/images/coverPhoto7.jpg";
-import post1 from "./assets/images/post1.jpg";
-import post2 from "./assets/images/post2.jpg";
-import post3 from "./assets/images/post3.jpg";
+import coverPhoto from "./assets/images/coverPhoto.jpg";
+import postPhoto1 from "./assets/images/postPhoto1.jpg";
+import postPhoto2 from "./assets/images/postPhoto2.jpg";
+import postPhoto3 from "./assets/images/postPhoto3.jpg";
 import { ac3PostsId } from "../Account3/Account3";
 
 export const ac2PostsId = {
@@ -30,7 +30,7 @@ export const account2 = {
 				description: `We need to be able to rest, especially from your thoughts.`,
 				id: ac2PostsId.id1,
 				likes: [],
-				photo: post1,
+				photo: postPhoto1,
 			},
 			{
 				comments: [],
@@ -38,7 +38,7 @@ export const account2 = {
 				description: `A friend is the best you can have and the best you can be.`,
 				id: ac2PostsId.id2,
 				likes: [],
-				photo: post2,
+				photo: postPhoto2,
 			},
 			{
 				comments: [],
@@ -46,7 +46,7 @@ export const account2 = {
 				description: `Don't want to go to work in the morning? Open Forbes magazine and find your last name there. Didn't find it? Then go to work!`,
 				id: ac2PostsId.id3,
 				likes: [],
-				photo: post3,
+				photo: postPhoto3,
 			},
 		],
 		savedPosts: [ac3PostsId.id3],
