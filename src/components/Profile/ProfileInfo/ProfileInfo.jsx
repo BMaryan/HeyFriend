@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
-import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
+import { editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import betaVershion from "../../../assets/images/betaVershion.png";
 
@@ -176,16 +176,10 @@ const ProfileInfo = props => {
 					<div className={styles.wrapper_button}>
 						{props.id ? (
 							<>
-								{/* <NavLink className={styles.navLink_message} to={`${chatConstant}/` + props.id}> */}
-								<Button
-									className={styles.button}
-									style={{ textTransform: "capitalize" }}
-									// onClick={() => props.addChat(props.id)}
-									variant='contained'>
+								<Button className={styles.button} style={{ textTransform: "capitalize" }} variant='contained'>
 									Message
 									<img className={styles.beta_vershion_picture} src={betaVershion} alt='' />
 								</Button>
-								{/* </NavLink> */}
 
 								{checkFollow ? (
 									<Button style={{ textTransform: "capitalize" }} onClick={() => props.unFollowing(props.id)} variant='contained'>
@@ -196,7 +190,6 @@ const ProfileInfo = props => {
 										style={{ textTransform: "capitalize" }}
 										onClick={() => {
 											props.following(props.id);
-											// props.followers(props.id);
 										}}
 										variant='contained'>
 										Follow
