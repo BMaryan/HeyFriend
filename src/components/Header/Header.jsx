@@ -5,6 +5,7 @@ import HeaderReduxForm from "./HeaderForm";
 import NavbarRow from "./Navbar/NavbarRow/NavbarRow";
 import NavbarList from "./Navbar/NavbarList/NavbarList";
 import { NavLink } from "react-router-dom";
+import Logo from "../../assets/images/insta.png";
 
 const Header = props => {
 	const onsubmit = formData => {
@@ -17,7 +18,8 @@ const Header = props => {
 				{/* logo */}
 				<div className={styles.header_logo}>
 					<NavLink to='/'>
-						<img src='https://i.pinimg.com/originals/64/10/38/6410388e5b15a38a625e315427d0c808.jpg' alt='' />
+						{/* <img src='https://i.pinimg.com/originals/64/10/38/6410388e5b15a38a625e315427d0c808.jpg' alt='' /> */}
+						<img src={Logo} alt='' />
 					</NavLink>
 
 					<HeaderReduxForm onSubmit={onsubmit} />
