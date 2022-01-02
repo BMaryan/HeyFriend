@@ -5,11 +5,12 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import MainContainer from "./components/Main/MainContainer";
 import NotFound from "./components/common/NotFound/NotFound";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import ChatContainer from "./components/Chat/ChatContainer";
-import FriendsContainer from "./components/Friends/FriendsContainer";
-import EditContainer from "./components/common/Edit/EditContainer";
 import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
 import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
+import CurrentPostContainer from "./components/common/CurrentPost/CurrentPostContainer";
+import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
+import { useLocation } from "react-router-dom";
+import { withSuspense } from "./hoc/withSuspense/withSuspense";
 import {
 	chatConstant,
 	editConstant,
@@ -19,10 +20,11 @@ import {
 	signInConstant,
 	signUpConstant,
 } from "./core/constants/constants";
-// import { Redirect } from "react-router";
-import CurrentPostContainer from "./components/common/CurrentPost/CurrentPostContainer";
-import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
-import { useLocation } from "react-router-dom";
+
+// lazy loading
+const ChatContainer = React.lazy(() => import("./components/Chat/ChatContainer"));
+const FriendsContainer = React.lazy(() => import("./components/Friends/FriendsContainer"));
+const EditContainer = React.lazy(() => import("./components/common/Edit/EditContainer"));
 
 function App(props) {
 	let location = useLocation();
@@ -44,16 +46,15 @@ function App(props) {
 						<Route exact path='/' render={() => <MainContainer />} />
 						<Route exact path={`${photoConstant}/:id`} render={() => <CurrentPostContainer />} />
 						<Route path={`${profileConstant}/:id?`} render={() => <ProfileContainer />} />
-						<Route path={`${chatConstant}/:id?`} render={() => <ChatContainer />} />
-						<Route path={`${friendsConstant}`} render={() => <FriendsContainer />} />
-						<Route path={`${editConstant}`} render={() => <EditContainer />} />
+						<Route path={`${chatConstant}/:id?`} render={withSuspense(ChatContainer)} />
+						<Route path={`${friendsConstant}`} render={withSuspense(FriendsContainer)} />
+						<Route path={`${editConstant}`} render={withSuspense(EditContainer)} />
 						<Route path={`${signInConstant}`} render={() => <SignInContainer />} />
 						<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
 						<Route path='*' render={() => <NotFound />} />
 					</Switch>
 				) : (
 					<>
-						{/* <Route path='*' render={() => <Redirect to={signUpConstant} />} /> */}
 						<Route path={`${signInConstant}`} render={() => <SignInContainer />} />
 						<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
 					</>
