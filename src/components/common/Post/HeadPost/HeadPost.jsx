@@ -24,7 +24,7 @@ const HeadPost = props => {
 		<div className={styles.head}>
 			<div className={styles.wrapper_details}>
 				<div className={styles.details_position}>
-					<NavLink to={`${profileConstant}/${props.currentAccount.id}`}>
+					<NavLink to={`${profileConstant}/${props.account.id === props.currentAccount.id ? "" : props.currentAccount.id}`}>
 						<div className={styles.wrapper_profile_img}>
 							{props.currentAccount && props.currentAccount.profile.avatar ? (
 								<img className={styles.profile_avatar} src={props.currentAccount.profile.avatar} alt='' />
@@ -36,7 +36,7 @@ const HeadPost = props => {
 
 					<div className={styles.details}>
 						<NavLink
-							to={`${profileConstant}/${props.currentAccount && props.currentAccount.id ? props.currentAccount.id : undefined}`}
+							to={`${profileConstant}/${props.currentAccount && props.account.id !== props.currentAccount.id ? props.currentAccount.id : ""}`}
 							className={styles.fullName}>
 							{props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
 						</NavLink>

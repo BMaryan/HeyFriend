@@ -10,7 +10,7 @@ const Comment = props => {
 				{props.post && props.post.description ? (
 					<NavLink
 						className={styles.full_name_comment}
-						to={`${profileConstant}/${props.currentAccount && props.currentAccount.id ? props.currentAccount.id : undefined}`}>
+						to={`${profileConstant}/${props.currentAccount && props.account.id !== props.currentAccount.id ? props.currentAccount.id : ""}`}>
 						{props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
 					</NavLink>
 				) : undefined}

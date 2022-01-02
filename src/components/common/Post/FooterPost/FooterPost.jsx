@@ -26,7 +26,7 @@ const FooterPost = props => {
 
 	return (
 		<div className={props.modal ? styles.footer : styles.footer_modal}>
-			{props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} /> : undefined}
+			{props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} account={props.account}/> : undefined}
 
 			<div className={styles.footer_head}>
 				<div className={styles.features}>
@@ -75,7 +75,7 @@ const FooterPost = props => {
 				</div>
 			</div>
 
-			{!props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} /> : undefined}
+			{!props.modal ? <Comments post={props.post} modal={props.modal} currentAccount={props.currentAccount} account={props.account}/> : undefined}
 
 			<FooterPostReduxForm onSubmit={onSubmit} />
 		</div>
