@@ -40,6 +40,20 @@ const AppContainer = props => {
 		}
 	}, [props.account]);
 
+	// name of page in title
+	React.useEffect(() => {
+	let getArrayOfName = props.location.pathname.split('/');
+		let namePage = getArrayOfName[1];
+
+		if(namePage === '') {
+			namePage = 'Main'
+		} else if(namePage === "account") {
+			namePage = "Edit Account";
+		}
+
+		document.title = namePage[0].toUpperCase() + namePage.slice(1);
+	}, [props.location])
+
 	setSignUpDataToLocalStorage(props);
 
 	return <App {...props} id={id} />;

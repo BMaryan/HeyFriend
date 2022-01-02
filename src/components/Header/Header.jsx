@@ -12,13 +12,16 @@ const Header = props => {
 		return formData;
 	};
 
+	function refreshPage(){ 
+		window.location.href="/"; 
+	}
+		
 	return (
 		<div className={styles.header}>
 			<div className={"container" + " " + styles.header_container}>
 				{/* logo */}
 				<div className={styles.header_logo}>
-					<NavLink to='/'>
-						{/* <img src='https://i.pinimg.com/originals/64/10/38/6410388e5b15a38a625e315427d0c808.jpg' alt='' /> */}
+					<NavLink to='' onClick={() => refreshPage()}>
 						<img src={Logo} alt='' />
 					</NavLink>
 
