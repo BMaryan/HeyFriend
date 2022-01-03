@@ -44,5 +44,10 @@ export const account1 = {
 			},
 		],
 		savedPosts: [ac2PostsId.id1, ac3PostsId.id2],
+		likedPosts: [
+				{id: "2FBgSbLhh94B"},
+				{id: "2vegVLhAslP"},
+				{id: "1nBgGE4mh9jE"}
+			]
 	},
 };
