@@ -7,6 +7,7 @@ let SET_PROFILE_CHATS = "social_network/profilePage/SET_PROFILE_CHATS";
 let GET_AUTHORIZATION_ID = "social_network/chatPage/GET_AUTHORIZATION_ID";
 let GET_PARAMS_ID = "social_network/chatPage/GET_PARAMS_ID";
 let PUT_LIKE = "social_network/chatPage/PUT_LIKE";
+let TAKE_LIKE = "social_network/chatPage/TAKE_LIKE";
 let FOLLOWING = "social_network/chatPage/FOLLOWING";
 let UNFOLLOWING = "social_network/chatPage/UNFOLLOWING";
 let SAVE_POST = "social_network/chatPage/SAVE_POST";
@@ -193,26 +194,17 @@ const ProfileReducer = (state = initialState, action) => {
 			};
 		}
 		case FOLLOWERS: {
-			let accounts = state.accounts.filter(account => account.id !== action.id);
-
 			return {
 				...state,
-				accounts: [
-					...accounts,
-					state.accounts.find(account =>
-						account?.id === action?.id
-							? {
-									...account,
-									profile: {
-										...account.profile,
-										followers: account?.profile?.followers
-											? [...account.profile.followers, { id: action.id }]
-											: [{ id: action.id }],
-									},
-							  }
-							: {}
-					),
-				],
+				account: { 
+					...state.account,
+					profile: {
+						...state.account.profile,
+						followers: state.account?.profile?.followers
+							? [...state.account.profile.followers, { id: action.id }]
+							: [{ id: action.id }]
+					}
+				}
 			};
 		}
 		case DELETE_POST: {
@@ -228,6 +220,44 @@ const ProfileReducer = (state = initialState, action) => {
 								: [],
 					},
 				},
+			};
+		}
+		case PUT_LIKE: {
+			let currentAccount = state.accounts.find(account => account?.profile?.posts.find(post => post.id === action.postId));
+			
+			return {
+				...state,
+				accounts: state.accounts.map(account => account.id === currentAccount.id 
+					? {...account, profile: {...account.profile, posts: account.profile.posts.map(post => post.id === action.postId 
+						? {...post, likes: post.likes && post.likes.length > 0
+							? [...post.likes, {id: state.account.id}]
+							: [{id: state.account.id}]}
+						: {...post})}}
+					: {...account}),
+				account: {
+					...state.account, profile: {...state.account.profile, likedPosts: state.account.profile.likedPosts && state.account.profile.likedPosts.length 
+						? [...state.account.profile.likedPosts, {id: action.postId}] 
+						: [{id: action.postId}]}
+				}
+			};
+		}
+		case TAKE_LIKE: {
+			let currentAccount = state.accounts.find(account => account?.profile?.posts.find(post => post.id === action.postId));
+			
+			return {
+				...state,
+				accounts: state.accounts.map(account => account.id === currentAccount.id 
+					? {...account, profile: {...account.profile, posts: account.profile.posts.map(post => post.id === action.postId 
+						? {...post, likes: post.likes && post.likes.length > 0
+							? post.likes.filter(like => like.id !== state.account.id)
+							: [...post]}
+						: {...post})}}
+					: {...account}),
+				account: {
+					...state.account, profile: {...state.account.profile, likedPosts: state.account.profile.likedPosts && state.account.profile.likedPosts.length > 0
+						? state.account.profile.likedPosts.filter(like => like.id !== action.postId)
+						: [...state.account.profile.likedPosts]}
+				}
 			};
 		}
 		default: {
@@ -277,9 +307,14 @@ export const getParamsId = id => ({
 	id,
 });
 
-export const putLike = id => ({
+export const putLike = (postId) => ({
 	type: PUT_LIKE,
-	id,
+	postId
+});
+
+export const takeLike = (postId) => ({
+	type: TAKE_LIKE,
+	postId
 });
 
 export const following = id => ({

@@ -41,9 +41,7 @@ export const InformationContainer = props => {
 
 export const ModalDefaultAccounts = props => {
 	let filterDefaultAccounts =
-		defaultAccounts && props.accounts
-			? props.accounts.filter(account => defaultAccounts.map(defaultAccount => account.id === defaultAccount.id))
-			: undefined;
+	defaultAccounts ? defaultAccounts.map(defaultAccount => defaultAccount) : undefined;
 
 	return (
 		<Modal

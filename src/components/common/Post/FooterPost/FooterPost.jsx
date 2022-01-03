@@ -32,15 +32,11 @@ const FooterPost = props => {
 				<div className={styles.features}>
 					<div className={styles.features_left}>
 						<Checkbox
+							onClick={() => !props.checkClickFavoriteBorder ? props.putLike(props.post.id) : props.takeLike(props.post.id)}
 							className={styles.icon}
-							sx={{
-								color: red[0],
-								"&.Mui-checked": {
-									color: red[600],
-								},
-							}}
-							icon={<FavoriteBorder />}
-							checkedIcon={<Favorite />}
+							color="default"
+							icon={!props.checkClickFavoriteBorder ? <FavoriteBorder /> : <Favorite sx={{color: red[600]}} />}
+							checkedIcon={props.checkClickFavoriteBorder ? <Favorite sx={{color: red[600]}} /> : <FavoriteBorder />}
 						/>
 						<Checkbox
 							onClick={() => props.history.push(`${photoConstant}/${props.post.id}`)}
