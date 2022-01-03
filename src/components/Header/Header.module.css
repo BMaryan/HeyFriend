@@ -103,6 +103,12 @@
 	}
 }
 
+@media (max-width: 575.98px) {
+	.header {
+		padding: 10px var(--pdContent);
+	}
+}
+
 @media (max-width: 539.98px) {
 	.navbar_row {
 		display: none;
