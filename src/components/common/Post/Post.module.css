@@ -207,7 +207,7 @@
 
 .button_icon {
 	padding: 0 !important;
-	margin-right: 5px !important;
+	margin-right: 10px !important;
 }
 
 .input {
@@ -224,7 +224,7 @@
 
 .button_post button:disabled {
 	padding: 0;
-	cursor: no-drop;
+	cursor: no-drop !important;
 }
 
 /* media */
@@ -246,6 +246,10 @@
 @media (max-width: 424.98px) {
 	.wrapper_post {
 		height: 700px;
+	}
+
+	.modalPostActions {
+		width: 70vw;
 	}
 }
 

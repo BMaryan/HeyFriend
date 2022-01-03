@@ -100,7 +100,6 @@
 .wrapper_button button {
 	width: 100%;
 	background: linear-gradient(var(--mainBg));
-	padding: 10px 100px;
 }
 
 /* media */

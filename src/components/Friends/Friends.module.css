@@ -93,15 +93,17 @@
 }
 
 .wrapper_avatar {
-	height: calc(120px + (150 - 50) * ((100vw - 300px) / (1600 - 300)));
+	height: calc(120px + (150 - 70) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .head_content {
+	padding: 12px !important;
+
 }
 
 .full_name {
 	color: black;
-	font-size: 19px;
+	font-size: calc(15px + (20 - 17) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .subtitle {
