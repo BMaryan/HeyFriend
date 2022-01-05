@@ -11,13 +11,11 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 const Recommendation = props => {
-	// let checkFollowing = props.account.profile.followers ? props.account.profile.followers.map(follower => follower) : undefined;
-	let checkRecommendation = props.account.profile.followers ? props.account.profile.followers.filter(follower => props.account.profile.following 
-			? props.account.profile.following.map(following => follower.id === following.id)
-			: undefined)
-		: undefined;
-
-		console.log(checkRecommendation)
+	let checkFollowing = props.account.profile.followers ? props.account.profile.followers.map(follower => follower) : undefined;
+	// let checkRecommendation = props.account.profile.followers ? props.account.profile.followers.filter(follower => props.account.profile.following 
+	// 		? props.account.profile.following.map(following => follower.id === following.id)
+	// 		: undefined)
+	// 	: undefined;
 
 	return (
 		<React.Fragment>
@@ -51,12 +49,12 @@ const Recommendation = props => {
 					: undefined}
 			</div>
 
-			{/* {(checkFollowing && checkFollowing.length < 1) || !checkFollowing ? (
+			{(checkFollowing && checkFollowing.length < 1) || !checkFollowing ? (
 				<div className={ownStyles.content}>
-				<div className={ownStyles.title}>Followers</div>
-				<div className={ownStyles.subtitle}>People who are watching you will be displayed here</div>
+				<div className={ownStyles.title}>Recommendation</div>
+				<div className={ownStyles.subtitle}>Here are the people you may know</div>
 			</div>
-			) : undefined} */}
+			) : undefined}
 		</React.Fragment>
 	);
 };
