@@ -13,9 +13,7 @@ let UNFOLLOWING = "social_network/chatPage/UNFOLLOWING";
 let SAVE_POST = "social_network/chatPage/SAVE_POST";
 let DELETE_SAVED_POST = "social_network/chatPage/DELETE_SAVED_POST";
 let DELETE_POST = "social_network/profilePage/DELETE_POST";
-
-// in progress
-let FOLLOWERS = "social_network/chatPage/FOLLOWERS";
+let ADD_COMMENT = "social_network/profilePage/ADD_COMMENT";
 
 let initialState = {
 	accounts: [],
@@ -124,16 +122,21 @@ const ProfileReducer = (state = initialState, action) => {
 		case FOLLOWING: {
 			return {
 				...state,
+				accounts: state.accounts.map(account => account.id === action.currentAccountId 
+					? {...account, profile: {...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 
+						? [...account.profile.followers, {id: state.account.id}] 
+						: [{id: state.account.id}]}}
+					: {...account}),
 				account: {
 					...state.account,
 					profile:
-						state.account && state.account.profile && action.id
+						state.account && state.account.profile && action.currentAccountId
 							? {
 									...state.account.profile,
 									following:
 										state.account && state.account.profile && state.account.profile.following
-											? [...state.account.profile.following, { id: action.id }]
-											: [{ id: action.id }],
+											? [...state.account.profile.following, { id: action.currentAccountId }]
+											: [{ id: action.currentAccountId }],
 							  }
 							: { ...state.account.profile },
 				},
@@ -142,15 +145,20 @@ const ProfileReducer = (state = initialState, action) => {
 		case UNFOLLOWING: {
 			return {
 				...state,
+				accounts: state.accounts.map(account => account.id === action.currentAccountId 
+					? {...account, profile: {...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 
+						? account.profile.followers.filter(follower => follower.id !== state.account.id ) 
+						: [{id: state.account.id}]}}
+					: {...account}),
 				account: {
 					...state.account,
 					profile:
-						state.account && state.account.profile && action.id
+						state.account && state.account.profile && action.currentAccountId
 							? {
 									...state.account.profile,
 									following:
 										state.account && state.account.profile && state.account.profile.following
-											? state.account.profile.following.filter(followingAc => followingAc.id !== action.id)
+											? state.account.profile.following.filter(followingAc => followingAc.id !== action.currentAccountId)
 											: [],
 							  }
 							: { ...state.account.profile },
@@ -193,20 +201,6 @@ const ProfileReducer = (state = initialState, action) => {
 				},
 			};
 		}
-		case FOLLOWERS: {
-			return {
-				...state,
-				account: { 
-					...state.account,
-					profile: {
-						...state.account.profile,
-						followers: state.account?.profile?.followers
-							? [...state.account.profile.followers, { id: action.id }]
-							: [{ id: action.id }]
-					}
-				}
-			};
-		}
 		case DELETE_POST: {
 			return {
 				...state,
@@ -235,7 +229,7 @@ const ProfileReducer = (state = initialState, action) => {
 						: {...post})}}
 					: {...account}),
 				account: {
-					...state.account, profile: {...state.account.profile, likedPosts: state.account.profile.likedPosts && state.account.profile.likedPosts.length 
+					...state.account, profile: {...state.account.profile, likedPosts: state.account.profile.likedPosts && state.account.profile.likedPosts.length > 0 
 						? [...state.account.profile.likedPosts, {id: action.postId}] 
 						: [{id: action.postId}]}
 				}
@@ -247,17 +241,32 @@ const ProfileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				accounts: state.accounts.map(account => account.id === currentAccount.id 
-					? {...account, profile: {...account.profile, posts: account.profile.posts.map(post => post.id === action.postId 
+					? {...account, profile: {...account.profile, posts: account?.profile?.posts.map(post => post.id === action.postId 
 						? {...post, likes: post.likes && post.likes.length > 0
 							? post.likes.filter(like => like.id !== state.account.id)
-							: [...post]}
+							: []}
 						: {...post})}}
 					: {...account}),
 				account: {
 					...state.account, profile: {...state.account.profile, likedPosts: state.account.profile.likedPosts && state.account.profile.likedPosts.length > 0
 						? state.account.profile.likedPosts.filter(like => like.id !== action.postId)
-						: [...state.account.profile.likedPosts]}
+						: []}
 				}
+			};
+		}
+		case ADD_COMMENT: {
+			let currentAccount = state.accounts.find(account => account?.profile?.posts.find(post => post.id === action.postId));
+			console.log(currentAccount)
+
+			return {
+				...state,
+				accounts: state.accounts.map(account => account.id === currentAccount.id 
+					? {...account, profile: {...account.profile, posts: account.profile.posts.map(post => post.id === action.postId 
+						? {...post, comments: post.comments && post.comments.length > 0
+							? [...post.comments, {comment: action.comment}]
+							: [{comment: action.comment}]}
+						: {...post})}}
+					: {...account}),
 			};
 		}
 		default: {
@@ -317,14 +326,14 @@ export const takeLike = (postId) => ({
 	postId
 });
 
-export const following = id => ({
+export const following = currentAccountId => ({
 	type: FOLLOWING,
-	id,
+	currentAccountId,
 });
 
-export const unFollowing = id => ({
+export const unFollowing = currentAccountId => ({
 	type: UNFOLLOWING,
-	id,
+	currentAccountId,
 });
 
 export const savePost = id => ({
@@ -337,14 +346,15 @@ export const deleteSavedPost = id => ({
 	id,
 });
 
-export const followers = id => ({
-	type: FOLLOWERS,
-	id,
-});
-
 export const deletePost = id => ({
 	type: DELETE_POST,
 	id,
 });
+
+export const addComment = (postId, comment) => ({
+	type: ADD_COMMENT,
+	postId, comment,
+});
+
 
 export default ProfileReducer;

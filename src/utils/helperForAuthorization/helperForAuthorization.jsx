@@ -13,7 +13,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemButton from "@mui/material/ListItemButton";
-import defaultAccounts from "../../defaultAccounts/defaultAccounts";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 
 export const AuthorizationHelperContainer = props => {
@@ -40,8 +39,7 @@ export const InformationContainer = props => {
 };
 
 export const ModalDefaultAccounts = props => {
-	let filterDefaultAccounts =
-	defaultAccounts ? defaultAccounts.map(defaultAccount => defaultAccount) : undefined;
+	let filterDefaultAccounts = props.accounts && props.accounts.slice(0, 3) ? props.accounts.slice(0, 3).map(defaultAccount => defaultAccount) : undefined;
 
 	return (
 		<Modal

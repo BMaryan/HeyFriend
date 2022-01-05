@@ -17,7 +17,6 @@ import {
 	setProfileChats,
 	addAccount,
 	unFollowing,
-	followers,
 } from "../../redux/profile-reducer";
 
 const ProfileContainer = props => {
@@ -64,7 +63,6 @@ export default compose(
 		setProfileChats,
 		addAccount,
 		unFollowing,
-		followers,
 	}),
 	withRouter
 )(ProfileContainer);

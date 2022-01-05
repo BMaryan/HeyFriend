@@ -10,7 +10,6 @@ import DefaultFriends from "./DefaultFriends/DefaultFriends";
 import { useLocation } from "react-router-dom";
 import GoBackHead from "../common/GoBackHead/GoBackHead";
 import Media from "react-media";
-import betaVershion from "../../assets/images/betaVershion.png";
 
 const Friends = props => {
 	let location = useLocation();
@@ -67,7 +66,6 @@ const Friends = props => {
 						</li>
 						<li className={styles.friends_item}>
 							<NavLink exact to={`${friendsConstant}/${path.followers}`} className={styles.item} activeClassName={styles.item_active}>
-								<img className={styles.item_picture} src={betaVershion} alt='' />
 								Followers
 							</NavLink>
 						</li>

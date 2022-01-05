@@ -8,8 +8,10 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../assets/images/insta.png";
 
 const Header = props => {
+	// let [searchValue, setSearchValue] = React.useState('');
+
 	const onsubmit = formData => {
-		return formData;
+		// setSearchValue(formData.search);
 	};
 
 	function refreshPage(){ 
@@ -25,7 +27,7 @@ const Header = props => {
 						<img src={Logo} alt='' />
 					</NavLink>
 
-					<HeaderReduxForm onSubmit={onsubmit} />
+					<HeaderReduxForm onChange={onsubmit} account={props.account} accounts={props.accounts} />
 				</div>
 
 				{/* navBar row */}

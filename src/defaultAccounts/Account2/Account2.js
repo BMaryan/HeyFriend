@@ -22,14 +22,17 @@ export const account2 = {
 		avatar: avatar,
 		status: "Do not confuse laziness with rest!",
 		aboutMe: "Currently living in Colorado. Lover of art, languages and travelling.",
-		following: [{ id: 1 }, { id: 3 }],
+		following: [{ id: 1 }],
+		followers: [{ id: 3 }],
 		posts: [
 			{
 				comments: [],
 				dateCreated: "01.01.01",
 				description: `We need to be able to rest, especially from your thoughts.`,
 				id: ac2PostsId.id1,
-				likes: [],
+				likes: [
+					{id: 1}
+				],
 				photo: postPhoto1,
 			},
 			{
@@ -45,14 +48,16 @@ export const account2 = {
 				dateCreated: "01.01.01",
 				description: `Don't want to go to work in the morning? Open Forbes magazine and find your last name there. Didn't find it? Then go to work!`,
 				id: ac2PostsId.id3,
-				likes: [],
+				likes: [
+					{id: 1}
+				],
 				photo: postPhoto3,
 			},
 		],
 		savedPosts: [ac3PostsId.id3],
 		likedPosts: [
-			{id: "3cBgОyLhh04M"},
-			{id: "3KegVdh3sls"},
+			{id: "1nBgGE4mh9jE"},
+			{id: "3eSgbLSLn2f"}
 		]
 	},
 };

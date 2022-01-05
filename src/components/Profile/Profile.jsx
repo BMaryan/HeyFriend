@@ -16,7 +16,6 @@ const Profile = props => {
 				setProfileChats={props.setProfileChats}
 				following={props.following}
 				unFollowing={props.unFollowing}
-				followers={props.followers}
 			/>
 			<ProfileContent
 				accounts={props.accounts}

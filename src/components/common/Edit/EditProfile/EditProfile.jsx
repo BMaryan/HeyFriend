@@ -11,7 +11,7 @@ const EditProfile = props => {
 	let [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
 
 	let onSubmit = formData => {
-		props.getProfileData(formData);
+		props.getProfileData({...formData});
 		setOpen(true);
 	};
 

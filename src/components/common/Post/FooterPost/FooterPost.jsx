@@ -14,7 +14,7 @@ import FooterPostReduxForm from "./FooterPostForm";
 
 const FooterPost = props => {
 	let onSubmit = formData => {
-		return formData;
+		props.addComment(props.post.id, formData.comment);
 	};
 
 	let checkClickBookmarkIcon =

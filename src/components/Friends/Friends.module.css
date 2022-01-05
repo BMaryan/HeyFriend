@@ -45,13 +45,6 @@
 	position: relative;
 }
 
-.item_picture {
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 2px;
-}
-
 .item:hover {
 	background: var(--bgWhite245);
 }

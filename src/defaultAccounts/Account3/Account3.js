@@ -22,6 +22,7 @@ export const account3 = {
 		status: "Two things fly by the sea especially fast - time and money.",
 		aboutMe: "Living in Athens, Greece. I love black and white classics, chillout music and green tea.",
 		following: [{ id: 2 }],
+		followers: [{ id: 1 }],
 		posts: [
 			{
 				comments: [],
@@ -36,7 +37,10 @@ export const account3 = {
 				dateCreated: "01.01.01",
 				description: `The sea attracts people with its magical beauty and mysterious grandeur.`,
 				id: ac3PostsId.id2,
-				likes: [],
+				likes: [
+					{id: 1},
+					{id: 2}
+				],
 				photo: postPhoto2,
 			},
 			{
