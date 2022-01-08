@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../Friends.module.css";
-import ownStyles from "./Followers.module.css";
 import { NavLink } from "react-router-dom";
 import { profileConstant } from "../../../core/constants/constants";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
@@ -46,10 +45,10 @@ const Followers = props => {
 			</div>
 
 			{(checkFollowers && checkFollowers.length < 1) || !checkFollowers ? (
-				<div className={ownStyles.content}>
-				<div className={ownStyles.title}>Followers</div>
-				<div className={ownStyles.subtitle}>People who are watching you will be displayed here</div>
-			</div>
+				<div className={styles.content_default}>
+					<div className={styles.title}>Followers</div>
+					<div className={styles.subtitle}>People who are watching you will be displayed here</div>
+				</div>
 			) : undefined}
 		</React.Fragment>
 	);

@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../Friends.module.css";
-import ownStyles from "./Recommendation.module.css";
 import { NavLink } from "react-router-dom";
 import { profileConstant } from "../../../core/constants/constants";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
@@ -12,11 +11,10 @@ import { CardActionArea } from "@mui/material";
 
 const Recommendation = props => {
 	let checkFollowing = props.account.profile.followers ? props.account.profile.followers.map(follower => follower) : undefined;
-	// let checkRecommendation = props.account.profile.followers ? props.account.profile.followers.filter(follower => props.account.profile.following 
-	// 		? props.account.profile.following.map(following => follower.id === following.id)
-	// 		: undefined)
-	// 	: undefined;
-
+	// let followingFor = props.account.profile.following 
+	// ? props.account.profile.following.map(following => props.accounts.filter(account => following.id !== account.id)) 
+	// : props.accounts;
+	
 	return (
 		<React.Fragment>
 			<div className={styles.content}>
@@ -50,10 +48,10 @@ const Recommendation = props => {
 			</div>
 
 			{(checkFollowing && checkFollowing.length < 1) || !checkFollowing ? (
-				<div className={ownStyles.content}>
-				<div className={ownStyles.title}>Recommendation</div>
-				<div className={ownStyles.subtitle}>Here are the people you may know</div>
-			</div>
+				<div className={styles.content_default}>
+					<div className={styles.title}>Recommendation</div>
+					<div className={styles.subtitle}>Here are the people you may know</div>
+				</div>
 			) : undefined}
 		</React.Fragment>
 	);
