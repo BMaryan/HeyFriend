@@ -1,3 +1,7 @@
+:root {
+  --mgBottom: 7px;
+}
+
 .comment_content {
   display: flex;
   flex-direction: column;
@@ -31,15 +35,25 @@
   transition: 0.5s;
 }
 
+.wrapper_description {
+  margin-bottom: var(--mgBottom);
+}
+
 .description {
   color: rgb(46, 46, 46);
   font-size: 15px;
   word-break: break-all;
 }
 
-.button_more {
+.button_more_text {
   color: rgb(151, 150, 150);
   background: none;
   border: none;
+  cursor: pointer;
+}
+
+.button_more_comments {
+  color: #8e8e8e;
+  text-transform: none;
   cursor: pointer;
 }
