@@ -14,7 +14,7 @@ import FooterPostReduxForm from "./FooterPostForm";
 
 const FooterPost = (props) => {
   let onSubmit = (formData) => {
-    props.addComment(props.post.id, formData[`comment_${props.post.id}`]);
+    props.addComment({ postId: props.post.id, accountId: props.account.id, comment: formData[`comment_${props.post.id}`] });
   };
 
   let checkClickBookmarkIcon = props.account && props.account.profile && props.account.profile.savedPosts ? props.account.profile.savedPosts.find((postId) => (postId && props.post && props.post.id && postId === props.post.id ? postId : undefined)) : undefined;
