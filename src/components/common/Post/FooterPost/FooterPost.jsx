@@ -11,10 +11,12 @@ import { red } from "@mui/material/colors";
 import Comments from "../Comments/Comments";
 import { photoConstant } from "../../../../core/constants/constants";
 import FooterPostReduxForm from "./FooterPostForm";
+import { getUniqueGeneratedIdComment } from "../../../../core/methods/methods";
 
 const FooterPost = (props) => {
   let onSubmit = (formData) => {
-    props.addComment({ postId: props.post.id, accountId: props.account.id, comment: formData[`comment_${props.post.id}`] });
+    console.log(formData);
+    props.addComment({ id: getUniqueGeneratedIdComment({ id: props.account.id }), idAccount: props.account.id, postId: props.post.id, comment: formData[`comment_${props.post.id}`], dateAdded: new Date() });
   };
 
   let checkClickBookmarkIcon = props.account && props.account.profile && props.account.profile.savedPosts ? props.account.profile.savedPosts.find((postId) => (postId && props.post && props.post.id && postId === props.post.id ? postId : undefined)) : undefined;

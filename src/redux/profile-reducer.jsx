@@ -209,11 +209,21 @@ const ProfileReducer = (state = initialState, action) => {
       };
     }
     case ADD_COMMENT: {
+      let newComment = {
+        id: action.data.id,
+        idAccount: action.data.idAccount,
+        comment: action.data.comment,
+        dateAdded: action.data.dateAdded,
+
+        // photo: action.data.photo,
+        // likes: action.data.likes,
+        // description: action.data.description,
+      };
       let currentAccount = state.accounts.find((account) => account?.profile?.posts.find((post) => post.id === action.data.postId));
 
       return {
         ...state,
-        accounts: state.accounts.map((account) => (account.id === currentAccount.id ? { ...account, profile: { ...account.profile, posts: account.profile.posts.map((post) => (post.id === action.data.postId ? { ...post, comments: post.comments && post.comments.length > 0 ? [...post.comments, { id: action.data.accountId, comment: action.data.comment }] : [{ id: action.data.accountId, comment: action.data.comment }] } : { ...post })) } } : { ...account })),
+        accounts: state.accounts.map((account) => (account.id === currentAccount.id ? { ...account, profile: { ...account.profile, posts: account.profile.posts.map((post) => (post.id === action.data.postId ? { ...post, comments: post.comments && post.comments.length > 0 ? [...post.comments, { ...newComment }] : [{ ...newComment }] } : { ...post })) } } : { ...account })),
       };
     }
     default: {
