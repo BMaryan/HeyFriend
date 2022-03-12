@@ -23,8 +23,6 @@ export let getUniqueGeneratedIdPost = (props) => {
 export let getUniqueGeneratedIdComment = (props) => {
   let result = props.id + moment(new Date()).format();
   return result;
-  //   console.log(moment(new Date()).startOf("minute").fromNow());
-  //   console.log(moment(new Date()).format());
 };
 
 // get date formatted for post

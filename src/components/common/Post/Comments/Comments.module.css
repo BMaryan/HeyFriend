@@ -1,5 +1,5 @@
 :root {
-  --mgBottom: 7px;
+  --mgBottom: 20px;
 }
 
 .comment_content {
@@ -24,7 +24,7 @@
 .full_name_comment {
   color: black;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600 !important;
   margin-right: 5px;
   cursor: pointer;
   transition: 0.5s;
@@ -35,8 +35,27 @@
   transition: 0.5s;
 }
 
-.wrapper_description {
-  margin-bottom: var(--mgBottom);
+.list {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.list_item {
+  align-items: flex-start !important;
+  padding: 0 !important;
+}
+
+.list_item__text {
+  margin: 0 !important;
+}
+
+.wrapper_description__modal {
+  margin-bottom: var(--mgBottom) !important;
+}
+
+.wrapper_description,
+.wrapper_description__modal {
+  padding: 0 !important;
 }
 
 .description {
