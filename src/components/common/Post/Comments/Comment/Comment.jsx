@@ -9,12 +9,19 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import defaultAvatar from "../../../../../assets/images/DefaultAvatar.png";
+import { getFormattedDate } from "../../../../../core/methods/methods";
+import Typography from "@mui/material/Typography";
 
 const Comment = (props) => {
+  let leftCommentAccount = props.accounts.filter((account) => (account.id === props.comment.idAccount ? account : undefined));
+
+  // console.log(leftCommentAccount.profile);
+  // console.log(props.comment);
+
   return (
     <div className={styles.comment}>
       {props.post && props.post.comments
-        ? props.accounts.map((account) =>
+        ? props.accounts.map((account, index) =>
             account.id === props.comment.idAccount ? (
               <List key={account.id} className={commonStyles.list}>
                 <ListItem className={commonStyles.list_item}>
@@ -32,6 +39,14 @@ const Comment = (props) => {
                         </NavLink>
 
                         {props.comment.comment}
+                      </React.Fragment>
+                    }
+                    secondary={
+                      <React.Fragment>
+                        {/* <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary"> */}
+                        {getFormattedDate(props.comment.dateAdded)}
+                        {/* </Typography> */}
+                        {/* {" — I'll be in your neighborhood doing errands this…"} */}
                       </React.Fragment>
                     }
                   />
