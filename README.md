@@ -34,20 +34,20 @@ Below is a quick start guide for setting up and running the HeyFriend developmen
 
 ### 1. Clone the Repository
 
-> <https://github.com/BMaryan/HeyFriend>
+> <https://github.com/BMaryan/heyfriend>
 
 Ensure that the heyfriend code repository is present on your machine. Either follow the link above and select the code dropdown for the ssh and html links or run one of the following commands:
 
 ```bash
-  git clone https://github.com/BMaryan/HeyFriend.git
+  git clone https://github.com/BMaryan/heyfriend.git
 ```
 
 ```bash
-  git clone git@github.com:BMaryan/HeyFriend.git
+  git clone git@github.com:BMaryan/heyfriend.git
 ```
 
 ```bash
-  gh repo clone BMaryan/HeyFriend
+  gh repo clone BMaryan/heyfriend
 ```
 
 
@@ -72,7 +72,7 @@ npm start
 This structure is used in heyfriend. This structure helps to better interact with the site.
 
 ```bash
-social_network/
+heyfriend/
 ├── src/ 
     ├── assets/
     ├── components/
