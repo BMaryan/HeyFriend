@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# Hey Friend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- <p align="center">
+  <img src="https://media.heyauto.com/media/dotbot.png" alt="dotbot" width="500" />
+</p>
+<p align="center">
+  <strong>Simple. Trusted. Car Buying</strong>
+</p>
+<br />
+<p align="center">
+  <a href="https://heyauto.com/">
+    <img alt="https://heyauto.com/" src="https://img.shields.io/website?down_color=red&down_message=down&up_color=yellow&up_message=up&url=https%3A%2F%2Fheyauto.com">
+  </a>
+    <a href="https://heyauto.com/">
+    <img alt="https://heyauto.com/" src="https://app.codacy.com/project/badge/Grade/cc3fa6ac19674ce6aedbd0f501491998">
+  </a>
+</p> -->
 
-## Available Scripts
+- [heyfriend](#heyfriend)
+  - [Quick Start](#quick-start)
+    - [1. Clone the Repository](#1-clone-the-repository)
+    - [2. Run the apps!](#2-run-the-apps)
+  - [Structure](#structure)
+    - [1. Build all packages](#1-build-all-packages)
+ 
+ Running the `npm` command in the root directory of the project will install all top level dependencies.
 
-In the project directory, you can run:
+The root directory has a `package.json` which contains build-related dependencies for tasks including:
 
-### `npm start`
+ 
+## Quick Start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Below is a quick start guide for setting up and running the HeyFriend development environment.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1. Clone the Repository
 
-### `npm test`
+> <https://github.com/BMaryan/HeyFriend>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ensure that the heyfriend code repository is present on your machine. Either follow the link above and select the code dropdown for the ssh and html links or run one of the following commands:
 
-### `npm run build`
+```bash
+  git clone https://github.com/BMaryan/HeyFriend.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  git clone git@github.com:BMaryan/HeyFriend.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  gh repo clone BMaryan/HeyFriend
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### 1. Install all `node_modules`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Running the npm command in the root directory of the project will install all top level dependencies.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The root directory has a package.json which contains build-related dependencies for tasks including:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm init
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 2. Run the apps!
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This structure is used in heyfriend. This structure helps to better interact with the site.
 
-### Code Splitting
+```bash
+social_network/
+├── src/ 
+    ├── assets/
+    ├── components/
+    ├── core/
+    ├── defaultsAccounts/
+    ├── hoc/ 
+    ├── redux/
+    ├── utils/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 1. Build all packages
 
-### Analyzing the Bundle Size
+While still in the root directory running `npm build` will run a global build of local dependencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This process can take a few minutes.
