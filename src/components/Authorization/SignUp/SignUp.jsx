@@ -11,7 +11,7 @@ import { profileConstant, signInConstant } from "../../../core/constants/constan
 const SignUp = (props) => {
   let onSubmit = (formData) => {
     if (formData) {
-      props.signUpThunk({ ...formData });
+      props.signUp({ ...formData });
 
       return Object.keys(formData).map((item) => (formData[item] = ""));
     }

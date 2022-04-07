@@ -10,15 +10,11 @@ import Media from "react-media";
 
 const SignIn = (props) => {
   let onSubmit = (formData) => {
-    // props.setUserSignIn(formData);
-    // if (formData) {
-    // 	props.accounts &&
-    // 		props.accounts.find(profile =>
-    // 			profile.profile.phone_or_email === formData.phone_or_email && profile.profile.password === formData.password
-    // 				? props.isAccount({ ...profile })
-    // 				: undefined
-    // 		);
-    // }
+    if (formData) {
+      props.signIn({ ...formData });
+
+      return Object.keys(formData).map((item) => (formData[item] = ""));
+    }
   };
 
   // if (props.account && props.account.id) {

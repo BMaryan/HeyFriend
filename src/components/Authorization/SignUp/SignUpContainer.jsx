@@ -2,8 +2,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { setUserSignUp, signUpThunk } from "../../../redux/auth-reducer";
-import { getUserSignUpSelector } from "../../../redux/auth-selectors";
+import { setUserSignUp, signUp } from "../../../redux/auth-reducer";
+import { getUserSignUpSelector, loginErrorSelector } from "../../../redux/auth-selectors";
 import { addAccount, isAccount, setAccounts } from "../../../redux/profile-reducer";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
@@ -40,6 +40,7 @@ const mapStateToProps = (state) => {
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
     userSignUp: getUserSignUpSelector(state),
+    authError: loginErrorSelector(state),
   };
 };
 
@@ -51,7 +52,7 @@ export default compose(
     setAccounts,
     setSignUpDataToLocalStorage,
     isAccount,
-    signUpThunk,
+    signUp,
   }),
   withRouter
 )(SignUpContainer);
