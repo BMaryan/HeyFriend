@@ -11,40 +11,40 @@ import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-
 import { isAccount, setAccounts } from "../../../redux/profile-reducer";
 import defaultAccounts from "../../../defaultAccounts/defaultAccounts";
 
-const SignInContainer = props => {
-	React.useEffect(() => {
-		if (props.accounts && props.accounts.length > 0) {
-			localStorage.setItem(accounts, JSON.stringify(props.accounts));
-		} else {
-			props.setAccounts([...defaultAccounts]);
-		}
-	}, [props.accounts]);
+const SignInContainer = (props) => {
+  // React.useEffect(() => {
+  // 	if (props.accounts && props.accounts.length > 0) {
+  // 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
+  // 	} else {
+  // 		props.setAccounts([...defaultAccounts]);
+  // 	}
+  // }, [props.accounts]);
 
-	React.useEffect(() => {
-		if (props.account) {
-			localStorage.setItem(account, JSON.stringify(props.account));
-		}
-	}, [props.account]);
+  // React.useEffect(() => {
+  // 	if (props.account) {
+  // 		localStorage.setItem(account, JSON.stringify(props.account));
+  // 	}
+  // }, [props.account]);
 
-	if (props.account && props.account.id) {
-		return <Redirect to='/' />;
-	}
+  // if (props.account && props.account.id) {
+  // 	return <Redirect to='/' />;
+  // }
 
-	return <SignIn {...props} />;
+  return <SignIn {...props} />;
 };
 
-const mapStateToProps = state => {
-	return {
-		accounts: getAccountsSelector(state),
-		account: getAccountSelector(state),
-		userSignIn: getUserSignInSelector(state),
-	};
+const mapStateToProps = (state) => {
+  return {
+    accounts: getAccountsSelector(state),
+    account: getAccountSelector(state),
+    userSignIn: getUserSignInSelector(state),
+  };
 };
 
 export default connect(mapStateToProps, {
-	setUserSignIn,
-	helpCheckAuthorization,
-	isAccount,
-	setAccounts,
-	getDefaultAccount,
+  setUserSignIn,
+  helpCheckAuthorization,
+  isAccount,
+  setAccounts,
+  getDefaultAccount,
 })(SignInContainer);
