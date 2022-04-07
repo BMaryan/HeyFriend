@@ -8,7 +8,7 @@ let LOGIN_ERROR = "heyfriend/auth/LOGIN_ERROR";
 
 let initialState = {
   userSignIn: {
-    phone_or_email: null,
+    email: null,
     password: null,
     rememberMe: null,
   },
@@ -16,7 +16,7 @@ let initialState = {
     id: null,
     name: null,
     surname: null,
-    phone_or_email: null,
+    email: null,
     password: null,
   },
   authError: null,
@@ -61,9 +61,9 @@ const AuthReducer = (state = initialState, action) => {
   }
 };
 
-export const setUserSignIn = ({ phone_or_email, password, rememberMe = false }) => ({
+export const setUserSignIn = ({ email, password, rememberMe = false }) => ({
   type: SET_USER_SIGN_IN,
-  data: { phone_or_email, password, rememberMe },
+  data: { email, password, rememberMe },
 });
 
 export const setUserSignUp = (credentials) => ({
@@ -88,7 +88,7 @@ export const loginError = (error) => ({
 // thunks
 export const signUp = (credentials) => async (dispatch) => {
   try {
-    await authFb.signUp({ email: credentials.phone_or_email, password: credentials.password });
+    await authFb.signUp({ email: credentials.email, password: credentials.password });
 
     dispatch(loginSuccess());
   } catch (error) {
@@ -98,7 +98,7 @@ export const signUp = (credentials) => async (dispatch) => {
 
 export const signIn = (credentials) => async (dispatch) => {
   try {
-    await authFb.signIn({ email: credentials.phone_or_email, password: credentials.password });
+    await authFb.signIn({ email: credentials.email, password: credentials.password });
 
     dispatch(loginSuccess());
 
