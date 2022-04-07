@@ -1,11 +1,15 @@
-export const getUserSignInSelector = state => {
-	return state.auth.userSignIn;
+export const getUserSignInSelector = (state) => {
+  return state.auth.userSignIn;
 };
 
-export const getUserSignUpSelector = state => {
-	return state.auth.userSignUp;
+export const getUserSignUpSelector = (state) => {
+  return state.auth.userSignUp;
 };
 
-export const getDefaultAccountSelector = state => {
-	return state.auth.defaultAccount;
+export const getDefaultAccountSelector = (state) => {
+  return state.auth.defaultAccount;
+};
+
+export const loginErrorSelector = (state) => {
+  return state.auth.authError;
 };
