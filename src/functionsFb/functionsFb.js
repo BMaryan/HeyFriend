@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 export const authFb = {
@@ -8,5 +8,9 @@ export const authFb = {
 
   async signIn(credentials) {
     return await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
+  },
+
+  async signOut() {
+    return await signOut(auth);
   },
 };
