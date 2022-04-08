@@ -3,8 +3,11 @@ import { authFb } from "../functionsFb/functionsFb";
 let SET_USER_SIGN_IN = "heyfriend/auth/SET_USER_SIGN_IN";
 let SET_USER_SIGN_UP = "heyfriend/auth/SET_USER_SIGN_UP";
 let GET_DEFAULT_ACCOUNT = "heyfriend/auth/GET_DEFAULT_ACCOUNT";
+//
+let SET_AUTH = "heyfriend/auth/SET_AUTH";
 let LOGIN_SUCCESS = "heyfriend/auth/LOGIN_SUCCESS";
 let LOGIN_ERROR = "heyfriend/auth/LOGIN_ERROR";
+let SIGNOUT_SUCCESS = "heyfriend/auth/SIGNOUT_SUCCESS";
 
 let initialState = {
   userSignIn: {
@@ -19,6 +22,7 @@ let initialState = {
     email: null,
     password: null,
   },
+  auth: null,
   authError: null,
   defaultAccount: null,
 };
@@ -43,6 +47,13 @@ const AuthReducer = (state = initialState, action) => {
         defaultAccount: action.account ? action.account : null,
       };
     }
+    // --------------------------------
+    case SET_AUTH: {
+      return {
+        ...state,
+        auth: action.credentials ? action.credentials : null,
+      };
+    }
     case LOGIN_SUCCESS: {
       return {
         ...state,
@@ -53,6 +64,11 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         authError: action.error,
+      };
+    }
+    case SIGNOUT_SUCCESS: {
+      return {
+        ...state,
       };
     }
     default: {
@@ -76,11 +92,23 @@ export const getDefaultAccount = (account) => ({
   account,
 });
 
+// --------------------
+
+export const setAuth = (credentials) => ({
+  type: SET_AUTH,
+  credentials,
+});
+
 export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
 });
 
 export const loginError = (error) => ({
+  type: LOGIN_ERROR,
+  error,
+});
+
+export const logoutSuccess = (error) => ({
   type: LOGIN_ERROR,
   error,
 });
@@ -101,13 +129,15 @@ export const signIn = (credentials) => async (dispatch) => {
     await authFb.signIn({ email: credentials.email, password: credentials.password });
 
     dispatch(loginSuccess());
-
-    alert("Welcome");
   } catch (error) {
     dispatch(loginError(error));
-
-    alert("Fatal");
   }
+};
+
+export const signOut = () => async (dispatch) => {
+  await authFb.signOut();
+
+  dispatch(logoutSuccess());
 };
 
 export default AuthReducer;
