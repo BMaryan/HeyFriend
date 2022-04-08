@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { setUserSignUp, signUp } from "../../../redux/auth-reducer";
+import { setAuth, setUserSignUp, signUp } from "../../../redux/auth-reducer";
 import { getUserSignUpSelector, loginErrorSelector } from "../../../redux/auth-selectors";
 import { addAccount, isAccount, setAccounts } from "../../../redux/profile-reducer";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
@@ -13,8 +13,20 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { profileConstant } from "../../../core/constants/constants";
 import defaultAccounts from "../../../defaultAccounts/defaultAccounts";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase";
+import { useHistory } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const SignUpContainer = (props) => {
+  let history = useHistory();
+  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+
+  // console.log(createUserWithEmailAndPassword);
+  console.log(user);
+  console.log(loading);
+  console.log(error);
+
   // React.useEffect(() => {
   // 	if (props.accounts && props.accounts.length > 0) {
   // 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
@@ -32,7 +44,18 @@ const SignUpContainer = (props) => {
   // if (props.account && props.account.id) {
   // 	return <Redirect to={`${profileConstant}`} />;
   // }
-  return <SignUp {...props} />;
+
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+
+        history.push(`${profileConstant}`);
+      }
+    });
+  }, []);
+
+  return <SignUp {...props} loading={loading} />;
 };
 
 const mapStateToProps = (state) => {
@@ -53,6 +76,7 @@ export default compose(
     setSignUpDataToLocalStorage,
     isAccount,
     signUp,
+    setAuth,
   }),
   withRouter
 )(SignUpContainer);

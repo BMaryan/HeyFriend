@@ -10,8 +10,13 @@ import { account, accounts } from "../../../core/constants/constantsLocalStorage
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
 import { isAccount, setAccounts } from "../../../redux/profile-reducer";
 import defaultAccounts from "../../../defaultAccounts/defaultAccounts";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase";
+import { useHistory } from "react-router-dom";
 
 const SignInContainer = (props) => {
+  let history = useHistory();
+
   // React.useEffect(() => {
   // 	if (props.accounts && props.accounts.length > 0) {
   // 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
@@ -29,6 +34,17 @@ const SignInContainer = (props) => {
   // if (props.account && props.account.id) {
   // 	return <Redirect to='/' />;
   // }
+
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("main");
+
+        history.push(`/`);
+        // return <Redirect to={`/`} />;
+      }
+    });
+  });
 
   return <SignIn {...props} />;
 };
