@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "../Edit.module.css";
 import { reduxForm } from "redux-form";
-import { WrapperCreateField, Input, Textarea, WrapperButton } from "../../../common/FormControls/FormControls";
+import { WrapperCreateField, InputField, Textarea, WrapperButton } from "../../../common/FormControls/FormControls";
 import { connect } from "react-redux";
 import { validateEmail, validatePassword, required, validateFirstAndLastNameCreator } from "../../../../utils/FieldValidationForm/FieldValidationForm";
 
@@ -15,26 +15,26 @@ const EditProfileForm = (props) => {
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Name</div>
         <div className={styles.action}>
-          <WrapperCreateField name="name" type="text" validate={[validateFirstName]} component={Input} placeholder="Your name" />
+          <WrapperCreateField name="name" type="text" validate={[validateFirstName]} component={InputField} placeholder="Your name" />
         </div>
       </div>
 
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Surname</div>
         <div className={styles.action}>
-          <WrapperCreateField name="surname" type="text" validate={[validateLastName]} component={Input} placeholder="Your surname" />
+          <WrapperCreateField name="surname" type="text" validate={[validateLastName]} component={InputField} placeholder="Your surname" />
         </div>
       </div>
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Email *</div>
         <div className={styles.action}>
-          <WrapperCreateField name="email" type="text" validate={[validateEmail, required]} component={Input} placeholder="Your email *" />
+          <WrapperCreateField name="email" type="text" validate={[validateEmail, required]} component={InputField} placeholder="Your email *" />
         </div>
       </div>
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Status</div>
         <div className={styles.action}>
-          <WrapperCreateField name="status" type="text" validate={[]} component={Input} placeholder="Your status" />
+          <WrapperCreateField name="status" type="text" validate={[]} component={InputField} placeholder="Your status" />
         </div>
       </div>
       <div className={styles.wrapper_block}>
