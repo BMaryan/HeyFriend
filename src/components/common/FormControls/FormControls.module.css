@@ -1,110 +1,23 @@
-/* wrapper over input and textarea */
-.wrapperInputAndTextarea {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	transition: 0.5s;
-	position: relative;
-}
-
-.wrapperInputAndTextarea input,
-textarea {
-	width: 100%;
-	border: 1px solid silver;
-}
-
-.wrapperInputAndTextarea textarea {
-	resize: vertical;
-}
-
-.wrapperInputAndTextareaError input,
-textarea {
-	border: 1px solid var(--errorBgOrC);
-	transition: 0.5s;
-}
-
-/* wrapper over field */
 .wrapper_field {
-	width: 100%;
-	position: relative;
-	margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .field {
-	padding: 15px 15px;
+  width: 100%;
 }
 
-.field__password {
-	padding-right: 50px;
-}
-
-/* toggle_show_password_button */
-.toggle_show_password_button {
-	position: absolute;
-	top: 25px;
-	right: 12px;
-	transition: 1s;
-}
-
-.toggle_show_password_button button {
-	padding: 0;
-}
-
-.wrapper_field_checkbox {
-	display: flex;
-	align-content: center;
-}
-
-.text_for_field {
-	color: rgb(138, 138, 138);
-	font-size: 13.5px;
-}
-
-/* wrapper over button */
+/* wrapper_button */
 .wrapper_button {
-	width: 100%;
-	border-radius: 10px;
-	margin-top: 10px;
 }
 
-.wrapper_button button,
-.field {
-	background: white;
-	border: 1px solid silver;
-	border-radius: 10px;
-	outline: none;
-	transition: 0.5s;
-}
-
-.wrapper_button button {
-	width: 100%;
-	color: white;
-	background: linear-gradient(var(--mainBg));
-	padding: 10px 0;
-	cursor: pointer;
-	transition: 0.5s;
+.button {
+  width: 100%;
+  color: white;
+  background: linear-gradient(var(--mainBg));
+  padding: 10px 0 !important;
+  cursor: pointer;
 }
 
 .wrapper_button button:disabled {
-	color: white;
-	pointer-events: auto;
-	cursor: no-drop;
-	opacity: 0.7;
-}
-
-/* style for box error */
-
-.block_error,
-.common_error {
-	color: var(--errorBgOrC);
-	font-size: 13px;
-	display: flex;
-	justify-content: left;
-	align-items: center;
-	margin-top: 3px;
-}
-
-.block_error svg {
-	color: var(--errorBgOrC);
-	margin: 0 5px 0 0;
+  cursor: no-drop;
 }

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./SignIn.module.css";
 import commonStyles from "../Authorization.module.css";
 import { reduxForm } from "redux-form";
-import { WrapperCreateField, Input, WrapperButton } from "../../common/FormControls/FormControls";
+import { WrapperCreateField, InputField, WrapperButton } from "../../common/FormControls/FormControls";
 import { validateEmail, validatePassword, required } from "../../../utils/FieldValidationForm/FieldValidationForm";
 import Button from "@mui/material/Button";
 import { ModalDefaultAccounts } from "../../../utils/helperForAuthorization/helperForAuthorization";
@@ -16,9 +16,9 @@ const SignInForm = (props) => {
 
   return (
     <form className={commonStyles.form} onSubmit={props.handleSubmit}>
-      <WrapperCreateField name="email" type="text" validate={[validateEmail, required]} component={Input} placeholder="Email" />
-      <WrapperCreateField name="password" type="password" validate={[validatePassword, required]} component={Input} placeholder="Password" />
-      <WrapperCreateField name="rememberMe" type="checkbox" validate={[]} component={Input} placeholder="" text="Remember Me" />
+      <WrapperCreateField name="email" type="text" validate={[validateEmail, required]} component={InputField} placeholder="Email" />
+      <WrapperCreateField name="password" type="password" validate={[validatePassword, required]} component={InputField} placeholder="Password" />
+      <WrapperCreateField name="rememberMe" type="checkbox" validate={[]} component={InputField} placeholder="" text="Remember Me" />
       <WrapperButton {...props} button_text="Sign In" isSignIn={true} />
 
       <div onClick={handleOpen} className={styles.wrapper_button}>

@@ -4,7 +4,8 @@ export const required = (value) => {
   if (value) {
     return undefined;
   } else {
-    return <div className={styles.required}>This field is required</div>;
+    return "This field is required";
+    // return <div className={styles.required}>This field is required</div>;
   }
 };
 
