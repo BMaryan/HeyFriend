@@ -23,9 +23,9 @@ const SignUpContainer = (props) => {
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
   // console.log(createUserWithEmailAndPassword);
-  console.log(user);
-  console.log(loading);
-  console.log(error);
+  // console.log(user);
+  // console.log(loading);
+  // console.log(error);
 
   // React.useEffect(() => {
   // 	if (props.accounts && props.accounts.length > 0) {
@@ -48,7 +48,7 @@ const SignUpContainer = (props) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
 
         history.push(`${profileConstant}`);
       }

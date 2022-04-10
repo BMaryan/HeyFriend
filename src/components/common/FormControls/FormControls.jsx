@@ -65,7 +65,7 @@ export const WrapperCreateField = (props) => {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
-                  {values.showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                  {values.showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
                 </IconButton>
               </InputAdornment>
             ),

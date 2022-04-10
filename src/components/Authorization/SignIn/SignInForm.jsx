@@ -16,19 +16,18 @@ const SignInForm = (props) => {
 
   return (
     <form className={commonStyles.form} onSubmit={props.handleSubmit}>
-      <WrapperCreateField name="email" type="text" validate={[validateEmail, required]} component={InputField} placeholder="Email" />
-      <WrapperCreateField name="password" type="password" validate={[validatePassword, required]} component={InputField} placeholder="Password" />
-      <WrapperCreateField name="rememberMe" type="checkbox" validate={[]} component={InputField} placeholder="" text="Remember Me" />
+      <WrapperCreateField id="outlined-error-helper-text" name="email" type="email" label="Email" helperText="" placeholder="" validate={[validateEmail, required]} component={InputField} />
+      <WrapperCreateField id="outlined-error-helper-text" name="password" type="password" label="Password" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
       <WrapperButton {...props} button_text="Sign In" isSignIn={true} />
 
-      <div onClick={handleOpen} className={styles.wrapper_button}>
+      {/* <div onClick={handleOpen} className={styles.wrapper_button}>
         <Button variant="contained">
           <span style={{ textTransform: "capitalize" }}>Default accounts</span>
         </Button>
-      </div>
+      </div> */}
 
       {/* modal for autocomplete auth data */}
-      <ModalDefaultAccounts open={open} handleOpen={handleOpen} handleClose={handleClose} getDefaultAccount={props.getDefaultAccount} accounts={props.accounts} />
+      {/* <ModalDefaultAccounts open={open} handleOpen={handleOpen} handleClose={handleClose} getDefaultAccount={props.getDefaultAccount} accounts={props.accounts} /> */}
     </form>
   );
 };

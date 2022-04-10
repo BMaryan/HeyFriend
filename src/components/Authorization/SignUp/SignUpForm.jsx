@@ -15,8 +15,11 @@ let validateLastName = validateFirstAndLastNameCreator("last");
 const SignUpForm = (props) => {
   return (
     <form className={commonStyles.form} onSubmit={props.handleSubmit}>
-      <WrapperCreateField id="outlined-error-helper-text" name="name" type="text" label="Name" helperText="" placeholder="" validate={[validateFirstName, required]} component={InputField} />
-      <WrapperCreateField id="outlined-error-helper-text" name="surname" type="text" label="Surname" helperText="" placeholder="" validate={[validateLastName, required]} component={InputField} />
+      <div className={styles.form__display_name}>
+        <WrapperCreateField id="outlined-error-helper-text" name="name" type="text" label="Name" helperText="" placeholder="" validate={[validateFirstName, required]} component={InputField} />
+        <WrapperCreateField id="outlined-error-helper-text" name="surname" type="text" label="Surname" helperText="" placeholder="" validate={[validateLastName, required]} component={InputField} />
+      </div>
+
       <WrapperCreateField id="outlined-error-helper-text" name="email" type="email" label="Email" helperText="" placeholder="" validate={[validateEmail, required]} component={InputField} />
       <WrapperCreateField id="outlined-error-helper-text" name="password" type="password" label="Password" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
       <WrapperButton {...props} loading={props.loading} button_text="Sign Up" isSignUp={true} />
