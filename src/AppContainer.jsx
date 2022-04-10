@@ -10,16 +10,19 @@ import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalSt
 import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { signInConstant } from "./core/constants/constants";
+import { signInConstant, signUpConstant } from "./core/constants/constants";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import { setAuth } from "./redux/auth-reducer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
+import { addDoc, collection, setDoc } from "firebase/firestore";
+import { useHistory } from "react-router-dom";
 
 const AppContainer = (props) => {
-  let id = Number(props.match.params.id);
+  const id = Number(props.match.params.id);
   const [user, loading, error] = useAuthState(auth);
+  const history = useHistory();
 
   //   React.useEffect(() => {
   //     let accountsP = JSON.parse(localStorage.getItem(accounts));
@@ -64,8 +67,15 @@ const AppContainer = (props) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         props.setAuth(user);
+
+        // setDoc(collection(db, `users`), {
+        //   displayName: user.displayName,
+        // });
       } else {
         props.setAuth(null);
+
+        if (!history.location.pathname === signUpConstant) return history.push(signInConstant);
+        else return history.push(signUpConstant);
       }
     });
   }, [props.auth]);

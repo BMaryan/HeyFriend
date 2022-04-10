@@ -1,4 +1,5 @@
 // ways to navigate the site
+export const mainConstant = "/";
 export const profileConstant = "/profile";
 export const chatConstant = "/chat";
 export const friendsConstant = "/friends";
