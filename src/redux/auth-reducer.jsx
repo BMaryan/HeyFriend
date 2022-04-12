@@ -1,3 +1,5 @@
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 import { authFb } from "../functionsFb/functionsFb";
 
 let SET_USER_SIGN_IN = "heyfriend/auth/SET_USER_SIGN_IN";
@@ -5,9 +7,9 @@ let SET_USER_SIGN_UP = "heyfriend/auth/SET_USER_SIGN_UP";
 let GET_DEFAULT_ACCOUNT = "heyfriend/auth/GET_DEFAULT_ACCOUNT";
 //
 let SET_AUTH = "heyfriend/auth/SET_AUTH";
-let LOGIN_SUCCESS = "heyfriend/auth/LOGIN_SUCCESS";
-let LOGIN_ERROR = "heyfriend/auth/LOGIN_ERROR";
-let SIGNOUT_SUCCESS = "heyfriend/auth/SIGNOUT_SUCCESS";
+let AUTH_SUCCESS = "heyfriend/auth/AUTH_SUCCESS";
+let AUTH_LOADING = "heyfriend/auth/AUTH_LOADING";
+let AUTH_ERROR = "heyfriend/auth/AUTH_ERROR";
 
 let initialState = {
   userSignIn: {
@@ -24,6 +26,7 @@ let initialState = {
   },
   auth: null,
   authError: null,
+  loading: false,
   defaultAccount: null,
 };
 
@@ -54,21 +57,22 @@ const AuthReducer = (state = initialState, action) => {
         auth: action.credentials ? action.credentials : null,
       };
     }
-    case LOGIN_SUCCESS: {
+    case AUTH_SUCCESS: {
       return {
         ...state,
         authError: null,
       };
     }
-    case LOGIN_ERROR: {
+    case AUTH_LOADING: {
       return {
         ...state,
-        authError: action.error,
+        loading: action.loading,
       };
     }
-    case SIGNOUT_SUCCESS: {
+    case AUTH_ERROR: {
       return {
         ...state,
+        authError: action.error.message,
       };
     }
     default: {
@@ -99,45 +103,55 @@ export const setAuth = (credentials) => ({
   credentials,
 });
 
-export const loginSuccess = () => ({
-  type: LOGIN_SUCCESS,
+export const authSuccess = () => ({
+  type: AUTH_SUCCESS,
 });
 
-export const loginError = (error) => ({
-  type: LOGIN_ERROR,
-  error,
+export const authLoading = (loading) => ({
+  type: AUTH_LOADING,
+  loading,
 });
 
-export const logoutSuccess = (error) => ({
-  type: LOGIN_ERROR,
+export const authError = (error) => ({
+  type: AUTH_ERROR,
   error,
 });
 
 // thunks
 export const signUp = (credentials) => async (dispatch) => {
-  try {
-    await authFb.signUp({ email: credentials.email, password: credentials.password });
+  dispatch(authLoading(true));
 
-    dispatch(loginSuccess());
+  try {
+    const user = await authFb.signUp({ email: credentials.email, password: credentials.password });
+
+    await setDoc(doc(db, "accounts", user.user.uid), { name: credentials.name, surname: credentials.surname, email: user.user.email });
+
+    dispatch(authSuccess());
   } catch (error) {
-    dispatch(loginError(error));
+    dispatch(authError(error));
   }
+
+  dispatch(authLoading(false));
 };
 
 export const signIn = (credentials) => async (dispatch) => {
+  dispatch(authLoading(true));
+
   try {
     await authFb.signIn({ email: credentials.email, password: credentials.password });
 
-    dispatch(loginSuccess());
+    dispatch(authSuccess());
   } catch (error) {
-    dispatch(loginError(error));
+    dispatch(authError(error));
   }
+
+  dispatch(authLoading(false));
 };
 
 export const signOut = () => async (dispatch) => {
   await authFb.signOut();
 
-  dispatch(logoutSuccess());
+  dispatch(authSuccess());
 };
 
 export default AuthReducer;

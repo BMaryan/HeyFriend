@@ -16,6 +16,10 @@ export const setAuthSelector = (state) => {
   return state.auth.auth;
 };
 
-export const loginErrorSelector = (state) => {
+export const authLoadingSelector = (state) => {
+  return state.auth.loading;
+};
+
+export const authErrorSelector = (state) => {
   return state.auth.authError;
 };
