@@ -34,16 +34,18 @@ const ProfileInfo = (props) => {
         {/* <div className={styles.profile_cover} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${coverPhoto})` }}> */}
         <div className={styles.profile_cover_line}>
           {/* full name */}
-          <div className={styles.profile_fullName}>
-            test
-            {/* {oftenCheckOtherProfile ? (
+          {props.account ? (
+            <div className={styles.profile_fullName}>
+              {/* {oftenCheckOtherProfile ? (
 							otherProfile.profile.surname + " " + otherProfile.profile.name
 						) : oftenCheckMyProfile ? (
 							props.account.profile.surname + " " + props.account.profile.name
 						) : (
 							<></>
 						)} */}
-          </div>
+              {props.account.surname + " " + props.account.name}
+            </div>
+          ) : null}
 
           {/* status */}
           <div className={styles.profile_status}>

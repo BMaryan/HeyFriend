@@ -18,13 +18,13 @@ const NavbarList = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  let dataFromAccountToAccounts = () => {
-    if (props.accounts) {
-      props.accounts.find((account) => {
-        return account.id === props.account.id ? (props.accounts[account.id - 1] = { ...props.account }) : undefined;
-      });
-    }
-  };
+  // let dataFromAccountToAccounts = () => {
+  //   if (props.accounts) {
+  //     props.accounts.find((account) => {
+  //       return account.id === props.account.id ? (props.accounts[account.id - 1] = { ...props.account }) : undefined;
+  //     });
+  //   }
+  // };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,15 +37,7 @@ const NavbarList = (props) => {
   return (
     <div className={styles.navbar_list}>
       <div className={styles.wrapper_nav_link}>
-        <Chip
-          onClick={handleClick}
-          sx={{ fontSize: "15px" }}
-          className={commonStyles.nav_link_toggleList}
-          variant="outlined"
-          // label=''
-          label={props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}
-          avatar={<Avatar src={props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />}
-        />
+        <Chip onClick={handleClick} sx={{ fontSize: "15px" }} className={commonStyles.nav_link_toggleList} variant="outlined" label={props.account ? props.account.surname + " " + props.account.name : undefined} avatar={<Avatar src={props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />} />
       </div>
 
       <Menu
