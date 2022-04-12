@@ -3,12 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getDefaultAccount, setUserSignIn, signIn } from "../../../redux/auth-reducer";
-import { getUserSignInSelector } from "../../../redux/auth-selectors";
+import { authErrorSelector, authLoadingSelector, getUserSignInSelector } from "../../../redux/auth-selectors";
 import { helpCheckAuthorization } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignIn from "./SignIn";
 import { account, accounts } from "../../../core/constants/constantsLocalStorage";
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
-import { isAccount, setAccounts } from "../../../redux/profile-reducer";
+import { isAccount } from "../../../redux/profile-reducer";
 import defaultAccounts from "../../../defaultAccounts/defaultAccounts";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase";
@@ -41,7 +41,6 @@ const SignInContainer = (props) => {
         console.log("main");
 
         history.push(`/`);
-        // return <Redirect to={`/`} />;
       }
     });
   });
@@ -54,6 +53,8 @@ const mapStateToProps = (state) => {
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
     userSignIn: getUserSignInSelector(state),
+    authError: authErrorSelector(state),
+    loading: authLoadingSelector(state),
   };
 };
 
@@ -61,7 +62,6 @@ export default connect(mapStateToProps, {
   setUserSignIn,
   helpCheckAuthorization,
   isAccount,
-  setAccounts,
   getDefaultAccount,
   signIn,
 })(SignInContainer);

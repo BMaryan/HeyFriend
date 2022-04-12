@@ -22,7 +22,10 @@ const SignUpForm = (props) => {
 
       <WrapperCreateField id="outlined-error-helper-text" name="email" type="email" label="Email" helperText="" placeholder="" validate={[validateEmail, required]} component={InputField} />
       <WrapperCreateField id="outlined-error-helper-text" name="password" type="password" label="Password" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
-      <WrapperButton {...props} loading={props.loading} button_text="Sign Up" isSignUp={true} />
+
+      {/* {props.authError ? <div className={styles.form__auth_error}>{props.authError}</div> : null} */}
+
+      <WrapperButton {...props} button_text="Sign Up" />
     </form>
   );
 };

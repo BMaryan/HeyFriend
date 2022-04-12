@@ -11,22 +11,16 @@ import { profileConstant, signInConstant } from "../../../core/constants/constan
 const SignUp = (props) => {
   let onSubmit = (formData) => {
     if (formData) {
-      console.log(formData);
       props.signUp({ ...formData });
-
-      return Object.keys(formData).map((item) => (formData[item] = ""));
+      // return Object.keys(formData).map((item) => (formData[item] = ""));
     }
   };
-
-  // if (props.account && props.account.id) {
-  //   return <Redirect to={`${profileConstant}`} />;
-  // }
 
   return (
     <div className={commonStyle.authorization}>
       <div className={commonStyle.authorization_container}>
         <InformationContainer title={"Welcome Back!"} subtitle={"Don't have an account?"} linkTo={`${signInConstant}`} buttonText={"Sign In"} />
-        <AuthorizationHelperContainer title={"Sign Up"} form={<SignUpReduxForm onSubmit={onSubmit} accounts={props.accounts} userSignUp={props.userSignUp} loading={props.loading} />} />
+        <AuthorizationHelperContainer title={"Sign Up"} form={<SignUpReduxForm onSubmit={onSubmit} authError={props.authError} loading={props.loading} accounts={props.accounts} userSignUp={props.userSignUp} />} />
       </div>
     </div>
   );

@@ -3,8 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { setAuth, setUserSignUp, signUp } from "../../../redux/auth-reducer";
-import { getUserSignUpSelector, loginErrorSelector } from "../../../redux/auth-selectors";
-import { addAccount, isAccount, setAccounts } from "../../../redux/profile-reducer";
+import { getUserSignUpSelector, authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
+import { addAccount, isAccount } from "../../../redux/profile-reducer";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import SignUp from "./SignUp";
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
@@ -20,13 +20,6 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const SignUpContainer = (props) => {
   let history = useHistory();
-  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
-
-  // console.log(createUserWithEmailAndPassword);
-  // console.log(user);
-  // console.log(loading);
-  // console.log(error);
-
   // React.useEffect(() => {
   // 	if (props.accounts && props.accounts.length > 0) {
   // 		localStorage.setItem(accounts, JSON.stringify(props.accounts));
@@ -41,21 +34,15 @@ const SignUpContainer = (props) => {
   // 	}
   // }, [props.account]);
 
-  // if (props.account && props.account.id) {
-  // 	return <Redirect to={`${profileConstant}`} />;
-  // }
-
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log(user);
-
         history.push(`${profileConstant}`);
       }
     });
   }, []);
 
-  return <SignUp {...props} loading={loading} />;
+  return <SignUp {...props} />;
 };
 
 const mapStateToProps = (state) => {
@@ -63,7 +50,8 @@ const mapStateToProps = (state) => {
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
     userSignUp: getUserSignUpSelector(state),
-    authError: loginErrorSelector(state),
+    loading: authLoadingSelector(state),
+    authError: authErrorSelector(state),
   };
 };
 
@@ -72,7 +60,6 @@ export default compose(
     setUserSignUp,
     helpCheckAuthorization,
     addAccount,
-    setAccounts,
     setSignUpDataToLocalStorage,
     isAccount,
     signUp,

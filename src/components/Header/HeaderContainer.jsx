@@ -6,7 +6,6 @@ import { getAuthorizationId, getParamsId, getProfileData, isAccount } from "../.
 import { signOut } from "../../redux/auth-reducer";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
-import { Redirect } from "react-router-dom";
 import { signInConstant } from "../../core/constants/constants";
 import { useHistory } from "react-router-dom";
 
@@ -19,7 +18,6 @@ const HeaderContainer = (props) => {
         console.log("logout");
 
         history.push(`${signInConstant}`);
-        // return <Redirect to={`${signInConstant}`} />;
       }
     });
   }, []);
