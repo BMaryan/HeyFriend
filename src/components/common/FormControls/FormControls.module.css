@@ -17,3 +17,8 @@
 .wrapper_button button:disabled {
   cursor: no-drop;
 }
+
+.form_error {
+  color: #d32f2f;
+  font-size: 15px;
+}

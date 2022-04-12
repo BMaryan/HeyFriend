@@ -79,14 +79,12 @@ export const WrapperCreateField = (props) => {
 };
 
 export const WrapperButton = (props) => {
-  let [errorSignIn, setErrorSignIn] = React.useState(false);
-
   return (
     <>
-      {props.isSignIn && errorSignIn ? <div className={styles.common_error}>{errorSignIn}</div> : undefined}
+      {props.authError ? <div className={styles.form_error}>{props.authError}</div> : null}
 
       <div className={styles.wrapper_button}>
-        <LoadingButton className={styles.button} onClick={() => (props.isSignIn ? setErrorSignIn(validateAuthorizationUserCreator(props.accounts, props.userSignIn)) : undefined)} type="submit" loading={props.loading} disabled={props.invalid || props.submitting} variant="contained" loadingPosition="center">
+        <LoadingButton className={styles.button} type="submit" loading={props.loading} disabled={props.invalid || props.submitting} variant="contained" loadingPosition="center">
           {props.button_text}
         </LoadingButton>
       </div>
