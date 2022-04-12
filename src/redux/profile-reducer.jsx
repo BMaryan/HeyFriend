@@ -1,4 +1,3 @@
-let SET_ACCOUNTS = "heyfriend/chatPage/SET_ACCOUNTS";
 let ADD_ACCOUNT = "heyfriend/chatPage/ADD_ACCOUNT";
 let IS_ACCOUNT = "heyfriend/auth/IS_ACCOUNT";
 let GET_PROFILE_DATA = "heyfriend/profilePage/GET_PROFILE_DATA";
@@ -15,6 +14,10 @@ let DELETE_SAVED_POST = "heyfriend/chatPage/DELETE_SAVED_POST";
 let DELETE_POST = "heyfriend/profilePage/DELETE_POST";
 let ADD_COMMENT = "heyfriend/profilePage/ADD_COMMENT";
 
+//
+let SET_ACCOUNTS = "heyfriend/chatPage/SET_ACCOUNTS";
+let SET_ACCOUNT = "heyfriend/chatPage/SET_ACCOUNT";
+
 let initialState = {
   accounts: [],
   account: null,
@@ -24,12 +27,6 @@ let initialState = {
 
 const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ACCOUNTS: {
-      return {
-        ...state,
-        accounts: action.accounts ? [...action.accounts] : [],
-      };
-    }
     case ADD_ACCOUNT: {
       let newProfile = {
         id: action.id,
@@ -217,16 +214,26 @@ const ProfileReducer = (state = initialState, action) => {
         accounts: state.accounts.map((account) => (account.id === currentAccount.id ? { ...account, profile: { ...account.profile, posts: account.profile.posts.map((post) => (post.id === action.postId ? { ...post, comments: post.comments && post.comments.length > 0 ? [...post.comments, { comment: action.comment }] : [{ comment: action.comment }] } : { ...post })) } } : { ...account })),
       };
     }
+
+    // ------------------------------------------
+
+    case SET_ACCOUNTS: {
+      return {
+        ...state,
+        accounts: [...action.accounts],
+      };
+    }
+    case SET_ACCOUNT: {
+      return {
+        ...state,
+        account: action.account,
+      };
+    }
     default: {
       return state;
     }
   }
 };
-
-export const setAccounts = (accounts) => ({
-  type: SET_ACCOUNTS,
-  accounts,
-});
 
 export const addAccount = (id, profile) => ({
   type: ADD_ACCOUNT,
@@ -303,6 +310,18 @@ export const addComment = (postId, comment) => ({
   type: ADD_COMMENT,
   postId,
   comment,
+});
+
+// -----------------------------------------
+
+export const setAccounts = (accounts) => ({
+  type: SET_ACCOUNTS,
+  accounts,
+});
+
+export const setAccount = (account) => ({
+  type: SET_ACCOUNT,
+  account,
 });
 
 export default ProfileReducer;
