@@ -1,21 +1,15 @@
 import React from "react";
-import styles from "./Messages.module.css";
+import styles from "./Messages.module.scss";
 import Message from "./Message/Message";
 
-const Messages = props => {
-	let id = Number(props.match.params.id);
+const Messages = (props) => {
+  let id = Number(props.match.params.id);
 
-	return (
-		<div className={styles.messages}>
-			<div className={styles.messages_content}>
-				{id ? (
-					props.chat.messages.map(el => <Message key={el.id} el={el} accounts={props.accounts} id={id} account={props.account} />)
-				) : (
-					<></>
-				)}
-			</div>
-		</div>
-	);
+  return (
+    <div className={styles.messages}>
+      <div className={styles.messages_content}>{id ? props.chat.messages.map((el) => <Message key={el.id} el={el} accounts={props.accounts} id={id} account={props.account} />) : <></>}</div>
+    </div>
+  );
 };
 
 export default Messages;

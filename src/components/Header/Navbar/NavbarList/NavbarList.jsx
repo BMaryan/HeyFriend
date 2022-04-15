@@ -1,6 +1,6 @@
 import React from "react";
-import commonStyles from "../Navbar.module.css";
-import styles from "./NavbarList.module.css";
+import commonStyles from "../Navbar.module.scss";
+import styles from "./NavbarList.module.scss";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,135 +14,118 @@ import { profileConstant, editConstant } from "../../../../core/constants/consta
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 
-const NavbarList = props => {
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const open = Boolean(anchorEl);
+const NavbarList = (props) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-	let dataFromAccountToAccounts = () => {
-		if (props.accounts) {
-			props.accounts.find(account => {
-				return account.id === props.account.id ? (props.accounts[account.id - 1] = { ...props.account }) : undefined;
-			});
-		}
-	};
+  let dataFromAccountToAccounts = () => {
+    if (props.accounts) {
+      props.accounts.find((account) => {
+        return account.id === props.account.id ? (props.accounts[account.id - 1] = { ...props.account }) : undefined;
+      });
+    }
+  };
 
-	const handleClick = event => {
-		setAnchorEl(event.currentTarget);
-	};
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-	return (
-		<div className={styles.navbar_list}>
-			<div className={styles.wrapper_nav_link}>
-				<Chip
-					onClick={handleClick}
-					sx={{ fontSize: "15px" }}
-					className={commonStyles.nav_link_toggleList}
-					variant='outlined'
-					// label=''
-					label={props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}
-					avatar={
-						<Avatar
-							src={
-								props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar
-							}
-							alt=''
-						/>
-					}
-				/>
-			</div>
+  return (
+    <div className={styles.navbar_list}>
+      <div className={styles.wrapper_nav_link}>
+        <Chip
+          onClick={handleClick}
+          sx={{ fontSize: "15px" }}
+          className={commonStyles.nav_link_toggleList}
+          variant="outlined"
+          // label=''
+          label={props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}
+          avatar={<Avatar src={props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />}
+        />
+      </div>
 
-			<Menu
-				className={styles.menu}
-				anchorEl={anchorEl}
-				open={open}
-				onClose={handleClose}
-				onClick={handleClose}
-				transformOrigin={{ horizontal: "right", vertical: "top" }}
-				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-				PaperProps={{
-					elevation: 0,
-					sx: {
-						overflow: "visible",
-						filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-						mt: 1.5,
-						"& .MuiAvatar-root": {
-							width: 32,
-							height: 32,
-							ml: -0.5,
-							mr: 1,
-						},
-						"&:before": {
-							content: '""',
-							display: "block",
-							position: "absolute",
-							top: 0,
-							right: 14,
-							width: 10,
-							height: 10,
-							bgcolor: "background.paper",
-							transform: "translateY(-50%) rotate(45deg)",
-							zIndex: 0,
-						},
-					},
-				}}>
-				<NavLink
-					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
-					activeClassName={styles.nav_linkList_active}
-					to={`${profileConstant}`}>
-					<MenuItem className={styles.menu_item}>
-						<ListItemIcon>
-							<Person className={commonStyles.icon} />
-						</ListItemIcon>
-						Profile
-					</MenuItem>
-				</NavLink>
+      <Menu
+        className={styles.menu}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            mt: 1.5,
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        }}>
+        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant}`}>
+          <MenuItem className={styles.menu_item}>
+            <ListItemIcon>
+              <Person className={commonStyles.icon} />
+            </ListItemIcon>
+            Profile
+          </MenuItem>
+        </NavLink>
 
-				<NavLink
-					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
-					activeClassName={styles.nav_linkList_active}
-					to={`${profileConstant}/saved`}>
-					<MenuItem className={styles.menu_item}>
-						<ListItemIcon>
-							<BookmarkBorderOutlined className={commonStyles.icon} />
-						</ListItemIcon>
-						Saved
-					</MenuItem>
-				</NavLink>
+        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant}/saved`}>
+          <MenuItem className={styles.menu_item}>
+            <ListItemIcon>
+              <BookmarkBorderOutlined className={commonStyles.icon} />
+            </ListItemIcon>
+            Saved
+          </MenuItem>
+        </NavLink>
 
-				<NavLink
-					className={styles.nav_linkList + " " + commonStyles.common_nav_linkList}
-					activeClassName={styles.nav_linkList_active}
-					to={`${editConstant}`}
-					exact>
-					<MenuItem className={styles.menu_item}>
-						<ListItemIcon>
-							<Settings className={commonStyles.icon} />
-						</ListItemIcon>
-						Settings
-					</MenuItem>
-				</NavLink>
+        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${editConstant}`} exact>
+          <MenuItem className={styles.menu_item}>
+            <ListItemIcon>
+              <Settings className={commonStyles.icon} />
+            </ListItemIcon>
+            Settings
+          </MenuItem>
+        </NavLink>
 
-				<MenuItem
-					onClick={() => {
-						dataFromAccountToAccounts();
-						props.isAccount(null);
-						props.getAuthorizationId(null);
-						props.getParamsId(null);
-					}}
-					sx={{ borderTop: "1px solid var(--bgWhite233)" }}
-					className={styles.menu_item}>
-					<ListItemIcon>
-						<Logout sx={{ fontSize: 20 }} className={commonStyles.icon} />
-					</ListItemIcon>
-					Log Out
-				</MenuItem>
-			</Menu>
-		</div>
-	);
+        <MenuItem
+          onClick={() => {
+            dataFromAccountToAccounts();
+            props.isAccount(null);
+            props.getAuthorizationId(null);
+            props.getParamsId(null);
+          }}
+          sx={{ borderTop: "1px solid var(--bgWhite233)" }}
+          className={styles.menu_item}>
+          <ListItemIcon>
+            <Logout sx={{ fontSize: 20 }} className={commonStyles.icon} />
+          </ListItemIcon>
+          Log Out
+        </MenuItem>
+      </Menu>
+    </div>
+  );
 };
 
 export default NavbarList;
