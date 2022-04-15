@@ -3,12 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { getUserSignInSelector, getUserSignUpSelector } from "../../redux/auth-selectors";
+import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, createPost } from "../../redux/profile-reducer";
 
 const ProfileContainer = (props) => {
   let id = Number(props.match.params.id);
@@ -37,6 +37,8 @@ const mapStateToProps = (state) => {
   return {
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
+    auth: setAuthSelector(state),
+    //
     chats: getChatsSelector(state),
     userSignIn: getUserSignInSelector(state),
     userSignUp: getUserSignUpSelector(state),
@@ -54,6 +56,7 @@ export default compose(
     setProfileChats,
     addAccount,
     unFollowing,
+    createPost,
   }),
   withRouter
 )(ProfileContainer);

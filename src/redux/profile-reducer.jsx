@@ -1,3 +1,7 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+
 let ADD_ACCOUNT = "heyfriend/chatPage/ADD_ACCOUNT";
 let IS_ACCOUNT = "heyfriend/auth/IS_ACCOUNT";
 let GET_PROFILE_DATA = "heyfriend/profilePage/GET_PROFILE_DATA";
@@ -17,10 +21,13 @@ let ADD_COMMENT = "heyfriend/profilePage/ADD_COMMENT";
 //
 let SET_ACCOUNTS = "heyfriend/chatPage/SET_ACCOUNTS";
 let SET_ACCOUNT = "heyfriend/chatPage/SET_ACCOUNT";
+let CREATE_POST = "heyfriend/chatPage/CREATE_POST";
 
 let initialState = {
   accounts: [],
   account: null,
+  posts: [],
+  //
   authorizationId: null,
   paramsId: null,
 };
@@ -229,6 +236,14 @@ const ProfileReducer = (state = initialState, action) => {
         account: action.account,
       };
     }
+    case CREATE_POST: {
+      let newPost = { ...action.data };
+
+      return {
+        ...state,
+        posts: [newPost],
+      };
+    }
     default: {
       return state;
     }
@@ -323,5 +338,34 @@ export const setAccount = (account) => ({
   type: SET_ACCOUNT,
   account,
 });
+
+export const createPost = (data) => ({
+  type: CREATE_POST,
+  data,
+});
+
+// thunks
+export const setAccountsThunk = () => async (dispatch) => {
+  return await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
+};
+
+export const setAccountThunk = (user) => async (dispatch) => {
+  const resp = await getDoc(doc(db, "accounts", user.uid));
+
+  if (resp.exists()) {
+    dispatch(setAccount(resp.data()));
+  }
+};
+
+export const createPostThunk = (data) => async (dispatch, getState) => {
+  await onAuthStateChanged(auth, (user) => user && setDoc(doc(db, "posts", user.uid), { ...data }));
+
+  // onSnapshot(collection(db, "posts"), (snapshot) => console.log(snapshot.docs));
+  onSnapshot(collection(db, "posts"), (snapshot) => dispatch(createPost(snapshot.docs)));
+
+  // const resp = await getDoc(doc(db, "posts"));
+
+  // dispatch(createPost(resp.data()));
+};
 
 export default ProfileReducer;

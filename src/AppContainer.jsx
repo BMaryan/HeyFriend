@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import App from "./App";
 import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
-import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount } from "./redux/profile-reducer";
-import { getAccountSelector, getAccountsSelector } from "./redux/profile-selectors";
+import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk, createPost, createPostThunk } from "./redux/profile-reducer";
+import { getAccountSelector, getAccountsSelector, setPostsSelector } from "./redux/profile-selectors";
 import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
 // import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
@@ -15,8 +15,8 @@ import { auth, db } from "./firebase";
 import { setAuth } from "./redux/auth-reducer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
-import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useHistory } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
 
 const AppContainer = (props) => {
   const id = Number(props.match.params.id);
@@ -29,16 +29,20 @@ const AppContainer = (props) => {
       if (user) {
         props.setAuth(user);
 
-        onSnapshot(collection(db, "accounts"), (snapshot) => props.setAccounts(snapshot.docs));
-        getDoc(doc(db, "accounts", user.uid)).then((resp) => (resp.exists() ? props.setAccount(resp.data()) : console.log("No such document!")));
+        props.setAccountsThunk();
+        props.setAccountThunk(user);
       } else {
         props.setAuth(null);
 
-        if (history.location.pathname !== signInConstant) return history.push(signInConstant);
-        else if (history.location.pathname === signUpConstant) return history.push(signUpConstant);
+        if (history.location.pathname !== signInConstant) history.push(signInConstant);
+        else if (history.location.pathname === signUpConstant) history.push(signUpConstant);
       }
     });
   }, [props.auth]);
+
+  React.useEffect(() => {
+    if (props.posts.length > 0) props.createPostThunk(props.posts);
+  }, [props.posts]);
 
   // name of page in title
   React.useEffect(() => {
@@ -73,6 +77,7 @@ const mapStateToProps = (state) => {
     userSignIn: getUserSignInSelector(state),
     userSignUp: getUserSignUpSelector(state),
     auth: setAuthSelector(state),
+    posts: setPostsSelector(state),
   };
 };
 
@@ -88,6 +93,9 @@ export default compose(
     setAccounts,
     setAuth,
     setAccount,
+    setAccountsThunk,
+    setAccountThunk,
+    createPostThunk,
   }),
   withRouter
 )(AppContainer);
