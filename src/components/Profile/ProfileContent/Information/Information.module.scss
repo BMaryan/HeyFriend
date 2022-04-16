@@ -50,13 +50,13 @@
 }
 
 /* media */
-@media (max-width: 539.98px) {
+@include media-breakpoint-down("sm") {
   .information_container {
     margin-bottom: 0;
   }
 }
 
-@media (max-width: 399.98px) {
+@include media-breakpoint-down("s") {
   .information_container {
     flex-direction: column;
     padding: 0;

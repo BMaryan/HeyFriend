@@ -98,19 +98,19 @@
 }
 
 /* media */
-@media (max-width: 719.98px) {
+@include media-breakpoint-down("md") {
   .form {
     display: none;
   }
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down("sm") {
   .header {
     padding: 10px $pd-content;
   }
 }
 
-@media (max-width: 539.98px) {
+@include media-breakpoint-down("sm") {
   .navbar_row {
     display: none;
   }

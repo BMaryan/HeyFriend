@@ -16,7 +16,7 @@
 }
 
 /* media */
-@media (max-width: 399.98px) {
+@include media-breakpoint-down("s") {
   :root {
     --paddingForCoverAndDetailsTop: 0;
     --paddingForCoverAndDetailsRight: 0;

@@ -19,13 +19,13 @@
 }
 
 /* media */
-@media (min-width: 540px) {
+@include media-breakpoint-up("sm") {
   .container_fluid__paper {
     display: none;
   }
 }
 
-@media (max-width: 539.98px) {
+@include media-breakpoint-down("sm") {
   .container_fluid__paper {
     display: block;
   }

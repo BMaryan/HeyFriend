@@ -27,7 +27,7 @@
 }
 
 /* media */
-@media (max-width: 539.98px) {
+@include media-breakpoint-down("md") {
   .current_post {
     height: calc(100vh - $ht-bottom-navigation + 100px);
   }

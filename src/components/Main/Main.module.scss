@@ -134,7 +134,7 @@
 }
 
 /* media */
-@media (max-width: 991.98px) {
+@include media-breakpoint-down("l") {
   .main {
     display: flex;
     justify-content: center;
@@ -150,14 +150,9 @@
   }
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down("sm") {
   .main_content {
     width: 100%;
-  }
-}
-
-@media (max-width: 539.98px) {
-  .main_content {
     margin-bottom: 0;
   }
 }

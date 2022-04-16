@@ -239,7 +239,7 @@
 }
 
 /* media */
-@media (max-width: 991.98px) {
+@include media-breakpoint-down("l") {
   .wrapper_post {
   }
 
@@ -248,13 +248,13 @@
   }
 }
 
-@media (max-width: 767.98px) {
+@include media-breakpoint-down("md") {
   .wrapper_post {
     height: 800px;
   }
 }
 
-@media (max-width: 424.98px) {
+@include media-breakpoint-down("m") {
   .wrapper_post {
     height: 700px;
   }
@@ -264,7 +264,7 @@
   }
 }
 
-@media (max-width: 319.98px) {
+@include media-breakpoint-down("s") {
   .wrapper_post {
     height: 600px;
   }

@@ -1,39 +1,41 @@
+@import "../../../sass/main.scss";
+
 .default_friends {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .default_friends div {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 
 .wrapper_icon {
-	border: 2px solid black;
-	border-radius: 50%;
-	padding: 30px 35px;
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 30px 35px;
 }
 
 .wrapper_icon .icon {
-	font-size: calc(40px + (42 - 40) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(40px + (42 - 40) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .title {
-	font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .subtitle {
-	color: rgb(60, 60, 60);
-	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
-	text-align: center;
+  color: rgb(60, 60, 60);
+  font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
 }
 
 /* media */
-@media (max-width: 399.98px) {
-	.default_friends {
-		display: none;
-	}
+@include media-breakpoint-down("s") {
+  .default_friends {
+    display: none;
+  }
 }

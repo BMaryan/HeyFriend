@@ -18,14 +18,14 @@
 }
 
 /* media */
-@media (max-width: 539.98px) {
+@include media-breakpoint-up("sm") {
   .paper {
-    display: block;
+    display: none;
   }
 }
 
-@media (min-width: 540px) {
+@include media-breakpoint-down("sm") {
   .paper {
-    display: none;
+    display: block;
   }
 }

@@ -208,7 +208,7 @@
 }
 
 /* media */
-@media (max-width: 767.98px) {
+@include media-breakpoint-down("md") {
   .profile_cover {
     display: flex;
     justify-content: center;
@@ -285,7 +285,7 @@
   }
 }
 
-@media (max-width: 399.98px) {
+@include media-breakpoint-down("s") {
   .profile_info_line {
     padding: 15px 0;
   }

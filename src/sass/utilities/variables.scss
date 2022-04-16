@@ -10,6 +10,19 @@ $mg-between-contaner: 20px;
 // ** border radius
 $bd-radius: 10px;
 
+// ** media queries
+$breakpoints: (
+  "xs": 0px,
+  "s": 400px,
+  "m": 480px,
+  "sm": 576px,
+  "xsm": 640px,
+  "md": 768px,
+  "l": 992px,
+  "xl": 1248px,
+  "xxl": 1440px,
+);
+
 // ** color
 // >>   grey   <<
 $grey50: #fafafa;

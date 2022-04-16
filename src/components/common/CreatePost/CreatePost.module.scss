@@ -145,19 +145,19 @@
 }
 
 /* media */
-@media (min-width: 768px) and (max-width: 991.98px) {
+@include media-breakpoint-between("md", "l") {
   .create_new_post_container {
     min-width: 45vw;
   }
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {
+@include media-breakpoint-between("sm", "md") {
   .create_new_post_container {
     min-width: 55vw;
   }
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down("sm") {
   /* content */
   .create_post_content {
     height: 65vh;
@@ -174,13 +174,13 @@
   }
 }
 
-@media (min-width: 400px) and (max-width: 575.98px) {
+@include media-breakpoint-between("s", "sm") {
   .create_new_post_container {
     min-width: 65vw;
   }
 }
 
-@media (max-width: 399.98px) {
+@include media-breakpoint-down("s") {
   .create_new_post_container {
     min-width: 75vw;
   }
