@@ -1,67 +1,69 @@
+@import "../../../../sass/main.scss";
+
 .chat {
-	padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 .chat,
 .chat_forHead {
-	text-decoration: none;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-	transition: 0.5s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .chat:hover {
-	background: var(--bgWhite245);
-	transition: 0.5s;
+  background: $grey200;
+  transition: 0.5s;
 }
 
 .chat_active {
-	background: var(--bgWhite233);
-	transition: 0.5s;
+  background: $grey400;
+  transition: 0.5s;
 }
 
 .wrapper_picture {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 .wrapper_picture .have_not_picture img,
 .have_not_picture_forHead img,
 .wrapper_icon {
-	font-weight: bold;
-	border-radius: 50%;
-	object-fit: cover;
-	object-position: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  font-weight: bold;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper_picture .have_not_picture img {
-	height: 50px;
-	width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 .wrapper_picture .have_not_picture_forHead img,
 .wrapper_icon {
-	height: 40px;
-	width: 40px;
+  height: 40px;
+  width: 40px;
 }
 
 .wrapper_icon {
-	color: white;
-	background: rgb(103, 200, 238);
-	font-size: 18px;
+  color: white;
+  background: rgb(103, 200, 238);
+  font-size: 18px;
 }
 
 /*  */
 .login {
-	color: black;
-	font-size: 15px;
-	/* font-size: 15px; */
+  color: black;
+  font-size: 15px;
+  /* font-size: 15px; */
 }
 
 .message {
-	color: rgb(102, 102, 102);
-	font-size: 15px;
+  color: rgb(102, 102, 102);
+  font-size: 15px;
 }

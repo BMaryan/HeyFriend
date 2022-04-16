@@ -1,63 +1,65 @@
+@import "../../../../sass/main.scss";
+
 /* 		common wrapper container message */
 .wrapper_container_message,
 .wrapper_container_myMessage,
 .wrapper_container_otherMessage {
-	width: 100%;
-	display: flex;
-	margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 15px;
 }
 
 /* wrapper container my message */
 .wrapper_container_myMessage {
-	flex-direction: row-reverse;
-	justify-content: flex-start;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
 }
 
 /* wrapper container other message */
 .wrapper_container_otherMessage {
-	justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 /* 		common wrapper picture */
 .wrapper_picture,
 .wrapper_myPicture img,
 .wrapper_otherPicture img {
-	height: 40px;
-	width: 40px;
-	border-radius: 50%;
-	object-fit: cover;
-	object-position: top;
-	display: flex;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  display: flex;
 }
 
 /* wrapper my picture */
 .wrapper_myPicture {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 /* wrapper other picture */
 .wrapper_otherPicture {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 /* 		common wrapper message */
 .wrapper_message,
 .wrapper_myMessage,
 .wrapper_otherMessage {
-	display: flex;
-	align-items: center;
-	padding: 0 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
 }
 
 /* wrapper my message */
 .wrapper_myMessage {
-	background: var(--bgWhite245);
-	border-radius: 20px 20px 0 20px;
+  background: $grey300;
+  border-radius: 20px 20px 0 20px;
 }
 
 /* wrapper other message */
 .wrapper_otherMessage {
-	background: white;
-	border: 1px solid var(--bgWhite233);
-	border-radius: 20px 20px 20px 0px;
+  background: white;
+  border: 1px solid $grey400;
+  border-radius: 20px 20px 20px 0px;
 }

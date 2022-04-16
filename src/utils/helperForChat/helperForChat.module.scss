@@ -1,51 +1,53 @@
+@import "../../sass/main.scss";
+
 .head {
-	height: 70px;
-	max-height: 100%;
-	border-bottom: 1px solid rgb(230, 229, 229);
-	display: flex;
-	align-items: center;
-	/* padding: 0 20px; */
+  height: 70px;
+  max-height: 100%;
+  border-bottom: 1px solid rgb(230, 229, 229);
+  display: flex;
+  align-items: center;
+  /* padding: 0 20px; */
 }
 
 /* head dialogs */
 .head_dialogs {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .head_wrapper_picture {
-	height: 100%;
+  height: 100%;
 }
 
 .head_wrapper_picture img {
-	height: 100%;
+  height: 100%;
 }
 
 .head_dialogs_title {
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
 /* head messages */
 .head_messages {
-	justify-content: space-between;
-	padding: 0 var(--pdContent);
+  justify-content: space-between;
+  padding: 0 $pd-content;
 }
 
 /* wrapper picture */
 .wrapper_picture img {
-	height: 85px;
-	width: 85px;
-	color: white;
-	font-size: 20px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 5px;
+  height: 85px;
+  width: 85px;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 /* icon */
 .icon {
-	color: var(--colorIcons);
-	font-size: 25px;
-	cursor: pointer;
+  color: $grey600;
+  font-size: 25px;
+  cursor: pointer;
 }

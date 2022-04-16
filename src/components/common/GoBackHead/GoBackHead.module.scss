@@ -1,26 +1,28 @@
+@import "../../../sass/main.scss";
+
 .go_back_head {
-	height: 56px;
-	width: 100%;
-	background: white;
-	border-bottom: 1px solid var(--bgWhite233);
-	display: flex;
-	align-items: center;
-	margin-bottom: var(--pdContent);
+  height: 56px;
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid $grey400;
+  display: flex;
+  align-items: center;
+  margin-bottom: $pd-content;
 }
 
 .wrapper_title {
-	height: 100%;
-	/* background: silver; */
-	font-size: 20px;
-	font-weight: 500;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex: 1;
-	position: relative;
+  height: 100%;
+  /* background: silver; */
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  position: relative;
 }
 
 .wrapper_icon {
-	position: absolute;
-	left: 0;
+  position: absolute;
+  left: 0;
 }

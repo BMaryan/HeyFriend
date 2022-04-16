@@ -1,18 +1,20 @@
+@import "../../../../sass/main.scss";
+
 .wrapper_input {
-	background: white;
-	display: flex;
-	align-items: center;
-	padding: var(--pdContent, 15px);
-	margin-bottom: var(--mgBetweenContainers, 20px);
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: $pd-content;
+  margin-bottom: $mg-between-contaner;
 }
 
 .input {
-	padding: 10px 75px 10px 10px;
-	cursor: pointer;
+  padding: 10px 75px 10px 10px;
+  cursor: pointer;
 }
 
 .input {
-	width: 100%;
-	border: 1px solid rgb(233, 232, 232);
-	outline: none;
+  width: 100%;
+  border: 1px solid rgb(233, 232, 232);
+  outline: none;
 }

@@ -1,9 +1,11 @@
+@import "../../../sass/main.scss";
+
 .messages {
-	position: relative;
+  position: relative;
 }
 
 .messages_content {
-	display: flex;
-	flex-direction: column;
-	padding: var(--pdContent);
+  display: flex;
+  flex-direction: column;
+  padding: $pd-content;
 }

@@ -1,39 +1,41 @@
+@import "../../../../sass/main.scss";
+
 .edit_profile {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	box-sizing: border-box;
-	padding: var(--pdContent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: $pd-content;
 }
 
 .wrapper_profile_contact {
-	display: flex;
-	align-items: center;
-	margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .wrapper_picture {
-	margin-right: var(--pdContent);
+  margin-right: $pd-content;
 }
 
 .wrapper_picture > img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-	object-position: center;
-	object-fit: cover;
-	cursor: pointer;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: cover;
+  cursor: pointer;
 }
 
 .wrapper_info {
 }
 
 .fullName {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 .change_picture {
-	color: rgb(116, 116, 116);
-	font-size: 14px;
-	cursor: pointer;
+  color: rgb(116, 116, 116);
+  font-size: 14px;
+  cursor: pointer;
 }

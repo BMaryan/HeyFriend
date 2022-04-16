@@ -1,10 +1,12 @@
+@import "../../../sass/main.scss";
+
 .stories {
-	/* background: teal; */
-	border-radius: var(--borderRadius);
-	padding: var(--pdContent) 0;
-	margin-right: 20px;
+  /* background: teal; */
+  border-radius: $bd-radius;
+  padding: $pd-content 0;
+  margin-right: 20px;
 }
 
 .stories:last-child {
-	margin-right: 0;
+  margin-right: 0;
 }

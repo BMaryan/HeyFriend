@@ -1,24 +1,26 @@
+@import "../../sass/main.scss";
+
 /* common styles */
 :root {
-	--paddingForCoverAndDetailsTop: 7px;
-	--paddingForCoverAndDetailsRight: 30px;
-	--paddingForCoverAndDetailsBottom: 7px;
-	--paddingForCoverAndDetailsLeft: 180px;
+  --paddingForCoverAndDetailsTop: 7px;
+  --paddingForCoverAndDetailsRight: 30px;
+  --paddingForCoverAndDetailsBottom: 7px;
+  --paddingForCoverAndDetailsLeft: 180px;
 }
 
 .profile {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-top: var(--mgFromHeader);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: $mg-from-header;
 }
 
 /* media */
 @media (max-width: 399.98px) {
-	:root {
-		--paddingForCoverAndDetailsTop: 0;
-		--paddingForCoverAndDetailsRight: 0;
-		--paddingForCoverAndDetailsBottom: 0;
-		--paddingForCoverAndDetailsLeft: 0;
-	}
+  :root {
+    --paddingForCoverAndDetailsTop: 0;
+    --paddingForCoverAndDetailsRight: 0;
+    --paddingForCoverAndDetailsBottom: 0;
+    --paddingForCoverAndDetailsLeft: 0;
+  }
 }

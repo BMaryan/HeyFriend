@@ -1,26 +1,28 @@
+@import "../../../../../sass/main.scss";
+
 .review {
 }
 
 .wrapper_item {
-	font-size: 17px;
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 20px;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .title {
-	font-size: 18px;
-	font-weight: 500;
-	margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .wrapper_content {
-	display: flex;
+  display: flex;
 }
 
 .icon {
-	color: var(--colorIcons);
-	margin-right: 10px;
+  color: $grey600;
+  margin-right: 10px;
 }
 
 .value {
