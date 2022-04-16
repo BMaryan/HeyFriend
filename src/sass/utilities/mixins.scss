@@ -1,0 +1,95 @@
+// gradient backgrounds
+@mixin bg-gradient($gradient) {
+  background: linear-gradient($gradient);
+}
+
+@mixin ds-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin spacing($number) {
+  gap: $number * 4px;
+}
+
+// ** media queries
+$breakpoints: (
+  "xs": 0px,
+  "s": 320px,
+  "m": 480px,
+  "sm": 576px,
+  "xsm": 640px,
+  "md": 768px,
+  "l": 992px,
+  "xl": 1248px,
+  "xxl": 1440px,
+);
+
+@mixin media-breakpoint-up($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map-get(
+      $map: $breakpoints,
+      $key: $width,
+    );
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map-get(
+      $map: $breakpoints,
+      $key: $width,
+    );
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-only($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map-get(
+      $map: $breakpoints,
+      $key: $width,
+    );
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-between($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map-get(
+      $map: $breakpoints,
+      $key: $width,
+    );
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+// @media (min-width: 576px) and (max-width: 767.98px) {
+//   /* form */
+//   .form {
+//     width: 80%;
+//     display: flex;
+//     flex-direction: column;
+//   }
+// }
