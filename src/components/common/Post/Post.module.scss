@@ -15,8 +15,7 @@
 
 .post {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  @include ds-position(unset, unset, column);
   box-sizing: border-box;
 }
 
@@ -26,14 +25,11 @@
 }
 
 .wrapper_details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include ds-position(space-between, center);
 }
 
 .details_position {
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
 }
 
 .wrapper_profile_img {
@@ -97,16 +93,12 @@
 /* footer */
 .footer {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include ds-position(space-between, unset, column);
   overflow: hidden;
 }
 
 .footer_modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include ds-position(space-between, unset, column);
 }
 
 .footer_head {
@@ -114,9 +106,7 @@
 }
 
 .features {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include ds-position(space-between, center);
 }
 
 .features_left > .icon {
@@ -192,10 +182,8 @@
 }
 
 .content {
-  display: flex;
+  @include ds-position(space-between, unset, column);
   flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .button_image {
@@ -210,8 +198,7 @@
 .form {
   width: 100%;
   border-top: 1px solid $grey400;
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   box-sizing: border-box;
   padding: $pd-content;
 }

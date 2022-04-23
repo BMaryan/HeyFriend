@@ -5,8 +5,7 @@
   width: 100%;
   background: white;
   border-bottom: 1px solid $grey400;
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   margin-bottom: $pd-content;
 }
 
@@ -15,9 +14,7 @@
   /* background: silver; */
   font-size: 20px;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include ds-position(center, center);
   flex: 1;
   position: relative;
 }

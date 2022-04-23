@@ -13,9 +13,7 @@
 }
 
 .change_profile_picture_content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include ds-position(unset, center, column);
 }
 
 .change_profile_picture_content button {
@@ -125,10 +123,7 @@
 /* default content images list */
 .default_content_images_list {
   /* background: red; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center, column);
   margin-bottom: $mg-from-header;
 }
 

@@ -48,8 +48,7 @@
 .messages_noDetails,
 .messages_details {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  @include ds-position(unset, unset, column);
 }
 
 .dialogs {
@@ -73,9 +72,7 @@
 
 .details_hidden,
 .details_show {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include ds-position(unset, center, column);
   border-left: 1px solid rgb(230, 229, 229);
   padding: $pd-content 0;
   box-sizing: border-box;
@@ -89,9 +86,7 @@
 
 .details_show {
   width: 25%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include ds-position(unset, center, column);
   overflow: hidden;
   transition-delay: 10ms;
   transition-property: width;
@@ -99,9 +94,7 @@
 
 /*  */
 .contact_link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include ds-position(unset, center, column);
   text-decoration: none;
 }
 
@@ -111,9 +104,7 @@
   color: white;
   font-size: 20px;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center, unset);
   object-fit: cover;
   object-position: center;
   margin-bottom: 5px;
@@ -143,10 +134,7 @@
 /* default view messages */
 .default_view_messages {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center, column);
 }
 
 .default_view_messages div {

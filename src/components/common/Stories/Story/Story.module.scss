@@ -1,42 +1,42 @@
+@import "../../../../core/styles/main.scss";
+
 .story {
-	width: 80px;
-	max-width: 100%;
-	display: inline-flex;
-	flex-direction: column;
-	cursor: pointer;
-	transition: 0.5s;
+  width: 80px;
+  max-width: 100%;
+  @include ds-position(unset, unset, column);
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 /* wrapper content */
 .wrapper_content {
-	display: flex;
-	border: 1px solid rgb(216, 216, 216);
-	border-radius: 50%;
-	transition: 1s;
+  display: flex;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 50%;
+  transition: 1s;
 }
 
 .wrapper_content img {
-	height: 80px;
-	width: 100%;
-	background: wheat;
-	object-fit: cover;
-	object-position: center;
-	border-radius: 50%;
-	transform: scale(0.95);
-	transition: 1s;
+  height: 80px;
+  width: 100%;
+  background: wheat;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  transform: scale(0.95);
+  transition: 1s;
 }
 
 .wrapper_content img:hover {
-	transform: scale(0.9);
-	transition: 1s;
+  transform: scale(0.9);
+  transition: 1s;
 }
 
 /* wrapper footer */
 .wrapper_footer {
-	display: flex;
-	justify-content: center;
-	overflow: hidden;
-	margin-top: 5px;
+  @include ds-position(center);
+  overflow: hidden;
+  margin-top: 5px;
 }
 
 /* .wrapper_picture {
@@ -53,5 +53,5 @@
 } */
 
 .fullName {
-	font-size: 14px;
+  font-size: 14px;
 }

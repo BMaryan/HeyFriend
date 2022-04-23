@@ -5,11 +5,21 @@
   background: linear-gradient($gradient);
 }
 
-// ** display centered
-@mixin ds-center {
+// ** display position
+@mixin ds-position($justifyPos: unset, $alignPos: unset, $flexDir: unset) {
   display: flex;
-  justify-content: center;
-  align-items: center;
+
+  @if $justifyPos != unset {
+    justify-content: $justifyPos;
+  }
+
+  @if $alignPos != unset {
+    align-items: $alignPos;
+  }
+
+  @if $flexDir != unset {
+    flex-direction: $flexDir;
+  }
 }
 
 // ** spacing from items

@@ -5,7 +5,6 @@
 }
 
 .messages_content {
-  display: flex;
-  flex-direction: column;
+  @include ds-position(unset, unset, column);
   padding: $pd-content;
 }

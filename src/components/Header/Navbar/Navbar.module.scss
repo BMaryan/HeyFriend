@@ -18,8 +18,7 @@
   color: black;
   text-decoration: none;
   border: 1px solid transparent;
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   transition: 0.5s;
 }
 

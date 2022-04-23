@@ -2,10 +2,7 @@
 
 .default {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center, column);
 }
 
 .default div {

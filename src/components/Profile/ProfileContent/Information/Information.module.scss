@@ -26,8 +26,7 @@
 }
 
 .navigation {
-  display: flex;
-  flex-direction: column;
+  @include ds-position(unset, unset, column);
 }
 
 .item {
@@ -58,7 +57,7 @@
 
 @include media-breakpoint-down("s") {
   .information_container {
-    flex-direction: column;
+    @include ds-position(unset, unset, column);
     padding: 0;
   }
 
@@ -74,7 +73,7 @@
   }
 
   .navigation {
-    flex-direction: row;
+    @include ds-position(unset, unset, row);
     flex: 1;
   }
 

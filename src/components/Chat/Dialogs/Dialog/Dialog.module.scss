@@ -1,14 +1,12 @@
 @import "../../../../core/styles/main.scss";
-
-.chat {
+\ .chat {
   padding: 10px 20px;
 }
 
 .chat,
 .chat_forHead {
   text-decoration: none;
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   cursor: pointer;
   transition: 0.5s;
 }
@@ -34,9 +32,7 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center);
 }
 
 .wrapper_picture .have_not_picture img {

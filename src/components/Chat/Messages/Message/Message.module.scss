@@ -11,13 +11,12 @@
 
 /* wrapper container my message */
 .wrapper_container_myMessage {
-  flex-direction: row-reverse;
-  justify-content: flex-start;
+  @include ds-position(flex-start, unset, row-reverse);
 }
 
 /* wrapper container other message */
 .wrapper_container_otherMessage {
-  justify-content: flex-start;
+  @include ds-position(flex-start);
 }
 
 /* 		common wrapper picture */
@@ -46,8 +45,7 @@
 .wrapper_message,
 .wrapper_myMessage,
 .wrapper_otherMessage {
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   padding: 0 10px;
 }
 

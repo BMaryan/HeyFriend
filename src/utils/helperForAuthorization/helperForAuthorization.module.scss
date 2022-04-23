@@ -4,9 +4,7 @@
 .authorization_content {
   width: 50%;
   background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include ds-position(space-between, unset, column);
   box-sizing: border-box;
   padding: 25px;
   transition: 1s;
@@ -23,10 +21,7 @@
 .information_content {
   width: 50%;
   background: linear-gradient($hey-friend-style);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center, column);
   box-sizing: border-box;
   padding: 25px;
   transition: 1s;

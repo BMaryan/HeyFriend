@@ -4,8 +4,7 @@
   height: 70px;
   max-height: 100%;
   border-bottom: 1px solid rgb(230, 229, 229);
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   /* padding: 0 20px; */
 }
 
@@ -28,7 +27,7 @@
 
 /* head messages */
 .head_messages {
-  justify-content: space-between;
+  @include ds-position(space-between);
   padding: 0 $pd-content;
 }
 
@@ -39,9 +38,7 @@
   color: white;
   font-size: 20px;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center);
   margin-bottom: 5px;
 }
 

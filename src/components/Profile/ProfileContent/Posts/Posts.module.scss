@@ -2,8 +2,7 @@
 
 .wrapper_input {
   background: white;
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
   padding: $pd-content;
   margin-bottom: $mg-between-contaner;
 }

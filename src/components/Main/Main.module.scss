@@ -31,16 +31,13 @@
 
 /* wrapper contact */
 .wrapper_contact {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include ds-position(space-between, center);
   margin-bottom: 10px;
 }
 
 /* wrapper contact info */
 .wrapper_contact_info {
-  display: flex;
-  align-items: center;
+  @include ds-position(unset, center);
 }
 
 .wrapper_contact_info_avatar {
@@ -82,7 +79,7 @@
 }
 
 .avatar_group {
-  justify-content: flex-end;
+  @include ds-position(flex-end);
 }
 
 .subtitle {
@@ -102,10 +99,7 @@
 /* default_content */
 .default_content {
   /* background: cornflowerblue; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center, column);
 }
 
 .default_content div {
@@ -136,8 +130,7 @@
 /* media */
 @include media-breakpoint-down("l") {
   .main {
-    display: flex;
-    justify-content: center;
+    @include ds-position(center);
   }
 
   .main_content {

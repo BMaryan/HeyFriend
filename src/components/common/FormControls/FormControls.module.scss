@@ -3,8 +3,7 @@
 /* wrapper over input and textarea */
 .wrapperInputAndTextarea {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  @include ds-position(center);
   transition: 0.5s;
   position: relative;
 }
@@ -100,9 +99,7 @@ textarea {
 .common_error {
   color: $error-main;
   font-size: 13px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
+  @include ds-position(left, center);
   margin-top: 3px;
 }
 

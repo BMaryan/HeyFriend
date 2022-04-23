@@ -20,8 +20,7 @@
 /* head */
 .create_post_head {
   border-bottom: 1px solid $grey400;
-  display: flex;
-  justify-content: space-between;
+  @include ds-position(space-between);
   padding: $pd-content;
 }
 
@@ -69,9 +68,7 @@
 /* content wrapper content */
 .content_wrapper_content {
   max-width: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include ds-position(unset, center, column);
 }
 
 .content_wrapper_content .title {
@@ -162,8 +159,7 @@
   .create_post_content {
     height: 65vh;
     width: 100%;
-    display: flex;
-    flex-direction: column-reverse;
+    @include ds-position(unset, unset, column-reverse);
   }
 
   /* content wrapper content */

@@ -5,8 +5,7 @@
 
 .wrapper_item {
   font-size: 17px;
-  display: flex;
-  flex-direction: column;
+  @include ds-position(unset, unset, column);
   margin-bottom: 20px;
 }
 
