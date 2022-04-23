@@ -30,8 +30,7 @@
 .wrapper_icon {
   font-weight: bold;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
+  @include image-position(cover, center);
   @include ds-position(center, center);
 }
 

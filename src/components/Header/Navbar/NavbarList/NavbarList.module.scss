@@ -26,8 +26,7 @@
 .wrapper_toggleList_picture img {
   height: 100%;
   width: 35px;
-  object-fit: cover;
-  object-position: center;
+  @include image-position(cover, center);
   border-radius: 50%;
 }
 

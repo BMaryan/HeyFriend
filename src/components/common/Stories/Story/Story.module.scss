@@ -20,8 +20,7 @@
   height: 80px;
   width: 100%;
   background: wheat;
-  object-fit: cover;
-  object-position: center;
+  @include image-position(cover, center);
   border-radius: 50%;
   transform: scale(0.95);
   transition: 1s;
