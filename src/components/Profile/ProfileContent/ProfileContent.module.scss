@@ -53,9 +53,7 @@
 
 /* wrapper button delete */
 .wrapper_button_delete {
-  position: absolute;
-  top: 0;
-  right: 0;
+  @include position(absolute, 0, 0);
 }
 
 /* wrapper button close */
@@ -65,9 +63,7 @@
 
 .wrapper_button_close button,
 .wrapper_button_delete button {
-  position: absolute;
-  top: 10px;
-  right: $pd-content;
+  @include position(absolute, 10px, $pd-content);
   cursor: pointer;
   transition: 0.5s;
 }

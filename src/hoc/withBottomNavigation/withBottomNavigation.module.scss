@@ -1,10 +1,7 @@
 @import "../../core/styles/main.scss";
 
 .paper {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @include position(fixed, unset, 0, 0, 0);
 }
 
 .paper_bottom_navigation {

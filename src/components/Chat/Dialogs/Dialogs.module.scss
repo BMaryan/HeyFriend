@@ -13,7 +13,7 @@
 
 /* wrapper_input */
 .wrapper_input {
-  position: relative;
+  @include position(relative);
   @include ds-position(center, center, unset);
   border-bottom: 1px solid rgb(230, 229, 229);
   transition: 1s;
@@ -30,8 +30,7 @@
 .search_icon {
   color: rgb(192, 191, 191);
   font-size: 13px;
-  position: absolute;
-  left: 0;
+  @include position(absolute, unset, unset, unset 0);
   padding: 0 0 0 13px;
 }
 

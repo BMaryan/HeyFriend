@@ -22,6 +22,27 @@
   }
 }
 
+// ** position
+@mixin position($property: relative, $top: unset, $right: unset, $bottom: unset, $left: unset) {
+  position: $property;
+
+  @if $top != unset {
+    top: $top;
+  }
+
+  @if $right != unset {
+    right: $right;
+  }
+
+  @if $bottom != unset {
+    bottom: $bottom;
+  }
+
+  @if $left != unset {
+    left: $left;
+  }
+}
+
 // ** spacing from items
 @mixin spacing($number: 1) {
   gap: $number * 4px;

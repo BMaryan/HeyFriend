@@ -5,7 +5,7 @@
   width: 100%;
   @include ds-position(center);
   transition: 0.5s;
-  position: relative;
+  @include position(relative);
 }
 
 .wrapperInputAndTextarea input,
@@ -27,7 +27,7 @@ textarea {
 /* wrapper over field */
 .wrapper_field {
   width: 100%;
-  position: relative;
+  @include position(relative);
   margin-bottom: 10px;
 }
 
@@ -41,9 +41,7 @@ textarea {
 
 /* toggle_show_password_button */
 .toggle_show_password_button {
-  position: absolute;
-  top: 25px;
-  right: 12px;
+  @include position(absolute, 25px, 12px);
   transition: 1s;
 }
 

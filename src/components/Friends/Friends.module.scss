@@ -43,7 +43,7 @@
   border-left: 2px solid transparent;
   padding: 16px 16px 16px 30px;
   cursor: pointer;
-  position: relative;
+  @include position(relative);
 }
 
 .item:hover {
@@ -61,7 +61,7 @@
   @include ds-position(unset, unset, column);
   flex: 1;
   box-sizing: border-box;
-  position: relative;
+  @include position(relative);
   padding: $pd-content;
   overflow-y: scroll;
 }

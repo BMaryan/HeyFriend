@@ -6,9 +6,7 @@
   border: 1px solid $grey400;
   border-radius: $bd-radius;
   outline: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  @include position(absolute, 50%, unset, unset, 50%);
   transform: translate(-50%, -50%);
 }
 
@@ -65,16 +63,12 @@
   width: 75vw;
   background: white;
   outline: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  @include position(absolute, 50%, unset, unset, 50%);
   transform: translate(-50%, -50%);
 }
 
 .wrapper_button_close {
-  position: absolute;
-  top: 0;
-  right: 0;
+  @include position(absolute, 0, 0);
 }
 
 .wrapper_button_close button {

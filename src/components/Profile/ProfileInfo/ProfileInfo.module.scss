@@ -14,7 +14,7 @@
   background-position: center;
   background-repeat: no-repeat;
   @include ds-position(unset, flex-end);
-  position: relative;
+  @include position(relative);
 }
 
 /* profile cover line */
@@ -45,9 +45,7 @@
 /* wrapper change cover */
 .wrapper_change_cover {
   /* background: red; */
-  position: absolute;
-  top: $pd-content;
-  right: $pd-content;
+  @include position(absolute, $pd-content, $pd-content);
 }
 
 .icon_change_cover {
@@ -61,7 +59,7 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   @include ds-position(space-between, center);
-  position: relative;
+  @include position(relative);
   padding: var(--paddingForCoverAndDetailsTop) var(--paddingForCoverAndDetailsRight) var(--paddingForCoverAndDetailsBottom) var(--paddingForCoverAndDetailsLeft);
 }
 
@@ -88,9 +86,7 @@
   border-radius: 50%;
   border: 1px solid $grey400;
   display: inline-flex;
-  position: absolute;
-  left: var(--paddingForCoverAndDetailsRight);
-  bottom: var(--paddingForCoverAndDetailsBottom);
+  @include position(absolute, unset, unset, var(--paddingForCoverAndDetailsBottom), var(--paddingForCoverAndDetailsRight));
   transition: 0.5s;
 }
 
@@ -164,14 +160,12 @@
 }
 
 .button {
-  position: relative;
+  @include position(relative);
 }
 
 .beta_vershion_picture {
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  @include position(absolute, 0, unset, unset, 0);
 }
 
 .icon {
@@ -206,7 +200,7 @@
 @include media-breakpoint-down("md") {
   .profile_cover {
     @include ds-position(center);
-    position: relative;
+    @include position(relative);
   }
 
   .wrapper_profilePicture,
@@ -217,8 +211,7 @@
   .wrapper_profilePicture__center,
   .wrapper_profilePicture_active__center {
     display: flex !important;
-    position: absolute;
-    bottom: -20px;
+    @include position(absolute, unset, unset, -20px);
     z-index: 100;
   }
 

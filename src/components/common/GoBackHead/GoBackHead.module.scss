@@ -16,10 +16,9 @@
   font-weight: 500;
   @include ds-position(center, center);
   flex: 1;
-  position: relative;
+  @include position(relative);
 }
 
 .wrapper_icon {
-  position: absolute;
-  left: 0;
+  @include position(absolute, unset, unset, unset, 0);
 }

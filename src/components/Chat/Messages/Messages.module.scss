@@ -1,7 +1,7 @@
 @import "../../../core/styles/main.scss";
 
 .messages {
-  position: relative;
+  @include position(relative);
 }
 
 .messages_content {

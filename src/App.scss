@@ -2,8 +2,7 @@
 
 .container_fluid__position {
   position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  @include position(sticky, 0);
   z-index: 1000;
 }
 
@@ -12,10 +11,7 @@
   height: $ht-bottom-navigation;
   background: white;
   box-shadow: 0px -1px 10px rgb(209, 209, 209);
-  position: fixed;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  @include position(fixed, unset, 0, 0, 0);
 }
 
 /* media */

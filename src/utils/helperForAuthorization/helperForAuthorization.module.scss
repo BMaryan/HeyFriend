@@ -63,9 +63,7 @@
 /* modal autocomplete default accounts */
 .modal_autocomplete_default_accounts {
   width: 50vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  @include position(absolute, 50%, unset, unset, 50%);
   transform: translate(-50%, -50%);
 }
 

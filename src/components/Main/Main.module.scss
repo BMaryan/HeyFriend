@@ -24,8 +24,7 @@
 .sideBar_right_content {
   height: 80vh;
   width: 100%;
-  position: sticky;
-  top: 70px;
+  @include position(sticky, 70px);
   overflow: hidden;
 }
 

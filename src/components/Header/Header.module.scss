@@ -46,7 +46,7 @@
 
 .wrapper_field {
   height: 100%;
-  position: relative;
+  @include position(relative);
   @include ds-position(center, center);
   margin: 0 10px 0 0;
   transition: 1s;
@@ -86,8 +86,7 @@
   font-size: 13px;
   border-right: 1px solid silver;
   border-radius: 50%;
-  position: absolute;
-  left: 0;
+  @include position(absolute, underline, underline, underline, 0);
   padding: 0 13px 0 13px;
   cursor: pointer;
 }
