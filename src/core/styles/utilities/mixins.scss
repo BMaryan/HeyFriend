@@ -1,0 +1,57 @@
+@import "./variables.scss";
+
+// ** gradient backgrounds
+@mixin bg-gradient($gradient) {
+  background: linear-gradient($gradient);
+}
+
+// ** display centered
+@mixin ds-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// ** spacing from items
+@mixin spacing($number: 1) {
+  gap: $number * 4px;
+}
+
+// calc
+@mixin calc($property, $expression) {
+  #{$property}: calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+}
+
+// ** media queries
+@mixin media-breakpoint-up($breakpoint) {
+  @if map_has_key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+
+    @media (min-width: $value) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @if map_has_key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+
+    @media (max-width: ($value - 1px)) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-between($breakpoint-start: "xs", $breakpoint-end) {
+  @if map_has_key($breakpoints, $breakpoint-end) {
+    $value-start: map-get($breakpoints, $breakpoint-start);
+    $value-end: map-get($breakpoints, $breakpoint-end);
+
+    @media (min-width: $value-start) and (max-width: ($value-end - 1px)) {
+      @content;
+    }
+  }
+}
