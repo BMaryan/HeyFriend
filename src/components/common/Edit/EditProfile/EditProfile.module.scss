@@ -27,11 +27,12 @@
 }
 
 .fullName {
+  color: $black;
   font-weight: 500;
 }
 
 .change_picture {
-  color: rgb(116, 116, 116);
+  color: $grey600;
   font-size: 14px;
   cursor: pointer;
 }

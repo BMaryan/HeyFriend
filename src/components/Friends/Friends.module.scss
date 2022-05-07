@@ -3,8 +3,8 @@
 .friends {
   height: calc(100vh - 100px);
   width: 100%;
-  background: white;
-  border: 1px solid rgb(208, 208, 208);
+  background: $white;
+  border: 1px solid $grey400;
   display: flex;
   margin-top: $mg-from-header;
   overflow: hidden;
@@ -20,7 +20,7 @@
 .friends_menu__none {
   height: 100%;
   min-width: 25%;
-  border-right: 1px solid rgb(208, 208, 208);
+  border-right: 1px solid $grey400;
   @include ds-position(unset, unset, column);
 }
 
@@ -31,13 +31,13 @@
 }
 
 .friends_item {
-  background: white;
+  background: $white;
   display: flex;
 }
 
 .item {
   width: 100%;
-  color: #262626;
+  color: $grey900;
   font-size: 16px;
   text-decoration: none;
   border-left: 2px solid transparent;
@@ -51,7 +51,7 @@
 }
 
 .item_active {
-  border-left-color: rgb(107, 107, 107);
+  border-left-color: $grey600;
   font-weight: 600;
 }
 
@@ -93,12 +93,12 @@
 }
 
 .full_name {
-  color: black;
+  color: $black;
   font-size: calc(15px + (20 - 17) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .subtitle {
-  color: rgb(104, 104, 104);
+  color: $grey600;
 }
 
 .footer {
@@ -131,7 +131,7 @@
 }
 
 .subtitle {
-  color: rgb(60, 60, 60);
+  color: $grey800;
   font-size: calc(15px + (22 - 17) * ((100vw - 300px) / (1600 - 300)));
   text-align: center;
 }
@@ -182,7 +182,7 @@
 
   .item_active {
     border-left: none;
-    border-bottom-color: rgb(107, 107, 107);
+    border-bottom-color: $grey600;
   }
 
   /* content */

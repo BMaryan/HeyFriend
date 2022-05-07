@@ -1,57 +1,34 @@
-@import "../../sass/main.scss";
+@import "../../core/styles/main.scss";
 
-/* authorization */
 .authorization {
   height: 100vh;
   width: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center);
+
+  &_container {
+    @include calc(width, "100% - 20%");
+    display: flex;
+    box-sizing: border-box;
+    box-shadow: $grey900 0px 5px 15px;
+  }
 }
 
-.authorization_container {
-  min-height: 400px;
-  max-height: 100%;
-  width: 80%;
-  background: white;
-  box-sizing: border-box;
-  display: flex;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-/* common form */
 .form {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include ds-position(space-between, unset, column);
 }
 
 /* media */
 @include media-breakpoint-down("md") {
-  .authorization {
-    min-height: 500px;
-    max-height: 100%;
-  }
-
   .authorization_container {
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include calc(width, "100% - 40%");
+    @include ds-position(unset, unset, column);
   }
 }
 
-@include media-breakpoint-between("s", "sm") {
-  .authorization_container {
-    width: 70%;
-  }
-}
-
-@include media-breakpoint-down("s") {
+@include media-breakpoint-down("sm") {
   .authorization_container {
     width: 100%;
+    @include ds-position(unset, unset, column);
   }
 }

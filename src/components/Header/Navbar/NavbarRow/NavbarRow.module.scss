@@ -10,6 +10,14 @@
   flex: 1;
 }
 
+.icon {
+  color: $grey600 !important;
+}
+
+.icon_active {
+  color: $grey800 !important;
+}
+
 /* wrapper nav link */
 .wrapper_nav_link {
   height: 100%;

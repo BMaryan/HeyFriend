@@ -3,7 +3,7 @@
 /* authorization_content */
 .authorization_content {
   width: 50%;
-  background: white;
+  background: $white;
   @include ds-position(space-between, unset, column);
   box-sizing: border-box;
   padding: 25px;
@@ -11,7 +11,7 @@
 }
 
 .authorization_title {
-  color: rgb(138, 138, 138);
+  color: $grey500;
   font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
@@ -28,25 +28,25 @@
 }
 
 .information_title {
-  color: white;
+  color: $white;
   font-size: 25px;
   font-weight: bold;
   text-align: center;
 }
 
 .information_subtitle {
-  color: white;
+  color: $white;
   font-size: 13px;
   text-align: center;
   margin: 10px 0 20px 0;
 }
 
 .information_navLink {
-  color: white;
+  color: $white;
   background: transparent;
   text-decoration: none;
   font-size: 15px;
-  border: 2px solid white;
+  border: 2px solid $white;
   border-radius: 20px;
   outline: none;
   padding: 7px 20px;
@@ -56,7 +56,7 @@
 
 .information_navLink:hover {
   color: black;
-  background: rgb(255, 255, 255);
+  background: $grey100;
   transition: 0.5s;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .list {
-  background: white;
+  background: $white;
   border-radius: $bd-radius;
   padding: 0 !important;
   overflow: hidden;
@@ -81,7 +81,7 @@
 }
 
 .list_subtitle {
-  color: rgb(58, 58, 58);
+  color: $grey800;
   font-size: 14px;
   text-align: center;
   border-bottom: 1px solid $grey400;

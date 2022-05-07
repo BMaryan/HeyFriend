@@ -1,4 +1,5 @@
 @import "../../../core/styles/main.scss";
+@import "../Profile.module.scss";
 
 .profile_info {
   margin-bottom: $mg-from-header;
@@ -8,7 +9,7 @@
 .profile_cover {
   height: 250px;
   max-height: 100%;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+  /* background-image: linear-gradient($grey900, $grey900),
 		url("https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc0ee8c57-0789-439c-8fd2-704aa26b9a4a_4066x2711.jpeg"); */
   background-size: cover;
   background-position: center;
@@ -20,11 +21,11 @@
 /* profile cover line */
 .profile_cover_line {
   width: 100%;
-  padding: var(--paddingForCoverAndDetailsTop) var(--paddingForCoverAndDetailsRight) var(--paddingForCoverAndDetailsBottom) var(--paddingForCoverAndDetailsLeft);
+  padding: $pdYCover $pdRightCover $pdYCover $pdLeftCover;
 }
 
 .profile_fullName {
-  color: white;
+  color: $white;
   font-size: 22px;
   font-weight: 700;
 }
@@ -34,7 +35,7 @@
 }
 
 .profile_status {
-  color: rgb(235, 235, 235);
+  color: $grey200;
   font-size: 15px;
 }
 
@@ -44,28 +45,28 @@
 
 /* wrapper change cover */
 .wrapper_change_cover {
-  /* background: red; */
+  /* background: $red500; */
   @include position(absolute, $pd-content, $pd-content);
 }
 
 .icon_change_cover {
-  color: white;
+  color: $white;
   cursor: pointer;
 }
 
 /* profile info line */
 .profile_info_line {
-  background: white;
+  background: $white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   @include ds-position(space-between, center);
   @include position(relative);
-  padding: var(--paddingForCoverAndDetailsTop) var(--paddingForCoverAndDetailsRight) var(--paddingForCoverAndDetailsBottom) var(--paddingForCoverAndDetailsLeft);
+  padding: $pdYCover $pdRightCover $pdYCover $pdLeftCover;
 }
 
 /* wrapper profile picture */
 /* .wrapper_profilePicture__center {
-	background: white;
+	background: $white;
 	border-radius: 50%;
 }
 
@@ -76,7 +77,7 @@
 .wrapper_profilePicture__center,
 .wrapper_profilePicture_active__center {
   border-radius: 50%;
-  border: 5px solid white;
+  border: 5px solid $white;
   display: none;
   transition: 0.5s;
 }
@@ -86,7 +87,7 @@
   border-radius: 50%;
   border: 1px solid $grey400;
   display: inline-flex;
-  @include position(absolute, unset, unset, var(--paddingForCoverAndDetailsBottom), var(--paddingForCoverAndDetailsRight));
+  @include position(absolute, unset, unset, $pdYCover, $pdRightCover);
   transition: 0.5s;
 }
 
@@ -125,11 +126,12 @@
 }
 
 .detail_number {
+  color: $black;
   font-weight: 500;
 }
 
 .detail_title {
-  color: rgb(94, 94, 94);
+  color: $grey700;
   font-weight: 500;
 }
 
@@ -138,10 +140,10 @@
 }
 
 .wrapper_button button {
-  color: white;
+  color: $white;
   background: linear-gradient($hey-friend-style);
   font-size: 14px;
-  border: 1px solid silver;
+  border: 1px solid $grey400;
   border-radius: $bd-radius;
   outline: none;
   padding: 5px 25px;
@@ -150,7 +152,7 @@
 }
 
 .navLink_message {
-  color: white;
+  color: $white;
   text-decoration: none;
 }
 
@@ -185,10 +187,10 @@
 
 .button_createPost {
   width: 100%;
-  color: white;
+  color: $white;
   background: linear-gradient($hey-friend-style);
   border-radius: 6px;
-  border: 1px solid silver;
+  border: 1px solid $grey400;
   outline: none;
   font-size: 16px;
   padding: 10px 0;
@@ -246,7 +248,7 @@
 
   /* profile info line */
   .profile_info_line {
-    padding: var(--paddingForCoverAndDetailsTop) var(--paddingForCoverAndDetailsRight);
+    padding: $pdYCover $pdRightCover;
   }
 
   .wrapper_profile_details_info_line {
@@ -265,7 +267,7 @@
 
   /* wrapper_button */
   .wrapper_button button {
-    margin: var(--paddingForCoverAndDetailsTop) 10px;
+    margin: $pdYCover 10px;
   }
 }
 

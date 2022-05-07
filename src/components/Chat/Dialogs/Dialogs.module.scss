@@ -15,7 +15,7 @@
 .wrapper_input {
   @include position(relative);
   @include ds-position(center, center, unset);
-  border-bottom: 1px solid rgb(230, 229, 229);
+  border-bottom: 1px solid $grey300;
   transition: 1s;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .search_icon {
-  color: rgb(192, 191, 191);
+  color: $grey400;
   font-size: 13px;
   @include position(absolute, unset, unset, unset 0);
   padding: 0 0 0 13px;
@@ -51,7 +51,7 @@
 }
 
 .chats_wrapper_subtitle {
-  color: rgb(60, 60, 60);
+  color: $grey800;
   font-size: calc(14px + (15 - 12) * ((100vw - 300px) / (1600 - 300)));
   text-align: center;
 }

@@ -2,7 +2,7 @@
 
 .change_profile_picture_container {
   width: 30vw;
-  background: white;
+  background: $white;
   border: 1px solid $grey400;
   border-radius: $bd-radius;
   outline: none;
@@ -15,7 +15,7 @@
 }
 
 .change_profile_picture_content button {
-  color: rgb(41, 41, 41);
+  color: $grey900;
   text-transform: none;
   border-top: 1px solid $grey400;
   border-radius: 0;
@@ -24,7 +24,7 @@
 
 /* title */
 .title {
-  color: rgb(38, 38, 38);
+  color: $grey900;
   font-weight: 500;
   font-size: 20px;
   padding: $pd-content 0;
@@ -61,7 +61,7 @@
 .modal_current_post_container {
   height: 500px;
   width: 75vw;
-  background: white;
+  background: $white;
   outline: none;
   @include position(absolute, 50%, unset, unset, 50%);
   transform: translate(-50%, -50%);
@@ -100,7 +100,7 @@
 .post {
   height: calc(100px + (300 - 50) * ((100vw - 300px) / (1600 - 300)));
   max-height: 300px;
-  background: green;
+  background: $green800;
   cursor: pointer;
 }
 
@@ -116,7 +116,7 @@
 
 /* default content images list */
 .default_content_images_list {
-  /* background: red; */
+  /* background: $red500; */
   @include ds-position(center, center, column);
   margin-bottom: $mg-from-header;
 }
@@ -126,7 +126,7 @@
 }
 
 .default_content_wrapper_icon {
-  border: 2px solid black;
+  border: 2px solid $black;
   border-radius: 50%;
   padding: 30px 35px;
 }
@@ -142,7 +142,7 @@
 
 .default_content_subtitle,
 .default_content_subSubTitle {
-  color: rgb(60, 60, 60);
+  color: $grey800;
   font-size: calc(12px + (20 - 15) * ((100vw - 300px) / (1600 - 300)));
   text-align: center;
 }

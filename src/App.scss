@@ -9,8 +9,8 @@
 /* paper for bottom navigation */
 .container_fluid__paper {
   height: $ht-bottom-navigation;
-  background: white;
-  box-shadow: 0px -1px 10px rgb(209, 209, 209);
+  background: $white;
+  box-shadow: 0px -1px 10px $grey300;
   @include position(fixed, unset, 0, 0, 0);
 }
 

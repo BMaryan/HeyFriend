@@ -68,7 +68,7 @@
 }
 
 .fullName {
-  color: black;
+  color: $black;
   text-decoration: none;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .subtitle {
-  color: rgb(142, 142, 142);
+  color: $grey500;
   font-size: 14px;
   margin-right: 10px;
 }
@@ -94,9 +94,20 @@
   text-transform: capitalize;
 }
 
+// ** divider line
+.divider::before,
+.divider::after {
+  border-top: thin solid $grey300 !important;
+}
+
+.chip {
+  color: $black !important;
+  border: 1px solid $grey300 !important ;
+}
+
 /* default_content */
 .default_content {
-  /* background: cornflowerblue; */
+  /* background: $blue300; */
   @include ds-position(center, center, column);
 }
 
@@ -108,9 +119,9 @@
 }
 
 .default_content__wrapper_icon svg {
-  color: rgb(24, 24, 24);
+  color: $grey900;
   font-size: 35px;
-  border: 1px solid silver;
+  border: 1px solid $grey400;
   border-radius: 50%;
   padding: 10px 12px;
 }
@@ -120,7 +131,7 @@
 }
 
 .default_content__subtitle {
-  color: rgb(55, 55, 55);
+  color: $grey800;
   font-size: 17px;
   text-align: center;
 }

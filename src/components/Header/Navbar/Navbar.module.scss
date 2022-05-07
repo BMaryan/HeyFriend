@@ -7,15 +7,20 @@
 }
 
 .nav_link_toggleList {
+  font-size: 15px !important;
   padding: 0px;
   cursor: pointer;
+}
+
+.nav_link_toggleList > span {
+  color: $black !important;
 }
 
 .common_nav_linkRow,
 .common_nav_linkList,
 .nav_link_toggleList,
 .nav_link_toggleList_active {
-  color: black;
+  color: $black;
   text-decoration: none;
   border: 1px solid transparent;
   @include ds-position(unset, center);
@@ -31,6 +36,6 @@
 /* icon */
 .icon {
   color: $grey600;
-  font-size: 18px;
+  font-size: 20px !important;
   transition: 0.5s;
 }

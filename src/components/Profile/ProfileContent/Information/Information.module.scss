@@ -2,8 +2,8 @@
 
 .information_container {
   width: 100%;
-  color: rgb(39, 39, 39);
-  background: white;
+  color: $grey900;
+  background: $white;
   font-size: 15px;
   box-sizing: border-box;
   display: flex;
@@ -15,7 +15,7 @@
 /* menu */
 .menu {
   min-width: 30%;
-  border-right: 1px solid #262626;
+  border-right: 1px solid $grey900;
   padding-right: 5px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .item {
-  color: #8e8e8e;
+  color: $grey500;
   font-size: 18px;
   text-decoration: none;
   padding: 10px 0;
@@ -38,7 +38,7 @@
 }
 
 .item_active {
-  color: #262626;
+  color: $grey900;
   transition: border-top 1s;
 }
 
@@ -65,7 +65,7 @@
   .menu {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid $grey300;
   }
 
   .title {
@@ -83,7 +83,7 @@
   }
 
   .item_active {
-    border-bottom: 1px solid #262626;
+    border-bottom: 1px solid $grey900;
   }
 
   /* content */

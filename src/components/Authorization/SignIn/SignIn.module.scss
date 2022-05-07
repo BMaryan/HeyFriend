@@ -1,29 +1,15 @@
-@import "../../../sass/main.scss";
+@import "../../../core/styles/main.scss";
 
-/* wrapper over button */
 .wrapper_button {
   width: 100%;
-  border-radius: 10px;
-}
+  border-radius: $bd-radius;
 
-.wrapper_button button {
-  border: 1px solid silver;
-  border-radius: 10px;
-  outline: none;
-  transition: 0.5s;
-}
-
-.wrapper_button button {
-  width: 100%;
-  color: white;
-  padding: 10px 0;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-/* media */
-@include media-breakpoint-down("md") {
-  .wrapper_button {
-    margin-top: 15px;
+  & button {
+    width: 100%;
+    border-radius: $bd-radius;
+    outline: none;
+    padding: 10px 0;
+    transition: 0.5s;
+    cursor: pointer;
   }
 }

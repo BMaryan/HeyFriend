@@ -11,7 +11,7 @@
 /* wrapper content */
 .wrapper_content {
   display: flex;
-  border: 1px solid rgb(216, 216, 216);
+  border: 1px solid $grey300;
   border-radius: 50%;
   transition: 1s;
 }
@@ -19,7 +19,7 @@
 .wrapper_content img {
   height: 80px;
   width: 100%;
-  background: wheat;
+  background: $yellow100;
   @include image-position(cover, center);
   border-radius: 50%;
   transform: scale(0.95);
@@ -45,8 +45,7 @@
 .picture {
 	height: 25px;
 	width: 25px;
-	object-fit: cover;
-	object-position: center;
+  @include image-position(cover, center);
 	border-radius: 50%;
 	margin-right: 5px;
 } */

@@ -3,8 +3,8 @@
 .edit {
   height: calc(100vh - 100px);
   width: 100%;
-  background: white;
-  border: 1px solid rgb(208, 208, 208);
+  background: $white;
+  border: 1px solid $grey300;
   display: flex;
   margin-top: $mg-from-header;
   overflow: hidden;
@@ -14,7 +14,7 @@
 .edit_menu,
 .edit_menu__none {
   min-width: 25%;
-  border-right: 1px solid rgb(208, 208, 208);
+  border: 1px solid $grey300;
   @include ds-position(unset, unset, column);
 }
 
@@ -25,13 +25,13 @@
 }
 
 .edit_item {
-  background: white;
+  background: $white;
   display: flex;
 }
 
 .item {
   width: 100%;
-  color: #262626;
+  color: $grey900;
   font-size: 16px;
   text-decoration: none;
   border-left: 2px solid transparent;
@@ -44,7 +44,7 @@
 }
 
 .item_active {
-  border-left-color: rgb(107, 107, 107);
+  border-left-color: $grey700;
   font-weight: 600;
 }
 
@@ -68,9 +68,8 @@
 
 .key {
   width: 40%;
-  color: rgb(48, 48, 48);
+  color: $grey900;
   font-weight: 500;
-  /* text-align: right; */
   margin-right: 10px;
 }
 
@@ -82,7 +81,8 @@
 .field {
   width: 100%;
   max-width: 100%;
-  border: 1px solid silver;
+  color: red !important;
+  border: 1px solid $grey400;
   outline: none;
   padding: 7px 10px;
 }
@@ -155,6 +155,6 @@
 
   .item_active {
     border-left: none;
-    border-bottom-color: rgb(107, 107, 107);
+    border-bottom-color: $grey700;
   }
 }

@@ -4,7 +4,7 @@
   height: 910px;
   max-height: 100%;
   width: 100%;
-  background: white;
+  background: $white;
   flex-wrap: wrap;
   margin-bottom: 20px;
 }
@@ -48,7 +48,7 @@
 }
 
 .fullName {
-  color: black;
+  color: $black;
   text-decoration: none;
   font-weight: 500;
 }
@@ -58,7 +58,7 @@
 }
 
 .date {
-  color: rgb(131, 131, 131);
+  color: $grey500;
   font-size: 13px;
 }
 
@@ -114,11 +114,13 @@
 
 .features_left > .icon,
 .features_right > .icon {
+  color: $grey600;
   padding: 0px;
 }
 
 /* number of likes */
 .numberOfLikes {
+  color: $black;
   font-size: 15px;
   margin: 10px 0;
 }
@@ -126,7 +128,7 @@
 /* modal post actions */
 .modalPostActions {
   width: 30vw;
-  background: white;
+  background: $white;
   border-radius: $bd-radius;
   @include position(absolute, 50%, unset, unset, 50%);
   transform: translate(-50%, -50%);
@@ -135,7 +137,7 @@
 .modalPostActions button {
   height: 100%;
   width: 100%;
-  color: rgb(33, 33, 33);
+  color: $grey900;
   text-transform: capitalize;
   font-size: 14px;
   border-radius: 0;
@@ -147,7 +149,7 @@
 }
 
 .modalPostActions .item__red {
-  color: red;
+  color: $red500;
 }
 
 .item:first-child {
@@ -184,7 +186,7 @@
 .button_image {
   height: 100%;
   width: 100%;
-  color: black !important;
+  color: $black !important;
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -192,6 +194,7 @@
 /* form */
 .form {
   width: 100%;
+  background: $white !important;
   border-top: 1px solid $grey400;
   @include ds-position(unset, center);
   box-sizing: border-box;
@@ -212,10 +215,16 @@
 }
 
 .button_post {
+  color: $black !important;
   text-transform: capitalize !important;
 }
 
+.button_post:disabled {
+  color: $grey600 !important;
+}
+
 .button_post button:disabled {
+  color: red !important;
   padding: 0;
   cursor: no-drop !important;
 }

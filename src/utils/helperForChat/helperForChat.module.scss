@@ -3,7 +3,7 @@
 .head {
   height: 70px;
   max-height: 100%;
-  border-bottom: 1px solid rgb(230, 229, 229);
+  border-bottom: 1px solid $grey300;
   @include ds-position(unset, center);
   /* padding: 0 20px; */
 }
@@ -35,7 +35,7 @@
 .wrapper_picture img {
   height: 85px;
   width: 85px;
-  color: white;
+  color: $white;
   font-size: 20px;
   border-radius: 50%;
   @include ds-position(center, center);

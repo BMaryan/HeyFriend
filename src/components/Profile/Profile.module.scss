@@ -1,12 +1,8 @@
 @import "../../core/styles/main.scss";
 
-/* common styles */
-:root {
-  --paddingForCoverAndDetailsTop: 7px;
-  --paddingForCoverAndDetailsRight: 30px;
-  --paddingForCoverAndDetailsBottom: 7px;
-  --paddingForCoverAndDetailsLeft: 180px;
-}
+$pdYCover: 7px;
+$pdRightCover: 30px;
+$pdLeftCover: 180px;
 
 .profile {
   width: 100%;
@@ -16,10 +12,7 @@
 
 /* media */
 @include media-breakpoint-down("s") {
-  :root {
-    --paddingForCoverAndDetailsTop: 0;
-    --paddingForCoverAndDetailsRight: 0;
-    --paddingForCoverAndDetailsBottom: 0;
-    --paddingForCoverAndDetailsLeft: 0;
-  }
+  $pdYCover: 0;
+  $pdRightCover: 0;
+  $pdLeftCover: 0;
 }

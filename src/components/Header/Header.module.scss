@@ -2,9 +2,9 @@
 
 .header {
   height: $ht-header;
-  background: white;
+  background: $white;
   display: flex;
-  border-bottom: 1px solid rgb(221, 221, 221);
+  border-bottom: 1px solid $grey300;
   padding: 10px 0;
 }
 
@@ -56,6 +56,7 @@
   height: 100%;
   width: 250px;
   max-width: 100%;
+  background: $white;
   border: 1px solid $grey300;
   border: none;
   outline: none;
@@ -81,9 +82,9 @@
 
 .search_icon {
   height: 100%;
-  color: rgb(192, 191, 191);
+  color: $grey400;
   font-size: 13px;
-  border-right: 1px solid silver;
+  border-right: 1px solid $grey400;
   border-radius: 50%;
   @include position(absolute, underline, underline, underline, 0);
   padding: 0 13px 0 13px;
