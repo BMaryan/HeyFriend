@@ -5,6 +5,27 @@
   background: linear-gradient($gradient);
 }
 
+// ** position
+@mixin position($property: relative, $top: unset, $right: unset, $bottom: unset, $left: unset) {
+  position: $property;
+
+  @if $top != unset {
+    top: $top;
+  }
+
+  @if $right != unset {
+    right: $right;
+  }
+
+  @if $bottom != unset {
+    bottom: $bottom;
+  }
+
+  @if $left != unset {
+    left: $left;
+  }
+}
+
 // ** display position
 @mixin ds-position($justifyPos: unset, $alignPos: unset, $flexDir: unset) {
   display: flex;
@@ -30,23 +51,6 @@
 
   @if $obj-pos != unset {
     object-position: $obj-pos;
-  }
-}
-
-// ** display position
-@mixin ds-position($justifyPos: unset, $alignPos: unset, $flexDir: unset) {
-  display: flex;
-
-  @if $justifyPos != unset {
-    justify-content: $justifyPos;
-  }
-
-  @if $alignPos != unset {
-    align-items: $alignPos;
-  }
-
-  @if $flexDir != unset {
-    flex-direction: $flexDir;
   }
 }
 
