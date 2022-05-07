@@ -17,6 +17,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
+import defaultAvatar from "./assets/images/DefaultAvatar.png";
 
 const AppContainer = (props) => {
   const id = Number(props.match.params.id);
@@ -40,9 +41,9 @@ const AppContainer = (props) => {
     });
   }, [props.auth]);
 
-  React.useEffect(() => {
-    if (props.posts.length > 0) props.createPostThunk(props.posts);
-  }, [props.posts]);
+  // React.useEffect(() => {
+  //   if (props.posts.length > 0) props.createPostThunk(props.posts);
+  // }, [props.posts]);
 
   // name of page in title
   React.useEffect(() => {

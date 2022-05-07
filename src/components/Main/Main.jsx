@@ -37,6 +37,8 @@ const Main = (props) => {
 
   // props.getDefaultAccount(null);
 
+  console.log(props.account);
+
   return (
     <div className={styles.main}>
       {/* // content */}
@@ -75,16 +77,16 @@ const Main = (props) => {
         <div className={styles.sideBar_right_content}>
           <div className={styles.wrapper_contact}>
             <div className={styles.wrapper_contact_info}>
-              default
-              {/* <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant}`}>
-                <img className={styles.avatar + " " + styles.avatar__large} src={props?.account?.profile?.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />
+              {/* default */}
+              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant}`}>
+                <img className={styles.avatar + " " + styles.avatar__large} src={props?.account?.avatar ? props.account.avatar : defaultAvatar} alt="" />
               </NavLink>
               <div className={styles.wrapper_contact_info_detail}>
                 <NavLink className={styles.fullName} to={`${profileConstant}`}>
-                  {props.account.profile.surname + " " + props.account.profile.name}
+                  {props?.account?.surname + " " + props?.account?.name}
                 </NavLink>
-                <div className={styles.subtitle}>{props.account.profile.status}</div>
-              </div> */}
+                <div className={styles.subtitle}>{props?.account?.status}</div>
+              </div>
             </div>
 
             <div className={styles.wrapper_contact_button}></div>

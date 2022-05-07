@@ -22,7 +22,7 @@ const Recommendation = (props) => {
           <Card key={account.id} className={styles.card}>
             <CardActionArea className={styles.head}>
               <NavLink className={styles.navLink} to={`${profileConstant}/` + account.id}>
-                <CardMedia className={styles.wrapper_avatar} component="img" image={account.data() ? account.data().avatar : defaultAvatar} alt="" />
+                <CardMedia className={styles.wrapper_avatar} component="img" image={account?.data()?.avatar ? account.data().avatar : defaultAvatar} alt="" />
                 <CardContent className={styles.head_content}>
                   <Typography className={styles.full_name} component="div">
                     {account.data().surname + " " + account.data().name}

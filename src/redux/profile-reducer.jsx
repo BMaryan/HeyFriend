@@ -353,7 +353,7 @@ export const setAccountThunk = (user) => async (dispatch) => {
   const resp = await getDoc(doc(db, "accounts", user.uid));
 
   if (resp.exists()) {
-    dispatch(setAccount(resp.data()));
+    dispatch(setAccount({ ...resp.data(), id: user.uid }));
   }
 };
 
@@ -361,8 +361,7 @@ export const createPostThunk = (data) => async (dispatch, getState) => {
   await onAuthStateChanged(auth, (user) => user && setDoc(doc(db, "posts", user.uid), { ...data }));
 
   // onSnapshot(collection(db, "posts"), (snapshot) => console.log(snapshot.docs));
-  onSnapshot(collection(db, "posts"), (snapshot) => dispatch(createPost(snapshot.docs)));
-
+  return onSnapshot(collection(db, "posts"), (snapshot) => dispatch(createPost(snapshot.docs)));
   // const resp = await getDoc(doc(db, "posts"));
 
   // dispatch(createPost(resp.data()));

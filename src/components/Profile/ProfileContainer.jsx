@@ -11,7 +11,7 @@ import { getChatsSelector } from "../../redux/chat-selectors";
 import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, createPost } from "../../redux/profile-reducer";
 
 const ProfileContainer = (props) => {
-  let id = Number(props.match.params.id);
+  let id = props.match.params.id;
 
   // React.useEffect(() => {
   // 	if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
