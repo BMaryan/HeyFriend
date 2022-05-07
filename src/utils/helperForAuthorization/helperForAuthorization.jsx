@@ -69,7 +69,7 @@ export const ModalDefaultAccounts = (props) => {
                       <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src={account.profile.avatar ? account.profile.avatar : defaultAvatar} />
                       </ListItemAvatar>
-                      <ListItemText primary={account.profile.surname + " " + account.profile.name} secondary={account.profile.status && account.profile.status.length > 70 ? account.profile.status.slice(0, 70) + "..." : account.profile.status} />
+                      <ListItemText className={styles.list_item_description} primary={account.profile.surname + " " + account.profile.name} secondary={account.profile.status && account.profile.status.length > 70 ? account.profile.status.slice(0, 70) + "..." : account.profile.status} />
                     </ListItemButton>
                   </ListItem>
                 ))

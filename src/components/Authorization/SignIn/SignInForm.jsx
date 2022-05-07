@@ -19,12 +19,16 @@ const SignInForm = (props) => {
       <WrapperCreateField name="phone_or_email" type="text" validate={[validatePhoneNumberAndEmail, required]} component={Input} placeholder="Mobile Number or email" />
       <WrapperCreateField name="password" type="password" validate={[validatePassword, required]} component={Input} placeholder="Password" />
       <WrapperCreateField name="rememberMe" type="checkbox" validate={[]} component={Input} placeholder="" text="Remember Me" />
-      <WrapperButton {...props} button_text="Sign In" isSignIn={true} />
 
-      <div onClick={handleOpen} className={styles.wrapper_button}>
-        <Button variant="contained">
-          <span style={{ textTransform: "capitalize" }}>Default accounts</span>
-        </Button>
+      <div onClick={handleOpen} className={styles.wrapper_buttons}>
+        <div>
+          <WrapperButton {...props} button_text="Sign In" isSignIn={true} />
+        </div>
+        <div className={styles.wrapper_button}>
+          <Button variant="contained">
+            <span style={{ textTransform: "capitalize" }}>Default accounts</span>
+          </Button>
+        </div>
       </div>
 
       {/* modal for autocomplete auth data */}

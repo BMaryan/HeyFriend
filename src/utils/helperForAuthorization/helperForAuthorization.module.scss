@@ -55,7 +55,7 @@
 }
 
 .information_navLink:hover {
-  color: black;
+  color: $black;
   background: $grey100;
   transition: 0.5s;
 }
@@ -75,6 +75,7 @@
 }
 
 .list_title {
+  color: $black;
   text-align: center;
   font-size: 25px;
   padding-top: 15px;
@@ -89,7 +90,16 @@
 }
 
 .list_item {
+  color: $black;
   padding: 0 !important;
+}
+
+.list_item_description > span {
+  color: $black !important;
+}
+
+.list_item_description > p {
+  color: $grey600 !important;
 }
 
 /* media */
