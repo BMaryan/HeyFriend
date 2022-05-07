@@ -6,6 +6,7 @@ import NavbarRow from "./Navbar/NavbarRow/NavbarRow";
 import NavbarList from "./Navbar/NavbarList/NavbarList";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/images/insta.png";
+import Switch from "@mui/material/Switch";
 
 const Header = (props) => {
   // let [searchValue, setSearchValue] = React.useState('');
@@ -17,6 +18,10 @@ const Header = (props) => {
   function refreshPage() {
     window.location.href = "/";
   }
+
+  const handleChange = (event) => {
+    props.setDarkTheme(event.target.checked);
+  };
 
   return (
     <div className={styles.header}>
@@ -34,6 +39,8 @@ const Header = (props) => {
         <div className={styles.navbar_row}>
           <NavbarRow account={props.account} isTopNavigation={true} />
         </div>
+
+        <Switch checked={props.darkTheme} onChange={handleChange} />
 
         {/* navBar list */}
         <div className={styles.navbar_list}>

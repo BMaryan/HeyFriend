@@ -37,15 +37,7 @@ const NavbarList = (props) => {
   return (
     <div className={styles.navbar_list}>
       <div className={styles.wrapper_nav_link}>
-        <Chip
-          onClick={handleClick}
-          sx={{ fontSize: "15px" }}
-          className={commonStyles.nav_link_toggleList}
-          variant="outlined"
-          // label=''
-          label={props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}
-          avatar={<Avatar src={props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />}
-        />
+        <Chip className={commonStyles.nav_link_toggleList} onClick={handleClick} variant="outlined" label={props.account && props.account.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined} avatar={<Avatar src={props.account && props.account.profile && props.account.profile.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />} />
       </div>
 
       <Menu
@@ -58,29 +50,6 @@ const NavbarList = (props) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         PaperProps={{
           elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
         }}>
         <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant}`}>
           <MenuItem className={styles.menu_item}>
@@ -110,16 +79,15 @@ const NavbarList = (props) => {
         </NavLink>
 
         <MenuItem
+          className={styles.menu_item}
           onClick={() => {
             dataFromAccountToAccounts();
             props.isAccount(null);
             props.getAuthorizationId(null);
             props.getParamsId(null);
-          }}
-          sx={{ borderTop: "1px solid var(--bgWhite233)" }}
-          className={styles.menu_item}>
+          }}>
           <ListItemIcon>
-            <Logout sx={{ fontSize: 20 }} className={commonStyles.icon} />
+            <Logout className={commonStyles.icon} />
           </ListItemIcon>
           Log Out
         </MenuItem>

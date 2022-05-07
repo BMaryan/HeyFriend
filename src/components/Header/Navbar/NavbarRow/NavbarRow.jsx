@@ -27,9 +27,9 @@ const NavbarRow = (props) => {
 
   return (
     <div className={!props.isBottomNavigation ? styles.navbar_row : styles.navbar_row_bottom}>
-      <DuplicateCodeFunc path="/" icon={<Checkbox icon={location.pathname !== "/" ? <HomeOutlinedIcon /> : <Home color="action" />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
-      <DuplicateCodeFunc path={`${chatConstant}`} icon={<Checkbox icon={location.pathname !== chatConstant ? <ChatOutlinedIcon /> : <ChatRoundedIcon color="action" />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
-      <DuplicateCodeFunc path={`${friendsConstant}`} icon={<Checkbox icon={!location.pathname.includes(friendsConstant) ? <PeopleOutlineIcon /> : <PeopleRoundedIcon color="action" />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} />
+      <DuplicateCodeFunc path="/" icon={<Checkbox icon={location.pathname !== "/" ? <HomeOutlinedIcon className={styles.icon} /> : <Home className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
+      <DuplicateCodeFunc path={`${chatConstant}`} icon={<Checkbox icon={location.pathname !== chatConstant ? <ChatOutlinedIcon className={styles.icon} /> : <ChatRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
+      <DuplicateCodeFunc path={`${friendsConstant}`} icon={<Checkbox icon={!location.pathname.includes(friendsConstant) ? <PeopleOutlineIcon className={styles.icon} /> : <PeopleRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} />
     </div>
   );
 };

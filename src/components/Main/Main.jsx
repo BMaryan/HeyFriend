@@ -56,8 +56,8 @@ const Main = (props) => {
             <div className={styles.wrapper_contact_button}></div>
           </div>
 
-          <Divider sx={{ margin: "10px 0" }}>
-            <Chip label="Suggestions For You" variant="outlined" />
+          <Divider className={styles.divider} sx={{ margin: "10px 0" }}>
+            <Chip className={styles.chip} label="Suggestions For You" variant="outlined" />
           </Divider>
 
           {followedAccounts

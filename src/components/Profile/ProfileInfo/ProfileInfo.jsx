@@ -79,11 +79,12 @@ const ProfileInfo = (props) => {
                 </Button>
 
                 {checkFollow ? (
-                  <Button style={{ textTransform: "capitalize" }} onClick={() => props.unFollowing(props.id)} variant="contained">
+                  <Button className={styles.button} style={{ textTransform: "capitalize" }} onClick={() => props.unFollowing(props.id)} variant="contained">
                     Unfollow
                   </Button>
                 ) : (
                   <Button
+                    className={styles.button}
                     style={{ textTransform: "capitalize" }}
                     onClick={() => {
                       props.following(props.id);
@@ -95,7 +96,7 @@ const ProfileInfo = (props) => {
               </>
             ) : (
               <NavLink className={styles.navLink_message} to={`${editConstant}${profileConstant}`}>
-                <Button variant="contained">
+                <Button className={styles.button} variant="contained">
                   <FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
                   Edit profile
                 </Button>
