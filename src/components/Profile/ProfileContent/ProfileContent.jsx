@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ProfileContent.module.css";
+import styles from "./ProfileContent.module.scss";
 import { NavLink } from "react-router-dom";
 import { Route } from "react-router-dom";
 import Information from "./Information/Information";
@@ -98,7 +98,11 @@ const ProfileContent = (props) => {
       </div>
 
       {/* toggle show create post container */}
+<<<<<<< HEAD
       <CreatePost account={props.account} auth={props.auth} open={open} postPhoto={postPhoto} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} createPost={props.createPost} />
+=======
+      <CreatePost account={props.account} open={open} postPhoto={postPhoto} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} />
+>>>>>>> 829743376670bcf6bd688d0d118905c801d65516
     </div>
   );
 };

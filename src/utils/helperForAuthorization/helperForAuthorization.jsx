@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React from "react";
-import styles from "./helperForAuthorization.module.css";
+import styles from "./helperForAuthorization.module.scss";
 import { NavLink } from "react-router-dom";
 import { accounts, account } from "../../core/constants/constantsLocalStorage";
 import Backdrop from "@mui/material/Backdrop";
@@ -69,7 +69,11 @@ export const ModalDefaultAccounts = (props) => {
                       <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src={account.profile.avatar ? account.profile.avatar : defaultAvatar} />
                       </ListItemAvatar>
+<<<<<<< HEAD
                       <ListItemText primary={account.profile.surname + " " + account.profile.name} secondary={account.profile.status && account.profile.status.length > 70 ? account.profile.status.slice(0, 70) + "..." : account.profile.status} />
+=======
+                      <ListItemText className={styles.list_item_description} primary={account.profile.surname + " " + account.profile.name} secondary={account.profile.status && account.profile.status.length > 70 ? account.profile.status.slice(0, 70) + "..." : account.profile.status} />
+>>>>>>> 829743376670bcf6bd688d0d118905c801d65516
                     </ListItemButton>
                   </ListItem>
                 ))
@@ -91,8 +95,13 @@ export const setSignUpDataToLocalStorage = (props) => {
 // check authorization
 export const helpCheckAuthorization = (props) => {
   props.users.find((user) => {
+<<<<<<< HEAD
     if (props.userSignIn && props.userSignIn.email) {
       if (user.email === props.userSignIn.email && user.password === props.userSignIn.password) {
+=======
+    if (props.userSignIn && props.userSignIn.phone_or_email) {
+      if (user.phone_or_email === props.userSignIn.phone_or_email && user.password === props.userSignIn.password) {
+>>>>>>> 829743376670bcf6bd688d0d118905c801d65516
         return user;
       }
     }

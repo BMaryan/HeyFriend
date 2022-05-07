@@ -1,0 +1,28 @@
+@import "../../../../../core/styles/main.scss";
+
+.review {
+}
+
+.wrapper_item {
+  font-size: 17px;
+  @include ds-position(unset, unset, column);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.wrapper_content {
+  display: flex;
+}
+
+.icon {
+  color: $grey600;
+  margin-right: 10px;
+}
+
+.value {
+}

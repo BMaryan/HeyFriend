@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import MainContainer from "./components/Main/MainContainer";
 import NotFound from "./components/common/NotFound/NotFound";
@@ -33,7 +33,6 @@ function App(props) {
       ) : undefined}
 
       <div className={props.auth ? `container` : "container__auth"}>
-        {/* {props.account ? ( */}
         <Switch>
           <Route exact path="/" render={() => <MainContainer />} />
           <Route exact path={`${photoConstant}/:id`} render={() => <CurrentPostContainer />} />
@@ -45,12 +44,6 @@ function App(props) {
           <Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
           <Route path="*" render={() => <NotFound />} />
         </Switch>
-        {/* // ) : (
-				// 	<>
-				// 		<Route path={`${signInConstant}`} render={() => <SignInContainer />} />
-				// 		<Route path={`${signUpConstant}`} render={() => <SignUpContainer />} />
-				// 	</>
-				// )} */}
       </div>
 
       {!(checkSignIn || checkSignUp) ? (

@@ -1,0 +1,57 @@
+@import "../../../core/styles/main.scss";
+
+.dialogs {
+  height: 100%;
+  @include ds-position(unset, unset, column);
+}
+
+/* title */
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* wrapper_input */
+.wrapper_input {
+  @include position(relative);
+  @include ds-position(center, center, unset);
+  border-bottom: 1px solid $grey300;
+  transition: 1s;
+}
+
+.wrapper_input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 15px 10px 15px 35px;
+  transition: 1s;
+}
+
+.search_icon {
+  color: $grey400;
+  font-size: 13px;
+  @include position(absolute, unset, unset, unset 0);
+  padding: 0 0 0 13px;
+}
+
+/* chats */
+.chats {
+  flex: 1;
+  overflow: hidden;
+}
+
+.chats_wrapper_text {
+  height: 100%;
+  @include ds-position(center, center, column);
+  text-align: center;
+}
+
+.chats_wrapper_title {
+  font-size: calc(20px + (25 - 20) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.chats_wrapper_subtitle {
+  color: $grey800;
+  font-size: calc(14px + (15 - 12) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+}

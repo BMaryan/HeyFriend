@@ -1,0 +1,32 @@
+@import "../../../core/styles/main.scss";
+
+.current_post {
+  height: calc(100vh - 100px);
+  width: 100%;
+  background: $white;
+  margin-top: $mg-from-header;
+}
+
+.current_post_content {
+  height: 100%;
+  @include ds-position(space-between);
+}
+
+/* wrapper post photo */
+.wrapper_post_photo {
+  height: 100%;
+  width: 100%;
+}
+
+/* wrapper content */
+.wrapper_content {
+  width: 35%;
+  @include ds-position(unset, unset, column);
+}
+
+/* media */
+@include media-breakpoint-down("md") {
+  .current_post {
+    height: calc(100vh - $ht-bottom-navigation + 100px);
+  }
+}

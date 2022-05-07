@@ -1,0 +1,64 @@
+@import "../../../../core/styles/main.scss";
+\ .chat {
+  padding: 10px 20px;
+}
+
+.chat,
+.chat_forHead {
+  text-decoration: none;
+  @include ds-position(unset, center);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.chat:hover {
+  background: $grey200;
+  transition: 0.5s;
+}
+
+.chat_active {
+  background: $grey400;
+  transition: 0.5s;
+}
+
+.wrapper_picture {
+  margin-right: 10px;
+}
+
+.wrapper_picture .have_not_picture img,
+.have_not_picture_forHead img,
+.wrapper_icon {
+  font-weight: bold;
+  border-radius: 50%;
+  @include image-position(cover, center);
+  @include ds-position(center, center);
+}
+
+.wrapper_picture .have_not_picture img {
+  height: 50px;
+  width: 50px;
+}
+
+.wrapper_picture .have_not_picture_forHead img,
+.wrapper_icon {
+  height: 40px;
+  width: 40px;
+}
+
+.wrapper_icon {
+  color: $white;
+  background: $blue200;
+  font-size: 18px;
+}
+
+/*  */
+.login {
+  color: $black;
+  font-size: 15px;
+  /* font-size: 15px; */
+}
+
+.message {
+  color: $grey600;
+  font-size: 15px;
+}

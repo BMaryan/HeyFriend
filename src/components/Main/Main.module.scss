@@ -1,0 +1,160 @@
+@import "../../core/styles/main.scss";
+
+.main {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  margin-top: $mg-from-header;
+}
+
+/* content */
+.main_content {
+  width: 60%;
+  margin-right: $mg-from-header;
+  margin-bottom: $mg-from-header;
+}
+
+/* sidebar */
+.main_sideBar_right {
+  display: flex;
+  flex: 1;
+  z-index: 10;
+}
+
+.sideBar_right_content {
+  height: 80vh;
+  width: 100%;
+  @include position(sticky, 70px);
+  overflow: hidden;
+}
+
+/* wrapper contact */
+.wrapper_contact {
+  @include ds-position(space-between, center);
+  margin-bottom: 10px;
+}
+
+/* wrapper contact info */
+.wrapper_contact_info {
+  @include ds-position(unset, center);
+}
+
+.wrapper_contact_info_avatar {
+  margin-right: 10px;
+}
+
+.avatar {
+  border-radius: 50%;
+  @include image-position(cover, center);
+}
+
+.avatar__large {
+  height: 56px;
+  width: 56px;
+}
+
+.avatar__medium {
+  height: 46px;
+  width: 46px;
+}
+
+.avatar__small {
+  height: 20px;
+  width: 20px;
+  border: 1px solid $grey400;
+}
+
+.wrapper_contact_info_detail {
+}
+
+.fullName {
+  color: $black;
+  text-decoration: none;
+}
+
+.fullName:hover {
+  text-decoration: underline;
+}
+
+.avatar_group {
+  @include ds-position(flex-end);
+}
+
+.subtitle {
+  color: $grey500;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+/* wrapper contact button */
+.wrapper_contact_button {
+}
+
+.wrapper_contact_button button {
+  text-transform: capitalize;
+}
+
+// ** divider line
+.divider::before,
+.divider::after {
+  border-top: thin solid $grey300 !important;
+}
+
+.chip {
+  color: $black !important;
+  border: 1px solid $grey300 !important ;
+}
+
+/* default_content */
+.default_content {
+  /* background: $blue300; */
+  @include ds-position(center, center, column);
+}
+
+.default_content div {
+  margin: 5px 0;
+}
+
+.default_content__wrapper_icon {
+}
+
+.default_content__wrapper_icon svg {
+  color: $grey900;
+  font-size: 35px;
+  border: 1px solid $grey400;
+  border-radius: 50%;
+  padding: 10px 12px;
+}
+
+.default_content__title {
+  font-size: 25px;
+}
+
+.default_content__subtitle {
+  color: $grey800;
+  font-size: 17px;
+  text-align: center;
+}
+
+/* media */
+@include media-breakpoint-down("l") {
+  .main {
+    @include ds-position(center);
+  }
+
+  .main_content {
+    width: 65%;
+    margin-right: 0;
+  }
+
+  .main_sideBar_right {
+    display: none;
+  }
+}
+
+@include media-breakpoint-down("sm") {
+  .main_content {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}

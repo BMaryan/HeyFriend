@@ -1,0 +1,18 @@
+@import "../../core/styles/main.scss";
+
+$pdYCover: 7px;
+$pdRightCover: 30px;
+$pdLeftCover: 180px;
+
+.profile {
+  width: 100%;
+  @include ds-position(unset, unset, column);
+  margin-top: $mg-from-header;
+}
+
+/* media */
+@include media-breakpoint-down("s") {
+  $pdYCover: 0;
+  $pdRightCover: 0;
+  $pdLeftCover: 0;
+}

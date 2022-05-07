@@ -1,0 +1,266 @@
+@import "../../../core/styles/main.scss";
+
+.wrapper_post {
+  height: 910px;
+  max-height: 100%;
+  width: 100%;
+  background: $white;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.wrapper_post:last-child {
+  margin: 0;
+}
+
+.post {
+  height: 100%;
+  @include ds-position(unset, unset, column);
+  box-sizing: border-box;
+}
+
+/* head */
+.head {
+  padding: $pd-content;
+}
+
+.wrapper_details {
+  @include ds-position(space-between, center);
+}
+
+.details_position {
+  @include ds-position(unset, center);
+}
+
+.wrapper_profile_img {
+  margin-right: $pd-content;
+}
+
+.profile_avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  @include image-position(cover, center);
+  display: flex;
+}
+
+.details {
+}
+
+.fullName {
+  color: $black;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.fullName:hover {
+  text-decoration: underline;
+}
+
+.date {
+  color: $grey500;
+  font-size: 13px;
+}
+
+.wrapper_button button {
+  padding: 0;
+}
+
+.icon {
+  color: $grey600;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* body */
+.body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.bodyPhoto {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* footer */
+.footer {
+  height: 100%;
+  @include ds-position(space-between, unset, column);
+  overflow: hidden;
+}
+
+.footer_modal {
+  @include ds-position(space-between, unset, column);
+}
+
+.footer_head {
+  padding: $pd-content $pd-content 0 $pd-content;
+}
+
+.features {
+  @include ds-position(space-between, center);
+}
+
+.features_left > .icon {
+  margin: 0px 15px 0px 0px;
+}
+
+.features_left > .icon,
+.features_right > .icon {
+  color: $grey600;
+  padding: 0px;
+}
+
+/* number of likes */
+.numberOfLikes {
+  color: $black;
+  font-size: 15px;
+  margin: 10px 0;
+}
+
+/* modal post actions */
+.modalPostActions {
+  width: 30vw;
+  background: $white;
+  border-radius: $bd-radius;
+  @include position(absolute, 50%, unset, unset, 50%);
+  transform: translate(-50%, -50%);
+}
+
+.modalPostActions button {
+  height: 100%;
+  width: 100%;
+  color: $grey900;
+  text-transform: capitalize;
+  font-size: 14px;
+  border-radius: 0;
+  padding: 12px;
+}
+
+.modalPostActions .item__border {
+  border-bottom: 1px solid $grey400;
+}
+
+.modalPostActions .item__red {
+  color: $red500;
+}
+
+.item:first-child {
+  border-radius: $bd-radius $bd-radius 0 0;
+}
+
+.item:last-child {
+  border-radius: 0 0 $bd-radius $bd-radius;
+}
+
+.item_beta_vershion_picture {
+  height: 100%;
+  @include position(absolute, 0, unset, unset, 0);
+}
+
+/*  */
+.toggle_show_post_content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.postPhoto {
+  height: 100%;
+  width: 65%;
+  margin: 0;
+}
+
+.content {
+  @include ds-position(space-between, unset, column);
+  flex: 1;
+}
+
+.button_image {
+  height: 100%;
+  width: 100%;
+  color: $black !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* form */
+.form {
+  width: 100%;
+  background: $white !important;
+  border-top: 1px solid $grey400;
+  @include ds-position(unset, center);
+  box-sizing: border-box;
+  padding: $pd-content;
+}
+
+.button_icon {
+  padding: 0 !important;
+  margin-right: 10px !important;
+}
+
+.input {
+  flex: 1;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  padding: 5px 0;
+}
+
+.button_post {
+  color: $black !important;
+  text-transform: capitalize !important;
+}
+
+.button_post:disabled {
+  color: $grey600 !important;
+}
+
+.button_post button:disabled {
+  color: red !important;
+  padding: 0;
+  cursor: no-drop !important;
+}
+
+/* media */
+@include media-breakpoint-down("l") {
+  .wrapper_post {
+  }
+
+  .modalPostActions {
+    width: 50vw;
+  }
+}
+
+@include media-breakpoint-down("md") {
+  .wrapper_post {
+    height: 800px;
+  }
+}
+
+@include media-breakpoint-down("m") {
+  .wrapper_post {
+    height: 700px;
+  }
+
+  .modalPostActions {
+    width: 70vw;
+  }
+}
+
+@include media-breakpoint-down("s") {
+  .wrapper_post {
+    height: 600px;
+  }
+
+  .input {
+    width: 100%;
+  }
+}

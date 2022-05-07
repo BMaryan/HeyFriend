@@ -1,0 +1,160 @@
+@import "../../../core/styles/main.scss";
+
+.edit {
+  height: calc(100vh - 100px);
+  width: 100%;
+  background: $white;
+  border: 1px solid $grey300;
+  display: flex;
+  margin-top: $mg-from-header;
+  overflow: hidden;
+}
+
+/* edit menu */
+.edit_menu,
+.edit_menu__none {
+  min-width: 25%;
+  border: 1px solid $grey300;
+  @include ds-position(unset, unset, column);
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edit_item {
+  background: $white;
+  display: flex;
+}
+
+.item {
+  width: 100%;
+  color: $grey900;
+  font-size: 16px;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  padding: 16px 16px 16px 30px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: $grey200;
+}
+
+.item_active {
+  border-left-color: $grey700;
+  font-weight: 600;
+}
+
+/* edit content */
+.edit_content {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+/* form */
+.form {
+  width: 65%;
+  @include ds-position(unset, unset, column);
+}
+
+.wrapper_block {
+  width: 100%;
+  display: flex;
+  margin-bottom: $pd-content;
+}
+
+.key {
+  width: 40%;
+  color: $grey900;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.action {
+  width: 100%;
+  @include ds-position(right);
+}
+
+.field {
+  width: 100%;
+  max-width: 100%;
+  color: red !important;
+  border: 1px solid $grey400;
+  outline: none;
+  padding: 7px 10px;
+}
+
+.wrapper_button {
+  width: 70%;
+  margin: auto;
+}
+
+.wrapper_button > div {
+  cursor: no-drop;
+}
+
+.wrapper_button button {
+  width: 100%;
+  background: linear-gradient($hey-friend-style);
+}
+
+/* media */
+@include media-breakpoint-between("sm", "md") {
+  /* form */
+  .form {
+    width: 80%;
+    @include ds-position(unset, unset, column);
+  }
+}
+
+@include media-breakpoint-down("sm") {
+  /* form */
+  .form {
+    width: 100%;
+    @include ds-position(unset, unset, column);
+  }
+
+  .wrapper_block {
+    @include ds-position(unset, unset, column);
+  }
+
+  .key {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .edit {
+    height: calc(100vh - $ht-bottom-navigation + 100px);
+  }
+}
+
+@include media-breakpoint-down("s") {
+  .edit {
+    @include ds-position(unset, unset, column);
+  }
+
+  /* edit menu */
+  .edit_menu {
+    width: 100%;
+  }
+
+  .edit_menu__none {
+    display: none;
+  }
+
+  .edit_item {
+    text-align: center;
+  }
+
+  .item {
+    border-bottom: 2px solid $grey400;
+  }
+
+  .item_active {
+    border-left: none;
+    border-bottom-color: $grey700;
+  }
+}

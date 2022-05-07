@@ -1,9 +1,0 @@
-.messages {
-	position: relative;
-}
-
-.messages_content {
-	display: flex;
-	flex-direction: column;
-	padding: var(--pdContent);
-}

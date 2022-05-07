@@ -1,0 +1,12 @@
+@import "../../../core/styles/main.scss";
+
+.stories {
+  /* background: $green300; */
+  border-radius: $bd-radius;
+  padding: $pd-content 0;
+  margin-right: 20px;
+}
+
+.stories:last-child {
+  margin-right: 0;
+}

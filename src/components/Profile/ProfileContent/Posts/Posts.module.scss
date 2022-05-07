@@ -1,0 +1,19 @@
+@import "../../../../core/styles/main.scss";
+
+.wrapper_input {
+  background: $white;
+  @include ds-position(unset, center);
+  padding: $pd-content;
+  margin-bottom: $mg-between-contaner;
+}
+
+.input {
+  padding: 10px 75px 10px 10px;
+  cursor: pointer;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid $grey300;
+  outline: none;
+}

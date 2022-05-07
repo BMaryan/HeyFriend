@@ -1,0 +1,62 @@
+@import "../../../../core/styles/main.scss";
+
+/* 		common wrapper container message */
+.wrapper_container_message,
+.wrapper_container_myMessage,
+.wrapper_container_otherMessage {
+  width: 100%;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+/* wrapper container my message */
+.wrapper_container_myMessage {
+  @include ds-position(flex-start, unset, row-reverse);
+}
+
+/* wrapper container other message */
+.wrapper_container_otherMessage {
+  @include ds-position(flex-start);
+}
+
+/* 		common wrapper picture */
+.wrapper_picture,
+.wrapper_myPicture img,
+.wrapper_otherPicture img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  @include image-position(cover, top);
+  display: flex;
+}
+
+/* wrapper my picture */
+.wrapper_myPicture {
+  margin-left: 10px;
+}
+
+/* wrapper other picture */
+.wrapper_otherPicture {
+  margin-right: 10px;
+}
+
+/* 		common wrapper message */
+.wrapper_message,
+.wrapper_myMessage,
+.wrapper_otherMessage {
+  @include ds-position(unset, center);
+  padding: 0 10px;
+}
+
+/* wrapper my message */
+.wrapper_myMessage {
+  background: $grey300;
+  border-radius: 20px 20px 0 20px;
+}
+
+/* wrapper other message */
+.wrapper_otherMessage {
+  background: $white;
+  border: 1px solid $grey400;
+  border-radius: 20px 20px 20px 0px;
+}

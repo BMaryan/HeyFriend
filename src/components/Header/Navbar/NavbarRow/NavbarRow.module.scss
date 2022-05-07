@@ -1,0 +1,38 @@
+@import "../../../../core/styles/main.scss";
+
+.navbar_row,
+.navbar_row_bottom {
+  height: 100%;
+  display: flex;
+}
+
+.navbar_row_bottom {
+  flex: 1;
+}
+
+.icon {
+  color: $grey600 !important;
+}
+
+.icon_active {
+  color: $grey800 !important;
+}
+
+/* wrapper nav link */
+.wrapper_nav_link {
+  height: 100%;
+  width: 100%;
+  @include ds-position(center, center);
+  transition: 0.5s;
+}
+
+/* nav link */
+.nav_linkRow {
+  border-radius: 30px;
+  margin: 0 20px;
+}
+
+.nav_linkRow__bottom {
+  display: flex;
+  flex: 1;
+}

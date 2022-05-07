@@ -1,0 +1,52 @@
+@import "../../../../../core/styles/main.scss";
+
+.comment {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+.comment_content {
+  display: flex;
+  padding: 0 $pd-content $pd-content $pd-content;
+}
+
+.comment_content_modal {
+  word-break: break-all;
+  border-top: 1px solid $grey400;
+  border-bottom: 1px solid $grey400;
+  flex: 1;
+  padding: $pd-content;
+  overflow-y: scroll;
+}
+
+.comment_content_modal::-webkit-scrollbar {
+  width: 0;
+}
+
+.full_name_comment {
+  color: $black;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.full_name_comment:hover {
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
+.description {
+  color: $grey800;
+  font-size: 15px;
+  word-break: break-all;
+}
+
+.button_more {
+  color: $grey500;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

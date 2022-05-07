@@ -1,0 +1,127 @@
+@import "../../../core/styles/main.scss";
+@import "../Profile.module.scss";
+
+.profile_content {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 0 $pdRightCover;
+}
+
+/* content */
+.content {
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.navigation {
+  border-bottom: 1px solid $grey300;
+  @include ds-position(center, center);
+  margin-bottom: $mg-between-contaner;
+  transition: border-top 0.5s;
+}
+
+.item {
+  color: $grey500;
+  font-size: 18px;
+  text-decoration: none;
+  @include ds-position(unset, center);
+  padding: 5px 5px;
+  margin: 0 5%;
+  transition: 0.5s;
+}
+
+.item svg {
+  font-size: 18px;
+}
+
+.item_active {
+  color: $grey900;
+  border-bottom: 1px solid $grey900;
+  transition: border-top 1s;
+}
+
+.item_active svg {
+  color: $grey900;
+}
+
+.icon {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+/* wrapper button delete */
+.wrapper_button_delete {
+  @include position(absolute, 0, 0);
+}
+
+/* wrapper button close */
+.wrapper_button_delete button {
+  color: $white;
+}
+
+.wrapper_button_close button,
+.wrapper_button_delete button {
+  @include position(absolute, 10px, $pd-content);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+/* media */
+@include media-breakpoint-between("md", "l") {
+  /* modal create post */
+  .create_new_post_content {
+    width: 35vw;
+  }
+}
+
+@include media-breakpoint-between("sm", "md") {
+  /* modal create post */
+  .create_new_post_content {
+    width: 45vw;
+  }
+
+  .create_post_wrapper_content {
+    height: 40vh;
+  }
+}
+
+@include media-breakpoint-down("sm") {
+  /* modal create post */
+  .create_new_post_content {
+    width: 55vw;
+  }
+
+  .create_post_wrapper_content {
+    height: 30vh;
+  }
+}
+
+@include media-breakpoint-down("m") {
+  .icon {
+    font-size: 20px !important;
+    margin: 0;
+  }
+
+  .item {
+    @include ds-position(center);
+    flex: 1;
+  }
+
+  .item_active {
+    border-bottom: 1px solid $grey900;
+  }
+}
+
+@include media-breakpoint-down("s") {
+  /* modal create post */
+  .create_new_post_content {
+    width: 55vw;
+  }
+
+  .wrapper_button_close button {
+    display: none;
+  }
+}

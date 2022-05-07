@@ -1,0 +1,24 @@
+@import "../../../core/styles/main.scss";
+
+.not_found {
+  @include ds-position(unset, center, column);
+  margin: 100px auto;
+}
+
+.title {
+  color: $grey800;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin: 10px 0;
+}
+
+.nav_link {
+}
+
+.nav_link button {
+  padding: 5px 20px;
+  cursor: pointer;
+}

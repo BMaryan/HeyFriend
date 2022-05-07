@@ -1,0 +1,10 @@
+@import "../../../core/styles/main.scss";
+
+.messages {
+  @include position(relative);
+}
+
+.messages_content {
+  @include ds-position(unset, unset, column);
+  padding: $pd-content;
+}

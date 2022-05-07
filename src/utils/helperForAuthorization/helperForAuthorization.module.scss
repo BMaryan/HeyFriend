@@ -1,0 +1,128 @@
+@import "../../core/styles/main.scss";
+
+/* authorization_content */
+.authorization_content {
+  width: 50%;
+  background: $white;
+  @include ds-position(space-between, unset, column);
+  box-sizing: border-box;
+  padding: 25px;
+  transition: 1s;
+}
+
+.authorization_title {
+  color: $grey500;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* information content */
+.information_content {
+  width: 50%;
+  background: linear-gradient($hey-friend-style);
+  @include ds-position(center, center, column);
+  box-sizing: border-box;
+  padding: 25px;
+  transition: 1s;
+}
+
+.information_title {
+  color: $white;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.information_subtitle {
+  color: $white;
+  font-size: 13px;
+  text-align: center;
+  margin: 10px 0 20px 0;
+}
+
+.information_navLink {
+  color: $white;
+  background: transparent;
+  text-decoration: none;
+  font-size: 15px;
+  border: 2px solid $white;
+  border-radius: 20px;
+  outline: none;
+  padding: 7px 20px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.information_navLink:hover {
+  color: $black;
+  background: $grey100;
+  transition: 0.5s;
+}
+
+/* modal autocomplete default accounts */
+.modal_autocomplete_default_accounts {
+  width: 50vw;
+  @include position(absolute, 50%, unset, unset, 50%);
+  transform: translate(-50%, -50%);
+}
+
+.list {
+  background: $white;
+  border-radius: $bd-radius;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.list_title {
+  color: $black;
+  text-align: center;
+  font-size: 25px;
+  padding-top: 15px;
+}
+
+.list_subtitle {
+  color: $grey800;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid $grey400;
+  padding: 5px 0 15px 0;
+}
+
+.list_item {
+  color: $black;
+  padding: 0 !important;
+}
+
+.list_item_description > span {
+  color: $black !important;
+}
+
+.list_item_description > p {
+  color: $grey600 !important;
+}
+
+/* media */
+@include media-breakpoint-down("md") {
+  /* authorization_content */
+  .authorization_content {
+    width: 100%;
+  }
+
+  .information_content {
+    width: 100%;
+    border-radius: 0 0 $bd-radius $bd-radius;
+  }
+
+  /* modal autocomplete default accounts */
+  .modal_autocomplete_default_accounts {
+    width: 70vw;
+  }
+}
+
+@include media-breakpoint-down("m") {
+  /* modal autocomplete default accounts */
+  .modal_autocomplete_default_accounts {
+    width: 90vw;
+  }
+}

@@ -1,0 +1,77 @@
+@import "../../../../core/styles/main.scss";
+
+.navbar_list {
+  height: 100%;
+  display: flex;
+  transition: 0.5s;
+}
+
+.navbar_list div {
+  /* background: $red500; */
+}
+
+/* wrapper nav link */
+.wrapper_nav_link {
+  height: 100%;
+  display: flex;
+  @include position(relative);
+  transition: 0.5s;
+}
+
+/* wrapper picture */
+.wrapper_toggleList_picture {
+  height: 100%;
+}
+
+.wrapper_toggleList_picture img {
+  height: 100%;
+  width: 35px;
+  @include image-position(cover, center);
+  border-radius: 50%;
+}
+
+/* full name */
+.toggleList_fullName {
+  color: $black;
+  text-decoration: none;
+  margin: 0 7px;
+}
+
+/* menu */
+.menu > div > ul {
+  width: 100% !important;
+  min-width: 180px !important;
+  max-width: 250px !important;
+  background: $white !important;
+  overflow: "visible" !important;
+  filter: "drop-shadow(0px 2px 8px $grey900)" !important;
+  padding: 0 !important;
+
+  &::before {
+    content: "" !important;
+    display: "block" !important;
+    @include position(absolute, unset, 0 !important, 0 !important, 0 !important);
+    transform: "translateY(-50%) rotate(45deg)" !important;
+    z-index: 0 !important;
+  }
+}
+
+/* menu_item */
+.menu > div ul li {
+  width: 100%;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
+.menu_item {
+  color: $black !important;
+  border-bottom: 1px solid $grey200 !important;
+}
+
+.nav_linkList {
+  font-size: 15px;
+}
+
+.nav_linkList svg {
+  font-size: 21px;
+}

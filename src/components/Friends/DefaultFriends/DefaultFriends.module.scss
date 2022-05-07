@@ -1,0 +1,38 @@
+@import "../../../core/styles/main.scss";
+
+.default_friends {
+  height: 100%;
+  width: 100%;
+  @include ds-position(center, center, column);
+}
+
+.default_friends div {
+  margin: 10px 0;
+}
+
+.wrapper_icon {
+  border: 2px solid $black;
+  border-radius: 50%;
+  padding: 30px 35px;
+}
+
+.wrapper_icon .icon {
+  font-size: calc(40px + (42 - 40) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.title {
+  font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.subtitle {
+  color: $grey800;
+  font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+}
+
+/* media */
+@include media-breakpoint-down("s") {
+  .default_friends {
+    display: none;
+  }
+}

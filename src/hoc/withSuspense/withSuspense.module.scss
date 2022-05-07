@@ -1,0 +1,6 @@
+@import "../../core/styles/main.scss";
+
+.loading {
+  color: $grey500 !important;
+  @include position(fixed, 50%, unset, unset, 50%);
+}

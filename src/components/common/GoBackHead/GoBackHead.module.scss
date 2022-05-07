@@ -1,0 +1,24 @@
+@import "../../../core/styles/main.scss";
+
+.go_back_head {
+  height: 56px;
+  width: 100%;
+  background: $white;
+  border-bottom: 1px solid $grey400;
+  @include ds-position(unset, center);
+  margin-bottom: $pd-content;
+}
+
+.wrapper_title {
+  height: 100%;
+  /* background: $grey400; */
+  font-size: 20px;
+  font-weight: 500;
+  @include ds-position(center, center);
+  flex: 1;
+  @include position(relative);
+}
+
+.wrapper_icon {
+  @include position(absolute, unset, unset, unset, 0);
+}

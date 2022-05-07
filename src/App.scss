@@ -1,0 +1,28 @@
+@import "./core/styles/main.scss";
+
+.container_fluid__position {
+  position: -webkit-sticky;
+  @include position(sticky, 0);
+  z-index: 1000;
+}
+
+/* paper for bottom navigation */
+.container_fluid__paper {
+  height: $ht-bottom-navigation;
+  background: $white;
+  box-shadow: 0px -1px 10px $grey300;
+  @include position(fixed, unset, 0, 0, 0);
+}
+
+/* media */
+@include media-breakpoint-up("sm") {
+  .container_fluid__paper {
+    display: none;
+  }
+}
+
+@include media-breakpoint-down("sm") {
+  .container_fluid__paper {
+    display: block;
+  }
+}
