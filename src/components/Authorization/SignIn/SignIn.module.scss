@@ -7,13 +7,12 @@
 
 .wrapper_button {
   width: 100%;
-  border-radius: $bd-radius;
 
   & button {
     width: 100%;
     color: $white !important;
     background: linear-gradient($hey-friend-style) !important;
-    border-radius: $bd-radius;
+    text-transform: none !important;
     outline: none;
     padding: 10px 0;
     transition: 0.5s;
