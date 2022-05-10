@@ -2,16 +2,16 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { authFb } from "../functionsFb/functionsFb";
 
-let SET_USER_SIGN_IN = "heyfriend/auth/SET_USER_SIGN_IN";
-let SET_USER_SIGN_UP = "heyfriend/auth/SET_USER_SIGN_UP";
-let GET_DEFAULT_ACCOUNT = "heyfriend/auth/GET_DEFAULT_ACCOUNT";
+const SET_USER_SIGN_IN = "heyfriend/auth/SET_USER_SIGN_IN";
+const SET_USER_SIGN_UP = "heyfriend/auth/SET_USER_SIGN_UP";
+const GET_DEFAULT_ACCOUNT = "heyfriend/auth/GET_DEFAULT_ACCOUNT";
 //
-let SET_AUTH = "heyfriend/auth/SET_AUTH";
-let AUTH_SUCCESS = "heyfriend/auth/AUTH_SUCCESS";
-let AUTH_LOADING = "heyfriend/auth/AUTH_LOADING";
-let AUTH_ERROR = "heyfriend/auth/AUTH_ERROR";
+const SET_AUTH = "heyfriend/auth/SET_AUTH";
+const AUTH_SUCCESS = "heyfriend/auth/AUTH_SUCCESS";
+const AUTH_LOADING = "heyfriend/auth/AUTH_LOADING";
+const AUTH_ERROR = "heyfriend/auth/AUTH_ERROR";
 
-let initialState = {
+const initialState = {
   userSignIn: {
     email: null,
     password: null,
@@ -24,6 +24,7 @@ let initialState = {
     email: null,
     password: null,
   },
+  //
   auth: null,
   authError: null,
   loading: false,
@@ -98,24 +99,13 @@ export const getDefaultAccount = (account) => ({
 
 // --------------------
 
-export const setAuth = (credentials) => ({
-  type: SET_AUTH,
-  credentials,
-});
+export const setAuth = (credentials) => ({ type: SET_AUTH, credentials });
 
-export const authSuccess = () => ({
-  type: AUTH_SUCCESS,
-});
+export const authSuccess = () => ({ type: AUTH_SUCCESS });
 
-export const authLoading = (loading) => ({
-  type: AUTH_LOADING,
-  loading,
-});
+export const authLoading = (loading) => ({ type: AUTH_LOADING, loading });
 
-export const authError = (error) => ({
-  type: AUTH_ERROR,
-  error,
-});
+export const authError = (error) => ({ type: AUTH_ERROR, error });
 
 // thunks
 export const signUp = (credentials) => async (dispatch) => {

@@ -1,15 +1,7 @@
-export const getAccountsSelector = (state) => {
-  return state.profilePage.accounts;
-};
+export const getAccountsSelector = (state) => state.profilePage.accounts;
 
-export const getAccountSelector = (state) => {
-  return state.profilePage.account;
-};
+export const getAccountSelector = (state) => state.profilePage.account;
 
-export const setPostsSelector = (state) => {
-  return state.profilePage.posts;
-};
+export const setPostsSelector = (state) => state.profilePage.posts;
 
-export const getAuthorizationIdSelector = (state) => {
-  return state.profilePage.id;
-};
+export const getAuthorizationIdSelector = (state) => state.profilePage.id;
