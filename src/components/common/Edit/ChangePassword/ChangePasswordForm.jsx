@@ -18,7 +18,7 @@ const ChangePasswordForm = (props) => {
       <div className={commonStyles.wrapper_block}>
         <div className={commonStyles.key}>New Password *</div>
         <div className={commonStyles.action}>
-          <WrapperCreateField id="outlined-error-helper-text" name="new_password" type="text" label="Your new password *" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
+          <WrapperCreateField id="outlined-error-helper-text" name="new_password" type="password" label="Your new password *" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
         </div>
       </div>
       <div className={commonStyles.wrapper_block}>

@@ -56,7 +56,7 @@ const AppContainer = (props) => {
   if (loading) {
     return (
       <div className="wrapper_loading">
-        <CircularProgress />
+        <CircularProgress className="loading" />
       </div>
     );
   }
