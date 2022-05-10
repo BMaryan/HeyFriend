@@ -12,31 +12,19 @@ const ChangePasswordForm = (props) => {
       <div className={commonStyles.wrapper_block}>
         <div className={commonStyles.key}>Old Password *</div>
         <div className={commonStyles.action}>
-<<<<<<< HEAD
-          <WrapperCreateField name="old_password" type="password" validate={[validatePassword, required]} component={InputField} placeholder="Your old password *" />
-=======
-          <WrapperCreateField name="old_password" type="password" validate={[validatePassword, required]} component={Input} placeholder="Your old password *" />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
+          <WrapperCreateField id="outlined-error-helper-text" name="old_password" type="password" label="Your old password *" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
         </div>
       </div>
       <div className={commonStyles.wrapper_block}>
         <div className={commonStyles.key}>New Password *</div>
         <div className={commonStyles.action}>
-<<<<<<< HEAD
-          <WrapperCreateField name="new_password" type="password" validate={[validatePassword, required]} component={InputField} placeholder="Your new password *" />
-=======
-          <WrapperCreateField name="new_password" type="password" validate={[validatePassword, required]} component={Input} placeholder="Your new password *" />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
+          <WrapperCreateField id="outlined-error-helper-text" name="new_password" type="text" label="Your new password *" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
         </div>
       </div>
       <div className={commonStyles.wrapper_block}>
         <div className={commonStyles.key}>Confirm New Password *</div>
         <div className={commonStyles.action}>
-<<<<<<< HEAD
-          <WrapperCreateField name="confirm_new_password" type="password" validate={[validatePassword, required]} component={InputField} placeholder="Your confirm new password *" />
-=======
-          <WrapperCreateField name="confirm_new_password" type="password" validate={[validatePassword, required]} component={Input} placeholder="Your confirm new password *" />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
+          <WrapperCreateField id="outlined-error-helper-text" name="confirm_new_password" type="password" label="Your confirm new password *" placeholder="" validate={[validatePassword, required]} component={InputField} />
         </div>
       </div>
 

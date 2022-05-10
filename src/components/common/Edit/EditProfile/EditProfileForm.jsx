@@ -4,11 +4,7 @@ import styles from "../Edit.module.scss";
 import { reduxForm } from "redux-form";
 import { WrapperCreateField, InputField, Textarea, WrapperButton } from "../../../common/FormControls/FormControls";
 import { connect } from "react-redux";
-<<<<<<< HEAD
 import { validateEmail, validatePassword, required, validateFirstAndLastNameCreator } from "../../../../utils/FieldValidationForm/FieldValidationForm";
-=======
-import { validatePhoneNumberAndEmail, validatePassword, required, validateFirstAndLastNameCreator } from "../../../../utils/FieldValidationForm/FieldValidationForm";
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
 
 let validateFirstName = validateFirstAndLastNameCreator("first");
 let validateLastName = validateFirstAndLastNameCreator("last");
@@ -19,50 +15,32 @@ const EditProfileForm = (props) => {
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Name</div>
         <div className={styles.action}>
-<<<<<<< HEAD
-          <WrapperCreateField name="name" type="text" validate={[validateFirstName]} component={InputField} placeholder="Your name" />
-=======
-          <WrapperCreateField name="name" type="text" validate={[validateFirstName]} component={Input} placeholder="Your name" />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
+          <WrapperCreateField id="outlined-error-helper-text" name="name" type="text" label="Name" helperText="" placeholder="" validate={[validateFirstName]} component={InputField} />
         </div>
       </div>
 
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Surname</div>
         <div className={styles.action}>
-<<<<<<< HEAD
-          <WrapperCreateField name="surname" type="text" validate={[validateLastName]} component={InputField} placeholder="Your surname" />
+          <WrapperCreateField id="outlined-error-helper-text" name="surname" type="text" label="Surname" helperText="" placeholder="" validate={[validateLastName]} component={InputField} />
         </div>
       </div>
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Email *</div>
         <div className={styles.action}>
-          <WrapperCreateField name="email" type="text" validate={[validateEmail, required]} component={InputField} placeholder="Your email *" />
-=======
-          <WrapperCreateField name="surname" type="text" validate={[validateLastName]} component={Input} placeholder="Your surname" />
-        </div>
-      </div>
-      <div className={styles.wrapper_block}>
-        <div className={styles.key}>Email or Phone *</div>
-        <div className={styles.action}>
-          <WrapperCreateField name="phone_or_email" type="text" validate={[validatePhoneNumberAndEmail, required]} component={Input} placeholder="Your email or phone *" />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
+          <WrapperCreateField id="outlined-error-helper-text" name="email" type="email" label="Email" helperText="" placeholder="" validate={[validateEmail, required]} component={InputField} />
         </div>
       </div>
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Status</div>
         <div className={styles.action}>
-<<<<<<< HEAD
-          <WrapperCreateField name="status" type="text" validate={[]} component={InputField} placeholder="Your status" />
-=======
-          <WrapperCreateField name="status" type="text" validate={[]} component={Input} placeholder="Your status" />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
+          <WrapperCreateField id="outlined-error-helper-text" name="text" type="text" label="Status" helperText="" placeholder="" validate={[]} component={InputField} />
         </div>
       </div>
       <div className={styles.wrapper_block}>
         <div className={styles.key}>About</div>
         <div className={styles.action}>
-          <WrapperCreateField name="aboutMe" type="text" validate={[]} component={Textarea} placeholder="About you" />
+          <WrapperCreateField id="outlined-error-helper-text" name="aboutMe" type="text" label="About me" helperText="" validate={[]} component={InputField} />
         </div>
       </div>
 
@@ -77,7 +55,7 @@ const EditProfileReduxForm = reduxForm({ form: "edit_profile", enableReinitializ
 
 const mapStateToProps = (state) => {
   return {
-    initialValues: state?.profilePage?.account?.profile,
+    initialValues: state?.profilePage?.account,
   };
 };
 
