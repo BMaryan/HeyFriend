@@ -1,30 +1,5 @@
 @import "../../../core/styles/main.scss";
 
-/* wrapper over input and textarea */
-.wrapperInputAndTextarea {
-  width: 100%;
-  @include ds-position(center);
-  transition: 0.5s;
-  @include position(relative);
-}
-
-.wrapperInputAndTextarea input,
-textarea {
-  width: 100%;
-  border: 1px solid $grey400;
-}
-
-.wrapperInputAndTextarea textarea {
-  resize: vertical;
-}
-
-.wrapperInputAndTextareaError input,
-textarea {
-  border: 1px solid $error-main;
-  transition: 0.5s;
-}
-
-/* wrapper over field */
 .wrapper_field {
   width: 100%;
   @include position(relative);
@@ -32,56 +7,22 @@ textarea {
 }
 
 .field {
+  width: 100% !important;
   color: $black !important;
   padding: 15px 15px;
-}
-
-.field__password {
-  padding-right: 50px;
-}
-
-/* toggle_show_password_button */
-.toggle_show_password_button {
-  @include position(absolute, 25px, 12px);
-  transition: 1s;
-}
-
-.toggle_show_password_button button {
-  color: $grey600 !important;
-  padding: 0;
-}
-
-.wrapper_field_checkbox {
-  color: red;
-  display: flex;
-  align-content: center;
-}
-
-.text_for_field {
-  color: $grey500;
-  font-size: 13.5px;
 }
 
 /* wrapper over button */
 .wrapper_button {
   width: 100%;
-  border-radius: 10px;
   margin-top: 10px;
-}
-
-.wrapper_button button,
-.field {
-  background: $white;
-  border: 1px solid $grey400;
-  border-radius: 10px;
-  outline: none;
-  transition: 0.5s;
 }
 
 .wrapper_button button {
   width: 100%;
   color: $white;
   background: linear-gradient($hey-friend-style);
+  text-transform: none !important;
   padding: 10px 0;
   cursor: pointer;
   transition: 0.5s;
@@ -94,17 +35,8 @@ textarea {
   opacity: 0.7;
 }
 
-/* style for box error */
-
-.block_error,
-.common_error {
-  color: $error-main;
-  font-size: 13px;
-  @include ds-position(left, center);
-  margin-top: 3px;
-}
-
-.block_error svg {
-  color: $error-main;
-  margin: 0 5px 0 0;
+// form error
+.form_error {
+  color: #d32f2f;
+  font-size: 15px;
 }

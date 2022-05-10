@@ -124,7 +124,6 @@ const CreatePost = (props) => {
                       <Button
                         onClick={() => {
                           if (activeStep === steps.length - 1) {
-<<<<<<< HEAD
                             props.createPost({
                               id: 1,
                               // id: props.getUniqueGeneratedIdPost({ length: 11, account: props.account }),
@@ -140,16 +139,6 @@ const CreatePost = (props) => {
                             // 	dateCreated: "01.01.01",
                             // 	description: saveOwnerPost,
                             // });
-=======
-                            props.setProfilePosts({
-                              id: props.getUniqueGeneratedIdPost({ length: 11, account: props.account }),
-                              photo: props.postPhoto,
-                              likes: [],
-                              comments: [],
-                              dateCreated: "01.01.01",
-                              description: saveOwnerPost,
-                            });
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
                             props.handleClose();
                           }
                           handleNext();
