@@ -11,7 +11,7 @@ const EditProfile = (props) => {
   let [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
 
   let onSubmit = (formData) => {
-    props.getProfileData({ ...formData });
+    props.updateAccountThunk({ ...props.account, ...formData });
     setOpen(true);
   };
 
@@ -22,9 +22,9 @@ const EditProfile = (props) => {
   return (
     <div className={styles.edit_profile}>
       <div className={styles.wrapper_profile_contact}>
-        <div className={styles.wrapper_picture}>{props?.account?.profile?.avatar ? <img src={props.account.profile.avatar} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} title="Change photo" alt="" /> : <img src={defaultAvatar} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} title="Change photo" alt="" />}</div>
+        <div className={styles.wrapper_picture}>{props?.account?.avatar ? <img src={props.account.avatar} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} title="Change photo" alt="" /> : <img src={defaultAvatar} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} title="Change photo" alt="" />}</div>
         <div className={styles.wrapper_info}>
-          <div className={styles.fullName}>{props?.account?.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}</div>
+          <div className={styles.fullName}>{props?.account ? props.account.surname + " " + props.account.name : undefined}</div>
           <div className={styles.change_picture} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}>
             Change profile photo
           </div>

@@ -23,7 +23,7 @@ const ChangePassword = (props) => {
   const [message, setMessage] = React.useState("");
 
   let onSubmit = (formData) => {
-    if (formData.old_password !== props.account.profile.password) {
+    if (formData.old_password !== props.account?.password) {
       showSnackbar("error", "Your old password was entered incorrectly. Please enter it again.");
     }
 
@@ -36,7 +36,7 @@ const ChangePassword = (props) => {
     }
 
     if (formData.old_password !== formData.new_password && formData.old_password !== formData.confirm_new_password) {
-      if (formData.new_password === formData.confirm_new_password && formData.old_password === props.account.profile.password) {
+      if (formData.new_password === formData.confirm_new_password && formData.old_password === props.account?.password) {
         props.getProfileData({ password: formData.new_password });
         showSnackbar("success", "You have successfully changed your password.");
       }
@@ -52,8 +52,8 @@ const ChangePassword = (props) => {
   return (
     <div className={styles.change_password}>
       <div className={styles.wrapper_profile_contact}>
-        <div className={styles.wrapper_picture}>{props?.account?.profile?.avatar ? <img src={props.account.profile.avatar} alt="" /> : <img src={defaultAvatar} alt="" />}</div>
-        <div className={styles.fullName}>{props?.account?.profile ? props.account.profile.surname + " " + props.account.profile.name : undefined}</div>
+        <div className={styles.wrapper_picture}>{props?.account?.avatar ? <img src={props.account.avatar} alt="" /> : <img src={defaultAvatar} alt="" />}</div>
+        <div className={styles.fullName}>{props?.account ? props.account.surname + " " + props.account.name : undefined}</div>
       </div>
       <ChangePasswordReduxForm onSubmit={onSubmit} account={props.account} />
 

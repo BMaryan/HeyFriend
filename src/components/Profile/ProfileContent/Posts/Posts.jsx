@@ -10,14 +10,14 @@ const Posts = (props) => {
   let currentAccount =
     props.accounts &&
     props.accounts.find((account) => {
-      if (account && account.profile && account.profile.posts) {
-        return account.profile.posts.find((post) => (post && props.params.id ? post.id === props.params.id : undefined));
+      if (account && account.posts) {
+        return account.posts.find((post) => (post && props.params.id ? post.id === props.params.id : undefined));
       } else {
         return props.account;
       }
     });
 
-  let currentPost = currentAccount && currentAccount.profile && currentAccount.profile.posts ? currentAccount.profile.posts.find((post) => (post && props.params.id ? post.id === props.params.id : undefined)) : props.account && props.account.profile && props.account.profile.posts ? props.account.profile.posts.find((post) => (post && props.params.id ? post.id === props.params.id : undefined)) : undefined;
+  let currentPost = currentAccount && currentAccount && currentAccount.posts ? currentAccount.posts.find((post) => (post && props.params.id ? post.id === props.params.id : undefined)) : props.account && props.account.profile && props.account.profile.posts ? props.account.profile.posts.find((post) => (post && props.params.id ? post.id === props.params.id : undefined)) : undefined;
 
   let otherProfile = props.accounts.find((profile) => (profile && props.id ? profile.id === props.id : undefined));
 
