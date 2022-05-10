@@ -14,6 +14,14 @@
   @include position(fixed, unset, 0, 0, 0);
 }
 
+// wrapper_loading
+.wrapper_loading {
+  height: "100vh";
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+}
+
 /* media */
 @include media-breakpoint-up("sm") {
   .container_fluid__paper {
