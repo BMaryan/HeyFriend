@@ -8,7 +8,7 @@ import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, createPost } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, createPost, updateAccountThunk } from "../../redux/profile-reducer";
 
 const ProfileContainer = (props) => {
   let id = props.match.params.id;
@@ -57,6 +57,7 @@ export default compose(
     addAccount,
     unFollowing,
     createPost,
+    updateAccountThunk,
   }),
   withRouter
 )(ProfileContainer);

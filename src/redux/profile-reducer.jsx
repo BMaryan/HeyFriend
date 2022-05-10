@@ -1,29 +1,30 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
-let ADD_ACCOUNT = "heyfriend/chatPage/ADD_ACCOUNT";
-let IS_ACCOUNT = "heyfriend/auth/IS_ACCOUNT";
-let GET_PROFILE_DATA = "heyfriend/profilePage/GET_PROFILE_DATA";
-let SET_PROFILE_POSTS = "heyfriend/profilePage/SET_PROFILE_POSTS";
-let SET_PROFILE_CHATS = "heyfriend/profilePage/SET_PROFILE_CHATS";
-let GET_AUTHORIZATION_ID = "heyfriend/chatPage/GET_AUTHORIZATION_ID";
-let GET_PARAMS_ID = "heyfriend/chatPage/GET_PARAMS_ID";
-let PUT_LIKE = "heyfriend/chatPage/PUT_LIKE";
-let TAKE_LIKE = "heyfriend/chatPage/TAKE_LIKE";
-let FOLLOWING = "heyfriend/chatPage/FOLLOWING";
-let UNFOLLOWING = "heyfriend/chatPage/UNFOLLOWING";
-let SAVE_POST = "heyfriend/chatPage/SAVE_POST";
-let DELETE_SAVED_POST = "heyfriend/chatPage/DELETE_SAVED_POST";
-let DELETE_POST = "heyfriend/profilePage/DELETE_POST";
-let ADD_COMMENT = "heyfriend/profilePage/ADD_COMMENT";
+const ADD_ACCOUNT = "heyfriend/profilePage/ADD_ACCOUNT";
+const IS_ACCOUNT = "heyfriend/auth/IS_ACCOUNT";
+const GET_PROFILE_DATA = "heyfriend/profilePage/GET_PROFILE_DATA";
+const SET_PROFILE_POSTS = "heyfriend/profilePage/SET_PROFILE_POSTS";
+const SET_PROFILE_CHATS = "heyfriend/profilePage/SET_PROFILE_CHATS";
+const GET_AUTHORIZATION_ID = "heyfriend/profilePage/GET_AUTHORIZATION_ID";
+const GET_PARAMS_ID = "heyfriend/profilePage/GET_PARAMS_ID";
+const PUT_LIKE = "heyfriend/profilePage/PUT_LIKE";
+const TAKE_LIKE = "heyfriend/profilePage/TAKE_LIKE";
+const FOLLOWING = "heyfriend/profilePage/FOLLOWING";
+const UNFOLLOWING = "heyfriend/profilePage/UNFOLLOWING";
+const SAVE_POST = "heyfriend/profilePage/SAVE_POST";
+const DELETE_SAVED_POST = "heyfriend/profilePage/DELETE_SAVED_POST";
+const DELETE_POST = "heyfriend/profilePage/DELETE_POST";
+const ADD_COMMENT = "heyfriend/profilePage/ADD_COMMENT";
 
 //
-let SET_ACCOUNTS = "heyfriend/chatPage/SET_ACCOUNTS";
-let SET_ACCOUNT = "heyfriend/chatPage/SET_ACCOUNT";
-let CREATE_POST = "heyfriend/chatPage/CREATE_POST";
+const SET_ACCOUNTS = "heyfriend/profilePage/SET_ACCOUNTS";
+const SET_ACCOUNT = "heyfriend/profilePage/SET_ACCOUNT";
+const UPDATE_ACCOUNT = "heyfriend/profilePage/UPDATE_ACCOUNT";
+const CREATE_POST = "heyfriend/profilePage/CREATE_POST";
 
-let initialState = {
+const initialState = {
   accounts: [],
   account: null,
   posts: [],
@@ -236,6 +237,12 @@ const ProfileReducer = (state = initialState, action) => {
         account: action.account,
       };
     }
+    case UPDATE_ACCOUNT: {
+      return {
+        ...state,
+        account: action.account,
+      };
+    }
     case CREATE_POST: {
       let newPost = { ...action.data };
 
@@ -329,25 +336,16 @@ export const addComment = (postId, comment) => ({
 
 // -----------------------------------------
 
-export const setAccounts = (accounts) => ({
-  type: SET_ACCOUNTS,
-  accounts,
-});
+export const setAccounts = (accounts) => ({ type: SET_ACCOUNTS, accounts });
 
-export const setAccount = (account) => ({
-  type: SET_ACCOUNT,
-  account,
-});
+export const setAccount = (account) => ({ type: SET_ACCOUNT, account });
 
-export const createPost = (data) => ({
-  type: CREATE_POST,
-  data,
-});
+export const updateAccount = (account) => ({ type: UPDATE_ACCOUNT, account });
+
+export const createPost = (data) => ({ type: CREATE_POST, data });
 
 // thunks
-export const setAccountsThunk = () => async (dispatch) => {
-  return await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
-};
+export const setAccountsThunk = () => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
 
 export const setAccountThunk = (user) => async (dispatch) => {
   const resp = await getDoc(doc(db, "accounts", user.uid));
@@ -355,6 +353,14 @@ export const setAccountThunk = (user) => async (dispatch) => {
   if (resp.exists()) {
     dispatch(setAccount({ ...resp.data(), id: user.uid }));
   }
+};
+
+export const updateAccountThunk = (account) => async (dispatch) => {
+  const docRef = await doc(db, "accounts", account.id);
+
+  await setDoc(docRef, account);
+
+  dispatch(updateAccount(account));
 };
 
 export const createPostThunk = (data) => async (dispatch, getState) => {

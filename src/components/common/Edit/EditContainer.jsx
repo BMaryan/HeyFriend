@@ -4,32 +4,32 @@ import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-
 import Edit from "./Edit";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { getProfileData, isAccount } from "../../../redux/profile-reducer";
+import { getProfileData, isAccount, updateAccountThunk } from "../../../redux/profile-reducer";
 import { accounts, account } from "../../../core/constants/constantsLocalStorage";
 
-const EditContainer = props => {
-	React.useEffect(() => {
-		if (props.account) {
-			localStorage.setItem(account, JSON.stringify(props.account));
-		}
-	}, [props.account]);
+const EditContainer = (props) => {
+  React.useEffect(() => {
+    if (props.account) {
+      localStorage.setItem(account, JSON.stringify(props.account));
+    }
+  }, [props.account]);
 
-	React.useEffect(() => {
-		if (props.accounts && props.accounts.length > 0) {
-			localStorage.setItem(accounts, JSON.stringify(props.accounts));
-		}
-	}, [props.accounts]);
+  React.useEffect(() => {
+    if (props.accounts && props.accounts.length > 0) {
+      localStorage.setItem(accounts, JSON.stringify(props.accounts));
+    }
+  }, [props.accounts]);
 
-	let id = Number(props.match.params.id);
+  let id = Number(props.match.params.id);
 
-	return <Edit {...props} id={id} />;
+  return <Edit {...props} id={id} />;
 };
 
-let mapStateToProps = state => {
-	return {
-		accounts: getAccountsSelector(state),
-		account: getAccountSelector(state),
-	};
+let mapStateToProps = (state) => {
+  return {
+    accounts: getAccountsSelector(state),
+    account: getAccountSelector(state),
+  };
 };
 
-export default compose(connect(mapStateToProps, { getProfileData, isAccount }), withRouter)(EditContainer);
+export default compose(connect(mapStateToProps, { getProfileData, isAccount, updateAccountThunk }), withRouter)(EditContainer);
