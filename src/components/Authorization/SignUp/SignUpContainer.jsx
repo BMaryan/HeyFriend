@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { setAuth, setUserSignUp, signUp } from "../../../redux/auth-reducer";
+import { authSuccess, setAuth, setUserSignUp, signUp } from "../../../redux/auth-reducer";
 import { getUserSignUpSelector, authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
 import { addAccount, isAccount } from "../../../redux/profile-reducer";
 import { helpCheckAuthorization, setSignUpDataToLocalStorage } from "../../../utils/helperForAuthorization/helperForAuthorization";
@@ -37,7 +37,7 @@ const SignUpContainer = (props) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        history.push(`${profileConstant}`);
+        history.push(`${profileConstant.path}`);
       }
     });
   }, []);
@@ -64,6 +64,7 @@ export default compose(
     isAccount,
     signUp,
     setAuth,
+    authSuccess,
   }),
   withRouter
 )(SignUpContainer);

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import commonStyles from "../Navbar.module.scss";
 import styles from "./NavbarRow.module.scss";
-import { chatConstant, friendsConstant } from "../../../../core/constants/constants";
+import { chatConstant, friendsConstant, mainConstant } from "../../../../core/constants/constants";
 import Checkbox from "@mui/material/Checkbox";
 import Home from "@mui/icons-material/Home";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -27,9 +27,9 @@ const NavbarRow = (props) => {
 
   return (
     <div className={!props.isBottomNavigation ? styles.navbar_row : styles.navbar_row_bottom}>
-      <DuplicateCodeFunc path="/" icon={<Checkbox icon={location.pathname !== "/" ? <HomeOutlinedIcon className={styles.icon} /> : <Home className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
-      <DuplicateCodeFunc path={`${chatConstant}`} icon={<Checkbox icon={location.pathname !== chatConstant ? <ChatOutlinedIcon className={styles.icon} /> : <ChatRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
-      <DuplicateCodeFunc path={`${friendsConstant}`} icon={<Checkbox icon={!location.pathname.includes(friendsConstant) ? <PeopleOutlineIcon className={styles.icon} /> : <PeopleRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} />
+      <DuplicateCodeFunc path={`${mainConstant.path}`} icon={<Checkbox icon={location.pathname !== mainConstant.path ? <HomeOutlinedIcon className={styles.icon} /> : <Home className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
+      <DuplicateCodeFunc path={`${chatConstant.path}`} icon={<Checkbox icon={location.pathname !== chatConstant.path ? <ChatOutlinedIcon className={styles.icon} /> : <ChatRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
+      <DuplicateCodeFunc path={`${friendsConstant.path}`} icon={<Checkbox icon={!location.pathname.includes(friendsConstant.path) ? <PeopleOutlineIcon className={styles.icon} /> : <PeopleRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} />
     </div>
   );
 };

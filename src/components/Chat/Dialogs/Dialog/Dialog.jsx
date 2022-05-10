@@ -11,7 +11,7 @@ const Dialog = (props) => {
 
   return (
     <>
-      <NavLink to={foundUser ? `${chatConstant}/` + foundUser.id : ""} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
+      <NavLink to={foundUser ? `${chatConstant.path}/` + foundUser.id : ""} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
         <div className={styles.wrapper_picture}>
           <div className={styles.have_not_picture + " " + styles.have_not_picture_forHead}>
             {!foundUser ? (

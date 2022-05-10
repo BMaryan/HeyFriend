@@ -10,22 +10,18 @@ import { signInConstant } from "../../core/constants/constants";
 import { useHistory } from "react-router-dom";
 
 const HeaderContainer = (props) => {
-<<<<<<< HEAD
   let history = useHistory();
-
-  React.useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        console.log("logout");
-
-        history.push(`${signInConstant}`);
-      }
-    });
-  }, []);
-
-  return <Header {...props} />;
-=======
   const [darkTheme, setDarkTheme] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (!user) {
+  //       console.log("logout");
+
+  //       history.push(`${signInConstant.path}`);
+  //     }
+  //   });
+  // }, []);
 
   React.useEffect(() => {
     const root = document.documentElement;
@@ -43,7 +39,6 @@ const HeaderContainer = (props) => {
   }, [darkTheme]);
 
   return <Header {...props} darkTheme={darkTheme} setDarkTheme={setDarkTheme} />;
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
 };
 
 const mapStateToProps = (state) => {
@@ -58,8 +53,5 @@ export default connect(mapStateToProps, {
   getProfileData,
   getParamsId,
   getAuthorizationId,
-<<<<<<< HEAD
   signOut,
-=======
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
 })(HeaderContainer);

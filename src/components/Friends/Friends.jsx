@@ -40,17 +40,17 @@ const Friends = (props) => {
         <div className={!(checkFollowing || checkFollowers || checkRecommendation) ? styles.friends_menu : styles.friends_menu__none}>
           <ul className={styles.menu}>
             <li className={styles.friends_item}>
-              <NavLink exact to={`${friendsConstant}/${path.following}`} className={styles.item} activeClassName={styles.item_active}>
+              <NavLink exact to={`${friendsConstant.path}/${path.following}`} className={styles.item} activeClassName={styles.item_active}>
                 Following
               </NavLink>
             </li>
             <li className={styles.friends_item}>
-              <NavLink exact to={`${friendsConstant}/${path.followers}`} className={styles.item} activeClassName={styles.item_active}>
+              <NavLink exact to={`${friendsConstant.path}/${path.followers}`} className={styles.item} activeClassName={styles.item_active}>
                 Followers
               </NavLink>
             </li>
             <li className={styles.friends_item}>
-              <NavLink exact to={`${friendsConstant}/${path.recommendation}`} className={styles.item} activeClassName={styles.item_active}>
+              <NavLink exact to={`${friendsConstant.path}/${path.recommendation}`} className={styles.item} activeClassName={styles.item_active}>
                 Recommendation
               </NavLink>
             </li>
@@ -59,10 +59,10 @@ const Friends = (props) => {
 
         {/* content */}
         <div className={styles.friends_content}>
-          <Route exact path={`${friendsConstant}/${path.following}`} render={() => <Following {...props} />} />
-          <Route exact path={`${friendsConstant}/${path.followers}`} render={() => <Followers {...props} />} />
-          <Route exact path={`${friendsConstant}/${path.recommendation}`} render={() => <Recommendation {...props} />} />
-          <Route exact path={`${friendsConstant}`} render={() => <DefaultFriends {...props} />} />
+          <Route exact path={`${friendsConstant.path}/${path.following}`} render={() => <Following {...props} />} />
+          <Route exact path={`${friendsConstant.path}/${path.followers}`} render={() => <Followers {...props} />} />
+          <Route exact path={`${friendsConstant.path}/${path.recommendation}`} render={() => <Recommendation {...props} />} />
+          <Route exact path={`${friendsConstant.path}`} render={() => <DefaultFriends {...props} />} />
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import { NavLink, useLocation } from "react-router-dom";
-import { chatConstant, friendsConstant } from "../../core/constants/constants";
+import { chatConstant, friendsConstant, mainConstant } from "../../core/constants/constants";
 
 export let withBottomNavigation = (Component) => (props) => {
   const [value, setValue] = React.useState(0);
@@ -28,9 +28,9 @@ export let withBottomNavigation = (Component) => (props) => {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}>
-          <BottomNavigationAction component={NavLink} to={`/`} label="" icon={location.pathname !== "/" ? <HomeOutlinedIcon color="action" /> : <Home color="action" />} />
-          <BottomNavigationAction component={NavLink} to={`${chatConstant}`} label="" icon={location.pathname !== chatConstant ? <ChatOutlinedIcon color="action" /> : <ChatRoundedIcon color="action" />} />
-          <BottomNavigationAction component={NavLink} to={`${friendsConstant}`} label="" icon={location.pathname !== friendsConstant ? <PeopleOutlineIcon color="action" /> : <PeopleRoundedIcon color="action" />} />
+          <BottomNavigationAction component={NavLink} to={`/`} label="" icon={location.pathname !== mainConstant.path ? <HomeOutlinedIcon color="action" /> : <Home color="action" />} />
+          <BottomNavigationAction component={NavLink} to={`${chatConstant.path}`} label="" icon={location.pathname !== chatConstant.path ? <ChatOutlinedIcon color="action" /> : <ChatRoundedIcon color="action" />} />
+          <BottomNavigationAction component={NavLink} to={`${friendsConstant.path}`} label="" icon={location.pathname !== friendsConstant.path ? <PeopleOutlineIcon color="action" /> : <PeopleRoundedIcon color="action" />} />
         </BottomNavigation>
       </Paper>
     </>

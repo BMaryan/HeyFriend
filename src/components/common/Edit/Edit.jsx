@@ -38,12 +38,12 @@ const Edit = (props) => {
       <div className={!(checkProfile || checkPassword || checkManageAccess) ? styles.edit_menu : styles.edit_menu__none}>
         <ul className={styles.menu}>
           <li className={styles.edit_item}>
-            <NavLink exact to={`${editConstant}/${path.profile}`} className={styles.item} activeClassName={styles.item_active}>
+            <NavLink exact to={`${editConstant.path}/${path.profile}`} className={styles.item} activeClassName={styles.item_active}>
               {title.profile}
             </NavLink>
           </li>
           <li className={styles.edit_item}>
-            <NavLink exact to={`${editConstant}/${path.password}`} className={styles.item} activeClassName={styles.item_active}>
+            <NavLink exact to={`${editConstant.path}/${path.password}`} className={styles.item} activeClassName={styles.item_active}>
               {title.password}
             </NavLink>
           </li>
@@ -52,9 +52,9 @@ const Edit = (props) => {
 
       {/* content */}
       <div className={styles.edit_content}>
-        <Route exact path={`${editConstant}/${path.profile}`} render={() => <EditProfile {...props} />} />
-        <Route exact path={`${editConstant}/${path.password}`} render={() => <ChangePassword {...props} />} />
-        <Route exact path={`${editConstant}`} render={() => <Default />} />
+        <Route exact path={`${editConstant.path}/${path.profile}`} render={() => <EditProfile {...props} />} />
+        <Route exact path={`${editConstant.path}/${path.password}`} render={() => <ChangePassword {...props} />} />
+        <Route exact path={`${editConstant.path}`} render={() => <Default />} />
       </div>
     </div>
   );

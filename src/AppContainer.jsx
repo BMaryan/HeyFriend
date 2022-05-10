@@ -3,21 +3,19 @@ import { connect } from "react-redux";
 import App from "./App";
 import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
-import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk, createPost, createPostThunk } from "./redux/profile-reducer";
+import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk, createPostThunk } from "./redux/profile-reducer";
 import { getAccountSelector, getAccountsSelector, setPostsSelector } from "./redux/profile-selectors";
 import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
-// import { accounts, account } from "./core/constants/constantsLocalStorage";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { signInConstant, signUpConstant } from "./core/constants/constants";
+import navigation, { signInConstant, signUpConstant, editConstant, mainConstant } from "./core/constants/constants";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "./firebase";
+import { auth } from "./firebase";
 import { setAuth } from "./redux/auth-reducer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import defaultAvatar from "./assets/images/DefaultAvatar.png";
+import { Redirect } from "react-router-dom";
 
 const AppContainer = (props) => {
   const id = Number(props.match.params.id);
@@ -34,34 +32,30 @@ const AppContainer = (props) => {
         props.setAccountThunk(user);
       } else {
         props.setAuth(null);
+        props.setAccount(null);
+        props.setAccounts([]);
 
-        if (history.location.pathname !== signInConstant) history.push(signInConstant);
-        else if (history.location.pathname === signUpConstant) history.push(signUpConstant);
+        if (!props.auth && history.location.pathname === signUpConstant.path) {
+          history.push(signUpConstant.path);
+        } else if (!props.auth && history.location.pathname !== signInConstant.path) {
+          history.push(signInConstant.path);
+        }
       }
     });
   }, [props.auth]);
 
-  // React.useEffect(() => {
-  //   if (props.posts.length > 0) props.createPostThunk(props.posts);
-  // }, [props.posts]);
-
   // name of page in title
   React.useEffect(() => {
-    let getArrayOfName = props.location.pathname.split("/");
-    let namePage = getArrayOfName[1];
+    let namePage = props.location.pathname;
 
-    if (namePage === "") {
-      namePage = "Main";
-    } else if (namePage === "account") {
-      namePage = "Edit Account";
-    }
+    navigation.forEach((item) => (namePage === item.path ? (namePage = item.title) : "Hey Friend"));
 
     document.title = namePage[0].toUpperCase() + namePage.slice(1);
   }, [props.location]);
 
   if (loading) {
     return (
-      <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div className="wrapper_loading">
         <CircularProgress />
       </div>
     );

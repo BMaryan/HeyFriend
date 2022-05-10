@@ -17,16 +17,16 @@ export const Head = (props) => {
       <div className={styles.head_wrapper_picture}>
         <img src={betaVershion} alt="" />
       </div>
-      <div className={styles.head_dialogs_title}>{props.account.profile.surname + " " + props.account.profile.name}</div>
+      <div className={styles.head_dialogs_title}>{props.account.surname + " " + props.account.name}</div>
     </div>
   ) : (
     <div className={styles.head + " " + styles.head_messages}>
       <div>
         {props.accounts.map((account) =>
           account && id && account.id === id ? (
-            <NavLink key={account.id} to={props.account && props.account.id !== id ? `${profileConstant}/` + account.id : `${profileConstant}`} className={dialogStyles.chat_forHead}>
+            <NavLink key={account.id} to={props.account && props.account.id !== id ? `${profileConstant.path}/` + account.id : `${profileConstant.path}`} className={dialogStyles.chat_forHead}>
               <div className={dialogStyles.wrapper_picture}>
-                <div className={dialogStyles.have_not_picture_forHead}>{account ? <img src={otherProfile && otherProfile.profile.img ? otherProfile.profile.img : defaultAvatar} alt="" /> : <></>}</div>
+                <div className={dialogStyles.have_not_picture_forHead}>{account ? <img src={otherProfile?.avatar ? otherProfile.avatar : defaultAvatar} alt="" /> : <></>}</div>
               </div>
               <div>
                 <div className={dialogStyles.login}>{account ? account.surname + " " + account.name : <></>}</div>

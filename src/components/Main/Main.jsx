@@ -11,7 +11,6 @@ import AvatarGroup from "@mui/material/AvatarGroup";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 
 const Main = (props) => {
-<<<<<<< HEAD
   // let followedAccounts = props.account.profile.following
   // 	? props.account.profile.following.map(followingAccount =>
   // 			props.accounts ? props.accounts.find(account => account.id === followingAccount.id) : undefined
@@ -38,25 +37,10 @@ const Main = (props) => {
 
   // props.getDefaultAccount(null);
 
-  console.log(props.account);
-
-=======
-  let followedAccounts = props.account.profile.following ? props.account.profile.following.map((followingAccount) => (props.accounts ? props.accounts.find((account) => account.id === followingAccount.id) : undefined)) : undefined;
-
-  let followedByNotMe = followedAccounts ? followedAccounts.filter((account) => (account.profile.following && account.profile.following.length > 0 ? account.profile.following.find((followedAccount) => followedAccount.id !== props.account.id) : undefined)) : undefined;
-
-  let checkPosts = followedAccounts ? followedAccounts.filter((account) => (account.profile.posts ? account.profile.posts.map((post) => post) : undefined)) : undefined;
-
-  let checkFollowing = followedAccounts ? followedAccounts.filter((account) => (account.profile.following && account.profile.following.length > 0 ? account.profile.following.map((following) => following) : undefined)) : undefined;
-
-  props.getDefaultAccount(null);
-
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-<<<<<<< HEAD
         defaultAvatar
         {/* {followedAccounts && followedAccounts.length > 0
 					? followedAccounts.map((account, index) =>
@@ -84,18 +68,6 @@ const Main = (props) => {
 						<div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
 					</div>
 				) : undefined} */}
-=======
-        {followedAccounts && followedAccounts.length > 0 ? followedAccounts.map((account, index) => (account.profile.posts && account.profile.posts.length > 0 ? account.profile.posts.map((post) => (post ? <PostContainer key={post.id} modal={false} post={post} kindOfPost={defaultPostConstant} currentAccount={account} /> : undefined)) : undefined)) : undefined}
-
-        {/* default content */}
-        {(checkPosts && checkPosts.length === 0) || !checkPosts ? (
-          <div className={styles.default_content}>
-            <div className={styles.default_content__wrapper_icon}>{/* <DynamicFeedIcon /> */}</div>
-            <div className={styles.default_content__title}>News Feed</div>
-            <div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
-          </div>
-        ) : undefined}
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
       </div>
 
       {/* sideBar right */}
@@ -103,32 +75,20 @@ const Main = (props) => {
         <div className={styles.sideBar_right_content}>
           <div className={styles.wrapper_contact}>
             <div className={styles.wrapper_contact_info}>
-<<<<<<< HEAD
               {/* default */}
-              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant}`}>
+              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant.path}`}>
                 <img className={styles.avatar + " " + styles.avatar__large} src={props?.account?.avatar ? props.account.avatar : defaultAvatar} alt="" />
               </NavLink>
               <div className={styles.wrapper_contact_info_detail}>
-                <NavLink className={styles.fullName} to={`${profileConstant}`}>
+                <NavLink className={styles.fullName} to={`${profileConstant.path}`}>
                   {props?.account?.surname + " " + props?.account?.name}
                 </NavLink>
                 <div className={styles.subtitle}>{props?.account?.status}</div>
-=======
-              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant}`}>
-                <img className={styles.avatar + " " + styles.avatar__large} src={props?.account?.profile?.avatar ? props.account.profile.avatar : defaultAvatar} alt="" />
-              </NavLink>
-              <div className={styles.wrapper_contact_info_detail}>
-                <NavLink className={styles.fullName} to={`${profileConstant}`}>
-                  {props.account.profile.surname + " " + props.account.profile.name}
-                </NavLink>
-                <div className={styles.subtitle}>{props.account.profile.status}</div>
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
               </div>
             </div>
 
             <div className={styles.wrapper_contact_button}></div>
           </div>
-<<<<<<< HEAD
           <Divider sx={{ margin: "10px 0" }}>
             <Chip label="Suggestions For You" variant="outlined" />
           </Divider>
@@ -143,7 +103,7 @@ const Main = (props) => {
 														<div className={styles.wrapper_contact_info}>
 															<NavLink
 																className={styles.wrapper_contact_info_avatar}
-																to={`${profileConstant}/${props.accounts[followedAccount.id - 1].id}`}>
+																to={`${profileConstant.path}/${props.accounts[followedAccount.id - 1].id}`}>
 																<img
 																	className={styles.avatar + " " + styles.avatar__medium}
 																	src={
@@ -154,34 +114,15 @@ const Main = (props) => {
 																	alt=''
 																/>
 															</NavLink>
-=======
-
-          <Divider className={styles.divider} sx={{ margin: "10px 0" }}>
-            <Chip className={styles.chip} label="Suggestions For You" variant="outlined" />
-          </Divider>
-
-          {followedAccounts
-            ? followedAccounts
-                .map((account) =>
-                  account.profile.following && account.profile.following.length > 0
-                    ? account.profile.following.map((followedAccount) =>
-                        followedAccount.id !== props.account.id ? (
-                          <div key={followedAccount.id} className={styles.wrapper_contact}>
-                            <div className={styles.wrapper_contact_info}>
-                              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant}/${props.accounts[followedAccount.id - 1].id}`}>
-                                <img className={styles.avatar + " " + styles.avatar__medium} src={props.accounts[followedAccount.id - 1].profile.avatar ? props.accounts[followedAccount.id - 1].profile.avatar : defaultAvatar} alt="" />
-                              </NavLink>
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
 
                               <div className={styles.wrapper_contact_info_detail}>
-                                <NavLink className={styles.fullName} to={`${profileConstant}/${props.accounts[followedAccount.id - 1].id}`}>
+                                <NavLink className={styles.fullName} to={`${profileConstant.path}/${props.accounts[followedAccount.id - 1].id}`}>
                                   {props.accounts[followedAccount.id - 1].profile.surname + " " + props.accounts[followedAccount.id - 1].profile.name}
                                 </NavLink>
 
-<<<<<<< HEAD
 																<AvatarGroup className={styles.avatar_group} max={3}>
 																	<span className={styles.subtitle}>Followed by</span>
-																	<NavLink to={`${profileConstant}/${account.id}`}>
+																	<NavLink to={`${profileConstant.path}/${account.id}`}>
 																		<img
 																			className={styles.avatar + " " + styles.avatar__small}
 																			src={account.profile.avatar ? account.profile.avatar : defaultAvatar}
@@ -209,33 +150,6 @@ const Main = (props) => {
 							<div className={styles.default_content__subtitle}>No suggestions found</div>
 						</div>
 					) : undefined} */}
-=======
-                                <AvatarGroup className={styles.avatar_group} max={3}>
-                                  <span className={styles.subtitle}>Followed by</span>
-                                  <NavLink to={`${profileConstant}/${account.id}`}>
-                                    <img className={styles.avatar + " " + styles.avatar__small} src={account.profile.avatar ? account.profile.avatar : defaultAvatar} alt={account.profile.surname + " " + account.profile.name} title={account.profile.surname + " " + account.profile.name} />
-                                  </NavLink>
-                                </AvatarGroup>
-                              </div>
-                            </div>
-                          </div>
-                        ) : undefined
-                      )
-                    : undefined
-                )
-                .slice(followedAccounts.length - 5)
-            : undefined}
-
-          {/* default content */}
-          {(checkFollowing && checkFollowing.length === 0) || !checkFollowing || followedByNotMe.length === 0 || !followedByNotMe ? (
-            <div className={styles.default_content}>
-              <div className={styles.default_content__wrapper_icon}>
-                <PeopleOutlineIcon />
-              </div>
-              <div className={styles.default_content__subtitle}>No suggestions found</div>
-            </div>
-          ) : undefined}
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
         </div>
       </div>
     </div>

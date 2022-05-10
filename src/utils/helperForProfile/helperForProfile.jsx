@@ -44,7 +44,7 @@ export const ChangeProfilePictureContainer = (props) => {
             Upload photo
             <input
               onChange={(event) => {
-                getPictureBase64({ event: event, method: props.getProfileData, account: props.account, key: "avatar" });
+                getPictureBase64({ event: event, method: props.updateAccountThunk, account: props.account, key: "avatar" });
                 props.setOpenModalAvatarProfile(false);
               }}
               id="file-upload"
@@ -57,7 +57,7 @@ export const ChangeProfilePictureContainer = (props) => {
         <Button
           className={styles.wrapper_item}
           onClick={() => {
-            removePicture({ method: props.getProfileData, account: props.account, key: "avatar" });
+            removePicture({ method: props.updateAccountThunk, account: props.account, key: "avatar" });
             props.setOpenModalAvatarProfile(false);
           }}>
           Remove current photo
@@ -81,7 +81,7 @@ export const ContainerCoverProfile = (props) => {
             Upload cover photo
             <input
               onChange={(event) => {
-                getPictureBase64({ event: event, method: props.getProfileData, account: props.account, key: "coverPhoto" });
+                getPictureBase64({ event: event, method: props.updateAccountThunk, account: props.account, key: "coverPhoto" });
                 props.setOpenModalCoverProfile(false);
               }}
               id="file-upload"
@@ -94,7 +94,7 @@ export const ContainerCoverProfile = (props) => {
         <Button
           className={styles.wrapper_item}
           onClick={() => {
-            removePicture({ method: props.getProfileData, account: props.account, key: "coverPhoto" });
+            removePicture({ method: props.updateAccountThunk, account: props.account, key: "coverPhoto" });
             props.setOpenModalCoverProfile(false);
           }}>
           Remove cover photo
@@ -127,7 +127,7 @@ const DuplicateCodeReturnImageList = (props) => {
   return (
     // <div className={styles.posts}>
     <div className={styles.wrapper_posts}>
-      <NavLink exact onClick={() => (props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true))} to={`${photoConstant}/${props?.post?.id ? props.post.id : undefined}`} className={styles.post}>
+      <NavLink exact onClick={() => (props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true))} to={`${photoConstant.path}/${props?.post?.id ? props.post.id : undefined}`} className={styles.post}>
         <PostContainer post={props.post} currentAccount={props.currentAccount} kindOfPost={onlyBodyPostConstant} />
       </NavLink>
     </div>

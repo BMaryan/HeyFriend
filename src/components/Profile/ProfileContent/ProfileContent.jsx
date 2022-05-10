@@ -21,7 +21,7 @@ const ProfileContent = (props) => {
   const [open, setOpen] = React.useState(false);
 
   let otherProfile = props.accounts.find((profile) => (profile && props.id ? profile.id === props.id : undefined));
-  let oftenCheckOtherProfile = otherProfile && otherProfile.profile && props.id;
+  let oftenCheckOtherProfile = otherProfile && props.id;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -33,7 +33,7 @@ const ProfileContent = (props) => {
     <div className={styles.profile_content}>
       <div className={styles.content}>
         <div className={styles.navigation}>
-          <NavLink exact to={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`} className={styles.item} activeClassName={styles.item_active}>
+          <NavLink exact to={props.id ? `${profileConstant.path}/${props.id}` : `${profileConstant.path}`} className={styles.item} activeClassName={styles.item_active}>
             <Media queries={{ small: "(max-width: 480px)" }}>
               {(matches) =>
                 !matches.small ? (
@@ -49,7 +49,7 @@ const ProfileContent = (props) => {
               }
             </Media>
           </NavLink>
-          <NavLink to={props.id ? `${profileConstant}/${props.id}/information` : `${profileConstant}/information`} className={styles.item} activeClassName={styles.item_active}>
+          <NavLink to={props.id ? `${profileConstant.path}/${props.id}/information` : `${profileConstant.path}/information`} className={styles.item} activeClassName={styles.item_active}>
             <Media queries={{ small: "(max-width: 480px)" }}>
               {(matches) =>
                 !matches.small ? (
@@ -66,7 +66,7 @@ const ProfileContent = (props) => {
             </Media>
           </NavLink>
           {!props.id ? (
-            <NavLink exact to={props.id ? `${profileConstant}/${props.id}/saved` : `${profileConstant}/saved`} className={styles.item} activeClassName={styles.item_active}>
+            <NavLink exact to={props.id ? `${profileConstant.path}/${props.id}/saved` : `${profileConstant.path}/saved`} className={styles.item} activeClassName={styles.item_active}>
               <Media queries={{ small: "(max-width: 480px)" }}>
                 {(matches) =>
                   !matches.small ? (
@@ -87,22 +87,18 @@ const ProfileContent = (props) => {
 
         <Route
           exact
-          path={props.id ? `${profileConstant}/${props.id}` : `${profileConstant}`}
+          path={props.id ? `${profileConstant.path}/${props.id}` : `${profileConstant.path}`}
           render={() => {
             return <Posts {...props} handleOpen={handleOpen} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
           }}
         />
 
-        <Route path={props.id ? `${profileConstant}/${props.id}/information` : `${profileConstant}/information`} render={() => <Information accounts={props.accounts} id={props.id} account={props.account} otherProfile={otherProfile} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
-        {!props.id ? <Route exact path={props.id ? `${profileConstant}/${props.id}/saved` : `${profileConstant}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
+        <Route path={props.id ? `${profileConstant.path}/${props.id}/information` : `${profileConstant.path}/information`} render={() => <Information accounts={props.accounts} id={props.id} account={props.account} otherProfile={otherProfile} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
+        {!props.id ? <Route exact path={props.id ? `${profileConstant.path}/${props.id}/saved` : `${profileConstant.path}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}
-<<<<<<< HEAD
       <CreatePost account={props.account} auth={props.auth} open={open} postPhoto={postPhoto} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} createPost={props.createPost} />
-=======
-      <CreatePost account={props.account} open={open} postPhoto={postPhoto} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} />
->>>>>>> 829743376670bcf6bd688d0d118905c801d65516
     </div>
   );
 };
