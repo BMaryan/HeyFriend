@@ -34,7 +34,7 @@ const EditProfileForm = (props) => {
       <div className={styles.wrapper_block}>
         <div className={styles.key}>Status</div>
         <div className={styles.action}>
-          <WrapperCreateField id="outlined-error-helper-text" name="text" type="text" label="Status" helperText="" placeholder="" validate={[]} component={InputField} />
+          <WrapperCreateField id="outlined-error-helper-text" name="status" type="text" label="Status" helperText="" placeholder="" validate={[]} component={InputField} />
         </div>
       </div>
       <div className={styles.wrapper_block}>

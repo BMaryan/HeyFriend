@@ -22,12 +22,10 @@ const ADD_COMMENT = "heyfriend/profilePage/ADD_COMMENT";
 const SET_ACCOUNTS = "heyfriend/profilePage/SET_ACCOUNTS";
 const SET_ACCOUNT = "heyfriend/profilePage/SET_ACCOUNT";
 const UPDATE_ACCOUNT = "heyfriend/profilePage/UPDATE_ACCOUNT";
-const CREATE_POST = "heyfriend/profilePage/CREATE_POST";
 
 const initialState = {
   accounts: [],
   account: null,
-  posts: [],
   //
   authorizationId: null,
   paramsId: null,
@@ -243,14 +241,6 @@ const ProfileReducer = (state = initialState, action) => {
         account: action.account,
       };
     }
-    case CREATE_POST: {
-      let newPost = { ...action.data };
-
-      return {
-        ...state,
-        posts: [newPost],
-      };
-    }
     default: {
       return state;
     }
@@ -342,8 +332,6 @@ export const setAccount = (account) => ({ type: SET_ACCOUNT, account });
 
 export const updateAccount = (account) => ({ type: UPDATE_ACCOUNT, account });
 
-export const createPost = (data) => ({ type: CREATE_POST, data });
-
 // thunks
 export const setAccountsThunk = () => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
 
@@ -361,16 +349,6 @@ export const updateAccountThunk = (account) => async (dispatch) => {
   await setDoc(docRef, account);
 
   dispatch(updateAccount(account));
-};
-
-export const createPostThunk = (data) => async (dispatch, getState) => {
-  await onAuthStateChanged(auth, (user) => user && setDoc(doc(db, "posts", user.uid), { ...data }));
-
-  // onSnapshot(collection(db, "posts"), (snapshot) => console.log(snapshot.docs));
-  return onSnapshot(collection(db, "posts"), (snapshot) => dispatch(createPost(snapshot.docs)));
-  // const resp = await getDoc(doc(db, "posts"));
-
-  // dispatch(createPost(resp.data()));
 };
 
 export default ProfileReducer;

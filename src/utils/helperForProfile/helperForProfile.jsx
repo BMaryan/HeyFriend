@@ -151,10 +151,10 @@ export let ReturnImageList = (props) => {
     <>
       {/* return my profile images list */}
       {props.isMyProfile ? (
-        props?.account?.profile?.posts && props.logicOfPagePost ? (
+        props?.posts && props.logicOfPagePost ? (
           <div className={styles.posts}>
-            {props.account.profile.posts.map((post) => (
-              <DuplicateCodeReturnImageList key={post.id} {...props} post={post} currentAccount={props.account} />
+            {props.posts.map((post) => (
+              <DuplicateCodeReturnImageList key={post.id} {...props} post={post?.data()} currentAccount={props.account} />
             ))}
           </div>
         ) : (
@@ -164,9 +164,9 @@ export let ReturnImageList = (props) => {
 
       {/* return other profile images list */}
       {props.isOtherProfile ? (
-        props?.otherProfile?.profile?.posts && props.logicOfPagePost ? (
+        props?.otherProfile?.posts && props.logicOfPagePost ? (
           <div className={styles.posts}>
-            {props.otherProfile.profile.posts.map((post) => (
+            {props.otherProfile.posts.map((post) => (
               <DuplicateCodeReturnImageList key={post.id} {...props} post={post} currentAccount={props.otherProfile} />
             ))}
           </div>

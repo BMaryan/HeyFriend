@@ -6,7 +6,7 @@ import FooterPost from "./FooterPost/FooterPost";
 import { defaultPostConstant, modalPostConstant, onlyBodyPostConstant } from "../../../core/constants/constantsPost";
 
 const Post = (props) => {
-  let checkClickFavoriteBorder = props.account.profile.likedPosts && props.account.profile.likedPosts.length > 0 ? props.account.profile.likedPosts.find((like) => like.id === props.post.id) : undefined;
+  let checkClickFavoriteBorder = props?.account?.profile?.likedPosts && props?.account?.profile?.likedPosts?.length > 0 ? props?.account?.profile?.likedPosts?.find((like) => like.id === props.post.id) : undefined;
 
   return (
     <div className={styles.wrapper_post}>

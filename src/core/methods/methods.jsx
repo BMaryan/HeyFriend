@@ -1,18 +1,18 @@
 export const getUniqueGeneratedIdPost = (props) => {
-  const result = props.account.id + "";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
+  let result = props.posts?.length ? props.posts?.length : 0 + "";
+  let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let charactersLength = characters.length;
 
-  for (const i = 0; i < props.length; i++) {
+  for (let i = 0; i < props.length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
 
-  const searchTheSameId = props.account && props.account.posts ? props.account.posts.find((post) => post.id === result) : undefined;
+  const searchTheSameId = props.posts ? props.posts.find((post) => post.id === result) : undefined;
 
   if (!searchTheSameId) {
     return result;
   } else {
-    return result + props.account.posts.length;
+    return result + props.posts.length;
   }
 };
 

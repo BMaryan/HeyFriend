@@ -89,7 +89,7 @@ const ProfileContent = (props) => {
           exact
           path={props.id ? `${profileConstant.path}/${props.id}` : `${profileConstant.path}`}
           render={() => {
-            return <Posts {...props} handleOpen={handleOpen} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
+            return <Posts {...props} handleOpen={handleOpen} posts={props.posts} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
           }}
         />
 
@@ -98,7 +98,7 @@ const ProfileContent = (props) => {
       </div>
 
       {/* toggle show create post container */}
-      <CreatePost account={props.account} auth={props.auth} open={open} postPhoto={postPhoto} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} createPost={props.createPost} />
+      <CreatePost account={props.account} auth={props.auth} open={open} postPhoto={postPhoto} posts={props.posts} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} createPostThunk={props.createPostThunk} />
     </div>
   );
 };

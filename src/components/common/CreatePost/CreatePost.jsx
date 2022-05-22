@@ -124,12 +124,14 @@ const CreatePost = (props) => {
                       <Button
                         onClick={() => {
                           if (activeStep === steps.length - 1) {
-                            props.createPost({
-                              id: 1,
-                              // id: props.getUniqueGeneratedIdPost({ length: 11, account: props.account }),
-                              postPhoto: props.postPhoto,
-                              description: saveOwnerPost,
-                              dateCreated: new Date(),
+                            props.createPostThunk({
+                              id: props.account.id,
+                              data: {
+                                id: props.getUniqueGeneratedIdPost({ length: 28, posts: props.posts }),
+                                postPhoto: props.postPhoto,
+                                description: saveOwnerPost,
+                                dateCreated: new Date(),
+                              },
                             });
                             // props.setProfilePosts({
                             // 	id: props.getUniqueGeneratedIdPost({ length: 11, account: props.account }),

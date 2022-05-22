@@ -8,27 +8,18 @@ import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { addChat } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, createPost, updateAccountThunk } from "../../redux/profile-reducer";
+import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, updateAccountThunk } from "../../redux/profile-reducer";
+import { useHistory } from "react-router-dom";
+import { createPostThunk } from "../../redux/post-reducer";
+import { setPostsSelector } from "../../redux/post-selectors";
 
 const ProfileContainer = (props) => {
   let id = props.match.params.id;
+  const history = useHistory();
 
-  // React.useEffect(() => {
-  // 	if (props.accounts && props.userSignUp && props.userSignUp.name && props.account) {
-  // 		let foundTheSameAccount = props.accounts.find(account => account.id === props.account.id);
-  // 		if (!foundTheSameAccount) {
-  // 			props.addAccount(props.accounts.length + 1, props.account.profile);
-  // 		}
-  // 	}
-  // }, [props.userSignUp]);
-
-  // if (!id && props.account && props.account.id) {
-  // 	props.getParamsId(null);
-  // 	props.getAuthorizationId(props.account.id);
-  // } else {
-  // 	props.getParamsId(id);
-  // 	props.getAuthorizationId(null);
-  // }
+  React.useEffect(() => {
+    if (id) props.accounts.find((item) => item?.data()?.id === id || history.push("/not-found"));
+  }, [id]);
 
   return <Profile {...props} id={id} />;
 };
@@ -38,6 +29,7 @@ const mapStateToProps = (state) => {
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
     auth: setAuthSelector(state),
+    posts: setPostsSelector(state),
     //
     chats: getChatsSelector(state),
     userSignIn: getUserSignInSelector(state),
@@ -56,7 +48,7 @@ export default compose(
     setProfileChats,
     addAccount,
     unFollowing,
-    createPost,
+    createPostThunk,
     updateAccountThunk,
   }),
   withRouter
