@@ -1,1 +1,1 @@
-export const getPostsSelector = (state) => state.postPage.chats;
+export const setPostsSelector = (state) => state.postPage.posts;
