@@ -24,6 +24,8 @@ function App(props) {
   let checkSignIn = location.pathname.includes(signInConstant.path);
   let checkSignUp = location.pathname.includes(signUpConstant.path);
 
+  // console.log(props.id);
+
   return (
     <div className="App">
       {props.auth ? (

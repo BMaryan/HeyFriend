@@ -3,22 +3,23 @@ import { connect } from "react-redux";
 import App from "./App";
 import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "./redux/auth-selectors";
 import { getChatsSelector } from "./redux/chat-selectors";
-import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk, createPostThunk } from "./redux/profile-reducer";
-import { getAccountSelector, getAccountsSelector, setPostsSelector } from "./redux/profile-selectors";
+import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk } from "./redux/profile-reducer";
+import { getAccountSelector, getAccountsSelector } from "./redux/profile-selectors";
 import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import navigation, { signInConstant, signUpConstant, editConstant, mainConstant } from "./core/constants/constants";
+import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { setAuth } from "./redux/auth-reducer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { createPostThunk, setPostsThunk } from "./redux/post-reducer";
+import { setPostsSelector } from "./redux/post-selectors";
 
 const AppContainer = (props) => {
-  const id = Number(props.match.params.id);
+  const id = props.match.params.id;
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
@@ -43,6 +44,21 @@ const AppContainer = (props) => {
       }
     });
   }, [props.auth]);
+
+  React.useEffect(() => {
+    props.setPostsThunk();
+  }, [props.posts]);
+
+  // React.useEffect(() => {
+  //   if (!props.auth || !props.account) {
+  //     props.setAuth(null);
+  //     props.setAccount(null);
+
+  //     history.push(signInConstant.path);
+
+  //     return;
+  //   }
+  // }, [props.auth, props.account]);
 
   // name of page in title
   React.useEffect(() => {
@@ -90,6 +106,7 @@ export default compose(
     setAccount,
     setAccountsThunk,
     setAccountThunk,
+    setPostsThunk,
     createPostThunk,
   }),
   withRouter
