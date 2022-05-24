@@ -76,7 +76,7 @@ const NavbarList = (props) => {
             },
           },
         }}>
-        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant.path}`}>
+        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant.path}/${props?.account?.id}`}>
           <MenuItem className={styles.menu_item}>
             <ListItemIcon>
               <Person className={commonStyles.icon} />
@@ -85,7 +85,7 @@ const NavbarList = (props) => {
           </MenuItem>
         </NavLink>
 
-        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant.path}/saved`}>
+        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant.path}/${props?.account?.id}/saved`}>
           <MenuItem className={styles.menu_item}>
             <ListItemIcon>
               <BookmarkBorderOutlined className={commonStyles.icon} />

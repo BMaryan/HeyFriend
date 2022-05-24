@@ -24,7 +24,7 @@ export const Head = (props) => {
       <div>
         {props.accounts.map((account) =>
           account && id && account.id === id ? (
-            <NavLink key={account.id} to={props.account && props.account.id !== id ? `${profileConstant.path}/` + account.id : `${profileConstant.path}`} className={dialogStyles.chat_forHead}>
+            <NavLink key={account.id} to={props.account && props.account.id === id ? `${profileConstant.path}/${props?.account?.id}` : `${profileConstant.path}/${account.id}`} className={dialogStyles.chat_forHead}>
               <div className={dialogStyles.wrapper_picture}>
                 <div className={dialogStyles.have_not_picture_forHead}>{account ? <img src={otherProfile?.avatar ? otherProfile.avatar : defaultAvatar} alt="" /> : <></>}</div>
               </div>

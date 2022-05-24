@@ -16,7 +16,7 @@ const SignUp = (props) => {
   };
 
   if (props.account && props.account.id) {
-    return <Redirect to={profileConstant.path} />;
+    return <Redirect to={`${profileConstant.path}/${props?.account?.id}`} />;
   }
 
   return (

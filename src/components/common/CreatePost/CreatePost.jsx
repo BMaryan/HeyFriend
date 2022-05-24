@@ -127,7 +127,7 @@ const CreatePost = (props) => {
                             props.createPostThunk({
                               id: props.account.id,
                               data: {
-                                id: props.getUniqueGeneratedIdPost({ length: 28, posts: props.posts }),
+                                // id: props.getUniqueGeneratedIdPost({ length: 28, posts: props.posts }),
                                 postPhoto: props.postPhoto,
                                 description: saveOwnerPost,
                                 dateCreated: new Date(),

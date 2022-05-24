@@ -57,7 +57,7 @@ const Chat = (props) => {
           props.users.map((user) =>
             user && id && user.id === id ? (
               <div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
-                <NavLink key={user.id} to={props.account && props.account.id !== id ? `${profileConstant.path}/` + user.id : `${profileConstant.path}`} className={styles.contact_link}>
+                <NavLink key={user.id} to={props.account && props.account.id === id ? `${profileConstant.path}/${props?.account?.id}` : `${profileConstant.path}/${user.id}`} className={styles.contact_link}>
                   <div className={styles.wrapper_picture}>{user ? <img src={props.account && props.account.img ? props.account.img : defaultAvatar} alt="" /> : <></>}</div>
                   <div className={styles.fullName}>{user ? user.surname + " " + user.name : <></>}</div>
                 </NavLink>

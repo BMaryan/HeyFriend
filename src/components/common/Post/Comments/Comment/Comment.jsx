@@ -11,7 +11,7 @@ const Comment = (props) => {
       <div className={!props.modal ? styles.comment_content : styles.comment_content_modal}>
         {props.post && props.post.description ? (
           <div>
-            <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${props.currentAccount && props.account.id !== props.currentAccount.id ? props.currentAccount.id : ""}`}>
+            <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${props.currentAccount.id}`}>
               {props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
             </NavLink>
             <span className={styles.description}>

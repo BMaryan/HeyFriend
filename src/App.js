@@ -12,6 +12,7 @@ import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
 import { useLocation } from "react-router-dom";
 import { withSuspense } from "./hoc/withSuspense/withSuspense";
 import { chatConstant, editConstant, friendsConstant, mainConstant, photoConstant, profileConstant, signInConstant, signUpConstant } from "./core/constants/constants";
+import { CircularProgress } from "@mui/material";
 
 // lazy loading
 const ChatContainer = React.lazy(() => import("./components/Chat/ChatContainer"));
@@ -23,8 +24,6 @@ function App(props) {
 
   let checkSignIn = location.pathname.includes(signInConstant.path);
   let checkSignUp = location.pathname.includes(signUpConstant.path);
-
-  // console.log(props.id);
 
   return (
     <div className="App">
@@ -38,7 +37,7 @@ function App(props) {
         <Switch>
           <Route exact path={`${mainConstant.path}`} render={() => <MainContainer />} />
           <Route exact path={`${photoConstant.path}/:id`} render={() => <CurrentPostContainer />} />
-          <Route path={`${profileConstant.path}/:id?`} render={() => <ProfileContainer />} />
+          <Route path={`${profileConstant.path}/:id`} render={() => <ProfileContainer />} />
           <Route path={`${chatConstant.path}/:id?`} render={withSuspense(ChatContainer)} />
           <Route path={`${friendsConstant.path}`} render={withSuspense(FriendsContainer)} />
           <Route path={`${editConstant.path}`} render={withSuspense(EditContainer)} />

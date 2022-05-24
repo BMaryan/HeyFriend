@@ -76,11 +76,11 @@ const Main = (props) => {
           <div className={styles.wrapper_contact}>
             <div className={styles.wrapper_contact_info}>
               {/* default */}
-              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant.path}`}>
+              <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant.path}/${props?.account?.id}`}>
                 <img className={styles.avatar + " " + styles.avatar__large} src={props?.account?.avatar ? props.account.avatar : defaultAvatar} alt="" />
               </NavLink>
               <div className={styles.wrapper_contact_info_detail}>
-                <NavLink className={styles.fullName} to={`${profileConstant.path}`}>
+                <NavLink className={styles.fullName} to={`${profileConstant.path}/${props?.account?.id}`}>
                   {props?.account?.surname + " " + props?.account?.name}
                 </NavLink>
                 <div className={styles.subtitle}>{props?.account?.status}</div>

@@ -37,7 +37,7 @@ const SignUpContainer = (props) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        history.push(`${profileConstant.path}`);
+        history.push(`${profileConstant.path}/${props?.account?.id}`);
       }
     });
   }, []);

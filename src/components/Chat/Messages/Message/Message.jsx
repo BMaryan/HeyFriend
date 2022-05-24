@@ -12,7 +12,7 @@ const Message = (props) => {
 
   return (
     <div className={checkMessage ? styles.wrapper_container_myMessage : styles.wrapper_container_otherMessage + " " + styles.wrapper_container_message}>
-      <NavLink to={props.account && props.account.id !== props.id ? `${profileConstant.path}/` + props.id : `${profileConstant.path}`} className={checkMessage ? styles.wrapper_myPicture : styles.wrapper_otherPicture + " " + styles.wrapper_picture}>
+      <NavLink to={props.account && props.account.id === props.id ? `${profileConstant.path}/${props?.account?.id}` : `${profileConstant.path}/${props.id}`} className={checkMessage ? styles.wrapper_myPicture : styles.wrapper_otherPicture + " " + styles.wrapper_picture}>
         <img src={myProfile && myProfile.profile.img ? myProfile.profile.img : otherProfile && otherProfile.profile.img ? otherProfile.profile.img : defaultAvatar} alt="" />
       </NavLink>
       <div className={checkMessage ? styles.wrapper_myMessage : styles.wrapper_otherMessage + " " + styles.wrapper_message}>{props.el && props.el.message}</div>

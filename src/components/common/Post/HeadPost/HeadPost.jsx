@@ -24,12 +24,12 @@ const HeadPost = (props) => {
     <div className={styles.head}>
       <div className={styles.wrapper_details}>
         <div className={styles.details_position}>
-          <NavLink to={`${profileConstant.path}/${props.account.id === props.currentAccount.id ? "" : props.currentAccount.id}`}>
+          <NavLink to={`${profileConstant.path}/${props.currentAccount.id}`}>
             <div className={styles.wrapper_profile_img}>{props.currentAccount && props.currentAccount.profile.avatar ? <img className={styles.profile_avatar} src={props.currentAccount.profile.avatar} alt="" /> : <img className={styles.profile_avatar} src={defaultAvatar} alt="" />}</div>
           </NavLink>
 
           <div className={styles.details}>
-            <NavLink to={`${profileConstant.path}/${props.currentAccount && props.account.id !== props.currentAccount.id ? props.currentAccount.id : ""}`} className={styles.fullName}>
+            <NavLink to={`${profileConstant.path}/${props.currentAccount.id}`} className={styles.fullName}>
               {props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
             </NavLink>
             {props.post && props.post.dateCreated ? <div className={styles.date}>{props.post.dateCreated}</div> : undefined}
@@ -59,7 +59,7 @@ const HeadPost = (props) => {
                   <Button
                     onClick={() => {
                       props.deletePost(props.post.id);
-                      history.push(`${profileConstant.path}`);
+                      history.push(`${profileConstant.path}/${props?.account?.id}`);
                     }}
                     className={styles.item + " " + styles.item__border + " " + styles.item__red}
                     variant="text">
