@@ -14,15 +14,11 @@ const ProfileInfo = (props) => {
   const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
   const [openModalCoverProfile, setOpenModalCoverProfile] = React.useState(false);
 
-  let otherProfile = props.accounts.find((profile) => (profile && props?.id ? profile?.id === props?.id : undefined));
-  let oftenCheckMyProfile = props?.account && !props?.id;
-  let oftenCheckOtherProfile = otherProfile && props?.id;
-  let coverPhoto = oftenCheckMyProfile && props?.account?.coverPhoto ? props.account.coverPhoto : oftenCheckOtherProfile && otherProfile.data().coverPhoto ? otherProfile.data().coverPhoto : undefined;
+  let otherProfile = props.accounts.find((profile) => (profile && props?.id ? profile?.data()?.id === props?.id : undefined));
+  let oftenCheckMyProfile = props?.account && props?.id === props?.account?.id;
+  let oftenCheckOtherProfile = otherProfile?.data() && props?.id !== props?.account?.id;
+  let coverPhoto = oftenCheckMyProfile && props?.account?.coverPhoto ? props.account.coverPhoto : oftenCheckOtherProfile && otherProfile?.data().coverPhoto ? otherProfile?.data().coverPhoto : undefined;
   let checkFollow = props?.account?.following ? props.account.following.find((account) => account.id === props?.id) : undefined;
-
-  // React.useEffect(() => {
-  //   if (props?.account) props.updateAccountThunk({ ...props.account, coverPhoto: openModalCoverProfile });
-  // }, [openModalCoverProfile]);
 
   return (
     <div className={styles.profile_info}>
@@ -36,10 +32,10 @@ const ProfileInfo = (props) => {
         </div>
 
         {/* wrapper picture */}
-        <div className={openModalAvatarProfile && !props?.id ? styles.wrapper_profilePicture_active__center : styles.wrapper_profilePicture__center}>{oftenCheckMyProfile && props.account.avatar ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={props?.account?.avatar} title="Change profile photo" alt="" /> : oftenCheckOtherProfile && otherProfile.data().avatar ? <img src={otherProfile?.data()?.avatar} alt="" /> : !props?.id ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={defaultAvatar} title="Change profile photo" alt="" /> : <img src={defaultAvatar} alt="" />}</div>
+        <div className={openModalAvatarProfile && props?.id === props?.account?.id ? styles.wrapper_profilePicture_active__center : styles.wrapper_profilePicture__center}>{oftenCheckMyProfile && props.account.avatar ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={props?.account?.avatar} title="Change profile photo" alt="" /> : oftenCheckOtherProfile && otherProfile.data().avatar ? <img src={otherProfile?.data()?.avatar} alt="" /> : !props?.id ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={defaultAvatar} title="Change profile photo" alt="" /> : <img src={defaultAvatar} alt="" />}</div>
 
         {/* change cover img */}
-        {!props?.id ? (
+        {props?.id === props?.account?.id ? (
           <div className={styles.wrapper_change_cover}>
             <PhotoCameraOutlinedIcon onClick={() => (openModalCoverProfile ? setOpenModalCoverProfile(false) : setOpenModalCoverProfile(true))} className={styles.icon_change_cover} fontSize="medium" />
           </div>
@@ -49,7 +45,7 @@ const ProfileInfo = (props) => {
       {/* 				profile info line				 */}
       <div className={styles.profile_info_line}>
         {/* wrapper picture */}
-        <div className={openModalAvatarProfile && !props?.id ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>{oftenCheckMyProfile && props?.account?.avatar ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={props?.account?.avatar} title="Change profile photo" alt="" /> : oftenCheckOtherProfile && otherProfile?.data()?.avatar ? <img src={otherProfile?.data()?.avatar} alt="" /> : !props?.id ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={defaultAvatar} title="Change profile photo" alt="" /> : <img src={defaultAvatar} alt="" />}</div>
+        <div className={openModalAvatarProfile && props?.id === props?.account?.id ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>{oftenCheckMyProfile && props?.account?.avatar ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={props?.account?.avatar} title="Change profile photo" alt="" /> : oftenCheckOtherProfile && otherProfile?.data()?.avatar ? <img src={otherProfile?.data()?.avatar} alt="" /> : !props?.id ? <img onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} src={defaultAvatar} title="Change profile photo" alt="" /> : <img src={defaultAvatar} alt="" />}</div>
 
         {/* wrapper profile details info line */}
         <div className={styles.wrapper_profile_details_info_line}>
@@ -75,7 +71,7 @@ const ProfileInfo = (props) => {
           </div>
 
           <div className={styles.wrapper_button}>
-            {props?.id ? (
+            {props?.id !== props?.account?.id ? (
               <>
                 <Button className={styles.button} style={{ textTransform: "capitalize" }} variant="contained">
                   Message
@@ -112,10 +108,10 @@ const ProfileInfo = (props) => {
 
       {/* toggle show container for change something in profile */}
       {/* toggle cover container */}
-      {!props?.id && props?.account?.id !== props?.id ? <div>{openModalCoverProfile ? <ContainerCoverProfile profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} getProfileData={props.getProfileData} account={props.account} openModalCoverProfile={openModalCoverProfile} setOpenModalCoverProfile={setOpenModalCoverProfile} /> : <></>}</div> : <></>}
+      {props?.account?.id === props?.id ? <div>{openModalCoverProfile ? <ContainerCoverProfile profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} getProfileData={props.getProfileData} account={props.account} openModalCoverProfile={openModalCoverProfile} setOpenModalCoverProfile={setOpenModalCoverProfile} /> : <></>}</div> : <></>}
 
       {/* change picture */}
-      {!props?.id && props?.account?.id !== props?.id ? <div>{openModalAvatarProfile ? <ChangeProfilePictureContainer profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} getProfileData={props.getProfileData} account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} /> : <></>}</div> : <></>}
+      {props?.account?.id === props?.id ? <div>{openModalAvatarProfile ? <ChangeProfilePictureContainer profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} getProfileData={props.getProfileData} account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} /> : <></>}</div> : <></>}
     </div>
   );
 };

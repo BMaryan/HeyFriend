@@ -18,7 +18,8 @@ const ProfileContainer = (props) => {
   const history = useHistory();
 
   React.useEffect(() => {
-    if (id) props.accounts.find((item) => item?.data()?.id === id || history.push("/not-found"));
+    if (id) props.accounts.find((item) => (item?.data()?.id && id ? item?.data()?.id === id : history.push("/not-found")));
+    // if (id) props.accounts.find((item) => item?.data()?.id === id || history.push("/not-found"));
   }, [id]);
 
   return <Profile {...props} id={id} />;

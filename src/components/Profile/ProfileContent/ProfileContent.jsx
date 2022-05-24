@@ -20,8 +20,8 @@ const ProfileContent = (props) => {
   let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
-  let otherProfile = props.accounts.find((profile) => (profile && props.id ? profile.id === props.id : undefined));
-  let oftenCheckOtherProfile = otherProfile && props.id;
+  let otherProfile = props.accounts.find((profile) => (profile?.data() && props.id ? profile?.data().id === props.id : undefined));
+  let oftenCheckOtherProfile = otherProfile?.data() && props?.id;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -33,7 +33,7 @@ const ProfileContent = (props) => {
     <div className={styles.profile_content}>
       <div className={styles.content}>
         <div className={styles.navigation}>
-          <NavLink exact to={props.id ? `${profileConstant.path}/${props.id}` : `${profileConstant.path}`} className={styles.item} activeClassName={styles.item_active}>
+          <NavLink exact to={`${profileConstant.path}/${props?.id}`} className={styles.item} activeClassName={styles.item_active}>
             <Media queries={{ small: "(max-width: 480px)" }}>
               {(matches) =>
                 !matches.small ? (
@@ -49,7 +49,7 @@ const ProfileContent = (props) => {
               }
             </Media>
           </NavLink>
-          <NavLink to={props.id ? `${profileConstant.path}/${props.id}/information` : `${profileConstant.path}/information`} className={styles.item} activeClassName={styles.item_active}>
+          <NavLink to={`${profileConstant.path}/${props?.id}/information`} className={styles.item} activeClassName={styles.item_active}>
             <Media queries={{ small: "(max-width: 480px)" }}>
               {(matches) =>
                 !matches.small ? (
@@ -65,8 +65,8 @@ const ProfileContent = (props) => {
               }
             </Media>
           </NavLink>
-          {!props.id ? (
-            <NavLink exact to={props.id ? `${profileConstant.path}/${props.id}/saved` : `${profileConstant.path}/saved`} className={styles.item} activeClassName={styles.item_active}>
+          {props.id === props?.account?.id ? (
+            <NavLink exact to={`${profileConstant.path}/${props?.id}/saved`} className={styles.item} activeClassName={styles.item_active}>
               <Media queries={{ small: "(max-width: 480px)" }}>
                 {(matches) =>
                   !matches.small ? (
@@ -87,14 +87,14 @@ const ProfileContent = (props) => {
 
         <Route
           exact
-          path={props.id ? `${profileConstant.path}/${props.id}` : `${profileConstant.path}`}
+          path={`${profileConstant.path}/${props?.id}`}
           render={() => {
             return <Posts {...props} handleOpen={handleOpen} posts={props.posts} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
           }}
         />
 
-        <Route path={props.id ? `${profileConstant.path}/${props.id}/information` : `${profileConstant.path}/information`} render={() => <Information accounts={props.accounts} id={props.id} account={props.account} otherProfile={otherProfile} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
-        {!props.id ? <Route exact path={props.id ? `${profileConstant.path}/${props.id}/saved` : `${profileConstant.path}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
+        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information accounts={props.accounts} id={props?.id} account={props.account} otherProfile={otherProfile} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
+        {props?.id !== props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}

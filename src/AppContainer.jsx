@@ -12,7 +12,6 @@ import navigation, { signInConstant, signUpConstant } from "./core/constants/con
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { setAuth } from "./redux/auth-reducer";
-import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
 import { createPostThunk, setPostsThunk } from "./redux/post-reducer";
@@ -20,7 +19,6 @@ import { setPostsSelector } from "./redux/post-selectors";
 
 const AppContainer = (props) => {
   const id = props.match.params.id;
-  const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
   // set account to redux and redirect if you aren't auth
@@ -63,18 +61,18 @@ const AppContainer = (props) => {
   // name of page in title
   React.useEffect(() => {
     let namePage = props.location.pathname;
-
     navigation.forEach((item) => (namePage === item.path ? (namePage = item.title) : "Hey Friend"));
-
     document.title = namePage[0].toUpperCase() + namePage.slice(1);
   }, [props.location]);
 
-  if (loading) {
-    return (
-      <div className="wrapper_loading">
-        <CircularProgress className="loading" />
-      </div>
-    );
+  if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
+    if (!props.account) {
+      return (
+        <div className="wrapper_loading">
+          <CircularProgress className="loading" />
+        </div>
+      );
+    }
   }
 
   return <App {...props} id={id} />;
