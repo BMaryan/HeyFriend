@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Contacts = (props) => {
-  let valueEmail = props.account && !props.id ? props.account.profile.email : props.otherProfile ? props.otherProfile.profile.email : undefined;
+  let valueEmail = props?.currentAccount?.data() ? props?.currentAccount?.data()?.email : undefined;
 
-  return <div className={styles.contacts}>{props.account && props.account.profile && props.account.profile.email ? <ReturnEmail value={valueEmail} /> : undefined}</div>;
+  return <div className={styles.contacts}>{props?.currentAccount?.data()?.email ? <ReturnEmail value={valueEmail} /> : undefined}</div>;
 };
 
 let ReturnEmail = (props) => {

@@ -3,7 +3,7 @@ import styles from "../Post.module.scss";
 import Button from "@mui/material/Button";
 
 const BodyPost = (props) => {
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className={styles.body}>

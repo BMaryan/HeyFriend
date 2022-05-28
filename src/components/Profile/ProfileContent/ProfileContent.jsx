@@ -20,8 +20,10 @@ const ProfileContent = (props) => {
   let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
-  let otherProfile = props.accounts.find((profile) => (profile?.data() && props.id ? profile?.data().id === props.id : undefined));
-  let oftenCheckOtherProfile = otherProfile?.data() && props?.id;
+  let currentAccount = props?.accounts ? props.accounts.find((account) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined)) : undefined;
+  let oftenCheckOtherProfile = currentAccount?.data() && props?.id;
+
+  console.log(oftenCheckOtherProfile);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -93,7 +95,7 @@ const ProfileContent = (props) => {
           }}
         />
 
-        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information accounts={props.accounts} id={props?.id} account={props.account} otherProfile={otherProfile} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
+        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information accounts={props.accounts} id={props?.id} account={props.account} currentAccount={currentAccount} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
         {props?.id !== props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
       </div>
 

@@ -4,18 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Review = (props) => {
-  let valueEmail = props.account && !props.id ? props.account.email : props.otherProfile.data() ? props.otherProfile.data().email : undefined;
+  let valueEmail = props?.currentAccount?.data() ? props?.currentAccount?.data()?.email : undefined;
 
   return (
     <div className={styles.review}>
       <div className={styles.wrapper_item}>
         <div className={styles.title}>Login</div>
         <div className={styles.wrapper_content}>
-          <div className={styles.value}>{!props.id ? props.account.surname + " " + props.account.name : props.otherProfile.data() ? props.otherProfile.data().surname + " " + props.otherProfile.data().name : undefined}</div>
+          <div className={styles.value}>{props?.currentAccount?.data() ? props?.currentAccount?.data()?.surname + " " + props?.currentAccount?.data()?.name : undefined}</div>
         </div>
       </div>
 
-      {props.account && props.account && props.account.email ? <ReturnEmail value={valueEmail} /> : undefined}
+      {props?.currentAccount?.data()?.email ? <ReturnEmail value={valueEmail} /> : undefined}
     </div>
   );
 };
