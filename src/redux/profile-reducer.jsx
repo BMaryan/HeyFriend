@@ -336,10 +336,10 @@ export const updateAccount = (account) => ({ type: UPDATE_ACCOUNT, account });
 export const setAccountsThunk = () => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
 
 export const setAccountThunk = (user) => async (dispatch) => {
-  const resp = await getDoc(doc(db, "accounts", user.uid));
+  const resp = await getDoc(doc(db, "accounts", user?.uid));
 
   if (resp.exists()) {
-    dispatch(setAccount({ ...resp.data(), id: user.uid }));
+    dispatch(setAccount({ ...resp.data(), id: user?.uid }));
   }
 };
 

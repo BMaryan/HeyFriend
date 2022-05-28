@@ -114,7 +114,7 @@ export const signUp = (credentials) => async (dispatch) => {
   try {
     const user = await authFb.signUp({ email: credentials.email, password: credentials.password });
 
-    await setDoc(doc(db, "accounts", user.user.uid), { name: credentials.name, surname: credentials.surname, email: user.user.email });
+    await setDoc(doc(db, "accounts", user.user.uid), { name: credentials.name, surname: credentials.surname, email: user.user.email, id: user.user.uid });
 
     dispatch(authSuccess());
   } catch (error) {

@@ -25,12 +25,14 @@ const HeadPost = (props) => {
       <div className={styles.wrapper_details}>
         <div className={styles.details_position}>
           <NavLink to={`${profileConstant.path}/${props.currentAccount.id}`}>
-            <div className={styles.wrapper_profile_img}>{props.currentAccount && props.currentAccount.profile.avatar ? <img className={styles.profile_avatar} src={props.currentAccount.profile.avatar} alt="" /> : <img className={styles.profile_avatar} src={defaultAvatar} alt="" />}</div>
+            <div className={styles.wrapper_profile_img}>
+              <img className={styles.profile_avatar} src={props?.currentAccount?.avatar || defaultAvatar} alt="" />
+            </div>
           </NavLink>
 
           <div className={styles.details}>
             <NavLink to={`${profileConstant.path}/${props.currentAccount.id}`} className={styles.fullName}>
-              {props.currentAccount ? props.currentAccount.profile.surname + " " + props.currentAccount.profile.name : undefined}
+              {props?.currentAccount?.surname + " " + props?.currentAccount?.name}
             </NavLink>
             {props.post && props.post.dateCreated ? <div className={styles.date}>{props.post.dateCreated}</div> : undefined}
           </div>
@@ -54,11 +56,11 @@ const HeadPost = (props) => {
           }}>
           <Fade in={open}>
             <Box className={styles.modalPostActions}>
-              {props.account && props.currentAccount && props.account.id === props.currentAccount.id ? (
+              {props?.account?.id === props?.currentAccount?.id ? (
                 <>
                   <Button
                     onClick={() => {
-                      props.deletePost(props.post.id);
+                      props.deletePost(props?.post?.id);
                       history.push(`${profileConstant.path}/${props?.account?.id}`);
                     }}
                     className={styles.item + " " + styles.item__border + " " + styles.item__red}
@@ -69,7 +71,7 @@ const HeadPost = (props) => {
                     variant="text"
                     className={styles.item + " " + styles.item__border}
                     onClick={() => {
-                      history.push(`${photoConstant.path}/${props.post.id}`);
+                      history.push(`${photoConstant.path}/${props?.post?.id}`);
                       handleClose();
                     }}>
                     Go to post
@@ -88,7 +90,7 @@ const HeadPost = (props) => {
                     variant="text"
                     className={styles.item + " " + styles.item__border + " " + styles.item__red}
                     onClick={() => {
-                      props.unFollowing(props.currentAccount.id);
+                      props.unFollowing(props?.currentAccount?.id);
                       handleClose();
                     }}>
                     Unfollow

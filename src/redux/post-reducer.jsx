@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
 const SET_POSTS = "heyfriend/postPage/SET_POSTS";
@@ -36,14 +36,18 @@ export const setPosts = (posts) => ({ type: SET_POSTS, posts });
 export const createPost = (data) => ({ type: CREATE_POST, data });
 
 // thunk
-export const setPostsThunk = () => async (dispatch) => await onSnapshot(collection(db, "posts"), (snapshot) => dispatch(setPosts(snapshot.docs)));
+export const setPostsThunk = () => async (dispatch) =>
+  await onSnapshot(collection(db, "posts"), (snapshot) => {
+    // console.log(snapshot.docs);
+    dispatch(setPosts(snapshot.docs));
+  });
 
 export const createPostThunk =
   ({ id, data }) =>
   async (dispatch) => {
-    let addedDoc = await addDoc(collection(db, "posts"), { ...data, accountId: id });
+    await addDoc(collection(db, "posts"), { ...data, accountId: id });
 
-    dispatch(createPost({ ...data, accountId: id, id: addedDoc.id }));
+    dispatch(createPost({ ...data }));
   };
 
 export default PostPage;

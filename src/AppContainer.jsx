@@ -26,7 +26,6 @@ const AppContainer = (props) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         props.setAuth(user);
-
         props.setAccountsThunk();
         props.setAccountThunk(user);
       } else {
@@ -34,18 +33,28 @@ const AppContainer = (props) => {
         props.setAccount(null);
         props.setAccounts([]);
 
-        if (!props.auth && history.location.pathname === signUpConstant.path) {
+        if (history.location.pathname === signUpConstant.path) {
           history.push(signUpConstant.path);
-        } else if (!props.auth && history.location.pathname !== signInConstant.path) {
+        } else if (history.location.pathname !== signInConstant.path) {
           history.push(signInConstant.path);
         }
       }
     });
   }, [props.auth]);
 
+  // React.useEffect(() => {
+  //   if ((!props.auth || !props.account || (!props.auth && !props.account)) && history.location.pathname === signUpConstant.path) {
+  //     history.push(signUpConstant.path);
+  //   } else if ((!props.auth || !props.account || (!props.auth && !props.account)) && history.location.pathname !== signInConstant.path) {
+  //     history.push(signInConstant.path);
+  //   }
+  // }, [props.auth, props.account]);
+
   React.useEffect(() => {
-    props.setPostsThunk();
-  }, [props.posts]);
+    if (props.posts) {
+      props.setPostsThunk();
+    }
+  }, [props.posts.length]);
 
   // React.useEffect(() => {
   //   if (!props.auth || !props.account) {

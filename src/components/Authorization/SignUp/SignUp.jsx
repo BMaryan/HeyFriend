@@ -23,7 +23,7 @@ const SignUp = (props) => {
     <div className={commonStyle.authorization}>
       <div className={commonStyle.authorization_container}>
         <InformationContainer title={"Welcome Back!"} subtitle={"Don't have an account?"} authSuccess={props.authSuccess} linkTo={`${signInConstant.path}`} buttonText={"Sign In"} />
-        <AuthorizationHelperContainer title={"Sign Up"} form={<SignUpReduxForm onSubmit={onSubmit} loading={props.loading} accounts={props.accounts} userSignUp={props.userSignUp} />} />
+        <AuthorizationHelperContainer title={"Sign Up"} form={<SignUpReduxForm onSubmit={onSubmit} loading={props.loading} accounts={props.accounts} authError={props.authError} userSignUp={props.userSignUp} />} />
       </div>
     </div>
   );

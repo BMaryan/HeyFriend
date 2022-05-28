@@ -18,20 +18,23 @@ const Recommendation = (props) => {
   return (
     <React.Fragment>
       <div className={styles.content}>
-        {props?.accounts.map((account) => (
-          <Card key={account.id} className={styles.card}>
-            <CardActionArea className={styles.head}>
-              <NavLink className={styles.navLink} to={`${profileConstant.path}/` + account.id}>
-                <CardMedia className={styles.wrapper_avatar} component="img" image={account?.data()?.avatar ? account.data().avatar : defaultAvatar} alt="" />
-                <CardContent className={styles.head_content}>
-                  <Typography className={styles.full_name} component="div">
-                    {account.data().surname + " " + account.data().name}
-                  </Typography>
-                </CardContent>
-              </NavLink>
-            </CardActionArea>
-          </Card>
-        ))}
+        {props?.accounts.map(
+          (account) =>
+            props?.account?.id !== account?.data()?.id && (
+              <Card key={account.id} className={styles.card}>
+                <CardActionArea className={styles.head}>
+                  <NavLink className={styles.navLink} to={`${profileConstant.path}/` + account.id}>
+                    <CardMedia className={styles.wrapper_avatar} component="img" image={account?.data()?.avatar ? account.data().avatar : defaultAvatar} alt="" />
+                    <CardContent className={styles.head_content}>
+                      <Typography className={styles.full_name} component="div">
+                        {account.data().surname + " " + account.data().name}
+                      </Typography>
+                    </CardContent>
+                  </NavLink>
+                </CardActionArea>
+              </Card>
+            )
+        )}
 
         {/* {props.accounts
 					? props.accounts.map(account =>

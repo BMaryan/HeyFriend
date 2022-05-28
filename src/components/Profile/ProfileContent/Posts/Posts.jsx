@@ -7,11 +7,8 @@ const Posts = (props) => {
   let history = useHistory();
   let params = useParams();
 
-  // let currentAccount = props?.posts.map((post) => (post?.data() && props.params.id ? post?.data().accountId === props.params.id : undefined));
-  // let currentPost = currentAccount?.data()?.posts ? currentAccount?.data()?.posts.find((post) => (post?.data() && props.params.id ? post?.data()?.accountId === props.params.id : undefined)) : undefined;
-  // let otherProfile = props.posts.find((post) => (post?.data() && props.id ? post?.data().accountId === props.id : undefined));
-
-  // console.log(currentAccount);
+  let currentAccount = props?.accounts && props?.accounts?.find((account) => (account?.data() && props?.params?.id ? account?.data()?.id === props?.params?.id : undefined));
+  let isAccountPosts = props?.posts && props?.posts?.map((post) => (post?.data() && currentAccount?.data()?.id ? post?.data()?.accountId === currentAccount?.data()?.id : undefined));
 
   return (
     <div className={styles.posts}>
@@ -22,9 +19,9 @@ const Posts = (props) => {
           </div>
         ) : undefined}
 
-        {!props.id ? <ReturnImageList accounts={props.accounts} account={props.account} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} oftenCheckOtherProfile={props.oftenCheckOtherProfile} id={props.id} posts={props.posts} logicOfPagePost={true} isMyProfile={true} /> : <ReturnImageList accounts={props.accounts} account={props.account} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} oftenCheckOtherProfile={props.oftenCheckOtherProfile} id={props.id} logicOfPagePost={true} posts={props.posts} isOtherProfile={true} />}
+        {props.id === props.account.id ? <ReturnImageList {...props} isAccountPosts={isAccountPosts} logicOfPagePost={true} currentAccount={currentAccount} /> : <ReturnImageList {...props} isAccountPosts={isAccountPosts} logicOfPagePost={true} currentAccount={currentAccount} />}
 
-        {props.openModalCurrentPost ? <ToggleShowCurrentPostContainer {...props} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} id={props.id} history={history} params={params} currentAccount={undefined} /> : undefined}
+        {props.openModalCurrentPost ? <ToggleShowCurrentPostContainer {...props} history={history} params={params} currentAccount={currentAccount} /> : undefined}
       </div>
     </div>
   );
