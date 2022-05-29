@@ -20,21 +20,25 @@ const HeadPost = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // test
+  let date = new Date();
+  date.setMilliseconds(date.getSeconds() - props?.post?.data()?.dateCreated.nanoseconds);
+
   return (
     <div className={styles.head}>
       <div className={styles.wrapper_details}>
         <div className={styles.details_position}>
-          <NavLink to={`${profileConstant.path}/${props.currentAccount.id}`}>
+          <NavLink to={`${profileConstant.path}/${props?.currentAccount?.id}`}>
             <div className={styles.wrapper_profile_img}>
               <img className={styles.profile_avatar} src={props?.currentAccount?.avatar || defaultAvatar} alt="" />
             </div>
           </NavLink>
 
           <div className={styles.details}>
-            <NavLink to={`${profileConstant.path}/${props.currentAccount.id}`} className={styles.fullName}>
+            <NavLink to={`${profileConstant.path}/${props?.currentAccount?.id}`} className={styles.fullName}>
               {props?.currentAccount?.surname + " " + props?.currentAccount?.name}
             </NavLink>
-            {props.post && props.post.dateCreated ? <div className={styles.date}>{props.post.dateCreated}</div> : undefined}
+            {props?.post?.data()?.dateCreated ? <div className={styles.date}>{date.toLocaleDateString() + " " + date.toLocaleTimeString()}</div> : undefined}
           </div>
         </div>
 

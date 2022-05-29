@@ -1,6 +1,5 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 
 const ADD_ACCOUNT = "heyfriend/profilePage/ADD_ACCOUNT";
 const IS_ACCOUNT = "heyfriend/auth/IS_ACCOUNT";
@@ -113,38 +112,6 @@ const ProfileReducer = (state = initialState, action) => {
         paramsId: action.id,
       };
     }
-    case FOLLOWING: {
-      return {
-        ...state,
-        accounts: state.accounts.map((account) => (account.id === action.currentAccountId ? { ...account, profile: { ...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 ? [...account.profile.followers, { id: state.account.id }] : [{ id: state.account.id }] } } : { ...account })),
-        account: {
-          ...state.account,
-          profile:
-            state.account && state.account.profile && action.currentAccountId
-              ? {
-                  ...state.account.profile,
-                  following: state.account && state.account.profile && state.account.profile.following ? [...state.account.profile.following, { id: action.currentAccountId }] : [{ id: action.currentAccountId }],
-                }
-              : { ...state.account.profile },
-        },
-      };
-    }
-    case UNFOLLOWING: {
-      return {
-        ...state,
-        accounts: state.accounts.map((account) => (account.id === action.currentAccountId ? { ...account, profile: { ...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 ? account.profile.followers.filter((follower) => follower.id !== state.account.id) : [{ id: state.account.id }] } } : { ...account })),
-        account: {
-          ...state.account,
-          profile:
-            state.account && state.account.profile && action.currentAccountId
-              ? {
-                  ...state.account.profile,
-                  following: state.account && state.account.profile && state.account.profile.following ? state.account.profile.following.filter((followingAc) => followingAc.id !== action.currentAccountId) : [],
-                }
-              : { ...state.account.profile },
-        },
-      };
-    }
     case SAVE_POST: {
       return {
         ...state,
@@ -241,6 +208,38 @@ const ProfileReducer = (state = initialState, action) => {
         account: action.account,
       };
     }
+    case FOLLOWING: {
+      return {
+        ...state,
+        // accounts: state.accounts.map((account) => (account.id === action.currentAccountId ? { ...account, profile: { ...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 ? [...account.profile.followers, { id: state.account.id }] : [{ id: state.account.id }] } } : { ...account })),
+        account: {
+          ...state.account,
+          profile:
+            state.account && state.account.profile && action.currentAccountId
+              ? {
+                  ...state.account.profile,
+                  following: state.account && state.account.profile && state.account.profile.following ? [...state.account.profile.following, { id: action.currentAccountId }] : [{ id: action.currentAccountId }],
+                }
+              : { ...state.account.profile },
+        },
+      };
+    }
+    case UNFOLLOWING: {
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => (account.id === action.currentAccountId ? { ...account, profile: { ...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 ? account.profile.followers.filter((follower) => follower.id !== state.account.id) : [{ id: state.account.id }] } } : { ...account })),
+        account: {
+          ...state.account,
+          profile:
+            state.account && state.account.profile && action.currentAccountId
+              ? {
+                  ...state.account.profile,
+                  following: state.account && state.account.profile && state.account.profile.following ? state.account.profile.following.filter((followingAc) => followingAc.id !== action.currentAccountId) : [],
+                }
+              : { ...state.account.profile },
+        },
+      };
+    }
     default: {
       return state;
     }
@@ -293,16 +292,6 @@ export const takeLike = (postId) => ({
   postId,
 });
 
-export const following = (currentAccountId) => ({
-  type: FOLLOWING,
-  currentAccountId,
-});
-
-export const unFollowing = (currentAccountId) => ({
-  type: UNFOLLOWING,
-  currentAccountId,
-});
-
 export const savePost = (id) => ({
   type: SAVE_POST,
   id,
@@ -332,6 +321,10 @@ export const setAccount = (account) => ({ type: SET_ACCOUNT, account });
 
 export const updateAccount = (account) => ({ type: UPDATE_ACCOUNT, account });
 
+export const following = (currentAccountId) => ({ type: FOLLOWING, currentAccountId });
+
+export const unFollowing = (currentAccountId) => ({ type: UNFOLLOWING, currentAccountId });
+
 // thunks
 export const setAccountsThunk = () => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
 
@@ -343,12 +336,22 @@ export const setAccountThunk = (user) => async (dispatch) => {
   }
 };
 
-export const updateAccountThunk = (account) => async (dispatch) => {
+export const updateAccountThunk = (account) => async (dispatch, getState) => {
   const docRef = await doc(db, "accounts", account.id);
 
   await setDoc(docRef, account);
 
-  dispatch(updateAccount(account));
+  if (getState().profilePage.account.id === account.id) {
+    dispatch(updateAccount(account));
+  }
 };
+
+// export const followingThunk = (account) => async (dispatch) => {
+//   const docRef = await doc(db, "accounts", account.id);
+
+//   await setDoc(docRef, account);
+
+//   dispatch(updateAccount(account));
+// };
 
 export default ProfileReducer;

@@ -23,8 +23,6 @@ const ProfileContent = (props) => {
   let currentAccount = props?.accounts ? props.accounts.find((account) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined)) : undefined;
   let oftenCheckOtherProfile = currentAccount?.data() && props?.id;
 
-  console.log(oftenCheckOtherProfile);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -67,7 +65,7 @@ const ProfileContent = (props) => {
               }
             </Media>
           </NavLink>
-          {props.id === props?.account?.id ? (
+          {props?.id === props?.account?.id ? (
             <NavLink exact to={`${profileConstant.path}/${props?.id}/saved`} className={styles.item} activeClassName={styles.item_active}>
               <Media queries={{ small: "(max-width: 480px)" }}>
                 {(matches) =>
@@ -96,7 +94,8 @@ const ProfileContent = (props) => {
         />
 
         <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information accounts={props.accounts} id={props?.id} account={props.account} currentAccount={currentAccount} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
-        {props?.id !== props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
+
+        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}

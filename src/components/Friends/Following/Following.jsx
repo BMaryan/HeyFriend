@@ -10,36 +10,37 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 const Following = (props) => {
-  let checkFollowing = props.account.profile.following ? props.account.profile.following.map((following) => following) : undefined;
+  let checkFollowingAccount = props?.account?.following ? props?.account?.following?.map((item) => item) : undefined;
 
   return (
     <React.Fragment>
       <div className={styles.content}>
-        {props.accounts
-          ? props.accounts.map((account) =>
-              props.account && props.account.profile && props.account.profile.following
-                ? props.account.profile.following.map((followedAccount) =>
-                    account.id === followedAccount.id ? (
-                      <Card key={account.id} className={styles.card}>
-                        <CardActionArea className={styles.head}>
-                          <NavLink className={styles.navLink} key={account.id} to={`${profileConstant.path}/` + account.id}>
-                            <CardMedia className={styles.wrapper_avatar} component="img" image={account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar} alt="" />
-                            <CardContent className={styles.head_content}>
-                              <Typography className={styles.full_name} component="div">
-                                {account.profile.surname + " " + account.profile.name}
-                              </Typography>
-                            </CardContent>
-                          </NavLink>
-                        </CardActionArea>
-                      </Card>
-                    ) : undefined
+        {props?.accounts
+          ? props?.accounts?.map((account) =>
+              props?.account?.following
+                ? props?.account?.following.map(
+                    (item) =>
+                      account.data().id === item.id && (
+                        <Card key={account.id} className={styles.card}>
+                          <CardActionArea className={styles.head}>
+                            <NavLink className={styles.navLink} key={account.id} to={`${profileConstant.path}/` + account.id}>
+                              <CardMedia className={styles.wrapper_avatar} component="img" image={account?.data()?.avatar ? account?.data()?.avatar : defaultAvatar} alt="" />
+                              <CardContent className={styles.head_content}>
+                                <Typography className={styles.full_name} component="div">
+                                  {account?.data()?.surname + " " + account?.data()?.name}
+                                </Typography>
+                              </CardContent>
+                            </NavLink>
+                          </CardActionArea>
+                        </Card>
+                      )
                   )
                 : undefined
             )
           : undefined}
       </div>
 
-      {(checkFollowing && checkFollowing.length < 1) || !checkFollowing ? (
+      {(checkFollowingAccount && checkFollowingAccount.length === 0) || !checkFollowingAccount ? (
         <div className={styles.content_default}>
           <div className={styles.title}>Following</div>
           <div className={styles.subtitle}>The people you are following will be displayed here</div>

@@ -8,21 +8,21 @@ import { getChatsSelector } from "../../redux/chat-selectors";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { getAuthorizationId, getParamsId } from "../../redux/profile-reducer";
 
-const ChatContainer = props => {
-	if (props.account) {
-		props.getAuthorizationId(props.account.id);
-		props.getParamsId(null);
-	}
+const ChatContainer = (props) => {
+  // if (props.account) {
+  // 	props.getAuthorizationId(props.account.id);
+  // 	props.getParamsId(null);
+  // }
 
-	return <Chat {...props} />;
+  return <Chat {...props} />;
 };
 
-const mapStateToProps = state => {
-	return {
-		chats: getChatsSelector(state),
-		accounts: getAccountsSelector(state),
-		account: getAccountSelector(state),
-	};
+const mapStateToProps = (state) => {
+  return {
+    chats: getChatsSelector(state),
+    accounts: getAccountsSelector(state),
+    account: getAccountSelector(state),
+  };
 };
 
 export default compose(connect(mapStateToProps, { addMessage, getAuthorizationId, getParamsId }), withRouter)(ChatContainer);

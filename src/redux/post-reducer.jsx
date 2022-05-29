@@ -1,9 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
 const SET_POSTS = "heyfriend/postPage/SET_POSTS";
 const CREATE_POST = "heyfriend/postPage/CREATE_POST";
+const DELETE_POST = "heyfriend/postPage/DELETE_POST";
 
 const initialState = {
   posts: [],
@@ -25,6 +26,12 @@ const PostPage = (state = initialState, action) => {
         posts: [...state.posts, newPost],
       };
     }
+    case DELETE_POST: {
+      return {
+        ...state,
+        posts: state?.posts ? state.posts.filter((item) => item.id !== action.post.id) : [],
+      };
+    }
     default: {
       return state;
     }
@@ -34,6 +41,8 @@ const PostPage = (state = initialState, action) => {
 export const setPosts = (posts) => ({ type: SET_POSTS, posts });
 
 export const createPost = (data) => ({ type: CREATE_POST, data });
+
+export const deletePost = (post) => ({ type: DELETE_POST, post });
 
 // thunk
 export const setPostsThunk = () => async (dispatch) =>
@@ -49,5 +58,13 @@ export const createPostThunk =
 
     dispatch(createPost({ ...data }));
   };
+
+export const deletePostThunk = (post) => async (dispatch, getState) => {
+  const docRef = await doc(db, "accounts", post.id);
+
+  await deleteDoc(docRef);
+
+  dispatch(deletePost(post));
+};
 
 export default PostPage;

@@ -14,7 +14,6 @@ import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import { useParams } from "react-router-dom";
 
 const DuplicateCodeFunc = (props) => {
   return (
@@ -110,8 +109,6 @@ export const ContainerCoverProfile = (props) => {
 };
 
 export let ToggleShowCurrentPostContainer = (props) => {
-  console.log(props);
-
   return (
     <DuplicateCodeFunc
       {...props}
@@ -121,19 +118,17 @@ export let ToggleShowCurrentPostContainer = (props) => {
         props.history.goBack();
       }}
       class={styles.modal_current_post_container}>
-      <PostContainer kindOfPost={modalPostConstant} account={props.currentAccount} post={props.currentPost} modal={true} />
+      <PostContainer post={props.currentPost} kindOfPost={modalPostConstant} modal={true} />
     </DuplicateCodeFunc>
   );
 };
 
 const DuplicateCodeReturnImageList = (props) => {
-  console.log(props);
-
   return (
     // <div className={styles.posts}>
     <div className={styles.wrapper_posts}>
       <NavLink exact onClick={() => (props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true))} to={`${photoConstant.path}/${props?.post?.id}`} className={styles.post}>
-        <PostContainer post={props.post?.data()} currentAccount={props.currentAccount} kindOfPost={onlyBodyPostConstant} />
+        <PostContainer post={props?.post} kindOfPost={onlyBodyPostConstant} />
       </NavLink>
     </div>
     // {/* </div> */}
@@ -160,15 +155,15 @@ export let ReturnImageList = (props) => {
       {isPosts && props?.logicOfPagePost && <div className={styles.posts}>{props?.posts?.map((post) => post?.data()?.accountId === props?.id && <DuplicateCodeReturnImageList key={post.id} {...props} post={post} currentAccount={props.currentAccount} />)}</div>}
 
       {/* return default content if posts don't have */}
-      {!isPosts ? props?.logicOfPagePost && props?.id === props?.account?.id ? <ReturnDefaultContentForImageList icon={<AddAPhotoOutlinedIcon />} title={"Share Photos and Videos"} subtitle={"When you share photos and videos, they'll appear on your profile."} /> : <ReturnDefaultContentForImageList icon={<PhotoCameraOutlinedIcon />} title={"No posts yet"} /> : undefined}
+      {!isPosts && !props.isSaved ? props?.logicOfPagePost && props?.id === props?.account?.id ? <ReturnDefaultContentForImageList icon={<AddAPhotoOutlinedIcon />} title={"Share Photos and Videos"} subtitle={"When you share photos and videos, they'll appear on your profile."} /> : <ReturnDefaultContentForImageList icon={<PhotoCameraOutlinedIcon />} title={"No posts yet"} /> : undefined}
 
       {/* return saved posts list */}
       {props.isSaved ? (
         !props.logicOfPagePost && props.accounts ? (
-          <div className={props.account.profile.savedPosts && props.account.profile.savedPosts.length > 0 ? styles.posts : styles.posts__columns}>
-            {props.accounts.map((account) => (account?.profile?.posts ? account.profile.posts.map((post) => (props?.account?.profile?.savedPosts ? props.account.profile.savedPosts.map((savedPostID) => (post?.id === savedPostID ? <DuplicateCodeReturnImageList key={account.id} {...props} post={post} currentAccount={account} /> : undefined)) : undefined)) : undefined))}
+          <div className={props?.account?.savedPosts?.length > 0 ? styles.posts : styles.posts__columns}>
+            {props?.accounts.map((account) => (account?.profile?.posts ? account.profile.posts.map((post) => (props?.account?.profile?.savedPosts ? props.account.profile.savedPosts.map((savedPostID) => (post?.id === savedPostID ? <DuplicateCodeReturnImageList key={account.id} {...props} post={post} currentAccount={account} /> : undefined)) : undefined)) : undefined))}
 
-            {!props.account.profile.savedPosts || props.account.profile.savedPosts.length < 1 ? <ReturnDefaultContentForImageList icon={<BookmarkBorderOutlinedIcon />} title={"Save"} subtitle={"Save photos and videos that you want to see again."} subSubTitle={"Only you can see what you have saved."} /> : undefined}
+            {!props?.account?.savedPosts || props?.account?.savedPosts?.length === 0 ? <ReturnDefaultContentForImageList icon={<BookmarkBorderOutlinedIcon />} title={"Save"} subtitle={"Save photos and videos that you want to see again."} subSubTitle={"Only you can see what you have saved."} /> : undefined}
           </div>
         ) : undefined
       ) : undefined}

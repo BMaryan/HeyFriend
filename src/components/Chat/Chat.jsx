@@ -27,11 +27,13 @@ const DefaultViewMessages = (props) => {
 
 const Chat = (props) => {
   let [toggleDetails, setToggleDetails] = React.useState(true);
-  let id = Number(props.match.params.id);
+  let id = props.match.params.id;
 
   let onSubmit = (formData) => {
-    props.addMessage(id, props.account.id, formData.send_message);
+    // props.addMessage(id, props.account.id, formData.send_message);
   };
+
+  // console.log(id);
 
   return (
     <div className={styles.chat}>

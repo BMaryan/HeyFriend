@@ -12,7 +12,6 @@ import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follo
 import { useHistory } from "react-router-dom";
 import { createPostThunk } from "../../redux/post-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
-import { CircularProgress } from "@mui/material";
 
 const ProfileContainer = (props) => {
   let id = props.match.params.id;

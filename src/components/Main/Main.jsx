@@ -37,38 +37,29 @@ const Main = (props) => {
 
   // props.getDefaultAccount(null);
 
+  //   let currentAccount = props?.accounts ? props?.accounts?.filter((account) => (props?.account?.following ? props?.account?.following.find((item) => account?.data()?.id === item?.id) : undefined)) : undefined;
+  let followedAccountPosts = props?.account?.following ? props?.account?.following?.map((item) => (props?.posts && item ? props?.posts?.filter((post) => (post?.data()?.accountId === item?.id ? post : undefined)) : undefined)) : undefined;
+
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        defaultAvatar
-        {/* {followedAccounts && followedAccounts.length > 0
-					? followedAccounts.map((account, index) =>
-							account.profile.posts && account.profile.posts.length > 0
-								? account.profile.posts.map(post =>
-										post ? (
-											<PostContainer
-												key={post.id}
-												modal={false}
-												post={post}
-												kindOfPost={defaultPostConstant}
-												currentAccount={account}
-											/>
-										) : undefined
-								  )
-								: undefined
-					  )
-					: undefined} */}
+        {followedAccountPosts ? followedAccountPosts.flat().map((post) => <PostContainer key={post.id} modal={false} post={post} kindOfPost={defaultPostConstant} />) : undefined}
+
         {/* default content */}
-        defaultAvatar
-        {/* {(checkPosts && checkPosts.length === 0) || !checkPosts ? (
-					<div className={styles.default_content}>
-						<div className={styles.default_content__wrapper_icon}><DynamicFeedIcon /></div>
-						<div className={styles.default_content__title}>News Feed</div>
-						<div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
-					</div>
-				) : undefined} */}
+        {/* defaultAvatar */}
+        {(followedAccountPosts.flat() && followedAccountPosts.flat().length === 0) || !followedAccountPosts.flat() ? (
+          <div className={styles.default_content}>
+            <div className={styles.default_content__wrapper_icon}>{/* <DynamicFeedIcon /> */}</div>
+            <div className={styles.default_content__title}>News Feed</div>
+            <div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
+          </div>
+        ) : undefined}
       </div>
+
+      {/* 
+
+
 
       {/* sideBar right */}
       <div className={styles.main_sideBar_right}>

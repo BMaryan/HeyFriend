@@ -18,7 +18,11 @@ const ProfileInfo = (props) => {
   let isMyAccount = props?.account && props?.id === props?.account?.id;
   let isOtherAccount = props?.id !== props?.account?.id;
   let coverPhoto = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
-  let numberOfPosts = props?.posts ? props?.posts?.filter((item) => (item?.data() ? item?.data()?.accountId === currentAccount?.data()?.id : undefined)) : [];
+  let numberOfPosts = props?.posts ? props?.posts?.filter((item) => (item?.data() ? item?.data()?.accountId === currentAccount?.data()?.id : [])) : [];
+
+  let isCheckFollowing = props?.account?.following ? props?.account?.following.find((item) => (item?.id === props?.id ? item : undefined)) : undefined;
+
+  // console.log(currentAccount);
 
   return (
     <div className={styles.profile_info}>
@@ -61,21 +65,11 @@ const ProfileInfo = (props) => {
               <div className={styles.detail_title}>Posts</div>
             </div>
             <div className={styles.details_info}>
-              <div className={styles.detail_number}>
-                {
-                  0
-                  // isOtherAccount && otherProfile.data().followers && otherProfile.data().followers.length > 0 ? otherProfile.data().followers.length : 0 || (isMyAccount && props.account.followers && props.account.followers.length > 0) ? props.account.followers.length : 0
-                }
-              </div>
+              <div className={styles.detail_number}>{currentAccount?.data()?.followers?.length ? currentAccount?.data()?.followers?.length : 0}</div>
               <div className={styles.detail_title}>Followers</div>
             </div>
             <div className={styles.details_info}>
-              <div className={styles.detail_number}>
-                {
-                  0
-                  // isOtherAccount && otherProfile.data().following && otherProfile.data().following.length > 0 ? otherProfile.data().following.length : 0 || (isMyAccount && props.account.following && props.account.following.length > 0) ? props.account.following.length : 0
-                }
-              </div>
+              <div className={styles.detail_number}>{currentAccount?.data()?.following?.length ? currentAccount?.data()?.following?.length : 0}</div>
               <div className={styles.detail_title}>Following</div>
             </div>
           </div>
@@ -88,8 +82,15 @@ const ProfileInfo = (props) => {
                   <img className={styles.beta_vershion_picture} src={betaVershion} alt="" />
                 </Button>
 
-                {false ? (
-                  <Button className={styles.button} style={{ textTransform: "capitalize" }} onClick={() => props.unFollowing(props?.id)} variant="contained">
+                {isCheckFollowing ? (
+                  <Button
+                    className={styles.button}
+                    style={{ textTransform: "capitalize" }}
+                    onClick={() => {
+                      props.updateAccountThunk({ ...props.account, following: props?.account?.following ? props?.account?.following.filter((item) => item?.id !== props?.id) : [] });
+                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? currentAccount?.data()?.followers.filter((item) => item?.id !== props?.account?.id) : [] });
+                    }}
+                    variant="contained">
                     Unfollow
                   </Button>
                 ) : (
@@ -97,7 +98,8 @@ const ProfileInfo = (props) => {
                     className={styles.button}
                     style={{ textTransform: "capitalize" }}
                     onClick={() => {
-                      props.following(props?.id);
+                      props.updateAccountThunk({ ...props.account, following: props?.account?.following ? [...props?.account?.following, { id: props?.id }] : [{ id: props?.id }] });
+                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? [...currentAccount?.data()?.followers, { id: props?.account?.id }] : [{ id: props?.account?.id }] });
                     }}
                     variant="contained">
                     Follow
