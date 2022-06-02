@@ -59,10 +59,8 @@ export const createPostThunk =
     dispatch(createPost({ ...data }));
   };
 
-export const deletePostThunk = (post) => async (dispatch, getState) => {
-  const docRef = await doc(db, "accounts", post.id);
-
-  await deleteDoc(docRef);
+export const deletePostThunk = (post) => async (dispatch) => {
+  await deleteDoc(doc(db, "posts", post.id));
 
   dispatch(deletePost(post));
 };

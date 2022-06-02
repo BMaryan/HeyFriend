@@ -6,13 +6,15 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
-import { editConstant, profileConstant } from "../../../core/constants/constants";
+import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import betaVershion from "../../../assets/images/betaVershion.png";
+import { useHistory } from "react-router-dom";
 
 const ProfileInfo = (props) => {
   const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
   const [openModalCoverProfile, setOpenModalCoverProfile] = React.useState(false);
+  const history = useHistory();
 
   let currentAccount = props?.accounts.find((account) => account?.data()?.id === props?.id);
   let isMyAccount = props?.account && props?.id === props?.account?.id;
@@ -24,15 +26,17 @@ const ProfileInfo = (props) => {
 
   // console.log(currentAccount);
 
+  console.log(props.account);
+
   return (
     <div className={styles.profile_info}>
       <div className={styles.profile_cover} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${coverPhoto})` }}>
         <div className={styles.profile_cover_line}>
           {/* full name */}
-          <div className={styles.profile_fullName}>{currentAccount?.data() ? currentAccount?.data()?.surname + " " + currentAccount?.data()?.name : undefined}</div>
+          <div className={styles.profile_fullName}>{currentAccount ? currentAccount?.data()?.surname + " " + currentAccount?.data()?.name : undefined}</div>
 
           {/* status */}
-          <div className={styles.profile_status}>{currentAccount?.data() ? <div>{currentAccount?.data()?.status}</div> : undefined}</div>
+          <div className={styles.profile_status}>{currentAccount ? <div>{currentAccount?.data()?.status}</div> : undefined}</div>
         </div>
 
         {/* wrapper picture */}
@@ -77,7 +81,17 @@ const ProfileInfo = (props) => {
           <div className={styles.wrapper_button}>
             {!isMyAccount ? (
               <>
-                <Button className={styles.button} style={{ textTransform: "capitalize" }} variant="contained">
+                <Button
+                  className={styles.button}
+                  style={{ textTransform: "capitalize" }}
+                  onClick={() => {
+                    props
+                      .createChatThunk({
+                        participants: [{ id: props?.account?.id }, { id: props?.id }],
+                      })
+                      .then((res) => history.push(`${chatConstant.path}/${res?.id}`));
+                  }}
+                  variant="contained">
                   Message
                   <img className={styles.beta_vershion_picture} src={betaVershion} alt="" />
                 </Button>

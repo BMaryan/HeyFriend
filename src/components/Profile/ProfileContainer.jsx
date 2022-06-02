@@ -6,12 +6,13 @@ import { compose } from "redux";
 import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { addChat } from "../../redux/chat-reducer";
+import { createChatThunk } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
 import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, updateAccountThunk } from "../../redux/profile-reducer";
 import { useHistory } from "react-router-dom";
 import { createPostThunk } from "../../redux/post-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
+import { CircularProgress } from "@mui/material";
 
 const ProfileContainer = (props) => {
   let id = props.match.params.id;
@@ -21,6 +22,14 @@ const ProfileContainer = (props) => {
     if (id) props.accounts.find((item) => (item?.data()?.id && id ? item?.data()?.id === id : history.push("/not-found")));
     // if (id) props.accounts.find((item) => item?.data()?.id === id || history.push("/not-found"));
   }, [id]);
+
+  // if (!props.account) {
+  //   return (
+  //     <div className="wrapper_loading">
+  //       <CircularProgress className="loading" />
+  //     </div>
+  //   );
+  // }
 
   return <Profile {...props} id={id} />;
 };
@@ -42,7 +51,6 @@ export default compose(
   connect(mapStateToProps, {
     getProfileData,
     setProfilePosts,
-    addChat,
     getParamsId,
     getAuthorizationId,
     following,
@@ -51,6 +59,7 @@ export default compose(
     unFollowing,
     createPostThunk,
     updateAccountThunk,
+    createChatThunk,
   }),
   withRouter
 )(ProfileContainer);

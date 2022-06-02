@@ -12,8 +12,8 @@ const Dialogs = (props) => {
         <FontAwesomeIcon className={styles.search_icon} icon={faSearch} />
       </div>
       <div className={styles.chats}>
-        {props.chats && props.chats.length > 0 ? (
-          props.chats.map((chat) => <Dialog key={chat.id} chat={chat} account={props.account} />)
+        {props?.chats?.length > 0 ? (
+          props?.chats.map((chat) => <Dialog {...props} key={chat.id} chat={chat} />)
         ) : (
           <div className={styles.chats_wrapper_text}>
             <div className={styles.chats_wrapper_title}>Work in progress</div>

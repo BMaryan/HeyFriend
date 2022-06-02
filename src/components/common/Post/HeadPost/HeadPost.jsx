@@ -64,7 +64,8 @@ const HeadPost = (props) => {
                 <>
                   <Button
                     onClick={() => {
-                      props.deletePost(props?.post?.id);
+                      props.deletePostThunk(props?.post);
+                      // props.deletePost(props?.post?.id);
                       history.push(`${profileConstant.path}/${props?.account?.id}`);
                     }}
                     className={styles.item + " " + styles.item__border + " " + styles.item__red}

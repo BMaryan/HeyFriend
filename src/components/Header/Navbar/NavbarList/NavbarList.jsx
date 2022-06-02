@@ -39,7 +39,7 @@ const NavbarList = (props) => {
   return (
     <div className={styles.navbar_list}>
       <div className={styles.wrapper_nav_link}>
-        <Chip onClick={handleClick} sx={{ fontSize: "15px" }} className={commonStyles.nav_link_toggleList} variant="outlined" label={props.account ? props.account.surname + " " + props.account.name : undefined} avatar={<Avatar src={props.account && props.account && props.account.avatar ? props.account.avatar : defaultAvatar} alt="" />} />
+        <Chip onClick={handleClick} sx={{ fontSize: "15px" }} className={commonStyles.nav_link_toggleList} variant="outlined" label={props.account ? props.account.surname + " " + props.account.name : undefined} avatar={<Avatar src={props.account && props.account.avatar ? props.account.avatar : defaultAvatar} alt="" />} />
       </div>
 
       <Menu

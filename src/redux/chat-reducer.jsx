@@ -1,95 +1,44 @@
+import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+let SET_CHATS = "heyfriend/chatPage/SET_CHATS";
+let SET_MESSAGES = "heyfriend/chatPage/SET_MESSAGES";
+let CREATE_CHAT = "heyfriend/chatPage/CREATE_CHAT";
 let ADD_MESSAGE = "heyfriend/chatPage/ADD_MESSAGE";
-let ADD_CHAT = "heyfriend/chatPage/ADD_CHAT";
 
 let initialState = {
-  chats: [
-    // {
-    // 	id: 1,
-    // 	messages: [
-    // 		{
-    // 			id: 2,
-    // 			userId: 3,
-    // 			message: "HEllo",
-    // 		},
-    // 		{
-    // 			id: 1,
-    // 			userId: 3,
-    // 			message: "How are you",
-    // 		},
-    // 		{
-    // 			id: 1,
-    // 			userId: 1,
-    // 			message: "I'm good",
-    // 		},
-    // 	],
-    // },
-    // {
-    // 	id: 2,
-    // 	messages: [
-    // 		{
-    // 			id: 2,
-    // 			userId: 2,
-    // 			message: "HEllo",
-    // 		},
-    // 		{
-    // 			id: 2,
-    // 			userId: 2,
-    // 			message: "How are you",
-    // 		},
-    // 		{
-    // 			id: 2,
-    // 			userId: 1,
-    // 			message: "I'm good",
-    // 		},
-    // 	],
-    // },
-    // {
-    // 	id: 3,
-    // 	messages: [
-    // 		{
-    // 			id: 3,
-    // 			userId: 2,
-    // 			message: "HEllo",
-    // 		},
-    // 		{
-    // 			id: 3,
-    // 			userId: 2,
-    // 			message: "How are you",
-    // 		},
-    // 		{
-    // 			id: 3,
-    // 			userId: 3,
-    // 			message: "I'm good",
-    // 		},
-    // 	],
-    // },
-  ],
+  chats: [],
+  messages: [],
 };
 
 const ChatReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CHAT: {
-      let newChat = {
-        id: action.id,
-        messages: [],
+    case SET_CHATS: {
+      return {
+        ...state,
+        chats: action.chats,
       };
+    }
+    case SET_MESSAGES: {
+      return {
+        ...state,
+        messages: action.messages,
+      };
+    }
+    case CREATE_CHAT: {
+      let newChat = action.chat;
 
       return {
         ...state,
-        // chats: state.chats && state.chats.filter(chat => (chat.id === action.id ? [...state.chats] : [...state.chats, { ...newChat }])),
-        chats: [...state.chats, { ...newChat }],
+        chats: state?.chats?.length > 0 ? [...state.chats, { ...newChat }] : [{ ...newChat }],
       };
     }
     case ADD_MESSAGE: {
-      let newMessage = {
-        id: state.chats.map((chat) => (chat.id === action.id ? chat.messages.length : undefined)),
-        userId: action.userId,
-        message: action.message,
-      };
+      let newMessage = { ...action.message };
 
       return {
         ...state,
-        chats: state.chats.map((chat) => (chat.id === action.id ? { ...chat, messages: [...chat.messages, newMessage] } : { ...chat, messages: [...chat.messages] })),
+        messages: state?.messages?.length > 0 ? [...state.messages, { ...newMessage }] : [{ ...newMessage }],
       };
     }
     default: {
@@ -98,16 +47,33 @@ const ChatReducer = (state = initialState, action) => {
   }
 };
 
-export const addChat = (id) => ({
-  type: ADD_CHAT,
-  id,
-});
+export const setChats = (chats) => ({ type: SET_CHATS, chats });
 
-export const addMessage = (id, userId, message) => ({
-  type: ADD_MESSAGE,
-  id,
-  userId,
-  message,
-});
+export const setMessages = (messages) => ({ type: SET_MESSAGES, messages });
+
+export const createChat = (chat) => ({ type: CREATE_CHAT, chat });
+
+export const addMessage = (message) => ({ type: ADD_MESSAGE, message });
+
+// thunk
+export const setChatsThunk = () => async (dispatch) => await onSnapshot(collection(db, "chats"), (snapshot) => dispatch(setChats(snapshot.docs)));
+
+export const setMessagesThunk = () => async (dispatch) => await onSnapshot(collection(db, "messages"), (snapshot) => dispatch(setMessages(snapshot.docs)));
+
+export const createChatThunk = (chat) => async (dispatch) => {
+  let promise = await addDoc(collection(db, "chats"), chat);
+
+  await updateDoc(doc(db, "chats", promise.id), { ...chat, id: promise.id });
+
+  dispatch(createChat({ ...chat, id: promise.id }));
+
+  return promise;
+};
+
+export const addMessageThunk = (message) => async (dispatch) => {
+  await addDoc(collection(db, "messages"), message);
+
+  dispatch(addMessage(message));
+};
 
 export default ChatReducer;

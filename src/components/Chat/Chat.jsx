@@ -29,26 +29,35 @@ const Chat = (props) => {
   let [toggleDetails, setToggleDetails] = React.useState(true);
   let id = props.match.params.id;
 
+  let currentChat = id ? props?.chats?.find((chat) => chat?.id === id) : undefined;
+  let chatWithAccount = props?.accounts?.find((account) => (currentChat?.data()?.participants?.length > 0 ? currentChat?.data()?.participants?.find((participant) => (account?.id === participant?.id && account?.id !== props?.account?.id ? account : undefined)) : undefined));
+
   let onSubmit = (formData) => {
+    // if (formData.send_message) {
+    props.addMessageThunk({
+      id: props?.account?.id,
+      chatId: currentChat?.id,
+      message: formData?.send_message,
+      date: new Date(),
+    });
+    // }
     // props.addMessage(id, props.account.id, formData.send_message);
   };
-
-  // console.log(id);
 
   return (
     <div className={styles.chat}>
       <div className={styles.dialogs}>
-        <Head {...props} toggleShowContent={true} />
+        <Head {...props} id={id} chatWithAccount={chatWithAccount} toggleShowContent={true} />
         <div className={styles.dialogs_content}>
-          <Dialogs accounts={props.accounts} chats={props.chats} account={props.account} />
+          <Dialogs {...props} />
         </div>
       </div>
 
       <div className={toggleDetails ? styles.messages_noDetails : styles.messages_details}>
-        {id ? <Head {...props} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
+        {id ? <Head {...props} id={id} chatWithAccount={chatWithAccount} toggleShowContent={false} toggleDetails={toggleDetails} setToggleDetails={setToggleDetails} /> : <></>}
 
         <div className={id ? styles.messages_content : styles.messages_content_defaultView}>
-          {props.chats && props.chats.length > 0 ? props.chats.find((chat) => (chat.id === id ? <Messages key={chat.id} chat={chat} accounts={props.accounts} account={props.account} match={props.match} /> : undefined)) : <></>}
+          <Messages {...props} id={id} currentChat={currentChat} chatWithAccount={chatWithAccount} />
 
           {id ? <ChatReduxForm onSubmit={onSubmit} /> : <></>}
           {!id ? <DefaultViewMessages /> : <></>}
@@ -56,16 +65,12 @@ const Chat = (props) => {
 
         {/* toggle container which shows when onClick on button  */}
         {id ? (
-          props.users.map((user) =>
-            user && id && user.id === id ? (
-              <div key={user.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
-                <NavLink key={user.id} to={props.account && props.account.id === id ? `${profileConstant.path}/${props?.account?.id}` : `${profileConstant.path}/${user.id}`} className={styles.contact_link}>
-                  <div className={styles.wrapper_picture}>{user ? <img src={props.account && props.account.img ? props.account.img : defaultAvatar} alt="" /> : <></>}</div>
-                  <div className={styles.fullName}>{user ? user.surname + " " + user.name : <></>}</div>
-                </NavLink>
-              </div>
-            ) : undefined
-          )
+          <div key={chatWithAccount?.id} className={toggleDetails ? styles.details_hidden : styles.details_show}>
+            <NavLink key={chatWithAccount?.id} to={chatWithAccount ? `${profileConstant.path}/${chatWithAccount?.id}` : `${profileConstant.path}/${chatWithAccount?.id}`} className={styles.contact_link}>
+              <div className={styles.wrapper_picture}>{chatWithAccount?.data() ? <img src={chatWithAccount?.data()?.avatar ? chatWithAccount?.data()?.avatar : defaultAvatar} alt="" /> : <></>}</div>
+              <div className={styles.fullName}>{chatWithAccount?.data() ? chatWithAccount?.data()?.surname + " " + chatWithAccount?.data()?.name : <></>}</div>
+            </NavLink>
+          </div>
         ) : (
           <></>
         )}

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import App from "./App";
 import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "./redux/auth-selectors";
-import { getChatsSelector } from "./redux/chat-selectors";
+import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
 import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk } from "./redux/profile-reducer";
 import { getAccountSelector, getAccountsSelector } from "./redux/profile-selectors";
 import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
@@ -16,6 +16,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
 import { createPostThunk, setPostsThunk } from "./redux/post-reducer";
 import { setPostsSelector } from "./redux/post-selectors";
+import { setChatsThunk, setMessagesThunk } from "./redux/chat-reducer";
 
 const AppContainer = (props) => {
   const id = props.match.params.id;
@@ -56,6 +57,18 @@ const AppContainer = (props) => {
     }
   }, [props.posts.length]);
 
+  React.useEffect(() => {
+    if (props.chats) {
+      props.setChatsThunk();
+    }
+  }, [props.chats.length]);
+
+  React.useEffect(() => {
+    if (props.messages) {
+      props.setMessagesThunk();
+    }
+  }, [props.messages.length]);
+
   // React.useEffect(() => {
   //   if (!props.auth || !props.account) {
   //     props.setAuth(null);
@@ -89,9 +102,11 @@ const AppContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    chats: getChatsSelector(state),
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
+    chats: getChatsSelector(state),
+    messages: getMessagesSelector(state),
+    //
     userSignIn: getUserSignInSelector(state),
     userSignUp: getUserSignUpSelector(state),
     auth: setAuthSelector(state),
@@ -115,6 +130,8 @@ export default compose(
     setAccountThunk,
     setPostsThunk,
     createPostThunk,
+    setChatsThunk,
+    setMessagesThunk,
   }),
   withRouter
 )(AppContainer);

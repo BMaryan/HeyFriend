@@ -9,9 +9,6 @@ import { profileConstant } from "../../core/constants/constants";
 import betaVershion from "../../assets/images/betaVershion.png";
 
 export const Head = (props) => {
-  let id = Number(props.match.params.id);
-  let otherProfile = props.accounts ? props.accounts.find((profile) => (id ? profile.id === id : undefined)) : undefined;
-
   return props.toggleShowContent ? (
     <div className={styles.head + " " + styles.head_dialogs}>
       <div className={styles.head_wrapper_picture}>
@@ -22,18 +19,14 @@ export const Head = (props) => {
   ) : (
     <div className={styles.head + " " + styles.head_messages}>
       <div>
-        {props.accounts.map((account) =>
-          account && id && account.id === id ? (
-            <NavLink key={account.id} to={props.account && props.account.id === id ? `${profileConstant.path}/${props?.account?.id}` : `${profileConstant.path}/${account.id}`} className={dialogStyles.chat_forHead}>
-              <div className={dialogStyles.wrapper_picture}>
-                <div className={dialogStyles.have_not_picture_forHead}>{account ? <img src={otherProfile?.avatar ? otherProfile.avatar : defaultAvatar} alt="" /> : <></>}</div>
-              </div>
-              <div>
-                <div className={dialogStyles.login}>{account ? account.surname + " " + account.name : <></>}</div>
-              </div>
-            </NavLink>
-          ) : undefined
-        )}
+        <NavLink key={props?.chatWithAccount?.id} to={`${profileConstant.path}/${props?.chatWithAccount?.id}`} className={dialogStyles.chat_forHead}>
+          <div className={dialogStyles.wrapper_picture}>
+            <div className={dialogStyles.have_not_picture_forHead}>{props?.chatWithAccount?.data() ? <img src={props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" /> : <></>}</div>
+          </div>
+          <div>
+            <div className={dialogStyles.login}>{props?.chatWithAccount?.data() ? props?.chatWithAccount?.data()?.surname + " " + props?.chatWithAccount?.data()?.name : <></>}</div>
+          </div>
+        </NavLink>
       </div>
       <div>
         <FontAwesomeIcon onClick={() => (props.toggleDetails ? props.setToggleDetails(false) : props.setToggleDetails(true))} className={styles.icon} icon={faInfoCircle} />
