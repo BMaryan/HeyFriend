@@ -211,7 +211,6 @@ const ProfileReducer = (state = initialState, action) => {
     case FOLLOWING: {
       return {
         ...state,
-        // accounts: state.accounts.map((account) => (account.id === action.currentAccountId ? { ...account, profile: { ...account.profile, followers: account.profile.followers && account.profile.followers.length > 0 ? [...account.profile.followers, { id: state.account.id }] : [{ id: state.account.id }] } } : { ...account })),
         account: {
           ...state.account,
           profile:

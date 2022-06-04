@@ -6,8 +6,8 @@ import FooterPost from "./FooterPost/FooterPost";
 import { defaultPostConstant, modalPostConstant, onlyBodyPostConstant } from "../../../core/constants/constantsPost";
 
 const Post = (props) => {
-  let checkClickFavoriteBorder = props?.account?.profile?.likedPosts && props?.account?.profile?.likedPosts?.length > 0 ? props?.account?.profile?.likedPosts?.find((like) => like.id === props.post.id) : undefined;
-  let currentAccount = props?.accounts ? props?.accounts?.find((account) => (props?.post?.data()?.accountId === account?.id ? account : undefined)) : undefined;
+  let checkClickFavoriteBorder = props?.post?.liked?.length !== 0 ? props?.post?.liked?.find((liked) => liked?.id === props?.account?.id) : undefined;
+  let currentAccount = props?.accounts ? props?.accounts?.find((account) => (props?.post?.accountId === account?.id ? account : undefined)) : undefined;
 
   return (
     <div className={styles.wrapper_post}>

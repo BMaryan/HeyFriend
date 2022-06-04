@@ -44,13 +44,13 @@ const Main = (props) => {
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        {followedAccountPosts ? followedAccountPosts?.flat()?.map((post) => <PostContainer key={post.id} modal={false} post={post} kindOfPost={defaultPostConstant} />) : undefined}
+        {followedAccountPosts?.length !== 0 ? followedAccountPosts?.flat()?.map((post) => <PostContainer key={post.id} modal={false} post={post?.data()} kindOfPost={defaultPostConstant} />) : undefined}
 
         {/* default content */}
         {/* defaultAvatar */}
         {(followedAccountPosts?.flat() && followedAccountPosts?.flat()?.length === 0) || !followedAccountPosts?.flat() ? (
           <div className={styles.default_content}>
-            <div className={styles.default_content__wrapper_icon}>{/* <DynamicFeedIcon /> */}</div>
+            <div className={styles.default_content__wrapper_icon}>{}</div>
             <div className={styles.default_content__title}>News Feed</div>
             <div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
           </div>

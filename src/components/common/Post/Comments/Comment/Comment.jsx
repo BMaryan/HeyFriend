@@ -9,17 +9,17 @@ const Comment = (props) => {
   return (
     <div className={styles.comment}>
       <div className={!props.modal ? styles.comment_content : styles.comment_content_modal}>
-        {props?.post?.data()?.description ? (
+        {props?.post?.description ? (
           <div>
             <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${props?.currentAccount?.id}`}>
               {props?.currentAccount ? props?.currentAccount?.surname + " " + props?.currentAccount?.name : undefined}
             </NavLink>
             <span className={styles.description}>
-              {props?.post?.data()?.description && props?.post?.data()?.description.length <= 100 ? (
-                props?.post?.data()?.description
+              {props?.post?.description && props?.post?.description.length <= 100 ? (
+                props?.post?.description
               ) : (
                 <>
-                  <span className={styles.description}>{fullDes ? props?.post?.data()?.description : props?.post?.data()?.description.slice(0, 100) + "..."}</span>
+                  <span className={styles.description}>{fullDes ? props?.post?.description : props?.post?.description.slice(0, 100) + "..."}</span>
                   <button
                     className={styles.button_more}
                     onClick={(e) => {

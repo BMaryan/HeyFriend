@@ -152,18 +152,18 @@ export let ReturnImageList = (props) => {
   return (
     <>
       {/* return posts list */}
-      {isPosts && props?.logicOfPagePost && <div className={styles.posts}>{props?.posts?.map((post) => post?.data()?.accountId === props?.id && <DuplicateCodeReturnImageList key={post.id} {...props} post={post} currentAccount={props.currentAccount} />)}</div>}
+      {isPosts && props?.logicOfPagePost && <div className={styles.posts}>{props?.posts?.map((post, index) => post?.data()?.accountId === props?.id && <DuplicateCodeReturnImageList key={post.id + index} {...props} post={post?.data()} currentAccount={props.currentAccount} />)}</div>}
 
       {/* return default content if posts don't have */}
       {!isPosts && !props.isSaved ? props?.logicOfPagePost && props?.id === props?.account?.id ? <ReturnDefaultContentForImageList icon={<AddAPhotoOutlinedIcon />} title={"Share Photos and Videos"} subtitle={"When you share photos and videos, they'll appear on your profile."} /> : <ReturnDefaultContentForImageList icon={<PhotoCameraOutlinedIcon />} title={"No posts yet"} /> : undefined}
 
       {/* return saved posts list */}
       {props.isSaved ? (
-        !props.logicOfPagePost && props.accounts ? (
-          <div className={props?.account?.savedPosts?.length > 0 ? styles.posts : styles.posts__columns}>
-            {props?.accounts.map((account) => (account?.profile?.posts ? account.profile.posts.map((post) => (props?.account?.profile?.savedPosts ? props.account.profile.savedPosts.map((savedPostID) => (post?.id === savedPostID ? <DuplicateCodeReturnImageList key={account.id} {...props} post={post} currentAccount={account} /> : undefined)) : undefined)) : undefined))}
+        !props.logicOfPagePost && props.posts ? (
+          <div className={props?.isSavedPosts?.length !== 0 ? styles.posts : styles.posts__columns}>
+            {props?.posts?.map((post) => post?.data()?.saved?.map((saved) => (props?.account?.id === saved?.id ? <DuplicateCodeReturnImageList key={post.id} {...props} post={post?.data()} currentAccount={props.currentAccount} /> : undefined)))}
 
-            {!props?.account?.savedPosts || props?.account?.savedPosts?.length === 0 ? <ReturnDefaultContentForImageList icon={<BookmarkBorderOutlinedIcon />} title={"Save"} subtitle={"Save photos and videos that you want to see again."} subSubTitle={"Only you can see what you have saved."} /> : undefined}
+            {!props?.isSavedPosts || props?.isSavedPosts?.length === 0 ? <ReturnDefaultContentForImageList icon={<BookmarkBorderOutlinedIcon />} title={"Save"} subtitle={"Save photos and videos that you want to see again."} subSubTitle={"Only you can see what you have saved."} /> : undefined}
           </div>
         ) : undefined
       ) : undefined}

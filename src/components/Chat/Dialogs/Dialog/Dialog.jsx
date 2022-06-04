@@ -11,8 +11,6 @@ const Dialog = (props) => {
   let messageWithAccount = props?.accounts ? props?.accounts?.find((account) => (props?.chat?.data()?.participants?.length > 0 ? props?.chat?.data()?.participants?.find((participants) => account?.id === participants?.id && account?.id !== props?.account?.id) : undefined)) : undefined;
   let params = useParams();
 
-  console.log(props);
-
   return (
     <>
       {props?.chat?.data()?.participants

@@ -22,7 +22,7 @@ const HeadPost = (props) => {
 
   // test
   let date = new Date();
-  date.setMilliseconds(date.getSeconds() - props?.post?.data()?.dateCreated.nanoseconds);
+  date.setMilliseconds(date.getSeconds() - props?.post?.dateCreated?.nanoseconds);
 
   return (
     <div className={styles.head}>
@@ -38,7 +38,7 @@ const HeadPost = (props) => {
             <NavLink to={`${profileConstant.path}/${props?.currentAccount?.id}`} className={styles.fullName}>
               {props?.currentAccount?.surname + " " + props?.currentAccount?.name}
             </NavLink>
-            {props?.post?.data()?.dateCreated ? <div className={styles.date}>{date.toLocaleDateString() + " " + date.toLocaleTimeString()}</div> : undefined}
+            {props?.post?.dateCreated ? <div className={styles.date}>{date.toLocaleDateString() + " " + date.toLocaleTimeString()}</div> : undefined}
           </div>
         </div>
 

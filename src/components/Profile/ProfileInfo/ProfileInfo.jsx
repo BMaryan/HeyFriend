@@ -20,13 +20,8 @@ const ProfileInfo = (props) => {
   let isMyAccount = props?.account && props?.id === props?.account?.id;
   let isOtherAccount = props?.id !== props?.account?.id;
   let coverPhoto = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
-  let numberOfPosts = props?.posts ? props?.posts?.filter((item) => (item?.data() ? item?.data()?.accountId === currentAccount?.data()?.id : [])) : [];
-
+  let numberOfPosts = props?.posts ? props?.posts?.filter((item) => (item?.data() ? item?.data().accountId === currentAccount?.data()?.id : [])) : [];
   let isCheckFollowing = props?.account?.following ? props?.account?.following.find((item) => (item?.id === props?.id ? item : undefined)) : undefined;
-
-  // console.log(currentAccount);
-
-  console.log(props.account);
 
   return (
     <div className={styles.profile_info}>
@@ -76,6 +71,12 @@ const ProfileInfo = (props) => {
               <div className={styles.detail_number}>{currentAccount?.data()?.following?.length ? currentAccount?.data()?.following?.length : 0}</div>
               <div className={styles.detail_title}>Following</div>
             </div>
+            {/* {isMyAccount && (
+              <div className={styles.details_info}>
+                <div className={styles.detail_number}>{currentAccount?.data()?.savedPosts?.length ? currentAccount?.data()?.savedPosts?.length : 0}</div>
+                <div className={styles.detail_title}>Saved</div>
+              </div>
+            )} */}
           </div>
 
           <div className={styles.wrapper_button}>

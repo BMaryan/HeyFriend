@@ -89,17 +89,17 @@ const ProfileContent = (props) => {
           exact
           path={`${profileConstant.path}/${props?.id}`}
           render={() => {
-            return <Posts {...props} handleOpen={handleOpen} posts={props.posts} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
+            return <Posts {...props} handleOpen={handleOpen} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
           }}
         />
 
-        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information accounts={props.accounts} id={props?.id} account={props.account} currentAccount={currentAccount} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
+        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information {...props} currentAccount={currentAccount} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
 
-        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} accounts={props.accounts} id={props.id} account={props.account} />} /> : undefined}
+        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved {...props} openModalCurrentPost={openModalCurrentPost} currentAccount={currentAccount} setOpenModalCurrentPost={setOpenModalCurrentPost} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}
-      <CreatePost account={props.account} auth={props.auth} open={open} postPhoto={postPhoto} posts={props.posts} handleClose={handleClose} setProfilePosts={props.setProfilePosts} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} createPostThunk={props.createPostThunk} />
+      <CreatePost {...props} open={open} postPhoto={postPhoto} handleClose={handleClose} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} />
     </div>
   );
 };

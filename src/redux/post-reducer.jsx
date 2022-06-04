@@ -1,9 +1,9 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const SET_POSTS = "heyfriend/postPage/SET_POSTS";
 const CREATE_POST = "heyfriend/postPage/CREATE_POST";
+const UPDATE_POST = "heyfriend/postPage/UPDATE_POST";
 const DELETE_POST = "heyfriend/postPage/DELETE_POST";
 
 const initialState = {
@@ -15,7 +15,7 @@ const PostPage = (state = initialState, action) => {
     case SET_POSTS: {
       return {
         ...state,
-        posts: action.posts,
+        posts: action.posts ? action.posts : [],
       };
     }
     case CREATE_POST: {
@@ -24,6 +24,12 @@ const PostPage = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts, newPost],
+      };
+    }
+    case UPDATE_POST: {
+      return {
+        ...state,
+        posts: state?.posts ? state?.posts?.map((item) => (item?.id === action?.post?.id ? (item = { ...action?.post }) : [...state.posts])).flat() : [],
       };
     }
     case DELETE_POST: {
@@ -42,27 +48,31 @@ export const setPosts = (posts) => ({ type: SET_POSTS, posts });
 
 export const createPost = (data) => ({ type: CREATE_POST, data });
 
+export const updatePost = (post) => ({ type: UPDATE_POST, post });
+
 export const deletePost = (post) => ({ type: DELETE_POST, post });
 
 // thunk
-export const setPostsThunk = () => async (dispatch) =>
-  await onSnapshot(collection(db, "posts"), (snapshot) => {
-    // console.log(snapshot.docs);
-    dispatch(setPosts(snapshot.docs));
-  });
+export const setPostsThunk = () => async (dispatch) => await onSnapshot(collection(db, "posts"), (snapshot) => !snapshot.empty && dispatch(setPosts(snapshot.docs)));
 
-export const createPostThunk =
-  ({ id, data }) =>
-  async (dispatch) => {
-    await addDoc(collection(db, "posts"), { ...data, accountId: id });
+export const createPostThunk = (data) => async (dispatch) => {
+  let res = await addDoc(collection(db, "posts"), { ...data });
 
-    dispatch(createPost({ ...data }));
-  };
+  await updateDoc(doc(db, "posts", res.id), { ...data, id: res.id });
+
+  // dispatch(createPost({ ...data }));
+};
+
+export const updatePostThunk = (post) => async (dispatch) => {
+  await updateDoc(doc(db, "posts", post.id), post);
+
+  // dispatch(updatePost(post));
+};
 
 export const deletePostThunk = (post) => async (dispatch) => {
   await deleteDoc(doc(db, "posts", post.id));
 
-  dispatch(deletePost(post));
+  // dispatch(deletePost(post));
 };
 
 export default PostPage;

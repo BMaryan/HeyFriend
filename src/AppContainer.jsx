@@ -55,7 +55,7 @@ const AppContainer = (props) => {
     if (props.posts) {
       props.setPostsThunk();
     }
-  }, [props.posts.length]);
+  }, [props?.posts?.length]);
 
   React.useEffect(() => {
     if (props.chats) {
