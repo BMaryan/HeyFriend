@@ -44,7 +44,12 @@ const Main = (props) => {
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        {followedAccountPosts?.length !== 0 ? followedAccountPosts?.flat()?.map((post) => <PostContainer key={post.id} modal={false} post={post?.data()} kindOfPost={defaultPostConstant} />) : undefined}
+        {followedAccountPosts?.length !== 0
+          ? followedAccountPosts
+              ?.flat()
+              .sort((a, b) => new Date(b?.data()?.dateCreated.toDate()) - new Date(a?.data()?.dateCreated.toDate()))
+              ?.map((post) => <PostContainer key={post.id} modal={false} post={post?.data()} kindOfPost={defaultPostConstant} />)
+          : undefined}
 
         {/* default content */}
         {/* defaultAvatar */}

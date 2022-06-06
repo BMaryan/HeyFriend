@@ -1,22 +1,21 @@
 import React from "react";
-import { connect } from "react-redux";
 import App from "./App";
-import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "./redux/auth-selectors";
-import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
-import { getProfileData, setProfileChats, addAccount, setAccounts, isAccount, setAccount, setAccountsThunk, setAccountThunk } from "./redux/profile-reducer";
-import { getAccountSelector, getAccountsSelector } from "./redux/profile-selectors";
-import { deleteAuthorizationUser, helpCheckAuthorization, setSignUpDataToLocalStorage } from "./utils/helperForAuthorization/helperForAuthorization";
-import { compose } from "redux";
-import { withRouter } from "react-router-dom";
 import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { setAuth } from "./redux/auth-reducer";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useHistory } from "react-router-dom";
-import { createPostThunk, setPostsThunk } from "./redux/post-reducer";
-import { setPostsSelector } from "./redux/post-selectors";
+import { setAccounts, setAccount, setAccountsThunk, setAccountThunk } from "./redux/profile-reducer";
+import { setCommentsThunk, createPostThunk, setPostsThunk } from "./redux/post-reducer";
+import { getAccountSelector, getAccountsSelector } from "./redux/profile-selectors";
+import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
+import { getCommentsSelector, setPostsSelector } from "./redux/post-selectors";
 import { setChatsThunk, setMessagesThunk } from "./redux/chat-reducer";
+import CircularProgress from "@mui/material/CircularProgress";
+import { setAuthSelector } from "./redux/auth-selectors";
+import { onAuthStateChanged } from "firebase/auth";
+import { setAuth } from "./redux/auth-reducer";
+import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { auth } from "./firebase";
+import { compose } from "redux";
 
 const AppContainer = (props) => {
   const id = props.match.params.id;
@@ -69,6 +68,12 @@ const AppContainer = (props) => {
     }
   }, [props.messages.length]);
 
+  React.useEffect(() => {
+    if (props.comments) {
+      props.setCommentsThunk();
+    }
+  }, [props.comments.length]);
+
   // React.useEffect(() => {
   //   if (!props.auth || !props.account) {
   //     props.setAuth(null);
@@ -104,27 +109,18 @@ const mapStateToProps = (state) => {
   return {
     accounts: getAccountsSelector(state),
     account: getAccountSelector(state),
-    chats: getChatsSelector(state),
-    messages: getMessagesSelector(state),
-    //
-    userSignIn: getUserSignInSelector(state),
-    userSignUp: getUserSignUpSelector(state),
     auth: setAuthSelector(state),
     posts: setPostsSelector(state),
+    comments: getCommentsSelector(state),
+    chats: getChatsSelector(state),
+    messages: getMessagesSelector(state),
   };
 };
 
 export default compose(
   connect(mapStateToProps, {
-    isAccount,
-    setSignUpDataToLocalStorage,
-    helpCheckAuthorization,
-    getProfileData,
-    deleteAuthorizationUser,
-    setProfileChats,
-    addAccount,
-    setAccounts,
     setAuth,
+    setAccounts,
     setAccount,
     setAccountsThunk,
     setAccountThunk,
@@ -132,6 +128,7 @@ export default compose(
     createPostThunk,
     setChatsThunk,
     setMessagesThunk,
+    setCommentsThunk,
   }),
   withRouter
 )(AppContainer);

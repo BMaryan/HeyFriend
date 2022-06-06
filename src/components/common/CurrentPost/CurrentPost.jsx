@@ -14,8 +14,6 @@ const CurrentPost = (props) => {
   let currentPost = props.posts.length !== 0 ? props.posts.find((post) => (post?.data()?.id && params?.id ? post?.data()?.id === params?.id : undefined)) : undefined;
   // let test = props.posts.length !== 0 ? props.posts.filter((post) => (post?.id && params?.id ? post?.id === params?.id : undefined)) : undefined;
 
-  console.log(currentPost?.data());
-
   return (
     <div className={styles.current_post}>
       <div className={styles.current_post_content}>

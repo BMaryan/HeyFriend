@@ -11,17 +11,25 @@ import { red } from "@mui/material/colors";
 import Comments from "../Comments/Comments";
 import { photoConstant } from "../../../../core/constants/constants";
 import FooterPostReduxForm from "./FooterPostForm";
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from "@mui/material/AvatarGroup";
 
 const FooterPost = (props) => {
   let onSubmit = (formData) => {
-    props.addComment(props?.post?.id, formData.comment);
+    props.createCommentThunk({
+      accountId: props?.account?.id,
+      postId: props?.post?.id,
+      comment: formData.comment,
+      dateCreated: new Date(),
+    });
+    // props.addComment(props?.post?.id, formData.comment);
   };
 
   let checkClickBookmarkIcon = props?.post?.saved ? props?.post?.saved?.find((saved) => (saved?.id && props?.account?.id && saved?.id === props?.account?.id ? saved : undefined)) : undefined;
 
   return (
     <div className={props.modal ? styles.footer : styles.footer_modal}>
-      {props.modal ? <Comments post={props?.post} modal={props.modal} currentAccount={props.currentAccount} account={props.account} /> : undefined}
+      {props.modal ? <Comments {...props} /> : undefined}
 
       <div className={styles.footer_head}>
         <div className={styles.features}>
@@ -36,11 +44,16 @@ const FooterPost = (props) => {
           </div>
         </div>
         <div className={styles.numberOfLikes}>
-          {props?.post?.liked?.length > 0 ? props?.post?.liked?.length : 0} <span>likes</span>
+          <AvatarGroup className={styles.likes_avatar_group} max={4}>
+            {props?.accounts ? props?.accounts?.map((account) => props?.post?.liked?.map((liked) => (account.id === liked.id ? <Avatar alt={account?.data()?.surname + " " + account?.data()?.name} src={account?.data()?.avatar} /> : undefined))) : undefined}
+          </AvatarGroup>
+          <span>
+            {!props?.post?.liked || props?.post?.liked?.length === 0 ? 0 : undefined} {props?.post?.liked?.length > 1 ? "likes" : "like"}
+          </span>
         </div>
       </div>
 
-      {!props.modal ? <Comments post={props?.post} modal={props.modal} currentAccount={props.currentAccount} account={props.account} /> : undefined}
+      {!props.modal ? <Comments {...props} /> : undefined}
 
       <FooterPostReduxForm onSubmit={onSubmit} />
     </div>

@@ -21,6 +21,7 @@
 
 /* head */
 .head {
+  border-bottom: 1px solid $grey300;
   padding: $pd-content;
 }
 
@@ -30,6 +31,8 @@
 
 .details_position {
   @include ds-position(unset, center);
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .wrapper_profile_img {
@@ -70,6 +73,14 @@
   color: $grey600;
   font-size: 25px;
   cursor: pointer;
+}
+
+.wrapper_description {
+  margin-top: 10px;
+}
+
+.description {
+  font-size: 14px;
 }
 
 /* body */
@@ -122,7 +133,22 @@
 .numberOfLikes {
   color: $black;
   font-size: 15px;
+  display: flex;
+  align-items: center;
   margin: 10px 0;
+}
+
+.likes_avatar_group {
+  display: inline-flex;
+  justify-content: flex-end;
+  margin-right: 5px;
+
+  & > div {
+    height: 23px !important;
+    width: 23px !important;
+    font-size: 12px !important;
+    cursor: pointer;
+  }
 }
 
 /* modal post actions */
@@ -195,7 +221,7 @@
 .form {
   width: 100%;
   background: $white !important;
-  border-top: 1px solid $grey400;
+  border-top: 1px solid $grey300;
   @include ds-position(unset, center);
   box-sizing: border-box;
   padding: $pd-content;
