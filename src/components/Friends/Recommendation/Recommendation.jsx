@@ -10,24 +10,22 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 const Recommendation = (props) => {
-  // let checkFollowing = props.account.profile.followers ? props.account.profile.followers.map(follower => follower) : undefined;
-  // let followingFor = props.account.profile.following
-  // ? props.account.profile.following.map(following => props.accounts.filter(account => following.id !== account.id))
-  // : props.accounts;
+  let unFollowingAccounts = props?.account?.following ? props?.account?.following?.map((following) => (props?.account?.followers ? props?.account?.followers?.filter((followers) => following.id !== followers.id) : undefined)) : undefined;
+  let recommendation = props?.accounts ? props?.accounts?.filter((account) => unFollowingAccounts.flat().find((unFollowing) => account.id === unFollowing.id)) : undefined;
 
   return (
     <React.Fragment>
       <div className={styles.content}>
-        {props?.accounts.map(
-          (account) =>
-            props?.account?.id !== account?.data()?.id && (
-              <Card key={account.id} className={styles.card}>
+        {recommendation?.map(
+          (recommendationAccount) =>
+            props?.account?.id !== recommendationAccount?.id && (
+              <Card key={recommendationAccount.id} className={styles.card}>
                 <CardActionArea className={styles.head}>
-                  <NavLink className={styles.navLink} to={`${profileConstant.path}/` + account.id}>
-                    <CardMedia className={styles.wrapper_avatar} component="img" image={account?.data()?.avatar ? account.data().avatar : defaultAvatar} alt="" />
+                  <NavLink className={styles.navLink} to={`${profileConstant.path}/` + recommendationAccount.id}>
+                    <CardMedia className={styles.wrapper_avatar} component="img" image={recommendationAccount?.data()?.avatar ? recommendationAccount.data().avatar : defaultAvatar} alt="" />
                     <CardContent className={styles.head_content}>
                       <Typography className={styles.full_name} component="div">
-                        {account.data().surname + " " + account.data().name}
+                        {recommendationAccount.data().surname + " " + recommendationAccount.data().name}
                       </Typography>
                     </CardContent>
                   </NavLink>
@@ -35,42 +33,14 @@ const Recommendation = (props) => {
               </Card>
             )
         )}
-
-        {/* {props.accounts
-					? props.accounts.map(account =>
-							props.account && props.account.profile && props.account.profile.followers
-								? props.account.profile.followers.map(follower =>
-										account.id !== props.account.id ? (
-											<Card key={account.id} className={styles.card}>
-												<CardActionArea className={styles.head}>
-													<NavLink className={styles.navLink} key={account.id} to={`${profileConstant.path}/` + account.id}>
-														<CardMedia
-															className={styles.wrapper_avatar}
-															component='img'
-															image={account.profile && account.profile.avatar ? account.profile.avatar : defaultAvatar}
-															alt=''
-														/>
-														<CardContent className={styles.head_content}>
-															<Typography className={styles.full_name} component='div'>
-																{account.profile.surname + " " + account.profile.name}
-															</Typography>
-														</CardContent>
-													</NavLink>
-												</CardActionArea>
-											</Card>
-										) : undefined
-								  )
-								: undefined
-					  )
-					: undefined} */}
       </div>
 
-      {/* {(checkFollowing && checkFollowing.length < 1) || !checkFollowing ? (
-				<div className={styles.content_default}>
-					<div className={styles.title}>Recommendation</div>
-					<div className={styles.subtitle}>Here are the people you may know</div>
-				</div>
-			) : undefined} */}
+      {recommendation.length < 1 || !recommendation ? (
+        <div className={styles.content_default}>
+          <div className={styles.title}>Recommendation</div>
+          <div className={styles.subtitle}>Here are the people you may know</div>
+        </div>
+      ) : undefined}
     </React.Fragment>
   );
 };
