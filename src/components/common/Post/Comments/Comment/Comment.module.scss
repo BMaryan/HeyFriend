@@ -9,15 +9,14 @@
 
 .comment_content {
   display: flex;
-  padding: 0 $pd-content $pd-content $pd-content;
+  padding: 0 !important;
 }
 
 .comment_content_modal {
   word-break: break-all;
-  // border-top: 1px solid $grey400;
-  // border-bottom: 1px solid $grey400;
   flex: 1;
-  padding: $pd-content;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .full_name_comment {
@@ -45,4 +44,14 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+
+// timeline
+.timeline_item::before {
+  content: "" !important;
+  flex: unset !important;
+}
+
+.timeline_content {
+  padding-top: 0 !important;
 }

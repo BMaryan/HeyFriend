@@ -3,6 +3,7 @@
 .comments {
   height: 100%;
   overflow-y: scroll;
+  padding: $pd-content;
 }
 
 .comments::-webkit-scrollbar {

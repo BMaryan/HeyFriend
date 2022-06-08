@@ -6,7 +6,7 @@ import { useLocation, useHistory, useParams } from "react-router-dom";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { savePost, putLike, takeLike, deleteSavedPost, unFollowing, deletePost, getProfileData, addComment, updateAccountThunk } from "../../../redux/profile-reducer";
-import { createCommentThunk, deletePostThunk, updateCommentThunk, updatePostThunk } from "../../../redux/post-reducer";
+import { createCommentThunk, deleteCommentThunk, deletePostThunk, updateCommentThunk, updatePostThunk } from "../../../redux/post-reducer";
 import { getCommentsSelector } from "../../../redux/post-selectors";
 
 const PostContainer = (props) => {
@@ -26,4 +26,4 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(connect(mapStateToProps, { savePost, putLike, takeLike, deleteSavedPost, unFollowing, deletePost, getProfileData, addComment, deletePostThunk, updateAccountThunk, updatePostThunk, createCommentThunk, updateCommentThunk }), withRouter)(PostContainer);
+export default compose(connect(mapStateToProps, { savePost, putLike, takeLike, deleteSavedPost, unFollowing, deletePost, getProfileData, addComment, deletePostThunk, updateAccountThunk, updatePostThunk, createCommentThunk, updateCommentThunk, deleteCommentThunk }), withRouter)(PostContainer);

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Comments.module.scss";
+import styleDes from "../Post.module.scss";
 import Comment from "./Comment/Comment";
 import { useHistory } from "react-router-dom";
 import { photoConstant } from "../../../../core/constants/constants";
@@ -7,10 +8,13 @@ import { photoConstant } from "../../../../core/constants/constants";
 const Comments = (props) => {
   const history = useHistory();
   const [more, setMore] = React.useState(false);
+  const [fullDes, setFullDes] = React.useState(false);
   let areComments = props?.comments?.filter((comment) => (comment?.data()?.postId === props?.post?.id ? comment : undefined));
 
-  return (
+  return areComments?.length > 0 ? (
     <div className={styles.comments}>
+      {props.modal && <div className={styleDes.wrapper_description}>{props?.post?.description ? <div className={styleDes.description}>{props?.post?.description.length <= 100 ? props?.post?.description : !fullDes ? props?.post?.description : props?.post?.description.slice(0, 100) + " ..."}</div> : undefined}</div>}
+
       {areComments && props.modal ? areComments?.map((comment) => (comment?.data()?.postId === props?.post?.id ? <Comment {...props} key={comment.id} comment={comment?.data()} /> : undefined)) : undefined}
 
       {areComments && !props.modal ? areComments?.map((comment) => (comment?.data()?.postId === props?.post?.id ? <Comment {...props} key={comment.id} comment={comment?.data()} /> : undefined)).splice(-1) : undefined}
@@ -28,6 +32,8 @@ const Comments = (props) => {
         </button>
       ) : undefined}
     </div>
+  ) : (
+    <></>
   );
 };
 

@@ -101,4 +101,10 @@ export const deletePostThunk = (post) => async (dispatch) => {
   // dispatch(deletePost(post));
 };
 
+export const deleteCommentThunk = (comment) => async (dispatch) => {
+  await deleteDoc(doc(db, "comments", comment.id));
+
+  // dispatch(deletePost(post));
+};
+
 export default PostPage;
