@@ -1,10 +1,13 @@
 @import "../../../core/styles/main.scss";
 
 .messages {
+  height: 100%;
   @include position(relative);
 }
 
 .messages_content {
+  height: 100%;
   @include ds-position(unset, unset, column);
   padding: $pd-content;
+  // overflow-y: scroll;
 }

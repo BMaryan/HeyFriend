@@ -22,6 +22,7 @@ const ProfileInfo = (props) => {
   let coverPhoto = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
   let numberOfPosts = props?.posts ? props?.posts?.filter((item) => (item?.data() ? item?.data().accountId === currentAccount?.data()?.id : [])) : [];
   let isCheckFollowing = props?.account?.following ? props?.account?.following.find((item) => (item?.id === props?.id ? item : undefined)) : undefined;
+  let isChat = props?.chats?.length > 0 ? props?.chats?.filter((chat) => (chat?.data()?.participants?.length > 0 ? chat?.data()?.participants?.find((participants) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id) : undefined)) : undefined;
 
   return (
     <div className={styles.profile_info}>
@@ -86,11 +87,13 @@ const ProfileInfo = (props) => {
                   className={styles.button}
                   style={{ textTransform: "capitalize" }}
                   onClick={() => {
-                    props
-                      .createChatThunk({
-                        participants: [{ id: props?.account?.id }, { id: props?.id }],
-                      })
-                      .then((res) => history.push(`${chatConstant.path}/${res?.id}`));
+                    !isChat || isChat.length < 1
+                      ? props
+                          .createChatThunk({
+                            participants: [{ id: props?.account?.id }, { id: props?.id }],
+                          })
+                          .then((res) => history.push(`${chatConstant.path}/${res?.id}`))
+                      : history.push(`${chatConstant.path}/${isChat[0]?.id}`);
                   }}
                   variant="contained">
                   Message

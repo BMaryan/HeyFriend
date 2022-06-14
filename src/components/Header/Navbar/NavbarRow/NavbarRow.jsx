@@ -28,7 +28,7 @@ const NavbarRow = (props) => {
   return (
     <div className={!props.isBottomNavigation ? styles.navbar_row : styles.navbar_row_bottom}>
       <DuplicateCodeFunc path={`${mainConstant.path}`} icon={<Checkbox icon={location.pathname !== mainConstant.path ? <HomeOutlinedIcon className={styles.icon} /> : <Home className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
-      <DuplicateCodeFunc path={`${chatConstant.path}`} icon={<Checkbox icon={location.pathname !== chatConstant.path ? <ChatOutlinedIcon className={styles.icon} /> : <ChatRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
+      <DuplicateCodeFunc path={`${chatConstant.path}`} icon={<Checkbox icon={!location.pathname.includes(chatConstant.path) ? <ChatOutlinedIcon className={styles.icon} /> : <ChatRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact />
       <DuplicateCodeFunc path={`${friendsConstant.path}`} icon={<Checkbox icon={!location.pathname.includes(friendsConstant.path) ? <PeopleOutlineIcon className={styles.icon} /> : <PeopleRoundedIcon className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} />
     </div>
   );

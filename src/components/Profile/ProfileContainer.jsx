@@ -40,8 +40,8 @@ const mapStateToProps = (state) => {
     account: getAccountSelector(state),
     auth: setAuthSelector(state),
     posts: setPostsSelector(state),
-    //
     chats: getChatsSelector(state),
+    //
     userSignIn: getUserSignInSelector(state),
     userSignUp: getUserSignUpSelector(state),
   };

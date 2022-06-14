@@ -44,8 +44,10 @@
 .wrapper_message,
 .wrapper_myMessage,
 .wrapper_otherMessage {
+  width: 70%;
+  word-break: break-all;
   @include ds-position(unset, center);
-  padding: 0 10px;
+  padding: 10px 10px;
 }
 
 /* wrapper my message */

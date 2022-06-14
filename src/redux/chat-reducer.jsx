@@ -65,7 +65,7 @@ export const createChatThunk = (chat) => async (dispatch) => {
 
   await updateDoc(doc(db, "chats", promise.id), { ...chat, id: promise.id });
 
-  dispatch(createChat({ ...chat, id: promise.id }));
+  // dispatch(createChat({ ...chat, id: promise.id }));
 
   return promise;
 };
@@ -73,7 +73,7 @@ export const createChatThunk = (chat) => async (dispatch) => {
 export const addMessageThunk = (message) => async (dispatch) => {
   await addDoc(collection(db, "messages"), message);
 
-  dispatch(addMessage(message));
+  // dispatch(addMessage(message));
 };
 
 export default ChatReducer;

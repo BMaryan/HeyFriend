@@ -49,7 +49,7 @@ const Chat = (props) => {
       <div className={styles.dialogs}>
         <Head {...props} id={id} chatWithAccount={chatWithAccount} toggleShowContent={true} />
         <div className={styles.dialogs_content}>
-          <Dialogs {...props} />
+          <Dialogs {...props} id={id} currentChat={currentChat} chatWithAccount={chatWithAccount} />
         </div>
       </div>
 

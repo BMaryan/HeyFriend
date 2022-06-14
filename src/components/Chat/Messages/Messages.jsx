@@ -14,7 +14,7 @@ const Messages = (props) => {
 
   return (
     <div className={styles.messages}>
-      <div className={styles.messages_content}>{props?.messages?.length !== 0 ? props?.messages?.map((message) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message {...props} key={message?.id} message={message} id={props?.id} /> : undefined : undefined)) : undefined}</div>
+      <div className={styles.messages_content}>{props?.messages?.length !== 0 ? props?.messages?.sort((a, b) => new Date(a?.data()?.date.toDate()) - new Date(b?.data()?.date.toDate())).map((message, index) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message {...props} key={message?.id} message={message} id={props?.id} index={index} myIndex={message.data().id === props.account.id && message.data()} /> : undefined : undefined)) : undefined}</div>
     </div>
   );
 };

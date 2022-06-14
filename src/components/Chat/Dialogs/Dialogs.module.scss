@@ -23,14 +23,14 @@
   width: 100%;
   border: none;
   outline: none;
-  padding: 15px 10px 15px 35px;
+  padding: 15px 10px 15px 20px;
   transition: 1s;
 }
 
 .search_icon {
   color: $grey400;
   font-size: 13px;
-  @include position(absolute, unset, unset, unset 0);
+  @include position(absolute, unset, 10px, unset unset);
   padding: 0 0 0 13px;
 }
 
