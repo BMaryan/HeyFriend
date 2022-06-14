@@ -11,7 +11,7 @@ import { CardActionArea } from "@mui/material";
 
 const Recommendation = (props) => {
   let unFollowingAccounts = props?.account?.following ? props?.account?.following?.map((following) => (props?.account?.followers ? props?.account?.followers?.filter((followers) => following.id !== followers.id) : undefined)) : undefined;
-  let recommendation = props?.accounts ? props?.accounts?.filter((account) => unFollowingAccounts.flat().find((unFollowing) => account.id === unFollowing.id)) : undefined;
+  let recommendation = props?.accounts ? props?.accounts?.filter((account) => unFollowingAccounts?.flat().find((unFollowing) => account.id === unFollowing.id)) : undefined;
 
   return (
     <React.Fragment>

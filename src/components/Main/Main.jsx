@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { profileConstant } from "../../core/constants/constants";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import Stories from "../common/Stories/Stories";
 
 const Main = (props) => {
   // let followedAccounts = props.account.profile.following
@@ -41,12 +42,14 @@ const Main = (props) => {
   let followedAccountPosts = props?.account?.following ? props?.account?.following?.map((item) => (props?.posts && item ? props?.posts?.filter((post) => (post?.data()?.accountId === item?.id ? post : undefined)) : undefined)) : undefined;
 
   let unFollowingAccounts = props?.account?.following ? props?.account?.following?.map((following) => (props?.account?.followers ? props?.account?.followers?.filter((followers) => following.id !== followers.id) : undefined)) : undefined;
-  let recommendation = props?.accounts ? props?.accounts?.filter((account) => unFollowingAccounts.flat().find((unFollowing) => account.id === unFollowing.id)) : undefined;
+  let recommendation = props?.accounts ? props?.accounts?.filter((account) => unFollowingAccounts?.flat().find((unFollowing) => account.id === unFollowing.id)) : undefined;
 
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
+        <Stories {...props} />
+
         {followedAccountPosts?.length !== 0
           ? followedAccountPosts
               ?.flat()

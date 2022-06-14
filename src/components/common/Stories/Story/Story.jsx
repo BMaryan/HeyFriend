@@ -20,7 +20,7 @@ const Story = (props) => {
         {/* <div className={styles.fullName}>
 					{foundMyProfile && foundMyProfile.profile ? foundMyProfile.profile.surname + " " + foundMyProfile.profile.name : <></>}
 				</div> */}
-        <div className={styles.fullName}>{props.account ? props.account.profile.surname + " " + props.account.profile.name : <></>}</div>
+        <div className={styles.fullName}>{props.account ? props.account.surname + " " + props.account.name : <></>}</div>
       </div>
     </div>
   );

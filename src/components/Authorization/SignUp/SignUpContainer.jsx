@@ -28,16 +28,11 @@ const SignUpContainer = (props) => {
   // 	}
   // }, [props.accounts]);
 
-  // React.useEffect(() => {
-  // 	if (props.account) {
-  // 		localStorage.setItem(account, JSON.stringify(props.account));
-  // 	}
-  // }, [props.account]);
-
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        history.push(`${profileConstant.path}/${props?.account?.id}`);
+        console.log(user);
+        history.push(`${profileConstant.path}/${user.uid}`);
       }
     });
   }, []);

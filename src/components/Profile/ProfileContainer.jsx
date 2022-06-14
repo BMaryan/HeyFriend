@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -12,24 +11,18 @@ import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, follo
 import { useHistory } from "react-router-dom";
 import { createPostThunk } from "../../redux/post-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
-import { CircularProgress } from "@mui/material";
 
 const ProfileContainer = (props) => {
   let id = props.match.params.id;
   const history = useHistory();
 
   React.useEffect(() => {
-    if (id) props.accounts.find((item) => (item?.data()?.id && id ? item?.data()?.id === id : history.push("/not-found")));
-    // if (id) props.accounts.find((item) => item?.data()?.id === id || history.push("/not-found"));
-  }, [id]);
+    if (id) {
+      let isCorrentId = props.accounts.find((account) => account?.id === id || undefined);
 
-  // if (!props.account) {
-  //   return (
-  //     <div className="wrapper_loading">
-  //       <CircularProgress className="loading" />
-  //     </div>
-  //   );
-  // }
+      if (!isCorrentId) history.push("/not-found");
+    }
+  }, [id]);
 
   return <Profile {...props} id={id} />;
 };

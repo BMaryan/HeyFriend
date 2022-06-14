@@ -26,12 +26,10 @@ const AppContainer = (props) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         props.setAuth(user);
-        props.setAccountsThunk();
         props.setAccountThunk(user);
       } else {
         props.setAuth(null);
         props.setAccount(null);
-        props.setAccounts([]);
 
         if (history.location.pathname === signUpConstant.path) {
           history.push(signUpConstant.path);
@@ -49,6 +47,12 @@ const AppContainer = (props) => {
   //     history.push(signInConstant.path);
   //   }
   // }, [props.auth, props.account]);
+
+  React.useEffect(() => {
+    if (props.accounts) {
+      props.setAccountsThunk();
+    }
+  }, [props?.accounts?.length]);
 
   React.useEffect(() => {
     if (props.posts) {

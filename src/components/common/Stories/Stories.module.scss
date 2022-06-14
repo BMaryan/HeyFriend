@@ -1,10 +1,11 @@
 @import "../../../core/styles/main.scss";
 
 .stories {
-  /* background: $green300; */
-  border-radius: $bd-radius;
-  padding: $pd-content 0;
-  margin-right: 20px;
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+  background: $green300;
+  margin-bottom: 30px;
 }
 
 .stories:last-child {

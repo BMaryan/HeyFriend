@@ -1,15 +1,19 @@
 @import "../../../../core/styles/main.scss";
 
 .story {
-  width: 80px;
-  max-width: 100%;
+  height: 100px;
+  width: 100px;
+  // max-width: 100%;
   @include ds-position(unset, unset, column);
+  margin-right: 20px;
   cursor: pointer;
   transition: 0.5s;
 }
 
 /* wrapper content */
 .wrapper_content {
+  height: 100%;
+  width: 100%;
   display: flex;
   border: 1px solid $grey300;
   border-radius: 50%;
@@ -17,7 +21,7 @@
 }
 
 .wrapper_content img {
-  height: 80px;
+  height: 100%;
   width: 100%;
   background: $yellow100;
   @include image-position(cover, center);
