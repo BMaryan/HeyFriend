@@ -4,7 +4,6 @@ import styles from "./SignUp.module.scss";
 import commonStyles from "../Authorization.module.scss";
 import { reduxForm } from "redux-form";
 import { WrapperCreateField, Input, WrapperButton, InputField } from "../../common/FormControls/FormControls";
-import { accounts } from "../../../core/constants/constantsLocalStorage";
 import { validateEmail, validatePassword, required, validateFirstAndLastNameCreator } from "../../../utils/FieldValidationForm/FieldValidationForm";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
