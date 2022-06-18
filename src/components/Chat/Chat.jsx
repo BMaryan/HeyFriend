@@ -33,15 +33,12 @@ const Chat = (props) => {
   let chatWithAccount = props?.accounts?.find((account) => (currentChat?.data()?.participants?.length > 0 ? currentChat?.data()?.participants?.find((participant) => (account?.id === participant?.id && account?.id !== props?.account?.id ? account : undefined)) : undefined));
 
   let onSubmit = (formData) => {
-    // if (formData.send_message) {
     props.addMessageThunk({
       id: props?.account?.id,
       chatId: currentChat?.id,
       message: formData?.send_message,
       date: new Date(),
     });
-    // }
-    // props.addMessage(id, props.account.id, formData.send_message);
   };
 
   return (
