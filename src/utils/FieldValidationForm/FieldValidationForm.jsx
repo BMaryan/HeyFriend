@@ -8,31 +8,31 @@ export const required = (value) => {
 
 export const maxLengthCreator = (maxLength) => (value) => value && value.length > maxLength ? `Max length is ${maxLength} symbols` : undefined;
 
-export const validateAuthorizationUserCreator = (accounts, userSignIn) => {
-  let foundAccount;
-  if (accounts) {
-    foundAccount = accounts && accounts.find((account) => (account.email === userSignIn.email && account.password === userSignIn.password) || (account?.email === userSignIn.email && account?.password === userSignIn.password));
+// export const validateAuthorizationUserCreator = (accounts, userSignIn) => {
+//   let foundAccount;
+//   if (accounts) {
+//     foundAccount = accounts && accounts.find((account) => (account.email === userSignIn.email && account.password === userSignIn.password) || (account?.email === userSignIn.email && account?.password === userSignIn.password));
 
-    if (foundAccount) {
-      return undefined;
-    } else {
-      return "No such account found. You can check the correctness of data entry or register.";
-    }
-  }
-};
+//     if (foundAccount) {
+//       return undefined;
+//     } else {
+//       return "No such account found. You can check the correctness of data entry or register.";
+//     }
+//   }
+// };
 
-export const validateFindTheSameUserCreator = (accounts, userSignUp) => {
-  let foundUser;
-  if (accounts) {
-    foundUser = accounts && accounts.find((account) => (account.email === userSignUp.email ? account : undefined));
+// export const validateFindTheSameUserCreator = (accounts, userSignUp) => {
+//   let foundUser;
+//   if (accounts) {
+//     foundUser = accounts && accounts.find((account) => (account.email === userSignUp.email ? account : undefined));
 
-    if (!foundUser) {
-      return undefined;
-    } else {
-      return "An account already exists with this email.";
-    }
-  }
-};
+//     if (!foundUser) {
+//       return undefined;
+//     } else {
+//       return "An account already exists with this email.";
+//     }
+//   }
+// };
 
 export const validateFirstAndLastNameCreator = (nameField) => (value) => {
   if (value && !/^[a-z ,.'-]+$/i.test(value)) {

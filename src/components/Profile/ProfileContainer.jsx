@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { getUserSignInSelector, getUserSignUpSelector, setAuthSelector } from "../../redux/auth-selectors";
+import { setAuthSelector } from "../../redux/auth-selectors";
 import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { createChatThunk } from "../../redux/chat-reducer";
@@ -34,9 +34,6 @@ const mapStateToProps = (state) => {
     auth: setAuthSelector(state),
     posts: setPostsSelector(state),
     chats: getChatsSelector(state),
-    //
-    userSignIn: getUserSignInSelector(state),
-    userSignUp: getUserSignUpSelector(state),
   };
 };
 
