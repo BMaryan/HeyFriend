@@ -7,7 +7,7 @@ import Profile from "./Profile";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
 import { createChatThunk } from "../../redux/chat-reducer";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { getProfileData, setProfilePosts, getParamsId, getAuthorizationId, following, setProfileChats, addAccount, unFollowing, updateAccountThunk } from "../../redux/profile-reducer";
+import { updateAccountThunk } from "../../redux/profile-reducer";
 import { useHistory } from "react-router-dom";
 import { createPostThunk } from "../../redux/post-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
@@ -39,14 +39,6 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    getProfileData,
-    setProfilePosts,
-    getParamsId,
-    getAuthorizationId,
-    following,
-    setProfileChats,
-    addAccount,
-    unFollowing,
     createPostThunk,
     updateAccountThunk,
     createChatThunk,

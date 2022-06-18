@@ -38,7 +38,7 @@ const Header = (props) => {
 
         {/* navBar list */}
         <div className={styles.navbar_list}>
-          <NavbarList accounts={props.accounts} account={props.account} isAccount={props.isAccount} getProfileData={props.getProfileData} getAuthorizationId={props.getAuthorizationId} getParamsId={props.getParamsId} signOut={props.signOut} />
+          <NavbarList accounts={props.accounts} account={props.account} signOut={props.signOut} />
         </div>
       </div>
     </div>

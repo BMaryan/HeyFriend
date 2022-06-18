@@ -22,7 +22,6 @@ const FooterPost = (props) => {
       comment: formData.comment,
       dateCreated: new Date(),
     });
-    // props.addComment(props?.post?.id, formData.comment);
   };
 
   let checkClickBookmarkIcon = props?.post?.saved ? props?.post?.saved?.find((saved) => (saved?.id && props?.account?.id && saved?.id === props?.account?.id ? saved : undefined)) : undefined;

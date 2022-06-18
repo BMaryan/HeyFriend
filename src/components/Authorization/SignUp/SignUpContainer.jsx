@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { authSuccess, setAuth, signUp } from "../../../redux/auth-reducer";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
-import { addAccount, isAccount } from "../../../redux/profile-reducer";
 import SignUp from "./SignUp";
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
 import { withRouter } from "react-router-dom";
@@ -37,8 +36,6 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    addAccount,
-    isAccount,
     signUp,
     setAuth,
     authSuccess,

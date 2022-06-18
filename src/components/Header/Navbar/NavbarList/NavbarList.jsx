@@ -106,9 +106,6 @@ const NavbarList = (props) => {
         <MenuItem
           onClick={() => {
             // dataFromAccountToAccounts();
-            // props.isAccount(null);
-            // props.getAuthorizationId(null);
-            props.getParamsId(null);
             //
             props.signOut();
             history.push(`${signInConstant.path}`);

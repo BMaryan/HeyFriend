@@ -4,7 +4,6 @@ import { authSuccess, signIn } from "../../../redux/auth-reducer";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
 import SignIn from "./SignIn";
 import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
-import { isAccount } from "../../../redux/profile-reducer";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useHistory } from "react-router-dom";
@@ -35,7 +34,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  isAccount,
   signIn,
   authSuccess,
 })(SignInContainer);

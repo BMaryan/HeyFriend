@@ -108,7 +108,6 @@ const HeadPost = (props) => {
                     variant="text"
                     className={styles.item + " " + styles.item__border + " " + styles.item__red}
                     onClick={() => {
-                      props.unFollowing(props?.currentAccount?.id);
                       handleClose();
                     }}>
                     Unfollow

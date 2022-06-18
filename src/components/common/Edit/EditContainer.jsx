@@ -4,7 +4,7 @@ import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-
 import Edit from "./Edit";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { getProfileData, isAccount, updateAccountThunk } from "../../../redux/profile-reducer";
+import { updateAccountThunk } from "../../../redux/profile-reducer";
 import { accounts, account } from "../../../core/constants/constantsLocalStorage";
 
 const EditContainer = (props) => {
@@ -32,4 +32,4 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(connect(mapStateToProps, { getProfileData, isAccount, updateAccountThunk }), withRouter)(EditContainer);
+export default compose(connect(mapStateToProps, { updateAccountThunk }), withRouter)(EditContainer);

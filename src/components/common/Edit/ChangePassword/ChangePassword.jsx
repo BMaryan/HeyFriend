@@ -37,7 +37,7 @@ const ChangePassword = (props) => {
 
     if (formData.old_password !== formData.new_password && formData.old_password !== formData.confirm_new_password) {
       if (formData.new_password === formData.confirm_new_password && formData.old_password === props.account?.password) {
-        props.getProfileData({ password: formData.new_password });
+        // props.getProfileData({ password: formData.new_password });
         showSnackbar("success", "You have successfully changed your password.");
       }
     }

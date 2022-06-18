@@ -2,26 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
 import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
-import { getAuthorizationId, getParamsId, getProfileData, isAccount } from "../../redux/profile-reducer";
 import { signOut } from "../../redux/auth-reducer";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
-import { signInConstant } from "../../core/constants/constants";
-import { useHistory } from "react-router-dom";
 
 const HeaderContainer = (props) => {
-  let history = useHistory();
   const [darkTheme, setDarkTheme] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (!user) {
-  //       console.log("logout");
-
-  //       history.push(`${signInConstant.path}`);
-  //     }
-  //   });
-  // }, []);
 
   React.useEffect(() => {
     const root = document.documentElement;
@@ -49,9 +33,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  isAccount,
-  getProfileData,
-  getParamsId,
-  getAuthorizationId,
   signOut,
 })(HeaderContainer);

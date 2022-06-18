@@ -138,10 +138,10 @@ const ProfileInfo = (props) => {
 
       {/* toggle show container for change something in profile */}
       {/* toggle cover container */}
-      {isMyAccount ? <div>{openModalCoverProfile ? <ContainerCoverProfile profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} getProfileData={props.getProfileData} account={props.account} openModalCoverProfile={openModalCoverProfile} setOpenModalCoverProfile={setOpenModalCoverProfile} /> : <></>}</div> : <></>}
+      {isMyAccount ? <div>{openModalCoverProfile ? <ContainerCoverProfile profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} account={props.account} openModalCoverProfile={openModalCoverProfile} setOpenModalCoverProfile={setOpenModalCoverProfile} /> : <></>}</div> : <></>}
 
       {/* change picture */}
-      {isMyAccount ? <div>{openModalAvatarProfile ? <ChangeProfilePictureContainer profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} getProfileData={props.getProfileData} account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} /> : <></>}</div> : <></>}
+      {isMyAccount ? <div>{openModalAvatarProfile ? <ChangeProfilePictureContainer profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} /> : <></>}</div> : <></>}
     </div>
   );
 };
