@@ -36,8 +36,6 @@ const Main = (props) => {
   // 	  )
   // 	: undefined;
 
-  // props.getDefaultAccount(null);
-
   //   let currentAccount = props?.accounts ? props?.accounts?.filter((account) => (props?.account?.following ? props?.account?.following.find((item) => account?.data()?.id === item?.id) : undefined)) : undefined;
   let followedAccountPosts = props?.account?.following ? props?.account?.following?.map((item) => (props?.posts && item ? props?.posts?.filter((post) => (post?.data()?.accountId === item?.id ? post : undefined)) : undefined)) : undefined;
 
