@@ -7,43 +7,27 @@ const AUTH_SUCCESS = "heyfriend/auth/AUTH_SUCCESS";
 const AUTH_LOADING = "heyfriend/auth/AUTH_LOADING";
 const AUTH_ERROR = "heyfriend/auth/AUTH_ERROR";
 
-export type InitialStateType = {
-  auth: object | null;
-  authError: string | null;
-  loading: boolean;
-};
-
-const initialState: InitialStateType = {
-  auth: null,
-  authError: null,
+const initialState = {
+  auth: null as object | null,
+  authError: null as string | null,
   loading: false,
 };
+
+export type InitialStateType = typeof initialState;
 
 const AuthReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_AUTH: {
-      return {
-        ...state,
-        auth: action.credentials ? action.credentials : null,
-      };
+      return { ...state, auth: action.credentials ? action.credentials : null };
     }
     case AUTH_SUCCESS: {
-      return {
-        ...state,
-        authError: null,
-      };
+      return { ...state, authError: null };
     }
     case AUTH_LOADING: {
-      return {
-        ...state,
-        loading: action.loading,
-      };
+      return { ...state, loading: action.loading };
     }
     case AUTH_ERROR: {
-      return {
-        ...state,
-        authError: action.error.message,
-      };
+      return { ...state, authError: action.error.message };
     }
     default: {
       return state;
@@ -51,30 +35,19 @@ const AuthReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
-type SetAuthActionType = {
-  type: typeof SET_AUTH;
-  credentials: object | null;
-};
+type SetAuthActionType = { type: typeof SET_AUTH; credentials: object | null };
 
 export const setAuth = (credentials: object | null): SetAuthActionType => ({ type: SET_AUTH, credentials });
 
-type AuthSuccessActionType = {
-  type: typeof AUTH_SUCCESS;
-};
+type AuthSuccessActionType = { type: typeof AUTH_SUCCESS };
 
 export const authSuccess = (): AuthSuccessActionType => ({ type: AUTH_SUCCESS });
 
-type AuthLoadingActionType = {
-  type: typeof AUTH_LOADING;
-  loading: boolean;
-};
+type AuthLoadingActionType = { type: typeof AUTH_LOADING; loading: boolean };
 
 export const authLoading = (loading: boolean): AuthLoadingActionType => ({ type: AUTH_LOADING, loading });
 
-type AuthErrorActionType = {
-  type: typeof AUTH_ERROR;
-  error: string;
-};
+type AuthErrorActionType = { type: typeof AUTH_ERROR; error: string };
 
 export const authError = (error: string): AuthErrorActionType => ({ type: AUTH_ERROR, error });
 
