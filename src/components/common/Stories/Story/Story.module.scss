@@ -1,19 +1,16 @@
 @import "../../../../core/styles/main.scss";
 
 .story {
-  height: 100px;
-  width: 100px;
-  // max-width: 100%;
   @include ds-position(unset, unset, column);
-  margin-right: 20px;
+  margin: $pd-content;
   cursor: pointer;
   transition: 0.5s;
 }
 
 /* wrapper content */
 .wrapper_content {
-  height: 100%;
-  width: 100%;
+  height: 70px;
+  width: 70px;
   display: flex;
   border: 1px solid $grey300;
   border-radius: 50%;
@@ -31,7 +28,7 @@
 }
 
 .wrapper_content img:hover {
-  transform: scale(0.9);
+  transform: scale(0.85);
   transition: 1s;
 }
 
@@ -56,4 +53,5 @@
 
 .fullName {
   font-size: 14px;
+  // text-align: center;
 }

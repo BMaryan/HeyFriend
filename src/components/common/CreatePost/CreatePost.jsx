@@ -13,6 +13,7 @@ import { getPictureBase64 } from "../../../core/methods/methods";
 import Media from "react-media";
 
 const CreatePost = (props) => {
+  const [files, setFiles] = React.useState([]);
   let [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -21,6 +22,12 @@ const CreatePost = (props) => {
 
   let onSubmit = (formData) => {
     setSaveOwnerPost(formData.create_post);
+  };
+
+  const handleGetFiles = (event) => {
+    setFiles([...files, ...event.target.files]);
+
+    getPictureBase64({ event: event, method: props.setPostPhoto, files: files });
   };
 
   const isStepSkipped = (step) => {
@@ -87,6 +94,8 @@ const CreatePost = (props) => {
                       <img className={styles.post_img} src={props.postPhoto} alt="" />
                     </div>
                   </div>
+
+                  <input onChange={handleGetFiles} id="inputFile" type="file" accept="image/*" />
                 </React.Fragment>
               ) : activeStep === 1 ? (
                 <React.Fragment>
@@ -130,14 +139,6 @@ const CreatePost = (props) => {
                               description: saveOwnerPost,
                               dateCreated: new Date(),
                             });
-                            // props.setProfilePosts({
-                            // 	id: props.getUniqueGeneratedIdPost({ length: 11, account: props.account }),
-                            // 	photo: props.postPhoto,
-                            // 	likes: [],
-                            // 	comments: [],
-                            // 	dateCreated: "01.01.01",
-                            // 	description: saveOwnerPost,
-                            // });
                             props.handleClose();
                           }
                           handleNext();
@@ -174,7 +175,7 @@ const CreatePost = (props) => {
                   <Button className={styles.content_button} onClick={handleClick} variant="contained">
                     Select
                   </Button>
-                  <input ref={hiddenFileInput} onChange={(event) => getPictureBase64({ event: event, method: props.setPostPhoto })} id="inputFile" type="file" accept="image/*" />
+                  <input ref={hiddenFileInput} onChange={handleGetFiles} id="inputFile" type="file" accept="image/*" />
                 </div>
               </div>
             </Box>

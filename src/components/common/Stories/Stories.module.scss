@@ -4,10 +4,10 @@
   width: 100%;
   display: flex;
   overflow-x: scroll;
-  background: $green300;
-  margin-bottom: 30px;
+  background: $white;
+  margin-bottom: $mg-between-contaner;
 }
 
-.stories:last-child {
-  margin-right: 0;
+.stories::-webkit-scrollbar {
+  height: 0;
 }
