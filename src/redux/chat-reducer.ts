@@ -4,38 +4,21 @@ import { db } from "../firebase";
 let SET_CHATS = "heyfriend/chatPage/SET_CHATS";
 let SET_MESSAGES = "heyfriend/chatPage/SET_MESSAGES";
 
-type ChatType = {
-  id: string;
-  participants: { id: string }[];
-};
+type ChatType = { id: string; participants: { id: string }[] };
 
-type MessageType = {
-  id: string;
-  chatId: string;
-  message: string;
-  date: Date;
-};
+type MessageType = { id: string; chatId: string; message: string; date: Date };
 
-let initialState = {
-  chats: [] as Array<ChatType>,
-  messages: [] as Array<MessageType>,
-};
+let initialState = { chats: [] as Array<ChatType>, messages: [] as Array<MessageType> };
 
 export type InitialStateType = typeof initialState;
 
 const ChatReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_CHATS: {
-      return {
-        ...state,
-        chats: action.chats,
-      };
+      return { ...state, chats: action.chats };
     }
     case SET_MESSAGES: {
-      return {
-        ...state,
-        messages: action.messages,
-      };
+      return { ...state, messages: action.messages };
     }
     default: {
       return state;
@@ -43,17 +26,11 @@ const ChatReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
-type SetChatsActionType = {
-  type: typeof SET_CHATS;
-  chats: Array<ChatType>;
-};
+type SetChatsActionType = { type: typeof SET_CHATS; chats: Array<ChatType> };
 
 export const setChats = (chats: Array<ChatType>): SetChatsActionType => ({ type: SET_CHATS, chats });
 
-type SetMessagesActionType = {
-  type: typeof SET_CHATS;
-  messages: Array<MessageType>;
-};
+type SetMessagesActionType = { type: typeof SET_CHATS; messages: Array<MessageType> };
 
 export const setMessages = (messages: Array<MessageType>): SetMessagesActionType => ({ type: SET_MESSAGES, messages });
 

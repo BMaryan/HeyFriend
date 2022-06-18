@@ -12,8 +12,8 @@ import React from "react";
 // import { getPictureBase64 } from "../../../core/methods/methods";
 // import Media from "react-media";
 
-const CreatePost = (props) => {
+const DefaultContent = (props) => {
   return <></>;
 };
 
-export default CreatePost;
+export default DefaultContent;

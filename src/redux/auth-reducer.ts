@@ -7,11 +7,7 @@ const AUTH_SUCCESS = "heyfriend/auth/AUTH_SUCCESS";
 const AUTH_LOADING = "heyfriend/auth/AUTH_LOADING";
 const AUTH_ERROR = "heyfriend/auth/AUTH_ERROR";
 
-const initialState = {
-  auth: null as object | null,
-  authError: null as string | null,
-  loading: false,
-};
+const initialState = { auth: null as object | null, authError: null as string | null, loading: false };
 
 export type InitialStateType = typeof initialState;
 
