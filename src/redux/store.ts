@@ -1,13 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { reducer as formReducer } from "redux-form";
-import ProfileReducer from "./profile-reducer";
+import AccountReducer from "./account-reducer";
 import AuthReducer from "./auth-reducer";
 import ChatReducer from "./chat-reducer";
 import PostPage from "./post-reducer";
 import thunk from "redux-thunk";
 
 let rootReducer = combineReducers({
-  profilePage: ProfileReducer,
+  accountPage: AccountReducer,
   chatPage: ChatReducer,
   postPage: PostPage,
   form: formReducer,

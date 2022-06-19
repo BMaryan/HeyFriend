@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { authSuccess, setAuth, signUp } from "../../../redux/auth-reducer";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
 import SignUp from "./SignUp";
-import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../../redux/account-selectors";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { profileConstant } from "../../../core/constants/constants";

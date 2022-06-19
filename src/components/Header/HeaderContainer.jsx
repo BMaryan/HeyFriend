@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { signOut } from "../../redux/auth-reducer";
 
 const HeaderContainer = (props) => {

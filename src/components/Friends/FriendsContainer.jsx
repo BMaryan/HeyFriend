@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Friends from "./Friends";
 import { withRouter } from "react-router-dom";
-import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 
 const FriendsContainer = (props) => {
   return <Friends {...props} />;

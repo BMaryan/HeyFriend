@@ -2,15 +2,15 @@ import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
 import { db } from "../firebase";
 import { AccountType } from "../types/types";
 
-const SET_ACCOUNTS = "heyfriend/profilePage/SET_ACCOUNTS";
-const SET_ACCOUNT = "heyfriend/profilePage/SET_ACCOUNT";
-const UPDATE_ACCOUNT = "heyfriend/profilePage/UPDATE_ACCOUNT";
+const SET_ACCOUNTS = "heyfriend/accountPage/SET_ACCOUNTS";
+const SET_ACCOUNT = "heyfriend/accountPage/SET_ACCOUNT";
+const UPDATE_ACCOUNT = "heyfriend/accountPage/UPDATE_ACCOUNT";
 
 const initialState = { accounts: [] as Array<AccountType>, account: null as AccountType | null };
 
 export type InitialStateType = typeof initialState;
 
-const ProfileReducer = (state = initialState, action: any): InitialStateType => {
+const AccountReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_ACCOUNTS: {
       return { ...state, accounts: [...action.accounts] };
@@ -55,9 +55,9 @@ export const updateAccountThunk = (account: AccountType) => async (dispatch: any
 
   await setDoc(docRef, account);
 
-  if (getState().profilePage.account.id === account.id) {
+  if (getState().accountPage.account.id === account.id) {
     dispatch(updateAccount(account));
   }
 };
 
-export default ProfileReducer;
+export default AccountReducer;

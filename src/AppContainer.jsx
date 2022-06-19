@@ -1,9 +1,9 @@
 import React from "react";
 import App from "./App";
 import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
-import { setAccounts, setAccount, setAccountsThunk, setAccountThunk } from "./redux/profile-reducer";
+import { setAccounts, setAccount, setAccountsThunk, setAccountThunk } from "./redux/account-reducer";
 import { setCommentsThunk, createPostThunk, setPostsThunk } from "./redux/post-reducer";
-import { getAccountSelector, getAccountsSelector } from "./redux/profile-selectors";
+import { getAccountSelector, getAccountsSelector } from "./redux/account-selectors";
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
 import { getCommentsSelector, setPostsSelector } from "./redux/post-selectors";
 import { setChatsThunk, setMessagesThunk } from "./redux/chat-reducer";

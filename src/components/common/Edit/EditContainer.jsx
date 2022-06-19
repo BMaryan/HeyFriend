@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../../redux/account-selectors";
 import Edit from "./Edit";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { updateAccountThunk } from "../../../redux/profile-reducer";
+import { updateAccountThunk } from "../../../redux/account-reducer";
 
 const EditContainer = (props) => {
   let id = Number(props.match.params.id);

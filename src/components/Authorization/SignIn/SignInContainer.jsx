@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { authSuccess, signIn } from "../../../redux/auth-reducer";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
 import SignIn from "./SignIn";
-import { getAccountsSelector, getAccountSelector } from "../../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../../redux/account-selectors";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useHistory } from "react-router-dom";

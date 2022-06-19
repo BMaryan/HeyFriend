@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
-import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { setPostsSelector } from "../../redux/post-selectors";
 
 const MainContainer = (props) => {

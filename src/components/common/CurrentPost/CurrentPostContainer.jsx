@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import React from "react";
 import { connect } from "react-redux";
 import { setPostsSelector } from "../../../redux/post-selectors";
-import { getAccountSelector, getAccountsSelector } from "../../../redux/profile-selectors";
+import { getAccountSelector, getAccountsSelector } from "../../../redux/account-selectors";
 import CurrentPost from "./CurrentPost";
 
 const CurrentPostContainer = (props) => {

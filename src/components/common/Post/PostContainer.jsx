@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAccountSelector, getAccountsSelector } from "../../../redux/profile-selectors";
+import { getAccountSelector, getAccountsSelector } from "../../../redux/account-selectors";
 import Post from "./Post";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import { updateAccountThunk } from "../../../redux/profile-reducer";
+import { updateAccountThunk } from "../../../redux/account-reducer";
 import { createCommentThunk, deleteCommentThunk, deletePostThunk, updateCommentThunk, updatePostThunk } from "../../../redux/post-reducer";
 import { getCommentsSelector } from "../../../redux/post-selectors";
 

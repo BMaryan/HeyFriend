@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { addMessageThunk } from "../../redux/chat-reducer";
 import { getChatsSelector, getMessagesSelector } from "../../redux/chat-selectors";
-import { getAccountsSelector, getAccountSelector } from "../../redux/profile-selectors";
+import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 
 const ChatContainer = (props) => {
   return <Chat {...props} />;

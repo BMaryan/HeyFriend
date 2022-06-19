@@ -55,7 +55,7 @@ const EditProfileReduxForm = reduxForm({ form: "edit_profile", enableReinitializ
 
 const mapStateToProps = (state) => {
   return {
-    initialValues: state?.profilePage?.account,
+    initialValues: state?.accountPage?.account,
   };
 };
 
