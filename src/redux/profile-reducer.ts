@@ -1,20 +1,10 @@
 import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { AccountType } from "../types/types";
 
 const SET_ACCOUNTS = "heyfriend/profilePage/SET_ACCOUNTS";
 const SET_ACCOUNT = "heyfriend/profilePage/SET_ACCOUNT";
 const UPDATE_ACCOUNT = "heyfriend/profilePage/UPDATE_ACCOUNT";
-
-type AccountType = {
-  id: string;
-  name: string;
-  surname: string;
-  email: string;
-  coverPhoto: string;
-  avatar: string;
-  followers: { id: string }[];
-  following: { id: string }[];
-};
 
 const initialState = { accounts: [] as Array<AccountType>, account: null as AccountType | null };
 

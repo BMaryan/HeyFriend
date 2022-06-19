@@ -1,12 +1,9 @@
 import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { ChatType, MessageType } from "../types/types";
 
 let SET_CHATS = "heyfriend/chatPage/SET_CHATS";
 let SET_MESSAGES = "heyfriend/chatPage/SET_MESSAGES";
-
-type ChatType = { id: string; participants: { id: string }[] };
-
-type MessageType = { id: string; chatId: string; message: string; date: Date };
 
 let initialState = { chats: [] as Array<ChatType>, messages: [] as Array<MessageType> };
 

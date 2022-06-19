@@ -1,28 +1,9 @@
 import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { CommentType, PostType } from "../types/types";
 
 const SET_POSTS = "heyfriend/postPage/SET_POSTS";
 const SET_COMMENTS = "heyfriend/postPage/SET_COMMENTS";
-
-type PostType = {
-  id: string;
-  accountId: string;
-  dateCreated: Date;
-  description: string;
-  postPhoto: string;
-  liked: { id: string }[];
-  saved: { id: string }[];
-};
-
-type CommentType = {
-  id: string;
-  accountId: string;
-  postId: string;
-  dateCreated: Date;
-  comment: string;
-  postPhoto: string;
-  liked: { id: string }[];
-};
 
 const initialState = { posts: [] as Array<PostType>, comments: [] as Array<CommentType> };
 

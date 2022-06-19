@@ -1,12 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunk from "redux-thunk";
-import AuthReducer from "./auth-reducer";
 import { reducer as formReducer } from "redux-form";
 import ProfileReducer from "./profile-reducer";
+import AuthReducer from "./auth-reducer";
 import ChatReducer from "./chat-reducer";
 import PostPage from "./post-reducer";
+import thunk from "redux-thunk";
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
   profilePage: ProfileReducer,
   chatPage: ChatReducer,
   postPage: PostPage,
@@ -14,8 +14,9 @@ let reducers = combineReducers({
   auth: AuthReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+type RootReducerType = typeof rootReducer;
+export type StateType = ReturnType<RootReducerType>;
 
-window.store = store;
+let store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
