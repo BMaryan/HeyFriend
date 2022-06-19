@@ -1,3 +1,15 @@
+// account
+export type AccountType = {
+  id: string;
+  name: string;
+  surname: string;
+  email: string;
+  coverPhoto: string;
+  avatar: string;
+  followers: { id: string }[];
+  following: { id: string }[];
+};
+
 // chat
 export type ChatType = { id: string; participants: { id: string }[] };
 
@@ -22,16 +34,4 @@ export type CommentType = {
   comment: string;
   postPhoto: string;
   liked: { id: string }[];
-};
-
-// profile
-export type AccountType = {
-  id: string;
-  name: string;
-  surname: string;
-  email: string;
-  coverPhoto: string;
-  avatar: string;
-  followers: { id: string }[];
-  following: { id: string }[];
 };
