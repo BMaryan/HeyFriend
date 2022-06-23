@@ -1,28 +1,40 @@
 import React from "react";
-import styles from "./ProfileInfo.module.scss";
-import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
+import { AccountType, ChatType, FollowersOfAccountType, FollowingOfAccountType, ParticipantsOfChatType, PostType } from "../../../types/types";
 import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import Button from "@mui/material/Button";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
+import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import betaVershion from "../../../assets/images/betaVershion.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import styles from "./ProfileInfo.module.scss";
 import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Button from "@mui/material/Button";
 
-const ProfileInfo = (props) => {
+interface ProfileInfoPropsType {
+  accounts: Array<AccountType>;
+  account: AccountType | null;
+  posts: Array<PostType>;
+  chats: Array<ChatType>;
+  id: string;
+  // fix
+  updateAccountThunk: any;
+  createChatThunk: any;
+}
+
+const ProfileInfo = (props: ProfileInfoPropsType) => {
   const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
   const [openModalCoverProfile, setOpenModalCoverProfile] = React.useState(false);
   const history = useHistory();
 
-  let currentAccount = props?.accounts.find((account) => account?.data()?.id === props?.id);
+  let currentAccount = props?.accounts.find((account: AccountType) => account.data().id === props?.id);
   let isMyAccount = props?.account && props?.id === props?.account?.id;
   let isOtherAccount = props?.id !== props?.account?.id;
   let coverPhoto = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
-  let numberOfPosts = props?.posts ? props?.posts?.filter((item) => (item?.data() ? item?.data().accountId === currentAccount?.data()?.id : [])) : [];
-  let isCheckFollowing = props?.account?.following ? props?.account?.following.find((item) => (item?.id === props?.id ? item : undefined)) : undefined;
-  let isChat = props?.chats?.length > 0 ? props?.chats?.filter((chat) => (chat?.data()?.participants?.length > 0 ? chat?.data()?.participants?.find((participants) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id) : undefined)) : undefined;
+  let numberOfPosts = props?.posts ? props?.posts?.filter((post: PostType) => (post?.data() ? post?.data().accountId === currentAccount?.data()?.id : [])) : [];
+  let isCheckFollowing = props?.account?.following ? props?.account?.following.find((following: FollowingOfAccountType) => (following?.id === props?.id ? following : undefined)) : undefined;
+  let isChat = props?.chats?.length > 0 ? props?.chats?.filter((chat: ChatType) => (chat.data().participants?.length > 0 ? chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id) : undefined)) : undefined;
 
   return (
     <div className={styles.profile_info}>
@@ -92,7 +104,7 @@ const ProfileInfo = (props) => {
                           .createChatThunk({
                             participants: [{ id: props?.account?.id }, { id: props?.id }],
                           })
-                          .then((res) => history.push(`${chatConstant.path}/${res?.id}`))
+                          .then((res: ParticipantsOfChatType) => history.push(`${chatConstant.path}/${res?.id}`))
                       : history.push(`${chatConstant.path}/${isChat[0]?.id}`);
                   }}
                   variant="contained">
@@ -105,8 +117,8 @@ const ProfileInfo = (props) => {
                     className={styles.button}
                     style={{ textTransform: "capitalize" }}
                     onClick={() => {
-                      props.updateAccountThunk({ ...props.account, following: props?.account?.following ? props?.account?.following.filter((item) => item?.id !== props?.id) : [] });
-                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? currentAccount?.data()?.followers.filter((item) => item?.id !== props?.account?.id) : [] });
+                      props.updateAccountThunk({ ...props.account, following: props?.account?.following ? props?.account?.following.filter((following: FollowingOfAccountType) => following?.id !== props?.id) : [] });
+                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? currentAccount?.data()?.followers.filter((followers: FollowersOfAccountType) => followers?.id !== props?.account?.id) : [] });
                     }}
                     variant="contained">
                     Unfollow
@@ -138,10 +150,10 @@ const ProfileInfo = (props) => {
 
       {/* toggle show container for change something in profile */}
       {/* toggle cover container */}
-      {isMyAccount ? <div>{openModalCoverProfile ? <ContainerCoverProfile profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} account={props.account} openModalCoverProfile={openModalCoverProfile} setOpenModalCoverProfile={setOpenModalCoverProfile} /> : <></>}</div> : <></>}
+      {isMyAccount ? <div>{openModalCoverProfile ? <ContainerCoverProfile account={props.account} openModalCoverProfile={openModalCoverProfile} setOpenModalCoverProfile={setOpenModalCoverProfile} updateAccountThunk={props.updateAccountThunk} /> : <></>}</div> : <></>}
 
       {/* change picture */}
-      {isMyAccount ? <div>{openModalAvatarProfile ? <ChangeProfilePictureContainer profile={props.profile} accounts={props.accounts} updateAccountThunk={props.updateAccountThunk} account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} /> : <></>}</div> : <></>}
+      {isMyAccount ? <div>{openModalAvatarProfile ? <ChangeProfilePictureContainer account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} updateAccountThunk={props.updateAccountThunk} /> : <></>}</div> : <></>}
     </div>
   );
 };

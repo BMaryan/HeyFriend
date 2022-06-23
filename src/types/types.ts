@@ -1,37 +1,76 @@
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+
 // account
-export type AccountType = {
+export interface FollowersOfAccountType {
   id: string;
-  name: string;
-  surname: string;
-  email: string;
-  coverPhoto: string;
-  avatar: string;
-  followers: { id: string }[];
-  following: { id: string }[];
-};
+}
+
+export interface FollowingOfAccountType {
+  id: string;
+}
+
+export interface AccountType extends QueryDocumentSnapshot<DocumentData> {
+  id: string;
+  name?: string;
+  surname?: string;
+  email?: string;
+  coverPhoto?: string;
+  avatar?: string;
+  status?: string;
+  about?: string;
+  followers?: Array<FollowersOfAccountType>;
+  following?: Array<FollowingOfAccountType>;
+}
 
 // chat
-export type ChatType = { id: string; participants: { id: string }[] };
+export interface ParticipantsOfChatType {
+  id: string;
+}
 
-export type MessageType = { id: string; chatId: string; message: string; date: Date };
+export interface ChatType extends QueryDocumentSnapshot<DocumentData> {
+  id: string;
+  participants?: ParticipantsOfChatType[];
+}
+
+export interface MessageType extends QueryDocumentSnapshot<DocumentData> {
+  id: string;
+  chatId?: string;
+  message?: string;
+  date?: Date;
+}
 
 // post
-export type PostType = {
+export interface LikedOfPostType {
   id: string;
-  accountId: string;
-  dateCreated: Date;
-  description: string;
-  postPhoto: string;
-  liked: { id: string }[];
-  saved: { id: string }[];
-};
+}
 
-export type CommentType = {
+export interface SavedOfPostType {
   id: string;
-  accountId: string;
-  postId: string;
-  dateCreated: Date;
-  comment: string;
-  postPhoto: string;
-  liked: { id: string }[];
-};
+}
+
+export interface PostType extends QueryDocumentSnapshot<DocumentData> {
+  id: string;
+  accountId?: string;
+  dateCreated?: Date;
+  description?: string;
+  postPhoto?: string;
+  liked?: Array<LikedOfPostType>;
+  saved?: Array<SavedOfPostType>;
+}
+
+export interface CommentOfPostType {
+  id: string;
+}
+
+export interface CommentType extends QueryDocumentSnapshot<DocumentData> {
+  id: string;
+  accountId?: string;
+  postId?: string;
+  dateCreated?: Date;
+  comment?: string;
+  liked?: Array<CommentOfPostType>;
+}
+
+// auth
+// CredentialType also here
+// AuthError name check

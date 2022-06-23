@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./EditProfile.module.scss";
+import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import EditProfileReduxForm from "./EditProfileForm";
-import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
+import styles from "./EditProfile.module.scss";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
@@ -39,7 +39,7 @@ const EditProfile = (props) => {
       </Snackbar>
 
       {/* toggle modal for change picture */}
-      {openModalAvatarProfile ? <ChangeProfilePictureContainer {...props} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} /> : undefined}
+      {openModalAvatarProfile ? <ChangeProfilePictureContainer account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} updateAccountThunk={props.updateAccountThunk} /> : undefined}
     </div>
   );
 };

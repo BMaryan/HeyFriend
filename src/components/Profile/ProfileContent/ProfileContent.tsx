@@ -1,26 +1,32 @@
 import React from "react";
+import { getUniqueGeneratedIdPost } from "../../../core/methods/methods";
+import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
+import { profileConstant } from "../../../core/constants/constants";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import CreatePost from "../../common/CreatePost/CreatePost";
+import Information from "./Information/Information";
+import { AccountType, PostType } from "../../../types/types";
 import styles from "./ProfileContent.module.scss";
 import { NavLink } from "react-router-dom";
 import { Route } from "react-router-dom";
-import Information from "./Information/Information";
 import Saved from "./Saved/Saved";
-import { profileConstant } from "../../../core/constants/constants";
-import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import Posts from "./Posts/Posts";
-import { useParams } from "react-router-dom";
 import Media from "react-media";
-import CreatePost from "../../common/CreatePost/CreatePost";
-import { getUniqueGeneratedIdPost } from "../../../core/methods/methods";
 
-const ProfileContent = (props) => {
-  let params = useParams();
-  let [postPhoto, setPostPhoto] = React.useState(null);
+interface ProfileContentPropsType {
+  accounts: Array<AccountType>;
+  account: AccountType | null;
+  posts: Array<PostType>;
+  id: string;
+}
+
+const ProfileContent = (props: ProfileContentPropsType) => {
   let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
+  let [postPhoto, setPostPhoto] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 
-  let currentAccount = props?.accounts ? props.accounts.find((account) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined)) : undefined;
+  let currentAccount = props?.accounts ? props.accounts.find((account: AccountType) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined)) : undefined;
   let oftenCheckOtherProfile = currentAccount?.data() && props?.id;
 
   const handleOpen = () => setOpen(true);
@@ -89,13 +95,13 @@ const ProfileContent = (props) => {
           exact
           path={`${profileConstant.path}/${props?.id}`}
           render={() => {
-            return <Posts {...props} handleOpen={handleOpen} handleClose={handleClose} oftenCheckOtherProfile={oftenCheckOtherProfile} params={params} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
+            return <Posts accounts={props.accounts} account={props.account} posts={props.posts} id={props.id} handleOpen={handleOpen} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
           }}
         />
 
         <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information {...props} currentAccount={currentAccount} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
 
-        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved {...props} openModalCurrentPost={openModalCurrentPost} currentAccount={currentAccount} setOpenModalCurrentPost={setOpenModalCurrentPost} />} /> : undefined}
+        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved account={props.account} posts={props.posts} id={props.id} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}

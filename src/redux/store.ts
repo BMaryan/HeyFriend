@@ -19,4 +19,7 @@ export type StateType = ReturnType<RootReducerType>;
 
 let store = createStore(rootReducer, applyMiddleware(thunk));
 
+// @ts-ignore
+window.store = store;
+
 export default store;

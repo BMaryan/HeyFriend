@@ -1,21 +1,25 @@
-import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { addDoc, collection, doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { ParticipantsOfChatType } from "./../types/types";
 import { ChatType, MessageType } from "../types/types";
+import { ThunkAction } from "redux-thunk";
+import { StateType } from "./store";
+import { db } from "../firebase";
 
-let SET_CHATS = "heyfriend/chatPage/SET_CHATS";
-let SET_MESSAGES = "heyfriend/chatPage/SET_MESSAGES";
+const SET_CHATS = "heyfriend/chatPage/SET_CHATS";
+const SET_MESSAGES = "heyfriend/chatPage/SET_MESSAGES";
 
-let initialState = { chats: [] as Array<ChatType>, messages: [] as Array<MessageType> };
+const initialState = { chats: [] as Array<ChatType>, messages: [] as Array<MessageType> };
 
 export type InitialStateType = typeof initialState;
+type ActionsType = SetChatsActionType | SetMessagesActionType;
 
-const ChatReducer = (state = initialState, action: any): InitialStateType => {
+const ChatReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
     case SET_CHATS: {
-      return { ...state, chats: action.chats };
+      return { ...state, chats: [...action.chats] };
     }
     case SET_MESSAGES: {
-      return { ...state, messages: action.messages };
+      return { ...state, messages: [...action.messages] };
     }
     default: {
       return state;
@@ -27,23 +31,36 @@ type SetChatsActionType = { type: typeof SET_CHATS; chats: Array<ChatType> };
 
 export const setChats = (chats: Array<ChatType>): SetChatsActionType => ({ type: SET_CHATS, chats });
 
-type SetMessagesActionType = { type: typeof SET_CHATS; messages: Array<MessageType> };
+type SetMessagesActionType = { type: typeof SET_MESSAGES; messages: Array<MessageType> };
 
 export const setMessages = (messages: Array<MessageType>): SetMessagesActionType => ({ type: SET_MESSAGES, messages });
 
 // thunk
-export const setChatsThunk = () => async (dispatch: any) => await onSnapshot(collection(db, "chats"), (snapshot: any) => dispatch(setChats(snapshot.docs)));
+export const setChatsThunk = (): ThunkAction<Promise<object>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "chats"), (snapshot) => dispatch(setChats(snapshot.docs)));
 
-export const setMessagesThunk = () => async (dispatch: any) => await onSnapshot(collection(db, "messages"), (snapshot: any) => dispatch(setMessages(snapshot.docs)));
+export const setMessagesThunk = (): ThunkAction<Promise<object>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "messages"), (snapshot) => dispatch(setMessages(snapshot.docs)));
 
-export const createChatThunk = (chat: ChatType) => async (dispatch: any) => {
-  let promise = await addDoc(collection(db, "chats"), chat);
+export const createChatThunk =
+  (participants: ParticipantsOfChatType): ThunkAction<Promise<object>, StateType, unknown, ActionsType> =>
+  async (dispatch) => {
+    let chat = await addDoc(collection(db, "chats"), participants);
 
-  await updateDoc(doc(db, "chats", promise.id), { ...chat, id: promise.id });
+    await updateDoc(doc(db, "chats", chat.id), { ...participants, id: chat.id });
 
-  return promise;
-};
+    return chat;
+  };
 
-export const addMessageThunk = (message: MessageType) => async (dispatch: any) => await addDoc(collection(db, "messages"), message);
+export const addMessageThunk =
+  (message: MessageType): ThunkAction<Promise<object>, StateType, unknown, ActionsType> =>
+  async (dispatch) =>
+    await addDoc(collection(db, "messages"), message);
+
+export const updateChatThunk =
+  (chat: ChatType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  async (dispatch) => {
+    let res = await getDoc(doc(db, "chats", chat.id));
+
+    await updateDoc(doc(db, "chats", chat.id), { ...chat, id: res.id });
+  };
 
 export default ChatReducer;
