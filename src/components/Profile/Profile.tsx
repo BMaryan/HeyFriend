@@ -4,7 +4,9 @@ import ProfileContent from "./ProfileContent/ProfileContent";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import styles from "./Profile.module.scss";
 
-interface ProfilePropsType extends ProfileContainerPropsType {}
+interface ProfilePropsType extends ProfileContainerPropsType {
+  id: string;
+}
 
 const Profile = (props: ProfilePropsType) => {
   return (

@@ -13,9 +13,7 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import Profile from "./Profile";
 
-type OwnPropsType = {
-  id: string;
-};
+type OwnPropsType = {};
 
 type MapStateToPropsType = {
   accounts: Array<AccountType>;
@@ -35,8 +33,8 @@ type MapDispatchToPropsType = {
 export type ProfileContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
 
 const ProfileContainer = (props: ProfileContainerPropsType) => {
+  let { id } = useParams<{ id: string }>();
   const history = useHistory();
-  let { id } = useParams<OwnPropsType>();
 
   React.useEffect(() => {
     if (id) {
@@ -49,18 +47,6 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
   return <Profile {...props} id={id} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => {
-  return {
-    accounts: getAccountsSelector(state),
-    account: getAccountSelector(state),
-    auth: setAuthSelector(state),
-    posts: setPostsSelector(state),
-    chats: getChatsSelector(state),
-  };
-};
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), posts: setPostsSelector(state), chats: getChatsSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, {
-  createPostThunk,
-  updateAccountThunk,
-  createChatThunk,
-})(ProfileContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { createPostThunk, updateAccountThunk, createChatThunk })(ProfileContainer);
