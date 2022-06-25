@@ -1,6 +1,7 @@
+import { User, UserInfo } from "firebase/auth";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
-// account
+//  account
 export interface FollowersOfAccountType {
   id: string;
 }
@@ -72,5 +73,31 @@ export interface CommentType extends QueryDocumentSnapshot<DocumentData> {
 }
 
 // auth
-// CredentialType also here
+export interface AuthType extends User, UserInfo {}
+
+export interface CredentialType {}
+
+// CredentialType
 // AuthError name check
+
+// react router dom
+export interface ParamsOfMatchType {
+  id: string;
+}
+
+export interface MatchType {
+  params: ParamsOfMatchType;
+  isExact: boolean;
+  path: string;
+  url: string;
+}
+
+export interface LocationType {
+  pathname: string;
+}
+
+export interface HistoryType {
+  location: LocationType;
+  push: (url: string) => void;
+  goBack: () => void;
+}
