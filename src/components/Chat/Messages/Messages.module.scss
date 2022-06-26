@@ -3,11 +3,11 @@
 .messages {
   height: 100%;
   @include position(relative);
+  overflow-y: scroll;
 }
 
 .messages_content {
-  height: 100%;
-  @include ds-position(unset, unset, column);
+  // height: 100%;
   padding: $pd-content;
-  // overflow-y: scroll;
+  @include ds-position(unset, unset, column);
 }
