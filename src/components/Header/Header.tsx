@@ -1,6 +1,6 @@
 import React from "react";
-import { mainConstant } from "../../core/constants/constants";
 import { AccountType, LocationType } from "../../types/types";
+import { mainConstant } from "../../core/constants/constants";
 import NavbarList from "./Navbar/NavbarList/NavbarList";
 import NavbarRow from "./Navbar/NavbarRow/NavbarRow";
 import Logo from "../../assets/images/insta.png";
@@ -9,14 +9,13 @@ import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 interface HeaderPropsType {
-  accounts: Array<AccountType>;
   account: AccountType | null;
   location: LocationType;
   signOut: any;
 }
 
 const Header = (props: HeaderPropsType) => {
-  // let [searchValue, setSearchValue] = React.useState('');
+  // const [searchValue, setSearchValue] = React.useState('');
 
   const onsubmit = (formData: { header_form: string }) => {
     // setSearchValue(formData.search);
@@ -45,7 +44,7 @@ const Header = (props: HeaderPropsType) => {
 
         {/* navBar list */}
         <div className={styles.navbar_list}>
-          <NavbarList accounts={props.accounts} account={props.account} signOut={props.signOut} />
+          <NavbarList account={props.account} signOut={props.signOut} />
         </div>
       </div>
     </div>

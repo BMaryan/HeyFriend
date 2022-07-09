@@ -2,9 +2,9 @@ import React from "react";
 import { profileConstant, editConstant } from "../../../../core/constants/constants";
 import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
+import { AccountType } from "../../../../types/types";
 import Settings from "@mui/icons-material/SettingsOutlined";
 import Person from "@mui/icons-material/PersonOutline";
-import { AccountType } from "../../../../types/types";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import commonStyles from "../Navbar.module.scss";
 import Logout from "@mui/icons-material/Logout";
@@ -16,7 +16,6 @@ import Menu from "@mui/material/Menu";
 import Chip from "@mui/material/Chip";
 
 interface NavbarListPropsType {
-  accounts: Array<AccountType>;
   account: AccountType | null;
   signOut: any;
 }

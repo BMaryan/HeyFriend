@@ -7,7 +7,7 @@ import styles from "./Header.module.scss";
 interface HeaderFormPropsType {}
 
 const HeaderForm = (props: HeaderFormPropsType) => {
-  let [toggleField, steToggleField] = React.useState(false);
+  const [toggleField, steToggleField] = React.useState(false);
 
   return (
     <form className={styles.form}>
