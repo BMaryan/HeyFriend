@@ -1,19 +1,17 @@
-import { authFb } from "../functionsFb/functionsFb";
-import { doc, setDoc } from "firebase/firestore";
+import { InferActionsType, StateType } from "./store";
+import { authAPI } from "../api/auth-api";
 import { ThunkAction } from "redux-thunk";
-import { StateType } from "./store";
-import { db } from "../firebase";
 
-const SET_AUTH = "heyfriend/auth/SET_AUTH";
-const AUTH_SUCCESS = "heyfriend/auth/AUTH_SUCCESS";
-const AUTH_LOADING = "heyfriend/auth/AUTH_LOADING";
-const AUTH_ERROR = "heyfriend/auth/AUTH_ERROR";
+const SET_AUTH = "heyfriend/authPage/SET_AUTH";
+const AUTH_SUCCESS = "heyfriend/authPage/AUTH_SUCCESS";
+const AUTH_LOADING = "heyfriend/authPage/AUTH_LOADING";
+const AUTH_ERROR = "heyfriend/authPage/AUTH_ERROR";
 
 // * fix: auth - object
 const initialState = { auth: null as object | null, authError: null as string | null, loading: false };
 
 export type InitialStateType = typeof initialState;
-type ActionsType = SetAuthActionType | AuthSuccessActionType | AuthLoadingActionType | AuthErrorActionType;
+type ActionsType = InferActionsType<typeof authActions>;
 
 const AuthReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
@@ -35,63 +33,52 @@ const AuthReducer = (state = initialState, action: ActionsType): InitialStateTyp
   }
 };
 
-// fix: credentials, add type error and credentials
-type SetAuthActionType = { type: typeof SET_AUTH; credentials: object | null };
+// actions
+export const authActions = {
+  setAuth: (credentials: object | null) => ({ type: SET_AUTH, credentials } as const),
+  authSuccess: () => ({ type: AUTH_SUCCESS } as const),
+  authLoading: (loading: boolean) => ({ type: AUTH_LOADING, loading } as const),
+  authError: (error: { message: string }) => ({ type: AUTH_ERROR, error } as const),
+};
 
-export const setAuth = (credentials: object | null): SetAuthActionType => ({ type: SET_AUTH, credentials });
-
-type AuthSuccessActionType = { type: typeof AUTH_SUCCESS };
-
-export const authSuccess = (): AuthSuccessActionType => ({ type: AUTH_SUCCESS });
-
-type AuthLoadingActionType = { type: typeof AUTH_LOADING; loading: boolean };
-
-export const authLoading = (loading: boolean): AuthLoadingActionType => ({ type: AUTH_LOADING, loading });
-
-type AuthErrorActionType = { type: typeof AUTH_ERROR; error: { message: string } };
-
-export const authError = (error: { message: string }): AuthErrorActionType => ({ type: AUTH_ERROR, error });
-
-// thunks
+// thunks as const
 export const signUp =
   (credentials: any): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) => {
-    dispatch(authLoading(true));
+    dispatch(authActions.authLoading(true));
 
     try {
-      const user = await authFb.signUp({ email: credentials.email, password: credentials.password });
+      await authAPI.signUp({ name: credentials.name, surname: credentials.surname, email: credentials.email, password: credentials.password });
 
-      await setDoc(doc(db, "accounts", user.user.uid), { name: credentials.name, surname: credentials.surname, email: user.user.email, id: user.user.uid });
-
-      dispatch(authSuccess());
+      dispatch(authActions.authSuccess());
     } catch (error: any) {
-      dispatch(authError(error));
+      dispatch(authActions.authError(error));
     }
 
-    dispatch(authLoading(false));
+    dispatch(authActions.authLoading(false));
   };
 
 // fix: error - any
 export const signIn =
   (credentials: any): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) => {
-    dispatch(authLoading(true));
+    dispatch(authActions.authLoading(true));
 
     try {
-      await authFb.signIn({ email: credentials.email, password: credentials.password });
+      await authAPI.signIn({ email: credentials.email, password: credentials.password });
 
-      dispatch(authSuccess());
+      dispatch(authActions.authSuccess());
     } catch (error: any) {
-      dispatch(authError(error));
+      dispatch(authActions.authError(error));
     }
 
-    dispatch(authLoading(false));
+    dispatch(authActions.authLoading(false));
   };
 
 export const signOut = (): ThunkAction<Promise<void>, StateType, unknown, ActionsType> => async (dispatch) => {
-  await authFb.signOut();
+  await authAPI.signOut();
 
-  dispatch(authSuccess());
+  dispatch(authActions.authSuccess());
 };
 
 export default AuthReducer;

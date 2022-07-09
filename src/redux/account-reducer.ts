@@ -1,17 +1,18 @@
-import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
-import { AccountType } from "../types/types";
+import { collection, DocumentData, onSnapshot } from "firebase/firestore";
+import { AccountType, FirebaseType } from "../types/types";
+import { InferActionsType, StateType } from "./store";
+import { accountAPI } from "../api/account-api";
 import { ThunkAction } from "redux-thunk";
-import { StateType } from "./store";
 import { db } from "../firebase";
 
 const SET_ACCOUNTS = "heyfriend/accountPage/SET_ACCOUNTS";
 const SET_ACCOUNT = "heyfriend/accountPage/SET_ACCOUNT";
 const UPDATE_ACCOUNT = "heyfriend/accountPage/UPDATE_ACCOUNT";
 
-const initialState = { accounts: [] as Array<AccountType>, account: null as AccountType | null };
+const initialState = { accounts: [] as Array<FirebaseType<AccountType>>, account: null as AccountType | null };
 
 export type InitialStateType = typeof initialState;
-type ActionsType = SetAccountsActionType | SetAccountActionType | UpdateAccountActionType;
+type ActionsType = InferActionsType<typeof accountActions>;
 
 const AccountReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
@@ -30,40 +31,33 @@ const AccountReducer = (state = initialState, action: ActionsType): InitialState
   }
 };
 
-type SetAccountsActionType = { type: typeof SET_ACCOUNTS; accounts: Array<AccountType> };
-
-export const setAccounts = (accounts: Array<AccountType>): SetAccountsActionType => ({ type: SET_ACCOUNTS, accounts });
-
-type SetAccountActionType = { type: typeof SET_ACCOUNT; account: AccountType };
-
-export const setAccount = (account: AccountType): SetAccountActionType => ({ type: SET_ACCOUNT, account });
-
-type UpdateAccountActionType = { type: typeof UPDATE_ACCOUNT; account: AccountType };
-
-export const updateAccount = (account: AccountType): UpdateAccountActionType => ({ type: UPDATE_ACCOUNT, account });
+// actions
+export const accountActions = {
+  setAccounts: (accounts: Array<FirebaseType<AccountType>>) => ({ type: SET_ACCOUNTS, accounts } as const),
+  setAccount: (account: AccountType | null) => ({ type: SET_ACCOUNT, account } as const),
+  updateAccount: (account: AccountType) => ({ type: UPDATE_ACCOUNT, account } as const),
+};
 
 // thunks
-export const setAccountsThunk = (): ThunkAction<Promise<object>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(setAccounts(snapshot.docs)));
+export const setAccountsThunk = (): ThunkAction<Promise<DocumentData<AccountType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(accountActions.setAccounts(snapshot.docs)));
 
 export const setAccountThunk =
   (user: { uid: string }): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) => {
-    const resp = await getDoc(doc(db, "accounts", user.uid));
+    const resp = await accountAPI.setAccount(user);
 
     if (resp.exists()) {
-      dispatch(setAccount({ ...resp.data(), id: user.uid } as AccountType));
+      dispatch(accountActions.setAccount({ ...resp.data(), id: user.uid } as AccountType));
     }
   };
 
 export const updateAccountThunk =
   (account: AccountType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch, getState) => {
-    const docRef = await doc(db, "accounts", account.id);
-
-    await setDoc(docRef, account);
+    await accountAPI.updateAccount(account);
 
     if (getState()?.accountPage?.account?.id === account.id) {
-      dispatch(updateAccount(account));
+      dispatch(accountActions.updateAccount(account));
     }
   };
 

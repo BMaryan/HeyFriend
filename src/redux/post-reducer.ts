@@ -1,16 +1,17 @@
-import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { CommentType, PostType } from "../types/types";
+import { collection, DocumentData, onSnapshot } from "firebase/firestore";
+import { CommentType, FirebaseType, PostType } from "../types/types";
+import { InferActionsType, StateType } from "./store";
+import { postAPI } from "../api/post-api";
 import { ThunkAction } from "redux-thunk";
-import { StateType } from "./store";
 import { db } from "../firebase";
 
 const SET_POSTS = "heyfriend/postPage/SET_POSTS";
 const SET_COMMENTS = "heyfriend/postPage/SET_COMMENTS";
 
-const initialState = { posts: [] as Array<PostType>, comments: [] as Array<CommentType> };
+const initialState = { posts: [] as Array<FirebaseType<PostType>>, comments: [] as Array<FirebaseType<CommentType>> };
 
 export type InitialStateType = typeof initialState;
-type ActionsType = SetPostsActionType | SetCommentsActionType;
+type ActionsType = InferActionsType<typeof postActions>;
 
 const PostPage = (state = initialState, action: ActionsType) => {
   switch (action.type) {
@@ -26,53 +27,45 @@ const PostPage = (state = initialState, action: ActionsType) => {
   }
 };
 
-type SetPostsActionType = { type: typeof SET_POSTS; posts: Array<PostType> };
-
-export const setPosts = (posts: Array<PostType>): SetPostsActionType => ({ type: SET_POSTS, posts });
-
-type SetCommentsActionType = { type: typeof SET_COMMENTS; comments: Array<CommentType> };
-
-export const setComments = (comments: Array<CommentType>): SetCommentsActionType => ({ type: SET_COMMENTS, comments });
+// actions
+export const postActions = {
+  setPosts: (posts: Array<FirebaseType<PostType>>) => ({ type: SET_POSTS, posts } as const),
+  setComments: (comments: Array<FirebaseType<CommentType>>) => ({ type: SET_COMMENTS, comments } as const),
+};
 
 // thunk
-export const setPostsThunk = (): ThunkAction<Promise<object>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "posts"), (snapshot) => dispatch(setPosts(snapshot.docs)));
+export const setPostsThunk = (): ThunkAction<Promise<DocumentData<PostType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "posts"), (snapshot) => dispatch(postActions.setPosts(snapshot.docs)));
 
-export const setCommentsThunk = (): ThunkAction<Promise<object>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "comments"), (snapshot) => dispatch(setComments(snapshot.docs)));
+export const setCommentsThunk = (): ThunkAction<Promise<DocumentData<CommentType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "comments"), (snapshot) => dispatch(postActions.setComments(snapshot.docs)));
 
 export const createPostThunk =
   (post: PostType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
-  async (dispatch) => {
-    let res = await addDoc(collection(db, "posts"), { ...post });
-
-    await updateDoc(doc(db, "posts", res.id), { ...post, id: res.id });
-  };
+  async (dispatch) =>
+    postAPI.createPost(post);
 
 export const createCommentThunk =
   (comment: CommentType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
-  async (dispatch) => {
-    let res = await addDoc(collection(db, "comments"), { ...comment });
-
-    await updateDoc(doc(db, "comments", res.id), { ...comment, id: res.id });
-  };
+  async (dispatch) =>
+    postAPI.createComment(comment);
 
 export const updatePostThunk =
   (post: PostType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
-    await updateDoc(doc(db, "posts", post.id), { ...post });
+    postAPI.updatePost(post);
 
 export const updateCommentThunk =
   (comment: CommentType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
-    await updateDoc(doc(db, "comments", comment.id), { ...comment });
+    postAPI.updateComment(comment);
 
 export const deletePostThunk =
   (post: PostType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
-    await deleteDoc(doc(db, "posts", post.id));
+    postAPI.deletePost(post);
 
 export const deleteCommentThunk =
   (comment: CommentType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
-    await deleteDoc(doc(db, "comments", comment.id));
+    postAPI.deleteComment(comment);
 
 export default PostPage;
