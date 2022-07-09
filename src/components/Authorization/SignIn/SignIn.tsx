@@ -9,9 +9,8 @@ import styles from "./SignIn.module.scss";
 import Media from "react-media";
 
 interface SignInPropsType {
-  accounts: Array<AccountType>;
   account: AccountType | null;
-  authSuccess: boolean;
+  authSuccess: () => void;
   authError: string | null;
   loading: boolean;
   signIn: any;

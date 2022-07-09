@@ -18,9 +18,7 @@ const SignInForm = (props: InjectedFormProps<SignInFormDataType, SignInFormProps
       <WrapperCreateField name="password" type="password" label="Password" helperText="" placeholder="" validate={[validatePassword, required]} component={InputField} />
 
       <div className={styles.wrapper_buttons}>
-        <div>
-          <WrapperButton authError={props.authError} loading={props.loading} button_text="Sign In" invalid={props.invalid} submitting={props.submitting} anyTouched={props.anyTouched} dirty={props.dirty} />
-        </div>
+        <WrapperButton authError={props.authError} loading={props.loading} button_text="Sign In" invalid={props.invalid} submitting={props.submitting} anyTouched={props.anyTouched} dirty={props.dirty} />
       </div>
     </form>
   );

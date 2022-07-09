@@ -1,7 +1,7 @@
 import React from "react";
-import { getAccountsSelector, getAccountSelector } from "../../../redux/account-selectors";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
-import { authSuccess, signIn } from "../../../redux/auth-reducer";
+import { getAccountSelector } from "../../../redux/account-selectors";
+import { authActions, signIn } from "../../../redux/auth-reducer";
 import { onAuthStateChanged } from "firebase/auth";
 import { AccountType } from "../../../types/types";
 import { StateType } from "../../../redux/store";
@@ -13,7 +13,6 @@ import SignIn from "./SignIn";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
-  accounts: Array<AccountType>;
   account: AccountType | null;
   authError: string | null;
   loading: boolean;
@@ -21,7 +20,7 @@ type MapStateToPropsType = {
 
 type MapDispatchToPropsType = {
   signIn: any;
-  authSuccess: any;
+  authSuccess: () => void;
 };
 
 export type SignInContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
@@ -40,6 +39,6 @@ const SignInContainer = (props: SignInContainerPropsType) => {
   return <SignIn {...props} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), authError: authErrorSelector(state), loading: authLoadingSelector(state) });
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ account: getAccountSelector(state), authError: authErrorSelector(state), loading: authLoadingSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { signIn, authSuccess })(SignInContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { signIn, authSuccess: authActions.authSuccess })(SignInContainer);
