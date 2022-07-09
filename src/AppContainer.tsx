@@ -1,7 +1,7 @@
 import React from "react";
-import { AccountType, ChatType, CommentType, MessageType, PostType } from "./types/types";
+import { AccountType, ChatType, CommentType, FirebaseType, MessageType, ParamsOfMatchType, PostType } from "./types/types";
+import { accountActions, setAccountsThunk, setAccountThunk } from "./redux/account-reducer";
 import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
-import { setAccount, setAccountsThunk, setAccountThunk } from "./redux/account-reducer";
 import { getAccountSelector, getAccountsSelector } from "./redux/account-selectors";
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
 import { getCommentsSelector, setPostsSelector } from "./redux/post-selectors";
@@ -10,7 +10,7 @@ import { setChatsThunk, setMessagesThunk } from "./redux/chat-reducer";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setAuthSelector } from "./redux/auth-selectors";
 import { onAuthStateChanged } from "firebase/auth";
-import { setAuth } from "./redux/auth-reducer";
+import { authActions } from "./redux/auth-reducer";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { StateType } from "./redux/store";
@@ -18,24 +18,22 @@ import { connect } from "react-redux";
 import { auth } from "./firebase";
 import App from "./App";
 
-type OwnPropsType = {
-  id: string;
-};
+type OwnPropsType = {};
 
 type MapStateToPropsType = {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   auth: object | null;
-  posts: Array<PostType>;
-  comments: Array<CommentType>;
-  chats: Array<ChatType>;
-  messages: Array<MessageType>;
+  posts: Array<FirebaseType<PostType>>;
+  comments: Array<FirebaseType<CommentType>>;
+  chats: Array<FirebaseType<ChatType>>;
+  messages: Array<FirebaseType<MessageType>>;
 };
 
 // fix
 type MapDispatchToPropsType = {
-  setAuth: any;
-  setAccount: any;
+  setAuth: (credentials: object | null) => void;
+  setAccount: (account: AccountType | null) => void;
   setAccountsThunk: any;
   setAccountThunk: any;
   setPostsThunk: any;
@@ -47,7 +45,7 @@ type MapDispatchToPropsType = {
 export type AppContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
 
 const AppContainer = (props: AppContainerPropsType) => {
-  const { id } = useParams<OwnPropsType>();
+  const { id } = useParams<ParamsOfMatchType>();
   const history = useHistory();
 
   // set account to redux and redirect if you aren't auth
@@ -137,4 +135,4 @@ const AppContainer = (props: AppContainerPropsType) => {
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), posts: setPostsSelector(state), comments: getCommentsSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setAuth, setAccount, setAccountsThunk, setAccountThunk, setPostsThunk, setChatsThunk, setMessagesThunk, setCommentsThunk })(AppContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setAuth: authActions.setAuth, setAccount: accountActions.setAccount, setAccountsThunk, setAccountThunk, setPostsThunk, setChatsThunk, setMessagesThunk, setCommentsThunk })(AppContainer);

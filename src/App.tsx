@@ -24,8 +24,8 @@ type AppPropsType = {
 };
 
 function App(props: AppPropsType) {
-  let checkSignIn = props.history.location.pathname.includes(signInConstant.path);
-  let checkSignUp = props.history.location.pathname.includes(signUpConstant.path);
+  const checkSignIn = props.history.location.pathname.includes(signInConstant.path);
+  const checkSignUp = props.history.location.pathname.includes(signUpConstant.path);
 
   return (
     <div className="App">
