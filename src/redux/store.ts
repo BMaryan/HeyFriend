@@ -6,7 +6,7 @@ import ChatReducer from "./chat-reducer";
 import PostPage from "./post-reducer";
 import thunk from "redux-thunk";
 
-let rootReducer = combineReducers({
+const rootReducer = combineReducers({
   accountPage: AccountReducer,
   chatPage: ChatReducer,
   postPage: PostPage,
@@ -17,7 +17,10 @@ let rootReducer = combineReducers({
 type RootReducerType = typeof rootReducer;
 export type StateType = ReturnType<RootReducerType>;
 
-let store = createStore(rootReducer, applyMiddleware(thunk));
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never;
+export type InferActionsType<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>;
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // @ts-ignore
 window.store = store;
