@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, ChatType, MessageType, ParticipantsOfChatType } from "../../../../types/types";
+import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType } from "../../../../types/types";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { chatConstant } from "../../../../core/constants/constants";
@@ -13,20 +13,20 @@ import styles from "./Dialog.module.scss";
 import Avatar from "@mui/material/Avatar";
 
 interface DialogPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  chat: ChatType;
-  messages: Array<MessageType>;
+  chat: FirebaseType<ChatType>;
+  messages: Array<FirebaseType<MessageType>>;
 }
 
 const Dialog = (props: DialogPropsType) => {
-  const messageWithAccount: AccountType | undefined = props?.accounts ? props?.accounts?.find((account: AccountType) => (props?.chat?.data()?.participants?.length > 0 ? props?.chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => account?.id === participants?.id && account?.id !== props?.account?.id) : undefined)) : undefined;
-  const currentMessages: Array<MessageType> = props?.messages?.length > 0 ? props?.messages?.sort((a: MessageType, b: MessageType) => a?.data()?.date.toDate() - b?.data()?.date.toDate())?.filter((message: MessageType) => (message?.data() ? (message?.data()?.chatId === props?.chat?.id ? message : []) : [])) : [];
+  const messageWithAccount: FirebaseType<AccountType> | undefined = props?.accounts ? props?.accounts?.find((account: FirebaseType<AccountType>) => (props?.chat?.data()?.participants ? props?.chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => account?.id === participants?.id && account?.id !== props?.account?.id) : undefined)) : undefined;
+  const currentMessages: Array<FirebaseType<MessageType>> = props?.messages?.length > 0 ? props?.messages?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime())?.filter((message: FirebaseType<MessageType>) => (message?.data() ? (message?.data()?.chatId === props?.chat?.id ? message : []) : [])) : [];
 
   return (
     <>
       {props?.chat?.data()?.participants
-        ? props?.chat?.data()?.participants.map((item: ParticipantsOfChatType) =>
+        ? props?.chat?.data()?.participants?.map((item: ParticipantsOfChatType) =>
             item?.id === props?.account?.id ? (
               <NavLink key={item.id} to={messageWithAccount?.data() ? `${chatConstant.path}/` + props?.chat?.data()?.id : ""} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
                 <ListItem key={item.id} alignItems="flex-start">
@@ -39,15 +39,15 @@ const Dialog = (props: DialogPropsType) => {
                         <Typography sx={{ display: "inline" }} component="span" variant="body1" color="text.primary">
                           {messageWithAccount?.data() ? messageWithAccount?.data()?.surname + " " + messageWithAccount?.data()?.name : undefined}
                         </Typography>
-                        {/* <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
+                        <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
                           {currentMessages?.length > 0 ? currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate().toDateString() : undefined}
-                        </Typography> */}
+                        </Typography>
                       </Typography>
                     }
                     secondary={
                       <React.Fragment>
                         <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
-                          {currentMessages?.length > 0 ? currentMessages[currentMessages?.length - 1]?.data()?.message.length < 20 ? currentMessages[currentMessages?.length - 1]?.data()?.message : currentMessages[currentMessages?.length - 1]?.data()?.message.slice(0, 20) + "..." : <>Send a message</>}
+                          {currentMessages?.length > 0 ? currentMessages[currentMessages?.length - 1]?.data()?.message?.length < 20 ? currentMessages[currentMessages?.length - 1]?.data()?.message : currentMessages[currentMessages?.length - 1]?.data()?.message?.slice(0, 20) + "..." : <>Send a message</>}
                         </Typography>
                       </React.Fragment>
                     }

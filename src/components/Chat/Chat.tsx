@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, ChatType, MessageType, ParticipantsOfChatType } from "../../types/types";
+import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType } from "../../types/types";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,10 +11,10 @@ import Dialogs from "./Dialogs/Dialogs";
 import styles from "./Chat.module.scss";
 
 interface ChatPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  chats: Array<ChatType>;
-  messages: Array<MessageType>;
+  chats: Array<FirebaseType<ChatType>>;
+  messages: Array<FirebaseType<MessageType>>;
   id: string;
   addMessageThunk: any;
 }
@@ -39,10 +39,10 @@ const DefaultViewMessages = (props: DefaultViewMessagesPropsType) => {
 const Chat = (props: ChatPropsType) => {
   const [toggleDetails, setToggleDetails] = React.useState(true);
 
-  const currentChat: ChatType | undefined = props.id ? props?.chats?.find((chat: ChatType) => chat?.id === props.id) : undefined;
-  const chatWithAccount: AccountType | undefined = props?.accounts?.find((account: AccountType) => (currentChat?.data()?.participants?.length > 0 ? currentChat?.data()?.participants?.find((participant: ParticipantsOfChatType) => (account?.id === participant?.id && account?.id !== props?.account?.id ? account : undefined)) : undefined));
+  const currentChat: FirebaseType<ChatType> | undefined = props.id ? props?.chats?.find((chat: ChatType) => chat?.id === props.id) : undefined;
+  const chatWithAccount: FirebaseType<AccountType> | undefined = props?.accounts?.find((account: FirebaseType<AccountType>) => (currentChat?.data()?.participants ? currentChat?.data()?.participants?.find((participant: ParticipantsOfChatType) => (account?.id === participant?.id && account?.id !== props?.account?.id ? account : undefined)) : undefined));
 
-  let onSubmit = (formData: { send_message: string }) => {
+  const onSubmit = (formData: { send_message: string }) => {
     props.addMessageThunk({
       id: props?.account?.id,
       chatId: currentChat?.id,

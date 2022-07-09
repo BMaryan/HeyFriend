@@ -1,15 +1,15 @@
 import React from "react";
-import { AccountType, ChatType, MessageType } from "../../../types/types";
+import { AccountType, ChatType, FirebaseType, MessageType } from "../../../types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Dialogs.module.scss";
 import Dialog from "./Dialog/Dialog";
 
 interface DialogsPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  chats: Array<ChatType>;
-  messages: Array<MessageType>;
+  chats: Array<FirebaseType<ChatType>>;
+  messages: Array<FirebaseType<MessageType>>;
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -21,7 +21,7 @@ const Dialogs = (props: DialogsPropsType) => {
       </div>
       <div className={styles.chats}>
         {props?.chats?.length > 0 ? (
-          props?.chats.map((chat: ChatType) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} />)
+          props?.chats.map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} />)
         ) : (
           <div className={styles.chats_wrapper_text}>
             <div className={styles.chats_wrapper_title}>Work in progress</div>

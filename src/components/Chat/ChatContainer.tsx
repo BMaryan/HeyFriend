@@ -1,7 +1,7 @@
 import React from "react";
+import { AccountType, ChatType, FirebaseType, MessageType, ParamsOfMatchType } from "../../types/types";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { getChatsSelector, getMessagesSelector } from "../../redux/chat-selectors";
-import { AccountType, ChatType, MessageType, ParamsOfMatchType } from "../../types/types";
 import { addMessageThunk } from "../../redux/chat-reducer";
 import { StateType } from "../../redux/store";
 import { useParams } from "react-router-dom";
@@ -11,10 +11,10 @@ import Chat from "./Chat";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  chats: Array<ChatType>;
-  messages: Array<MessageType>;
+  chats: Array<FirebaseType<ChatType>>;
+  messages: Array<FirebaseType<MessageType>>;
 };
 
 type MapDispatchToPropsType = {

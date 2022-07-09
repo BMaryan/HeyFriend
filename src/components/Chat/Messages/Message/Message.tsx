@@ -1,14 +1,14 @@
 import React from "react";
-import { AccountType, ChatType, MessageType } from "../../../../types/types";
+import { AccountType, FirebaseType, MessageType } from "../../../../types/types";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../../core/constants/constants";
 import { NavLink } from "react-router-dom";
 import styles from "./Message.module.scss";
 
 interface MessagePropsType {
-  message: MessageType;
+  message: FirebaseType<MessageType>;
   account: AccountType | null;
-  chatWithAccount: ChatType | undefined;
+  chatWithAccount: FirebaseType<AccountType> | undefined;
 }
 
 const Message = (props: MessagePropsType) => {
