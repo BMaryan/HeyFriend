@@ -1,4 +1,5 @@
 import React from "react";
+import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType, PostType } from "../../types/types";
 import { defaultPostConstant } from "../../core/constants/constantsPost";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -9,24 +10,23 @@ import Divider from "@mui/material/Divider";
 import { NavLink } from "react-router-dom";
 import styles from "./Main.module.scss";
 import Chip from "@mui/material/Chip";
-import { AccountType, FollowersOfAccountType, FollowingOfAccountType, PostType } from "../../types/types";
 
 interface MainPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  posts: Array<PostType>;
+  posts: Array<FirebaseType<PostType>>;
 }
 
 const Main = (props: MainPropsType) => {
-  const followedAccountPosts: Array<PostType> = props?.account?.following ? props?.account?.following?.map((item: FollowingOfAccountType) => (props?.posts && item ? props?.posts?.filter((post: PostType) => (post?.data()?.accountId === item?.id ? post : [])) : [])).flat() : [];
+  const followedAccountPosts: Array<FirebaseType<PostType>> = props?.account?.following ? props?.account?.following?.map((item: FollowingOfAccountType) => (props?.posts && item ? props?.posts?.filter((post: FirebaseType<PostType>) => post?.data()?.accountId === item?.id) : [])).flat() : [];
   const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
-  const recommendation: Array<AccountType> = props?.accounts ? props?.accounts?.filter((account: AccountType) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
+  const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        {followedAccountPosts?.length !== 0 ? followedAccountPosts.sort((a: PostType, b: PostType) => b?.data()?.dateCreated?.toDate() - a?.data()?.dateCreated?.toDate())?.map((post: PostType) => <PostContainer key={post.id} modal={false} post={post?.data()} kindOfPost={defaultPostConstant} />) : undefined}
+        {followedAccountPosts?.length !== 0 ? followedAccountPosts.sort((a: FirebaseType<PostType>, b: FirebaseType<PostType>) => b?.data()?.dateCreated?.toDate().getTime() - a?.data()?.dateCreated?.toDate().getTime())?.map((post: FirebaseType<PostType>) => <PostContainer key={post.id} modal={false} post={post} kindOfPost={defaultPostConstant} />) : undefined}
 
         {/* default content */}
         {(followedAccountPosts && followedAccountPosts?.length === 0) || !followedAccountPosts ? (
@@ -67,19 +67,19 @@ const Main = (props: MainPropsType) => {
           </Divider>
 
           {recommendation
-            ? recommendation.slice(-5).map((account: AccountType) =>
-                account?.data()?.following?.length > 0 ? (
+            ? recommendation.slice(-5).map((account: FirebaseType<AccountType>) =>
+                account?.data()?.following ? (
                   account?.data()?.following?.map((followedAccount: FollowingOfAccountType) =>
                     followedAccount?.id !== props?.account?.id ? (
                       <div key={followedAccount?.id} className={styles.wrapper_contact}>
                         <div className={styles.wrapper_contact_info}>
                           <NavLink className={styles.wrapper_contact_info_avatar} to={`${profileConstant.path}/${followedAccount?.id}`}>
-                            <img className={styles.avatar + " " + styles.avatar__medium} src={props.accounts.find((account) => account.id === followedAccount.id)?.data()?.avatar || defaultAvatar} alt="" />
+                            <img className={styles.avatar + " " + styles.avatar__medium} src={props.accounts.find((account: FirebaseType<AccountType>) => account.id === followedAccount.id)?.data()?.avatar || defaultAvatar} alt="" />
                           </NavLink>
 
                           <div className={styles.wrapper_contact_info_detail}>
                             <NavLink className={styles.fullName} to={`${profileConstant.path}/${account?.id}`}>
-                              {props.accounts.find((account) => account.id === followedAccount.id)?.data()?.surname + " " + props.accounts.find((account) => account.id === followedAccount.id)?.data()?.name}
+                              {props.accounts.find((account: FirebaseType<AccountType>) => account.id === followedAccount.id)?.data()?.surname + " " + props.accounts.find((account: FirebaseType<AccountType>) => account?.id === followedAccount?.id)?.data()?.name}
                             </NavLink>
 
                             <AvatarGroup className={styles.avatar_group} max={3}>

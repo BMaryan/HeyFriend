@@ -1,7 +1,7 @@
 import React from "react";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
+import { AccountType, FirebaseType, PostType } from "../../types/types";
 import { setPostsSelector } from "../../redux/post-selectors";
-import { AccountType, PostType } from "../../types/types";
 import { StateType } from "../../redux/store";
 import { connect } from "react-redux";
 import Main from "./Main";
@@ -9,9 +9,9 @@ import Main from "./Main";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  posts: Array<PostType>;
+  posts: Array<FirebaseType<PostType>>;
 };
 
 type MapDispatchToPropsType = {};
