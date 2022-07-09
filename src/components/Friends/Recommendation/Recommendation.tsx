@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FollowersOfAccountType, FollowingOfAccountType } from "../../../types/types";
+import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType } from "../../../types/types";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
 import CardContent from "@mui/material/CardContent";
@@ -11,19 +11,19 @@ import { NavLink } from "react-router-dom";
 import Card from "@mui/material/Card";
 
 interface RecommendationPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
 }
 
 const Recommendation = (props: RecommendationPropsType) => {
   const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
-  const recommendation: Array<AccountType> = props?.accounts ? props?.accounts?.filter((account: AccountType) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
+  const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
   return (
     <React.Fragment>
       <div className={styles.content}>
-        {recommendation?.map(
-          (recommendationAccount: AccountType) =>
+        {props.accounts?.map(
+          (recommendationAccount: FirebaseType<AccountType>) =>
             props?.account?.id !== recommendationAccount?.id && (
               <Card key={recommendationAccount.id} className={styles.card}>
                 <CardActionArea className={styles.head}>
@@ -41,7 +41,7 @@ const Recommendation = (props: RecommendationPropsType) => {
         )}
       </div>
 
-      {recommendation.length < 1 || !recommendation ? (
+      {props.accounts.length < 1 || !props.accounts ? (
         <div className={styles.content_default}>
           <div className={styles.title}>Recommendation</div>
           <div className={styles.subtitle}>Here are the people you may know</div>

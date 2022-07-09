@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FollowingOfAccountType } from "../../../types/types";
+import { AccountType, FirebaseType, FollowingOfAccountType } from "../../../types/types";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
 import CardContent from "@mui/material/CardContent";
@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import Card from "@mui/material/Card";
 
 interface FollowingPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
 }
 
@@ -22,7 +22,7 @@ const Following = (props: FollowingPropsType) => {
     <React.Fragment>
       <div className={styles.content}>
         {props?.accounts
-          ? props?.accounts?.map((account: AccountType) =>
+          ? props?.accounts?.map((account: FirebaseType<AccountType>) =>
               props?.account?.following
                 ? props?.account?.following.map(
                     (following: FollowingOfAccountType) =>

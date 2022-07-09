@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FollowersOfAccountType } from "../../../types/types";
+import { AccountType, FirebaseType, FollowersOfAccountType } from "../../../types/types";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
 import CardContent from "@mui/material/CardContent";
@@ -11,18 +11,18 @@ import { NavLink } from "react-router-dom";
 import Card from "@mui/material/Card";
 
 interface FollowersPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
 }
 
 const Followers = (props: FollowersPropsType) => {
-  let checkFollowerAccount: Array<FollowersOfAccountType> = props?.account?.followers ? props?.account?.followers?.map((followersItem: FollowersOfAccountType) => followersItem) : [];
+  const checkFollowerAccount: Array<FollowersOfAccountType> = props?.account?.followers ? props?.account?.followers?.map((followersItem: FollowersOfAccountType) => followersItem) : [];
 
   return (
     <React.Fragment>
       <div className={styles.content}>
         {props?.accounts
-          ? props?.accounts?.map((account: AccountType) =>
+          ? props?.accounts?.map((account: FirebaseType<AccountType>) =>
               props?.account?.followers
                 ? props?.account?.followers.map(
                     (followersItem: FollowersOfAccountType) =>
