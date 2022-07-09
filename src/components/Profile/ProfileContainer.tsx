@@ -1,6 +1,6 @@
 import React from "react";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
-import { AccountType, ChatType, PostType } from "../../types/types";
+import { AccountType, ChatType, FirebaseType, PostType } from "../../types/types";
 import { updateAccountThunk } from "../../redux/account-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
 import { getChatsSelector } from "../../redux/chat-selectors";
@@ -16,11 +16,11 @@ import Profile from "./Profile";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   auth: object | null;
-  posts: Array<PostType>;
-  chats: Array<ChatType>;
+  posts: Array<FirebaseType<PostType>>;
+  chats: Array<FirebaseType<ChatType>>;
 };
 
 // fix
@@ -33,18 +33,18 @@ type MapDispatchToPropsType = {
 export type ProfileContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
 
 const ProfileContainer = (props: ProfileContainerPropsType) => {
-  let { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
   const history = useHistory();
 
   React.useEffect(() => {
     if (id) {
-      let isCorrentId = props.accounts.find((account: AccountType) => account?.id === id || undefined);
+      const isCorrentId = props.accounts.find((account: FirebaseType<AccountType>) => account?.id === id || undefined);
 
       if (!isCorrentId) history.push("/not-found");
     }
   }, [id]);
 
-  return <Profile {...props} id={id} />;
+  return <Profile {...props} id={id} history={history} />;
 };
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), posts: setPostsSelector(state), chats: getChatsSelector(state) });

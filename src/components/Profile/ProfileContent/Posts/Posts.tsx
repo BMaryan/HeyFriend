@@ -1,24 +1,22 @@
 import React from "react";
 import { ReturnImageList, ToggleShowCurrentPostContainer } from "../../../../utils/helperForProfile/helperForProfile";
-import { AccountType, PostType } from "../../../../types/types";
-import { useHistory } from "react-router-dom";
+import { AccountType, FirebaseType, HistoryType, PostType } from "../../../../types/types";
 import styles from "./Posts.module.scss";
 
 interface PostsPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  posts: Array<PostType>;
+  posts: Array<FirebaseType<PostType>>;
   id: string;
+  history: HistoryType;
   openModalCurrentPost: boolean;
-  setOpenModalCurrentPost: (isOpened: boolean) => void;
   handleOpen: () => void;
+  setOpenModalCurrentPost: (isOpened: boolean) => void;
 }
 
 const Posts = (props: PostsPropsType) => {
-  let history = useHistory();
-
-  let currentAccount = props?.accounts && props?.accounts?.find((account: AccountType) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined));
-  let isAccountPosts = props?.posts && props?.posts?.map((post: PostType) => (post?.data()?.accountId === currentAccount?.data()?.id ? post : undefined));
+  const currentAccount = props?.accounts && props?.accounts?.find((account: FirebaseType<AccountType>) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined));
+  const isAccountPosts = props?.posts && props?.posts?.map((post: FirebaseType<PostType>) => (post?.data()?.accountId === currentAccount?.data()?.id ? post : undefined));
 
   return (
     <div className={styles.posts}>
@@ -31,7 +29,7 @@ const Posts = (props: PostsPropsType) => {
 
         {props.id === props?.account?.id ? <ReturnImageList posts={props.posts} account={props.account} id={props.id} isAccountPosts={isAccountPosts} logicOfPagePost={true} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : <ReturnImageList posts={props.posts} account={props.account} id={props.id} isAccountPosts={isAccountPosts} logicOfPagePost={true} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} />}
 
-        {props.openModalCurrentPost ? <ToggleShowCurrentPostContainer currentPost={props.posts[0]} history={history} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : undefined}
+        {props.openModalCurrentPost ? <ToggleShowCurrentPostContainer currentPost={props.posts[0]} history={props.history} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : undefined}
       </div>
     </div>
   );

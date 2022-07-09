@@ -1,12 +1,11 @@
 import React from "react";
-import { getUniqueGeneratedIdPost } from "../../../core/methods/methods";
+import { AccountType, FirebaseType, HistoryType, PostType } from "../../../types/types";
 import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
 import { profileConstant } from "../../../core/constants/constants";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CreatePost from "../../common/CreatePost/CreatePost";
 import Information from "./Information/Information";
-import { AccountType, PostType } from "../../../types/types";
 import styles from "./ProfileContent.module.scss";
 import { NavLink } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -15,25 +14,28 @@ import Posts from "./Posts/Posts";
 import Media from "react-media";
 
 interface ProfileContentPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  posts: Array<PostType>;
+  posts: Array<FirebaseType<PostType>>;
   id: string;
+  history: HistoryType;
+  createPostThunk: any;
 }
 
 const ProfileContent = (props: ProfileContentPropsType) => {
-  let [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
-  let [postPhoto, setPostPhoto] = React.useState(null);
+  const [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
+  const [postPhoto, setPostPhoto] = React.useState<string | null>(null);
   const [open, setOpen] = React.useState(false);
 
-  let currentAccount = props?.accounts ? props.accounts.find((account: AccountType) => (account?.data() && props?.id ? account?.data()?.id === props?.id : undefined)) : undefined;
-  let oftenCheckOtherProfile = currentAccount?.data() && props?.id;
+  const currentAccount: FirebaseType<AccountType> | undefined = props?.accounts ? props.accounts.find((account: FirebaseType<AccountType>) => (account?.data()?.id === props?.id ? account : undefined)) : undefined;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
     setPostPhoto(null);
   };
+
+  console.log(postPhoto);
 
   return (
     <div className={styles.profile_content}>
@@ -95,17 +97,17 @@ const ProfileContent = (props: ProfileContentPropsType) => {
           exact
           path={`${profileConstant.path}/${props?.id}`}
           render={() => {
-            return <Posts accounts={props.accounts} account={props.account} posts={props.posts} id={props.id} handleOpen={handleOpen} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
+            return <Posts accounts={props.accounts} account={props.account} posts={props.posts} id={props.id} history={props.history} handleOpen={handleOpen} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />;
           }}
         />
 
-        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information {...props} currentAccount={currentAccount} oftenCheckOtherProfile={oftenCheckOtherProfile} />} />
+        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information currentAccount={currentAccount} id={props.id} />} />
 
         {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved account={props.account} posts={props.posts} id={props.id} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}
-      <CreatePost {...props} open={open} postPhoto={postPhoto} handleClose={handleClose} getUniqueGeneratedIdPost={getUniqueGeneratedIdPost} setPostPhoto={setPostPhoto} />
+      <CreatePost account={props.account} postPhoto={postPhoto} open={open} handleClose={handleClose} setPostPhoto={setPostPhoto} createPostThunk={props.createPostThunk} />
     </div>
   );
 };

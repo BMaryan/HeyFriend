@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, ChatType, FollowersOfAccountType, FollowingOfAccountType, ParticipantsOfChatType, PostType } from "../../../types/types";
+import { AccountType, ChatType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType, HistoryType, ParticipantsOfChatType, PostType } from "../../../types/types";
 import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
@@ -8,16 +8,16 @@ import betaVershion from "../../../assets/images/betaVershion.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ProfileInfo.module.scss";
-import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 interface ProfileInfoPropsType {
-  accounts: Array<AccountType>;
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  posts: Array<PostType>;
-  chats: Array<ChatType>;
+  posts: Array<FirebaseType<PostType>>;
+  chats: Array<FirebaseType<ChatType>>;
   id: string;
+  history: HistoryType;
   // fix
   updateAccountThunk: any;
   createChatThunk: any;
@@ -26,15 +26,14 @@ interface ProfileInfoPropsType {
 const ProfileInfo = (props: ProfileInfoPropsType) => {
   const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
   const [openModalCoverProfile, setOpenModalCoverProfile] = React.useState(false);
-  const history = useHistory();
 
-  let currentAccount = props?.accounts.find((account: AccountType) => account.data().id === props?.id);
-  let isMyAccount = props?.account && props?.id === props?.account?.id;
-  let isOtherAccount = props?.id !== props?.account?.id;
-  let coverPhoto = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
-  let numberOfPosts = props?.posts ? props?.posts?.filter((post: PostType) => (post?.data() ? post?.data().accountId === currentAccount?.data()?.id : [])) : [];
-  let isCheckFollowing = props?.account?.following ? props?.account?.following.find((following: FollowingOfAccountType) => (following?.id === props?.id ? following : undefined)) : undefined;
-  let isChat = props?.chats?.length > 0 ? props?.chats?.filter((chat: ChatType) => (chat.data().participants?.length > 0 ? chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id) : undefined)) : undefined;
+  const currentAccount = props?.accounts.find((account: FirebaseType<AccountType>) => account?.data()?.id === props?.id);
+  const isMyAccount = props?.account && props?.id === props?.account?.id;
+  const isOtherAccount = props?.id !== props?.account?.id;
+  const coverPhoto = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
+  const numberOfPosts = props?.posts ? props?.posts?.filter((post: FirebaseType<PostType>) => (post?.data() ? post?.data().accountId === currentAccount?.data()?.id : [])) : [];
+  const isCheckFollowing = props?.account?.following ? props?.account?.following.find((following: FollowingOfAccountType) => (following?.id === props?.id ? following : undefined)) : undefined;
+  const isChat = props?.chats?.length > 0 ? props?.chats?.filter((chat: FirebaseType<ChatType>) => (chat?.data()?.participants ? chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id) : undefined)) : undefined;
 
   return (
     <div className={styles.profile_info}>
@@ -104,8 +103,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                           .createChatThunk({
                             participants: [{ id: props?.account?.id }, { id: props?.id }],
                           })
-                          .then((res: ParticipantsOfChatType) => history.push(`${chatConstant.path}/${res?.id}`))
-                      : history.push(`${chatConstant.path}/${isChat[0]?.id}`);
+                          .then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`))
+                      : props.history.push(`${chatConstant.path}/${isChat[0]?.id}`);
                   }}
                   variant="contained">
                   Message
@@ -118,7 +117,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     style={{ textTransform: "capitalize" }}
                     onClick={() => {
                       props.updateAccountThunk({ ...props.account, following: props?.account?.following ? props?.account?.following.filter((following: FollowingOfAccountType) => following?.id !== props?.id) : [] });
-                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? currentAccount?.data()?.followers.filter((followers: FollowersOfAccountType) => followers?.id !== props?.account?.id) : [] });
+                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? currentAccount?.data()?.followers?.filter((followers: FollowersOfAccountType) => followers?.id !== props?.account?.id) : [] });
                     }}
                     variant="contained">
                     Unfollow
@@ -129,7 +128,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     style={{ textTransform: "capitalize" }}
                     onClick={() => {
                       props.updateAccountThunk({ ...props.account, following: props?.account?.following ? [...props?.account?.following, { id: props?.id }] : [{ id: props?.id }] });
-                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? [...currentAccount?.data()?.followers, { id: props?.account?.id }] : [{ id: props?.account?.id }] });
+                      props.updateAccountThunk({ ...currentAccount?.data(), followers: currentAccount?.data()?.followers ? [...(currentAccount?.data()?.followers as Array<FirebaseType<AccountType>>), { id: props?.account?.id }] : [{ id: props?.account?.id }] });
                     }}
                     variant="contained">
                     Follow
