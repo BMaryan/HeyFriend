@@ -1,7 +1,10 @@
+import { QueryDocumentSnapshot, Timestamp } from "firebase/firestore";
 import { User, UserInfo } from "firebase/auth";
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
-//  account
+// firebase
+export interface FirebaseType<T> extends QueryDocumentSnapshot<T> {}
+
+// account
 export interface FollowersOfAccountType {
   id: string;
 }
@@ -10,7 +13,7 @@ export interface FollowingOfAccountType {
   id: string;
 }
 
-export interface AccountType extends QueryDocumentSnapshot<DocumentData> {
+export interface AccountType {
   id: string;
   name?: string;
   surname?: string;
@@ -18,7 +21,7 @@ export interface AccountType extends QueryDocumentSnapshot<DocumentData> {
   coverPhoto?: string;
   avatar?: string;
   status?: string;
-  about?: string;
+  aboutMe?: string;
   followers?: Array<FollowersOfAccountType>;
   following?: Array<FollowingOfAccountType>;
 }
@@ -28,16 +31,16 @@ export interface ParticipantsOfChatType {
   id: string;
 }
 
-export interface ChatType extends QueryDocumentSnapshot<DocumentData> {
+export interface ChatType {
   id: string;
-  participants?: ParticipantsOfChatType[];
+  participants?: Array<ParticipantsOfChatType>;
 }
 
-export interface MessageType extends QueryDocumentSnapshot<DocumentData> {
+export interface MessageType {
   id: string;
   chatId?: string;
-  message?: string;
-  date?: Date;
+  message: string;
+  date: Timestamp;
 }
 
 // post
@@ -49,27 +52,32 @@ export interface SavedOfPostType {
   id: string;
 }
 
-export interface PostType extends QueryDocumentSnapshot<DocumentData> {
+export interface PostType {
   id: string;
   accountId?: string;
-  dateCreated?: Date;
-  description?: string;
+  dateCreated: Timestamp;
+  description: string;
   postPhoto?: string;
   liked?: Array<LikedOfPostType>;
   saved?: Array<SavedOfPostType>;
 }
 
-export interface CommentOfPostType {
+export interface LikedOfCommentType {
   id: string;
 }
 
-export interface CommentType extends QueryDocumentSnapshot<DocumentData> {
+export interface AnsweredOfCommentType {
+  id: string;
+}
+
+export interface CommentType {
   id: string;
   accountId?: string;
   postId?: string;
   dateCreated?: Date;
-  comment?: string;
-  liked?: Array<CommentOfPostType>;
+  comment: string;
+  liked?: Array<LikedOfPostType>;
+  answered?: Array<AnsweredOfCommentType>;
 }
 
 // auth
