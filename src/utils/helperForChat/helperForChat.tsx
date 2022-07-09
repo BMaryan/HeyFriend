@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { profileConstant } from "../../core/constants/constants";
 import betaVershion from "../../assets/images/betaVershion.png";
+import { AccountType, FirebaseType } from "../../types/types";
 import styles from "./helperForChat.module.scss";
-import { AccountType } from "../../types/types";
 import { NavLink } from "react-router-dom";
 
 interface HeadPropsType {
   account: AccountType | null;
   toggleShowContent: boolean;
   toggleDetails: boolean;
-  chatWithAccount: AccountType | undefined;
+  chatWithAccount: FirebaseType<AccountType> | undefined;
   setToggleDetails: (detail: boolean) => void;
 }
 

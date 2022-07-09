@@ -2,7 +2,7 @@ import React from "react";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { getPictureBase64, removePicture } from "../../core/methods/methods";
-import { AccountType, PostType, SavedOfPostType } from "../../types/types";
+import { AccountType, FirebaseType, PostType, SavedOfPostType } from "../../types/types";
 import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 import PostContainer from "../../components/common/Post/PostContainer";
@@ -131,7 +131,7 @@ export const ContainerCoverProfile = (props: ContainerCoverProfileType) => {
 };
 
 interface ToggleShowCurrentPostContainerType {
-  currentPost: PostType;
+  currentPost: FirebaseType<PostType>;
   history: any;
   openModalCurrentPost: boolean;
   setOpenModalCurrentPost: (isOpened: boolean) => void;
@@ -152,7 +152,7 @@ export let ToggleShowCurrentPostContainer = (props: ToggleShowCurrentPostContain
 };
 
 interface DuplicateCodeReturnImageListType {
-  post: PostType;
+  post: FirebaseType<PostType>;
   openModalCurrentPost: boolean;
   setOpenModalCurrentPost: (isOpened: boolean) => void;
 }
@@ -161,7 +161,7 @@ const DuplicateCodeReturnImageList = (props: DuplicateCodeReturnImageListType) =
   return (
     <div className={styles.wrapper_posts}>
       <NavLink exact className={styles.post} onClick={() => (props.openModalCurrentPost ? props.setOpenModalCurrentPost(false) : props.setOpenModalCurrentPost(true))} to={`${photoConstant.path}/${props?.post?.id}`}>
-        <PostContainer post={props?.post?.data()} kindOfPost={onlyBodyPostConstant} />
+        <PostContainer post={props?.post} kindOfPost={onlyBodyPostConstant} modal={false} />
       </NavLink>
     </div>
   );
@@ -189,21 +189,21 @@ interface ReturnImageListType {
   id: string;
   isSaved?: boolean;
   account: AccountType | null;
-  posts: Array<PostType>;
-  isSavedPosts?: Array<PostType>;
-  isAccountPosts?: Array<PostType | undefined>;
+  posts: Array<FirebaseType<PostType>>;
+  isSavedPosts?: Array<FirebaseType<PostType>>;
+  isAccountPosts?: Array<FirebaseType<PostType> | undefined>;
   logicOfPagePost: boolean;
   openModalCurrentPost: boolean;
   setOpenModalCurrentPost: (isOpened: boolean) => void;
 }
 
 export let ReturnImageList = (props: ReturnImageListType) => {
-  let isPosts = props?.isAccountPosts?.find((post: PostType | undefined) => post);
+  let isPosts = props?.isAccountPosts?.find((post: FirebaseType<PostType> | undefined) => post);
 
   return (
     <>
       {/* return posts list */}
-      {isPosts && props?.logicOfPagePost && <div className={styles.posts}>{props?.posts?.map((post: PostType, index: number) => post?.data()?.accountId === props?.id && <DuplicateCodeReturnImageList key={post.id + index} post={post} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} />)}</div>}
+      {isPosts && props?.logicOfPagePost && <div className={styles.posts}>{props?.posts?.sort((a: FirebaseType<PostType>, b: FirebaseType<PostType>) => b?.data()?.dateCreated?.toDate().getTime() - a?.data()?.dateCreated?.toDate().getTime()).map((post: FirebaseType<PostType>, index: number) => post?.data()?.accountId === props?.id && <DuplicateCodeReturnImageList key={post.id + index} post={post} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} />)}</div>}
 
       {/* return default content if posts don't have */}
       {!isPosts && !props.isSaved ? props?.logicOfPagePost && props?.id === props?.account?.id ? <ReturnDefaultContentForImageList title={"Share Photos and Videos"} subtitle={"When you share photos and videos, they'll appear on your profile."} icon={<AddAPhotoOutlinedIcon />} /> : <ReturnDefaultContentForImageList title={"No posts yet"} icon={<PhotoCameraOutlinedIcon />} /> : undefined}
@@ -212,7 +212,7 @@ export let ReturnImageList = (props: ReturnImageListType) => {
       {props.isSaved ? (
         !props.logicOfPagePost && props.posts ? (
           <div className={props?.isSavedPosts?.length !== 0 ? styles.posts : styles.posts__columns}>
-            {props?.posts?.map((post: PostType) => post?.data()?.saved?.map((saved: SavedOfPostType) => (props?.account?.id === saved?.id ? <DuplicateCodeReturnImageList key={post.id} post={post} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : undefined)))}
+            {props?.posts?.map((post: FirebaseType<PostType>) => post?.data()?.saved?.map((saved: SavedOfPostType) => (props?.account?.id === saved?.id ? <DuplicateCodeReturnImageList key={post.id} post={post} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : undefined)))}
 
             {!props?.isSavedPosts || props?.isSavedPosts?.length === 0 ? <ReturnDefaultContentForImageList title={"Save"} subtitle={"Save photos and videos that you want to see again."} subSubTitle={"Only you can see what you have saved."} icon={<BookmarkBorderOutlinedIcon />} /> : undefined}
           </div>
