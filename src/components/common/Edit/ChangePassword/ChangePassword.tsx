@@ -44,9 +44,9 @@ const ChangePassword = (props: ChangePasswordPropsType) => {
   const [message, setMessage] = React.useState("");
 
   const onSubmit = (formData: ChangePasswordFormDataType) => {
-    // if (formData.old_password !== props.account?.password) {
-    //   showSnackbar("error", "Your old password was entered incorrectly. Please enter it again.");
-    // }
+    if (formData.old_password !== props.account?.password) {
+      showSnackbar("error", "Your old password was entered incorrectly. Please enter it again.");
+    }
 
     if (formData.new_password !== formData.confirm_new_password) {
       showSnackbar("error", "Please make sure both passwords match.");
@@ -56,11 +56,11 @@ const ChangePassword = (props: ChangePasswordPropsType) => {
       showSnackbar("info", "You want to change the password to the same one that was. Please try to come up with a different password");
     }
 
-    // if (formData.old_password !== formData.new_password && formData.old_password !== formData.confirm_new_password) {
-    //   if (formData.new_password === formData.confirm_new_password && formData.old_password === props.account?.password) {
-    showSnackbar("success", "You have successfully changed your password.");
-    //   }
-    // }
+    if (formData.old_password !== formData.new_password && formData.old_password !== formData.confirm_new_password) {
+      if (formData.new_password === formData.confirm_new_password && formData.old_password === props.account?.password) {
+        showSnackbar("success", "You have successfully changed your password.");
+      }
+    }
   };
 
   const showSnackbar = (severityProp: any, messageProp: any) => {
