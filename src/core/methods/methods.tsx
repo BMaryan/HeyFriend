@@ -1,4 +1,3 @@
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import { AccountType } from "../../types/types";
 
 // type GetUniqueGeneratedIdPostType = {
@@ -24,11 +23,12 @@ import { AccountType } from "../../types/types";
 //   }
 // };
 
+// get pictrue
 type GetPictureBase64Type = {
   event: any;
-  account: AccountType | null;
+  account?: AccountType | null;
   method: (...args: any[]) => void;
-  key: string;
+  key?: string;
 };
 
 export const getPictureBase64 = (props: GetPictureBase64Type) => {
@@ -38,8 +38,7 @@ export const getPictureBase64 = (props: GetPictureBase64Type) => {
     reader.readAsDataURL(file);
 
     reader.onloadend = function () {
-      props.method(reader.result);
-      // props.method(props.account && props.key ? { ...props.account, [props.key]: reader.result } : reader.result);
+      props.method(props.account && props.key ? { ...props.account, [props.key]: reader.result } : reader.result);
     };
   }
 };
@@ -50,4 +49,26 @@ type RemovePictureType = {
   key: string;
 };
 
+// remove avatar
 export const removePicture = (props: RemovePictureType) => props.method({ ...props.account, [props.key]: null });
+
+type setIsOnlineToSessionStorageType = {
+  value: "online";
+};
+
+// set value to session storage
+export const setIsOnlineToSessionStorage = ({ value }: setIsOnlineToSessionStorageType) => {
+  sessionStorage.setItem("isOnline", value);
+};
+
+// get value from session storage
+export const getOnlineInSessionStorage = () => {
+  const res = sessionStorage.getItem("isOnline");
+
+  return res;
+};
+
+// remove value to session storage
+export const removeOnlineInSessionStorage = () => {
+  sessionStorage.removeItem("isOnline");
+};
