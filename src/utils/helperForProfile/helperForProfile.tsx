@@ -1,8 +1,8 @@
 import React from "react";
+import { AccountType, FirebaseType, PostType, SavedOfPostType } from "../../types/types";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { getPictureBase64, removePicture } from "../../core/methods/methods";
-import { AccountType, FirebaseType, PostType, SavedOfPostType } from "../../types/types";
 import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 import PostContainer from "../../components/common/Post/PostContainer";

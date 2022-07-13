@@ -10,6 +10,7 @@
 
 /* head dialogs */
 .head_dialogs {
+  @include ds-position(space-between, center);
   overflow: hidden;
 }
 
@@ -22,6 +23,7 @@
 }
 
 .head_dialogs_title {
+  font-size: 25px;
   padding: 0 10px;
 }
 

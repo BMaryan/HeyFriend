@@ -12,118 +12,23 @@
   overflow: hidden;
 }
 
-/* content */
+/* dialogs content */
 .dialogs {
-  min-width: 30%;
+  height: 100%;
+  min-width: 35%;
   background: $white;
-}
-
-.dialogs_content {
-  height: 100%;
-  overflow-y: scroll;
-}
-
-.messages_noDetails {
-  width: 70%;
-  transition: 1s;
-}
-
-.messages_details {
-  width: 45%;
-  transition: 1s;
-}
-
-.messages_content {
-  height: 100%;
-  @include position(relative);
-}
-
-.messages_content_defaultView {
-  height: 100%;
-  @include position(relative);
-}
-
-.dialogs,
-.messages_noDetails,
-.messages_details {
-  height: 100%;
-  @include ds-position(unset, unset, column);
-}
-
-.dialogs {
   border-right: 1px solid $grey300;
+  display: flex;
+  flex-direction: column;
 }
 
-/* .dialogs,
-.messages_details {
-	border-right: 1px solid $grey300;
-} */
-
-/* toggle details container (on click) */
-.details_hidden,
-.details_show {
-  @include position(absolute, 0, 0, 0);
-  transition: 1s;
-}
-
-.details_hidden,
-.details_show {
-  @include ds-position(unset, center, column);
-  border-left: 1px solid $grey300;
-  padding: $pd-content 0;
-  box-sizing: border-box;
-  transition: 1s;
-}
-
-.details_hidden {
-  width: 0px;
-  overflow: hidden;
-}
-
-.details_show {
-  width: 25%;
-  @include ds-position(unset, center, column);
-  overflow: hidden;
-  transition-delay: 10ms;
-  transition-property: width;
-}
-
-/*  */
-.contact_link {
-  @include ds-position(unset, center, column);
-  text-decoration: none;
-}
-
-.wrapper_picture img {
-  height: 85px;
-  width: 85px;
-  color: $white;
-  font-size: 20px;
-  border-radius: 50%;
-  @include ds-position(center, center, unset);
-  @include image-position(cover, center);
-  margin-bottom: 5px;
-}
-
-.fullName {
-  color: $black;
-  font-size: 20px;
-}
-
-/* form */
-.form {
-  // @include position(absolute, unset, 0, 0, 0);
-  // display: flex;
-}
-
-.field {
+/* messages contet */
+.messages {
+  height: 100%;
   width: 100%;
-  border: 1px solid $grey400;
-  outline: none;
-  padding: 10px 10px;
 }
 
-/* default view messages */
+/* default content */
 .default_view_messages {
   height: 100%;
   @include ds-position(center, center, column);
@@ -158,6 +63,29 @@
   font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
   padding: 7px 25px;
   cursor: pointer;
+}
+
+/* search input */
+.wrapper_input {
+  @include position(relative);
+  @include ds-position(center, center, unset);
+  border-bottom: 1px solid $grey300;
+  transition: 1s;
+}
+
+.wrapper_input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 15px $pd-content;
+  transition: 1s;
+}
+
+.search_icon {
+  color: $grey400;
+  font-size: 13px;
+  @include position(absolute, unset, 10px, unset unset);
+  padding: 0 0 0 $pd-content;
 }
 
 /* media */
