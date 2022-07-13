@@ -32,10 +32,12 @@ interface WrapperCreateFieldPropsType {
   label?: string;
   placeholder?: string;
   helperText?: string;
-  type: "text" | "email" | "password";
+  type: "text" | "email" | "search" | "password";
+  variant?: "outlined" | "filled" | "standard";
   validate?: Array<FiledValidatorType>;
   error?: string;
   component: typeof InputField | typeof Textarea | "input" | "textarea";
+  onReset?: any;
 }
 
 export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
@@ -71,6 +73,7 @@ export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
           name={props.name}
           type={values.showPassword ? "text" : "password"}
           label={props.label}
+          variant={props.variant}
           placeholder={props.placeholder}
           helperText={props.helperText}
           validate={props.validate}
@@ -89,7 +92,7 @@ export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
           }}
         />
       ) : (
-        <Field className={styles.field} name={props.name} type={props.type} label={props.label} placeholder={props.placeholder} helperText={props.helperText} validate={props.validate} error={props.error} component={props.component} />
+        <Field className={styles.field} name={props.name} type={props.type} label={props.label} variant={props.variant} placeholder={props.placeholder} helperText={props.helperText} validate={props.validate} error={props.error} component={props.component} />
       )}
     </div>
   );
