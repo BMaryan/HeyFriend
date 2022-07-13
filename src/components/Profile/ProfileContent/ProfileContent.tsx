@@ -35,8 +35,6 @@ const ProfileContent = (props: ProfileContentPropsType) => {
     setPostPhoto(null);
   };
 
-  console.log(postPhoto);
-
   return (
     <div className={styles.profile_content}>
       <div className={styles.content}>
