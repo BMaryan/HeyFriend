@@ -26,7 +26,7 @@ const Message = (props: MessagePropsType) => {
   return (
     <div className={isMyAccount ? styles.wrapper_container_myMessage : styles.wrapper_container_otherMessage + " " + styles.wrapper_container_message}>
       <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : props?.chatWithAccount?.data()?.id}`} className={isMyAccount ? styles.wrapper_myPicture : styles.wrapper_otherPicture + " " + styles.wrapper_picture}>
-        <img src={isMyAccount ? props?.account?.avatar : props?.chatWithAccount?.data() ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
+        <img src={isMyAccount ? props?.account?.avatar : props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
       </NavLink>
       <div className={isMyAccount ? styles.wrapper_myMessage : styles.wrapper_otherMessage + " " + styles.wrapper_message}>{props?.message?.data()?.message}</div>
     </div>

@@ -44,7 +44,7 @@
 .wrapper_message,
 .wrapper_myMessage,
 .wrapper_otherMessage {
-  width: 70%;
+  max-width: 50%;
   word-break: break-all;
   @include ds-position(unset, center);
   padding: 10px 10px;

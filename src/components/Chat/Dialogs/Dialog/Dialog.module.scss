@@ -1,7 +1,4 @@
 @import "../../../../core/styles/main.scss";
-\ .chat {
-  padding: 10px 20px;
-}
 
 .chat,
 .chat_forHead {
@@ -56,6 +53,11 @@
   color: $black;
   font-size: 15px;
   /* font-size: 15px; */
+}
+
+.date {
+  color: $grey500;
+  font-size: 13px;
 }
 
 .message {
