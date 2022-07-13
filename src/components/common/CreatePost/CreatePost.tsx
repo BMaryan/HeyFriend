@@ -41,7 +41,7 @@ const CreatePost = (props: CreatePostPropsType) => {
   const handleGetFiles = (event: any) => {
     // setFiles([files, event.target.files]);
 
-    getPictureBase64({ account: props.account, event: event, method: props.setPostPhoto, key: "postPhoto" });
+    getPictureBase64({ event: event, method: props.setPostPhoto });
   };
 
   const isStepSkipped = (step: any) => {
