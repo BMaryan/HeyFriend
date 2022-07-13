@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, LocationType } from "../../types/types";
+import { AccountType, FirebaseType, LocationType, MessageType } from "../../types/types";
 import { mainConstant } from "../../core/constants/constants";
 import NavbarList from "./Navbar/NavbarList/NavbarList";
 import NavbarRow from "./Navbar/NavbarRow/NavbarRow";
@@ -10,6 +10,7 @@ import styles from "./Header.module.scss";
 
 interface HeaderPropsType {
   account: AccountType | null;
+  messages: Array<FirebaseType<MessageType>>;
   location: LocationType;
   signOut: any;
 }
@@ -39,7 +40,7 @@ const Header = (props: HeaderPropsType) => {
 
         {/* navBar row */}
         <div className={styles.navbar_row}>
-          <NavbarRow isBottomNavigation={true} location={props.location} />
+          <NavbarRow messages={props.messages} isBottomNavigation={true} location={props.location} />
         </div>
 
         {/* navBar list */}

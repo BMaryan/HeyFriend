@@ -10,12 +10,22 @@
   flex: 1;
 }
 
+.wrapper_icon {
+  position: relative;
+}
+
 .icon {
   color: $grey600 !important;
 }
 
 .icon_active {
   color: $grey800 !important;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: 0;
 }
 
 /* wrapper nav link */
