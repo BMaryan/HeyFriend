@@ -45,12 +45,12 @@ export const createChatThunk =
     chatAPI.createChat(participants);
 
 export const addMessageThunk =
-  (message: FirebaseType<MessageType>): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  (message: MessageType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
-    chatAPI.addMessage(message.data());
+    chatAPI.addMessage(message);
 
 export const updateChatThunk =
-  (chat: FirebaseType<ChatType>): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  (chat: ChatType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
     chatAPI.updateChat(chat);
 

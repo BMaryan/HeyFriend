@@ -3,6 +3,7 @@ import { AccountType, FirebaseType } from "../types/types";
 import { InferActionsType, StateType } from "./store";
 import { accountAPI } from "../api/account-api";
 import { ThunkAction } from "redux-thunk";
+import { User } from "firebase/auth";
 import { db } from "../firebase";
 
 const SET_ACCOUNTS = "heyfriend/accountPage/SET_ACCOUNTS";
@@ -42,7 +43,7 @@ export const accountActions = {
 export const setAccountsThunk = (): ThunkAction<Promise<DocumentData<AccountType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(accountActions.setAccounts(snapshot.docs)));
 
 export const setAccountThunk =
-  (user: { uid: string }): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  (user: User & AccountType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) => {
     const resp = await accountAPI.setAccount(user);
 

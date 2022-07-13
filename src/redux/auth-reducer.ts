@@ -1,6 +1,7 @@
 import { InferActionsType, StateType } from "./store";
 import { authAPI } from "../api/auth-api";
 import { ThunkAction } from "redux-thunk";
+import { AccountType } from "../types/types";
 
 const SET_AUTH = "heyfriend/authPage/SET_AUTH";
 const AUTH_SUCCESS = "heyfriend/authPage/AUTH_SUCCESS";
@@ -75,10 +76,12 @@ export const signIn =
     dispatch(authActions.authLoading(false));
   };
 
-export const signOut = (): ThunkAction<Promise<void>, StateType, unknown, ActionsType> => async (dispatch) => {
-  await authAPI.signOut();
+export const signOut =
+  (account: AccountType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  async (dispatch) => {
+    await authAPI.signOut(account);
 
-  dispatch(authActions.authSuccess());
-};
+    dispatch(authActions.authSuccess());
+  };
 
 export default AuthReducer;
