@@ -10,7 +10,7 @@ import { withSuspense } from "./hoc/withSuspense/withSuspense";
 import NotFound from "./components/common/NotFound/NotFound";
 import MainContainer from "./components/Main/MainContainer";
 import { Route, Switch } from "react-router-dom";
-import { HistoryType } from "./types/types";
+import { FirebaseType, HistoryType, MessageType } from "./types/types";
 import "./App.scss";
 
 const FriendsContainer = React.lazy(() => import("./components/Friends/FriendsContainer"));
@@ -18,6 +18,7 @@ const EditContainer = React.lazy(() => import("./components/common/Edit/EditCont
 const ChatContainer = React.lazy(() => import("./components/Chat/ChatContainer"));
 
 type AppPropsType = {
+  messages: Array<FirebaseType<MessageType>>;
   auth: object | null;
   history: HistoryType;
   id: string;
@@ -51,7 +52,7 @@ function App(props: AppPropsType) {
 
       {!(checkSignIn || checkSignUp) ? (
         <div className="container_fluid container_fluid__paper">
-          <NavbarRow isBottomNavigation={true} location={props.history.location} />
+          <NavbarRow messages={props.messages} isBottomNavigation={true} location={props.history.location} />
         </div>
       ) : undefined}
     </div>
