@@ -1,5 +1,6 @@
 import React from "react";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
+import { setIsOnlineToSessionStorage } from "../../../core/methods/methods";
 import { getAccountSelector } from "../../../redux/account-selectors";
 import { authActions, signIn } from "../../../redux/auth-reducer";
 import { onAuthStateChanged } from "firebase/auth";
@@ -31,6 +32,7 @@ const SignInContainer = (props: SignInContainerPropsType) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        setIsOnlineToSessionStorage({ value: "online" });
         history.push(`/`);
       }
     });
