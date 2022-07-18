@@ -1,7 +1,5 @@
 import React from "react";
 import { AccountType, FirebaseType } from "../../../../../types/types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Review.module.scss";
 
 interface ReviewPropsType {
@@ -17,9 +15,7 @@ const ReturnEmail = (props: ReturnEmailPropsType) => {
     <div className={styles.wrapper_item}>
       <div className={styles.title}>Email</div>
       <div className={styles.wrapper_content}>
-        <div>
-          <FontAwesomeIcon className={styles.icon} icon={faEnvelope} />
-        </div>
+        <div>{/* <FontAwesomeIcon className={styles.icon} icon={faEnvelope} /> */}</div>
         <div className={styles.value}>{props.value}</div>
       </div>
     </div>
