@@ -157,6 +157,7 @@ const CreatePost = (props: CreatePostPropsType) => {
                             props.handleClose();
                           }
                           handleNext();
+                          handleReset();
                         }}>
                         {activeStep === steps.length - 1 ? "Share" : "Next"}
                       </Button>
