@@ -1,27 +1,22 @@
 import { AccountType } from "../../types/types";
+import FileResizer from "react-image-file-resizer";
 
-// type GetUniqueGeneratedIdPostType = {
-//   posts: Array<PostType>
-//   length: number
-// }
-
-// export const getUniqueGeneratedIdPost = (props:GetUniqueGeneratedIdPostType ) => {
-//   let result = props.posts?.length ? props.posts?.length : 0 ;
-//   let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//   let charactersLength = characters.length;
-
-//   for (let i = 0; i < props.length; i++) {
-//     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-//   }
-
-//   const searchTheSameId = props.posts ? props.posts.find((post: PostType) => post.id === result) : undefined;
-
-//   if (!searchTheSameId) {
-//     return result;
-//   } else {
-//     return result + props.posts.length;
-//   }
-// };
+const resizeFile = (file: File) =>
+  new Promise((resolve) => {
+    FileResizer.imageFileResizer(
+      file,
+      700,
+      1200,
+      "JPEG",
+      80,
+      0,
+      (uri) => {
+        // console.log("react-image-file-resizer", uri);
+        resolve(uri);
+      },
+      "base64"
+    );
+  });
 
 // get pictrue
 type GetPictureBase64Type = {
@@ -31,15 +26,20 @@ type GetPictureBase64Type = {
   key?: string;
 };
 
-export const getPictureBase64 = (props: GetPictureBase64Type) => {
+export const getPictureBase64 = async (props: GetPictureBase64Type) => {
   if (props.event.target.files.length) {
-    const file = props.event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    try {
+      const file = props.event.target.files[0];
+      const image = await resizeFile(file);
+      // const reader = new FileReader();
+      // reader.readAsDataURL(file);
 
-    reader.onloadend = function () {
-      props.method(props.account && props.key ? { ...props.account, [props.key]: reader.result } : reader.result);
-    };
+      // reader.onloadend = function () {
+      props.method(props.account && props.key ? { ...props.account, [props.key]: image } : image);
+      // };
+    } catch (error) {
+      alert(error);
+    }
   }
 };
 
