@@ -24,7 +24,7 @@
 
 .head_dialogs_title {
   font-size: 25px;
-  padding: 0 10px;
+  padding: 0 $pd-content;
 }
 
 /* head messages */
@@ -49,4 +49,95 @@
   color: $grey600;
   font-size: 25px;
   cursor: pointer;
+  display: grid;
+}
+
+// conteiner of smiles
+.conteiner_of_smiles > div > ul {
+  height: 300px !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  justify-items: center;
+}
+
+.smile_button {
+}
+
+// conteiner of message
+.conteiner_of_message {
+}
+
+/* default content for chat when don't have id in path */
+.default_view_messages {
+  height: 100%;
+  @include ds-position(center, center, column);
+}
+
+.default_view_messages div {
+  margin: 10px;
+}
+
+.wrapper_icon {
+  border: 2px solid $black;
+  border-radius: 50%;
+  padding: 30px;
+}
+
+.title {
+  font-size: calc(20px + (25 - 20) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+}
+
+.subtitle {
+  color: $grey800;
+  text-align: center;
+  font-size: calc(12px + (18 - 12) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.wrapper_button button {
+  font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
+  padding: 7px 25px;
+  cursor: pointer;
+}
+
+// chat detail | edit chat and more information
+.chat_details {
+  @include ds-position(center, center, column);
+  flex: 1;
+  padding: $pd-content;
+  row-gap: 10px;
+}
+
+// head
+.head_detail {
+}
+
+.head_detail_avatar {
+  height: 80px !important;
+  width: 80px !important;
+}
+
+// body
+.body_detail {
+  display: flex;
+  flex: 1;
+}
+
+.body_detail_fullName {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.body_detail_status {
+  display: flex;
+  flex: 1;
+}
+
+// footer
+.footer_detail {
+  width: 100%;
+}
+
+.footer_detail_button {
 }

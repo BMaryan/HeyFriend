@@ -1,21 +1,20 @@
 @import "../../../../core/styles/main.scss";
 
-/* 		common wrapper container message */
-.wrapper_container_message,
-.wrapper_container_myMessage,
-.wrapper_container_otherMessage {
+.wrapper_messages,
+.wrapper_messages_myMessage,
+.wrapper_messages_otherMessage {
   width: 100%;
   display: flex;
   margin-bottom: 15px;
 }
 
 /* wrapper container my message */
-.wrapper_container_myMessage {
+.wrapper_messages_myMessage {
   @include ds-position(flex-start, unset, row-reverse);
 }
 
 /* wrapper container other message */
-.wrapper_container_otherMessage {
+.wrapper_messages_otherMessage {
   @include ds-position(flex-start);
 }
 
@@ -40,25 +39,64 @@
   margin-right: 10px;
 }
 
-/* 		common wrapper message */
-.wrapper_message,
-.wrapper_myMessage,
-.wrapper_otherMessage {
-  max-width: 50%;
+/* common wrapper message */
+.wrapper_message {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.wrapper_message_myMessage {
+  flex-direction: row-reverse;
+}
+
+.wrapper_message_content {
+  width: 100%;
+}
+
+.message {
+  max-width: 65%;
+}
+
+.message,
+.myMessage,
+.otherMessage {
   word-break: break-all;
   @include ds-position(unset, center);
   padding: 10px 10px;
 }
 
 /* wrapper my message */
-.wrapper_myMessage {
+.myMessage {
   background: $grey300;
   border-radius: 20px 20px 0 20px;
 }
 
 /* wrapper other message */
-.wrapper_otherMessage {
+.otherMessage {
   background: $white;
   border: 1px solid $grey400;
   border-radius: 20px 20px 20px 0px;
+}
+
+.message_date {
+  color: $grey400;
+  font-size: 12px;
+}
+
+.message_date_myMessage {
+  text-align: end;
+}
+
+.message_date_otherMessage {
+  text-align: start;
+}
+
+// divider
+.divider {
+  margin: $pd-content 0;
+
+  & > span > div {
+    background-color: unset;
+  }
 }

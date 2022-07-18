@@ -1,9 +1,10 @@
 import React from "react";
 import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
+import { AccountType, ChatType, FirebaseType, MessageType } from "../../types/types";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../core/constants/constants";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { AccountType, FirebaseType } from "../../types/types";
+import { Avatar, Button, MenuItem } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import styles from "./helperForChat.module.scss";
 import InfoIcon from "@mui/icons-material/Info";
@@ -11,6 +12,8 @@ import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import Badge from "@mui/material/Badge";
+import Menu from "@mui/material/Menu";
+import moment from "moment";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -59,11 +62,11 @@ export const Head = (props: HeadPropsType) => {
 
   return props.toggleShowContent ? (
     <div className={styles.head + " " + styles.head_dialogs}>
-      <div className={styles.head_dialogs_title}>Messages</div>
+      <div className={styles.head_dialogs_title}>Chats</div>
 
       <div className={styles.head_dialogs_title}>
-        <IconButton aria-label="Example">
-          <ModeIcon />
+        <IconButton className={styles.icon}>
+          <ModeIcon fontSize="small" />
         </IconButton>
       </div>
     </div>
@@ -84,7 +87,8 @@ export const Head = (props: HeadPropsType) => {
           </div>
           <div>
             <div className={dialogStyles.login}>{props?.chatWithAccount?.data() ? props?.chatWithAccount?.data()?.surname + " " + props?.chatWithAccount?.data()?.name : <></>}</div>
-            <div className={dialogStyles.date}>{!isOnline ? `In the network ${lastSignInDate?.toLocaleDateString() + " " + lastSignInDate?.toLocaleTimeString()}` : "Now in the network"}</div>
+
+            <div className={dialogStyles.date}>{!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network"}</div>
           </div>
         </NavLink>
       </div>
@@ -95,5 +99,99 @@ export const Head = (props: HeadPropsType) => {
         </IconButton>
       </div>
     </div>
+  );
+};
+
+interface ChatDetailsPropsType {
+  chatWithAccount: FirebaseType<AccountType> | undefined;
+  currentChat: FirebaseType<ChatType> | undefined;
+}
+
+export const ChatDetails = (props: ChatDetailsPropsType) => {
+  return (
+    <div className={styles.chat_details}>
+      <NavLink className={styles.head_detail} to={`${profileConstant.path}/${props.chatWithAccount?.id}`}>
+        {/* <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot"> */}
+        <Avatar className={styles.head_detail_avatar} src={props.chatWithAccount?.data().avatar || defaultAvatar} />
+        {/* </StyledBadge> */}
+      </NavLink>
+
+      <div className={styles.body_detail}>
+        <div>
+          <NavLink className={styles.body_detail_fullName} to={`${profileConstant.path}/${props.chatWithAccount?.id}`}>
+            {props.chatWithAccount?.data() ? props.chatWithAccount?.data()?.surname + " " + props.chatWithAccount?.data()?.name : undefined}
+          </NavLink>
+        </div>
+
+        <div className={styles.body_detail_status}>{props.chatWithAccount?.data().status ? props.chatWithAccount?.data().status : undefined}</div>
+      </div>
+
+      <div className={styles.footer_detail}>
+        <Button fullWidth={true} className={styles.footer_detail_button} variant="outlined" color="error">
+          Delete
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+interface DefaultViewMessagesPropsType {}
+
+export const DefaultViewMessages = (props: DefaultViewMessagesPropsType) => {
+  return (
+    <div className={styles.default_view_messages}>
+      <div className={styles.wrapper_icon}>{/* <FontAwesomeIcon className={styles.icon} icon={faPaperPlane} /> */}</div>
+      <div className={styles.title}>Your Messages</div>
+      <div className={styles.subtitle}>Send private photos and messages to a friend or group</div>
+      <div className={styles.wrapper_button}>
+        <button>Send Message</button>
+      </div>
+    </div>
+  );
+};
+
+interface ContainerOfSmilesPropsType {
+  anchorEl: null | HTMLElement;
+  open: boolean;
+  setEmoji?: (emoji: number) => void;
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void;
+  handleClose: () => void;
+}
+
+export const ContainerOfSmiles = (props: ContainerOfSmilesPropsType) => {
+  const smiles: { smile: number }[] = [];
+
+  for (let i = 128512; i <= 128580; i++) {
+    smiles.push({ smile: i });
+  }
+
+  return (
+    <Menu className={styles.conteiner_of_smiles} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
+      {smiles.map((smile, index) => (
+        <IconButton key={index} onClick={(e: any) => props?.setEmoji && props?.setEmoji(e.target.innerText.codePointAt(0))} className={styles.smile_button}>
+          {String.fromCodePoint(smile.smile)}
+        </IconButton>
+      ))}
+    </Menu>
+  );
+};
+
+interface ContainerOfMessagePropsType {
+  anchorEl: null | HTMLElement;
+  open: boolean;
+  message: FirebaseType<MessageType>;
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void;
+  handleClose: () => void;
+  deleteMessageThunk: any;
+}
+
+export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
+  return (
+    <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
+      <MenuItem className={styles.menu_item}>Edit</MenuItem>
+      <MenuItem className={styles.menu_item} onClick={() => props.deleteMessageThunk(props.message)}>
+        Delete
+      </MenuItem>
+    </Menu>
   );
 };

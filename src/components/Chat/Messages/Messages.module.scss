@@ -1,10 +1,9 @@
 @import "../../../core/styles/main.scss";
 
 .messages {
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  @include position(relative);
+  @include ds-position(unset, unset, column);
+  flex: 1;
+  overflow-y: auto;
 }
 
 .messages_content {
@@ -12,6 +11,12 @@
   flex: 1;
   padding: $pd-content;
   overflow-y: scroll;
+}
+
+// default content
+.default_content {
+  @include ds-position(center, center, column);
+  flex: 1;
 }
 
 /* form */
@@ -28,5 +33,18 @@
   & > input,
   button {
     height: 100%;
+  }
+}
+
+.button_media {
+  & label {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+  }
+
+  & input {
+    display: none;
   }
 }
