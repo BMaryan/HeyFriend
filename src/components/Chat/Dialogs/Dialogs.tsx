@@ -8,14 +8,19 @@ interface DialogsPropsType {
   account: AccountType | null;
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
-  areChats: Array<ParticipantsOfChatType>;
+  searchValue: string;
 }
 
 const Dialogs = (props: DialogsPropsType) => {
+  const foundAccount: Array<FirebaseType<AccountType>> = props.accounts.filter((account: FirebaseType<AccountType>) => (account.data().surname + " " + account.data().name).toLocaleLowerCase().trim().includes(props.searchValue.toLocaleLowerCase().trim(), 0) && account.id !== props.account?.id);
+  const searchChat: Array<FirebaseType<ChatType>> = props.chats.filter((chat: FirebaseType<ChatType>) => foundAccount.find((account: FirebaseType<AccountType>) => chat.data().participants?.find((participant: ParticipantsOfChatType) => account.id === participant.id && account.id !== props.account?.id)));
+  const areChats: Array<FirebaseType<ChatType>> = props.chats?.filter((chat: FirebaseType<ChatType>) => chat.data().participants?.find((participant: ParticipantsOfChatType) => participant.id === props.account?.id));
+  const checkArray = props.searchValue ? searchChat : props.chats;
+
   return (
     <div className={styles.dialogs}>
-      {props.areChats.length > 0 ? (
-        props.chats.map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} />)
+      {areChats.length > 0 ? (
+        checkArray.map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} searchValue={props.searchValue} />)
       ) : (
         <div className={styles.chats_wrapper_text}>
           <div className={styles.chats_wrapper_title}>Work in progress</div>
