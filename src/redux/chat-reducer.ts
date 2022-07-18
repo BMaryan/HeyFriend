@@ -54,4 +54,9 @@ export const updateChatThunk =
   async (dispatch) =>
     chatAPI.updateChat(chat);
 
+export const deleteMessageThunk =
+  (message: MessageType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  async (dispatch) =>
+    chatAPI.deleteMessage(message);
+
 export default ChatReducer;
