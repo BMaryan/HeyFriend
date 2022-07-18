@@ -119,14 +119,6 @@ const AppContainer = (props: AppContainerPropsType) => {
     document.title = namePage[0].toUpperCase() + namePage.slice(1);
   }, [history.location]);
 
-  // React.useEffect(() => {
-  //   if (props.account) {
-  //     props.updateAccountThunk({ ...(props.account as AccountType), isOnline: "good" });
-  //   }
-
-  //   return props.account && props.updateAccountThunk({ ...(props.account as AccountType), isOnline: null });
-  // });
-
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
     if (!props.account) {
       return (
