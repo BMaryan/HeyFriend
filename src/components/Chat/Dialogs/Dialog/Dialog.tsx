@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
+import moment from "moment";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -51,6 +52,7 @@ interface DialogPropsType {
   account: AccountType | null;
   chat: FirebaseType<ChatType>;
   messages: Array<FirebaseType<MessageType>>;
+  searchValue: string;
 }
 
 const Dialog = (props: DialogPropsType) => {
@@ -59,6 +61,10 @@ const Dialog = (props: DialogPropsType) => {
 
   const lastSignInDate = new Date(messageWithAccount?.data()?.metadata?.lastSignInTime as string);
   const isOnline = Boolean(messageWithAccount?.data()?.isOnline);
+
+  // let test = messageWithAccount?.data()?.surname + " " + messageWithAccount?.data()?.name;
+  // let indexOf = test.indexOf(props.searchValue);
+  // let res = test.split(props.searchValue);
 
   return (
     <>
@@ -78,15 +84,15 @@ const Dialog = (props: DialogPropsType) => {
                         <Typography sx={{ display: "inline" }} component="span" variant="body1" color="text.primary">
                           {messageWithAccount?.data() ? messageWithAccount?.data()?.surname + " " + messageWithAccount?.data()?.name : undefined}
                         </Typography>
-                        <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
-                          {currentMessages?.length > 0 ? currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate().toDateString() : undefined}
+                        <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
+                          {currentMessages?.length > 0 ? moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow() : undefined}
                         </Typography>
                       </Typography>
                     }
                     secondary={
                       <React.Fragment>
                         <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary.light">
-                          {currentMessages?.length > 0 ? (currentMessages[currentMessages?.length - 1]?.data()?.message?.length < 20 ? currentMessages[currentMessages?.length - 1]?.data()?.message : currentMessages[currentMessages?.length - 1]?.data()?.message?.slice(0, 20) + "...") : "In the network " + lastSignInDate?.toLocaleDateString() + " " + lastSignInDate?.toLocaleTimeString()}
+                          {currentMessages?.length > 0 ? (currentMessages[currentMessages?.length - 1]?.data()?.message?.length < 20 ? currentMessages[currentMessages?.length - 1]?.data()?.message : currentMessages[currentMessages?.length - 1]?.data()?.message?.slice(0, 20) + "...") : !isOnline ? "In the network " + moment(lastSignInDate).fromNow() : "Now in the network"}
                         </Typography>
                       </React.Fragment>
                     }
