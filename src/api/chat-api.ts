@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { ChatType, MessageType, ParticipantsOfChatType } from "../types/types";
 import { db } from "../firebase";
 
@@ -23,5 +23,9 @@ export const chatAPI = {
     const res = await getDoc(doc(db, "chats", chat.id));
 
     await updateDoc(doc(db, "chats", chat.id), { ...chat, id: res.id });
+  },
+
+  async deleteMessage(message: MessageType) {
+    await deleteDoc(doc(db, "messages", message.id));
   },
 };
