@@ -1,5 +1,5 @@
 import { QueryDocumentSnapshot, Timestamp } from "firebase/firestore";
-import { User, UserInfo, UserMetadata } from "firebase/auth";
+import { User, UserInfo } from "firebase/auth";
 
 // firebase
 export interface FirebaseType<T> extends QueryDocumentSnapshot<T> {}
@@ -13,6 +13,13 @@ export interface FollowingOfAccountType {
   id: string;
 }
 
+export interface MetadataOfAccountType {
+  createdAt?: string;
+  lastLoginAt?: string;
+  creationTime?: string;
+  lastSignInTime?: string;
+}
+
 export interface AccountType {
   id: string;
   name?: string;
@@ -24,7 +31,7 @@ export interface AccountType {
   status?: string;
   aboutMe?: string;
   isOnline?: string | null;
-  metadata?: UserMetadata;
+  metadata?: MetadataOfAccountType;
   followers?: Array<FollowersOfAccountType>;
   following?: Array<FollowingOfAccountType>;
 }
