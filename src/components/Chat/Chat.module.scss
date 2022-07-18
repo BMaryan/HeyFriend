@@ -26,43 +26,7 @@
 .messages {
   height: 100%;
   width: 100%;
-}
-
-/* default content */
-.default_view_messages {
-  height: 100%;
-  @include ds-position(center, center, column);
-}
-
-.default_view_messages div {
-  margin: 10px;
-}
-
-.wrapper_icon {
-  border: 2px solid $black;
-  border-radius: 50%;
-  padding: 30px;
-}
-
-.icon {
-  font-size: calc(35px + (37 - 35) * ((100vw - 300px) / (1600 - 300)));
-}
-
-.title {
-  font-size: calc(20px + (25 - 20) * ((100vw - 300px) / (1600 - 300)));
-  text-align: center;
-}
-
-.subtitle {
-  color: $grey800;
-  text-align: center;
-  font-size: calc(12px + (18 - 12) * ((100vw - 300px) / (1600 - 300)));
-}
-
-.wrapper_button button {
-  font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
-  padding: 7px 25px;
-  cursor: pointer;
+  @include ds-position(unset, unset, column);
 }
 
 /* search input */
@@ -108,9 +72,5 @@
 @include media-breakpoint-down("s") {
   .dialogs {
     min-width: 100%;
-  }
-
-  .default_view_messages {
-    display: none;
   }
 }
