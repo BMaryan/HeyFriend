@@ -5,13 +5,12 @@ import { chatConstant, editConstant, profileConstant } from "../../../core/const
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import betaVershion from "../../../assets/images/betaVershion.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ProfileInfo.module.scss";
 import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
+import moment from "moment";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -84,7 +83,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
           <div className={styles.profile_status}>{currentAccount ? <div>{currentAccount?.data()?.status}</div> : undefined}</div>
 
           {/* last sign in date */}
-          <div className={styles.profile_status}>{props?.account?.id !== props?.id ? (!isOnline ? `In the network ${lastSignInDate?.toLocaleDateString() + " " + lastSignInDate?.toLocaleTimeString()}` : "Now in the network") : undefined}</div>
+          <div className={styles.profile_status}>{props?.account?.id !== props?.id ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
         </div>
 
         {/* wrapper picture */}
@@ -199,7 +198,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             ) : (
               <NavLink className={styles.navLink_message} to={`${editConstant.path}${profileConstant.path}`}>
                 <Button className={styles.button} variant="contained">
-                  <FontAwesomeIcon className={styles.icon} icon={faPencilAlt} />
+                  {/* <FontAwesomeIcon className={styles.icon} icon={faPencilAlt} /> */}
                   Edit profile
                 </Button>
               </NavLink>
