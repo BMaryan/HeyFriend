@@ -5,11 +5,6 @@ import { FirebaseError } from "firebase/app";
 // firebase
 export interface FirebaseType<T> extends QueryDocumentSnapshot<T> {}
 
-//
-// export interface Type {
-//   id: string;
-// }
-
 // auth
 export interface AuthType extends Auth {}
 
@@ -102,7 +97,7 @@ export interface CommentType {
   id: string;
   accountId?: string;
   postId?: string;
-  dateCreated?: Date;
+  dateCreated?: Timestamp;
   comment: string;
   liked?: Array<LikedOfPostType>;
   answered?: Array<AnsweredOfCommentType>;
@@ -129,6 +124,3 @@ export interface HistoryType {
   push: (url: string) => void;
   goBack: () => void;
 }
-
-//
-export interface DateType {}

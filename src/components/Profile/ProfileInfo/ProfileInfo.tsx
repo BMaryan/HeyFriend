@@ -53,7 +53,7 @@ interface ProfileInfoPropsType {
   id: string;
   history: HistoryType;
   updateAccountThunk: (account: AccountType) => void;
-  createChatThunk: (participants: ParticipantsOfChatType) => any;
+  createChatThunk: (participants: Array<ParticipantsOfChatType>) => any;
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -156,15 +156,9 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <Button
                   className={styles.button}
                   style={{ textTransform: "capitalize" }}
-                  // onClick={() => {
-                  //   !isChat || isChat.length < 1
-                  //     ? props
-                  //         .createChatThunk({
-                  //           participants: [{ id: props?.account?.id }, { id: props?.id }],
-                  //         })
-                  //         .then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`))
-                  //     : props.history.push(`${chatConstant.path}/${isChat[0]?.id}`);
-                  // }}
+                  onClick={() => {
+                    !isChat || isChat.length < 1 ? props.createChatThunk([{ id: props.account?.id ? props.account?.id : "" }, { id: props?.id }]).then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`)) : props.history.push(`${chatConstant.path}/${isChat[0]?.id}`);
+                  }}
                   variant="contained">
                   Message
                   <img className={styles.beta_vershion_picture} src={betaVershion} alt="" />

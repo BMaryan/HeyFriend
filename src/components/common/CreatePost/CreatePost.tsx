@@ -12,6 +12,7 @@ import Step from "@mui/material/Step";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Media from "react-media";
+import { fb } from "../../../firebase";
 
 interface CreatePostPropsType {
   account: AccountType | null;
@@ -71,6 +72,8 @@ const CreatePost = (props: CreatePostPropsType) => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  // console.log(fb.Timestamp.now());
 
   return (
     <Modal
@@ -148,13 +151,13 @@ const CreatePost = (props: CreatePostPropsType) => {
                       <Button
                         onClick={() => {
                           if (activeStep === steps.length - 1) {
-                            // props.createPostThunk({
-                            //   accountId: props?.account?.id,
-                            //   postPhoto: props.postPhoto ? props.postPhoto : undefined,
-                            //   description: saveOwnerPost ? saveOwnerPost : "",
-                            //   // dateCreated: new Date().getTime(),
-                            //   dateCreated: new Date().getTime() / 1000,
-                            // });
+                            props.createPostThunk({
+                              id: "",
+                              accountId: props?.account?.id,
+                              postPhoto: props.postPhoto ? props.postPhoto : undefined,
+                              description: saveOwnerPost ? saveOwnerPost : "",
+                              dateCreated: fb.Timestamp.now(),
+                            });
                             props.handleClose();
                           }
                           handleNext();

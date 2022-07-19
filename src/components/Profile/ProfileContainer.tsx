@@ -24,7 +24,7 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
   createPostThunk: (post: PostType) => void;
   updateAccountThunk: (account: AccountType) => void;
-  createChatThunk: (participants: ParticipantsOfChatType) => any;
+  createChatThunk: (participants: Array<ParticipantsOfChatType>) => any;
 };
 
 export type ProfileContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;

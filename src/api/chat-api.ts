@@ -7,10 +7,10 @@ export const chatAPI = {
   //   return await onSnapshot(collection(db, "accounts"), (snapshot) => snapshot.docs);
   // },
 
-  async createChat(participants: ParticipantsOfChatType) {
-    const chat = await addDoc(collection(db, "chats"), participants);
+  async createChat(participants: Array<ParticipantsOfChatType>) {
+    const chat = await addDoc(collection(db, "chats"), { participants: [...participants] });
 
-    await updateDoc(doc(db, "chats", chat.id), { ...participants, id: chat.id });
+    await updateDoc(doc(db, "chats", chat.id), { participants: [...participants], id: chat.id });
 
     return chat;
   },

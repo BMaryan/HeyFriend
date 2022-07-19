@@ -12,6 +12,7 @@ import FooterPostReduxForm from "./FooterPostForm";
 import Checkbox from "@mui/material/Checkbox";
 import Comments from "../Comments/Comments";
 import { red } from "@mui/material/colors";
+import { fb } from "../../../../firebase";
 import Avatar from "@mui/material/Avatar";
 import styles from "../Post.module.scss";
 
@@ -36,12 +37,13 @@ export interface FooterPostFormDataType {
 
 const FooterPost = (props: FooterPostPropsType) => {
   const onSubmit = (formData: FooterPostFormDataType) => {
-    // props.createCommentThunk({
-    //   accountId: props?.account?.id,
-    //   postId: props?.post?.id,
-    //   comment: formData.comment,
-    //   dateCreated: new Date(),
-    // });
+    props.createCommentThunk({
+      id: "",
+      accountId: props?.account?.id,
+      postId: props?.post?.id,
+      comment: formData.comment,
+      dateCreated: fb.Timestamp.now(),
+    });
   };
 
   const checkClickBookmarkIcon: SavedOfPostType | undefined = props?.post?.data()?.saved ? props?.post?.data()?.saved?.find((saved: SavedOfPostType) => (saved?.id && props?.account?.id && saved?.id === props?.account?.id ? saved : undefined)) : undefined;
