@@ -19,7 +19,7 @@ interface ProfileContentPropsType {
   posts: Array<FirebaseType<PostType>>;
   id: string;
   history: HistoryType;
-  createPostThunk: any;
+  createPostThunk: (post: PostType) => void;
 }
 
 const ProfileContent = (props: ProfileContentPropsType) => {

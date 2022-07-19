@@ -12,7 +12,7 @@ interface HeaderPropsType {
   account: AccountType | null;
   messages: Array<FirebaseType<MessageType>>;
   location: LocationType;
-  signOut: any;
+  signOut: (account: AccountType) => void;
 }
 
 const Header = (props: HeaderPropsType) => {

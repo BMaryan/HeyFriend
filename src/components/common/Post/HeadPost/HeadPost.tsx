@@ -20,7 +20,7 @@ interface HeadPostPropsType {
   post: FirebaseType<PostType> | undefined;
   history: HistoryType;
   modal: boolean;
-  deletePostThunk: any;
+  deletePostThunk: (post: PostType) => void;
 }
 
 const HeadPost = (props: HeadPostPropsType) => {
@@ -86,7 +86,7 @@ const HeadPost = (props: HeadPostPropsType) => {
                 <>
                   <Button
                     onClick={() => {
-                      props.deletePostThunk(props?.post);
+                      props?.post && props.deletePostThunk(props?.post?.data());
                       props.history.push(`${profileConstant.path}/${props?.account?.id}`);
                     }}
                     className={styles.item + " " + styles.item__border + " " + styles.item__red}

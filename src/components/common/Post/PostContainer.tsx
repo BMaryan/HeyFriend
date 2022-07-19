@@ -23,12 +23,12 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchToPropsType = {
-  deletePostThunk: any;
-  updatePostThunk: any;
-  updateAccountThunk: any;
-  createCommentThunk: any;
-  updateCommentThunk: any;
-  deleteCommentThunk: any;
+  deletePostThunk: (post: PostType) => void;
+  updatePostThunk: (post: PostType) => void;
+  updateAccountThunk: (account: AccountType) => void;
+  createCommentThunk: (comment: CommentType) => void;
+  updateCommentThunk: (comment: CommentType) => void;
+  deleteCommentThunk: (comment: CommentType) => void;
 };
 
 export type PostContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;

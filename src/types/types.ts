@@ -1,8 +1,26 @@
 import { QueryDocumentSnapshot, Timestamp } from "firebase/firestore";
-import { User, UserInfo } from "firebase/auth";
+import { Auth, AuthError, User, UserInfo } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 
 // firebase
 export interface FirebaseType<T> extends QueryDocumentSnapshot<T> {}
+
+//
+// export interface Type {
+//   id: string;
+// }
+
+// auth
+export interface AuthType extends Auth {}
+
+export interface AuthErrorType extends FirebaseError {}
+
+export interface SignType {
+  name?: string;
+  surname?: string;
+  email: string;
+  password: string;
+}
 
 // account
 export interface FollowersOfAccountType {
@@ -90,14 +108,6 @@ export interface CommentType {
   answered?: Array<AnsweredOfCommentType>;
 }
 
-// auth
-export interface AuthType extends User, UserInfo {}
-
-export interface CredentialType {}
-
-// CredentialType
-// AuthError name check
-
 // react router dom
 export interface ParamsOfMatchType {
   id: string;
@@ -119,3 +129,6 @@ export interface HistoryType {
   push: (url: string) => void;
   goBack: () => void;
 }
+
+//
+export interface DateType {}

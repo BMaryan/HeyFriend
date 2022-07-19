@@ -1,7 +1,7 @@
 import React from "react";
 import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
 import { getPictureBase64 } from "../../../core/methods/methods";
-import { AccountType } from "../../../types/types";
+import { AccountType, PostType } from "../../../types/types";
 import CreatePostReduxForm from "./CreatePostForm";
 import Backdrop from "@mui/material/Backdrop";
 import styles from "./CreatePost.module.scss";
@@ -16,9 +16,9 @@ import Media from "react-media";
 interface CreatePostPropsType {
   account: AccountType | null;
   postPhoto: string | null;
-  createPostThunk: any;
-  open: any;
+  open: boolean;
   handleClose: () => void;
+  createPostThunk: (post: PostType) => void;
   setPostPhoto: (postPhoto: string | null) => void;
 }
 
@@ -27,24 +27,24 @@ export interface CreatePostFormDataType {
 }
 
 const CreatePost = (props: CreatePostPropsType) => {
-  const [files, setFiles] = React.useState([]);
+  // const [files, setFiles] = React.useState([]);
   const hiddenFileInput = React.useRef<any>(null);
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-  const [saveOwnerPost, setSaveOwnerPost] = React.useState(null);
+  const [skipped, setSkipped] = React.useState(new Set<number>());
+  const [saveOwnerPost, setSaveOwnerPost] = React.useState<string | null>(null);
   const steps = ["Crop", "Edit", <Media query={{ maxWidth: 540 }}>{(matches) => (!matches ? "Create new post" : "Create")}</Media>];
 
   const onSubmit = (formData: CreatePostFormDataType) => {
     setSaveOwnerPost(formData?.create_post);
   };
 
-  const handleGetFiles = (event: any) => {
+  const handleGetFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     // setFiles([files, event.target.files]);
 
     getPictureBase64({ event: event, method: props.setPostPhoto });
   };
 
-  const isStepSkipped = (step: any) => {
+  const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
 
@@ -64,7 +64,7 @@ const CreatePost = (props: CreatePostPropsType) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     hiddenFileInput.current.click();
   };
 
@@ -148,12 +148,13 @@ const CreatePost = (props: CreatePostPropsType) => {
                       <Button
                         onClick={() => {
                           if (activeStep === steps.length - 1) {
-                            props.createPostThunk({
-                              accountId: props?.account?.id,
-                              postPhoto: props.postPhoto,
-                              description: saveOwnerPost,
-                              dateCreated: new Date(),
-                            });
+                            // props.createPostThunk({
+                            //   accountId: props?.account?.id,
+                            //   postPhoto: props.postPhoto ? props.postPhoto : undefined,
+                            //   description: saveOwnerPost ? saveOwnerPost : "",
+                            //   // dateCreated: new Date().getTime(),
+                            //   dateCreated: new Date().getTime() / 1000,
+                            // });
                             props.handleClose();
                           }
                           handleNext();

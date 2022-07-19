@@ -7,8 +7,7 @@ interface BodyPostPropsType {
   account: AccountType | null;
   post: FirebaseType<PostType> | undefined;
   checkClickFavoriteBorder: LikedOfPostType | undefined;
-  updatePostThunk: any;
-  // updatePostThunk: (post: PostType) => void;
+  updatePostThunk: (post: PostType) => void;
 }
 
 const BodyPost = (props: BodyPostPropsType) => {
@@ -16,7 +15,7 @@ const BodyPost = (props: BodyPostPropsType) => {
     <div className={styles.body}>
       {props?.post?.data()?.postPhoto ? (
         <Button className={styles.button_image} variant="text">
-          <div className={styles.bodyPhoto} title={!props.checkClickFavoriteBorder ? "Double-click if you liked the post" : "Double-click if you don't like the post"} onDoubleClick={() => (!props.checkClickFavoriteBorder ? props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? [...(props.post.data().liked as Array<FirebaseType<PostType>>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? props?.post?.data()?.liked?.filter((liked: LikedOfPostType) => liked?.id !== props?.account?.id) : [] }))} style={{ backgroundImage: `url(${props?.post?.data()?.postPhoto})` }}></div>
+          <div className={styles.bodyPhoto} title={!props.checkClickFavoriteBorder ? "Double-click if you liked the post" : "Double-click if you don't like the post"} onDoubleClick={() => (!props.checkClickFavoriteBorder ? props?.post && props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? [...(props.post.data().liked as Array<any>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.post && props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? props?.post?.data()?.liked?.filter((liked: LikedOfPostType) => liked?.id !== props?.account?.id) : [] }))} style={{ backgroundImage: `url(${props?.post?.data()?.postPhoto})` }}></div>
         </Button>
       ) : (
         <></>

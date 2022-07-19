@@ -16,7 +16,7 @@ interface EditPropsType {
   loading: boolean;
   history: HistoryType;
   id: string;
-  updateAccountThunk: any;
+  updateAccountThunk: (account: AccountType) => void;
 }
 
 const Edit = (props: EditPropsType) => {

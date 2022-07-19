@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FirebaseType, PostType, SavedOfPostType } from "../../types/types";
+import { AccountType, FirebaseType, HistoryType, PostType, SavedOfPostType } from "../../types/types";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { getPictureBase64, removePicture } from "../../core/methods/methods";
@@ -19,8 +19,8 @@ import Box from "@mui/material/Box";
 interface DuplicateCodeFuncType {
   children: React.ReactElement;
   class: string;
-  open: any;
-  close: any;
+  open: boolean;
+  close: () => void;
 }
 
 const DuplicateCodeFunc = (props: DuplicateCodeFuncType) => {
@@ -44,7 +44,7 @@ const DuplicateCodeFunc = (props: DuplicateCodeFuncType) => {
 
 interface ChangeProfilePictureContainerType {
   account: AccountType | null;
-  updateAccountThunk: any;
+  updateAccountThunk: (account: AccountType) => void;
   openModalAvatarProfile: boolean;
   setOpenModalAvatarProfile: (isOpened: boolean) => void;
 }
@@ -88,7 +88,7 @@ export const ChangeProfilePictureContainer = (props: ChangeProfilePictureContain
 
 interface ContainerCoverProfileType {
   account: AccountType | null;
-  updateAccountThunk: any;
+  updateAccountThunk: (account: AccountType) => void;
   openModalCoverProfile: boolean;
   setOpenModalCoverProfile: (isOpened: boolean) => void;
 }
@@ -132,7 +132,7 @@ export const ContainerCoverProfile = (props: ContainerCoverProfileType) => {
 
 interface ToggleShowCurrentPostContainerType {
   currentPost: FirebaseType<PostType>;
-  history: any;
+  history: HistoryType;
   openModalCurrentPost: boolean;
   setOpenModalCurrentPost: (isOpened: boolean) => void;
 }

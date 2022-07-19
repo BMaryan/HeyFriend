@@ -2,14 +2,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { getOnlineInSessionStorage } from "./../core/methods/methods";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { AccountType } from "../types/types";
-
-type SignType = {
-  name?: string;
-  surname?: string;
-  email: string;
-  password: string;
-};
+import { AccountType, SignType } from "../types/types";
 
 export const authAPI = {
   async signUp(credentials: SignType) {

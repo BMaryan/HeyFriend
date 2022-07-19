@@ -16,7 +16,7 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchToPropsType = {
-  signOut: any;
+  signOut: (account: AccountType) => void;
 };
 
 export type HeaderContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;

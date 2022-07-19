@@ -4,7 +4,7 @@ import { setIsOnlineToSessionStorage } from "../../../core/methods/methods";
 import { getAccountSelector } from "../../../redux/account-selectors";
 import { profileConstant } from "../../../core/constants/constants";
 import { authActions, signUp } from "../../../redux/auth-reducer";
-import { AccountType } from "../../../types/types";
+import { AccountType, SignType } from "../../../types/types";
 import { onAuthStateChanged } from "firebase/auth";
 import { StateType } from "../../../redux/store";
 import { useHistory } from "react-router-dom";
@@ -21,9 +21,8 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchToPropsType = {
-  signUp: any;
-  setAuth: any;
-  authSuccess: any;
+  authSuccess: () => void;
+  signUp: (credentials: SignType) => void;
 };
 
 export type SignUpContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
@@ -45,4 +44,4 @@ const SignUpContainer = (props: SignUpContainerPropsType) => {
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ account: getAccountSelector(state), loading: authLoadingSelector(state), authError: authErrorSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { signUp, setAuth: authActions.setAuth, authSuccess: authActions.authSuccess })(SignUpContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { signUp, authSuccess: authActions.authSuccess })(SignUpContainer);

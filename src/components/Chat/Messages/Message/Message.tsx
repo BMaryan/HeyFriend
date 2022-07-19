@@ -18,7 +18,7 @@ interface MessagePropsType {
   messageValue: string;
   chatWithAccount: FirebaseType<AccountType> | undefined;
   setMessageValue: (value: string) => void;
-  deleteMessageThunk: any;
+  deleteMessageThunk: (message: MessageType) => void;
 }
 
 const Message = (props: MessagePropsType) => {

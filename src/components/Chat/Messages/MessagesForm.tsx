@@ -57,7 +57,7 @@ const InputOfMessage = (props: ChatFormPropsType) => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(event: any) => {
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     // getPictureBase64({ event: event, method: props.updateAccountThunk, account: props.account, key: "coverPhoto" });
                     // props.setOpenModalCoverProfile(false);
                   }}
@@ -79,7 +79,7 @@ const MessagesForm = (props: InjectedFormProps<MessagesFormDataType, ChatFormPro
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.form_content}>
-        <Field name={`send_message_${props.account?.id}`} value={props.messageValue} onChange={(e: any) => props.setMessageValue(e.target.value)} type="text" placeholder="Search contact" component={InputOfMessage} />
+        <Field name={`send_message_${props.account?.id}`} value={props.messageValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)} type="text" placeholder="Search contact" component={InputOfMessage} />
       </div>
     </form>
   );

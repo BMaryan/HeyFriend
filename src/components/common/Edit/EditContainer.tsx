@@ -1,6 +1,6 @@
 import React from "react";
-import { getAccountsSelector, getAccountSelector } from "../../../redux/account-selectors";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
+import { getAccountSelector } from "../../../redux/account-selectors";
 import { updateAccountThunk } from "../../../redux/account-reducer";
 import { useHistory, useParams } from "react-router-dom";
 import { AccountType } from "../../../types/types";
@@ -11,14 +11,13 @@ import Edit from "./Edit";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
-  // accounts: Array<AccountType>;
   account: AccountType | null;
   authError: string | null;
   loading: boolean;
 };
 
 type MapDispatchToPropsType = {
-  updateAccountThunk: any;
+  updateAccountThunk: (account: AccountType) => void;
 };
 
 export type EditContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;

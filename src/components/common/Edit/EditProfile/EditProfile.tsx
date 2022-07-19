@@ -11,7 +11,7 @@ interface EditProfilePropsType {
   account: AccountType | null;
   authError: string | null;
   loading: boolean;
-  updateAccountThunk: any;
+  updateAccountThunk: (account: AccountType) => void;
 }
 
 export interface EditProfileFormDataType {
@@ -23,7 +23,7 @@ const EditProfile = (props: EditProfilePropsType) => {
   const [open, setOpen] = React.useState(false);
 
   const onSubmit = (formData: EditProfileFormDataType) => {
-    props.updateAccountThunk({ ...props.account, ...formData });
+    props.account && props.updateAccountThunk({ ...props.account, ...formData });
     setOpen(true);
   };
 

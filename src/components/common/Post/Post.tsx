@@ -16,11 +16,11 @@ interface PostPropsType {
   kindOfPost: typeof defaultPostConstant | typeof modalPostConstant | typeof onlyBodyPostConstant;
   id: string;
   modal: boolean;
-  deletePostThunk: any;
-  updatePostThunk: any;
-  deleteCommentThunk: any;
-  updateCommentThunk: any;
-  createCommentThunk: any;
+  deletePostThunk: (post: PostType) => void;
+  updatePostThunk: (post: PostType) => void;
+  deleteCommentThunk: (comment: CommentType) => void;
+  updateCommentThunk: (comment: CommentType) => void;
+  createCommentThunk: (comment: CommentType) => void;
 }
 
 const Post = (props: PostPropsType) => {

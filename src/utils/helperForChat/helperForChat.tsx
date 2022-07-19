@@ -177,19 +177,19 @@ export const ContainerOfSmiles = (props: ContainerOfSmilesPropsType) => {
 };
 
 interface ContainerOfMessagePropsType {
-  anchorEl: null | HTMLElement;
   open: boolean;
+  anchorEl: null | HTMLElement;
   message: FirebaseType<MessageType>;
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
   handleClose: () => void;
-  deleteMessageThunk: any;
+  deleteMessageThunk: (message: MessageType) => void;
 }
 
 export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
   return (
     <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
       <MenuItem className={styles.menu_item}>Edit</MenuItem>
-      <MenuItem className={styles.menu_item} onClick={() => props.deleteMessageThunk(props.message)}>
+      <MenuItem className={styles.menu_item} onClick={() => props.deleteMessageThunk(props.message.data())}>
         Delete
       </MenuItem>
     </Menu>

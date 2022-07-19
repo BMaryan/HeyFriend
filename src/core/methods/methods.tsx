@@ -28,18 +28,14 @@ type GetPictureBase64Type = {
 
 export const getPictureBase64 = async (props: GetPictureBase64Type) => {
   if (props.event.target.files.length) {
-    try {
-      const file = props.event.target.files[0];
-      const image = await resizeFile(file);
-      // const reader = new FileReader();
-      // reader.readAsDataURL(file);
+    const file = props.event.target.files[0];
+    const image = await resizeFile(file);
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
 
-      // reader.onloadend = function () {
-      props.method(props.account && props.key ? { ...props.account, [props.key]: image } : image);
-      // };
-    } catch (error) {
-      alert(error);
-    }
+    // reader.onloadend = function () {
+    props.method(props.account && props.key ? { ...props.account, [props.key]: image } : image);
+    // };
   }
 };
 

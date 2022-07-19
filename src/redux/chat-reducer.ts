@@ -40,7 +40,7 @@ export const setChatsThunk = (): ThunkAction<Promise<DocumentData<ChatType>>, St
 export const setMessagesThunk = (): ThunkAction<Promise<DocumentData<MessageType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "messages"), (snapshot) => dispatch(chatActions.setMessages(snapshot.docs)));
 
 export const createChatThunk =
-  (participants: ParticipantsOfChatType): ThunkAction<Promise<object>, StateType, unknown, ActionsType> =>
+  (participants: ParticipantsOfChatType): ThunkAction<Promise<any>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
     chatAPI.createChat(participants);
 

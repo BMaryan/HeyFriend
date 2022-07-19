@@ -13,8 +13,8 @@ interface CommentsPropsType {
   comments: Array<FirebaseType<CommentType>>;
   modal: boolean;
   history: HistoryType;
-  deleteCommentThunk: any;
-  updateCommentThunk: any;
+  deleteCommentThunk: (comment: CommentType) => void;
+  updateCommentThunk: (comment: CommentType) => void;
 }
 
 const Comments = (props: CommentsPropsType) => {
@@ -35,7 +35,7 @@ const Comments = (props: CommentsPropsType) => {
           {areComments.length > 1 && !props.modal ? (
             <button
               className={styles.button_more}
-              onClick={(e: any) => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement> & React.ChangeEvent<HTMLButtonElement>) => {
                 setMore(!more);
                 e.target.hidden = true;
                 props.history.push(`${photoConstant.path}/${props?.post?.id}`);

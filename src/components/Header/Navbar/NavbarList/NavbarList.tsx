@@ -18,7 +18,7 @@ import Chip from "@mui/material/Chip";
 
 interface NavbarListPropsType {
   account: AccountType | null;
-  signOut: any;
+  signOut: (account: AccountType) => void;
 }
 
 const NavbarList = (props: NavbarListPropsType) => {
@@ -102,7 +102,7 @@ const NavbarList = (props: NavbarListPropsType) => {
 
         <MenuItem
           onClick={() => {
-            props.signOut(props.account);
+            props.account && props.signOut(props.account);
             removeOnlineInSessionStorage();
           }}
           sx={{ borderTop: "1px solid var(--bgWhite233)" }}

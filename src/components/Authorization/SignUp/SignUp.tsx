@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthorizationHelperContainer, InformationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import { profileConstant, signInConstant } from "../../../core/constants/constants";
-import { AccountType } from "../../../types/types";
+import { AccountType, SignType } from "../../../types/types";
 import commonStyle from "../Authorization.module.scss";
 import { Redirect } from "react-router-dom";
 import SignUpReduxForm from "./SignUpForm";
@@ -10,16 +10,19 @@ interface SignUpPropsType {
   account: AccountType | null;
   loading: boolean;
   authError: string | null;
-  authSuccess: any;
-  signUp: any;
+  authSuccess: () => void;
+  signUp: (credentials: SignType) => void;
 }
 
 export interface SignUpFormDataType {
-  sign_up: string;
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
 }
 
 const SignUp = (props: SignUpPropsType) => {
-  const onSubmit = (formData: any) => {
+  const onSubmit = (formData: SignUpFormDataType) => {
     if (formData) {
       props.signUp({ ...formData });
       // return Object.keys(formData).map((item) => (formData[item] = ""));

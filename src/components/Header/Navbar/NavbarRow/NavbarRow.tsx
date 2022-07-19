@@ -29,11 +29,10 @@ interface DuplicateCodeFuncPropsType {
 
 const DuplicateCodeFunc = (props: DuplicateCodeFuncPropsType) => {
   let [count, setCount] = React.useState(0);
-  const [invisible, setInvisible] = React.useState(false);
 
-  React.useEffect(() => {
-    setCount(++count);
-  }, [props.messages.length]);
+  // React.useEffect(() => {
+  //   setCount(++count);
+  // }, [props.messages.length]);
 
   return (
     <div className={styles.wrapper_nav_link}>
@@ -51,8 +50,6 @@ const DuplicateCodeFunc = (props: DuplicateCodeFuncPropsType) => {
 };
 
 const NavbarRow = (props: NavbarRowPropsType) => {
-  const [count, setCount] = React.useState(0);
-
   return (
     <div className={!props.isBottomNavigation ? styles.navbar_row : styles.navbar_row_bottom}>
       <DuplicateCodeFunc messages={props.messages} path={`${mainConstant.path}`} icon={<Checkbox icon={props.location.pathname !== mainConstant.path ? <HomeOutlinedIcon className={styles.icon} /> : <Home className={styles.icon_active} />} sx={{ "& .MuiSvgIcon-root": { fontSize: 23 } }} />} exact isBottomNavigation={props.isBottomNavigation} />

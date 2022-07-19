@@ -24,10 +24,10 @@ interface FooterPostPropsType {
   checkClickFavoriteBorder: LikedOfPostType | undefined;
   history: HistoryType;
   modal: boolean;
-  updatePostThunk: any;
-  deleteCommentThunk: any;
-  updateCommentThunk: any;
-  createCommentThunk: any;
+  updatePostThunk: (post: PostType) => void;
+  deleteCommentThunk: (comment: CommentType) => void;
+  updateCommentThunk: (comment: CommentType) => void;
+  createCommentThunk: (comment: CommentType) => void;
 }
 
 export interface FooterPostFormDataType {
@@ -36,12 +36,12 @@ export interface FooterPostFormDataType {
 
 const FooterPost = (props: FooterPostPropsType) => {
   const onSubmit = (formData: FooterPostFormDataType) => {
-    props.createCommentThunk({
-      accountId: props?.account?.id,
-      postId: props?.post?.id,
-      comment: formData.comment,
-      dateCreated: new Date(),
-    });
+    // props.createCommentThunk({
+    //   accountId: props?.account?.id,
+    //   postId: props?.post?.id,
+    //   comment: formData.comment,
+    //   dateCreated: new Date(),
+    // });
   };
 
   const checkClickBookmarkIcon: SavedOfPostType | undefined = props?.post?.data()?.saved ? props?.post?.data()?.saved?.find((saved: SavedOfPostType) => (saved?.id && props?.account?.id && saved?.id === props?.account?.id ? saved : undefined)) : undefined;
@@ -53,13 +53,13 @@ const FooterPost = (props: FooterPostPropsType) => {
       <div className={styles.footer_head}>
         <div className={styles.features}>
           <div className={styles.features_left}>
-            <Checkbox onClick={() => (!props.checkClickFavoriteBorder ? props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? [...(props?.post?.data()?.liked as Array<LikedOfPostType>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? props?.post?.data()?.liked?.filter((liked: LikedOfPostType) => liked?.id !== props?.account?.id) : [] }))} className={styles.icon} color="default" icon={!props.checkClickFavoriteBorder ? <FavoriteBorder /> : <Favorite sx={{ color: red[600] }} />} checkedIcon={props.checkClickFavoriteBorder ? <Favorite sx={{ color: red[600] }} /> : <FavoriteBorder />} />
+            <Checkbox onClick={() => (!props.checkClickFavoriteBorder ? props?.post && props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? [...(props?.post?.data()?.liked as Array<any>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.post && props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? props?.post?.data()?.liked?.filter((liked: LikedOfPostType) => liked?.id !== props?.account?.id) : [] }))} className={styles.icon} color="default" icon={!props.checkClickFavoriteBorder ? <FavoriteBorder /> : <Favorite sx={{ color: red[600] }} />} checkedIcon={props.checkClickFavoriteBorder ? <Favorite sx={{ color: red[600] }} /> : <FavoriteBorder />} />
             <Checkbox onClick={() => props.history.push(`${photoConstant.path}/${props?.post?.id}`)} className={styles.icon} color="default" size="medium" icon={<Comment />} checkedIcon={<Comment />} />
             <Checkbox className={styles.icon} color="default" size="medium" icon={<ShareOutlinedIcon />} checkedIcon={<ShareOutlinedIcon />} />
           </div>
 
           <div className={styles.features_right}>
-            <Checkbox className={styles.icon} onClick={() => (!checkClickBookmarkIcon ? props?.updatePostThunk({ ...props?.post?.data(), saved: props?.post?.data()?.saved ? [...(props?.post?.data()?.saved as Array<SavedOfPostType>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.updatePostThunk({ ...props?.post?.data(), saved: props?.post?.data()?.saved ? props?.post?.data()?.saved?.filter((saved: SavedOfPostType) => saved?.id !== props?.account?.id) : [] }))} color="default" size="medium" icon={!checkClickBookmarkIcon ? <BookmarkBorderIcon /> : <BookmarkIcon />} checkedIcon={checkClickBookmarkIcon ? <BookmarkIcon /> : <BookmarkBorderIcon />} />
+            <Checkbox className={styles.icon} onClick={() => (!checkClickBookmarkIcon ? props?.post && props?.updatePostThunk({ ...props?.post?.data(), saved: props?.post?.data()?.saved ? [...(props?.post?.data()?.saved as Array<any>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.post && props?.updatePostThunk({ ...props?.post?.data(), saved: props?.post?.data()?.saved ? props?.post?.data()?.saved?.filter((saved: SavedOfPostType) => saved?.id !== props?.account?.id) : [] }))} color="default" size="medium" icon={!checkClickBookmarkIcon ? <BookmarkBorderIcon /> : <BookmarkIcon />} checkedIcon={checkClickBookmarkIcon ? <BookmarkIcon /> : <BookmarkBorderIcon />} />
           </div>
         </div>
         <div className={styles.numberOfLikes}>

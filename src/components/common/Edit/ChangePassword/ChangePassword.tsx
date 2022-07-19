@@ -63,7 +63,7 @@ const ChangePassword = (props: ChangePasswordPropsType) => {
     }
   };
 
-  const showSnackbar = (severityProp: any, messageProp: any) => {
+  const showSnackbar = (severityProp: AlertColor, messageProp: string) => {
     setSeverity(severityProp);
     setMessage(messageProp);
     setOpen(true);

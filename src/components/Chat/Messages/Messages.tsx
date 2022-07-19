@@ -10,8 +10,8 @@ interface MessagesPropsType {
   messages: Array<FirebaseType<MessageType>>;
   currentChat: FirebaseType<ChatType> | undefined;
   chatWithAccount: FirebaseType<AccountType> | undefined;
-  addMessageThunk: any;
-  deleteMessageThunk: any;
+  addMessageThunk: (message: MessageType) => void;
+  deleteMessageThunk: (message: MessageType) => void;
 }
 
 export interface MessagesFormDataType {

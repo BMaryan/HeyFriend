@@ -11,8 +11,8 @@ interface ChatPropsType {
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
   id: string;
-  addMessageThunk: any;
-  deleteMessageThunk: any;
+  addMessageThunk: (message: MessageType) => void;
+  deleteMessageThunk: (message: MessageType) => void;
 }
 
 const Chat = (props: ChatPropsType) => {
@@ -30,7 +30,7 @@ const Chat = (props: ChatPropsType) => {
 
         {/* field search people */}
         <div className={styles.wrapper_input}>
-          <input type="search" value={searchValue} onChange={(e: any) => setSearchValue(e.target.value)} placeholder="Search contact" />
+          <input type="search" value={searchValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)} placeholder="Search contact" />
         </div>
 
         <Dialogs accounts={props.accounts} account={props.account} chats={props.chats} messages={props.messages} searchValue={searchValue} />

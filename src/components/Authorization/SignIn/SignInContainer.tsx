@@ -3,8 +3,8 @@ import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-sele
 import { setIsOnlineToSessionStorage } from "../../../core/methods/methods";
 import { getAccountSelector } from "../../../redux/account-selectors";
 import { authActions, signIn } from "../../../redux/auth-reducer";
+import { AccountType, SignType } from "../../../types/types";
 import { onAuthStateChanged } from "firebase/auth";
-import { AccountType } from "../../../types/types";
 import { StateType } from "../../../redux/store";
 import { useHistory } from "react-router-dom";
 import { auth } from "../../../firebase";
@@ -20,7 +20,7 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchToPropsType = {
-  signIn: any;
+  signIn: (credentials: SignType) => void;
   authSuccess: () => void;
 };
 

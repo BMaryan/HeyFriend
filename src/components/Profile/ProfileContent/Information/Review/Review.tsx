@@ -7,7 +7,7 @@ interface ReviewPropsType {
 }
 
 interface ReturnEmailPropsType {
-  value: any;
+  value: string | undefined;
 }
 
 const ReturnEmail = (props: ReturnEmailPropsType) => {

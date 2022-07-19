@@ -24,6 +24,7 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import Backdrop from "@mui/material/Backdrop";
+import { AnyAaaaRecord } from "dns";
 
 interface CommentPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -32,8 +33,8 @@ interface CommentPropsType {
   post: FirebaseType<PostType> | undefined;
   comment: FirebaseType<CommentType>;
   modal: boolean;
-  deleteCommentThunk: any;
-  updateCommentThunk: any;
+  deleteCommentThunk: (comment: CommentType) => void;
+  updateCommentThunk: (comment: CommentType) => void;
 }
 
 const Comment = (props: CommentPropsType) => {
@@ -86,7 +87,7 @@ const Comment = (props: CommentPropsType) => {
                       <span className={styles.description}>{fullDes ? props?.comment?.data()?.comment : props?.comment?.data()?.comment?.slice(0, 100) + "..."}</span>
                       <button
                         className={styles.button_more}
-                        onClick={(e: any) => {
+                        onClick={(e: React.MouseEvent<HTMLButtonElement> & React.ChangeEvent<HTMLButtonElement>) => {
                           setFullDes(true);
                           e.target.hidden = true;
                         }}>
@@ -98,7 +99,7 @@ const Comment = (props: CommentPropsType) => {
 
                 <Typography sx={{ display: "flex", justifyContent: "space-between" }} component="span">
                   <Typography sx={{ display: "inline" }} component="span" variant="subtitle2" color="text.primary">
-                    <Checkbox className={styles.icon} onClick={() => (!checkClickFavoriteBorder ? props?.updateCommentThunk({ ...props?.comment?.data(), liked: props?.comment?.data()?.liked ? [...(props?.comment?.data()?.liked as Array<LikedOfCommentType>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.updateCommentThunk({ ...props?.comment?.data(), liked: props?.comment?.data()?.liked ? props?.comment?.data()?.liked?.filter((commentLike: LikedOfCommentType) => commentLike?.id !== props?.account?.id) : [] }))} color="default" icon={!checkClickFavoriteBorder ? <FavoriteBorder fontSize="small" /> : <Favorite sx={{ color: red[600] }} fontSize="small" />} checkedIcon={checkClickFavoriteBorder ? <Favorite sx={{ color: red[600] }} fontSize="small" /> : <FavoriteBorder fontSize="small" />} />
+                    <Checkbox className={styles.icon} onClick={() => (!checkClickFavoriteBorder ? props?.comment && props?.updateCommentThunk({ ...props?.comment?.data(), liked: props?.comment?.data()?.liked ? [...(props?.comment?.data()?.liked as Array<any>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.comment && props?.updateCommentThunk({ ...props?.comment?.data(), liked: props?.comment?.data()?.liked ? props?.comment?.data()?.liked?.filter((commentLike: LikedOfCommentType) => commentLike?.id !== props?.account?.id) : [] }))} color="default" icon={!checkClickFavoriteBorder ? <FavoriteBorder fontSize="small" /> : <Favorite sx={{ color: red[600] }} fontSize="small" />} checkedIcon={checkClickFavoriteBorder ? <Favorite sx={{ color: red[600] }} fontSize="small" /> : <FavoriteBorder fontSize="small" />} />
                     {props?.comment?.data()?.liked && (props?.comment?.data()?.liked?.length as number) > 0 ? props?.comment?.data()?.liked?.length : 0} {props?.comment?.data()?.liked && (props?.comment?.data()?.liked?.length as number) > 1 ? "likes" : "like"}
                   </Typography>
 
@@ -136,7 +137,7 @@ const Comment = (props: CommentPropsType) => {
 
                 <Button
                   onClick={() => {
-                    props.deleteCommentThunk(props.comment);
+                    props.comment && props.deleteCommentThunk(props.comment.data());
                   }}
                   className={stylesCommon.item + " " + stylesCommon.item__border + " " + stylesCommon.item__red}
                   variant="text">
@@ -156,7 +157,7 @@ const Comment = (props: CommentPropsType) => {
                 ) : (
                   <Button
                     onClick={() => {
-                      props.deleteCommentThunk(props.comment);
+                      props.comment && props.deleteCommentThunk(props.comment.data());
                     }}
                     className={stylesCommon.item + " " + stylesCommon.item__border + " " + stylesCommon.item__red}
                     variant="text">

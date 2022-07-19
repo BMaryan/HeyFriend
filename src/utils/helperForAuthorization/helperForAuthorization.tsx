@@ -21,7 +21,7 @@ interface InformationContainerPropsType {
   subtitle: string;
   linkTo: string;
   buttonText: string;
-  authSuccess: any;
+  authSuccess: () => void;
 }
 
 export const InformationContainer = (props: InformationContainerPropsType) => {

@@ -37,7 +37,7 @@ interface WrapperCreateFieldPropsType {
   validate?: Array<FiledValidatorType>;
   error?: string;
   component: typeof InputField | typeof Textarea | "input" | "textarea";
-  onReset?: any;
+  onReset?: () => void;
 }
 
 export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
@@ -49,7 +49,7 @@ export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
     showPassword: false,
   });
 
-  const handleChange = (prop: string) => (event: any) => {
+  const handleChange = (prop: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -60,7 +60,7 @@ export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
     });
   };
 
-  const handleMouseDownPassword = (event: any) => {
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 

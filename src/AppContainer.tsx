@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, ChatType, CommentType, FirebaseType, MessageType, ParamsOfMatchType, PostType } from "./types/types";
+import { AccountType, AuthType, ChatType, CommentType, FirebaseType, MessageType, ParamsOfMatchType, PostType } from "./types/types";
 import { accountActions, setAccountsThunk, setAccountThunk, updateAccountThunk } from "./redux/account-reducer";
 import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
 import { getAccountSelector, getAccountsSelector } from "./redux/account-selectors";
@@ -9,7 +9,7 @@ import { setCommentsThunk, setPostsThunk } from "./redux/post-reducer";
 import { setChatsThunk, setMessagesThunk } from "./redux/chat-reducer";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setAuthSelector } from "./redux/auth-selectors";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { authActions } from "./redux/auth-reducer";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -23,24 +23,23 @@ type OwnPropsType = {};
 type MapStateToPropsType = {
   accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  auth: object | null;
+  auth: AuthType | null;
   posts: Array<FirebaseType<PostType>>;
   comments: Array<FirebaseType<CommentType>>;
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
 };
 
-// fix
 type MapDispatchToPropsType = {
-  setAuth: (credentials: object | null) => void;
+  setAuth: (credentials: AuthType | null) => void;
   setAccount: (account: AccountType | null) => void;
-  setAccountsThunk: any;
-  setAccountThunk: any;
-  setPostsThunk: any;
-  setChatsThunk: any;
-  setMessagesThunk: any;
-  setCommentsThunk: any;
-  updateAccountThunk: any;
+  setAccountsThunk: () => void;
+  setAccountThunk: (user: User) => void;
+  setPostsThunk: () => void;
+  setChatsThunk: () => void;
+  setMessagesThunk: () => void;
+  setCommentsThunk: () => void;
+  updateAccountThunk: (account: AccountType) => void;
 };
 
 export type AppContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
@@ -53,7 +52,7 @@ const AppContainer = (props: AppContainerPropsType) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        props.setAuth(user);
+        props.setAuth(auth);
         props.setAccountThunk(user);
       } else {
         props.setAuth(null);

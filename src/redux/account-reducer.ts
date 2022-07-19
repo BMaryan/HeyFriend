@@ -43,7 +43,7 @@ export const accountActions = {
 export const setAccountsThunk = (): ThunkAction<Promise<DocumentData<AccountType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(accountActions.setAccounts(snapshot.docs)));
 
 export const setAccountThunk =
-  (user: User & AccountType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
+  (user: User): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>
   async (dispatch) => {
     const resp = await accountAPI.setAccount(user);
 

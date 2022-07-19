@@ -16,7 +16,7 @@ const FooterPostForm = (props: InjectedFormProps<FooterPostFormDataType, FooterP
       <IconButton className={styles.button_icon}>
         <SentimentSatisfiedOutlinedIcon className={styles.icon} />
       </IconButton>
-      <Field name="comment" onChange={(e: any) => setValue(e.target.value)} className={styles.input} placeholder="Add a comment..." component="input" />
+      <Field name="comment" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} className={styles.input} placeholder="Add a comment..." component="input" />
       <Button className={styles.button_post} type="submit" disabled={!value} variant="text">
         Post
       </Button>

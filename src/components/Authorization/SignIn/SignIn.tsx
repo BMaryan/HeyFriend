@@ -1,8 +1,8 @@
 import React from "react";
 import { AuthorizationHelperContainer, InformationContainer } from "../../../utils/helperForAuthorization/helperForAuthorization";
 import { mainConstant, signUpConstant } from "../../../core/constants/constants";
+import { AccountType, SignType } from "../../../types/types";
 import commonStyle from "../Authorization.module.scss";
-import { AccountType } from "../../../types/types";
 import { Redirect } from "react-router-dom";
 import SignInReduxForm from "./SignInForm";
 import styles from "./SignIn.module.scss";
@@ -13,11 +13,12 @@ interface SignInPropsType {
   authSuccess: () => void;
   authError: string | null;
   loading: boolean;
-  signIn: any;
+  signIn: (credentials: SignType) => void;
 }
 
 export interface SignInFormDataType {
-  sign_in: string;
+  email: string;
+  password: string;
 }
 
 const SignIn = (props: SignInPropsType) => {

@@ -18,8 +18,8 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchToPropsType = {
-  addMessageThunk: any;
-  deleteMessageThunk: any;
+  addMessageThunk: (message: MessageType) => void;
+  deleteMessageThunk: (message: MessageType) => void;
 };
 
 export type ChatContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;

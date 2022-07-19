@@ -1,10 +1,9 @@
 import React from "react";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
-import { AccountType, ChatType, FirebaseType, PostType } from "../../types/types";
+import { AccountType, ChatType, FirebaseType, ParticipantsOfChatType, PostType } from "../../types/types";
 import { updateAccountThunk } from "../../redux/account-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
 import { getChatsSelector } from "../../redux/chat-selectors";
-import { setAuthSelector } from "../../redux/auth-selectors";
 import { createChatThunk } from "../../redux/chat-reducer";
 import { createPostThunk } from "../../redux/post-reducer";
 import { useHistory } from "react-router-dom";
@@ -18,16 +17,14 @@ type OwnPropsType = {};
 type MapStateToPropsType = {
   accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
-  auth: object | null;
   posts: Array<FirebaseType<PostType>>;
   chats: Array<FirebaseType<ChatType>>;
 };
 
-// fix
 type MapDispatchToPropsType = {
-  createPostThunk: any;
-  updateAccountThunk: any;
-  createChatThunk: any;
+  createPostThunk: (post: PostType) => void;
+  updateAccountThunk: (account: AccountType) => void;
+  createChatThunk: (participants: ParticipantsOfChatType) => any;
 };
 
 export type ProfileContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
@@ -47,6 +44,6 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
   return <Profile {...props} id={id} history={history} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), posts: setPostsSelector(state), chats: getChatsSelector(state) });
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), posts: setPostsSelector(state), chats: getChatsSelector(state) });
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { createPostThunk, updateAccountThunk, createChatThunk })(ProfileContainer);

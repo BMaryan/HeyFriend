@@ -1,6 +1,7 @@
 import React from "react";
 import { chatConstant, editConstant, friendsConstant, mainConstant, photoConstant, profileConstant, signInConstant, signUpConstant } from "./core/constants/constants";
 import CurrentPostContainer from "./components/common/CurrentPost/CurrentPostContainer";
+import { AuthType, FirebaseType, HistoryType, MessageType } from "./types/types";
 import SignInContainer from "./components/Authorization/SignIn/SignInContainer";
 import SignUpContainer from "./components/Authorization/SignUp/SignUpContainer";
 import NavbarRow from "./components/Header/Navbar/NavbarRow/NavbarRow";
@@ -10,7 +11,6 @@ import { withSuspense } from "./hoc/withSuspense/withSuspense";
 import NotFound from "./components/common/NotFound/NotFound";
 import MainContainer from "./components/Main/MainContainer";
 import { Route, Switch } from "react-router-dom";
-import { FirebaseType, HistoryType, MessageType } from "./types/types";
 import "./App.scss";
 
 const FriendsContainer = React.lazy(() => import("./components/Friends/FriendsContainer"));
@@ -19,7 +19,7 @@ const ChatContainer = React.lazy(() => import("./components/Chat/ChatContainer")
 
 type AppPropsType = {
   messages: Array<FirebaseType<MessageType>>;
-  auth: object | null;
+  auth: AuthType | null;
   history: HistoryType;
   id: string;
 };
