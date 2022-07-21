@@ -61,6 +61,7 @@ export interface ChatType {
 
 export interface MessageType {
   id: string;
+  accountId?: string;
   chatId?: string;
   message: string;
   date: Timestamp;

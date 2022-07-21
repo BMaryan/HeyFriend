@@ -16,7 +16,9 @@ export const chatAPI = {
   },
 
   async addMessage(message: MessageType) {
-    await addDoc(collection(db, "messages"), message);
+    const res = await addDoc(collection(db, "messages"), message);
+
+    await updateDoc(doc(db, "messages", res.id), { ...message, id: res.id });
   },
 
   async updateChat(chat: ChatType) {

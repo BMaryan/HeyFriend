@@ -3,6 +3,7 @@ import { AccountType, ChatType, FirebaseType, MessageType } from "../../../types
 import MessagesReduxForm from "./MessagesForm";
 import styles from "./Messages.module.scss";
 import Message from "./Message/Message";
+import { fb } from "../../../firebase";
 
 interface MessagesPropsType {
   id: string;
@@ -31,12 +32,13 @@ const Messages = (props: MessagesPropsType) => {
   const onSubmit = (formData: MessagesFormDataType) => {
     console.log(formData[`send_message_${props.account?.id}`]);
 
-    // props.addMessageThunk({
-    //   id: props.account?.id,
-    //   chatId: props.currentChat?.id,
-    //   message: `${formData?.send_message}_${props.account?.id}`,
-    //   date: new Date(),
-    // });
+    props.addMessageThunk({
+      id: "",
+      accountId: props?.account?.id,
+      chatId: props.currentChat?.id,
+      message: formData[`send_message_${props.account?.id}`],
+      date: fb.Timestamp.now(),
+    });
   };
 
   return (

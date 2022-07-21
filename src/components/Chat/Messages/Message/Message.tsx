@@ -32,9 +32,9 @@ const Message = (props: MessagePropsType) => {
     setAnchorEl(null);
   };
 
-  const isMyAccount = props?.message?.data()?.id === props?.account?.id;
+  const isMyAccount = props?.message?.data()?.accountId === props?.account?.id;
   const checkDateOfMessage = props.prevMessage?.data().date.toDate().toLocaleDateString() !== props.message?.data().date.toDate().toLocaleDateString();
-  const checkMessageOfAccont = props.prevMessage?.data().id !== props.message?.data().id || checkDateOfMessage;
+  const checkMessageOfAccont = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
 
   return (
     <div>
