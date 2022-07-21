@@ -11,6 +11,7 @@ interface MessagesPropsType {
   messages: Array<FirebaseType<MessageType>>;
   currentChat: FirebaseType<ChatType> | undefined;
   chatWithAccount: FirebaseType<AccountType> | undefined;
+  setTyping: (typing: string | null) => void;
   addMessageThunk: (message: MessageType) => void;
   deleteMessageThunk: (message: MessageType) => void;
 }
@@ -30,15 +31,21 @@ const Messages = (props: MessagesPropsType) => {
   });
 
   const onSubmit = (formData: MessagesFormDataType) => {
-    console.log(formData[`send_message_${props.account?.id}`]);
+    // console.log(formData[`send_message_${props.currentChat?.id}_${props.account?.id}`]);
 
-    props.addMessageThunk({
-      id: "",
-      accountId: props?.account?.id,
-      chatId: props.currentChat?.id,
-      message: formData[`send_message_${props.account?.id}`],
-      date: fb.Timestamp.now(),
-    });
+    // props.addMessageThunk({
+    //   id: "",
+    //   accountId: props?.account?.id,
+    //   chatId: props.currentChat?.id,
+    //   message: formData[`send_message_${props.currentChat?.id}_${props.account?.id}`],
+    //   date: fb.Timestamp.now(),
+    // });
+
+    Object.keys(formData).map((item) => (formData[item] = ""));
+  };
+
+  const onChange = (formData: MessagesFormDataType) => {
+    props.setTyping(Object.keys(formData)[0]?.split("_")[Object.keys(formData)[0]?.split("_").length - 1] || null);
   };
 
   return (
@@ -51,7 +58,7 @@ const Messages = (props: MessagesPropsType) => {
         <div className={styles.default_content}>Default content</div>
       )}
 
-      <MessagesReduxForm account={props.account} messageValue={messageValue} setMessageValue={setMessageValue} onSubmit={onSubmit} />
+      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={messageValue} setMessageValue={setMessageValue} onSubmit={onSubmit} onChange={onChange} />
     </div>
   );
 };

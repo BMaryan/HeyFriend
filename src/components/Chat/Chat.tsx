@@ -10,7 +10,9 @@ interface ChatPropsType {
   account: AccountType | null;
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
+  currentChat: FirebaseType<ChatType> | undefined;
   id: string;
+  setTyping: (typing: string | null) => void;
   addMessageThunk: (message: MessageType) => void;
   deleteMessageThunk: (message: MessageType) => void;
 }
@@ -19,14 +21,14 @@ const Chat = (props: ChatPropsType) => {
   const [toggleDetails, setToggleDetails] = React.useState(true);
   const [searchValue, setSearchValue] = React.useState("");
 
-  const currentChat: FirebaseType<ChatType> | undefined = props.id ? props?.chats?.find((chat: ChatType) => chat?.id === props.id) : undefined;
-  const chatWithAccount: FirebaseType<AccountType> | undefined = props?.accounts?.find((account: FirebaseType<AccountType>) => (currentChat?.data()?.participants ? currentChat?.data()?.participants?.find((participant: ParticipantsOfChatType) => (account?.id === participant?.id && account?.id !== props?.account?.id ? account : undefined)) : undefined));
+  const chatWithAccount: FirebaseType<AccountType> | undefined = props?.accounts?.find((account: FirebaseType<AccountType>) => (props.currentChat?.data()?.participants ? props.currentChat?.data()?.participants?.find((participant: ParticipantsOfChatType) => (account?.id === participant?.id && account?.id !== props?.account?.id ? account : undefined)) : undefined));
+  const typingOfAccount: FirebaseType<AccountType> | undefined = props.accounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.typing && account.id !== props.account?.id);
 
   return (
     <div className={styles.chat}>
       {/* dialogs content */}
       <div className={styles.dialogs}>
-        <Head account={props.account} toggleShowContent={true} toggleDetails={toggleDetails} chatWithAccount={chatWithAccount} setToggleDetails={setToggleDetails} />
+        <Head account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={true} toggleDetails={toggleDetails} chatWithAccount={chatWithAccount} setToggleDetails={setToggleDetails} />
 
         {/* field search people */}
         <div className={styles.wrapper_input}>
@@ -38,9 +40,9 @@ const Chat = (props: ChatPropsType) => {
 
       {/* messages content */}
       <div className={styles.messages}>
-        {props.id ? <Head account={props.account} toggleShowContent={false} toggleDetails={toggleDetails} chatWithAccount={chatWithAccount} setToggleDetails={setToggleDetails} /> : undefined}
+        {props.id ? <Head account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={false} toggleDetails={toggleDetails} chatWithAccount={chatWithAccount} setToggleDetails={setToggleDetails} /> : undefined}
 
-        {props.id ? !toggleDetails ? <ChatDetails chatWithAccount={chatWithAccount} currentChat={currentChat} /> : <Messages account={props.account} messages={props.messages} id={props.id} currentChat={currentChat} chatWithAccount={chatWithAccount} addMessageThunk={props.addMessageThunk} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
+        {props.id ? !toggleDetails ? <ChatDetails chatWithAccount={chatWithAccount} currentChat={props.currentChat} /> : <Messages account={props.account} messages={props.messages} id={props.id} currentChat={props.currentChat} chatWithAccount={chatWithAccount} setTyping={props.setTyping} addMessageThunk={props.addMessageThunk} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
 
         {!props.id && <DefaultViewMessages />}
       </div>

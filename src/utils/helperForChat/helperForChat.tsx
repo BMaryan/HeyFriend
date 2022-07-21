@@ -1,6 +1,6 @@
 import React from "react";
-import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
 import { AccountType, ChatType, FirebaseType, MessageType } from "../../types/types";
+import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../core/constants/constants";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -50,6 +50,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 interface HeadPropsType {
   account: AccountType | null;
+  typingOfAccount: FirebaseType<AccountType> | undefined;
   toggleShowContent: boolean;
   toggleDetails: boolean;
   chatWithAccount: FirebaseType<AccountType> | undefined;
@@ -87,8 +88,7 @@ export const Head = (props: HeadPropsType) => {
           </div>
           <div>
             <div className={dialogStyles.login}>{props?.chatWithAccount?.data() ? props?.chatWithAccount?.data()?.surname + " " + props?.chatWithAccount?.data()?.name : <></>}</div>
-
-            <div className={dialogStyles.date}>{!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network"}</div>
+            <div className={dialogStyles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : !isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network"}</div>
           </div>
         </NavLink>
       </div>

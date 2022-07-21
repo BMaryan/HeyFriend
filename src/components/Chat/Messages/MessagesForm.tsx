@@ -6,7 +6,7 @@ import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { AccountType } from "../../../types/types";
+import { AccountType, ChatType, FirebaseType } from "../../../types/types";
 import { MessagesFormDataType } from "./Messages";
 import IconButton from "@mui/material/IconButton";
 import styles from "./Messages.module.scss";
@@ -15,6 +15,7 @@ import { getPictureBase64 } from "../../../core/methods/methods";
 
 interface ChatFormPropsType {
   account: AccountType | null;
+  currentChat: FirebaseType<ChatType> | undefined;
   input?: WrappedFieldInputProps;
   meta?: WrappedFieldMetaProps;
   messageValue: string;
@@ -79,7 +80,7 @@ const MessagesForm = (props: InjectedFormProps<MessagesFormDataType, ChatFormPro
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.form_content}>
-        <Field name={`send_message_${props.account?.id}`} value={props.messageValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)} type="text" placeholder="Search contact" component={InputOfMessage} />
+        <Field name={`send_message_${props.currentChat?.id}_${props.account?.id}`} value={props.messageValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)} type="text" placeholder="Search contact" component={InputOfMessage} />
       </div>
     </form>
   );

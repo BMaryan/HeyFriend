@@ -56,6 +56,7 @@ export interface ParticipantsOfChatType {
 
 export interface ChatType {
   id: string;
+  typing?: string | null;
   participants?: Array<ParticipantsOfChatType>;
 }
 
