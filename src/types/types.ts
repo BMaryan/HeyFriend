@@ -39,8 +39,8 @@ export interface AccountType {
   surname?: string;
   email?: string;
   password?: string;
-  coverPhoto?: string;
   avatar?: string;
+  coverPhoto?: string;
   status?: string;
   aboutMe?: string;
   isOnline?: string | null;
@@ -60,12 +60,17 @@ export interface ChatType {
   participants?: Array<ParticipantsOfChatType>;
 }
 
+export interface MediaOfMessageType {
+  media: string;
+}
+
 export interface MessageType {
   id: string;
   accountId?: string;
   chatId?: string;
   message: string;
   date: Timestamp;
+  medias: Array<MediaOfMessageType>;
 }
 
 // post
