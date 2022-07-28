@@ -22,9 +22,11 @@ export const chatAPI = {
   },
 
   async updateChat(chat: ChatType) {
-    const res = await getDoc(doc(db, "chats", chat.id));
+    await updateDoc(doc(db, "chats", chat.id), { ...chat });
+  },
 
-    await updateDoc(doc(db, "chats", chat.id), { ...chat, id: res.id });
+  async updateMessage(message: MessageType) {
+    await updateDoc(doc(db, "messages", message.id), { ...message });
   },
 
   async deleteMessage(message: MessageType) {
