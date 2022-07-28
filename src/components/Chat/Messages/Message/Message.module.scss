@@ -29,12 +29,14 @@
   display: flex;
 }
 
-/* wrapper my picture */
+.wrapper_picture {
+  @include position(sticky, 92%, unset, unset, unset);
+}
+
 .wrapper_myPicture {
   margin-left: 10px;
 }
 
-/* wrapper other picture */
 .wrapper_otherPicture {
   margin-right: 10px;
 }
@@ -51,11 +53,13 @@
 }
 
 .wrapper_message_content {
-  width: 100%;
+  max-width: 70%;
+  @include position(relative);
+  @include ds-position(unset, unset, column);
+  row-gap: 10px;
 }
 
 .message {
-  max-width: 65%;
 }
 
 .message,
@@ -99,4 +103,15 @@
   & > span > div {
     background-color: unset;
   }
+}
+
+// to display buttons when cursor is on hover
+.wrapper_my_toggle_buttons {
+  @include position(absolute, 50%, unset, unset, -50px);
+  transform: translate(-50%, -50%);
+}
+
+.wrapper_other_toggle_buttons {
+  @include position(absolute, 50%, -50px, unset, unset);
+  transform: translate(50%, -50%);
 }
