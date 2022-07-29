@@ -29,6 +29,10 @@ export const chatAPI = {
     await updateDoc(doc(db, "messages", message.id), { ...message });
   },
 
+  async deleteChat(chat: ChatType) {
+    await deleteDoc(doc(db, "chats", chat.id));
+  },
+
   async deleteMessage(message: MessageType) {
     await deleteDoc(doc(db, "messages", message.id));
   },
