@@ -25,6 +25,7 @@
   width: 38px;
   @include image-position(cover, center);
   margin: 0 10px 0 0;
+  cursor: pointer;
 }
 
 .logo_main_letter {

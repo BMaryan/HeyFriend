@@ -6,7 +6,6 @@ import NavbarRow from "./Navbar/NavbarRow/NavbarRow";
 import { LocationType } from "../../types/types";
 import Logo from "../../assets/images/insta.png";
 import HeaderReduxForm from "./HeaderForm";
-import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 interface HeaderPropsType extends HeaderContainerPropsType {
@@ -20,18 +19,16 @@ export interface HeaderFormDataPropsType {
 const Header = (props: HeaderPropsType) => {
   const onsubmit = (formData: HeaderFormDataPropsType) => {};
 
-  function refreshPage() {
+  const refreshPage = () => {
     window.location.href = mainConstant.path;
-  }
+  };
 
   return (
     <div className={styles.header}>
       <div className={"container" + " " + styles.header_container}>
         {/* logo */}
         <div className={styles.header_logo}>
-          <NavLink to={mainConstant.path} onClick={() => refreshPage()}>
-            <img src={Logo} alt="" />
-          </NavLink>
+          <img src={Logo} alt="" onClick={refreshPage} />
 
           <HeaderReduxForm accounts={props.accounts} account={props.account} onChange={onsubmit} />
         </div>
