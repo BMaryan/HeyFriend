@@ -1,6 +1,6 @@
 import React from "react";
 import { ContainerOfMessage, ContainerOfSmiles } from "../../../../utils/helperForChat/helperForChat";
-import { AccountType, FirebaseType, MessageType } from "../../../../types/types";
+import { AccountType, FirebaseType, MediaOfMessageType, MessageType } from "../../../../types/types";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../../core/constants/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -10,6 +10,10 @@ import { NavLink } from "react-router-dom";
 import styles from "./Message.module.scss";
 import Chip from "@mui/material/Chip";
 import moment from "moment";
+
+//
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
 interface MessagePropsType {
   account: AccountType | null;
@@ -25,6 +29,7 @@ const Message = (props: MessagePropsType) => {
   const [toggleIcon, setToggleIcon] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -32,13 +37,13 @@ const Message = (props: MessagePropsType) => {
     setAnchorEl(null);
   };
 
-  const isMyAccount = props?.message?.data()?.accountId === props?.account?.id;
-  const checkDateOfMessage = props.prevMessage?.data().date.toDate().toLocaleDateString() !== props.message?.data().date.toDate().toLocaleDateString();
-  const checkMessageOfAccont = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
+  const isMyAccount: boolean = props?.message?.data()?.accountId === props?.account?.id;
+  const checkDateOfMessage = props.prevMessage?.data().date && props.message?.data().date && props.prevMessage?.data().date.toDate().toLocaleDateString() !== props.message?.data().date.toDate().toLocaleDateString();
+  const checkMessageOfAccount = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
 
   return (
     <div>
-      {props.prevMessage?.data() && checkDateOfMessage && (
+      {checkDateOfMessage && (
         <Divider className={styles.divider}>
           <Chip label={props?.message?.data()?.date.toDate().toDateString()} />
         </Divider>
@@ -52,7 +57,7 @@ const Message = (props: MessagePropsType) => {
           handleClose();
         }}>
         <div className={`${isMyAccount ? styles.wrapper_myPicture : styles.wrapper_otherPicture}  ${styles.wrapper_picture}`}>
-          {checkMessageOfAccont && (
+          {checkMessageOfAccount && (
             <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : props?.chatWithAccount?.data()?.id}`}>
               <img src={isMyAccount ? props?.account?.avatar || defaultAvatar : props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
             </NavLink>
@@ -60,25 +65,42 @@ const Message = (props: MessagePropsType) => {
         </div>
 
         <div className={styles.wrapper_message_content}>
-          <div className={`${styles.wrapper_message} ${isMyAccount ? styles.wrapper_message_myMessage : ""}`}>
-            <div className={`${isMyAccount ? styles.myMessage : styles.otherMessage} ${styles.message}`}>{props?.message?.data()?.message}</div>
+          {/* media */}
+          {props?.message?.data()?.medias.length > 0 && (
+            <ImageList variant="quilted" cols={props?.message?.data()?.medias.length < 3 ? props?.message?.data()?.medias.length : 3} rowHeight={150}>
+              {props?.message?.data()?.medias.map((media: MediaOfMessageType, index: number) => (
+                // cols={(index % 2) + 2 === 0 ? 2 : 1} rows={(index % 2) - 1 === 0 ? 1 : 2}
+                <ImageListItem key={index}>
+                  <img src={media.media} srcSet={media.media} alt="" loading="lazy" />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          )}
 
-            {toggleIcon ? (
-              <>
-                <div>
-                  <IconButton onClick={handleClick}>
-                    <MoreHorizIcon fontSize="small" className={styles.icon} />
-                  </IconButton>
-                </div>
+          {/* message */}
+          {props?.message?.data()?.message && (
+            <div className={`${styles.wrapper_message} ${isMyAccount ? styles.wrapper_message_myMessage : ""}`}>
+              <div className={`${isMyAccount ? styles.myMessage : styles.otherMessage} ${styles.message}`}>{props?.message?.data()?.message}</div>
+            </div>
+          )}
 
-                {/* {open ? <ContainerOfSmiles open={open} anchorEl={anchorEl}  handleClick={handleClick} handleClose={handleClose} /> : undefined} */}
-              </>
-            ) : undefined}
-          </div>
-
+          {/* date */}
           <div className={`${styles.message_date} ${isMyAccount ? styles.message_date_myMessage : styles.message_date_otherMessage}`} title={props?.message?.data()?.date.toDate().toLocaleDateString() + " | " + props?.message?.data()?.date.toDate().toLocaleTimeString()}>
             {moment(props?.message?.data()?.date.toDate()).fromNow()}
           </div>
+
+          {/* to display buttons when cursor is on hover */}
+          {toggleIcon ? (
+            <>
+              <div className={`${isMyAccount ? styles.wrapper_my_toggle_buttons : styles.wrapper_other_toggle_buttons}`}>
+                <IconButton onClick={handleClick}>
+                  <MoreHorizIcon fontSize="small" className={styles.icon} />
+                </IconButton>
+              </div>
+
+              {/* {open ? <ContainerOfSmiles open={open} anchorEl={anchorEl} handleClick={handleClick} handleClose={handleClose} /> : undefined} */}
+            </>
+          ) : undefined}
         </div>
 
         {/* conteiner of message for editing */}

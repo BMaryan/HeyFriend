@@ -58,8 +58,10 @@ export const ChangeProfilePictureContainer = (props: ChangeProfilePictureContain
           <label>
             Upload photo
             <input
-              onChange={(event) => {
-                getPictureBase64({ event: event, method: props.updateAccountThunk, account: props.account, key: "avatar" });
+              onChange={(event: any) => {
+                getPictureBase64({ event }).then((image: string | undefined) => {
+                  props.account && props.updateAccountThunk({ ...props.account, avatar: image });
+                });
                 props.setOpenModalAvatarProfile(false);
               }}
               id="file-upload"
@@ -102,8 +104,10 @@ export const ContainerCoverProfile = (props: ContainerCoverProfileType) => {
           <label>
             Upload cover photo
             <input
-              onChange={(event) => {
-                getPictureBase64({ event: event, method: props.updateAccountThunk, account: props.account, key: "coverPhoto" });
+              onChange={(event: any) => {
+                getPictureBase64({ event }).then((image: string | undefined) => {
+                  props.account && props.updateAccountThunk({ ...props.account, coverPhoto: image });
+                });
                 props.setOpenModalCoverProfile(false);
               }}
               id="file-upload"

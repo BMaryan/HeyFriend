@@ -1,30 +1,34 @@
 import React from "react";
 import { Field, InjectedFormProps, reduxForm, WrappedFieldInputProps, WrappedFieldMetaProps } from "redux-form";
+import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../types/types";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { ContainerOfSmiles } from "../../../utils/helperForChat/helperForChat";
 import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
+import { getPictureBase64 } from "../../../core/methods/methods";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { AccountType, ChatType, FirebaseType } from "../../../types/types";
 import { MessagesFormDataType } from "./Messages";
 import IconButton from "@mui/material/IconButton";
 import styles from "./Messages.module.scss";
 import Divider from "@mui/material/Divider";
-import { getPictureBase64 } from "../../../core/methods/methods";
 
-interface ChatFormPropsType {
+interface ChatFormPropsType extends InputOfMessagePropsType {
   account: AccountType | null;
   currentChat: FirebaseType<ChatType> | undefined;
-  input?: WrappedFieldInputProps;
-  meta?: WrappedFieldMetaProps;
-  messageValue: string;
-  setMessageValue: (value: string) => void;
 }
 
-const InputOfMessage = (props: ChatFormPropsType) => {
-  const { input, meta, ...restProps } = props;
-  const [emoji, setEmoji] = React.useState<number | null>(null);
+interface InputOfMessagePropsType {
+  input?: WrappedFieldInputProps;
+  meta?: WrappedFieldMetaProps;
+  medias: Array<MediaOfMessageType>;
+  messageValue: string;
+  setMessageValue: (value: string) => void;
+  setMedias: (medias: Array<MediaOfMessageType>) => void;
+}
+
+const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMessagePropsType> & InputOfMessagePropsType) => {
+  let [emoji, setEmoji] = React.useState<string | null>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -40,8 +44,9 @@ const InputOfMessage = (props: ChatFormPropsType) => {
       {open ? <ContainerOfSmiles open={open} anchorEl={anchorEl} setEmoji={setEmoji} handleClick={handleClick} handleClose={handleClose} /> : undefined}
 
       <OutlinedInput
-        {...input}
-        {...restProps}
+        {...props.input}
+        type="text"
+        placeholder="Search contact"
         fullWidth={true}
         startAdornment={
           <InputAdornment sx={{ height: "100%" }} position="start">
@@ -52,19 +57,23 @@ const InputOfMessage = (props: ChatFormPropsType) => {
         }
         endAdornment={
           <InputAdornment sx={{ height: "100%", display: "flex", columnGap: "10px" }} position="end">
-            <IconButton className={styles.button_media} edge="start">
-              <label>
+            <label htmlFor="icon-button-file">
+              <input
+                id="icon-button-file"
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  getPictureBase64({ event }).then((image: string | undefined) => {
+                    image && props.setMedias([...props.medias, { media: image }]);
+                  });
+                }}
+              />
+              <IconButton component="span" edge="start">
                 <CollectionsOutlinedIcon />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    // getPictureBase64({ event: event, method: props.updateAccountThunk, account: props.account, key: "coverPhoto" });
-                    // props.setOpenModalCoverProfile(false);
-                  }}
-                />
-              </label>
-            </IconButton>
+              </IconButton>
+            </label>
+
             <Divider sx={{ height: 28 }} orientation="vertical" />
             <IconButton type="submit" color="primary" sx={{ p: "10px" }} disabled={((props.meta?.invalid || props.meta?.submitting) && !props.meta?.touched) || !props.meta?.dirty} edge="end">
               <SendOutlinedIcon />
@@ -80,7 +89,7 @@ const MessagesForm = (props: InjectedFormProps<MessagesFormDataType, ChatFormPro
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.form_content}>
-        <Field name={`send_message_${props.currentChat?.id}_${props.account?.id}`} value={props.messageValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)} type="text" placeholder="Search contact" component={InputOfMessage} />
+        <Field {...props} name={`send_message_${props.currentChat?.id}_${props.account?.id}`} value={props.messageValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)} component={InputOfMessage} />
       </div>
     </form>
   );

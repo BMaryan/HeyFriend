@@ -1,5 +1,7 @@
 @import "../../core/styles/main.scss";
 
+$ht-media: 300px;
+
 .head {
   height: 70px;
   max-height: 100%;
@@ -106,38 +108,146 @@
   flex: 1;
   padding: $pd-content;
   row-gap: 10px;
+  overflow: hidden;
 }
 
-// head
+.media_title {
+  font-size: 20px;
+}
+
+// head chat detail
 .head_detail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.head_detail_avatar {
+.detail_wrapper_avatar {
+}
+
+.detail_avatar {
   height: 80px !important;
   width: 80px !important;
 }
 
-// body
-.body_detail {
-  display: flex;
-  flex: 1;
-}
-
-.body_detail_fullName {
+.detail_fullName {
   color: black;
   font-size: 20px;
   text-decoration: none;
+  text-align: center;
 }
 
-.body_detail_status {
+.detail_status {
+  text-align: center;
+}
+
+// body chat detail
+.body_detail {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.wrapper_participants {
+}
+
+.wrapper_details {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper_detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
 }
 
-// footer
+.detail_count {
+}
+
+.detail_title {
+  color: $grey600;
+}
+
+.wrapper_medias {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.media_content {
+  display: flex;
+  flex: 1;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  column-gap: 10px;
+}
+
+.media {
+  max-width: 30%;
+  flex-shrink: 0;
+  padding: $pd-content 0;
+  box-sizing: border-box;
+  display: flex;
+
+  & img {
+    height: 100%;
+    width: 100%;
+    @include image-position(cover, center);
+  }
+}
+
+// footer chat detail
 .footer_detail {
   width: 100%;
 }
 
 .footer_detail_button {
+}
+
+// container of message and media
+.media_dialog {
+  & > div > div {
+    width: 500px;
+    display: flex;
+  }
+}
+
+// head
+.dialog_title {
+  display: flex;
+  justify-content: center;
+}
+
+// body
+.dialog_content {
+  padding: 0 !important;
+}
+
+.media {
+  height: $ht-media !important;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+
+.stepper_button_back {
+  color: white;
+  position: absolute;
+  top: calc(($ht-media / 2) - 24px);
+  right: 0;
+}
+
+.stepper_button_next {
+  color: white;
+  position: absolute;
+  top: calc(($ht-media / 2) - 24px);
+  left: 0;
 }

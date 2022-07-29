@@ -24,7 +24,7 @@ interface ProfileContentPropsType {
 
 const ProfileContent = (props: ProfileContentPropsType) => {
   const [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
-  const [postPhoto, setPostPhoto] = React.useState<string | null>(null);
+  const [postPhoto, setPostPhoto] = React.useState<string | undefined>(undefined);
   const [open, setOpen] = React.useState(false);
 
   const currentAccount: FirebaseType<AccountType> | undefined = props?.accounts ? props.accounts.find((account: FirebaseType<AccountType>) => (account?.data()?.id === props?.id ? account : undefined)) : undefined;
@@ -32,7 +32,7 @@ const ProfileContent = (props: ProfileContentPropsType) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setPostPhoto(null);
+    setPostPhoto(undefined);
   };
 
   return (
