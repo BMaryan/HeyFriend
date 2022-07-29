@@ -205,7 +205,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
             {currentMessagesOfChat.map((message: FirebaseType<MessageType>) =>
               message.data().medias ? (
                 message.data().medias.map((media: MediaOfMessageType, index: number) => (
-                  <div key={index} className={styles.media}>
+                  <div key={index} className={styles.wrapper_media}>
                     <img src={media.media} alt="" />
                   </div>
                 ))

@@ -1,6 +1,6 @@
 import React from "react";
 import { AccountType, FirebaseType, LocationType, MessageType } from "../../types/types";
-import { getAccountSelector } from "../../redux/account-selectors";
+import { getAccountSelector, getAccountsSelector } from "../../redux/account-selectors";
 import { getMessagesSelector } from "../../redux/chat-selectors";
 import { signOut } from "../../redux/auth-reducer";
 import { useLocation } from "react-router-dom";
@@ -11,6 +11,7 @@ import Header from "./Header";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   messages: Array<FirebaseType<MessageType>>;
 };
@@ -43,6 +44,6 @@ const HeaderContainer = (props: HeaderContainerPropsType) => {
   return <Header {...props} location={location} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({ account: getAccountSelector(state), messages: getMessagesSelector(state) });
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), messages: getMessagesSelector(state) });
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { signOut })(HeaderContainer);

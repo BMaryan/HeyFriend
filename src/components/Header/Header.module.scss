@@ -76,18 +76,60 @@
   width: 50px;
   font-size: 0;
   border: 1px solid $grey400;
-  padding: 0 0 0 50px;
+  padding: 0 0 0 45px;
   pointer-events: none;
+}
+
+// search menu
+.search_menu {
+  height: 300px;
+  width: 100%;
+  min-width: 220px;
+  background: white;
+  @include ds-position(unset, unset, column);
+  @include position(absolute, calc(100% + 11px), unset, unset, unset);
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.32));
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.search_menu_item {
+  & a {
+    color: black;
+    text-decoration: none;
+    @include ds-position(unset, center);
+    column-gap: 10px;
+
+    & img {
+      width: 100%;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  }
+}
+
+.search_default {
+  color: $grey600;
+  @include ds-position(center, center);
+  flex: 1;
+  padding: $pd-content;
+}
+
+/* menu_item */
+.menu > div ul li {
+  width: 100%;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .search_icon {
   height: 100%;
   color: $grey400;
-  font-size: 13px;
-  border-right: 1px solid $grey400;
-  border-radius: 50%;
-  @include position(absolute, underline, underline, underline, 0);
-  padding: 0 13px 0 13px;
+  border-right: 1px solid $grey400 !important;
+  @include position(absolute !important, unset, unset, unset, 0px);
   cursor: pointer;
 }
 
