@@ -16,11 +16,11 @@ import { fb } from "../../../firebase";
 
 interface CreatePostPropsType {
   account: AccountType | null;
-  postPhoto: string | null;
+  postPhoto: string | undefined;
   open: boolean;
   handleClose: () => void;
   createPostThunk: (post: PostType) => void;
-  setPostPhoto: (postPhoto: string | null) => void;
+  setPostPhoto: (postPhoto: string | undefined) => void;
 }
 
 export interface CreatePostFormDataType {
@@ -39,10 +39,13 @@ const CreatePost = (props: CreatePostPropsType) => {
     setSaveOwnerPost(formData?.create_post);
   };
 
-  const handleGetFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleGetFiles = (event: React.ChangeEvent<HTMLInputElement> | any) => {
     // setFiles([files, event.target.files]);
 
-    getPictureBase64({ event: event, method: props.setPostPhoto });
+    getPictureBase64({ event }).then((image: string | undefined) => {
+      props.setPostPhoto(image);
+    });
+    // getPictureBase64({ event: event, method: props.setPostPhoto });
   };
 
   const isStepSkipped = (step: number) => {
