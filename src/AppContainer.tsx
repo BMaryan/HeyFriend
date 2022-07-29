@@ -6,7 +6,6 @@ import { getAccountSelector, getAccountsSelector } from "./redux/account-selecto
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
 import { getCommentsSelector, setPostsSelector } from "./redux/post-selectors";
 import { setCommentsThunk, setPostsThunk } from "./redux/post-reducer";
-import { setChatsThunk, setMessagesThunk } from "./redux/chat-reducer";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setAuthSelector } from "./redux/auth-selectors";
 import { onAuthStateChanged, User } from "firebase/auth";
@@ -36,8 +35,6 @@ type MapDispatchToPropsType = {
   setAccountsThunk: () => void;
   setAccountThunk: (user: User) => void;
   setPostsThunk: () => void;
-  setChatsThunk: () => void;
-  setMessagesThunk: () => void;
   setCommentsThunk: () => void;
   updateAccountThunk: (account: AccountType) => void;
 };
@@ -85,18 +82,6 @@ const AppContainer = (props: AppContainerPropsType) => {
   }, [props?.posts?.length]);
 
   React.useEffect(() => {
-    if (props.chats) {
-      props.setChatsThunk();
-    }
-  }, [props.chats.length]);
-
-  React.useEffect(() => {
-    if (props.messages) {
-      props.setMessagesThunk();
-    }
-  }, [props.messages.length]);
-
-  React.useEffect(() => {
     if (props.comments) {
       props.setCommentsThunk();
     }
@@ -133,4 +118,4 @@ const AppContainer = (props: AppContainerPropsType) => {
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), posts: setPostsSelector(state), comments: getCommentsSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setAuth: authActions.setAuth, setAccount: accountActions.setAccount, setAccountsThunk, setAccountThunk, setPostsThunk, setChatsThunk, setMessagesThunk, setCommentsThunk, updateAccountThunk })(AppContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setAuth: authActions.setAuth, setAccount: accountActions.setAccount, setAccountsThunk, setAccountThunk, setPostsThunk, setCommentsThunk, updateAccountThunk })(AppContainer);
