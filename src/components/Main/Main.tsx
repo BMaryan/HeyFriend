@@ -6,15 +6,20 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import { profileConstant } from "../../core/constants/constants";
 import PostContainer from "../common/Post/PostContainer";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Skeleton from "@mui/material/Skeleton";
 import Divider from "@mui/material/Divider";
 import { NavLink } from "react-router-dom";
 import styles from "./Main.module.scss";
 import Chip from "@mui/material/Chip";
+import Card from "@mui/material/Card";
 
 interface MainPropsType {
   accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   posts: Array<FirebaseType<PostType>>;
+  loading: boolean;
 }
 
 const Main = (props: MainPropsType) => {
@@ -22,13 +27,40 @@ const Main = (props: MainPropsType) => {
   const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
   const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
+  // test check loading dialogs
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        {followedAccountPosts?.length !== 0 ? followedAccountPosts.sort((a: FirebaseType<PostType>, b: FirebaseType<PostType>) => b?.data()?.dateCreated?.toDate().getTime() - a?.data()?.dateCreated?.toDate().getTime())?.map((post: FirebaseType<PostType>) => <PostContainer key={post.id} modal={false} post={post} kindOfPost={defaultPostConstant} />) : undefined}
+        {loading
+          ? followedAccountPosts.map((item: any, index: any) => (
+              <Card sx={{ height: 900, display: "flex", flexDirection: "column", m: 2 }}>
+                <CardHeader avatar={<Skeleton animation="wave" variant="circular" width={40} height={40} />} title={<Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }} />} subheader={<Skeleton animation="wave" height={10} width="40%" />} />
 
-        {/* default content */}
+                <Skeleton sx={{ display: "flex", flex: 1 }} animation="wave" variant="rectangular" />
+
+                <CardContent>
+                  <React.Fragment>
+                    <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+                    <Skeleton animation="wave" height={10} width="80%" />
+                  </React.Fragment>
+                </CardContent>
+              </Card>
+            ))
+          : followedAccountPosts?.length !== 0
+          ? followedAccountPosts.sort((a: FirebaseType<PostType>, b: FirebaseType<PostType>) => b?.data()?.dateCreated?.toDate().getTime() - a?.data()?.dateCreated?.toDate().getTime())?.map((post: FirebaseType<PostType>) => <PostContainer key={post.id} modal={false} post={post} kindOfPost={defaultPostConstant} />)
+          : undefined}
+
+        {/* default content for content */}
         {(followedAccountPosts && followedAccountPosts?.length === 0) || !followedAccountPosts ? (
           <div className={styles.default_content}>
             <div className={styles.default_content__wrapper_icon}>{}</div>
@@ -38,11 +70,7 @@ const Main = (props: MainPropsType) => {
         ) : undefined}
       </div>
 
-      {/* 
-
-
-
-      /* sideBar right */}
+      {/* sideBar right */}
       <div className={styles.main_sideBar_right}>
         <div className={styles.sideBar_right_content}>
           <div className={styles.wrapper_contact}>
@@ -111,7 +139,7 @@ const Main = (props: MainPropsType) => {
               )
             : undefined}
 
-          {/* default content */}
+          {/* default content for sidebar */}
           {recommendation.length < 1 || !recommendation ? (
             <div className={styles.default_content}>
               <div className={styles.default_content__wrapper_icon}>

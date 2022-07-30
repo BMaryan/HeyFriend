@@ -43,7 +43,7 @@ export interface AccountType {
   coverPhoto?: string;
   status?: string;
   aboutMe?: string;
-  isOnline?: string | null;
+  isOnline?: string | null | undefined;
   metadata?: MetadataOfAccountType;
   followers?: Array<FollowersOfAccountType>;
   following?: Array<FollowingOfAccountType>;

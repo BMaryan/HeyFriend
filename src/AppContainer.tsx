@@ -1,11 +1,9 @@
 import React from "react";
-import { AccountType, AuthType, ChatType, CommentType, FirebaseType, MessageType, ParamsOfMatchType, PostType } from "./types/types";
 import { accountActions, setAccountsThunk, setAccountThunk, updateAccountThunk } from "./redux/account-reducer";
+import { AccountType, AuthType, ChatType, FirebaseType, MessageType, ParamsOfMatchType } from "./types/types";
 import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
 import { getAccountSelector, getAccountsSelector } from "./redux/account-selectors";
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
-import { getCommentsSelector, setPostsSelector } from "./redux/post-selectors";
-import { setCommentsThunk, setPostsThunk } from "./redux/post-reducer";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setAuthSelector } from "./redux/auth-selectors";
 import { onAuthStateChanged, User } from "firebase/auth";
@@ -23,8 +21,6 @@ type MapStateToPropsType = {
   accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   auth: AuthType | null;
-  posts: Array<FirebaseType<PostType>>;
-  comments: Array<FirebaseType<CommentType>>;
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
 };
@@ -34,8 +30,6 @@ type MapDispatchToPropsType = {
   setAccount: (account: AccountType | null) => void;
   setAccountsThunk: () => void;
   setAccountThunk: (user: User) => void;
-  setPostsThunk: () => void;
-  setCommentsThunk: () => void;
   updateAccountThunk: (account: AccountType) => void;
 };
 
@@ -75,18 +69,6 @@ const AppContainer = (props: AppContainerPropsType) => {
     }
   }, [props?.accounts?.length]);
 
-  React.useEffect(() => {
-    if (props.posts) {
-      props.setPostsThunk();
-    }
-  }, [props?.posts?.length]);
-
-  React.useEffect(() => {
-    if (props.comments) {
-      props.setCommentsThunk();
-    }
-  }, [props.comments.length]);
-
   // React.useEffect(() => {
   //   if (!props.auth || !props.account) {
   //     props.setAuth(null);
@@ -103,6 +85,40 @@ const AppContainer = (props: AppContainerPropsType) => {
     document.title = namePage[0].toUpperCase() + namePage.slice(1);
   }, [history.location]);
 
+  // first visitthe site
+  // React.useEffect(() => {
+  // window.addEventListener("onunload", function () {
+  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: null });
+  // });
+  // }, []);
+
+  // React.useEffect(() => {
+  //   // window.addEventListener("onload", function () {
+  //   //   console.log("onload");
+  //   //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: setIsOnlineToSessionStorage("online") });
+  //   // });
+  //   window.onload = function () {
+  //     // if (props.account) {
+  //     console.log("onload");
+  //     // props.updateAccountThunk({ ...props?.account, isOnline: "good" });
+
+  //     setOnline("good");
+  //     // }
+  //   };
+
+  //   // window.onunload = function () {
+  //   //   console.log("unload");
+  //   //   setOnline(null);
+  //   // };
+  // }, []);
+
+  // React.useEffect(() => {
+  //   if (props.account) {
+  //     props.account && props.updateAccountThunk({ ...props?.account, isOnline: online });
+  //   }
+  // }, []);
+
+  // to show progress when account doesn't have
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
     if (!props.account) {
       return (
@@ -116,6 +132,6 @@ const AppContainer = (props: AppContainerPropsType) => {
   return <App {...props} id={id} history={history} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), posts: setPostsSelector(state), comments: getCommentsSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state) });
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), auth: setAuthSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setAuth: authActions.setAuth, setAccount: accountActions.setAccount, setAccountsThunk, setAccountThunk, setPostsThunk, setCommentsThunk, updateAccountThunk })(AppContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setAuth: authActions.setAuth, setAccount: accountActions.setAccount, setAccountsThunk, setAccountThunk, updateAccountThunk })(AppContainer);

@@ -18,6 +18,16 @@ const Dialogs = (props: DialogsPropsType) => {
   const currentChatsOfAccount: Array<FirebaseType<ChatType>> = props.chats?.filter((chat: FirebaseType<ChatType>) => chat.data().participants?.find((participant: ParticipantsOfChatType) => participant.id === props.account?.id));
   const checkArray = props.searchValue ? searchChat : currentChatsOfAccount;
 
+  // test check loading dialogs
+  // const [loading, setLoading] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 6000);
+  // }, []);
+
   return (
     <div className={styles.dialogs}>
       {currentChatsOfAccount.length > 0 ? (
