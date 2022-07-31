@@ -1,26 +1,16 @@
 import React from "react";
-import { AccountType, CommentType, FirebaseType, HistoryType, LikedOfPostType, LocationType, PostType } from "../../../types/types";
 import { defaultPostConstant, modalPostConstant, onlyBodyPostConstant } from "../../../core/constants/constantsPost";
+import { AccountType, FirebaseType, HistoryType, LikedOfPostType, LocationType } from "../../../types/types";
+import { PostContainerPropsType } from "./PostContainer";
 import FooterPost from "./FooterPost/FooterPost";
 import BodyPost from "./BodyPost/BodyPost";
 import HeadPost from "./HeadPost/HeadPost";
 import styles from "./Post.module.scss";
 
-interface PostPropsType {
-  accounts: Array<FirebaseType<AccountType>>;
-  account: AccountType | null;
-  comments: Array<FirebaseType<CommentType>>;
-  post: FirebaseType<PostType> | undefined;
+interface PostPropsType extends PostContainerPropsType {
+  id: string;
   history: HistoryType;
   location: LocationType;
-  kindOfPost: typeof defaultPostConstant | typeof modalPostConstant | typeof onlyBodyPostConstant;
-  id: string;
-  modal: boolean;
-  deletePostThunk: (post: PostType) => void;
-  updatePostThunk: (post: PostType) => void;
-  deleteCommentThunk: (comment: CommentType) => void;
-  updateCommentThunk: (comment: CommentType) => void;
-  createCommentThunk: (comment: CommentType) => void;
 }
 
 const Post = (props: PostPropsType) => {
@@ -33,14 +23,14 @@ const Post = (props: PostPropsType) => {
         {props.kindOfPost === defaultPostConstant ? (
           <>
             <HeadPost account={props.account} currentAccount={currentAccount} post={props.post} history={props.history} modal={props.modal} deletePostThunk={props.deletePostThunk} />
-            <BodyPost account={props.account} post={props.post} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} />
+            <BodyPost account={props.account} post={props.post} location={props.location} kindOfPost={props.kindOfPost} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} />
 
             <FooterPost accounts={props.accounts} account={props.account} currentAccount={currentAccount} comments={props.comments} post={props.post} history={props.history} modal={props.modal} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} createCommentThunk={props.createCommentThunk} deleteCommentThunk={props.deleteCommentThunk} updateCommentThunk={props.updateCommentThunk} />
           </>
         ) : props.kindOfPost === modalPostConstant ? (
           <div className={styles.toggle_show_post_content}>
             <div className={styles.postPhoto}>
-              <BodyPost account={props.account} post={props.post} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} />
+              <BodyPost account={props.account} post={props.post} location={props.location} kindOfPost={props.kindOfPost} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} />
             </div>
 
             <div className={styles.content}>
@@ -50,7 +40,7 @@ const Post = (props: PostPropsType) => {
           </div>
         ) : props.kindOfPost === onlyBodyPostConstant ? (
           <>
-            <BodyPost account={props.account} post={props.post} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} />
+            <BodyPost account={props.account} post={props.post} location={props.location} kindOfPost={props.kindOfPost} checkClickFavoriteBorder={checkClickFavoriteBorder} updatePostThunk={props.updatePostThunk} />
           </>
         ) : undefined}
       </div>
