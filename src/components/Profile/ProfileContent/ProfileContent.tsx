@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FirebaseType, HistoryType, PostType } from "../../../types/types";
+import { AccountType, FirebaseType, HistoryType, MediaOfPostType, PostType } from "../../../types/types";
 import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
 import { profileConstant } from "../../../core/constants/constants";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -24,7 +24,7 @@ interface ProfileContentPropsType {
 
 const ProfileContent = (props: ProfileContentPropsType) => {
   const [openModalCurrentPost, setOpenModalCurrentPost] = React.useState(false);
-  const [postPhoto, setPostPhoto] = React.useState<string | undefined>(undefined);
+  const [mediasOfPost, setMediasOfPost] = React.useState<Array<MediaOfPostType>>([]);
   const [open, setOpen] = React.useState(false);
 
   const currentAccount: FirebaseType<AccountType> | undefined = props?.accounts ? props.accounts.find((account: FirebaseType<AccountType>) => (account?.data()?.id === props?.id ? account : undefined)) : undefined;
@@ -32,7 +32,7 @@ const ProfileContent = (props: ProfileContentPropsType) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setPostPhoto(undefined);
+    setMediasOfPost([]);
   };
 
   return (
@@ -105,7 +105,7 @@ const ProfileContent = (props: ProfileContentPropsType) => {
       </div>
 
       {/* toggle show create post container */}
-      <CreatePost account={props.account} postPhoto={postPhoto} open={open} handleClose={handleClose} setPostPhoto={setPostPhoto} createPostThunk={props.createPostThunk} />
+      <CreatePost account={props.account} mediasOfPost={mediasOfPost} open={open} handleClose={handleClose} setMediasOfPost={setMediasOfPost} createPostThunk={props.createPostThunk} />
     </div>
   );
 };
