@@ -82,12 +82,16 @@ export interface SavedOfPostType {
   id: string;
 }
 
+export interface MediaOfPostType {
+  media: string;
+}
+
 export interface PostType {
   id: string;
   accountId?: string;
   dateCreated: Timestamp;
   description: string;
-  postPhoto?: string;
+  medias: Array<MediaOfPostType>;
   liked?: Array<LikedOfPostType>;
   saved?: Array<SavedOfPostType>;
 }
