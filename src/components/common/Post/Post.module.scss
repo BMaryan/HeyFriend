@@ -87,7 +87,17 @@
 .body {
   height: 100%;
   width: 100%;
-  display: flex;
+  @include ds-position(unset, unset, column);
+  @include position(relative);
+}
+
+.wrapper_swipeable {
+  @include ds-position;
+  flex: 1;
+
+  & > div {
+    flex: 1;
+  }
 }
 
 .bodyPhoto {
@@ -98,6 +108,44 @@
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
+}
+
+.collections_icon {
+  color: white !important;
+  @include position(absolute, 10px, 10px, unset, unset);
+}
+
+.mobile_stepper {
+  padding: 0 !important;
+  margin: 0 !important;
+
+  & > .dots {
+    width: 100%;
+    @include position(absolute, unset, unset, $pd-content, unset);
+    @include ds-position(center !important);
+
+    & > .dot {
+      height: 10px !important;
+      width: 10px !important;
+      background-color: $grey400 !important;
+    }
+
+    & > .dot_active {
+      background-color: $white !important;
+    }
+  }
+
+  & .button_next {
+    background: white !important;
+    @include position(absolute, 50%, 0, unset, unset);
+    transform: translate(-50%, -50%);
+  }
+
+  & > .button_back {
+    background: white !important;
+    @include position(absolute, 50%, unset, unset, 0);
+    transform: translate(50%, -50%);
+  }
 }
 
 /* footer */

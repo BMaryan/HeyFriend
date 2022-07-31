@@ -1,53 +1,131 @@
 import React from "react";
 import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
 import { getPictureBase64 } from "../../../core/methods/methods";
-import { AccountType, PostType } from "../../../types/types";
+import { AccountType, MediaOfMessageType, MediaOfPostType, PostType } from "../../../types/types";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import SpeedDialIcon from "@mui/material/SpeedDialIcon";
+import MobileStepper from "@mui/material/MobileStepper";
 import CreatePostReduxForm from "./CreatePostForm";
+import SwipeableViews from "react-swipeable-views";
+import { useTheme } from "@mui/material/styles";
+import SpeedDial from "@mui/material/SpeedDial";
 import Backdrop from "@mui/material/Backdrop";
 import styles from "./CreatePost.module.scss";
 import Stepper from "@mui/material/Stepper";
+import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import { fb } from "../../../firebase";
 import Step from "@mui/material/Step";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Media from "react-media";
-import { fb } from "../../../firebase";
 
 interface CreatePostPropsType {
   account: AccountType | null;
-  postPhoto: string | undefined;
+  mediasOfPost: Array<MediaOfPostType>;
   open: boolean;
   handleClose: () => void;
   createPostThunk: (post: PostType) => void;
-  setPostPhoto: (postPhoto: string | undefined) => void;
+  setMediasOfPost: (medias: Array<MediaOfPostType>) => void;
+}
+
+interface SwipeableViewPropsType {
+  mediasOfPost: Array<MediaOfPostType>;
+  setMediasOfPost: (medias: Array<MediaOfPostType>) => void;
 }
 
 export interface CreatePostFormDataType {
   create_post: null;
 }
 
+const SwipeableView = (props: SwipeableViewPropsType) => {
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = props.mediasOfPost.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
+  return (
+    <>
+      <SwipeableViews className={styles.wrapper_swipeable} axis={theme.direction === "rtl" ? "x-reverse" : "x"} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
+        {props.mediasOfPost.map((media: MediaOfMessageType, index: number) => (Math.abs(activeStep - index) <= 2 ? <img key={index} className={styles.post_img} src={media.media} alt="" /> : null))}
+      </SwipeableViews>
+
+      {props.mediasOfPost.length > 1 && (
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          classes={{
+            root: styles.mobile_stepper,
+            dots: styles.dots,
+            dot: styles.dot,
+            dotActive: styles.dot_active,
+          }}
+          nextButton={
+            activeStep !== maxSteps - 1 && (
+              <IconButton className={styles.button_next} size="small" onClick={handleNext}>
+                {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+              </IconButton>
+            )
+          }
+          backButton={
+            activeStep !== 0 && (
+              <IconButton className={styles.button_back} size="small" onClick={handleBack}>
+                {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+              </IconButton>
+            )
+          }
+        />
+      )}
+    </>
+  );
+};
+
 const CreatePost = (props: CreatePostPropsType) => {
-  // const [files, setFiles] = React.useState([]);
   const hiddenFileInput = React.useRef<any>(null);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const [saveOwnerPost, setSaveOwnerPost] = React.useState<string | null>(null);
   const steps = ["Crop", "Edit", <Media query={{ maxWidth: 540 }}>{(matches) => (!matches ? "Create new post" : "Create")}</Media>];
 
+  //
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const onSubmit = (formData: CreatePostFormDataType) => {
     setSaveOwnerPost(formData?.create_post);
   };
 
   const handleGetFiles = (event: React.ChangeEvent<HTMLInputElement> | any) => {
-    // setFiles([files, event.target.files]);
+    if (props.mediasOfPost.length === 0) {
+      getPictureBase64({ event }).then((image: string | undefined) => {
+        image && props.setMediasOfPost([{ media: image }]);
+      });
+    }
 
-    getPictureBase64({ event }).then((image: string | undefined) => {
-      props.setPostPhoto(image);
+    props.mediasOfPost?.map((media: MediaOfPostType) => {
+      getPictureBase64({ event }).then((image: string | undefined) => {
+        image && props.setMediasOfPost([...props.mediasOfPost, { media: image }]);
+      });
     });
-    // getPictureBase64({ event: event, method: props.setPostPhoto });
   };
 
+  // console.log(props.mediasOfPost);
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
@@ -76,7 +154,7 @@ const CreatePost = (props: CreatePostPropsType) => {
     setActiveStep(0);
   };
 
-  // console.log(fb.Timestamp.now());
+  console.log(props.mediasOfPost);
 
   return (
     <Modal
@@ -94,7 +172,7 @@ const CreatePost = (props: CreatePostPropsType) => {
       }}>
       <Fade className={styles.create_new_post_container} in={props.open}>
         <Box className={styles.create_new_post_content}>
-          {props.postPhoto ? (
+          {props.mediasOfPost.length > 0 ? (
             <>
               {activeStep === steps.length ? (
                 <></>
@@ -112,11 +190,24 @@ const CreatePost = (props: CreatePostPropsType) => {
 
                   <div className={styles.create_post_content}>
                     <div className={styles.content_media}>
-                      <img className={styles.post_img} src={props.postPhoto} alt="" />
+                      <SwipeableView mediasOfPost={props.mediasOfPost} setMediasOfPost={props.setMediasOfPost} />
                     </div>
                   </div>
 
-                  <input onChange={handleGetFiles} id="inputFile" type="file" accept="image/*" />
+                  <Box sx={{ transform: "translateZ(0px)" }}>
+                    <SpeedDial ariaLabel="SpeedDial controlled open example" sx={{ position: "absolute", bottom: 16, right: 16 }} icon={<SpeedDialIcon />} onClose={handleClose} onOpen={handleOpen} open={open}>
+                      <SpeedDialAction
+                        icon={
+                          <IconButton aria-label="upload picture" component="label">
+                            <input hidden onChange={handleGetFiles} type="file" accept="image/*" multiple />
+                            <PermMediaOutlinedIcon />
+                          </IconButton>
+                        }
+                        tooltipTitle="add media"
+                        onClick={handleClose}
+                      />
+                    </SpeedDial>
+                  </Box>
                 </React.Fragment>
               ) : activeStep === 1 ? (
                 <React.Fragment>
@@ -132,7 +223,7 @@ const CreatePost = (props: CreatePostPropsType) => {
 
                   <div className={styles.create_post_content}>
                     <div className={styles.content_media}>
-                      <img className={styles.post_img} src={props.postPhoto} alt="" />
+                      <SwipeableView mediasOfPost={props.mediasOfPost} setMediasOfPost={props.setMediasOfPost} />
                     </div>
 
                     <div className={styles.content_wrapper_content}>
@@ -157,7 +248,7 @@ const CreatePost = (props: CreatePostPropsType) => {
                             props.createPostThunk({
                               id: "",
                               accountId: props?.account?.id,
-                              postPhoto: props.postPhoto ? props.postPhoto : undefined,
+                              medias: props.mediasOfPost,
                               description: saveOwnerPost ? saveOwnerPost : "",
                               dateCreated: fb.Timestamp.now(),
                             });
@@ -172,7 +263,7 @@ const CreatePost = (props: CreatePostPropsType) => {
 
                     <div className={styles.create_post_content}>
                       <div className={styles.content_media}>
-                        <img src={props.postPhoto} alt="" />
+                        <SwipeableView mediasOfPost={props.mediasOfPost} setMediasOfPost={props.setMediasOfPost} />
                       </div>
 
                       <div className={styles.content_wrapper_content}>
@@ -198,7 +289,7 @@ const CreatePost = (props: CreatePostPropsType) => {
                   <Button className={styles.content_button} onClick={handleClick} variant="contained">
                     Select
                   </Button>
-                  <input ref={hiddenFileInput} onChange={handleGetFiles} id="inputFile" type="file" accept="image/*" />
+                  <input ref={hiddenFileInput} onChange={handleGetFiles} type="file" accept="image/*" multiple />
                 </div>
               </div>
             </Box>

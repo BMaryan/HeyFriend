@@ -53,6 +53,7 @@
   height: 100%;
   /* width: 30vw; */
   flex: 1;
+  @include position(relative);
 }
 
 .content_media img {
@@ -136,6 +137,54 @@
 .temporary_beta_vershion_img {
   height: 130px;
   transform: rotate(45deg);
+}
+
+// stepper
+.wrapper_swipeable {
+  height: 100%;
+  @include ds-position;
+  flex: 1;
+
+  & > div {
+    flex: 1;
+  }
+}
+
+.mobile_stepper {
+  padding: 0 !important;
+  margin: 0 !important;
+
+  & > .dots {
+    width: 100%;
+    @include position(absolute, unset, unset, $pd-content, unset);
+    @include ds-position(center !important);
+
+    & > .dot {
+      height: 10px !important;
+      width: 10px !important;
+      background-color: $grey400 !important;
+    }
+
+    & > .dot_active {
+      background-color: $white !important;
+    }
+  }
+
+  & .button_next {
+    background: white !important;
+    @include position(absolute, 50%, 0, unset, unset);
+    transform: translate(-50%, -50%);
+  }
+
+  & > .button_back {
+    background: white !important;
+    @include position(absolute, 50%, unset, unset, 0);
+    transform: translate(50%, -50%);
+  }
+}
+
+.post_img {
+  @include image-position(cover !important, center !important);
 }
 
 /* media */
