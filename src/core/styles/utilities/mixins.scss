@@ -44,7 +44,7 @@
 }
 
 // ** image position
-@mixin image-position($obj-fit: relative, $obj-pos: unset) {
+@mixin image-position($obj-fit: cover, $obj-pos: unset) {
   @if $obj-fit != unset {
     object-fit: $obj-fit;
   }
