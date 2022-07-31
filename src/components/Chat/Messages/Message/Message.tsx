@@ -57,11 +57,11 @@ const Message = (props: MessagePropsType) => {
           handleClose();
         }}>
         <div className={`${isMyAccount ? styles.wrapper_myPicture : styles.wrapper_otherPicture}  ${styles.wrapper_picture}`}>
-          {checkMessageOfAccount && (
-            <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : props?.chatWithAccount?.data()?.id}`}>
-              <img src={isMyAccount ? props?.account?.avatar || defaultAvatar : props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
-            </NavLink>
-          )}
+          {/* {checkMessageOfAccount && ( */}
+          <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : props?.chatWithAccount?.data()?.id}`}>
+            <img src={isMyAccount ? props?.account?.avatar || defaultAvatar : props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
+          </NavLink>
+          {/* )} */}
         </div>
 
         <div className={styles.wrapper_message_content}>
