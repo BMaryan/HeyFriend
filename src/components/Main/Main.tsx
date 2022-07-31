@@ -27,23 +27,23 @@ const Main = (props: MainPropsType) => {
   const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
   const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
-  // test check loading dialogs
-  const [loading, setLoading] = React.useState(false);
+  // test check loading posts
+  // const [loading, setLoading] = React.useState(false);
 
-  React.useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+  // React.useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 3000);
+  // }, []);
 
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        {loading
-          ? followedAccountPosts.map((item: any, index: any) => (
-              <Card sx={{ height: 900, display: "flex", flexDirection: "column", m: 2 }}>
+        {props.loading
+          ? followedAccountPosts.map((item: FirebaseType<PostType>) => (
+              <Card key={item.id} sx={{ height: 900, display: "flex", flexDirection: "column", m: 2 }}>
                 <CardHeader avatar={<Skeleton animation="wave" variant="circular" width={40} height={40} />} title={<Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }} />} subheader={<Skeleton animation="wave" height={10} width="40%" />} />
 
                 <Skeleton sx={{ display: "flex", flex: 1 }} animation="wave" variant="rectangular" />
