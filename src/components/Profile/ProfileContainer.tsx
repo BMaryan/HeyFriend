@@ -1,6 +1,6 @@
 import React from "react";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
-import { AccountType, ChatType, FirebaseType, ParticipantsOfChatType, PostType } from "../../types/types";
+import { AccountType, ChatType, CreateChatType, FirebaseType, PostType } from "../../types/types";
 import { updateAccountThunk } from "../../redux/account-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
 import { getChatsSelector } from "../../redux/chat-selectors";
@@ -24,7 +24,7 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
   createPostThunk: (post: PostType) => void;
   updateAccountThunk: (account: AccountType) => void;
-  createChatThunk: (participants: Array<ParticipantsOfChatType>) => any;
+  createChatThunk: (data: CreateChatType) => any;
 };
 
 export type ProfileContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;

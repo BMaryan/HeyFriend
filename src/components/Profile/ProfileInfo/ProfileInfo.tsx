@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, ChatType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType, HistoryType, ParticipantsOfChatType, PostType } from "../../../types/types";
+import { AccountType, ChatType, CreateChatType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType, HistoryType, ParticipantsOfChatType, PostType } from "../../../types/types";
 import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
@@ -10,6 +10,7 @@ import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
+import { fb } from "../../../firebase";
 import moment from "moment";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -53,7 +54,7 @@ interface ProfileInfoPropsType {
   id: string;
   history: HistoryType;
   updateAccountThunk: (account: AccountType) => void;
-  createChatThunk: (participants: Array<ParticipantsOfChatType>) => any;
+  createChatThunk: (data: CreateChatType) => any;
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -157,7 +158,14 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                   className={styles.button}
                   style={{ textTransform: "capitalize" }}
                   onClick={() => {
-                    !isChat || isChat.length < 1 ? props.createChatThunk([{ id: props.account?.id ? props.account?.id : "" }, { id: props?.id }]).then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`)) : props.history.push(`${chatConstant.path}/${isChat[0]?.id}`);
+                    !isChat || isChat.length < 1
+                      ? props
+                          .createChatThunk({
+                            dateCreated: fb.Timestamp.now(),
+                            participants: [{ id: props.account?.id ? props.account?.id : "" }, { id: props?.id }],
+                          })
+                          .then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`))
+                      : props.history.push(`${chatConstant.path}/${isChat[0]?.id}`);
                   }}
                   variant="contained">
                   Message
