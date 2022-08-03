@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./Main.module.scss";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
+import Story from "../common/Story/Story";
 
 interface MainPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -41,6 +42,9 @@ const Main = (props: MainPropsType) => {
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
+        {/* story */}
+        {/* <Story account={props.account} /> */}
+
         {props.loading
           ? followedAccountPosts.map((item: FirebaseType<PostType>) => (
               <Card key={item.id} sx={{ height: 900, display: "flex", flexDirection: "column", m: 2 }}>

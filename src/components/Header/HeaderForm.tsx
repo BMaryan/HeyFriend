@@ -54,39 +54,3 @@ const HeaderForm = (props: InjectedFormProps<HeaderFormDataPropsType, HeaderForm
 const HeaderReduxForm = reduxForm<HeaderFormDataPropsType, HeaderFormPropsType>({ form: "header_form" })(HeaderForm);
 
 export default HeaderReduxForm;
-
-// <Menu
-//   id="search-menu"
-//   className={styles.search_menu}
-//   anchorEl={anchorEl}
-//   open={open}
-//   onClose={handleClose}
-//   onClick={handleClose}
-//   PaperProps={{
-//     elevation: 0,
-//     sx: {
-//       overflow: "visible",
-//       filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-//       mt: 1.5,
-//       "&:before": {
-//         content: '""',
-//         height: 10,
-//         width: 10,
-//         display: "block",
-//         position: "absolute",
-//         top: "-0.1px",
-//         left: "50%",
-//         bgcolor: "background.paper",
-//         transform: "translateY(-50%) rotate(45deg)",
-//         zIndex: 0,
-//       },
-//     },
-//   }}
-//   transformOrigin={{ horizontal: "center", vertical: "top" }}
-//   anchorOrigin={{ horizontal: "center", vertical: "bottom" }}>
-//   {foundAccount.map((account: FirebaseType<AccountType>) => (
-//     <MenuItem key={account.id}>
-//       <NavLink to={`${profileConstant.path}/${account.id}`}>{account.data().surname + " " + account.data().name}</NavLink>
-//     </MenuItem>
-//   ))}
-// </Menu>
