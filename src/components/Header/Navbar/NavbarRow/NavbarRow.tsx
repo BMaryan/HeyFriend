@@ -28,12 +28,6 @@ interface DuplicateCodeFuncPropsType {
 }
 
 const DuplicateCodeFunc = (props: DuplicateCodeFuncPropsType) => {
-  let [count, setCount] = React.useState(0);
-
-  // React.useEffect(() => {
-  //   setCount(++count);
-  // }, [props.messages.length]);
-
   return (
     <div className={styles.wrapper_nav_link}>
       {/* <div>
@@ -42,7 +36,7 @@ const DuplicateCodeFunc = (props: DuplicateCodeFuncPropsType) => {
       <NavLink className={props.isBottomNavigation ? styles.nav_linkRow : styles.nav_linkRow__bottom + " " + commonStyles.common_nav_linkRow} to={props.path} exact={props.exact}>
         <div className={styles.wrapper_icon}>
           {props.icon}
-          <Badge className={styles.badge} color="error" badgeContent={count}></Badge>
+          <Badge className={styles.badge} color="error"></Badge>
         </div>
       </NavLink>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { AccountType, ChatType, CreateChatType, FirebaseType, PostType } from "../../types/types";

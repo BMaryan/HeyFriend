@@ -1,6 +1,6 @@
 import React from "react";
-import { ContainerOfMessage, ContainerOfSmiles } from "../../../../utils/helperForChat/helperForChat";
 import { AccountType, FirebaseType, MediaOfMessageType, MessageType } from "../../../../types/types";
+import { ContainerOfMessage } from "../../../../utils/helperForChat/helperForChat";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../../core/constants/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -37,7 +37,7 @@ const Message = (props: MessagePropsType) => {
 
   const isMyAccount: boolean = props?.message?.data()?.accountId === props?.account?.id;
   const checkDateOfMessage = props.prevMessage?.data().date && props.message?.data().date && props.prevMessage?.data().date.toDate().toLocaleDateString() !== props.message?.data().date.toDate().toLocaleDateString();
-  const checkMessageOfAccount = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
+  // const checkMessageOfAccount = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
   const currentOtherAccount: FirebaseType<AccountType> | undefined = props.chatWithAccounts.find((account: FirebaseType<AccountType>) => account.id === props.message.data().accountId);
 
   return (

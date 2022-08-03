@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
 import { setIsOnlineToSessionStorage } from "../../../core/methods/methods";

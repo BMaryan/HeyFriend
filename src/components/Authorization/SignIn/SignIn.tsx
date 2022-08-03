@@ -5,7 +5,7 @@ import { AccountType, SignType } from "../../../types/types";
 import commonStyle from "../Authorization.module.scss";
 import { Redirect } from "react-router-dom";
 import SignInReduxForm from "./SignInForm";
-import styles from "./SignIn.module.scss";
+// import styles from "./SignIn.module.scss";
 import Media from "react-media";
 
 interface SignInPropsType {

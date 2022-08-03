@@ -17,14 +17,13 @@ import styles from "./Comment.module.scss";
 import { red } from "@mui/material/colors";
 import Avatar from "@mui/material/Avatar";
 
-//
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
+// import Timeline from "@mui/lab/Timeline";
+// import TimelineItem from "@mui/lab/TimelineItem";
+// import TimelineSeparator from "@mui/lab/TimelineSeparator";
+// import TimelineConnector from "@mui/lab/TimelineConnector";
+// import TimelineContent from "@mui/lab/TimelineContent";
 import Backdrop from "@mui/material/Backdrop";
-import { AnyAaaaRecord } from "dns";
+// import { AnyAaaaRecord } from "dns";
 
 interface CommentPropsType {
   accounts: Array<FirebaseType<AccountType>>;

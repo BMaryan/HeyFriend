@@ -1,9 +1,9 @@
 import React from "react";
-import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
-import { getPictureBase64 } from "../../../core/methods/methods";
 import { AccountType, MediaOfMessageType, MediaOfPostType, PostType } from "../../../types/types";
+import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import { getPictureBase64 } from "../../../core/methods/methods";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -122,6 +122,8 @@ const CreatePost = (props: CreatePostPropsType) => {
       getPictureBase64({ event }).then((image: string | undefined) => {
         image && props.setMediasOfPost([...props.mediasOfPost, { media: image }]);
       });
+
+      return media;
     });
   };
 

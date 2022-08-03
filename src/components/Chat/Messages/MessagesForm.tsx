@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, InjectedFormProps, reduxForm, WrappedFieldInputProps, WrappedFieldMetaProps } from "redux-form";
-import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../types/types";
+import { AccountType, ChatType, FirebaseType, MediaOfMessageType } from "../../../types/types";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { ContainerOfSmiles } from "../../../utils/helperForChat/helperForChat";
 import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
@@ -28,6 +28,7 @@ interface InputOfMessagePropsType {
 }
 
 const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMessagePropsType> & InputOfMessagePropsType) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [emoji, setEmoji] = React.useState<string | null>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

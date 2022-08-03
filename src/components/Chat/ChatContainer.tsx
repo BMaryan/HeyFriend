@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { addMessageThunk, createChatThunk, deleteChatThunk, deleteMessageThunk, setChatsThunk, setMessagesThunk, updateChatThunk, updateMessageThunk } from "../../redux/chat-reducer";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MessageType, ParamsOfMatchType } from "../../types/types";

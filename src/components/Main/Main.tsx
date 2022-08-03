@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./Main.module.scss";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
-import Story from "../common/Story/Story";
+// import Story from "../common/Story/Story";
 
 interface MainPropsType {
   accounts: Array<FirebaseType<AccountType>>;

@@ -39,9 +39,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 
-import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
+// import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
+// import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+// import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { fb } from "../../firebase";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -152,12 +152,12 @@ interface ChatDetailsPropsType {
 }
 
 export const ChatDetails = (props: ChatDetailsPropsType) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  // const [selectedIndex, setSelectedIndex] = React.useState(1);
   const currentMessagesOfChat: Array<FirebaseType<MessageType>> = props.messages.filter((message: FirebaseType<MessageType>) => message.data().chatId === props.currentChat?.data().id);
 
-  const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
-    setSelectedIndex(index);
-  };
+  // const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+  //   setSelectedIndex(index);
+  // };
 
   return (
     <div className={styles.chat_details}>

@@ -1,5 +1,5 @@
-import { collection, DocumentData, onSnapshot } from "firebase/firestore";
-import { CreateChatType, FirebaseType, ParticipantsOfChatType } from "./../types/types";
+import { CreateChatType, FirebaseType } from "./../types/types";
+import { collection, onSnapshot } from "firebase/firestore";
 import { ChatType, MessageType } from "../types/types";
 import { InferActionsType, StateType } from "./store";
 import { chatAPI } from "../api/chat-api";

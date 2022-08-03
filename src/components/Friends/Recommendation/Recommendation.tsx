@@ -1,7 +1,7 @@
 import React from "react";
-import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType } from "../../../types/types";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
+import { AccountType, FirebaseType } from "../../../types/types";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
@@ -16,8 +16,8 @@ interface RecommendationPropsType {
 }
 
 const Recommendation = (props: RecommendationPropsType) => {
-  const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
-  const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
+  // const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
+  // const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
   return (
     <React.Fragment>
