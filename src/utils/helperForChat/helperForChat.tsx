@@ -1,14 +1,14 @@
 import React from "react";
-import { AccountType, ChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType } from "../../types/types";
-import { Avatar, Button, InputAdornment, MenuItem, OutlinedInput } from "@mui/material";
+import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
+import { Avatar, AvatarGroup, Button, InputAdornment, MenuItem, OutlinedInput } from "@mui/material";
 import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
-import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import styles from "./helperForChat.module.scss";
 import InfoIcon from "@mui/icons-material/Info";
-import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import Badge from "@mui/material/Badge";
@@ -35,15 +35,14 @@ import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt
 import { MessagesFormDataType } from "../../components/Chat/Messages/Messages";
 
 //
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import Chip from "@mui/material/Chip";
 
-//
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import { fb } from "../../firebase";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -79,48 +78,59 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 interface HeadPropsType {
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   typingOfAccount: FirebaseType<AccountType> | undefined;
   toggleShowContent: boolean;
   toggleDetails: boolean;
-  chatWithAccount: FirebaseType<AccountType> | undefined;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
+  history: HistoryType;
   setToggleDetails: (detail: boolean) => void;
+  createChatThunk: (data: CreateChatType) => any;
 }
 
 export const Head = (props: HeadPropsType) => {
-  const lastSignInDate = new Date(props.chatWithAccount?.data()?.metadata?.lastSignInTime as string);
-  const isOnline = Boolean(props?.chatWithAccount?.data()?.isOnline);
+  const [openCreateGroup, setOpenCreateGroup] = React.useState(false);
+  const lastSignInDate = props.chatWithAccounts.length < 2 ? new Date(props.chatWithAccounts[0]?.data()?.metadata?.lastSignInTime as string) : "";
+  const isOnline = props.chatWithAccounts.length < 2 ? Boolean(props?.chatWithAccounts[0]?.data()?.isOnline) : "";
 
   return props.toggleShowContent ? (
     <div className={styles.head + " " + styles.head_dialogs}>
       <div className={styles.head_dialogs_title}>Chats</div>
 
       <div className={styles.head_dialogs_title}>
-        <IconButton className={styles.icon}>
-          <ModeIcon fontSize="small" />
+        <IconButton className={styles.icon} onClick={() => setOpenCreateGroup(!openCreateGroup)}>
+          <GroupAddOutlinedIcon fontSize="medium" />
         </IconButton>
+
+        {/* toggle container of creating group */}
+        {setOpenCreateGroup && <ContainerOfCreatingGroup accounts={props.accounts} account={props.account} open={openCreateGroup} history={props.history} setOpen={setOpenCreateGroup} createChatThunk={props.createChatThunk} />}
       </div>
     </div>
   ) : (
     <div className={styles.head + " " + styles.head_messages}>
       <div>
-        <NavLink key={props?.chatWithAccount?.id} to={`${profileConstant.path}/${props?.chatWithAccount?.id}`} className={dialogStyles.chat_forHead}>
+        <Box className={dialogStyles.chat_forHead} component={props.chatWithAccounts.length < 2 ? NavLink : "div"} to={`${profileConstant.path}/${props?.chatWithAccounts[0]?.id}`}>
           <div className={dialogStyles.wrapper_picture}>
             <div className={dialogStyles.have_not_picture_forHead}>
-              {props?.chatWithAccount?.data() ? (
+              {props.chatWithAccounts.length < 2 ? (
                 <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-                  <img src={props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
+                  <img src={props?.chatWithAccounts[0]?.data()?.avatar ? props?.chatWithAccounts[0]?.data()?.avatar : defaultAvatar} alt="" />
                 </StyledBadge>
               ) : (
-                <></>
+                <AvatarGroup max={3}>
+                  {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
+                    <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                  ))}
+                </AvatarGroup>
               )}
             </div>
           </div>
           <div>
-            <div className={dialogStyles.login}>{props?.chatWithAccount?.data() ? props?.chatWithAccount?.data()?.surname + " " + props?.chatWithAccount?.data()?.name : <></>}</div>
-            <div className={dialogStyles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : !isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network"}</div>
+            <div className={dialogStyles.login}>{props.chatWithAccounts.length < 2 ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : <>Good</>}</div>
+            <div className={dialogStyles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : props.chatWithAccounts.length < 2 ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
           </div>
-        </NavLink>
+        </Box>
       </div>
 
       <div>
@@ -136,7 +146,7 @@ interface ChatDetailsPropsType {
   history: HistoryType;
   messages: Array<FirebaseType<MessageType>>;
   currentChat: FirebaseType<ChatType> | undefined;
-  chatWithAccount: FirebaseType<AccountType> | undefined;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
   deleteChatThunk: (chat: ChatType) => void;
   deleteMessageThunk: (message: MessageType) => void;
 }
@@ -152,7 +162,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
   return (
     <div className={styles.chat_details}>
       {/* head */}
-      <div className={styles.head_detail}>
+      {/* <div className={styles.head_detail}>
         <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${props.chatWithAccount?.id}`}>
           <Avatar className={styles.detail_avatar} src={props.chatWithAccount?.data().avatar || defaultAvatar} />
         </NavLink>
@@ -162,7 +172,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
         </NavLink>
 
         <div className={styles.detail_status}>{props.chatWithAccount?.data().status ? props.chatWithAccount?.data().status : undefined}</div>
-      </div>
+      </div> */}
 
       {/* body */}
       <div className={styles.body_detail}>
@@ -423,6 +433,89 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
             Send
           </Button>
         </div>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+interface ContainerOfCreatingGroupPropsType {
+  accounts: Array<FirebaseType<AccountType>>;
+  account: AccountType | null;
+  open: boolean;
+  history: HistoryType;
+  setOpen: (value: boolean) => void;
+  createChatThunk: (data: CreateChatType) => any;
+}
+
+export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsType) => {
+  const [selectedAccounts, setSelectedAccounts] = React.useState<Array<FirebaseType<AccountType>>>([]);
+  const [titleValue, setTitleValue] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState("");
+
+  const foundAccounts: Array<FirebaseType<AccountType>> = props.accounts.filter((account: FirebaseType<AccountType>) => (account.data().surname + " " + account.data().name).toLocaleLowerCase().trim().includes(searchValue.toLocaleLowerCase().trim(), 0) && account.id !== props.account?.id);
+
+  const handleCancel = () => {
+    props.setOpen(false);
+    setSelectedAccounts([]);
+    setTitleValue("");
+  };
+
+  const handleCreate = () => {
+    const destructuringParticipants = {
+      participants: [
+        ...selectedAccounts.map((account: FirebaseType<AccountType>) => ({
+          id: account.id,
+        })),
+        { id: props.account?.id as string },
+      ],
+    };
+
+    props.setOpen(false);
+    props
+      .createChatThunk(
+        selectedAccounts.length > 1
+          ? {
+              title: titleValue,
+              ...destructuringParticipants,
+              dateCreated: fb.Timestamp.now(),
+            }
+          : {
+              ...destructuringParticipants,
+              dateCreated: fb.Timestamp.now(),
+            }
+      )
+      .then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`));
+
+    setSelectedAccounts([]);
+    setTitleValue("");
+  };
+
+  return (
+    <Dialog sx={{ "& .MuiDialog-paper": { height: "435px", width: "500px" } }} open={props.open}>
+      <DialogTitle className={styles.dialog_of_creating_group_title}>Add group</DialogTitle>
+
+      {selectedAccounts.length > 1 && <TextField className={styles.dialog_of_creating_group_field_title} label="Title" variant="outlined" value={titleValue} onChange={(e: any) => setTitleValue(e.target.value)} required helperText={!titleValue && "This field is required, you need to add the name of the group."} />}
+
+      <Autocomplete id="tags-filled" multiple options={[]} freeSolo renderTags={(value: Array<FirebaseType<AccountType>>, getTagProps) => value.map((account: FirebaseType<AccountType>, index: number) => <Chip variant="outlined" label={account.data().surname + " " + account.data().name} {...getTagProps({ index })} />)} value={[...selectedAccounts]} onChange={(event, value, reason) => setSelectedAccounts(value as Array<FirebaseType<AccountType>>)} onInputChange={(event, value, reason) => setSearchValue(value)} renderInput={(params) => <TextField {...params} variant="outlined" label="Add participants & Search" value={searchValue} />} />
+
+      <DialogContent className={styles.dialog_of_creating_group_content} dividers>
+        {foundAccounts.length > 0 ? (
+          foundAccounts.map((account: FirebaseType<AccountType>, index: number) => (
+            <MenuItem key={account.id} onClick={() => (selectedAccounts.find((item: FirebaseType<AccountType>) => item.id === account.id) ? setSelectedAccounts(selectedAccounts.filter((selectedAccount: FirebaseType<AccountType>) => selectedAccount.id !== account.id && [...selectedAccounts])) : setSelectedAccounts([...selectedAccounts, account]))} selected={Boolean(selectedAccounts.find((item: FirebaseType<AccountType>) => item.id === account.id))}>
+              {account.data().surname + " " + account.data().name}
+            </MenuItem>
+          ))
+        ) : (
+          <div>Empty</div>
+        )}
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCancel}>
+          Cancel
+        </Button>
+        <Button onClick={handleCreate} disabled={!titleValue && selectedAccounts.length > 1}>
+          Create
+        </Button>
       </DialogActions>
     </Dialog>
   );

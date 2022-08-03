@@ -251,3 +251,27 @@ $ht-media: 300px;
   top: calc(($ht-media / 2) - 24px);
   left: 0;
 }
+
+// container of creating group
+.dialog_of_creating_group_title {
+  text-align: center;
+}
+
+.dialog_of_creating_group_field_title {
+  margin-bottom: $pd-content;
+}
+
+.dialog_of_creating_group_content {
+  @include ds-position(unset, unset, column);
+  flex: 1;
+  padding: 0 !important;
+
+  & > div {
+    @include ds-position(center, center);
+    flex: 1;
+  }
+
+  & > li {
+    padding: $pd-content !important;
+  }
+}

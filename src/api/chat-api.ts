@@ -1,5 +1,5 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
-import { ChatType, MessageType, ParticipantsOfChatType } from "../types/types";
+import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { ChatType, CreateChatType, MessageType } from "../types/types";
 import { db } from "../firebase";
 
 export const chatAPI = {
@@ -7,10 +7,10 @@ export const chatAPI = {
   //   return await onSnapshot(collection(db, "accounts"), (snapshot) => snapshot.docs);
   // },
 
-  async createChat(participants: Array<ParticipantsOfChatType>) {
-    const chat = await addDoc(collection(db, "chats"), { participants: [...participants] });
+  async createChat(data: CreateChatType) {
+    const chat = await addDoc(collection(db, "chats"), data);
 
-    await updateDoc(doc(db, "chats", chat.id), { participants: [...participants], id: chat.id });
+    await updateDoc(doc(db, "chats", chat.id), { ...data, id: chat.id });
 
     return chat;
   },

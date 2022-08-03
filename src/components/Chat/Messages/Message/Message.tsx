@@ -4,23 +4,21 @@ import { AccountType, FirebaseType, MediaOfMessageType, MessageType } from "../.
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../../core/constants/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ImageListItem from "@mui/material/ImageListItem";
 import IconButton from "@mui/material/IconButton";
+import ImageList from "@mui/material/ImageList";
 import Divider from "@mui/material/Divider";
 import { NavLink } from "react-router-dom";
 import styles from "./Message.module.scss";
 import Chip from "@mui/material/Chip";
 import moment from "moment";
 
-//
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-
 interface MessagePropsType {
   account: AccountType | null;
   message: FirebaseType<MessageType>;
   prevMessage: FirebaseType<MessageType>;
   messageValue: string;
-  chatWithAccount: FirebaseType<AccountType> | undefined;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
   setMessageValue: (value: string) => void;
   deleteMessageThunk: (message: MessageType) => void;
 }
@@ -40,6 +38,7 @@ const Message = (props: MessagePropsType) => {
   const isMyAccount: boolean = props?.message?.data()?.accountId === props?.account?.id;
   const checkDateOfMessage = props.prevMessage?.data().date && props.message?.data().date && props.prevMessage?.data().date.toDate().toLocaleDateString() !== props.message?.data().date.toDate().toLocaleDateString();
   const checkMessageOfAccount = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
+  const currentOtherAccount: FirebaseType<AccountType> | undefined = props.chatWithAccounts.find((account: FirebaseType<AccountType>) => account.id === props.message.data().accountId);
 
   return (
     <div>
@@ -58,8 +57,8 @@ const Message = (props: MessagePropsType) => {
         }}>
         <div className={`${isMyAccount ? styles.wrapper_myPicture : styles.wrapper_otherPicture}  ${styles.wrapper_picture}`}>
           {/* {checkMessageOfAccount && ( */}
-          <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : props?.chatWithAccount?.data()?.id}`}>
-            <img src={isMyAccount ? props?.account?.avatar || defaultAvatar : props?.chatWithAccount?.data()?.avatar ? props?.chatWithAccount?.data()?.avatar : defaultAvatar} alt="" />
+          <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : currentOtherAccount?.data()?.id}`}>
+            <img src={isMyAccount ? props?.account?.avatar || defaultAvatar : currentOtherAccount?.data()?.avatar ? currentOtherAccount?.data()?.avatar : defaultAvatar} alt="" />
           </NavLink>
           {/* )} */}
         </div>

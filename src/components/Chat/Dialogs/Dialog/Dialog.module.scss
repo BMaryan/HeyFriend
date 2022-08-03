@@ -18,6 +18,15 @@
   transition: 0.5s;
 }
 
+.chat_list_item {
+  @include ds-position(unset, flex-start);
+  column-gap: 10px;
+
+  & > div {
+    min-width: unset !important;
+  }
+}
+
 .wrapper_picture {
   margin-right: 10px;
 }

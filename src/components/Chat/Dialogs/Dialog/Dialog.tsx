@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import styles from "./Dialog.module.scss";
 import Avatar from "@mui/material/Avatar";
-import { Skeleton } from "@mui/material";
+import { AvatarGroup, Skeleton } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import moment from "moment";
 
@@ -54,64 +54,68 @@ interface DialogPropsType {
   messages: Array<FirebaseType<MessageType>>;
   loading: boolean;
   searchValue: string;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
+  currentChatsOfAccount: Array<FirebaseType<ChatType>>;
 }
 
 const Dialog = (props: DialogPropsType) => {
-  const messageWithAccount: FirebaseType<AccountType> | undefined = props?.accounts ? props?.accounts?.find((account: FirebaseType<AccountType>) => (props?.chat?.data()?.participants ? props?.chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => account?.id === participants?.id && account?.id !== props?.account?.id) : undefined)) : undefined;
+  const messageWithAccounts: Array<FirebaseType<AccountType>> = props?.accounts?.filter((account: FirebaseType<AccountType>) => (props?.chat?.data()?.participants ? props?.chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => account?.id === participants?.id && account?.id !== props?.account?.id) : undefined));
+  const lengthChatOfAccounts = messageWithAccounts.length < 2;
   const currentMessages: Array<FirebaseType<MessageType>> = props?.messages?.length > 0 ? props?.messages?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime())?.filter((message: FirebaseType<MessageType>) => message?.data()?.chatId === props?.chat?.id) : [];
 
   // const lastSignInDate = new Date(messageWithAccount?.data()?.metadata?.lastSignInTime as string);
-  const lastLoginAt = new Date(Number(messageWithAccount?.data()?.metadata?.lastLoginAt));
-  const isOnline = Boolean(messageWithAccount?.data()?.isOnline);
+  const lastLoginAt = lengthChatOfAccounts ? new Date(Number(messageWithAccounts[0]?.data()?.metadata?.lastLoginAt)) : "test";
+  const isOnline = lengthChatOfAccounts ? Boolean(messageWithAccounts[0]?.data()?.isOnline) : "test";
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
 
   return (
-    <>
-      {props?.chat?.data()?.participants
-        ? props?.chat?.data()?.participants?.map((item: ParticipantsOfChatType) =>
-            item?.id === props?.account?.id ? (
-              <NavLink key={item.id} to={messageWithAccount?.data() ? `${chatConstant.path}/` + props?.chat?.data()?.id : ""} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
-                <ListItem key={item.id} alignItems="flex-start">
-                  <ListItemAvatar>
-                    {props.loading ? (
-                      <Skeleton animation="wave" variant="circular" width={40} height={40} />
-                    ) : (
-                      <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-                        <Avatar src={messageWithAccount?.data()?.avatar ? messageWithAccount?.data()?.avatar : defaultAvatar} alt={messageWithAccount?.data() ? messageWithAccount?.data()?.surname + " " + messageWithAccount?.data()?.name : undefined} />
-                      </StyledBadge>
-                    )}
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
-                      props.loading ? (
-                        <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }} />
-                      ) : (
-                        <Typography sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} component="span" variant="body2" color="text.primary">
-                          <Typography sx={{ display: "inline" }} component="span" variant="body1" color="text.primary">
-                            {messageWithAccount?.data() ? messageWithAccount?.data()?.surname + " " + messageWithAccount?.data()?.name : undefined}
-                          </Typography>
-                          <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
-                            {currentMessages?.length > 0 ? moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow() : undefined}
-                          </Typography>
-                        </Typography>
-                      )
-                    }
-                    secondary={
-                      props.loading ? (
-                        <Skeleton animation="wave" height={10} width="40%" />
-                      ) : (
-                        <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
-                          {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? "In the network " + moment(lastLoginAt).fromNow() : "Now in the network"}
-                        </Typography>
-                      )
-                    }
-                  />
-                </ListItem>
-              </NavLink>
-            ) : undefined
-          )
-        : undefined}
-    </>
+    <NavLink to={`${chatConstant.path}/` + props?.chat?.data()?.id} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
+      <ListItem
+        classes={{
+          root: styles.chat_list_item,
+        }}>
+        <ListItemAvatar>
+          {props.loading ? (
+            <Skeleton animation="wave" variant="circular" width={40} height={40} />
+          ) : lengthChatOfAccounts ? (
+            <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
+              <Avatar src={messageWithAccounts[0]?.data()?.avatar ? messageWithAccounts[0]?.data()?.avatar : defaultAvatar} alt={messageWithAccounts[0]?.data() ? messageWithAccounts[0]?.data()?.surname + " " + messageWithAccounts[0]?.data()?.name : undefined} />
+            </StyledBadge>
+          ) : (
+            <AvatarGroup max={2}>
+              {messageWithAccounts.map((account: FirebaseType<AccountType>) => (
+                <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+              ))}
+            </AvatarGroup>
+          )}
+        </ListItemAvatar>
+        <ListItemText
+          primary={
+            props.loading ? (
+              <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }} />
+            ) : (
+              <Typography sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} component="span" variant="body2" color="text.primary">
+                <Typography sx={{ display: "inline" }} component="span" variant="body1" color="text.primary">
+                  {lengthChatOfAccounts ? messageWithAccounts[0]?.data()?.surname + " " + messageWithAccounts[0]?.data()?.name : props.chat.data().title}
+                </Typography>
+                <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
+                  {currentMessages?.length > 0 ? moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow() : undefined}
+                </Typography>
+              </Typography>
+            )
+          }
+          secondary={
+            props.loading ? (
+              <Skeleton animation="wave" height={10} width="40%" />
+            ) : (
+              <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
+                {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? "In the network " + moment(lastLoginAt).fromNow() : "Now in the network"}
+              </Typography>
+            )
+          }
+        />
+      </ListItem>
+    </NavLink>
   );
 };
 

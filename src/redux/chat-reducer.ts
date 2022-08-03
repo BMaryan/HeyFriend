@@ -1,5 +1,5 @@
 import { collection, DocumentData, onSnapshot } from "firebase/firestore";
-import { FirebaseType, ParticipantsOfChatType } from "./../types/types";
+import { CreateChatType, FirebaseType, ParticipantsOfChatType } from "./../types/types";
 import { ChatType, MessageType } from "../types/types";
 import { InferActionsType, StateType } from "./store";
 import { chatAPI } from "../api/chat-api";
@@ -77,9 +77,9 @@ export const setMessagesThunk = (): ThunkAction<Promise<void>, StateType, unknow
 };
 
 export const createChatThunk =
-  (participants: Array<ParticipantsOfChatType>): ThunkAction<Promise<any>, StateType, unknown, ActionsType> =>
+  (data: CreateChatType): ThunkAction<Promise<any>, StateType, unknown, ActionsType> =>
   async (dispatch) =>
-    chatAPI.createChat(participants);
+    chatAPI.createChat(data);
 
 export const addMessageThunk =
   (message: MessageType): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>

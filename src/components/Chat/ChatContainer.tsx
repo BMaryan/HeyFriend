@@ -1,10 +1,10 @@
 import React from "react";
-import { addMessageThunk, deleteChatThunk, deleteMessageThunk, setChatsThunk, setMessagesThunk, updateChatThunk, updateMessageThunk } from "../../redux/chat-reducer";
-import { AccountType, ChatType, FirebaseType, HistoryType, MessageType, ParamsOfMatchType } from "../../types/types";
-import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
+import { addMessageThunk, createChatThunk, deleteChatThunk, deleteMessageThunk, setChatsThunk, setMessagesThunk, updateChatThunk, updateMessageThunk } from "../../redux/chat-reducer";
+import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MessageType, ParamsOfMatchType } from "../../types/types";
 import { getChatsSelector, getMessagesSelector, setErrorSelector, setLoadingSelector } from "../../redux/chat-selectors";
-import { StateType } from "../../redux/store";
+import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { useHistory, useParams } from "react-router-dom";
+import { StateType } from "../../redux/store";
 import { connect } from "react-redux";
 import Chat from "./Chat";
 
@@ -27,6 +27,7 @@ type MapDispatchToPropsType = {
   updateMessageThunk: (message: MessageType) => void;
   deleteChatThunk: (chat: ChatType) => void;
   deleteMessageThunk: (message: MessageType) => void;
+  createChatThunk: (data: CreateChatType) => any;
 };
 
 export type ChatContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
@@ -35,7 +36,7 @@ const ChatContainer = (props: ChatContainerPropsType) => {
   const { id } = useParams<ParamsOfMatchType>();
   const history = useHistory<HistoryType>();
   const [typing, setTyping] = React.useState<string | null>(null);
-  const currentChat: FirebaseType<ChatType> | undefined = id ? props?.chats?.find((chat: ChatType) => chat?.id === id) : undefined;
+  const currentChat: FirebaseType<ChatType> | undefined = id ? props?.chats?.find((chat: FirebaseType<ChatType>) => chat?.id === id) : undefined;
 
   React.useEffect(() => {
     if (props.chats) {
@@ -58,4 +59,4 @@ const ChatContainer = (props: ChatContainerPropsType) => {
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state), loading: setLoadingSelector(state), error: setErrorSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setChatsThunk, setMessagesThunk, addMessageThunk, updateChatThunk, updateMessageThunk, deleteChatThunk, deleteMessageThunk })(ChatContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setChatsThunk, setMessagesThunk, addMessageThunk, updateChatThunk, updateMessageThunk, deleteChatThunk, deleteMessageThunk, createChatThunk })(ChatContainer);

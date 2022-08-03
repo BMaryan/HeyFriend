@@ -12,7 +12,7 @@ interface MessagesPropsType {
   account: AccountType | null;
   messages: Array<FirebaseType<MessageType>>;
   currentChat: FirebaseType<ChatType> | undefined;
-  chatWithAccount: FirebaseType<AccountType> | undefined;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
   loading: boolean;
   setTyping: (typing: string | null) => void;
   addMessageThunk: (message: MessageType) => void;
@@ -73,7 +73,7 @@ const Messages = (props: MessagesPropsType) => {
     <div className={styles.messages}>
       {currentMessagesOfChat.length > 0 ? (
         <div className={styles.messages_content} ref={scrollContent}>
-          {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} message={message} messageValue={messageValue} setMessageValue={setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccount={props.chatWithAccount} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
+          {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} message={message} messageValue={messageValue} setMessageValue={setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
         </div>
       ) : (
         <div className={styles.default_content}>Default content</div>

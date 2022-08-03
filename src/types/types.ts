@@ -54,10 +54,15 @@ export interface ParticipantsOfChatType {
   id: string;
 }
 
-export interface ChatType {
+export interface CreateChatType {
+  title?: string;
+  dateCreated: Timestamp;
+  participants: Array<ParticipantsOfChatType>;
+}
+
+export interface ChatType extends CreateChatType {
   id: string;
   typing?: string | null;
-  participants?: Array<ParticipantsOfChatType>;
 }
 
 export interface MediaOfMessageType {

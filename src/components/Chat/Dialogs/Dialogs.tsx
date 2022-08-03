@@ -10,11 +10,21 @@ interface DialogsPropsType {
   messages: Array<FirebaseType<MessageType>>;
   searchValue: string;
   loading: boolean;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
 }
 
 const Dialogs = (props: DialogsPropsType) => {
   const foundAccount: Array<FirebaseType<AccountType>> = props.accounts.filter((account: FirebaseType<AccountType>) => (account.data().surname + " " + account.data().name).toLocaleLowerCase().trim().includes(props.searchValue.toLocaleLowerCase().trim(), 0) && account.id !== props.account?.id);
-  const searchChat: Array<FirebaseType<ChatType>> = props.chats.filter((chat: FirebaseType<ChatType>) => foundAccount.find((account: FirebaseType<AccountType>) => chat.data().participants?.find((participant: ParticipantsOfChatType) => account.id === participant.id && account.id !== props.account?.id)));
+
+  const foundGroup: Array<FirebaseType<ChatType>> = props.chats.filter((chat: FirebaseType<ChatType>) => chat.data()?.title?.toLocaleLowerCase().trim().includes(props.searchValue.toLocaleLowerCase().trim(), 0));
+
+  const searchChat: Array<FirebaseType<ChatType>> = props.chats.filter((chat: FirebaseType<ChatType>) => {
+    const resAccount = foundAccount.find((account: FirebaseType<AccountType>) => chat.data().participants?.find((participant: ParticipantsOfChatType) => account.id === participant.id && account.id !== props.account?.id));
+    const resGroup = foundGroup.find((chatOfGroup: FirebaseType<ChatType>) => chat.id === chatOfGroup.id);
+
+    return resAccount || resGroup;
+  });
+
   const currentChatsOfAccount: Array<FirebaseType<ChatType>> = props.chats?.filter((chat: FirebaseType<ChatType>) => chat.data().participants?.find((participant: ParticipantsOfChatType) => participant.id === props.account?.id));
   const checkArray = props.searchValue ? searchChat : currentChatsOfAccount;
 
@@ -28,10 +38,12 @@ const Dialogs = (props: DialogsPropsType) => {
   //   }, 6000);
   // }, []);
 
+  // console.log(currentChatsOfAccount);
+
   return (
     <div className={styles.dialogs}>
       {currentChatsOfAccount.length > 0 ? (
-        checkArray.map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} loading={props.loading} searchValue={props.searchValue} />)
+        checkArray.sort((a: FirebaseType<ChatType>, b: FirebaseType<ChatType>) => b?.data()?.dateCreated.toDate().getTime() - a?.data()?.dateCreated.toDate().getTime()).map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} loading={props.loading} searchValue={props.searchValue} chatWithAccounts={props.chatWithAccounts} currentChatsOfAccount={currentChatsOfAccount} />)
       ) : (
         <div className={styles.chats_wrapper_text}>
           <div className={styles.chats_wrapper_title}>Add a chat</div>
