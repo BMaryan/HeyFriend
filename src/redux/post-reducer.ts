@@ -1,5 +1,5 @@
 import { CommentType, FirebaseType, PostType } from "../types/types";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, DocumentData, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { InferActionsType, StateType } from "./store";
 import { postAPI } from "../api/post-api";
 import { ThunkAction } from "redux-thunk";
@@ -53,7 +53,7 @@ export const setPostsThunk = (): ThunkAction<Promise<void>, StateType, unknown, 
   dispatch(postActions.setLoading(true));
 
   try {
-    await onSnapshot(collection(db, "posts"), (snapshot) => dispatch(postActions.setPosts(snapshot.docs)));
+    onSnapshot(collection(db, "posts"), (snapshot: any) => dispatch(postActions.setPosts(snapshot.docs)));
 
     dispatch(postActions.setSuccess());
   } catch (error: any) {
@@ -67,7 +67,7 @@ export const setCommentsThunk = (): ThunkAction<Promise<void>, StateType, unknow
   dispatch(postActions.setLoading(true));
 
   try {
-    await onSnapshot(collection(db, "comments"), (snapshot) => dispatch(postActions.setComments(snapshot.docs)));
+    onSnapshot(collection(db, "comments"), (snapshot: any) => dispatch(postActions.setComments(snapshot.docs)));
 
     dispatch(postActions.setSuccess());
   } catch (error: any) {

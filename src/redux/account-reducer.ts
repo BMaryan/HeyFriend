@@ -1,4 +1,4 @@
-import { collection, DocumentData, onSnapshot } from "firebase/firestore";
+import { collection, DocumentData, onSnapshot, QueryDocumentSnapshot } from "firebase/firestore";
 import { AccountType, FirebaseType } from "../types/types";
 import { InferActionsType, StateType } from "./store";
 import { accountAPI } from "../api/account-api";
@@ -40,7 +40,9 @@ export const accountActions = {
 };
 
 // thunks
-export const setAccountsThunk = (): ThunkAction<Promise<DocumentData<AccountType>>, StateType, unknown, ActionsType> => async (dispatch) => await onSnapshot(collection(db, "accounts"), (snapshot) => dispatch(accountActions.setAccounts(snapshot.docs)));
+export const setAccountsThunk = (): ThunkAction<Promise<void>, StateType, unknown, ActionsType> => async (dispatch) => {
+  await onSnapshot(collection(db, "accounts"), (snapshot: any) => dispatch(accountActions.setAccounts(snapshot.docs)));
+};
 
 export const setAccountThunk =
   (user: User): ThunkAction<Promise<void>, StateType, unknown, ActionsType> =>

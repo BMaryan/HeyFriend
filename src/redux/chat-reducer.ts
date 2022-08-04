@@ -54,7 +54,7 @@ export const setChatsThunk = (): ThunkAction<Promise<void>, StateType, unknown, 
   dispatch(chatActions.setLoading(true));
 
   try {
-    await onSnapshot(collection(db, "chats"), (snapshot) => dispatch(chatActions.setChats(snapshot.docs)));
+    onSnapshot(collection(db, "chats"), (snapshot: any) => dispatch(chatActions.setChats(snapshot.docs)));
     dispatch(chatActions.setSuccess());
   } catch (error: any) {
     dispatch(chatActions.setError(error));
@@ -67,7 +67,7 @@ export const setMessagesThunk = (): ThunkAction<Promise<void>, StateType, unknow
   dispatch(chatActions.setLoading(true));
 
   try {
-    await onSnapshot(collection(db, "messages"), (snapshot) => dispatch(chatActions.setMessages(snapshot.docs)));
+    onSnapshot(collection(db, "messages"), (snapshot: any) => dispatch(chatActions.setMessages(snapshot.docs)));
     dispatch(chatActions.setSuccess());
   } catch (error: any) {
     dispatch(chatActions.setError(error));
