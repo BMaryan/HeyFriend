@@ -1,6 +1,6 @@
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
-import { Avatar, AvatarGroup, Button, InputAdornment, MenuItem, OutlinedInput } from "@mui/material";
+import { Avatar, AvatarGroup, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
 import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
@@ -38,6 +38,8 @@ import { MessagesFormDataType } from "../../components/Chat/Messages/Messages";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import ChangeCircleOutlinedIcon from "@mui/icons-material/ChangeCircleOutlined";
 
 // import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
 // import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -83,6 +85,7 @@ interface HeadPropsType {
   typingOfAccount: FirebaseType<AccountType> | undefined;
   toggleShowContent: boolean;
   toggleDetails: boolean;
+  currentChat: FirebaseType<ChatType> | undefined;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
   history: HistoryType;
   setToggleDetails: (detail: boolean) => void;
@@ -91,8 +94,9 @@ interface HeadPropsType {
 
 export const Head = (props: HeadPropsType) => {
   const [openCreateGroup, setOpenCreateGroup] = React.useState(false);
-  const lastSignInDate = props.chatWithAccounts.length < 2 ? new Date(props.chatWithAccounts[0]?.data()?.metadata?.lastSignInTime as string) : "";
-  const isOnline = props.chatWithAccounts.length < 2 ? Boolean(props?.chatWithAccounts[0]?.data()?.isOnline) : "";
+  const lengthChatOfAccounts = props.chatWithAccounts.length < 2;
+  const lastSignInDate = lengthChatOfAccounts ? new Date(props.chatWithAccounts[0]?.data()?.metadata?.lastSignInTime as string) : "";
+  const isOnline = lengthChatOfAccounts ? Boolean(props?.chatWithAccounts[0]?.data()?.isOnline) : "";
 
   return props.toggleShowContent ? (
     <div className={styles.head + " " + styles.head_dialogs}>
@@ -110,27 +114,31 @@ export const Head = (props: HeadPropsType) => {
   ) : (
     <div className={styles.head + " " + styles.head_messages}>
       <div>
-        <Box className={dialogStyles.chat_forHead} component={props.chatWithAccounts.length < 2 ? NavLink : "div"} to={`${profileConstant.path}/${props?.chatWithAccounts[0]?.id}`}>
-          <div className={dialogStyles.wrapper_picture}>
-            <div className={dialogStyles.have_not_picture_forHead}>
-              {props.chatWithAccounts.length < 2 ? (
-                <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-                  <img src={props?.chatWithAccounts[0]?.data()?.avatar ? props?.chatWithAccounts[0]?.data()?.avatar : defaultAvatar} alt="" />
-                </StyledBadge>
-              ) : (
-                <AvatarGroup max={3}>
-                  {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
-                    <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
-                  ))}
-                </AvatarGroup>
-              )}
+        {props.toggleDetails ? (
+          <Box className={dialogStyles.chat_forHead} component={lengthChatOfAccounts ? NavLink : "div"} to={`${profileConstant.path}/${props?.chatWithAccounts[0]?.id}`} onClick={() => !lengthChatOfAccounts && props.setToggleDetails(false)}>
+            <div className={dialogStyles.wrapper_picture}>
+              <div className={dialogStyles.have_not_picture_forHead}>
+                {lengthChatOfAccounts ? (
+                  <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
+                    <img src={props?.chatWithAccounts[0]?.data()?.avatar ? props?.chatWithAccounts[0]?.data()?.avatar : defaultAvatar} alt="" />
+                  </StyledBadge>
+                ) : (
+                  <AvatarGroup max={3}>
+                    {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
+                      <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                    ))}
+                  </AvatarGroup>
+                )}
+              </div>
             </div>
-          </div>
-          <div>
-            <div className={dialogStyles.login}>{props.chatWithAccounts.length < 2 ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : <>Good</>}</div>
-            <div className={dialogStyles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : props.chatWithAccounts.length < 2 ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
-          </div>
-        </Box>
+            <div>
+              <div className={dialogStyles.login}>{lengthChatOfAccounts ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : props.currentChat?.data().title}</div>
+              <div className={dialogStyles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
+            </div>
+          </Box>
+        ) : (
+          <>Details</>
+        )}
       </div>
 
       <div>
@@ -143,54 +151,61 @@ export const Head = (props: HeadPropsType) => {
 };
 
 interface ChatDetailsPropsType {
-  history: HistoryType;
+  accounts: Array<FirebaseType<AccountType>>;
   messages: Array<FirebaseType<MessageType>>;
   currentChat: FirebaseType<ChatType> | undefined;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
+  history: HistoryType;
   deleteChatThunk: (chat: ChatType) => void;
   deleteMessageThunk: (message: MessageType) => void;
 }
 
 export const ChatDetails = (props: ChatDetailsPropsType) => {
-  // const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const currentMessagesOfChat: Array<FirebaseType<MessageType>> = props.messages.filter((message: FirebaseType<MessageType>) => message.data().chatId === props.currentChat?.data().id);
+  const ownerGroupOfAccount: FirebaseType<AccountType> | undefined = props.accounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
 
-  // const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
-  //   setSelectedIndex(index);
-  // };
+  const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+    setSelectedIndex(index);
+  };
 
   return (
     <div className={styles.chat_details}>
       {/* head */}
-      {/* <div className={styles.head_detail}>
-        <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${props.chatWithAccount?.id}`}>
-          <Avatar className={styles.detail_avatar} src={props.chatWithAccount?.data().avatar || defaultAvatar} />
-        </NavLink>
+      <div className={styles.wrapper_head_detail}>
+        {/* contact of owner */}
+        <div className={styles.head_detail}>
+          <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
+            <Avatar className={styles.detail_avatar} src={ownerGroupOfAccount?.data().avatar || defaultAvatar} />
+          </NavLink>
 
-        <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${props.chatWithAccount?.id}`}>
-          {props.chatWithAccount?.data() ? props.chatWithAccount?.data()?.surname + " " + props.chatWithAccount?.data()?.name : undefined}
-        </NavLink>
+          <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
+            {ownerGroupOfAccount?.data() ? ownerGroupOfAccount?.data()?.surname + " " + ownerGroupOfAccount?.data()?.name : undefined}
+          </NavLink>
 
-        <div className={styles.detail_status}>{props.chatWithAccount?.data().status ? props.chatWithAccount?.data().status : undefined}</div>
-      </div> */}
+          <div className={styles.detail_subtitle}>Owner</div>
+        </div>
+
+        {/* participants */}
+        <div className={styles.wrapper_participants}>
+          {/* <div className={styles.media_title}>Participants</div> */}
+          {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
+            <NavLink key={account.data()?.id} className={styles.detail_fullName} to={`${profileConstant.path}/${account.data()?.id}`}>
+              <List component="nav" aria-label="main mailbox folders">
+                <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
+                  <ListItemIcon>
+                    <Avatar src={account.data()?.avatar || defaultAvatar} alt="" />
+                  </ListItemIcon>
+                  <ListItemText primary={account.data()?.surname + " " + account.data()?.name} />
+                </ListItemButton>
+              </List>
+            </NavLink>
+          ))}
+        </div>
+      </div>
 
       {/* body */}
       <div className={styles.body_detail}>
-        {/* <div className={styles.wrapper_participants}>
-          <div className={styles.media_title}>Participants</div>
-
-          <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${props.chatWithAccount?.id}`}>
-            <List component="nav" aria-label="main mailbox folders">
-              <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
-                <ListItemIcon>
-                  <Avatar src={props?.chatWithAccount?.data()?.avatar || defaultAvatar} alt="" />
-                </ListItemIcon>
-                <ListItemText primary={props?.chatWithAccount?.data()?.surname + " " + props?.chatWithAccount?.data()?.name} />
-              </ListItemButton>
-            </List>
-          </NavLink>
-        </div> */}
-
         <div className={styles.wrapper_details}>
           <div className={styles.wrapper_detail}>
             <div className={styles.detail_count}>{currentMessagesOfChat.length}</div>
@@ -349,6 +364,8 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
     setActiveStep(step);
   };
 
+  console.log(props.medias);
+
   return (
     <Dialog className={styles.media_dialog} open={props.open}>
       {/* head */}
@@ -358,8 +375,25 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
       <DialogContent className={styles.dialog_content} dividers>
         <Box sx={{ display: "flex", position: "relative", flexDirection: "column", columnGap: "10px" }}>
           <AutoPlaySwipeableViews axis={theme.direction === "rtl" ? "x-reverse" : "x"} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
-            {props.medias.map((step, index) => (
-              <div key={index}>{Math.abs(activeStep - index) <= 2 ? <Box className={styles.media} component="img" src={step.media} alt="" /> : null}</div>
+            {props.medias.map((media: MediaOfMessageType, index: number) => (
+              <div key={index} className={styles.wrapper_media}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <>
+                    <Box className={styles.media} component="img" src={media.media} alt="" />
+
+                    {/* position buttons */}
+                    <div className={styles.wrapper_position_button}>
+                      <IconButton
+                        onClick={() => {
+                          props.setMedias(props.medias?.filter((item: MediaOfMessageType, itemIndex: number) => index !== itemIndex));
+                          props.medias.length > 1 && activeStep !== 0 && setActiveStep(activeStep - 1);
+                        }}>
+                        <DeleteOutlinedIcon />
+                      </IconButton>
+                    </div>
+                  </>
+                ) : null}
+              </div>
             ))}
           </AutoPlaySwipeableViews>
 
@@ -476,10 +510,12 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
         selectedAccounts.length > 1
           ? {
               title: titleValue,
+              ownerId: props.account?.id,
               ...destructuringParticipants,
               dateCreated: fb.Timestamp.now(),
             }
           : {
+              ownerId: props.account?.id,
               ...destructuringParticipants,
               dateCreated: fb.Timestamp.now(),
             }

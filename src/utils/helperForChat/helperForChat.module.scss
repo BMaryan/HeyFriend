@@ -116,11 +116,15 @@ $ht-media: 300px;
 }
 
 // head chat detail
+.wrapper_head_detail {
+  @include ds-position(space-between, center, row);
+  flex: 1;
+}
+
+//
 .head_detail {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include ds-position(center, center, column);
+  flex: 1;
 }
 
 .detail_wrapper_avatar {
@@ -135,11 +139,15 @@ $ht-media: 300px;
   color: black;
   font-size: 20px;
   text-decoration: none;
-  text-align: center;
 }
 
-.detail_status {
-  text-align: center;
+.detail_subtitle {
+  color: $grey400;
+  font-size: 16px;
+}
+
+//
+.wrapper_participants {
 }
 
 // body chat detail
@@ -149,9 +157,6 @@ $ht-media: 300px;
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-}
-
-.wrapper_participants {
 }
 
 .wrapper_details {
@@ -174,26 +179,25 @@ $ht-media: 300px;
 }
 
 .wrapper_medias {
+  max-height: 220px;
   display: flex;
   flex-direction: column;
   flex: 1;
   box-sizing: border-box;
+  row-gap: 10px;
 }
 
 .media_content {
-  display: flex;
-  flex: 1;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 10px;
+  row-gap: 10px;
+  overflow-y: scroll;
 }
 
 .wrapper_media {
-  max-width: 30%;
-  flex-shrink: 0;
-  padding: $pd-content 0;
-  box-sizing: border-box;
-  display: flex;
+  height: 100%;
+  display: grid;
 
   & img {
     height: 100%;
@@ -229,6 +233,10 @@ $ht-media: 300px;
   padding: 0 !important;
 }
 
+.wrapper_media {
+  @include position(relative);
+}
+
 .media {
   height: $ht-media !important;
   width: 100%;
@@ -236,6 +244,20 @@ $ht-media: 300px;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
+}
+
+// position button for editing media
+.wrapper_position_button {
+  background: rgba($color: #000000, $alpha: 0.3) !important;
+  @include ds-position;
+  border-bottom-left-radius: 50%;
+  @include position(absolute, 0, 0);
+  column-gap: 5px;
+  padding: $pd-content;
+
+  & > button {
+    color: $white !important;
+  }
 }
 
 .stepper_button_back {
