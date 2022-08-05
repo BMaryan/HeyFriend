@@ -1,6 +1,6 @@
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
-import { Avatar, AvatarGroup, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
+import { Avatar, AvatarGroup, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Tooltip } from "@mui/material";
 import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
@@ -39,7 +39,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import ChangeCircleOutlinedIcon from "@mui/icons-material/ChangeCircleOutlined";
 
 // import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
 // import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -125,7 +124,9 @@ export const Head = (props: HeadPropsType) => {
                 ) : (
                   <AvatarGroup max={3}>
                     {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
-                      <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                      <Tooltip key={account.id} title={account.data().surname + " " + account.data().name}>
+                        <Avatar src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                      </Tooltip>
                     ))}
                   </AvatarGroup>
                 )}
@@ -549,7 +550,7 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
         <Button autoFocus onClick={handleCancel}>
           Cancel
         </Button>
-        <Button onClick={handleCreate} disabled={!titleValue && selectedAccounts.length > 1}>
+        <Button onClick={handleCreate} disabled={selectedAccounts.length > 1 ? !titleValue : selectedAccounts.length === 0}>
           Create
         </Button>
       </DialogActions>

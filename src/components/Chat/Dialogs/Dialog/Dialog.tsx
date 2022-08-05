@@ -2,6 +2,7 @@ import React from "react";
 import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType } from "../../../../types/types";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { chatConstant } from "../../../../core/constants/constants";
+import { AvatarGroup, Skeleton, Tooltip } from "@mui/material";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
@@ -10,7 +11,6 @@ import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import styles from "./Dialog.module.scss";
 import Avatar from "@mui/material/Avatar";
-import { AvatarGroup, Skeleton } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import moment from "moment";
 
@@ -84,7 +84,9 @@ const Dialog = (props: DialogPropsType) => {
           ) : (
             <AvatarGroup max={2}>
               {messageWithAccounts.map((account: FirebaseType<AccountType>) => (
-                <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                <Tooltip key={account.id} title={account.data().surname + " " + account.data().name}>
+                  <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                </Tooltip>
               ))}
             </AvatarGroup>
           )}
