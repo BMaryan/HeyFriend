@@ -56,6 +56,7 @@ export interface ParticipantsOfChatType {
 
 export interface CreateChatType {
   title?: string;
+  ownerId?: string;
   dateCreated: Timestamp;
   participants: Array<ParticipantsOfChatType>;
 }
