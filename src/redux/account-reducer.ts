@@ -1,4 +1,4 @@
-import { collection, DocumentData, onSnapshot, QueryDocumentSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { AccountType, FirebaseType } from "../types/types";
 import { InferActionsType, StateType } from "./store";
 import { accountAPI } from "../api/account-api";

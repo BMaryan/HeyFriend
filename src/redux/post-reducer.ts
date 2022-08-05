@@ -1,5 +1,5 @@
 import { CommentType, FirebaseType, PostType } from "../types/types";
-import { collection, DocumentData, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { InferActionsType, StateType } from "./store";
 import { postAPI } from "../api/post-api";
 import { ThunkAction } from "redux-thunk";
