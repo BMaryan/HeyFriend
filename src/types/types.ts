@@ -1,6 +1,6 @@
 import { QueryDocumentSnapshot, Timestamp } from "firebase/firestore";
-import { Auth, AuthError, User, UserInfo } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
+import { Auth } from "firebase/auth";
 
 // firebase
 export interface FirebaseType<T> extends QueryDocumentSnapshot<T> {}
@@ -43,7 +43,7 @@ export interface AccountType {
   coverPhoto?: string;
   status?: string;
   aboutMe?: string;
-  isOnline?: string | null | undefined;
+  isOnline?: boolean;
   metadata?: MetadataOfAccountType;
   followers?: Array<FollowersOfAccountType>;
   following?: Array<FollowingOfAccountType>;
