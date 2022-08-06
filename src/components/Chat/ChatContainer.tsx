@@ -37,6 +37,7 @@ const ChatContainer = (props: ChatContainerPropsType) => {
   const { id } = useParams<ParamsOfMatchType>();
   const history = useHistory<HistoryType>();
   const [typing, setTyping] = React.useState<string | null>(null);
+  const [messageValue, setMessageValue] = React.useState<string>("");
   const currentChat: FirebaseType<ChatType> | undefined = id ? props?.chats?.find((chat: FirebaseType<ChatType>) => chat?.id === id) : undefined;
 
   React.useEffect(() => {
@@ -52,10 +53,37 @@ const ChatContainer = (props: ChatContainerPropsType) => {
   }, [props.messages.length]);
 
   React.useEffect(() => {
+    if (id !== typing) {
+      setMessageValue("");
+    }
+  }, [id]);
+
+  // set account id to typing when a person is writting or null
+  React.useEffect(() => {
     currentChat?.data() && props.updateChatThunk({ ...currentChat?.data(), typing: typing });
+
+    window.addEventListener("beforeunload", function (event) {
+      currentChat?.data() && props.updateChatThunk({ ...currentChat?.data(), typing: null });
+      setMessageValue("");
+    });
+
+    return () => {
+      currentChat?.data() && props.updateChatThunk({ ...currentChat?.data(), typing: null });
+
+      window.removeEventListener("beforeunload", function (event) {
+        currentChat?.data() && props.updateChatThunk({ ...currentChat?.data(), typing: null });
+        setMessageValue("");
+      });
+    };
   }, [typing]);
 
-  return <Chat {...props} currentChat={currentChat} id={id} history={history} setTyping={setTyping} />;
+  React.useEffect(() => {
+    if (!messageValue) {
+      currentChat?.data() && props.updateChatThunk({ ...currentChat?.data(), typing: null });
+    }
+  }, [messageValue]);
+
+  return <Chat {...props} messageValue={messageValue} currentChat={currentChat} id={id} history={history} setTyping={setTyping} setMessageValue={setMessageValue} />;
 };
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state), loading: setLoadingSelector(state), error: setErrorSelector(state) });

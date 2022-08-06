@@ -9,8 +9,10 @@ import Dialogs from "./Dialogs/Dialogs";
 interface ChatPropsType extends ChatContainerPropsType {
   id: string;
   history: HistoryType;
+  messageValue: string;
   currentChat: FirebaseType<ChatType> | undefined;
   setTyping: (typing: string | null) => void;
+  setMessageValue: (messageValue: string) => void;
 }
 
 const Chat = (props: ChatPropsType) => {
@@ -23,6 +25,10 @@ const Chat = (props: ChatPropsType) => {
   React.useEffect(() => {
     setToggleDetails(true);
   }, [props.history.location.pathname]);
+
+  if (!toggleDetails) {
+    props.setMessageValue("");
+  }
 
   // console.log(chatWithAccounts.map((item) => item.data()));
 
@@ -37,14 +43,14 @@ const Chat = (props: ChatPropsType) => {
           <input type="search" value={searchValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)} placeholder="Search contact" />
         </div>
 
-        <Dialogs accounts={props.accounts} account={props.account} chats={props.chats} messages={props.messages} loading={props.loading} searchValue={searchValue} chatWithAccounts={chatWithAccounts} />
+        <Dialogs accounts={props.accounts} account={props.account} chats={props.chats} messages={props.messages} loading={props.loading} messageValue={props.messageValue} searchValue={searchValue} chatWithAccounts={chatWithAccounts} />
       </div>
 
       {/* messages content */}
       <div className={styles.messages}>
         {props.id ? <Head accounts={props.accounts} account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={false} toggleDetails={toggleDetails} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} history={props.history} setToggleDetails={setToggleDetails} createChatThunk={props.createChatThunk} /> : undefined}
 
-        {props.id ? !toggleDetails ? <ChatDetails accounts={props.accounts} messages={props.messages} chatWithAccounts={chatWithAccounts} currentChat={props.currentChat} history={props.history} deleteChatThunk={props.deleteChatThunk} deleteMessageThunk={props.deleteMessageThunk} /> : <Messages account={props.account} messages={props.messages} id={props.id} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} loading={props.loading} setTyping={props.setTyping} addMessageThunk={props.addMessageThunk} updateMessageThunk={props.updateMessageThunk} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
+        {props.id ? !toggleDetails ? <ChatDetails accounts={props.accounts} messages={props.messages} chatWithAccounts={chatWithAccounts} currentChat={props.currentChat} history={props.history} deleteChatThunk={props.deleteChatThunk} deleteMessageThunk={props.deleteMessageThunk} /> : <Messages account={props.account} messages={props.messages} id={props.id} currentChat={props.currentChat} messageValue={props.messageValue} chatWithAccounts={chatWithAccounts} loading={props.loading} setTyping={props.setTyping} setMessageValue={props.setMessageValue} addMessageThunk={props.addMessageThunk} updateMessageThunk={props.updateMessageThunk} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
 
         {!props.id && <DefaultViewMessages />}
       </div>

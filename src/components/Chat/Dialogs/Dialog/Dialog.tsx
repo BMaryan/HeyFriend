@@ -53,6 +53,7 @@ interface DialogPropsType {
   chat: FirebaseType<ChatType>;
   messages: Array<FirebaseType<MessageType>>;
   loading: boolean;
+  messageValue: string;
   searchValue: string;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
   currentChatsOfAccount: Array<FirebaseType<ChatType>>;

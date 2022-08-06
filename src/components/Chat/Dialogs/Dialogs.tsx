@@ -8,6 +8,7 @@ interface DialogsPropsType {
   account: AccountType | null;
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
+  messageValue: string;
   searchValue: string;
   loading: boolean;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
@@ -43,7 +44,7 @@ const Dialogs = (props: DialogsPropsType) => {
   return (
     <div className={styles.dialogs}>
       {currentChatsOfAccount.length > 0 ? (
-        checkArray.sort((a: FirebaseType<ChatType>, b: FirebaseType<ChatType>) => b?.data()?.dateCreated.toDate().getTime() - a?.data()?.dateCreated.toDate().getTime()).map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} chat={chat} loading={props.loading} searchValue={props.searchValue} chatWithAccounts={props.chatWithAccounts} currentChatsOfAccount={currentChatsOfAccount} />)
+        checkArray.sort((a: FirebaseType<ChatType>, b: FirebaseType<ChatType>) => b?.data()?.dateCreated.toDate().getTime() - a?.data()?.dateCreated.toDate().getTime()).map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} messageValue={props.messageValue} chat={chat} loading={props.loading} searchValue={props.searchValue} chatWithAccounts={props.chatWithAccounts} currentChatsOfAccount={currentChatsOfAccount} />)
       ) : (
         <div className={styles.chats_wrapper_text}>
           <div className={styles.chats_wrapper_title}>Add a chat</div>
