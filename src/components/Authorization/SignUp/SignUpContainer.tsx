@@ -34,7 +34,7 @@ const SignUpContainer = (props: SignUpContainerPropsType) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsOnlineToSessionStorage({ value: "online" });
+        // setIsOnlineToSessionStorage({ value: "online" });
         history.push(`${profileConstant.path}/${user.uid}`);
       }
     });

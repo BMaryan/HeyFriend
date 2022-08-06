@@ -33,7 +33,7 @@ const SignInContainer = (props: SignInContainerPropsType) => {
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsOnlineToSessionStorage({ value: "online" });
+        // setIsOnlineToSessionStorage({ value: "online" });
         history.push(`/`);
       }
     });

@@ -105,37 +105,93 @@ const AppContainer = (props: AppContainerPropsType) => {
   }, [history.location]);
 
   // first visitthe site
-  // React.useEffect(() => {
-  // window.addEventListener("onunload", function () {
-  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: null });
-  // });
-  // }, []);
-
-  // React.useEffect(() => {
-  //   // window.addEventListener("onload", function () {
-  //   //   console.log("onload");
-  //   //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: setIsOnlineToSessionStorage("online") });
-  //   // });
-  //   window.onload = function () {
-  //     // if (props.account) {
-  //     console.log("onload");
-  //     // props.updateAccountThunk({ ...props?.account, isOnline: "good" });
-
-  //     setOnline("good");
-  //     // }
-  //   };
-
-  //   // window.onunload = function () {
-  //   //   console.log("unload");
-  //   //   setOnline(null);
-  //   // };
-  // }, []);
 
   // React.useEffect(() => {
   //   if (props.account) {
   //     props.account && props.updateAccountThunk({ ...props?.account, isOnline: online });
   //   }
   // }, []);
+
+  // React.useEffect(() => {
+  //   window.addEventListener("onload", function () {
+  //     setIsOnlineToSessionStorage({ value: "online" });
+  //     props.account && props.updateAccountThunk({ ...props?.account, isOnline: getOnlineInSessionStorage() });
+  //   });
+
+  //   return () => {
+  //     window.addEventListener("beforeunload", function () {
+  //       removeOnlineInSessionStorage();
+  //       props.account && props.updateAccountThunk({ ...props?.account, isOnline: getOnlineInSessionStorage() });
+  //     });
+  //   };
+  // }, [getOnlineInSessionStorage()]);
+
+  // const setOnline = () => {
+  //   // alert("We are online!");
+  //   setOnlineStatus(true);
+  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: onlineStatus });
+  // };
+  // const setOffline = () => {
+  //   // alert("We are offline!");
+  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: onlineStatus });
+  //   setOnlineStatus(false);
+  // };
+
+  // console.log(navigator);
+
+  // React.useEffect(() => {
+  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: navigator.onLine });
+  //   // window.addEventListener("offline", setOffline);
+  //   // window.addEventListener("online", setOnline);
+
+  //   // cleanup if we unmount
+  //   // return () => {
+  //   //   window.removeEventListener("offline", setOffline);
+  //   //   window.removeEventListener("online", setOnline);
+  //   // };
+
+  //   return () => {
+  //     window.addEventListener("beforeunload", function () {
+  //       props.account && props.updateAccountThunk({ ...props?.account, isOnline: navigator.onLine });
+  //     });
+  //   };
+  // }, [navigator.onLine]);
+
+  // console.log(navigator);
+
+  // React.useEffect(() => {
+  //   navigator. .addEventListener("disconnect", (event: any) => {
+  //     console.log(`HID disconnected: ${event.device.productName}`);
+  //     console.dir(event);
+  //   });
+  // });
+
+  // React.useEffect(() => {
+  //   // props.account && props.updateAccountThunk({ ...props?.account, isOnline: isOnline });
+
+  //   // window.addEventListener("onload", updateMethodTrue);
+  //   // window.addEventListener("beforeunload", updateMethodFalse);
+  //   console.log("yes");
+  //   setIsOnline(true);
+
+  //   return () => {
+  //     console.log("false");
+  //     // props.account && props.updateAccountThunk({ ...props?.account, isOnline: isOnline });
+
+  //     setIsOnline(false);
+
+  //     // window.removeEventListener("onload", updateMethodTrue);
+  //     // window.removeEventListener("beforeunload", updateMethodFalse);
+  //   };
+  // });
+
+  // React.useEffect(() => {
+  //   test && props.updateAccountThunk({ ...test.data(), isOnline: true });
+
+  //   return () => {
+  //     test && props.updateAccountThunk({ ...test.data(), isOnline: false });
+  //   };
+  // }, [navigator.onLine]);
 
   // to show progress when account doesn't have
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {

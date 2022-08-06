@@ -97,7 +97,7 @@ const NavbarList = (props: NavbarListPropsType) => {
         <MenuItem
           onClick={() => {
             props.account && props.signOut(props.account);
-            removeOnlineInSessionStorage();
+            // removeOnlineInSessionStorage();
           }}
           sx={{ borderTop: "1px solid var(--bgWhite233)" }}
           className={styles.menu_item}>
