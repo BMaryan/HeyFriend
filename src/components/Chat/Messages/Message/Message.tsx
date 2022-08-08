@@ -19,6 +19,7 @@ interface MessagePropsType {
   prevMessage: FirebaseType<MessageType>;
   messageValue: string;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
+  setEditMessage: (value: MessageType | null) => void;
   setMessageValue: (value: string) => void;
   deleteMessageThunk: (message: MessageType) => void;
 }
@@ -103,7 +104,7 @@ const Message = (props: MessagePropsType) => {
         </div>
 
         {/* conteiner of message for editing */}
-        {open ? <ContainerOfMessage open={open} anchorEl={anchorEl} handleClick={handleClick} handleClose={handleClose} message={props.message} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
+        {open ? <ContainerOfMessage open={open} anchorEl={anchorEl} handleClick={handleClick} handleClose={handleClose} message={props.message} setEditMessage={props.setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
       </div>
     </div>
   );

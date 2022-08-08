@@ -307,6 +307,7 @@ interface ContainerOfMessagePropsType {
   open: boolean;
   anchorEl: null | HTMLElement;
   message: FirebaseType<MessageType>;
+  setEditMessage: (value: MessageType | null) => void;
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
   handleClose: () => void;
   deleteMessageThunk: (message: MessageType) => void;
@@ -315,7 +316,9 @@ interface ContainerOfMessagePropsType {
 export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
   return (
     <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
-      <MenuItem className={styles.menu_item}>Edit</MenuItem>
+      <MenuItem className={styles.menu_item} onClick={() => props.setEditMessage(props.message.data())}>
+        Edit
+      </MenuItem>
       <MenuItem className={styles.menu_item} onClick={() => props.deleteMessageThunk(props.message.data())}>
         Delete
       </MenuItem>

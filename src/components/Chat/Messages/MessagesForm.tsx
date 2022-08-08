@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, InjectedFormProps, reduxForm, WrappedFieldInputProps, WrappedFieldMetaProps } from "redux-form";
-import { AccountType, ChatType, FirebaseType, MediaOfMessageType } from "../../../types/types";
+import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../types/types";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { ContainerOfSmiles } from "../../../utils/helperForChat/helperForChat";
 import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
@@ -12,6 +12,7 @@ import { MessagesFormDataType } from "./Messages";
 import IconButton from "@mui/material/IconButton";
 import styles from "./Messages.module.scss";
 import Divider from "@mui/material/Divider";
+import ClearIcon from "@mui/icons-material/Clear";
 
 interface ChatFormPropsType extends InputOfMessagePropsType {
   account: AccountType | null;
@@ -23,8 +24,11 @@ interface InputOfMessagePropsType {
   meta?: WrappedFieldMetaProps;
   medias: Array<MediaOfMessageType>;
   messageValue: string;
+  editMessage: MessageType | null;
+  setEditMessage: (value: MessageType | null) => void;
   setMessageValue: (value: string) => void;
   setMedias: (medias: Array<MediaOfMessageType>) => void;
+  updateMessageThunk: (message: MessageType) => void;
 }
 
 const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMessagePropsType> & InputOfMessagePropsType) => {
@@ -49,6 +53,8 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
         type="text"
         placeholder="Search contact"
         fullWidth={true}
+        value={props.editMessage ? props.editMessage?.message : props.messageValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => (props.editMessage ? props.setEditMessage({ ...props.editMessage, message: e.target.value }) : props.setMessageValue(e.target.value))}
         startAdornment={
           <InputAdornment sx={{ height: "100%" }} position="start">
             <IconButton onClick={handleClick} edge="start">
@@ -58,25 +64,41 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
         }
         endAdornment={
           <InputAdornment sx={{ height: "100%", display: "flex", columnGap: "10px" }} position="end">
-            <label htmlFor="icon-button-file">
-              <input
-                id="icon-button-file"
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  getPictureBase64({ event }).then((image: string | undefined) => {
-                    image && props.setMedias([...props.medias, { media: image }]);
-                  });
-                }}
-              />
-              <IconButton component="span" edge="start">
-                <CollectionsOutlinedIcon />
+            {props.editMessage ? (
+              <IconButton onClick={() => props.setEditMessage(null)} component="span" edge="start">
+                <ClearIcon />
               </IconButton>
-            </label>
-
+            ) : (
+              <>
+                <label htmlFor="icon-button-file">
+                  <input
+                    id="icon-button-file"
+                    type="file"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      getPictureBase64({ event }).then((image: string | undefined) => {
+                        image && props.setMedias([...props.medias, { media: image }]);
+                      });
+                    }}
+                  />
+                  <IconButton component="span" edge="start">
+                    <CollectionsOutlinedIcon />
+                  </IconButton>
+                </label>
+              </>
+            )}
             <Divider sx={{ height: 28 }} orientation="vertical" />
-            <IconButton type="submit" color="primary" sx={{ p: "10px" }} disabled={((props.meta?.invalid || props.meta?.submitting) && !props.meta?.touched) || !props.meta?.dirty} edge="end">
+            <IconButton
+              onClick={(e: any) => {
+                props.editMessage && e.preventDefault();
+                props.editMessage && props.updateMessageThunk({ ...props.editMessage });
+              }}
+              type="submit"
+              color="primary"
+              sx={{ p: "10px" }}
+              disabled={!props.editMessage && !props.messageValue && !props.input?.value}
+              edge="end">
               <SendOutlinedIcon />
             </IconButton>
           </InputAdornment>
@@ -87,10 +109,12 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
 };
 
 const MessagesForm = (props: InjectedFormProps<MessagesFormDataType, ChatFormPropsType> & ChatFormPropsType) => {
+  console.log(props.editMessage?.message);
+
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.form_content}>
-        <Field {...props} name={`send_message_${props.currentChat?.id}_${props.account?.id}`} value={props.messageValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)} component={InputOfMessage} />
+        <Field {...props} name={`send_message_${props.currentChat?.id}_${props.account?.id}`} component={InputOfMessage} />
       </div>
     </form>
   );

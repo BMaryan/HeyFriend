@@ -28,6 +28,7 @@ export interface MessagesFormDataType {
 const Messages = (props: MessagesPropsType) => {
   const scrollContent = React.createRef<any>();
   const [open, setOpen] = React.useState(false);
+  const [editMessage, setEditMessage] = React.useState<MessageType | null>(null);
   const [medias, setMedias] = React.useState<Array<MediaOfMessageType>>([]);
   const currentMessagesOfChat: Array<FirebaseType<MessageType>> = props.messages.filter((message: FirebaseType<MessageType>) => message.data().chatId === props.currentChat?.id);
 
@@ -53,19 +54,21 @@ const Messages = (props: MessagesPropsType) => {
       date: fb.Timestamp.now(),
     });
 
-    Object.keys(formData).map((item) => (formData[item] = ""));
+    setEditMessage(null);
+    props.setMessageValue("");
+    Object.keys(formData).map((item) => console.log(formData[item]));
   };
 
   // get id from formData (send_message_${props.currentChat?.id}_${props.account?.id}) and set to setTyping
   const onChange = (formData: MessagesFormDataType) => {
-    formData ? props.setTyping(Object.keys(formData)[0]?.split("_")[Object.keys(formData)[0]?.split("_").length - 1]) : props.setTyping(null);
+    props.setTyping(Object.keys(formData)[0]?.split("_")[Object.keys(formData)[0]?.split("_").length - 1] || null);
   };
 
   return (
     <div className={styles.messages}>
       {currentMessagesOfChat.length > 0 ? (
         <div className={styles.messages_content} ref={scrollContent}>
-          {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} message={message} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
+          {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} message={message} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} setEditMessage={setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
 
           {/* {
             props.currentChat?.data()?.typing && <>...</>
@@ -76,7 +79,7 @@ const Messages = (props: MessagesPropsType) => {
         <div className={styles.default_content}>Default content</div>
       )}
 
-      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} setMessageValue={props.setMessageValue} setMedias={setMedias} onSubmit={onSubmit} onChange={onChange} />
+      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} updateMessageThunk={props.updateMessageThunk} />
 
       {/* toogle container for adding medias */}
       {medias.length > 0 && <ContainerOfMessageAndMedia messageValue={props.messageValue} setMessageValue={props.setMessageValue} medias={medias} setMedias={setMedias} open={open} setOpen={setOpen} onSubmit={onSubmit} />}
