@@ -61,7 +61,9 @@ const SwipeableView = (props: SwipeableViewPropsType) => {
   return (
     <>
       <SwipeableViews className={styles.wrapper_swipeable} axis={theme.direction === "rtl" ? "x-reverse" : "x"} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
-        {props.mediasOfPost.map((media: MediaOfMessageType, index: number) => (Math.abs(activeStep - index) <= 2 ? <img key={index} className={styles.post_img} src={media.media} alt="" /> : null))}
+        {props.mediasOfPost.map((media: MediaOfMessageType, index: number) => (
+          <img key={index} className={styles.post_img} src={media.media} alt="" />
+        ))}
       </SwipeableViews>
 
       {props.mediasOfPost.length > 1 && (
