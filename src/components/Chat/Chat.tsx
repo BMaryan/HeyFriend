@@ -2,10 +2,10 @@ import React from "react";
 import { AccountType, ChatType, FirebaseType, HistoryType, ParticipantsOfChatType } from "../../types/types";
 import { ChatDetails, DefaultViewMessages, Head } from "../../utils/helperForChat/helperForChat";
 import { ChatContainerPropsType } from "./ChatContainer";
+import GoBackHead from "../common/GoBackHead/GoBackHead";
 import Messages from "./Messages/Messages";
 import styles from "./Chat.module.scss";
 import Dialogs from "./Dialogs/Dialogs";
-import GoBackHead from "../common/GoBackHead/GoBackHead";
 
 interface ChatPropsType extends ChatContainerPropsType {
   id: string;

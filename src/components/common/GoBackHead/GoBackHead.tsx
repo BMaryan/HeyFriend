@@ -5,11 +5,12 @@ import IconButton from "@mui/material/IconButton";
 import styles from "./GoBackHead.module.scss";
 
 interface GoBackHeadPropsType {
-  title: string;
+  title?: string;
   history: HistoryType;
+  content?: React.ReactElement<GoBackHeadPropsType>;
 }
 
-let GoBackHead = (props: GoBackHeadPropsType) => {
+const GoBackHead = (props: GoBackHeadPropsType) => {
   return (
     <div className={styles.go_back_head}>
       <div className={styles.wrapper_title}>
@@ -21,6 +22,8 @@ let GoBackHead = (props: GoBackHeadPropsType) => {
 
         {props.title}
       </div>
+
+      {props.content}
     </div>
   );
 };
