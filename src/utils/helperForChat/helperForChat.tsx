@@ -1,7 +1,6 @@
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
 import { Avatar, AvatarGroup, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Tooltip } from "@mui/material";
-import dialogStyles from "../../components/Chat/Dialogs/Dialog/Dialog.module.scss";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";

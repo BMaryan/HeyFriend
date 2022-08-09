@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
-import { setIsOnlineToSessionStorage } from "../../../core/methods/methods";
+// import { setIsOnlineToSessionStorage } from "../../../core/methods/methods";
 import { getAccountSelector } from "../../../redux/account-selectors";
 import { authActions, signIn } from "../../../redux/auth-reducer";
 import { AccountType, SignType } from "../../../types/types";
