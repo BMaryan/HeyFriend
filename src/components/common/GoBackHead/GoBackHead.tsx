@@ -7,7 +7,7 @@ import styles from "./GoBackHead.module.scss";
 interface GoBackHeadPropsType {
   title?: string;
   history: HistoryType;
-  content?: React.ReactElement<GoBackHeadPropsType>;
+  // content?: React.ReactElement<GoBackHeadPropsType>;
 }
 
 const GoBackHead = (props: GoBackHeadPropsType) => {
@@ -23,7 +23,7 @@ const GoBackHead = (props: GoBackHeadPropsType) => {
         {props.title}
       </div>
 
-      {props.content}
+      {/* {props.content} */}
     </div>
   );
 };
