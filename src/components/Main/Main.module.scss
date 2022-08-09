@@ -2,21 +2,21 @@
 
 .main {
   width: 100%;
-  display: flex;
+  @include ds-position;
   flex: 1;
-  margin-top: $mg-from-header;
+  box-sizing: border-box;
 }
 
 /* content */
 .main_content {
+  height: 100%;
   width: 60%;
   margin-right: $mg-from-header;
-  margin-bottom: $mg-from-header;
 }
 
 /* sidebar */
 .main_sideBar_right {
-  display: flex;
+  @include ds-position;
   flex: 1;
   z-index: 10;
 }

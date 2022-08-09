@@ -5,6 +5,7 @@ import { ChatContainerPropsType } from "./ChatContainer";
 import Messages from "./Messages/Messages";
 import styles from "./Chat.module.scss";
 import Dialogs from "./Dialogs/Dialogs";
+import GoBackHead from "../common/GoBackHead/GoBackHead";
 
 interface ChatPropsType extends ChatContainerPropsType {
   id: string;
@@ -30,12 +31,10 @@ const Chat = (props: ChatPropsType) => {
     props.setMessageValue("");
   }
 
-  // console.log(chatWithAccounts.map((item) => item.data()));
-
   return (
     <div className={styles.chat}>
       {/* dialogs content */}
-      <div className={styles.dialogs}>
+      <div className={`${styles.dialogs} ${props.id && styles.mobile_dialogs}`}>
         <Head accounts={props.accounts} account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={true} toggleDetails={toggleDetails} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} history={props.history} setToggleDetails={setToggleDetails} createChatThunk={props.createChatThunk} />
 
         {/* field search people */}
@@ -47,8 +46,8 @@ const Chat = (props: ChatPropsType) => {
       </div>
 
       {/* messages content */}
-      <div className={styles.messages}>
-        {props.id ? <Head accounts={props.accounts} account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={false} toggleDetails={toggleDetails} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} history={props.history} setToggleDetails={setToggleDetails} createChatThunk={props.createChatThunk} /> : undefined}
+      <div className={`${styles.messages}`}>
+        {!props.id ? <Head accounts={props.accounts} account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={false} toggleDetails={toggleDetails} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} history={props.history} setToggleDetails={setToggleDetails} createChatThunk={props.createChatThunk} /> : <GoBackHead history={props.history} content={<>Content</>} />}
 
         {props.id ? !toggleDetails ? <ChatDetails accounts={props.accounts} messages={props.messages} chatWithAccounts={chatWithAccounts} currentChat={props.currentChat} history={props.history} deleteChatThunk={props.deleteChatThunk} deleteMessageThunk={props.deleteMessageThunk} /> : <Messages account={props.account} messages={props.messages} id={props.id} currentChat={props.currentChat} messageValue={props.messageValue} chatWithAccounts={chatWithAccounts} loading={props.loading} setTyping={props.setTyping} setMessageValue={props.setMessageValue} addMessageThunk={props.addMessageThunk} updateMessageThunk={props.updateMessageThunk} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
 

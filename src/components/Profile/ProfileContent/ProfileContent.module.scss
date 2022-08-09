@@ -3,23 +3,23 @@
 
 .profile_content {
   width: 100%;
-  box-sizing: border-box;
-  display: flex;
+  @include ds-position;
   flex: 1;
-  overflow: hidden;
+  box-sizing: border-box;
   padding: 0 $pdRightCover;
 }
 
 /* content */
 .content {
-  box-sizing: border-box;
+  @include ds-position(unset, unset, column);
   flex: 1;
+  row-gap: $pd-content;
+  box-sizing: border-box;
 }
 
 .navigation {
   border-bottom: 1px solid $grey300;
   @include ds-position(center, center);
-  margin-bottom: $mg-between-contaner;
   transition: border-top 0.5s;
 }
 
@@ -57,7 +57,7 @@
   @include position(absolute, 0, 0);
 }
 
-/* wrapper button close */
+/* wrapper button delete */
 .wrapper_button_delete button {
   color: $white;
 }

@@ -24,7 +24,7 @@ const CurrentPostContainer = (props: CurrentPostContainerPropsType) => {
 
   if (!props.posts) {
     return (
-      <div className="wrapper_loading">
+      <div className="gl_wrapper_loading">
         <CircularProgress className="loading" />
       </div>
     );

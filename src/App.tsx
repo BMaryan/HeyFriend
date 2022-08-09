@@ -25,18 +25,20 @@ type AppPropsType = {
 };
 
 function App(props: AppPropsType) {
+  const checkMain = props.history.location.pathname === mainConstant.path;
+  const checkProfile = "/" + props.history.location.pathname.split("/")[1] === profileConstant.path;
   const checkSignIn = props.history.location.pathname.includes(signInConstant.path);
   const checkSignUp = props.history.location.pathname.includes(signUpConstant.path);
 
   return (
-    <div className="App">
+    <div className="app">
       {props.auth ? (
         <div className="container_fluid container_fluid__position">
           <HeaderContainer />
         </div>
       ) : undefined}
 
-      <div className={props.auth ? `container` : "container__auth"}>
+      <div className={props.auth ? `${!checkMain && !checkProfile ? "container_heigth" : ""} container_width container_space` : "container_fluid"}>
         <Switch>
           <Route exact path={`${mainConstant.path}`} render={() => <MainContainer />} />
           <Route exact path={`${photoConstant.path}/:id`} render={() => <CurrentPostContainer />} />
@@ -50,6 +52,7 @@ function App(props: AppPropsType) {
         </Switch>
       </div>
 
+      {/* bottom navigation */}
       {!(checkSignIn || checkSignUp) ? (
         <div className="container_fluid container_fluid__paper">
           <NavbarRow messages={props.messages} isBottomNavigation={true} location={props.history.location} />

@@ -25,7 +25,7 @@ const Header = (props: HeaderPropsType) => {
 
   return (
     <div className={styles.header}>
-      <div className={`container ${styles.header_container}`}>
+      <div className={`container_width ${styles.header_container}`}>
         {/* logo */}
         <div className={styles.header_logo}>
           <img src={Logo} alt="" onClick={refreshPage} />

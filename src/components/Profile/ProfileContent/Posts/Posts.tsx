@@ -20,17 +20,15 @@ const Posts = (props: PostsPropsType) => {
 
   return (
     <div className={styles.posts}>
-      <div className={styles.wrapper_posts}>
-        {props?.id === props?.account?.id ? (
-          <div className={styles.wrapper_input}>
-            <input className={styles.input} onClick={() => props.handleOpen()} type="text" value="" onChange={() => undefined} placeholder="What's on your mind?" multiple />
-          </div>
-        ) : undefined}
+      {props?.id === props?.account?.id ? (
+        <div className={styles.wrapper_input}>
+          <input className={styles.input} onClick={() => props.handleOpen()} type="text" value="" onChange={() => undefined} placeholder="What's on your mind?" multiple />
+        </div>
+      ) : undefined}
 
-        {props.id === props?.account?.id ? <ReturnImageList posts={props.posts} account={props.account} id={props.id} isAccountPosts={isAccountPosts} logicOfPagePost={true} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : <ReturnImageList posts={props.posts} account={props.account} id={props.id} isAccountPosts={isAccountPosts} logicOfPagePost={true} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} />}
+      {props.id === props?.account?.id ? <ReturnImageList posts={props.posts} account={props.account} id={props.id} isAccountPosts={isAccountPosts} logicOfPagePost={true} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : <ReturnImageList posts={props.posts} account={props.account} id={props.id} isAccountPosts={isAccountPosts} logicOfPagePost={true} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} />}
 
-        {props.openModalCurrentPost ? <ToggleShowCurrentPostContainer currentPost={props.posts[0]} history={props.history} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : undefined}
-      </div>
+      {props.openModalCurrentPost ? <ToggleShowCurrentPostContainer currentPost={props.posts[0]} history={props.history} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} /> : undefined}
     </div>
   );
 };

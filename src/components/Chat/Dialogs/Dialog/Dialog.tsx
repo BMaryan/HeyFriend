@@ -80,19 +80,20 @@ const Dialog = (props: DialogPropsType) => {
             <Skeleton animation="wave" variant="circular" width={40} height={40} />
           ) : lengthChatOfAccounts ? (
             <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-              <Avatar src={messageWithAccounts[0]?.data()?.avatar ? messageWithAccounts[0]?.data()?.avatar : defaultAvatar} alt={messageWithAccounts[0]?.data() ? messageWithAccounts[0]?.data()?.surname + " " + messageWithAccounts[0]?.data()?.name : undefined} />
+              <Avatar className={styles.avatar} src={messageWithAccounts[0]?.data()?.avatar ? messageWithAccounts[0]?.data()?.avatar : defaultAvatar} alt={messageWithAccounts[0]?.data() ? messageWithAccounts[0]?.data()?.surname + " " + messageWithAccounts[0]?.data()?.name : undefined} />
             </StyledBadge>
           ) : (
             <AvatarGroup max={2}>
               {messageWithAccounts.map((account: FirebaseType<AccountType>) => (
                 <Tooltip key={account.id} title={account.data().surname + " " + account.data().name}>
-                  <Avatar key={account.id} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                  <Avatar key={account.id} className={styles.avatar} src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
                 </Tooltip>
               ))}
             </AvatarGroup>
           )}
         </ListItemAvatar>
         <ListItemText
+          className={styles.wrapper_list_item_text}
           primary={
             props.loading ? (
               <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { profileConstant, editConstant } from "../../../../core/constants/constants";
 import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
-import { removeOnlineInSessionStorage } from "../../../../core/methods/methods";
+// import { removeOnlineInSessionStorage } from "../../../../core/methods/methods";
 import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import Settings from "@mui/icons-material/SettingsOutlined";
 import Person from "@mui/icons-material/PersonOutline";

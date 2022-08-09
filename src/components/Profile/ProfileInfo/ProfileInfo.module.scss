@@ -2,15 +2,12 @@
 @import "../Profile.module.scss";
 
 .profile_info {
-  margin-bottom: $mg-from-header;
 }
 
 /* profile cover */
 .profile_cover {
   height: 250px;
   max-height: 100%;
-  /* background-image: linear-gradient($grey900, $grey900),
-		url("https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc0ee8c57-0789-439c-8fd2-704aa26b9a4a_4066x2711.jpeg"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -45,7 +42,6 @@
 
 /* wrapper change cover */
 .wrapper_change_cover {
-  /* background: $red500; */
   @include position(absolute, $pd-content, $pd-content);
 }
 
@@ -63,16 +59,6 @@
   @include position(relative);
   padding: $pdYCover $pdRightCover $pdYCover $pdLeftCover;
 }
-
-/* wrapper profile picture */
-/* .wrapper_profilePicture__center {
-	background: $white;
-	border-radius: 50%;
-}
-
-.wrapper_profilePicture__center img {
-	transform: scale(0.93);
-} */
 
 .wrapper_profilePicture__center,
 .wrapper_profilePicture_active__center {

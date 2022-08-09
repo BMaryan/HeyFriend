@@ -3,9 +3,10 @@
 .header {
   height: $ht-header;
   background: $white;
-  display: flex;
+  @include ds-position(unset, center);
   border-bottom: 1px solid $grey300;
-  padding: 10px 0;
+  padding: 5px 0;
+  box-sizing: border-box;
 }
 
 .header_container {
@@ -22,7 +23,8 @@
 
 .header_logo img {
   height: 100%;
-  width: 38px;
+  width: 100%;
+  // width: 38px;
   @include image-position(cover, center);
   margin: 0 10px 0 0;
   cursor: pointer;
@@ -41,7 +43,7 @@
 /* form */
 .form {
   height: 100%;
-  display: flex;
+  @include ds-position;
 }
 
 .wrapper_field {
@@ -81,7 +83,7 @@
   pointer-events: none;
 }
 
-// search menu
+// search menu options
 .search_menu {
   height: 300px;
   width: 100%;
@@ -117,13 +119,6 @@
   @include ds-position(center, center);
   flex: 1;
   padding: $pd-content;
-}
-
-/* menu_item */
-.menu > div ul li {
-  width: 100%;
-  padding-top: 9px;
-  padding-bottom: 9px;
 }
 
 .search_icon {

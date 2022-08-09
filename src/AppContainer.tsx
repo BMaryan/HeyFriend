@@ -197,7 +197,7 @@ const AppContainer = (props: AppContainerPropsType) => {
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
     if (!props.account) {
       return (
-        <div className="wrapper_loading">
+        <div className="gl_wrapper_loading">
           <CircularProgress className="loading" />
         </div>
       );
