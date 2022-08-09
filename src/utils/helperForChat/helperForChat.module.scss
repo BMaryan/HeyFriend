@@ -11,6 +11,14 @@ $ht-media: 300px;
 }
 
 /* head dialogs */
+.chat_forHead {
+  text-decoration: none;
+  @include ds-position(unset, center);
+  column-gap: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 .head_dialogs {
   @include ds-position(space-between, center);
   overflow: hidden;
@@ -33,17 +41,6 @@ $ht-media: 300px;
 .head_messages {
   @include ds-position(space-between);
   padding: 0 $pd-content;
-}
-
-/* wrapper picture */
-.wrapper_picture img {
-  height: 85px;
-  width: 85px;
-  color: $white;
-  font-size: 20px;
-  border-radius: 50%;
-  @include ds-position(center, center);
-  margin-bottom: 5px;
 }
 
 /* icon */
@@ -102,6 +99,22 @@ $ht-media: 300px;
   cursor: pointer;
 }
 
+.login {
+  color: $black;
+  font-size: 15px;
+  /* font-size: 15px; */
+}
+
+.date {
+  color: $grey500;
+  font-size: 13px;
+}
+
+.message {
+  color: $grey600;
+  font-size: 15px;
+}
+
 // chat detail | edit chat and more information
 .chat_details {
   @include ds-position(center, center, column);
@@ -117,8 +130,8 @@ $ht-media: 300px;
 
 // head chat detail
 .wrapper_head_detail {
+  width: 100%;
   @include ds-position(space-between, center, row);
-  flex: 1;
 }
 
 //

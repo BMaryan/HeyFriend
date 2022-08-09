@@ -114,27 +114,25 @@ export const Head = (props: HeadPropsType) => {
     <div className={styles.head + " " + styles.head_messages}>
       <div>
         {props.toggleDetails ? (
-          <Box className={dialogStyles.chat_forHead} component={lengthChatOfAccounts ? NavLink : "div"} to={`${profileConstant.path}/${props?.chatWithAccounts[0]?.id}`} onClick={() => !lengthChatOfAccounts && props.setToggleDetails(false)}>
-            <div className={dialogStyles.wrapper_picture}>
-              <div className={dialogStyles.have_not_picture_forHead}>
-                {lengthChatOfAccounts ? (
-                  <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-                    <img src={props?.chatWithAccounts[0]?.data()?.avatar ? props?.chatWithAccounts[0]?.data()?.avatar : defaultAvatar} alt="" />
-                  </StyledBadge>
-                ) : (
-                  <AvatarGroup max={3}>
-                    {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
-                      <Tooltip key={account.id} title={account.data().surname + " " + account.data().name}>
-                        <Avatar src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
-                      </Tooltip>
-                    ))}
-                  </AvatarGroup>
-                )}
-              </div>
+          <Box className={styles.chat_forHead} component={lengthChatOfAccounts ? NavLink : "div"} to={`${profileConstant.path}/${props?.chatWithAccounts[0]?.id}`} onClick={() => !lengthChatOfAccounts && props.setToggleDetails(false)}>
+            <div>
+              {lengthChatOfAccounts ? (
+                <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
+                  <Avatar src={props?.chatWithAccounts[0]?.data()?.avatar ? props?.chatWithAccounts[0]?.data()?.avatar : defaultAvatar} alt="" />
+                </StyledBadge>
+              ) : (
+                <AvatarGroup max={3}>
+                  {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
+                    <Tooltip key={account.id} title={account.data().surname + " " + account.data().name}>
+                      <Avatar src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
+                    </Tooltip>
+                  ))}
+                </AvatarGroup>
+              )}
             </div>
             <div>
-              <div className={dialogStyles.login}>{lengthChatOfAccounts ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : props.currentChat?.data().title}</div>
-              <div className={dialogStyles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
+              <div className={styles.login}>{lengthChatOfAccounts ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : props.currentChat?.data().title}</div>
+              <div className={styles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
             </div>
           </Box>
         ) : (
