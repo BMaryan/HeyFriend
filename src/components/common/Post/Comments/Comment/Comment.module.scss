@@ -45,13 +45,3 @@
   border: none;
   cursor: pointer;
 }
-
-// timeline
-.timeline_item::before {
-  content: "" !important;
-  flex: unset !important;
-}
-
-.timeline_content {
-  padding-top: 0 !important;
-}

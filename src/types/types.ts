@@ -106,10 +106,6 @@ export interface LikedOfCommentType {
   id: string;
 }
 
-export interface AnsweredOfCommentType {
-  id: string;
-}
-
 export interface CommentType {
   id: string;
   accountId?: string;
@@ -117,7 +113,16 @@ export interface CommentType {
   dateCreated?: Timestamp;
   comment: string;
   liked?: Array<LikedOfPostType>;
-  answered?: Array<AnsweredOfCommentType>;
+  // replies?: Array<RepliesOfCommentType>;
+}
+
+export interface ReplyType {
+  id: string;
+  accountId?: string;
+  commentId?: string;
+  dateCreated: Timestamp;
+  reply: string;
+  liked?: Array<LikedOfPostType>;
 }
 
 // react router dom

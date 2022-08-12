@@ -1,10 +1,10 @@
 import React from "react";
 import { AccountType, FirebaseType, HistoryType, PostType } from "../../../../types/types";
-import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import { photoConstant, profileConstant } from "../../../../core/constants/constants";
-import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
+import { ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import betaVershion from "../../../../assets/images/betaVershion.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Backdrop from "@mui/material/Backdrop";
 import { NavLink } from "react-router-dom";
@@ -42,7 +42,7 @@ const HeadPost = (props: HeadPostPropsType) => {
         <ListItem className={styles.details_position} alignItems="flex-start">
           <ListItemAvatar>
             <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${props?.currentAccount?.data()?.id}`}>
-              <Avatar src={props?.currentAccount?.data()?.avatar || defaultAvatar} alt="" />
+              <CustomAvatar avatarData={props?.currentAccount?.data()} />
             </NavLink>
           </ListItemAvatar>
 

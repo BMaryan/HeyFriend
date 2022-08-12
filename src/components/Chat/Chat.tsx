@@ -2,10 +2,11 @@ import React from "react";
 import { AccountType, ChatType, FirebaseType, HistoryType, ParticipantsOfChatType } from "../../types/types";
 import { ChatDetails, DefaultViewMessages, Head } from "../../utils/helperForChat/helperForChat";
 import { ChatContainerPropsType } from "./ChatContainer";
-// import GoBackHead from "../common/GoBackHead/GoBackHead";
+import GoBackHead from "../common/GoBackHead/GoBackHead";
 import Messages from "./Messages/Messages";
 import styles from "./Chat.module.scss";
 import Dialogs from "./Dialogs/Dialogs";
+import Media from "react-media";
 
 interface ChatPropsType extends ChatContainerPropsType {
   id: string;
@@ -47,9 +48,7 @@ const Chat = (props: ChatPropsType) => {
 
       {/* messages content */}
       <div className={`${styles.messages}`}>
-        {/* {!props.id ?  */}
-        <Head accounts={props.accounts} account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={false} toggleDetails={toggleDetails} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} history={props.history} setToggleDetails={setToggleDetails} createChatThunk={props.createChatThunk} />
-        {/* : <GoBackHead history={props.history} />} */}
+        {props.id && <Media query={{ maxWidth: 399 }}>{(matches) => (matches ? <GoBackHead history={props.history} title="TEST" /> : <Head accounts={props.accounts} account={props.account} typingOfAccount={typingOfAccount} toggleShowContent={false} toggleDetails={toggleDetails} currentChat={props.currentChat} chatWithAccounts={chatWithAccounts} history={props.history} setToggleDetails={setToggleDetails} createChatThunk={props.createChatThunk} />)}</Media>}
 
         {props.id ? !toggleDetails ? <ChatDetails accounts={props.accounts} messages={props.messages} chatWithAccounts={chatWithAccounts} currentChat={props.currentChat} history={props.history} deleteChatThunk={props.deleteChatThunk} deleteMessageThunk={props.deleteMessageThunk} /> : <Messages account={props.account} messages={props.messages} id={props.id} currentChat={props.currentChat} messageValue={props.messageValue} chatWithAccounts={chatWithAccounts} loading={props.loading} setTyping={props.setTyping} setMessageValue={props.setMessageValue} addMessageThunk={props.addMessageThunk} updateMessageThunk={props.updateMessageThunk} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
 

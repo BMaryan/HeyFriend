@@ -109,8 +109,6 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
 };
 
 const MessagesForm = (props: InjectedFormProps<MessagesFormDataType, ChatFormPropsType> & ChatFormPropsType) => {
-  console.log(props.editMessage?.message);
-
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.form_content}>

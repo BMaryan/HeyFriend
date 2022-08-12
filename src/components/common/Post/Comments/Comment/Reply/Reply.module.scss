@@ -1,0 +1,17 @@
+@import "../../../../../../core/styles/main.scss";
+
+// timeline
+.timeline {
+  padding: 5px 0 !important;
+  margin: 0 !important;
+}
+
+.timeline_item::before {
+  content: "" !important;
+  flex: unset !important;
+  padding: 0 !important;
+}
+
+.timeline_content {
+  padding-top: 0 !important;
+}
