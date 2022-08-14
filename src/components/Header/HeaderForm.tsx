@@ -1,15 +1,14 @@
 import React from "react";
-import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { profileConstant } from "../../core/constants/constants";
 import { AccountType, FirebaseType } from "../../types/types";
 import SearchIcon from "@mui/icons-material/Search";
 import { HeaderFormDataPropsType } from "./Header";
+import CustomAvatar from "../atoms/Avatar/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
-import styles from "./Header.module.scss";
-import Avatar from "@mui/material/Avatar";
 import { IconButton } from "@mui/material";
+import styles from "./Header.module.scss";
 
 interface HeaderFormPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -36,7 +35,8 @@ const HeaderForm = (props: InjectedFormProps<HeaderFormDataPropsType, HeaderForm
               foundAccount.map((account: FirebaseType<AccountType>) => (
                 <MenuItem key={account.id} className={styles.search_menu_item}>
                   <NavLink to={`${profileConstant.path}/${account.id}`} onClick={() => setSearchValue("")}>
-                    <Avatar src={account.data().avatar || defaultAvatar} />
+                    <CustomAvatar avatarData={account.data()} />
+
                     {account.data().surname + " " + account.data().name}
                   </NavLink>
                 </MenuItem>

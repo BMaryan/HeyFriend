@@ -5,7 +5,7 @@
   background: $white;
   @include ds-position(unset, center);
   border-bottom: 1px solid $grey300;
-  padding: 5px 0;
+  padding: 10px 0;
   box-sizing: border-box;
 }
 
@@ -38,6 +38,16 @@
 
 .logo_words {
   letter-spacing: 7px;
+}
+
+// row
+.navbar_row {
+  height: 100%;
+}
+
+// list
+.navbar_list {
+  height: 100%;
 }
 
 /* form */

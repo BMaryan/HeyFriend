@@ -16,6 +16,17 @@
   display: flex;
   @include position(relative);
   transition: 0.5s;
+
+  & > div {
+    height: 100%;
+    @include ds-position;
+    column-gap: 5px;
+    padding: 3px 10px !important;
+
+    & > span {
+      padding: 0 !important;
+    }
+  }
 }
 
 /* wrapper picture */

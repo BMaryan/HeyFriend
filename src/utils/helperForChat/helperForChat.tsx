@@ -1,6 +1,6 @@
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
-import { Avatar, AvatarGroup, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Tooltip } from "@mui/material";
+import { Avatar, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
@@ -8,9 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import styles from "./helperForChat.module.scss";
 import InfoIcon from "@mui/icons-material/Info";
-import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
-import Badge from "@mui/material/Badge";
 import Menu from "@mui/material/Menu";
 import moment from "moment";
 
@@ -43,39 +41,9 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 // import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 // import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { fb } from "../../firebase";
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    height: "10px",
-    width: "10px",
-    backgroundColor: "#44b700",
-    color: "#44b700",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    borderRadius: "50%",
-
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-  "@keyframes ripple": {
-    "0%": {
-      transform: "scale(.8)",
-      opacity: 1,
-    },
-    "100%": {
-      transform: "scale(2.4)",
-      opacity: 0,
-    },
-  },
-}));
+import CustomAvatarBadge from "../../components/atoms/AvatarBadge/AvatarBadge";
+import CustomAvatarGroup from "../../components/atoms/AvatarGroup/AvatarGroup";
+import CustomAvatar from "../../components/atoms/Avatar/Avatar";
 
 interface HeadPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -114,21 +82,7 @@ export const Head = (props: HeadPropsType) => {
       <div>
         {props.toggleDetails ? (
           <Box className={styles.chat_forHead} component={lengthChatOfAccounts ? NavLink : "div"} to={`${profileConstant.path}/${props?.chatWithAccounts[0]?.id}`} onClick={() => !lengthChatOfAccounts && props.setToggleDetails(false)}>
-            <div>
-              {lengthChatOfAccounts ? (
-                <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-                  <Avatar src={props?.chatWithAccounts[0]?.data()?.avatar ? props?.chatWithAccounts[0]?.data()?.avatar : defaultAvatar} alt="" />
-                </StyledBadge>
-              ) : (
-                <AvatarGroup max={3}>
-                  {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
-                    <Tooltip key={account.id} title={account.data().surname + " " + account.data().name}>
-                      <Avatar src={account.data().avatar || defaultAvatar} alt={account.data().surname + " " + account.data().name} />
-                    </Tooltip>
-                  ))}
-                </AvatarGroup>
-              )}
-            </div>
+            <div>{lengthChatOfAccounts ? <CustomAvatarBadge color="success" avatarData={props?.chatWithAccounts[0]?.data()} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" /> : <CustomAvatarGroup avatars={props.chatWithAccounts} max={3} />}</div>
             <div>
               <div className={styles.login}>{lengthChatOfAccounts ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : props.currentChat?.data().title}</div>
               <div className={styles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
@@ -174,7 +128,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
         {/* contact of owner */}
         <div className={styles.head_detail}>
           <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
-            <Avatar className={styles.detail_avatar} src={ownerGroupOfAccount?.data().avatar || defaultAvatar} />
+            <CustomAvatar avatarData={ownerGroupOfAccount?.data()} />
           </NavLink>
 
           <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
@@ -192,7 +146,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
               <List component="nav" aria-label="main mailbox folders">
                 <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
                   <ListItemIcon>
-                    <Avatar src={account.data()?.avatar || defaultAvatar} alt="" />
+                    <CustomAvatar avatarData={account.data()} />
                   </ListItemIcon>
                   <ListItemText primary={account.data()?.surname + " " + account.data()?.name} />
                 </ListItemButton>

@@ -116,6 +116,10 @@
 }
 
 @include media-breakpoint-down("s") {
+  .content {
+    margin-bottom: $pd-content;
+  }
+
   /* modal create post */
   .create_new_post_content {
     width: 55vw;

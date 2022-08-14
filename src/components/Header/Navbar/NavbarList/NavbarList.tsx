@@ -15,6 +15,7 @@ import { NavLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import Chip from "@mui/material/Chip";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 
 interface NavbarListPropsType {
   account: AccountType | null;
@@ -36,7 +37,7 @@ const NavbarList = (props: NavbarListPropsType) => {
   return (
     <div className={styles.navbar_list}>
       <div className={styles.wrapper_nav_link}>
-        <Chip onClick={handleClick} sx={{ fontSize: "15px" }} className={commonStyles.nav_link_toggleList} variant="outlined" label={props.account ? props.account.surname + " " + props.account.name : undefined} avatar={<Avatar src={props.account && props.account.avatar ? props.account.avatar : defaultAvatar} alt="" />} />
+        <Chip onClick={handleClick} sx={{ fontSize: "15px" }} className={commonStyles.nav_link_toggleList} variant="outlined" label={props.account ? props.account.surname + " " + props.account.name : undefined} avatar={<CustomAvatar avatarData={props.account} size="medium" />} />
       </div>
 
       <Menu
