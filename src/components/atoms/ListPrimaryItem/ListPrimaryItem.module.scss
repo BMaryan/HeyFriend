@@ -1,0 +1,17 @@
+@import "../../../core/styles/main.scss";
+
+.primary_fullName {
+  color: $black;
+  text-decoration: none;
+}
+
+.primary_button {
+  & > button {
+    padding: 0 !important;
+
+    & > svg {
+      color: $grey600;
+      font-size: 25px;
+    }
+  }
+}
