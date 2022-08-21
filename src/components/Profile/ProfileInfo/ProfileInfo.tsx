@@ -3,48 +3,13 @@ import { AccountType, ChatType, CreateChatType, FirebaseType, FollowersOfAccount
 import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
-import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
+import CustomAvatarBadge from "../../atoms/AvatarBadge/AvatarBadge";
 import betaVershion from "../../../assets/images/betaVershion.png";
 import styles from "./ProfileInfo.module.scss";
-import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
-import Badge from "@mui/material/Badge";
 import { fb } from "../../../firebase";
 import moment from "moment";
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    height: "12px",
-    width: "12px",
-    backgroundColor: "#44b700",
-    color: "#44b700",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    borderRadius: "50%",
-
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-  "@keyframes ripple": {
-    "0%": {
-      transform: "scale(.8)",
-      opacity: 1,
-    },
-    "100%": {
-      transform: "scale(2.4)",
-      opacity: 0,
-    },
-  },
-}));
 
 interface ProfileInfoPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -87,17 +52,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         </div>
 
         {/* wrapper picture */}
-        <div className={openModalAvatarProfile && isMyAccount ? styles.wrapper_profilePicture_active__center : styles.wrapper_profilePicture__center}>
-          {isMyAccount ? (
-            <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-              <img src={props?.account?.avatar || defaultAvatar} onClick={() => setOpenModalAvatarProfile(!openModalAvatarProfile)} title="Change profile photo" alt="" />
-            </StyledBadge>
-          ) : isOtherAccount ? (
-            <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-              <img src={currentAccount?.data()?.avatar || defaultAvatar} alt="" />
-            </StyledBadge>
-          ) : undefined}
-        </div>
+        <div className={openModalAvatarProfile && isMyAccount ? styles.wrapper_profilePicture_active__center : styles.wrapper_profilePicture__center}>{isMyAccount ? props?.account && <CustomAvatarBadge color="success" avatarData={props?.account} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" size="full" onClick={() => setOpenModalAvatarProfile(!openModalAvatarProfile)} /> : isOtherAccount ? currentAccount && <CustomAvatarBadge color="success" avatarData={currentAccount?.data()} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" size="full" /> : undefined}</div>
 
         {/* change cover img */}
         {isMyAccount && (
@@ -110,17 +65,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
       {/* 				profile info line				 */}
       <div className={styles.profile_info_line}>
         {/* wrapper picture */}
-        <div className={openModalAvatarProfile && isMyAccount ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>
-          {isMyAccount ? (
-            <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-              <img src={props?.account?.avatar || defaultAvatar} onClick={() => setOpenModalAvatarProfile(!openModalAvatarProfile)} title="Change profile photo" alt="" />
-            </StyledBadge>
-          ) : isOtherAccount ? (
-            <StyledBadge overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-              <img src={currentAccount?.data()?.avatar || defaultAvatar} alt="" />
-            </StyledBadge>
-          ) : undefined}
-        </div>
+        <div className={openModalAvatarProfile && isMyAccount ? styles.wrapper_profilePicture_active : styles.wrapper_profilePicture}>{isMyAccount ? props.account && <CustomAvatarBadge color="success" avatarData={props.account} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" size="full" onClick={() => setOpenModalAvatarProfile(!openModalAvatarProfile)} /> : isOtherAccount ? currentAccount && <CustomAvatarBadge color="success" avatarData={currentAccount?.data()} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" size="full" /> : undefined}</div>
 
         {/* wrapper profile details info line */}
         <div className={styles.wrapper_profile_details_info_line}>

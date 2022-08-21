@@ -81,9 +81,7 @@ const Reply = (props: ReplyPropsType) => {
         <Timeline className={styles.timeline}>
           <TimelineItem className={styles.timeline_item}>
             <TimelineSeparator>
-              <NavLink to={`${profileConstant.path}/${accountOfReply ? accountOfReply?.data()?.id : props?.currentAccount?.id}`}>
-                <CustomAvatar avatarData={accountOfReply?.data()} />
-              </NavLink>
+              <NavLink to={`${profileConstant.path}/${accountOfReply ? accountOfReply?.data()?.id : props?.currentAccount?.id}`}>{accountOfReply && <CustomAvatar avatarData={accountOfReply?.data()} />}</NavLink>
               <TimelineConnector />
             </TimelineSeparator>
 

@@ -42,7 +42,7 @@ const HeadPost = (props: HeadPostPropsType) => {
         <ListItem className={styles.details_position} alignItems="flex-start">
           <ListItemAvatar>
             <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${props?.currentAccount?.data()?.id}`}>
-              <CustomAvatar avatarData={props?.currentAccount?.data()} />
+              {props?.currentAccount && <CustomAvatar avatarData={props?.currentAccount?.data()} />}
             </NavLink>
           </ListItemAvatar>
 

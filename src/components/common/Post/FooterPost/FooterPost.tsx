@@ -81,7 +81,7 @@ const FooterPost = (props: FooterPostPropsType) => {
 
   return (
     <div className={props.modal ? styles.footer : styles.footer_modal}>
-      {props.modal ? <Comments {...destPropsComments} /> : undefined}
+      {props.modal && <Comments {...destPropsComments} />}
 
       <div className={styles.footer_head}>
         <div className={styles.features}>
@@ -105,11 +105,11 @@ const FooterPost = (props: FooterPostPropsType) => {
         </div>
       </div>
 
-      {!props.modal &&
-        (isPathOfPost ? (
+      {!props.modal ? (
+        isPathOfPost ? (
           <Media query={{ maxWidth: 720 }}>
             {(matches) =>
-              matches ? (
+              matches && (
                 <div className={styles.footer_comments}>
                   <Global
                     styles={{
@@ -147,8 +147,6 @@ const FooterPost = (props: FooterPostPropsType) => {
                     </div>
                   </SwipeableDrawer>
                 </div>
-              ) : (
-                <Comments {...destPropsComments} />
               )
             }
           </Media>
@@ -157,7 +155,10 @@ const FooterPost = (props: FooterPostPropsType) => {
             <Comments {...destPropsComments} />
             <FooterPostReduxForm {...destPropsFooterPostReduxForm} />
           </>
-        ))}
+        )
+      ) : (
+        <FooterPostReduxForm {...destPropsFooterPostReduxForm} />
+      )}
     </div>
   );
 };

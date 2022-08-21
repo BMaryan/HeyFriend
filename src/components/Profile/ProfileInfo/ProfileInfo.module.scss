@@ -77,22 +77,33 @@
   transition: 0.5s;
 }
 
-.wrapper_profilePicture img,
-.wrapper_profilePicture_active img,
-.wrapper_profilePicture__center img,
-.wrapper_profilePicture_active__center img {
+.wrapper_profilePicture,
+.wrapper_profilePicture_active,
+.wrapper_profilePicture__center,
+.wrapper_profilePicture_active__center {
   height: 130px;
   width: 130px;
   border-radius: 50%;
   @include image-position(cover, center);
-  cursor: pointer;
   transition: 0.5s;
 }
 
-.wrapper_profilePicture_active img,
-.wrapper_profilePicture_active__center img {
-  transform: scale(0.9);
+.wrapper_profilePicture_active,
+.wrapper_profilePicture_active__center {
   transition: 0.5s;
+
+  & > span {
+    transform: scale(0.9);
+    transition: 0.5s;
+
+    & > div {
+      transition: 0.5s;
+
+      & > img {
+        transition: 0.5s;
+      }
+    }
+  }
 }
 
 /* wrapper profile details info line */

@@ -57,7 +57,7 @@ const Comment = (props: CommentPropsType) => {
         <ListItem className={!props.modal ? styles.comment_content : styles.comment_content_modal} alignItems="flex-start">
           <ListItemAvatar>
             <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${accountOfComment ? accountOfComment?.data()?.id : props?.currentAccount?.id}`}>
-              <CustomAvatar avatarData={accountOfComment?.data()} />
+              {accountOfComment && <CustomAvatar avatarData={accountOfComment?.data()} />}
             </NavLink>
           </ListItemAvatar>
 

@@ -128,7 +128,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
         {/* contact of owner */}
         <div className={styles.head_detail}>
           <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
-            <CustomAvatar avatarData={ownerGroupOfAccount?.data()} />
+            {ownerGroupOfAccount && <CustomAvatar avatarData={ownerGroupOfAccount?.data()} />}
           </NavLink>
 
           <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
@@ -221,9 +221,6 @@ export const DefaultViewMessages = (props: DefaultViewMessagesPropsType) => {
       <div className={styles.wrapper_icon}>{/* <FontAwesomeIcon className={styles.icon} icon={faPaperPlane} /> */}</div>
       <div className={styles.title}>Your Messages</div>
       <div className={styles.subtitle}>Send private photos and messages to a friend or group</div>
-      <div className={styles.wrapper_button}>
-        <button>Send Message</button>
-      </div>
     </div>
   );
 };

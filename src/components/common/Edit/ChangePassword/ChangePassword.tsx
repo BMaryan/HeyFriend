@@ -1,7 +1,7 @@
 import React from "react";
-import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import MuiAlert, { AlertColor, AlertProps } from "@mui/material/Alert";
 import ChangePasswordReduxForm from "./ChangePasswordForm";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import { AccountType } from "../../../../types/types";
 import styles from "./ChangePassword.module.scss";
 import Snackbar from "@mui/material/Snackbar";
@@ -72,7 +72,7 @@ const ChangePassword = (props: ChangePasswordPropsType) => {
   return (
     <div className={styles.change_password}>
       <div className={styles.wrapper_profile_contact}>
-        <div className={styles.wrapper_picture}>{props?.account?.avatar ? <img src={props.account.avatar} alt="" /> : <img src={defaultAvatar} alt="" />}</div>
+        <div className={styles.wrapper_picture}>{props?.account && <CustomAvatar avatarData={props?.account} />}</div>
         <div className={styles.fullName}>{props?.account ? props.account.surname + " " + props.account.name : undefined}</div>
       </div>
       <ChangePasswordReduxForm authError={props.authError} loading={props.loading} onSubmit={onSubmit} />

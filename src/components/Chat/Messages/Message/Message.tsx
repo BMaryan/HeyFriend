@@ -12,6 +12,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./Message.module.scss";
 import Chip from "@mui/material/Chip";
 import moment from "moment";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 
 interface MessagePropsType {
   account: AccountType | null;
@@ -40,6 +41,7 @@ const Message = (props: MessagePropsType) => {
   const checkDateOfMessage = props.prevMessage?.data().date && props.message?.data().date && props.prevMessage?.data().date.toDate().toLocaleDateString() !== props.message?.data().date.toDate().toLocaleDateString();
   // const checkMessageOfAccount = props.prevMessage?.data().accountId !== props.message?.data().accountId || checkDateOfMessage;
   const currentOtherAccount: FirebaseType<AccountType> | undefined = props.chatWithAccounts.find((account: FirebaseType<AccountType>) => account.id === props.message.data().accountId);
+  const checkAccount = isMyAccount ? props?.account : currentOtherAccount?.data();
 
   return (
     <div>
@@ -58,9 +60,7 @@ const Message = (props: MessagePropsType) => {
         }}>
         <div className={`${isMyAccount ? styles.wrapper_myPicture : styles.wrapper_otherPicture}  ${styles.wrapper_picture}`}>
           {/* {checkMessageOfAccount && ( */}
-          <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : currentOtherAccount?.data()?.id}`}>
-            <img src={isMyAccount ? props?.account?.avatar || defaultAvatar : currentOtherAccount?.data()?.avatar ? currentOtherAccount?.data()?.avatar : defaultAvatar} alt="" />
-          </NavLink>
+          <NavLink to={`${profileConstant.path}/${isMyAccount ? props?.account?.id : currentOtherAccount?.data()?.id}`}>{checkAccount && <CustomAvatar avatarData={checkAccount} size="large" />}</NavLink>
           {/* )} */}
         </div>
 

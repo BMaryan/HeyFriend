@@ -1,7 +1,7 @@
 import React from "react";
 import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
-import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import { AccountType } from "../../../../types/types";
 import EditProfileReduxForm from "./EditProfileForm";
 import styles from "./EditProfile.module.scss";
@@ -34,7 +34,7 @@ const EditProfile = (props: EditProfilePropsType) => {
   return (
     <div className={styles.edit_profile}>
       <div className={styles.wrapper_profile_contact}>
-        <div className={styles.wrapper_picture}>{props?.account?.avatar ? <img src={props.account.avatar} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} title="Change photo" alt="" /> : <img src={defaultAvatar} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} title="Change photo" alt="" />}</div>
+        <div className={styles.wrapper_picture}>{props?.account?.avatar && <CustomAvatar avatarData={props.account} title="Change photo" onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} />}</div>
         <div className={styles.wrapper_info}>
           <div className={styles.fullName}>{props?.account ? props.account.surname + " " + props.account.name : undefined}</div>
           <div className={styles.change_picture} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}>
