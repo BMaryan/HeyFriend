@@ -1,13 +1,13 @@
 import React from "react";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
+import { AccountType, FirebaseType } from "../../../types/types";
 import AvatarGroup from "@mui/material/AvatarGroup";
-import { FirebaseType } from "../../../types/types";
 import styles from "./AvatarGroup.module.scss";
+import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
-import { Tooltip } from "@mui/material";
 
 interface AvatarPropsType {
-  avatars: Array<any>;
+  avatars: Array<FirebaseType<AccountType>>;
   max?: number;
   total?: number;
   spacing?: "medium" | "small";
@@ -17,7 +17,7 @@ interface AvatarPropsType {
 const CustomAvatarGroup = (props: AvatarPropsType) => {
   return (
     <AvatarGroup variant={props?.variant} max={props?.max} total={props?.total} spacing={props?.spacing}>
-      {props.avatars.map((avatar: FirebaseType<any>) => (
+      {props.avatars.map((avatar: FirebaseType<AccountType>) => (
         <Tooltip key={avatar.id} title={avatar.data().surname + " " + avatar.data().name}>
           <Avatar src={avatar.data().avatar || defaultAvatar} alt="" />
         </Tooltip>

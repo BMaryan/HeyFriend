@@ -1,21 +1,26 @@
 import React from "react";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
+import { AccountType } from "../../../types/types";
 import styles from "./AvatarBadge.module.scss";
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 
 interface AvatarBadgePropsType {
-  avatarData: any;
+  avatarData: AccountType;
   color: "primary" | "secondary" | "error" | "info" | "success" | "warning";
   anchorOrigin: { horizontal: "left" | "right"; vertical: "bottom" | "top" };
+  size?: "small" | "medium" | "large" | "full";
   overlap?: "circular" | "rectangular";
   badgeContent?: React.ReactNode;
   variant: "dot" | "standard";
-  invisible: boolean;
+  invisible?: boolean;
+  onClick?: () => void;
 }
 
 const CustomAvatarBadge = (props: AvatarBadgePropsType) => {
+  const size = props.size === "small" ? "30px" : props.size === "medium" ? "45px" : props.size === "large" ? "60px" : props.size === "full" ? "100%" : undefined;
+
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       // color is default white fix this
@@ -50,12 +55,12 @@ const CustomAvatarBadge = (props: AvatarBadgePropsType) => {
   }));
 
   return props?.badgeContent ? (
-    <Badge color={props.color} anchorOrigin={{ vertical: props.anchorOrigin.vertical, horizontal: props.anchorOrigin.horizontal }} invisible={props.invisible} overlap={props.overlap} badgeContent={props?.badgeContent} variant={props?.variant}>
-      <Avatar src={props.avatarData.avatar || defaultAvatar} alt="" />
+    <Badge sx={{ height: "100% !important", width: "100% !important" }} color={props.color} anchorOrigin={{ vertical: props.anchorOrigin.vertical, horizontal: props.anchorOrigin.horizontal }} invisible={props.invisible} overlap={props.overlap} badgeContent={props?.badgeContent} variant={props?.variant}>
+      <Avatar sx={{ height: `${size} !important`, maxHeight: size, width: `${size} !important`, maxWidth: size, cursor: props.onClick && "pointer" }} src={props.avatarData.avatar || defaultAvatar} alt="" onClick={props.onClick} />
     </Badge>
   ) : (
-    <StyledBadge color={props.color} anchorOrigin={{ vertical: props.anchorOrigin.vertical, horizontal: props.anchorOrigin.horizontal }} invisible={props.invisible} overlap={props.overlap} variant={props?.variant}>
-      <Avatar src={props.avatarData?.avatar || defaultAvatar} alt="" />
+    <StyledBadge sx={{ height: "100% !important", width: "100% !important" }} color={props.color} anchorOrigin={{ vertical: props.anchorOrigin.vertical, horizontal: props.anchorOrigin.horizontal }} invisible={props.invisible} overlap={props.overlap} variant={props?.variant}>
+      <Avatar sx={{ height: `${size} !important`, maxHeight: size, width: `${size} !important`, maxWidth: size, cursor: props.onClick && "pointer" }} src={props.avatarData?.avatar || defaultAvatar} alt="" onClick={props.onClick} />
     </StyledBadge>
   );
 };
