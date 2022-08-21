@@ -1,0 +1,40 @@
+@import "../../../core/styles/main.scss";
+
+.list_item {
+  @include ds-position;
+  column-gap: 10px;
+  padding: $pd-content !important;
+  margin: 0 !important;
+}
+
+// list item avatar
+.item_avatar {
+  min-width: unset !important;
+  margin: 0 !important;
+}
+
+// list item text
+.list_text {
+  margin: 0 !important;
+}
+
+// primary
+.wrapper_primary {
+  @include ds-position(space-between, center);
+}
+
+.primary_title {
+  color: $black;
+  font-weight: 500;
+}
+
+.primary_button {
+  & > button {
+    padding: 0 !important;
+
+    & > svg {
+      color: $grey600;
+      font-size: 25px;
+    }
+  }
+}
