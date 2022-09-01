@@ -5,12 +5,15 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import ReactDOM from "react-dom";
 import "./index.scss";
+import { ModalProvider } from "./context/ModalContext";
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <AppContainer />
-    </BrowserRouter>
+    <ModalProvider>
+      <BrowserRouter>
+        <AppContainer />
+      </BrowserRouter>
+    </ModalProvider>
   </Provider>,
   document.getElementById("root")
 );
