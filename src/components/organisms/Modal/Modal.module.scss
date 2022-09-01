@@ -1,0 +1,15 @@
+@import "../../../core/styles/main.scss";
+
+.modal {
+  & > .backdrop {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+  }
+
+  & > .box {
+    width: 30vw;
+    background: $white !important;
+    border-radius: $bd-radius;
+    @include position(absolute, 50%, unset, unset, 50%);
+    transform: translate(-50%, -50%);
+  }
+}
