@@ -1,0 +1,28 @@
+@import "../../../core/styles/main.scss";
+
+.full_name_comment {
+  color: $black;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.full_name_comment:hover {
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
+.description {
+  color: $grey800;
+  font-size: 15px;
+  word-break: break-all;
+}
+
+.button_more {
+  color: $grey500;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
