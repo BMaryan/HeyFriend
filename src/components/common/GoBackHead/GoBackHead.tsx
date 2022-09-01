@@ -15,7 +15,7 @@ const GoBackHead = (props: GoBackHeadPropsType) => {
     <div className={styles.go_back_head}>
       <div className={styles.wrapper_title}>
         <div className={styles.wrapper_icon}>
-          <IconButton onClick={() => props.history.goBack()}>
+          <IconButton onClick={() => props.history.goBack()} size="small">
             <ArrowBackOutlinedIcon />
           </IconButton>
         </div>

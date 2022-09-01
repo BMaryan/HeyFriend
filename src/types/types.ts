@@ -110,7 +110,7 @@ export interface CommentType {
   id: string;
   accountId?: string;
   postId?: string;
-  dateCreated?: Timestamp;
+  dateCreated: Timestamp;
   comment: string;
   liked?: Array<LikedOfPostType>;
   // replies?: Array<RepliesOfCommentType>;
