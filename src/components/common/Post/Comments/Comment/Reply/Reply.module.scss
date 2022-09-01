@@ -2,7 +2,7 @@
 
 // timeline
 .timeline {
-  padding: 5px 0 !important;
+  padding: 0 !important;
   margin: 0 !important;
 }
 
@@ -12,6 +12,18 @@
   padding: 0 !important;
 }
 
+// separator
+.timeline_separator {
+  & > a {
+    margin-bottom: 10px;
+  }
+}
+
+// content
 .timeline_content {
-  padding-top: 0 !important;
+  padding: (0 0 0 $pd-content) !important;
+
+  & > div {
+    margin: 0 !important;
+  }
 }

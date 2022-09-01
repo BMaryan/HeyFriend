@@ -240,13 +240,6 @@
 }
 
 /* modal post actions */
-.modalPostActions {
-  width: 30vw;
-  background: $white;
-  border-radius: $bd-radius;
-  @include position(absolute, 50%, unset, unset, 50%);
-  transform: translate(-50%, -50%);
-}
 
 .modalPostActions button {
   height: 100%;

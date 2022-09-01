@@ -38,10 +38,12 @@ interface FooterPostPropsType {
   createReplyThunk: (reply: ReplyType) => void;
   updatePostThunk: (post: PostType) => void;
   updateCommentThunk: (comment: CommentType) => void;
+  updateReplyThunk: (reply: ReplyType) => void;
   deleteCommentThunk: (comment: CommentType) => void;
+  deleteReplyThunk: (reply: ReplyType) => void;
 }
 
-export interface FooterPostFormDataType {
+export interface FooterPostFormDataType extends Array<any> {
   comment: string;
 }
 
@@ -55,16 +57,24 @@ const FooterPost = (props: FooterPostPropsType) => {
   const isPathOfPost = "/" + props.history.location.pathname.split("/")[1] === photoConstant.path;
 
   const onSubmit = (formData: FooterPostFormDataType) => {
-    !replyOfComment &&
-      props.createCommentThunk({
-        id: "",
-        accountId: props?.account?.id,
-        postId: props?.post?.id,
-        comment: formData.comment,
-        dateCreated: fb.Timestamp.now(),
-      });
+    !replyOfComment
+      ? props.createCommentThunk({
+          id: "",
+          accountId: props?.account?.id,
+          postId: props?.post?.id,
+          comment: formData.comment,
+          dateCreated: fb.Timestamp.now(),
+        })
+      : props.createReplyThunk({
+          id: "",
+          accountId: replyOfComment.accountId,
+          commentId: replyOfComment.id,
+          dateCreated: fb.Timestamp.now(),
+          reply: formData.comment,
+        });
 
-    // Object.keys(formData).map((item) => formData[item] = "");
+    setReplyOfComment(null);
+    Object.keys(formData).map((item: any) => (formData[item] = ""));
   };
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -74,10 +84,8 @@ const FooterPost = (props: FooterPostPropsType) => {
   const checkClickBookmarkIcon: SavedOfPostType | undefined = props?.post?.data()?.saved ? props?.post?.data()?.saved?.find((saved: SavedOfPostType) => (saved?.id && props?.account?.id && saved?.id === props?.account?.id ? saved : undefined)) : undefined;
 
   // destructuring props
-  const destPropsComments = { accounts: props.accounts, account: props.account, currentAccount: props.currentAccount, comments: props.comments, replies: props.replies, post: props.post, modal: props.modal, history: props.history, isPathOfPost, replyOfComment, answerComment, toggleDrawer, setReplyOfComment, setAnswerComment, deleteCommentThunk: props.deleteCommentThunk, updateCommentThunk: props.updateCommentThunk };
+  const destPropsComments = { accounts: props.accounts, account: props.account, currentAccount: props.currentAccount, comments: props.comments, replies: props.replies, post: props.post, modal: props.modal, history: props.history, isPathOfPost, replyOfComment, answerComment, toggleDrawer, setReplyOfComment, setAnswerComment, deleteCommentThunk: props.deleteCommentThunk, updateCommentThunk: props.updateCommentThunk, updateReplyThunk: props.updateReplyThunk, deleteReplyThunk: props.deleteReplyThunk };
   const destPropsFooterPostReduxForm = { replyOfComment, answerComment, setReplyOfComment, onSubmit: onSubmit, createReplyThunk: props.createReplyThunk, updateCommentThunk: props.updateCommentThunk };
-
-  console.log(answerComment);
 
   return (
     <div className={props.modal ? styles.footer : styles.footer_modal}>

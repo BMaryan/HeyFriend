@@ -1,5 +1,5 @@
 import React from "react";
-import { createCommentThunk, createReplyThunk, deleteCommentThunk, deletePostThunk, updateCommentThunk, updatePostThunk } from "../../../redux/post-reducer";
+import { createCommentThunk, createReplyThunk, deleteCommentThunk, deletePostThunk, deleteReplyThunk, updateCommentThunk, updatePostThunk, updateReplyThunk } from "../../../redux/post-reducer";
 import { defaultPostConstant, modalPostConstant, onlyBodyPostConstant } from "../../../core/constants/constantsPost";
 import { AccountType, CommentType, FirebaseType, PostType, ReplyType } from "../../../types/types";
 import { getAccountSelector, getAccountsSelector } from "../../../redux/account-selectors";
@@ -29,8 +29,10 @@ type MapDispatchToPropsType = {
   updateAccountThunk: (account: AccountType) => void;
   updatePostThunk: (post: PostType) => void;
   updateCommentThunk: (comment: CommentType) => void;
+  updateReplyThunk: (reply: ReplyType) => void;
   deletePostThunk: (post: PostType) => void;
   deleteCommentThunk: (comment: CommentType) => void;
+  deleteReplyThunk: (reply: ReplyType) => void;
 };
 
 export type PostContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
@@ -45,4 +47,4 @@ const PostContainer = (props: PostContainerPropsType) => {
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), comments: getCommentsSelector(state), replies: setRepliesSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { createReplyThunk, deletePostThunk, updateAccountThunk, updatePostThunk, createCommentThunk, updateCommentThunk, deleteCommentThunk })(PostContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { createReplyThunk, deletePostThunk, updateAccountThunk, updatePostThunk, createCommentThunk, updateCommentThunk, updateReplyThunk, deleteCommentThunk, deleteReplyThunk })(PostContainer);

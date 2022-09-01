@@ -4,15 +4,12 @@ import { photoConstant, profileConstant } from "../../../../core/constants/const
 import { ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import betaVershion from "../../../../assets/images/betaVershion.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import CustomModal from "../../../organisms/Modal/Modal";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import IconButton from "@mui/material/IconButton";
-import Backdrop from "@mui/material/Backdrop";
 import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styles from "../Post.module.scss";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Box from "@mui/material/Box";
 
 interface HeadPostPropsType {
   account: AccountType | null;
@@ -24,8 +21,8 @@ interface HeadPostPropsType {
 }
 
 const HeadPost = (props: HeadPostPropsType) => {
-  const [fullDes, setFullDes] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [fullDes, setFullDes] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -70,75 +67,62 @@ const HeadPost = (props: HeadPostPropsType) => {
           />
         </ListItem>
 
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}>
-          <Fade in={open}>
-            <Box className={styles.modalPostActions}>
-              {props?.account?.id === props?.currentAccount?.data()?.id ? (
-                <>
-                  <Button
-                    onClick={() => {
-                      props?.post && props.deletePostThunk(props?.post?.data());
-                      props.history.push(`${profileConstant.path}/${props?.account?.id}`);
-                    }}
-                    className={styles.item + " " + styles.item__border + " " + styles.item__red}
-                    variant="text">
-                    Delete
-                  </Button>
-                  <Button
-                    variant="text"
-                    className={styles.item + " " + styles.item__border}
-                    onClick={() => {
-                      props.history.push(`${photoConstant.path}/${props?.post?.id}`);
-                      handleClose();
-                    }}>
-                    Go to post
-                  </Button>
-                  <Button onClick={handleClose} variant="text" className={styles.item}>
-                    Cancel
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button variant="text" className={styles.item + " " + styles.item__border + " " + styles.item__red}>
-                    <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
-                    Report
-                  </Button>
-                  <Button
-                    variant="text"
-                    className={styles.item + " " + styles.item__border + " " + styles.item__red}
-                    onClick={() => {
-                      handleClose();
-                    }}>
-                    Unfollow
-                  </Button>
-                  <Button variant="text" className={styles.item + " " + styles.item__border}>
-                    <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
-                    Share to...
-                  </Button>
-                  <Button variant="text" className={styles.item + " " + styles.item__border}>
-                    <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
-                    Copy link
-                  </Button>
-                  <Button onClick={handleClose} variant="text" className={styles.item}>
-                    Cancel
-                  </Button>
-                </>
-              )}
-            </Box>
-          </Fade>
-        </Modal>
+        <CustomModal className={styles.modalPostActions} open={open} handleClose={handleClose}>
+          {props?.account?.id === props?.currentAccount?.data()?.id ? (
+            <>
+              <Button
+                onClick={() => {
+                  props?.post && props.deletePostThunk(props?.post?.data());
+                  props.history.push(`${profileConstant.path}/${props?.account?.id}`);
+                }}
+                className={styles.item + " " + styles.item__border + " " + styles.item__red}
+                variant="text">
+                Delete
+              </Button>
+              <Button
+                variant="text"
+                className={styles.item + " " + styles.item__border}
+                onClick={() => {
+                  props.history.push(`${photoConstant.path}/${props?.post?.id}`);
+                  handleClose();
+                }}>
+                Go to post
+              </Button>
+              <Button onClick={handleClose} variant="text" className={styles.item}>
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="text" className={styles.item + " " + styles.item__border + " " + styles.item__red}>
+                <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
+                Report
+              </Button>
+              <Button
+                variant="text"
+                className={styles.item + " " + styles.item__border + " " + styles.item__red}
+                onClick={() => {
+                  handleClose();
+                }}>
+                Unfollow
+              </Button>
+              <Button variant="text" className={styles.item + " " + styles.item__border}>
+                <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
+                Share to...
+              </Button>
+              <Button variant="text" className={styles.item + " " + styles.item__border}>
+                <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
+                Copy link
+              </Button>
+              <Button onClick={handleClose} variant="text" className={styles.item}>
+                Cancel
+              </Button>
+            </>
+          )}
+        </CustomModal>
       </div>
 
-      {!props.modal && <div className={styles.wrapper_description}>{props?.post?.data()?.description ? <div className={styles.description}>{props?.post?.data()?.description?.length <= 100 ? props?.post?.data()?.description : fullDes ? props?.post?.data()?.description : props?.post?.data()?.description?.slice(0, 100) + " ..."}</div> : undefined}</div>}
+      {!props.modal && props?.post?.data()?.description && <div className={styles.wrapper_description}>{props?.post?.data()?.description ? <div className={styles.description}>{props?.post?.data()?.description?.length <= 100 ? props?.post?.data()?.description : fullDes ? props?.post?.data()?.description : props?.post?.data()?.description?.slice(0, 100) + " ..."}</div> : undefined}</div>}
     </div>
   );
 };
