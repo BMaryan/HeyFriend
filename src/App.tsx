@@ -38,7 +38,7 @@ function App(props: AppPropsType) {
         </div>
       ) : undefined}
 
-      <div className={props.auth ? `${!checkMain && !checkProfile ? "container_heigth" : ""} container_width container_space` : "container_fluid"}>
+      <div className={`${!checkMain && !checkProfile ? "container_heigth" : ""} container_width container_space`}>
         <Switch>
           <Route exact path={`${mainConstant.path}`} render={() => <MainContainer />} />
           <Route exact path={`${photoConstant.path}/:id`} render={() => <CurrentPostContainer />} />
