@@ -146,3 +146,9 @@ export interface HistoryType {
   push: (url: string) => void;
   goBack: () => void;
 }
+
+// navigation
+export interface NavigationType {
+  path: string;
+  title: string;
+}
