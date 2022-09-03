@@ -5,6 +5,7 @@ import MessagesReduxForm from "./MessagesForm";
 import styles from "./Messages.module.scss";
 import Message from "./Message/Message";
 import { fb } from "../../../firebase";
+import { CircularProgress } from "@mui/material";
 
 interface MessagesPropsType {
   id: string;
@@ -56,13 +57,31 @@ const Messages = (props: MessagesPropsType) => {
 
     setEditMessage(null);
     props.setMessageValue("");
-    Object.keys(formData).map((item) => console.log(formData[item]));
+    Object.keys(formData).map((item) => formData[item]);
   };
 
   // get id from formData (send_message_${props.currentChat?.id}_${props.account?.id}) and set to setTyping
   const onChange = (formData: MessagesFormDataType) => {
     props.setTyping(Object.keys(formData)[0]?.split("_")[Object.keys(formData)[0]?.split("_").length - 1] || null);
   };
+
+  // test check loading dialogs
+  // const [loading, setLoading] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 6000);
+  // }, []);
+
+  if (!props.messages || props.loading) {
+    return (
+      <div className="gl_wrapper_loading">
+        <CircularProgress className="loading" />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.messages}>
@@ -71,12 +90,12 @@ const Messages = (props: MessagesPropsType) => {
           {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} message={message} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} setEditMessage={setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
 
           {/* {
-            props.currentChat?.data()?.typing && <>...</>
+            // props.currentChat?.data()?.typing !== props.account?.id && <>...</>
             // <Message account={props.account} message={} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[0]} currentChat={props.currentChat} chatWithAccounts={props.chatWithAccounts} deleteMessageThunk={props.deleteMessageThunk} />
           } */}
         </div>
       ) : (
-        <div className={styles.default_content}>Default content</div>
+        <div className={styles.default_content}>{!props.loading && "Default content"}</div>
       )}
 
       <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} updateMessageThunk={props.updateMessageThunk} />

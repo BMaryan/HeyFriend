@@ -1,7 +1,7 @@
 import React from "react";
 import { AccountType, FirebaseType, HistoryType, MediaOfPostType, PostType } from "../../../types/types";
+import { informationConstant, profileConstant, savedConstant } from "../../../core/constants/constants";
 import BorderAllRoundedIcon from "@mui/icons-material/BorderAllRounded";
-import { profileConstant } from "../../../core/constants/constants";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CreatePost from "../../common/CreatePost/CreatePost";
@@ -55,7 +55,7 @@ const ProfileContent = (props: ProfileContentPropsType) => {
               }
             </Media>
           </NavLink>
-          <NavLink to={`${profileConstant.path}/${props?.id}/information`} className={styles.item} activeClassName={styles.item_active}>
+          <NavLink to={`${profileConstant.path}/${props?.id}${informationConstant.path}`} className={styles.item} activeClassName={styles.item_active}>
             <Media queries={{ small: "(max-width: 480px)" }}>
               {(matches) =>
                 !matches.small ? (
@@ -72,7 +72,7 @@ const ProfileContent = (props: ProfileContentPropsType) => {
             </Media>
           </NavLink>
           {props?.id === props?.account?.id ? (
-            <NavLink exact to={`${profileConstant.path}/${props?.id}/saved`} className={styles.item} activeClassName={styles.item_active}>
+            <NavLink exact to={`${profileConstant.path}/${props?.id}${savedConstant.path}`} className={styles.item} activeClassName={styles.item_active}>
               <Media queries={{ small: "(max-width: 480px)" }}>
                 {(matches) =>
                   !matches.small ? (
@@ -99,9 +99,9 @@ const ProfileContent = (props: ProfileContentPropsType) => {
           }}
         />
 
-        <Route path={`${profileConstant.path}/${props?.id}/information`} render={() => <Information currentAccount={currentAccount} id={props.id} />} />
+        <Route path={`${profileConstant.path}/${props?.id}${informationConstant.path}`} render={() => <Information currentAccount={currentAccount} id={props.id} />} />
 
-        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}/saved`} render={() => <Saved account={props.account} posts={props.posts} id={props.id} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />} /> : undefined}
+        {props?.id === props?.account?.id ? <Route exact path={`${profileConstant.path}/${props?.id}${savedConstant.path}`} render={() => <Saved account={props.account} posts={props.posts} id={props.id} openModalCurrentPost={openModalCurrentPost} setOpenModalCurrentPost={setOpenModalCurrentPost} />} /> : undefined}
       </div>
 
       {/* toggle show create post container */}

@@ -29,14 +29,14 @@ const Main = (props: MainPropsType) => {
   const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
   // test check loading posts
-  // const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
-  // React.useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000);
-  // }, []);
+  React.useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
   return (
     <div className={styles.main}>

@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { AccountType, ChatType, CreateChatType, FirebaseType, PostType } from "../../types/types";
+import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
+import { notFoundConstant } from "../../core/constants/constants";
 import { updateAccountThunk } from "../../redux/account-reducer";
 import { setPostsSelector } from "../../redux/post-selectors";
 import { getChatsSelector } from "../../redux/chat-selectors";
@@ -38,7 +39,7 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
     if (id) {
       const isCorrentId = props.accounts.find((account: FirebaseType<AccountType>) => account?.id === id || undefined);
 
-      if (!isCorrentId) history.push("/not-found");
+      if (!isCorrentId) history.push(notFoundConstant.path);
     }
   }, [id]);
 

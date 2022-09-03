@@ -129,7 +129,6 @@ const CreatePost = (props: CreatePostPropsType) => {
     });
   };
 
-  // console.log(props.mediasOfPost);
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
@@ -157,8 +156,6 @@ const CreatePost = (props: CreatePostPropsType) => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
-  console.log(props.mediasOfPost);
 
   return (
     <Modal

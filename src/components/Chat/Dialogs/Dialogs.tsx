@@ -2,6 +2,7 @@ import React from "react";
 import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType } from "../../../types/types";
 import styles from "./Dialogs.module.scss";
 import Dialog from "./Dialog/Dialog";
+import { CircularProgress } from "@mui/material";
 
 interface DialogsPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -39,18 +40,24 @@ const Dialogs = (props: DialogsPropsType) => {
   //   }, 6000);
   // }, []);
 
-  // console.log(currentChatsOfAccount);
+  if (!props.chats) {
+    return (
+      <div className="gl_wrapper_loading">
+        <CircularProgress className="loading" />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.dialogs}>
-      {currentChatsOfAccount.length > 0 ? (
-        checkArray.sort((a: FirebaseType<ChatType>, b: FirebaseType<ChatType>) => b?.data()?.dateCreated.toDate().getTime() - a?.data()?.dateCreated.toDate().getTime()).map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} messageValue={props.messageValue} chat={chat} loading={props.loading} searchValue={props.searchValue} chatWithAccounts={props.chatWithAccounts} currentChatsOfAccount={currentChatsOfAccount} />)
-      ) : (
-        <div className={styles.chats_wrapper_text}>
-          <div className={styles.chats_wrapper_title}>Add a chat</div>
-          <div className={styles.chats_wrapper_subtitle}>Sorry, this content is not yet available</div>
-        </div>
-      )}
+      {currentChatsOfAccount.length > 0
+        ? checkArray.sort((a: FirebaseType<ChatType>, b: FirebaseType<ChatType>) => b?.data()?.dateCreated.toDate().getTime() - a?.data()?.dateCreated.toDate().getTime()).map((chat: FirebaseType<ChatType>) => <Dialog key={chat.id} accounts={props.accounts} account={props.account} messages={props.messages} messageValue={props.messageValue} chat={chat} loading={props.loading} searchValue={props.searchValue} chatWithAccounts={props.chatWithAccounts} currentChatsOfAccount={currentChatsOfAccount} />)
+        : props.loading && (
+            <div className={styles.chats_wrapper_text}>
+              <div className={styles.chats_wrapper_title}>Add a chat</div>
+              <div className={styles.chats_wrapper_subtitle}>Sorry, this content is not yet available</div>
+            </div>
+          )}
     </div>
   );
 };

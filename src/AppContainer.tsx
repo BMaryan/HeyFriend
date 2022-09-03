@@ -2,10 +2,10 @@
 import React from "react";
 import { AccountType, AuthType, ChatType, CommentType, FirebaseType, MessageType, ParamsOfMatchType, PostType, ReplyType } from "./types/types";
 import { accountActions, setAccountsThunk, setAccountThunk, updateAccountThunk } from "./redux/account-reducer";
-import navigation, { signInConstant, signUpConstant } from "./core/constants/constants";
+import navigation, { profileConstant, signInConstant, signUpConstant } from "./core/constants/constants";
+import { getCommentsSelector, setPostsSelector, setRepliesSelector } from "./redux/post-selectors";
 import { setCommentsThunk, setPostsThunk, setRepliesThunk } from "./redux/post-reducer";
 import { getAccountSelector, getAccountsSelector } from "./redux/account-selectors";
-import { getCommentsSelector, setPostsSelector, setRepliesSelector } from "./redux/post-selectors";
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setAuthSelector } from "./redux/auth-selectors";
@@ -107,10 +107,17 @@ const AppContainer = (props: AppContainerPropsType) => {
 
   // name of page in title
   React.useEffect(() => {
-    let namePage = history.location.pathname;
-    navigation.forEach((item) => (namePage === item.path ? (namePage = item.title) : "Hey Friend"));
-    document.title = namePage[0].toUpperCase() + namePage.slice(1);
-  }, [history.location]);
+    const test = history.location.pathname.split("/");
+    const nameOfPage = test[test.length - 1];
+
+    // const test = navigation.find((item) => {
+    //   if (history.location.pathname.includes(item.path)) {
+    //     document.title = item.title;
+    //   }
+    // });
+
+    document.title = nameOfPage[0]?.toUpperCase() + nameOfPage?.slice(1);
+  }, [history.location.pathname]);
 
   // first visitthe site
 

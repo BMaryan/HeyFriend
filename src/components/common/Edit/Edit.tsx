@@ -1,5 +1,5 @@
 import React from "react";
-import { editConstant } from "../../../core/constants/constants";
+import { editConstant, editPasswordConstant, editProfileConstant } from "../../../core/constants/constants";
 import { AccountType, HistoryType } from "../../../types/types";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import EditProfile from "./EditProfile/EditProfile";
@@ -21,14 +21,14 @@ interface EditPropsType {
 
 const Edit = (props: EditPropsType) => {
   const title = {
-    profile: "Edit profile",
-    password: "Change password",
+    profile: editProfileConstant.title,
+    password: editPasswordConstant.title,
     appsAndWeb: "Apps and Websites",
   };
 
   const path = {
-    profile: "profile",
-    password: "password",
+    profile: editProfileConstant.path,
+    password: editPasswordConstant.path,
     manageAccess: "manage_access",
   };
 
@@ -45,12 +45,12 @@ const Edit = (props: EditPropsType) => {
       <div className={!(checkProfile || checkPassword || checkManageAccess) ? styles.edit_menu : styles.edit_menu__none}>
         <ul className={styles.menu}>
           <li className={styles.edit_item}>
-            <NavLink exact to={`${editConstant.path}/${path.profile}`} className={styles.item} activeClassName={styles.item_active}>
+            <NavLink exact to={`${editConstant.path}${path.profile}`} className={styles.item} activeClassName={styles.item_active}>
               {title.profile}
             </NavLink>
           </li>
           <li className={styles.edit_item}>
-            <NavLink exact to={`${editConstant.path}/${path.password}`} className={styles.item} activeClassName={styles.item_active}>
+            <NavLink exact to={`${editConstant.path}${path.password}`} className={styles.item} activeClassName={styles.item_active}>
               {title.password}
             </NavLink>
           </li>
@@ -59,8 +59,8 @@ const Edit = (props: EditPropsType) => {
 
       {/* content */}
       <div className={styles.edit_content}>
-        <Route exact path={`${editConstant.path}/${path.profile}`} render={() => <EditProfile account={props.account} authError={props.authError} loading={props.loading} updateAccountThunk={props.updateAccountThunk} />} />
-        <Route exact path={`${editConstant.path}/${path.password}`} render={() => <ChangePassword account={props.account} authError={props.authError} loading={props.loading} />} />
+        <Route exact path={`${editConstant.path}${path.profile}`} render={() => <EditProfile account={props.account} authError={props.authError} loading={props.loading} updateAccountThunk={props.updateAccountThunk} />} />
+        <Route exact path={`${editConstant.path}${path.password}`} render={() => <ChangePassword account={props.account} authError={props.authError} loading={props.loading} />} />
         <Route exact path={`${editConstant.path}`} render={() => <Default />} />
       </div>
     </div>

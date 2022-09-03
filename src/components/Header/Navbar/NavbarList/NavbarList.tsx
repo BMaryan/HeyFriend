@@ -1,9 +1,9 @@
 import React from "react";
-import { profileConstant, editConstant } from "../../../../core/constants/constants";
+import { profileConstant, editConstant, savedConstant } from "../../../../core/constants/constants";
 import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
 // import { removeOnlineInSessionStorage } from "../../../../core/methods/methods";
-import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import Settings from "@mui/icons-material/SettingsOutlined";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import Person from "@mui/icons-material/PersonOutline";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { AccountType } from "../../../../types/types";
@@ -12,10 +12,8 @@ import Logout from "@mui/icons-material/Logout";
 import MenuItem from "@mui/material/MenuItem";
 import styles from "./NavbarList.module.scss";
 import { NavLink } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import Chip from "@mui/material/Chip";
-import CustomAvatar from "../../../atoms/Avatar/Avatar";
 
 interface NavbarListPropsType {
   account: AccountType | null;
@@ -75,7 +73,7 @@ const NavbarList = (props: NavbarListPropsType) => {
           </MenuItem>
         </NavLink>
 
-        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant.path}/${props?.account?.id}/saved`}>
+        <NavLink className={styles.nav_linkList + " " + commonStyles.common_nav_linkList} activeClassName={styles.nav_linkList_active} to={`${profileConstant.path}/${props?.account?.id}${savedConstant.path}`}>
           <MenuItem className={styles.menu_item}>
             <ListItemIcon>
               <BookmarkBorderOutlined className={commonStyles.icon} />
