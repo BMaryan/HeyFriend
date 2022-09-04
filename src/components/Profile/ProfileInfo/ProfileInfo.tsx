@@ -30,12 +30,16 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
   const numberOfPosts: Array<FirebaseType<PostType>> = props?.posts ? props?.posts?.filter((post: FirebaseType<PostType>) => (post?.data() ? post?.data().accountId === currentAccount?.data()?.id : [])) : [];
   const coverPhoto: string | undefined = currentAccount?.data()?.coverPhoto ? currentAccount?.data()?.coverPhoto : undefined;
   const isCheckFollowing = props?.account?.following ? props?.account?.following.find((following: FollowingOfAccountType) => (following?.id === props?.id ? following : undefined)) : undefined;
-  const isChat = props?.chats?.length > 0 ? props?.chats?.filter((chat: FirebaseType<ChatType>) => (chat?.data()?.participants ? chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id) : undefined)) : undefined;
+
+  const isChat: Array<FirebaseType<ChatType>> = props?.chats?.filter((chat: FirebaseType<ChatType>) => chat?.data()?.participants.length === 2 && chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => currentAccount?.id === participants?.id && currentAccount?.id !== props?.account?.id));
+
   const isMyAccount = props?.account && props?.id === props?.account?.id;
   const isOtherAccount = props?.id !== props?.account?.id;
 
   const lastSignInDate = new Date(currentAccount?.data()?.metadata?.lastSignInTime as string);
   const isOnline = props?.account?.id !== props?.id ? Boolean(currentAccount?.data()?.isOnline) : undefined;
+
+  // console.log(isChat);
 
   return (
     <div className={styles.profile_info}>
