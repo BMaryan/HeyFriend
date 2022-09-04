@@ -18,10 +18,14 @@
 // wrapper_loading
 .gl_wrapper_loading {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  & > span {
+    color: $grey500 !important;
+  }
 }
 
 /* media */

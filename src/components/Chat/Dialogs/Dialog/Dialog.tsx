@@ -35,7 +35,7 @@ const Dialog = (props: DialogPropsType) => {
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
 
   return (
-    <NavLink to={`${chatConstant.path}/` + props?.chat?.data()?.id} className={styles.chat + " " + styles.chat_forHead} activeClassName={styles.chat_active}>
+    <NavLink to={!props.loading ? `${chatConstant.path}/` + props?.chat?.data()?.id : "#"} className={styles.chat + " " + styles.chat_forHead} activeClassName={`${!props.loading && styles.chat_active}`}>
       <ListItem
         classes={{
           root: styles.chat_list_item,

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { addMessageThunk, createChatThunk, deleteChatThunk, deleteMessageThunk, setChatsThunk, setMessagesThunk, updateChatThunk, updateMessageThunk } from "../../redux/chat-reducer";
+import { addMessageThunk, createChatThunk, deleteChatThunk, deleteMessageThunk, setMessagesThunk, updateChatThunk, updateMessageThunk } from "../../redux/chat-reducer";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MessageType, ParamsOfMatchType } from "../../types/types";
-import { getChatsSelector, getMessagesSelector, setErrorSelector, setLoadingSelector } from "../../redux/chat-selectors";
+import { getChatsSelector, getMessagesSelector, setChatsLoadingSelector, setErrorSelector, setMessagesLoadingSelector } from "../../redux/chat-selectors";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
 import { useHistory, useParams } from "react-router-dom";
 import { StateType } from "../../redux/store";
@@ -16,12 +16,12 @@ type MapStateToPropsType = {
   account: AccountType | null;
   chats: Array<FirebaseType<ChatType>>;
   messages: Array<FirebaseType<MessageType>>;
-  loading: boolean;
+  chatsLoading: boolean;
+  messagesLoading: boolean;
   error: string | null;
 };
 
 type MapDispatchToPropsType = {
-  setChatsThunk: () => void;
   setMessagesThunk: () => void;
   addMessageThunk: (message: MessageType) => void;
   updateChatThunk: (chat: ChatType) => void;
@@ -39,12 +39,6 @@ const ChatContainer = (props: ChatContainerPropsType) => {
   const [typing, setTyping] = React.useState<string | null>(null);
   const [messageValue, setMessageValue] = React.useState<string>("");
   const currentChat: FirebaseType<ChatType> | undefined = id ? props?.chats?.find((chat: FirebaseType<ChatType>) => chat?.id === id) : undefined;
-
-  React.useEffect(() => {
-    if (props.chats) {
-      props.setChatsThunk();
-    }
-  }, [props.chats.length]);
 
   React.useEffect(() => {
     if (props.messages) {
@@ -86,6 +80,6 @@ const ChatContainer = (props: ChatContainerPropsType) => {
   return <Chat {...props} messageValue={messageValue} currentChat={currentChat} id={id} history={history} setTyping={setTyping} setMessageValue={setMessageValue} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state), loading: setLoadingSelector(state), error: setErrorSelector(state) });
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), chats: getChatsSelector(state), messages: getMessagesSelector(state), chatsLoading: setChatsLoadingSelector(state), messagesLoading: setMessagesLoadingSelector(state), error: setErrorSelector(state) });
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setChatsThunk, setMessagesThunk, addMessageThunk, updateChatThunk, updateMessageThunk, deleteChatThunk, deleteMessageThunk, createChatThunk })(ChatContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { setMessagesThunk, addMessageThunk, updateChatThunk, updateMessageThunk, deleteChatThunk, deleteMessageThunk, createChatThunk })(ChatContainer);
