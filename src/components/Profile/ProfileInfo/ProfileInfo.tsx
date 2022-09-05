@@ -39,8 +39,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
   const lastSignInDate = new Date(currentAccount?.data()?.metadata?.lastSignInTime as string);
   const isOnline = props?.account?.id !== props?.id ? Boolean(currentAccount?.data()?.isOnline) : undefined;
 
-  // console.log(isChat);
-
   return (
     <div className={styles.profile_info}>
       <div className={styles.profile_cover} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${coverPhoto})` }}>

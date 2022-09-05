@@ -28,7 +28,6 @@ interface InputOfMessagePropsType {
   setEditMessage: (value: MessageType | null) => void;
   setMessageValue: (value: string) => void;
   setMedias: (medias: Array<MediaOfMessageType>) => void;
-  updateMessageThunk: (message: MessageType) => void;
 }
 
 const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMessagePropsType> & InputOfMessagePropsType) => {
@@ -51,7 +50,7 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
       <OutlinedInput
         {...props.input}
         type="text"
-        placeholder="Search contact"
+        placeholder="Message..."
         fullWidth={true}
         value={props.editMessage ? props.editMessage?.message : props.messageValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => (props.editMessage ? props.setEditMessage({ ...props.editMessage, message: e.target.value }) : props.setMessageValue(e.target.value))}
@@ -89,16 +88,7 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
               </>
             )}
             <Divider sx={{ height: 28 }} orientation="vertical" />
-            <IconButton
-              onClick={(e: any) => {
-                props.editMessage && e.preventDefault();
-                props.editMessage && props.updateMessageThunk({ ...props.editMessage });
-              }}
-              type="submit"
-              color="primary"
-              sx={{ p: "10px" }}
-              disabled={!props.editMessage && !props.messageValue && !props.input?.value}
-              edge="end">
+            <IconButton type="submit" color="primary" sx={{ p: "10px" }} disabled={!props.editMessage && !props.messageValue && !props.input?.value} edge="end">
               <SendOutlinedIcon />
             </IconButton>
           </InputAdornment>

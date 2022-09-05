@@ -33,6 +33,7 @@ const Dialog = (props: DialogPropsType) => {
   const lastLoginAt = lengthChatOfAccounts ? new Date(Number(messageWithAccounts[0]?.data()?.metadata?.lastLoginAt)) : "test";
   const isOnline = lengthChatOfAccounts ? Boolean(messageWithAccounts[0]?.data()?.isOnline) : "test";
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
+  const checkMessage = currentMessages?.length > 0 && lastMessage !== "" && (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...");
 
   return (
     <NavLink to={!props.loading ? `${chatConstant.path}/` + props?.chat?.data()?.id : "#"} className={styles.chat + " " + styles.chat_forHead} activeClassName={`${!props.loading && styles.chat_active}`}>
@@ -62,7 +63,7 @@ const Dialog = (props: DialogPropsType) => {
               <Skeleton animation="wave" height={10} width="40%" />
             ) : (
               <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
-                {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? "In the network " + moment(lastLoginAt).fromNow() : "Now in the network"}
+                {props?.chat?.data()?.participants.length >= 3 ? checkMessage || "Send a message..." : checkMessage || (!isOnline ? "In the network " + moment(lastLoginAt).fromNow() : "Now in the network")}
               </Typography>
             )
           }

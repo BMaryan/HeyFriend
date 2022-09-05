@@ -48,6 +48,7 @@ import CustomAvatar from "../../components/atoms/Avatar/Avatar";
 interface HeadPropsType {
   accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
+  chats: Array<FirebaseType<ChatType>>;
   typingOfAccount: FirebaseType<AccountType> | undefined;
   toggleShowContent: boolean;
   toggleDetails: boolean;
@@ -74,7 +75,7 @@ export const Head = (props: HeadPropsType) => {
         </IconButton>
 
         {/* toggle container of creating group */}
-        {setOpenCreateGroup && <ContainerOfCreatingGroup accounts={props.accounts} account={props.account} open={openCreateGroup} history={props.history} setOpen={setOpenCreateGroup} createChatThunk={props.createChatThunk} />}
+        {setOpenCreateGroup && <ContainerOfCreatingGroup accounts={props.accounts} account={props.account} chats={props.chats} open={openCreateGroup} history={props.history} setOpen={setOpenCreateGroup} createChatThunk={props.createChatThunk} />}
       </div>
     </div>
   ) : (
@@ -264,10 +265,20 @@ interface ContainerOfMessagePropsType {
 export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
   return (
     <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
-      <MenuItem className={styles.menu_item} onClick={() => props.setEditMessage(props.message.data())}>
+      <MenuItem
+        className={styles.menu_item}
+        onClick={() => {
+          props.setEditMessage(props.message.data());
+          props.handleClose();
+        }}>
         Edit
       </MenuItem>
-      <MenuItem className={styles.menu_item} onClick={() => props.deleteMessageThunk(props.message.data())}>
+      <MenuItem
+        className={styles.menu_item}
+        onClick={() => {
+          props.deleteMessageThunk(props.message.data());
+          props.handleClose();
+        }}>
         Delete
       </MenuItem>
     </Menu>
@@ -315,8 +326,6 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
-
-  console.log(props.medias);
 
   return (
     <Dialog className={styles.media_dialog} open={props.open}>
@@ -427,6 +436,7 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
 interface ContainerOfCreatingGroupPropsType {
   accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
+  chats: Array<FirebaseType<ChatType>>;
   open: boolean;
   history: HistoryType;
   setOpen: (value: boolean) => void;
@@ -438,7 +448,11 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
   const [titleValue, setTitleValue] = React.useState("");
   const [searchValue, setSearchValue] = React.useState("");
 
+  // search accounts by surname & name
   const foundAccounts: Array<FirebaseType<AccountType>> = props.accounts.filter((account: FirebaseType<AccountType>) => (account.data().surname + " " + account.data().name).toLocaleLowerCase().trim().includes(searchValue.toLocaleLowerCase().trim(), 0) && account.id !== props.account?.id);
+
+  // if in group is one by one and a person wants to create a group with the same person than redirect to this chat
+  const checkCreatingOfGroup: FirebaseType<ChatType> | undefined = props.chats?.find((chat: FirebaseType<ChatType>) => chat?.data()?.participants.length === 2 && selectedAccounts.length === 1 && chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => selectedAccounts[0].data().id === participants?.id && selectedAccounts[0].data().id !== props?.account?.id));
 
   const handleCancel = () => {
     props.setOpen(false);
@@ -457,22 +471,24 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
     };
 
     props.setOpen(false);
-    props
-      .createChatThunk(
-        selectedAccounts.length > 1
-          ? {
-              title: titleValue,
-              ownerId: props.account?.id,
-              ...destructuringParticipants,
-              dateCreated: fb.Timestamp.now(),
-            }
-          : {
-              ownerId: props.account?.id,
-              ...destructuringParticipants,
-              dateCreated: fb.Timestamp.now(),
-            }
-      )
-      .then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`));
+    !checkCreatingOfGroup
+      ? props
+          .createChatThunk(
+            selectedAccounts.length > 1
+              ? {
+                  title: titleValue,
+                  ownerId: props.account?.id,
+                  ...destructuringParticipants,
+                  dateCreated: fb.Timestamp.now(),
+                }
+              : {
+                  ownerId: props.account?.id,
+                  ...destructuringParticipants,
+                  dateCreated: fb.Timestamp.now(),
+                }
+          )
+          .then((res: ParticipantsOfChatType) => props.history.push(`${chatConstant.path}/${res?.id}`))
+      : props.history.push(`${chatConstant.path}/${checkCreatingOfGroup.data().id}`);
 
     setSelectedAccounts([]);
     setTitleValue("");

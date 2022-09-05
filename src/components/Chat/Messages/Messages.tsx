@@ -46,14 +46,16 @@ const Messages = (props: MessagesPropsType) => {
   }, [medias]);
 
   const onSubmit = (formData: MessagesFormDataType) => {
-    props.addMessageThunk({
-      id: "",
-      accountId: props?.account?.id,
-      chatId: props.currentChat?.id,
-      message: formData[`send_message_${props.currentChat?.id}_${props.account?.id}`] || props.messageValue,
-      medias: medias,
-      date: fb.Timestamp.now(),
-    });
+    !editMessage
+      ? props.addMessageThunk({
+          id: "",
+          accountId: props?.account?.id,
+          chatId: props.currentChat?.id,
+          message: formData[`send_message_${props.currentChat?.id}_${props.account?.id}`] || props.messageValue,
+          medias: medias,
+          date: fb.Timestamp.now(),
+        })
+      : props.updateMessageThunk({ ...editMessage });
 
     setEditMessage(null);
     props.setMessageValue("");
@@ -83,7 +85,7 @@ const Messages = (props: MessagesPropsType) => {
         <div className={styles.default_content}>{!props.loading && "Default content"}</div>
       )}
 
-      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} updateMessageThunk={props.updateMessageThunk} />
+      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} />
 
       {/* toogle container for adding medias */}
       {medias.length > 0 && <ContainerOfMessageAndMedia messageValue={props.messageValue} setMessageValue={props.setMessageValue} medias={medias} setMedias={setMedias} open={open} setOpen={setOpen} onSubmit={onSubmit} />}

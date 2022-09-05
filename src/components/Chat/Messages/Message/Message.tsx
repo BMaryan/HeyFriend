@@ -1,10 +1,10 @@
 import React from "react";
 import { AccountType, FirebaseType, MediaOfMessageType, MessageType } from "../../../../types/types";
 import { ContainerOfMessage } from "../../../../utils/helperForChat/helperForChat";
-import defaultAvatar from "../../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../../core/constants/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ImageListItem from "@mui/material/ImageListItem";
+import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import IconButton from "@mui/material/IconButton";
 import ImageList from "@mui/material/ImageList";
 import Divider from "@mui/material/Divider";
@@ -12,7 +12,6 @@ import { NavLink } from "react-router-dom";
 import styles from "./Message.module.scss";
 import Chip from "@mui/material/Chip";
 import moment from "moment";
-import CustomAvatar from "../../../atoms/Avatar/Avatar";
 
 interface MessagePropsType {
   account: AccountType | null;
