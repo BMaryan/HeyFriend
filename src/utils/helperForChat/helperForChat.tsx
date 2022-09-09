@@ -90,7 +90,7 @@ export const Head = (props: HeadPropsType) => {
             </div>
           </Box>
         ) : (
-          <>Details</>
+          <div className={styles.detail_fullName}>Details</div>
         )}
       </div>
 
@@ -103,8 +103,28 @@ export const Head = (props: HeadPropsType) => {
   );
 };
 
+interface ChatListPropsType {
+  accountData: AccountType | null | undefined;
+  selectedIndex: number;
+  handleListItemClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => void;
+}
+
+const ChatList = (props: ChatListPropsType) => {
+  return (
+    <NavLink key={props.accountData?.id} className={styles.detail_fullName} to={`${profileConstant.path}/${props.accountData?.id}`}>
+      <List component="nav">
+        <ListItemButton selected={props.selectedIndex === 0} onClick={(event) => props.handleListItemClick(event, 0)}>
+          <ListItemIcon>{props.accountData && <CustomAvatar avatarData={props.accountData} />}</ListItemIcon>
+          <ListItemText primary={props.accountData?.surname + " " + props.accountData?.name} />
+        </ListItemButton>
+      </List>
+    </NavLink>
+  );
+};
+
 interface ChatDetailsPropsType {
   accounts: Array<FirebaseType<AccountType>>;
+  account: AccountType | null;
   messages: Array<FirebaseType<MessageType>>;
   currentChat: FirebaseType<ChatType> | undefined;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
@@ -116,7 +136,12 @@ interface ChatDetailsPropsType {
 export const ChatDetails = (props: ChatDetailsPropsType) => {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const currentMessagesOfChat: Array<FirebaseType<MessageType>> = props.messages.filter((message: FirebaseType<MessageType>) => message.data().chatId === props.currentChat?.data().id);
+  // check who is owner the group
   const ownerGroupOfAccount: FirebaseType<AccountType> | undefined = props.accounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
+  // medias length of message
+  const mediasLengthOfMessage: Array<number> = currentMessagesOfChat?.map((message: FirebaseType<MessageType>) => message.data()?.medias?.length);
+  // sum of medias
+  const sumOfMedias: number = mediasLengthOfMessage?.reduce((previousValue: number, currentItem: number) => previousValue + currentItem, 0);
 
   const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
     setSelectedIndex(index);
@@ -124,39 +149,6 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
 
   return (
     <div className={styles.chat_details}>
-      {/* head */}
-      <div className={styles.wrapper_head_detail}>
-        {/* contact of owner */}
-        <div className={styles.head_detail}>
-          <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
-            {ownerGroupOfAccount && <CustomAvatar avatarData={ownerGroupOfAccount?.data()} />}
-          </NavLink>
-
-          <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
-            {ownerGroupOfAccount?.data() ? ownerGroupOfAccount?.data()?.surname + " " + ownerGroupOfAccount?.data()?.name : undefined}
-          </NavLink>
-
-          <div className={styles.detail_subtitle}>Owner</div>
-        </div>
-
-        {/* participants */}
-        <div className={styles.wrapper_participants}>
-          {/* <div className={styles.media_title}>Participants</div> */}
-          {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => (
-            <NavLink key={account.data()?.id} className={styles.detail_fullName} to={`${profileConstant.path}/${account.data()?.id}`}>
-              <List component="nav" aria-label="main mailbox folders">
-                <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
-                  <ListItemIcon>
-                    <CustomAvatar avatarData={account.data()} />
-                  </ListItemIcon>
-                  <ListItemText primary={account.data()?.surname + " " + account.data()?.name} />
-                </ListItemButton>
-              </List>
-            </NavLink>
-          ))}
-        </div>
-      </div>
-
       {/* body */}
       <div className={styles.body_detail}>
         <div className={styles.wrapper_details}>
@@ -171,12 +163,12 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
           </div>
 
           <div className={styles.wrapper_detail}>
-            <div className={styles.detail_count}>test</div>
+            <div className={styles.detail_count}>{sumOfMedias}</div>
             <div className={styles.detail_title}>Medias</div>
           </div>
         </div>
 
-        <div className={styles.wrapper_medias}>
+        {/* <div className={styles.wrapper_medias}>
           <div className={styles.media_title}>Medias</div>
 
           <div className={styles.media_content}>
@@ -192,6 +184,30 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
               )
             )}
           </div>
+        </div> */}
+      </div>
+
+      {/* head */}
+      <div className={styles.wrapper_head_detail}>
+        {/* contact of owner */}
+        {/* <div className={styles.head_detail}>
+          <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
+            {ownerGroupOfAccount && <CustomAvatar avatarData={ownerGroupOfAccount?.data()} />}
+          </NavLink>
+
+          <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
+            {ownerGroupOfAccount?.data() ? ownerGroupOfAccount?.data()?.surname + " " + ownerGroupOfAccount?.data()?.name : undefined}
+          </NavLink>
+
+        </div> */}
+
+        {/* participants */}
+        <div className={styles.wrapper_participants}>
+          <div className={styles.media_title}>Participants</div>
+          <ChatList accountData={ownerGroupOfAccount?.data() || props.account} selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} />
+          {(props.currentChat?.data()?.participants?.length as number) > 2 && <div className={styles.detail_subtitle}>Owner</div>}
+
+          {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => ownerGroupOfAccount?.id !== account.id && <ChatList key={account.data()?.id} accountData={account.data()} selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} />)}
         </div>
       </div>
 
@@ -482,7 +498,6 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
                   dateCreated: fb.Timestamp.now(),
                 }
               : {
-                  ownerId: props.account?.id,
                   ...destructuringParticipants,
                   dateCreated: fb.Timestamp.now(),
                 }
@@ -495,7 +510,7 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
   };
 
   return (
-    <Dialog sx={{ "& .MuiDialog-paper": { height: "435px", width: "500px" } }} open={props.open}>
+    <Dialog sx={{ "& .MuiDialog-paper": { height: "100%", maxHeight: "600px", width: "500px" } }} open={props.open}>
       <DialogTitle className={styles.dialog_of_creating_group_title}>Add group</DialogTitle>
 
       {selectedAccounts.length > 1 && <TextField className={styles.dialog_of_creating_group_field_title} label="Title" variant="outlined" value={titleValue} onChange={(e: any) => setTitleValue(e.target.value)} required helperText={!titleValue && "This field is required, you need to add the name of the group."} />}
