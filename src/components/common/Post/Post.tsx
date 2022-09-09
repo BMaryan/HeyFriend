@@ -18,7 +18,7 @@ const Post = (props: PostPropsType) => {
   const currentAccount: FirebaseType<AccountType> | undefined = props?.accounts ? props?.accounts?.find((account: FirebaseType<AccountType>) => (props?.post?.data()?.accountId === account?.id ? account : undefined)) : undefined;
 
   // destructuring props
-  const destPropsOfHeadPost = { account: props.account, currentAccount, post: props.post, history: props.history, modal: props.modal, deletePostThunk: props.deletePostThunk };
+  const destPropsOfHeadPost = { account: props.account, currentAccount, post: props.post, history: props.history, modal: props.modal, updateAccountThunk: props.updateAccountThunk, deletePostThunk: props.deletePostThunk };
   const destPropsOfBodyPost = { account: props.account, post: props.post, location: props.location, kindOfPost: props.kindOfPost, checkClickFavoriteBorder, updatePostThunk: props.updatePostThunk };
   const destPropsOfFooterPost = { accounts: props.accounts, account: props.account, currentAccount, comments: props.comments, replies: props.replies, post: props.post, history: props.history, modal: props.modal, checkClickFavoriteBorder, createReplyThunk: props.createReplyThunk, updatePostThunk: props.updatePostThunk, createCommentThunk: props.createCommentThunk, updateCommentThunk: props.updateCommentThunk, updateReplyThunk: props.updateReplyThunk, deleteCommentThunk: props.deleteCommentThunk, deleteReplyThunk: props.deleteReplyThunk };
 

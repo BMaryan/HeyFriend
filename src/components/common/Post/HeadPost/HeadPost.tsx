@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FirebaseType, HistoryType, PostType } from "../../../../types/types";
+import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType, HistoryType, PostType } from "../../../../types/types";
 import { photoConstant, profileConstant } from "../../../../core/constants/constants";
 import { ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import betaVershion from "../../../../assets/images/betaVershion.png";
@@ -17,6 +17,7 @@ interface HeadPostPropsType {
   post: FirebaseType<PostType> | undefined;
   history: HistoryType;
   modal: boolean;
+  updateAccountThunk: (account: AccountType) => void;
   deletePostThunk: (post: PostType) => void;
 }
 
@@ -24,14 +25,15 @@ const HeadPost = (props: HeadPostPropsType) => {
   const [open, setOpen] = React.useState(false);
   const [fullDes, setFullDes] = React.useState(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  // if modal is true than to show full description
   React.useEffect(() => {
     if (props.modal) {
       setFullDes(true);
     }
   }, [props.modal]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className={styles.head}>
@@ -102,6 +104,13 @@ const HeadPost = (props: HeadPostPropsType) => {
                 variant="text"
                 className={styles.item + " " + styles.item__border + " " + styles.item__red}
                 onClick={() => {
+                  // remove a person from following
+                  props.account && props.updateAccountThunk({ ...props.account, following: props.account?.following ? props.account?.following.filter((following: FollowingOfAccountType) => following?.id !== props.currentAccount?.id) : [] });
+
+                  // remove a person from followers
+                  props.currentAccount?.data() && props.updateAccountThunk({ ...props.currentAccount?.data(), followers: props.currentAccount?.data()?.followers ? props.currentAccount?.data()?.followers?.filter((followers: FollowersOfAccountType) => followers?.id !== props.account?.id) : [] });
+
+                  // close a modal
                   handleClose();
                 }}>
                 Unfollow
@@ -122,6 +131,7 @@ const HeadPost = (props: HeadPostPropsType) => {
         </CustomModal>
       </div>
 
+      {/* description */}
       {!props.modal && props?.post?.data()?.description && <div className={styles.wrapper_description}>{props?.post?.data()?.description ? <div className={styles.description}>{props?.post?.data()?.description?.length <= 100 ? props?.post?.data()?.description : fullDes ? props?.post?.data()?.description : props?.post?.data()?.description?.slice(0, 100) + " ..."}</div> : undefined}</div>}
     </div>
   );
