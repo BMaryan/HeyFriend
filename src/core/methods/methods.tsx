@@ -64,3 +64,8 @@ export const getOnlineInSessionStorage = () => {
 export const removeOnlineInSessionStorage = () => {
   sessionStorage.removeItem("isOnline");
 };
+
+// copy to clipboard
+export const copyToClipboard = (value: string) => {
+  navigator.clipboard.writeText(value);
+};
