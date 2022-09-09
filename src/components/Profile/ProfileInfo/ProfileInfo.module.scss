@@ -62,19 +62,15 @@
 
 .wrapper_profilePicture__center,
 .wrapper_profilePicture_active__center {
-  border-radius: 50%;
   border: 5px solid $white;
   display: none;
-  transition: 0.5s;
 }
 
 .wrapper_profilePicture,
 .wrapper_profilePicture_active {
-  border-radius: 50%;
   border: 1px solid $grey400;
   display: inline-flex;
   @include position(absolute, unset, unset, $pdYCover, $pdRightCover);
-  transition: 0.5s;
 }
 
 .wrapper_profilePicture,
@@ -86,14 +82,8 @@
   border-radius: 50%;
   @include image-position(cover, center);
   transition: 0.5s;
-}
-
-.wrapper_profilePicture_active,
-.wrapper_profilePicture_active__center {
-  transition: 0.5s;
 
   & > span {
-    transform: scale(0.9);
     transition: 0.5s;
 
     & > div {
@@ -104,6 +94,11 @@
       }
     }
   }
+}
+
+.wrapper_profilePicture_active,
+.wrapper_profilePicture_active__center {
+  transform: scale(0.9);
 }
 
 /* wrapper profile details info line */
