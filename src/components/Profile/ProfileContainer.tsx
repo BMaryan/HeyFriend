@@ -35,6 +35,7 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
 
+  // check path id if id doen't have in accounts than redirect to 404 page
   React.useEffect(() => {
     if (id) {
       const isCorrentId = props.accounts.find((account: FirebaseType<AccountType>) => account?.id === id || undefined);
