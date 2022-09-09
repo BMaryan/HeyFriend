@@ -27,7 +27,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
-import { getPictureBase64 } from "../../core/methods/methods";
+import { copyToClipboard, getPictureBase64 } from "../../core/methods/methods";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { MessagesFormDataType } from "../../components/Chat/Messages/Messages";
 
@@ -137,7 +137,7 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const currentMessagesOfChat: Array<FirebaseType<MessageType>> = props.messages.filter((message: FirebaseType<MessageType>) => message.data().chatId === props.currentChat?.data().id);
   // check who is owner the group
-  const ownerGroupOfAccount: FirebaseType<AccountType> | undefined = props.accounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
+  const ownerAccountOfGroup: FirebaseType<AccountType> | undefined = props.accounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
   // medias length of message
   const mediasLengthOfMessage: Array<number> = currentMessagesOfChat?.map((message: FirebaseType<MessageType>) => message.data()?.medias?.length);
   // sum of medias
@@ -191,12 +191,12 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
       <div className={styles.wrapper_head_detail}>
         {/* contact of owner */}
         {/* <div className={styles.head_detail}>
-          <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
-            {ownerGroupOfAccount && <CustomAvatar avatarData={ownerGroupOfAccount?.data()} />}
+          <NavLink className={styles.detail_wrapper_avatar} to={`${profileConstant.path}/${ownerAccountOfGroup?.id}`}>
+            {ownerAccountOfGroup && <CustomAvatar avatarData={ownerAccountOfGroup?.data()} />}
           </NavLink>
 
-          <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerGroupOfAccount?.id}`}>
-            {ownerGroupOfAccount?.data() ? ownerGroupOfAccount?.data()?.surname + " " + ownerGroupOfAccount?.data()?.name : undefined}
+          <NavLink className={styles.detail_fullName} to={`${profileConstant.path}/${ownerAccountOfGroup?.id}`}>
+            {ownerAccountOfGroup?.data() ? ownerAccountOfGroup?.data()?.surname + " " + ownerAccountOfGroup?.data()?.name : undefined}
           </NavLink>
 
         </div> */}
@@ -204,10 +204,10 @@ export const ChatDetails = (props: ChatDetailsPropsType) => {
         {/* participants */}
         <div className={styles.wrapper_participants}>
           <div className={styles.media_title}>Participants</div>
-          <ChatList accountData={ownerGroupOfAccount?.data() || props.account} selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} />
+          <ChatList accountData={ownerAccountOfGroup?.data() || props.account} selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} />
           {(props.currentChat?.data()?.participants?.length as number) > 2 && <div className={styles.detail_subtitle}>Owner</div>}
 
-          {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => ownerGroupOfAccount?.id !== account.id && <ChatList key={account.data()?.id} accountData={account.data()} selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} />)}
+          {props.chatWithAccounts.map((account: FirebaseType<AccountType>) => ownerAccountOfGroup?.id !== account.id && <ChatList key={account.data()?.id} accountData={account.data()} selectedIndex={selectedIndex} handleListItemClick={handleListItemClick} />)}
         </div>
       </div>
 
@@ -269,9 +269,12 @@ export const ContainerOfSmiles = (props: ContainerOfSmilesPropsType) => {
 };
 
 interface ContainerOfMessagePropsType {
+  account: AccountType | null;
   open: boolean;
   anchorEl: null | HTMLElement;
   message: FirebaseType<MessageType>;
+  currentChat: FirebaseType<ChatType> | undefined;
+  chatWithAccounts: Array<FirebaseType<AccountType>>;
   setEditMessage: (value: MessageType | null) => void;
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
   handleClose: () => void;
@@ -279,24 +282,51 @@ interface ContainerOfMessagePropsType {
 }
 
 export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
+  // check who is owner the group
+  const ownerAccountOfGroup: FirebaseType<AccountType> | undefined = props.chatWithAccounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
+
   return (
     <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
+      {props.account?.id === props.message.data().accountId && (
+        <MenuItem
+          className={styles.menu_item}
+          onClick={() => {
+            props.setEditMessage(props.message.data());
+            props.handleClose();
+          }}>
+          Edit
+        </MenuItem>
+      )}
+
       <MenuItem
         className={styles.menu_item}
         onClick={() => {
-          props.setEditMessage(props.message.data());
+          copyToClipboard(props.message.data()?.message);
+          // props.setEditMessage(props.message.data());
           props.handleClose();
         }}>
-        Edit
+        Copy
       </MenuItem>
-      <MenuItem
-        className={styles.menu_item}
-        onClick={() => {
-          props.deleteMessageThunk(props.message.data());
-          props.handleClose();
-        }}>
-        Delete
-      </MenuItem>
+
+      {props.account?.id === props.message.data().accountId ? (
+        <MenuItem
+          className={styles.menu_item_error}
+          onClick={() => {
+            props.deleteMessageThunk(props.message.data());
+            props.handleClose();
+          }}>
+          Delete
+        </MenuItem>
+      ) : (
+        <MenuItem
+          className={styles.menu_item_error}
+          onClick={() => {
+            // props.deleteMessageThunk(props.message.data());
+            props.handleClose();
+          }}>
+          Report
+        </MenuItem>
+      )}
     </Menu>
   );
 };

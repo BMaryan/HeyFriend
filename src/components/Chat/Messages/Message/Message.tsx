@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountType, FirebaseType, MediaOfMessageType, MessageType } from "../../../../types/types";
+import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../../types/types";
 import { ContainerOfMessage } from "../../../../utils/helperForChat/helperForChat";
 import { profileConstant } from "../../../../core/constants/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -18,6 +18,7 @@ interface MessagePropsType {
   message: FirebaseType<MessageType>;
   prevMessage: FirebaseType<MessageType>;
   messageValue: string;
+  currentChat: FirebaseType<ChatType> | undefined;
   chatWithAccounts: Array<FirebaseType<AccountType>>;
   setEditMessage: (value: MessageType | null) => void;
   setMessageValue: (value: string) => void;
@@ -103,7 +104,7 @@ const Message = (props: MessagePropsType) => {
         </div>
 
         {/* conteiner of message for editing */}
-        {open ? <ContainerOfMessage open={open} anchorEl={anchorEl} handleClick={handleClick} handleClose={handleClose} message={props.message} setEditMessage={props.setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
+        {open ? <ContainerOfMessage account={props.account} chatWithAccounts={props.chatWithAccounts} currentChat={props.currentChat} open={open} anchorEl={anchorEl} handleClick={handleClick} handleClose={handleClose} message={props.message} setEditMessage={props.setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined}
       </div>
     </div>
   );

@@ -79,7 +79,7 @@ const Messages = (props: MessagesPropsType) => {
     <div className={styles.messages}>
       {currentMessagesOfChat.length > 0 ? (
         <div className={styles.messages_content} ref={scrollContent}>
-          {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} message={message} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} setEditMessage={setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
+          {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} currentChat={props.currentChat} message={message} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} setEditMessage={setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
         </div>
       ) : (
         <div className={styles.default_content}>{!props.loading && "Default content"}</div>

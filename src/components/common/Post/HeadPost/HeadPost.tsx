@@ -3,6 +3,7 @@ import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountTy
 import { photoConstant, profileConstant } from "../../../../core/constants/constants";
 import { ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import betaVershion from "../../../../assets/images/betaVershion.png";
+import { copyToClipboard } from "../../../../core/methods/methods";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CustomModal from "../../../organisms/Modal/Modal";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";
@@ -118,7 +119,12 @@ const HeadPost = (props: HeadPostPropsType) => {
                 <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
                 Share to...
               </Button>
-              <Button variant="text" className={styles.item + " " + styles.item__border}>
+              <Button
+                variant="text"
+                className={styles.item + " " + styles.item__border}
+                onClick={() => {
+                  console.log(props.history.location.pathname);
+                }}>
                 <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
                 Copy link
               </Button>

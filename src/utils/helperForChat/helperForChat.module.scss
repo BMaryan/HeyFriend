@@ -66,6 +66,13 @@ $ht-media: 300px;
 .conteiner_of_message {
 }
 
+.menu_item {
+}
+
+.menu_item_error {
+  color: $red500;
+}
+
 /* default content for chat when don't have id in path */
 .default_view_messages {
   height: 100%;
