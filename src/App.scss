@@ -17,11 +17,10 @@
 
 // wrapper_loading
 .gl_wrapper_loading {
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include ds-position(center, center);
+  flex: 1;
 
   & > span {
     color: $grey500 !important;

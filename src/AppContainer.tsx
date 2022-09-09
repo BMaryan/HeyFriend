@@ -3,13 +3,13 @@ import React from "react";
 import { AccountType, AuthType, ChatType, CommentType, FirebaseType, MessageType, ParamsOfMatchType, PostType, ReplyType } from "./types/types";
 import { accountActions, setAccountsThunk, setAccountThunk, updateAccountThunk } from "./redux/account-reducer";
 import { getCommentsSelector, setPostsSelector, setRepliesSelector } from "./redux/post-selectors";
+import { mainConstant, signInConstant, signUpConstant } from "./core/constants/constants";
 import { setCommentsThunk, setPostsThunk, setRepliesThunk } from "./redux/post-reducer";
 import { getAccountSelector, getAccountsSelector } from "./redux/account-selectors";
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
-import { signInConstant, signUpConstant } from "./core/constants/constants";
-import CircularProgress from "@mui/material/CircularProgress";
 import { setAuthSelector } from "./redux/auth-selectors";
 import { onAuthStateChanged, User } from "firebase/auth";
+import Loader from "./components/atoms/Loader/Loader";
 import { setChatsThunk } from "./redux/chat-reducer";
 import { authActions } from "./redux/auth-reducer";
 import { useHistory } from "react-router-dom";
@@ -131,7 +131,11 @@ const AppContainer = (props: AppContainerPropsType) => {
     //   }
     // });
 
-    document.title = nameOfPage[0]?.toUpperCase() + nameOfPage?.slice(1);
+    if (history.location.pathname === mainConstant.path) {
+      document.title = mainConstant.title;
+    } else {
+      document.title = nameOfPage[0]?.toUpperCase() + nameOfPage?.slice(1);
+    }
   }, [history.location.pathname]);
 
   // first visitthe site
@@ -227,8 +231,8 @@ const AppContainer = (props: AppContainerPropsType) => {
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
     if (!props.account) {
       return (
-        <div className="gl_wrapper_loading">
-          <CircularProgress className="loading" />
+        <div style={{ height: "100vh" }}>
+          <Loader />
         </div>
       );
     }
