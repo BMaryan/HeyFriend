@@ -3,7 +3,7 @@ import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountTy
 import { photoConstant, profileConstant } from "../../../../core/constants/constants";
 import { ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import betaVershion from "../../../../assets/images/betaVershion.png";
-import { copyToClipboard } from "../../../../core/methods/methods";
+// import { copyToClipboard } from "../../../../core/methods/methods";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CustomModal from "../../../organisms/Modal/Modal";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";

@@ -1,9 +1,8 @@
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
-import { Avatar, Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
+import { Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
-import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 import styles from "./helperForChat.module.scss";
@@ -283,7 +282,7 @@ interface ContainerOfMessagePropsType {
 
 export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
   // check who is owner the group
-  const ownerAccountOfGroup: FirebaseType<AccountType> | undefined = props.chatWithAccounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
+  // const ownerAccountOfGroup: FirebaseType<AccountType> | undefined = props.chatWithAccounts.find((account: FirebaseType<AccountType>) => account.id === props.currentChat?.data()?.ownerId);
 
   return (
     <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>

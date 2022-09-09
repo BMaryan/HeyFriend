@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { AccountType, FirebaseType } from "../../../types/types";
