@@ -59,18 +59,20 @@ export const setPostsThunk = (): ThunkAction<Promise<void>, StateType, unknown, 
   dispatch(postActions.setLoading(true));
 
   try {
-    onSnapshot(collection(db, "posts"), (snapshot: any) => dispatch(postActions.setPosts(snapshot.docs)));
+    onSnapshot(collection(db, "posts"), (snapshot: any) => {
+      const res = dispatch(postActions.setPosts(snapshot.docs));
+      if (res) dispatch(postActions.setLoading(false));
+    });
 
     dispatch(postActions.setSuccess());
   } catch (error: any) {
     dispatch(postActions.setError(error));
+    dispatch(postActions.setLoading(false));
   }
-
-  dispatch(postActions.setLoading(false));
 };
 
 export const setCommentsThunk = (): ThunkAction<Promise<void>, StateType, unknown, ActionsType> => async (dispatch) => {
-  dispatch(postActions.setLoading(true));
+  // dispatch(postActions.setLoading(true));
 
   try {
     onSnapshot(collection(db, "comments"), (snapshot: any) => dispatch(postActions.setComments(snapshot.docs)));
@@ -80,11 +82,11 @@ export const setCommentsThunk = (): ThunkAction<Promise<void>, StateType, unknow
     dispatch(postActions.setError(error));
   }
 
-  dispatch(postActions.setLoading(false));
+  // dispatch(postActions.setLoading(false));
 };
 
 export const setRepliesThunk = (): ThunkAction<Promise<void>, StateType, unknown, ActionsType> => async (dispatch) => {
-  dispatch(postActions.setLoading(true));
+  // dispatch(postActions.setLoading(true));
 
   try {
     onSnapshot(collection(db, "replies"), (snapshot: any) => dispatch(postActions.setReplies(snapshot.docs)));
@@ -94,7 +96,7 @@ export const setRepliesThunk = (): ThunkAction<Promise<void>, StateType, unknown
     dispatch(postActions.setError(error));
   }
 
-  dispatch(postActions.setLoading(false));
+  // dispatch(postActions.setLoading(false));
 };
 
 export const createPostThunk =
