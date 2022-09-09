@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { addMessageThunk, createChatThunk, deleteChatThunk, deleteMessageThunk, setMessagesThunk, updateChatThunk, updateMessageThunk } from "../../redux/chat-reducer";
-import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MessageType, ParamsOfMatchType } from "../../types/types";
 import { getChatsSelector, getMessagesSelector, setChatsLoadingSelector, setErrorSelector, setMessagesLoadingSelector } from "../../redux/chat-selectors";
+import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MessageType, ParamsOfMatchType } from "../../types/types";
 import { getAccountsSelector, getAccountSelector } from "../../redux/account-selectors";
+import { chatConstant } from "../../core/constants/constants";
 import { useHistory, useParams } from "react-router-dom";
 import { StateType } from "../../redux/store";
 import { connect } from "react-redux";
@@ -40,12 +41,14 @@ const ChatContainer = (props: ChatContainerPropsType) => {
   const [messageValue, setMessageValue] = React.useState<string>("");
   const currentChat: FirebaseType<ChatType> | undefined = id ? props?.chats?.find((chat: FirebaseType<ChatType>) => chat?.id === id) : undefined;
 
+  // set messages
   React.useEffect(() => {
     if (props.messages) {
       props.setMessagesThunk();
     }
   }, [props.messages.length]);
 
+  // if id in path !== account id who is writting
   React.useEffect(() => {
     if (id !== typing) {
       setMessageValue("");
@@ -71,11 +74,19 @@ const ChatContainer = (props: ChatContainerPropsType) => {
     };
   }, [typing]);
 
+  // if input doens't have value than update typing
   React.useEffect(() => {
     if (!messageValue) {
       currentChat?.data() && props.updateChatThunk({ ...currentChat?.data(), typing: null });
     }
   }, [messageValue]);
+
+  // redirect to /chat if id is but chat with that id doesn't have
+  React.useEffect(() => {
+    if (id && !currentChat) {
+      history.push(`${chatConstant.path}`);
+    }
+  }, [id, currentChat]);
 
   return <Chat {...props} messageValue={messageValue} currentChat={currentChat} id={id} history={history} setTyping={setTyping} setMessageValue={setMessageValue} />;
 };
