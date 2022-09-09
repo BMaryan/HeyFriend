@@ -10,11 +10,11 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Skeleton from "@mui/material/Skeleton";
 import Divider from "@mui/material/Divider";
+import Loader from "../atoms/Loader/Loader";
 import { NavLink } from "react-router-dom";
 import styles from "./Main.module.scss";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
-// import Story from "../common/Story/Story";
 
 interface MainPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -28,26 +28,17 @@ const Main = (props: MainPropsType) => {
   const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
   const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
 
-  // test check loading posts
-  const [loading, setLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
-
   return (
     <div className={styles.main}>
       {/* // content */}
       <div className={styles.main_content}>
-        {/* story */}
-        {/* <Story account={props.account} /> */}
+        {/* loading */}
+        {followedAccountPosts.length === 0 && props.loading && <Loader />}
 
+        {/* posts */}
         {props.loading
           ? followedAccountPosts.map((item: FirebaseType<PostType>) => (
-              <Card key={item.id} sx={{ height: 900, display: "flex", flexDirection: "column", m: 2 }}>
+              <Card key={item.id} sx={{ height: 900, display: "flex", flexDirection: "column", mb: 2 }}>
                 <CardHeader avatar={<Skeleton animation="wave" variant="circular" width={40} height={40} />} title={<Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }} />} subheader={<Skeleton animation="wave" height={10} width="40%" />} />
 
                 <Skeleton sx={{ display: "flex", flex: 1 }} animation="wave" variant="rectangular" />
@@ -65,13 +56,15 @@ const Main = (props: MainPropsType) => {
           : undefined}
 
         {/* default content for content */}
-        {(followedAccountPosts && followedAccountPosts?.length === 0) || !followedAccountPosts ? (
-          <div className={styles.default_content}>
-            <div className={styles.default_content__wrapper_icon}>{}</div>
-            <div className={styles.default_content__title}>News Feed</div>
-            <div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
-          </div>
-        ) : undefined}
+        {(followedAccountPosts && followedAccountPosts?.length === 0) || !followedAccountPosts
+          ? !props.loading && (
+              <div className={styles.default_content}>
+                <div className={styles.default_content__wrapper_icon}>{}</div>
+                <div className={styles.default_content__title}>News Feed</div>
+                <div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
+              </div>
+            )
+          : undefined}
       </div>
 
       {/* sideBar right */}
