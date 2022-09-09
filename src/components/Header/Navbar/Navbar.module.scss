@@ -10,10 +10,15 @@
   font-size: 15px !important;
   padding: 0px;
   cursor: pointer;
-}
 
-.nav_link_toggleList > span {
-  color: $black !important;
+  & > span {
+    color: $black !important;
+  }
+
+  & > div {
+    height: 20px;
+    width: 20px;
+  }
 }
 
 .common_nav_linkRow,
