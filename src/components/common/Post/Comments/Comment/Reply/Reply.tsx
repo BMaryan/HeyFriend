@@ -52,6 +52,7 @@ const Reply = (props: ReplyPropsType) => {
           {/* content */}
           <TimelineContent className={styles.timeline_content}>
             <ListItemText
+              className={stylesCommon.details_position_text}
               primary={<ListDateWithIcon data={props.reply.data()} onClick={handleOpen} />}
               secondary={
                 <Typography component="div">

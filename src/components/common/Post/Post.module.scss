@@ -35,8 +35,12 @@
   margin: 0 !important;
 }
 
-.wrapper_profile_img {
-  margin-right: $pd-content;
+.details_position_avatar {
+  margin: 0 !important;
+}
+
+.details_position_text {
+  margin: 0 !important;
 }
 
 .profile_avatar {
@@ -76,11 +80,14 @@
 }
 
 .wrapper_description {
-  margin-top: 10px;
+}
+
+.wrapper_description_modal {
+  padding: $pd-content $pd-content 0 $pd-content;
 }
 
 .description {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* body */

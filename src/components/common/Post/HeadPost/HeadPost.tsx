@@ -39,13 +39,12 @@ const HeadPost = (props: HeadPostPropsType) => {
     <div className={styles.head}>
       <div className={styles.wrapper_details}>
         <ListItem className={styles.details_position} alignItems="flex-start">
-          <ListItemAvatar>
-            <NavLink className={styles.full_name_comment} to={`${profileConstant.path}/${props?.currentAccount?.data()?.id}`}>
-              {props?.currentAccount && <CustomAvatar avatarData={props?.currentAccount?.data()} />}
-            </NavLink>
+          <ListItemAvatar className={styles.details_position_avatar}>
+            <NavLink to={`${profileConstant.path}/${props?.currentAccount?.data()?.id}`}>{props?.currentAccount && <CustomAvatar avatarData={props?.currentAccount?.data()} />}</NavLink>
           </ListItemAvatar>
 
           <ListItemText
+            className={styles.details_position_text}
             primary={
               <Typography sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} component="div">
                 <Typography sx={{ display: "inline" }} component="span" variant="body1" color="text.primary">

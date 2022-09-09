@@ -35,15 +35,17 @@ const Comments = (props: CommentsPropsType) => {
 
   return (
     <div className={styles.wrapper_comments}>
+      {/* description */}
+      {/* <div className={styles.comments}> */}
+      {props.modal && props?.post?.data()?.description && (
+        <div className={props.modal ? styleDes.wrapper_description_modal : styleDes.wrapper_description}>
+          <div className={styleDes.description}>{props?.post?.data()?.description?.length <= 100 ? props?.post?.data()?.description : !false ? props?.post?.data()?.description : props?.post?.data()?.description?.slice(0, 100) + " ..."}</div>
+        </div>
+      )}
+      {/* </div> */}
+
       {areComments?.length > 0 ? (
         <div className={styles.comments}>
-          {/* description */}
-          {props.modal && props?.post?.data()?.description && (
-            <div className={styleDes.wrapper_description}>
-              <div className={styleDes.description}>{props?.post?.data()?.description?.length <= 100 ? props?.post?.data()?.description : !false ? props?.post?.data()?.description : props?.post?.data()?.description?.slice(0, 100) + " ..."}</div>
-            </div>
-          )}
-
           {/* comments when is modal */}
           {areComments && props.modal && areComments?.map((comment: FirebaseType<CommentType>) => <Comment key={comment.id} {...destPropsComment} comment={comment} />)}
 

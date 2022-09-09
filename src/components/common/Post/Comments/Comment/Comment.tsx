@@ -64,6 +64,7 @@ const Comment = (props: CommentPropsType) => {
           </ListItemAvatar>
 
           <ListItemText
+            className={stylesCommon.details_position_text}
             primary={<ListDateWithIcon data={props.comment.data()} onClick={handleOpen} />}
             secondary={
               <Typography component="div">
