@@ -1,5 +1,8 @@
 import { NavigationType } from "../../types/types";
 
+// * path of wabsite
+export const pahtOfWebsiteConstant = "https://heyfriend.vercel.app";
+
 // * ways to navigate the site
 
 // main
