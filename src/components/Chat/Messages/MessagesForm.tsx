@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { Field, InjectedFormProps, reduxForm, WrappedFieldInputProps, WrappedFieldMetaProps } from "redux-form";
 import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../types/types";
@@ -36,6 +37,12 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  React.useEffect(() => {
+    if (props.editMessage) {
+      props.setMessageValue("");
+    }
+  }, [props.editMessage]);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -63,8 +70,22 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
         }
         endAdornment={
           <InputAdornment sx={{ height: "100%", display: "flex", columnGap: "10px" }} position="end">
+            {props.messageValue && (
+              <>
+                <IconButton
+                  onClick={() => {
+                    props.setMessageValue("");
+                    props.reset();
+                  }}
+                  component="span">
+                  <ClearIcon />
+                </IconButton>
+                <Divider sx={{ height: 28 }} orientation="vertical" />
+              </>
+            )}
+
             {props.editMessage ? (
-              <IconButton onClick={() => props.setEditMessage(null)} component="span" edge="start">
+              <IconButton onClick={() => props.setEditMessage(null)} component="span">
                 <ClearIcon />
               </IconButton>
             ) : (
@@ -81,7 +102,7 @@ const InputOfMessage = (props: InjectedFormProps<MessagesFormDataType, InputOfMe
                       });
                     }}
                   />
-                  <IconButton component="span" edge="start">
+                  <IconButton component="span">
                     <CollectionsOutlinedIcon />
                   </IconButton>
                 </label>
