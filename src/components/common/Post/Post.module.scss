@@ -274,6 +274,11 @@
   border-radius: 0 0 $bd-radius $bd-radius;
 }
 
+.item_link {
+  text-transform: capitalize !important;
+  padding: 12px !important;
+}
+
 .item_beta_vershion_picture {
   height: 100%;
   @include position(absolute, 0, unset, unset, 0);

@@ -115,9 +115,8 @@ const HeadPost = (props: HeadPostPropsType) => {
                 }}>
                 Unfollow
               </Button>
-              <Button variant="text" className={styles.item + " " + styles.item__border}>
-                <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
-                Share to...
+              <Button color="inherit" variant="text" className={styles.item + " " + styles.item__border + " " + styles.item_link} fullWidth href={`https://telegram.me/share/url?url=${`${pahtOfWebsiteConstant}/${photoConstant.path}/${props?.post?.data().id}`}`} target="_blank" rel="noopener noreferrer">
+                Share to Telegram
               </Button>
               <Button
                 variant="text"
@@ -126,7 +125,6 @@ const HeadPost = (props: HeadPostPropsType) => {
                   copyToClipboard(`${pahtOfWebsiteConstant}/${photoConstant.path}/${props?.post?.data().id}`);
                   handleClose();
                 }}>
-                <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
                 Copy link
               </Button>
               <Button onClick={handleClose} variant="text" className={styles.item}>
