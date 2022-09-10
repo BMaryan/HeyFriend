@@ -67,10 +67,18 @@ $ht-media: 300px;
 }
 
 .menu_item {
+  @include ds-position(center, unset);
+  padding-right: $pd-content * 2 !important;
+  padding-left: $pd-content * 2 !important;
 }
 
 .menu_item_error {
   color: $red500;
+}
+
+.item_beta_vershion_picture {
+  height: 100%;
+  @include position(absolute, 0, unset, unset, 0);
 }
 
 /* default content for chat when don't have id in path */

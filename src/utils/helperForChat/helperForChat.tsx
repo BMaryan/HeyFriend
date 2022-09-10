@@ -1,48 +1,39 @@
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
 import { Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
-import { chatConstant, profileConstant } from "../../core/constants/constants";
-import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import IconButton from "@mui/material/IconButton";
-import styles from "./helperForChat.module.scss";
-import InfoIcon from "@mui/icons-material/Info";
-import { NavLink } from "react-router-dom";
-import Menu from "@mui/material/Menu";
-import moment from "moment";
-
-//
-import Box from "@mui/material/Box";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Dialog from "@mui/material/Dialog";
-
-//
-import { useTheme } from "@mui/material/styles";
-import MobileStepper from "@mui/material/MobileStepper";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
-import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
-import { copyToClipboard, getPictureBase64 } from "../../core/methods/methods";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import { chatConstant, profileConstant } from "../../core/constants/constants";
+import { copyToClipboard, getPictureBase64 } from "../../core/methods/methods";
 import { MessagesFormDataType } from "../../components/Chat/Messages/Messages";
-
-//
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Chip from "@mui/material/Chip";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-
-// import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
-// import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-// import AcUnitIcon from "@mui/icons-material/AcUnit";
-import { fb } from "../../firebase";
 import CustomAvatarBadge from "../../components/atoms/AvatarBadge/AvatarBadge";
 import CustomAvatarGroup from "../../components/atoms/AvatarGroup/AvatarGroup";
+import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import betaVershion from "../../assets/images/betaVershion.png";
 import CustomAvatar from "../../components/atoms/Avatar/Avatar";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import MobileStepper from "@mui/material/MobileStepper";
+import { autoPlay } from "react-swipeable-views-utils";
+import Autocomplete from "@mui/material/Autocomplete";
+import DialogTitle from "@mui/material/DialogTitle";
+import SwipeableViews from "react-swipeable-views";
+import IconButton from "@mui/material/IconButton";
+import styles from "./helperForChat.module.scss";
+import TextField from "@mui/material/TextField";
+import InfoIcon from "@mui/icons-material/Info";
+import { useTheme } from "@mui/material/styles";
+import { NavLink } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import Chip from "@mui/material/Chip";
+import Menu from "@mui/material/Menu";
+import { fb } from "../../firebase";
+import Box from "@mui/material/Box";
+import moment from "moment";
 
 interface HeadPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -286,6 +277,26 @@ export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
 
   return (
     <Menu className={styles.conteiner_of_message} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
+      {props.account?.id === props.message.data().accountId ? (
+        <MenuItem
+          className={`${styles.menu_item} ${styles.menu_item_error}`}
+          onClick={() => {
+            props.deleteMessageThunk(props.message.data());
+            props.handleClose();
+          }}>
+          Delete
+        </MenuItem>
+      ) : (
+        <MenuItem
+          className={`${styles.menu_item} ${styles.menu_item_error}`}
+          onClick={() => {
+            props.handleClose();
+          }}>
+          <img className={styles.item_beta_vershion_picture} src={betaVershion} alt="" />
+          Report
+        </MenuItem>
+      )}
+
       {props.account?.id === props.message.data().accountId && (
         <MenuItem
           className={styles.menu_item}
@@ -297,33 +308,14 @@ export const ContainerOfMessage = (props: ContainerOfMessagePropsType) => {
         </MenuItem>
       )}
 
-      <MenuItem
-        className={styles.menu_item}
-        onClick={() => {
-          copyToClipboard(props.message.data()?.message);
-          // props.setEditMessage(props.message.data());
-          props.handleClose();
-        }}>
-        Copy
-      </MenuItem>
-
-      {props.account?.id === props.message.data().accountId ? (
+      {props.message.data()?.message && (
         <MenuItem
-          className={styles.menu_item_error}
+          className={styles.menu_item}
           onClick={() => {
-            props.deleteMessageThunk(props.message.data());
+            copyToClipboard(props.message.data()?.message);
             props.handleClose();
           }}>
-          Delete
-        </MenuItem>
-      ) : (
-        <MenuItem
-          className={styles.menu_item_error}
-          onClick={() => {
-            // props.deleteMessageThunk(props.message.data());
-            props.handleClose();
-          }}>
-          Report
+          Copy
         </MenuItem>
       )}
     </Menu>
