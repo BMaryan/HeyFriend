@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
 import { Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
@@ -337,7 +338,15 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaPropsType) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [valueOfMassage, setValueOfMassage] = React.useState(props.messageValue);
   const maxSteps = props.medias.length;
+
+  // reset value from input in messages but save this value in container of creating media
+  React.useEffect(() => {
+    if (props.open) {
+      props.setMessageValue("");
+    }
+  }, [props.open]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -350,14 +359,14 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
   const handleCancel = () => {
     props.setOpen(!props.open);
     props.setMedias([]);
-    props.setMessageValue("");
+    setValueOfMassage("");
   };
 
   const handleSend = () => {
     props.setOpen(!props.open);
     props.setMedias([]);
-    props.setMessageValue("");
-    props.onSubmit({ send_message: props.messageValue });
+    setValueOfMassage("");
+    props.onSubmit({ send_message: valueOfMassage });
   };
 
   const handleStepChange = (step: number) => {
@@ -423,8 +432,8 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
             type="text"
             placeholder="Search contact"
             fullWidth={true}
-            value={props.messageValue}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setMessageValue(e.target.value)}
+            value={valueOfMassage}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValueOfMassage(e.target.value)}
             startAdornment={
               <InputAdornment position="start">
                 <IconButton edge="start">

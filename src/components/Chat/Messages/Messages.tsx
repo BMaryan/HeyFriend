@@ -46,12 +46,13 @@ const Messages = (props: MessagesPropsType) => {
   }, [medias]);
 
   const onSubmit = (formData: MessagesFormDataType) => {
+    console.log(formData.send_message);
     !editMessage
       ? props.addMessageThunk({
           id: "",
           accountId: props?.account?.id,
           chatId: props.currentChat?.id,
-          message: formData[`send_message_${props.currentChat?.id}_${props.account?.id}`] || props.messageValue,
+          message: formData[`send_message_${props.currentChat?.id}_${props.account?.id}`] || formData.send_message,
           medias: medias,
           date: fb.Timestamp.now(),
         })
