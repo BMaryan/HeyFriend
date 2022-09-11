@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
-import { Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput } from "@mui/material";
+import { Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Typography } from "@mui/material";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import { copyToClipboard, getPictureBase64 } from "../../core/methods/methods";
@@ -35,6 +35,19 @@ import Menu from "@mui/material/Menu";
 import { fb } from "../../firebase";
 import Box from "@mui/material/Box";
 import moment from "moment";
+
+// stickers
+import AsleepSticker from "../../assets/Stickers/asleep.gif";
+import CoolSticker from "../../assets/Stickers/cool.gif";
+import FightingSticker from "../../assets/Stickers/fighting.gif";
+import LikedSticker from "../../assets/Stickers/liked.gif";
+import LuckySticker from "../../assets/Stickers/lucky.gif";
+import NescientSticker from "../../assets/Stickers/nescient.gif";
+import ShockedSticker from "../../assets/Stickers/shocked.gif";
+import CryingSticker from "../../assets/Stickers/crying.gif";
+import LovedSticker from "../../assets/Stickers/loved.gif";
+import NervousSticker from "../../assets/Stickers/nervous.gif";
+import HappySticker from "../../assets/Stickers/happy.gif";
 
 interface HeadPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -236,13 +249,15 @@ export const DefaultViewMessages = (props: DefaultViewMessagesPropsType) => {
 interface ContainerOfSmilesPropsType {
   anchorEl: null | HTMLElement;
   open: boolean;
-  setEmoji?: (emoji: string) => void;
+  setSticker: (sticker: string) => void;
+  setEmoji: (emoji: Array<string>) => void;
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
   handleClose: () => void;
 }
 
 export const ContainerOfSmiles = (props: ContainerOfSmilesPropsType) => {
   const smiles: { smile: number }[] = [];
+  const stickers: { sticker: string }[] = [{ sticker: HappySticker }, { sticker: LikedSticker }, { sticker: LuckySticker }, { sticker: AsleepSticker }, { sticker: CoolSticker }, { sticker: FightingSticker }, { sticker: NescientSticker }, { sticker: ShockedSticker }, { sticker: CryingSticker }, { sticker: LovedSticker }, { sticker: NervousSticker }];
 
   for (let i = 128512; i <= 128580; i++) {
     smiles.push({ smile: i });
@@ -250,11 +265,35 @@ export const ContainerOfSmiles = (props: ContainerOfSmilesPropsType) => {
 
   return (
     <Menu className={styles.conteiner_of_smiles} anchorEl={props.anchorEl} open={props.open} onClose={props.handleClose} transformOrigin={{ horizontal: "left", vertical: "bottom" }} anchorOrigin={{ horizontal: "left", vertical: "top" }}>
-      {smiles.map((smile, index) => (
-        <IconButton key={index} onClick={(e: any) => props?.setEmoji && props?.setEmoji(e.target.innerText.codePointAt(0))} className={styles.smile_button}>
-          {String.fromCodePoint(smile.smile)}
-        </IconButton>
-      ))}
+      {/* stikers */}
+      <div>
+        <Typography className={styles.title_of_smiles} color="text.primary" variant="h6" component="div">
+          Stickers
+        </Typography>
+
+        <div className={styles.content_of_smiles}>
+          {stickers.map((sticker, index: number) => (
+            <IconButton key={index} onClick={(e: any) => props.setSticker(e.target.srcset)} className={styles.sticker_button}>
+              <img src={sticker.sticker} srcSet={sticker.sticker} alt="" />
+            </IconButton>
+          ))}
+        </div>
+      </div>
+
+      {/* smiles */}
+      <div>
+        <Typography className={styles.title_of_smiles} color="text.primary" variant="h6" component="div">
+          Smiles
+        </Typography>
+
+        <div className={styles.content_of_smiles}>
+          {smiles.map((smile, index) => (
+            <IconButton key={index} onClick={(e: any) => props.setEmoji([e.target.innerText])} className={styles.smile_button}>
+              {String.fromCodePoint(smile.smile)}
+            </IconButton>
+          ))}
+        </div>
+      </div>
     </Menu>
   );
 };
@@ -540,12 +579,12 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
   };
 
   return (
-    <Dialog sx={{ "& .MuiDialog-paper": { height: "100%", maxHeight: "600px", width: "500px" } }} open={props.open}>
+    <Dialog sx={{ "& .MuiDialog-paper": { height: "100%", maxHeight: "500px", width: "500px" } }} open={props.open}>
       <DialogTitle className={styles.dialog_of_creating_group_title}>Add group</DialogTitle>
 
       {selectedAccounts.length > 1 && <TextField className={styles.dialog_of_creating_group_field_title} label="Title" variant="outlined" value={titleValue} onChange={(e: any) => setTitleValue(e.target.value)} required helperText={!titleValue && "This field is required, you need to add the name of the group."} />}
 
-      <Autocomplete id="tags-filled" multiple options={[]} freeSolo renderTags={(value: Array<FirebaseType<AccountType>>, getTagProps) => value.map((account: FirebaseType<AccountType>, index: number) => <Chip variant="outlined" label={account.data().surname + " " + account.data().name} {...getTagProps({ index })} />)} value={[...selectedAccounts]} onChange={(event, value, reason) => setSelectedAccounts(value as Array<FirebaseType<AccountType>>)} onInputChange={(event, value, reason) => setSearchValue(value)} renderInput={(params) => <TextField {...params} variant="outlined" label="Add participants & Search" value={searchValue} />} />
+      <Autocomplete id="tags-filled" multiple options={[]} freeSolo renderTags={(value: Array<FirebaseType<AccountType>>, getTagProps) => value.map((account: FirebaseType<AccountType>, index: number) => <Chip variant="outlined" label={account.data().surname + " " + account.data().name} {...getTagProps({ index })} />)} value={[...selectedAccounts]} onChange={(event, value, reason) => setSelectedAccounts(value as Array<FirebaseType<AccountType>>)} onInputChange={(event, value, reason) => setSearchValue(value)} renderInput={(params) => <TextField {...params} className={styles.dialog_of_creating_group_autocomplete} variant="outlined" placeholder="Add participants & Search" value={searchValue} />} />
 
       <DialogContent className={styles.dialog_of_creating_group_content} dividers>
         {foundAccounts.length > 0 ? (

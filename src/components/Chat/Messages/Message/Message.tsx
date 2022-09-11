@@ -84,6 +84,13 @@ const Message = (props: MessagePropsType) => {
             </div>
           )}
 
+          {/* sticker */}
+          {props?.message?.data()?.sticker && (
+            <div className={`${styles.wrapper_message} ${isMyAccount ? styles.wrapper_message_myMessage : ""}`}>
+              <img className={styles.sticker} src={props?.message?.data()?.sticker} alt="" />
+            </div>
+          )}
+
           {/* date */}
           <div className={`${styles.message_date} ${isMyAccount ? styles.message_date_myMessage : styles.message_date_otherMessage}`} title={props?.message?.data()?.date.toDate().toLocaleDateString() + " | " + props?.message?.data()?.date.toDate().toLocaleTimeString()}>
             {moment(props?.message?.data()?.date.toDate()).fromNow()}

@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../types/types";
 import { ContainerOfMessageAndMedia } from "../../../utils/helperForChat/helperForChat";
+import { CircularProgress } from "@mui/material";
 import MessagesReduxForm from "./MessagesForm";
 import styles from "./Messages.module.scss";
 import Message from "./Message/Message";
 import { fb } from "../../../firebase";
-import { CircularProgress } from "@mui/material";
 
 interface MessagesPropsType {
   id: string;
@@ -29,6 +30,7 @@ export interface MessagesFormDataType {
 const Messages = (props: MessagesPropsType) => {
   const scrollContent = React.createRef<any>();
   const [open, setOpen] = React.useState(false);
+  const [sticker, setSticker] = React.useState<string>("");
   const [editMessage, setEditMessage] = React.useState<MessageType | null>(null);
   const [medias, setMedias] = React.useState<Array<MediaOfMessageType>>([]);
   const currentMessagesOfChat: Array<FirebaseType<MessageType>> = props.messages.filter((message: FirebaseType<MessageType>) => message.data().chatId === props.currentChat?.id);
@@ -45,8 +47,22 @@ const Messages = (props: MessagesPropsType) => {
     }
   }, [medias]);
 
+  // if there is a sticker than post request to server
+  React.useEffect(() => {
+    if (sticker) {
+      props.addMessageThunk({
+        id: "",
+        accountId: props?.account?.id,
+        chatId: props.currentChat?.id,
+        message: "",
+        sticker: sticker,
+        medias: medias,
+        date: fb.Timestamp.now(),
+      });
+    }
+  }, [sticker]);
+
   const onSubmit = (formData: MessagesFormDataType) => {
-    console.log(formData.send_message);
     !editMessage
       ? props.addMessageThunk({
           id: "",
@@ -86,7 +102,7 @@ const Messages = (props: MessagesPropsType) => {
         <div className={styles.default_content}>{!props.loading && "Default content"}</div>
       )}
 
-      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} />
+      <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} setSticker={setSticker} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} />
 
       {/* toogle container for adding medias */}
       {medias.length > 0 && <ContainerOfMessageAndMedia messageValue={props.messageValue} setMessageValue={props.setMessageValue} medias={medias} setMedias={setMedias} open={open} setOpen={setOpen} onSubmit={onSubmit} />}

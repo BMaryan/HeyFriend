@@ -54,12 +54,33 @@ $ht-media: 300px;
 // conteiner of smiles
 .conteiner_of_smiles > div > ul {
   height: 300px !important;
+  // display: grid !important;
+  // grid-template-columns: repeat(6, 1fr) !important;
+  // justify-items: center;
+}
+
+.title_of_smiles {
+  padding: 10px 10px;
+}
+
+.content_of_smiles {
   display: grid !important;
   grid-template-columns: repeat(6, 1fr) !important;
   justify-items: center;
 }
 
+.sticker_button {
+  height: 60px;
+  width: 60px;
+
+  & > img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .smile_button {
+  color: orange;
 }
 
 // conteiner of message
@@ -312,6 +333,15 @@ $ht-media: 300px;
 
 .dialog_of_creating_group_field_title {
   margin-bottom: $pd-content;
+}
+
+.dialog_of_creating_group_autocomplete {
+  max-height: 100px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .dialog_of_creating_group_content {
