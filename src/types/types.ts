@@ -75,6 +75,7 @@ export interface MessageType {
   accountId?: string;
   chatId?: string;
   message: string;
+  sticker?: string;
   date: Timestamp;
   medias: Array<MediaOfMessageType>;
 }
