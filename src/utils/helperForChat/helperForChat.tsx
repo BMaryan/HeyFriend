@@ -473,13 +473,13 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
             fullWidth={true}
             value={valueOfMassage}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValueOfMassage(e.target.value)}
-            startAdornment={
-              <InputAdornment position="start">
-                <IconButton edge="start">
-                  <SentimentSatisfiedAltIcon />
-                </IconButton>
-              </InputAdornment>
-            }
+            // startAdornment={
+            //   <InputAdornment position="start">
+            //     <IconButton edge="start">
+            //       <SentimentSatisfiedAltIcon />
+            //     </IconButton>
+            //   </InputAdornment>
+            // }
           />
         </Box>
       </DialogContent>
