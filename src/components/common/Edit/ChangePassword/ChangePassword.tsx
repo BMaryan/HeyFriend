@@ -1,42 +1,25 @@
 import React from "react";
-import MuiAlert, { AlertColor, AlertProps } from "@mui/material/Alert";
+import CustomSnackbar from "../../../molecules/Snackbar/Snackbar";
 import ChangePasswordReduxForm from "./ChangePasswordForm";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import { AccountType } from "../../../../types/types";
 import styles from "./ChangePassword.module.scss";
-import Snackbar from "@mui/material/Snackbar";
+import { AlertColor } from "@mui/material/Alert";
+import { updatePassword } from "firebase/auth";
+import { auth } from "../../../../firebase";
 
 interface ChangePasswordPropsType {
   account: AccountType | null;
   authError: string | null;
   loading: boolean;
+  updateAccountThunk: (account: AccountType) => void;
 }
 
-interface ReturnSnackbarFuncPropsType {
-  severity: AlertColor;
-  message: string;
-  open: boolean;
-  handleClose: () => void;
-}
-
-export interface ChangePasswordFormDataType {
-  edit_password: string;
+export interface ChangePasswordFormDataType extends Array<string> {
   old_password: string;
   new_password: string;
   confirm_new_password: string;
 }
-
-const ReturnSnackbarFunc = (props: ReturnSnackbarFuncPropsType) => {
-  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
-    return <MuiAlert {...props} elevation={6} ref={ref} variant="filled" />;
-  });
-
-  return (
-    <Snackbar open={props.open} autoHideDuration={7000} onClose={props.handleClose}>
-      <Alert severity={props.severity}>{props.message}</Alert>
-    </Snackbar>
-  );
-};
 
 const ChangePassword = (props: ChangePasswordPropsType) => {
   const [open, setOpen] = React.useState(false);
@@ -58,7 +41,16 @@ const ChangePassword = (props: ChangePasswordPropsType) => {
 
     if (formData.old_password !== formData.new_password && formData.old_password !== formData.confirm_new_password) {
       if (formData.new_password === formData.confirm_new_password && formData.old_password === props.account?.password) {
-        showSnackbar("success", "You have successfully changed your password.");
+        auth.currentUser &&
+          updatePassword(auth.currentUser, formData.new_password)
+            .then(() => {
+              props.account && props.updateAccountThunk({ ...props.account, password: formData.new_password });
+              showSnackbar("success", "You have successfully changed your password.");
+              Object.keys(formData).map((item: any) => (formData[item] = ""));
+            })
+            .catch((error) => {
+              showSnackbar("error", error.message);
+            });
       }
     }
   };
@@ -78,7 +70,7 @@ const ChangePassword = (props: ChangePasswordPropsType) => {
       <ChangePasswordReduxForm authError={props.authError} loading={props.loading} onSubmit={onSubmit} />
 
       {/* toggle snackBar */}
-      <ReturnSnackbarFunc open={open} handleClose={() => setOpen(false)} severity={severity} message={message} />
+      <CustomSnackbar open={open} message={message} severity={severity} setOpen={setOpen} />
     </div>
   );
 };

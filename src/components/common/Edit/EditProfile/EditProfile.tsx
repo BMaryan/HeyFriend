@@ -1,11 +1,12 @@
 import React from "react";
 import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import CustomSnackbar from "../../../molecules/Snackbar/Snackbar";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import { AccountType } from "../../../../types/types";
 import EditProfileReduxForm from "./EditProfileForm";
 import styles from "./EditProfile.module.scss";
-import Snackbar from "@mui/material/Snackbar";
+import { auth } from "../../../../firebase";
+import { updateEmail } from "firebase/auth";
 
 interface EditProfilePropsType {
   account: AccountType | null;
@@ -15,21 +16,34 @@ interface EditProfilePropsType {
 }
 
 export interface EditProfileFormDataType {
-  edit_profile: string;
+  name: string;
+  surname: string;
+  email: string;
+  status: string;
+  aboutMe: string;
 }
 
 const EditProfile = (props: EditProfilePropsType) => {
   const [openModalAvatarProfile, setOpenModalAvatarProfile] = React.useState(false);
+  const [error, setError] = React.useState<any>(null);
   const [open, setOpen] = React.useState(false);
 
-  const onSubmit = (formData: EditProfileFormDataType) => {
-    props.account && props.updateAccountThunk({ ...props.account, ...formData });
+  const handleClick = () => {
     setOpen(true);
   };
 
-  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
-    return <MuiAlert {...props} elevation={6} ref={ref} variant="filled" />;
-  });
+  const onSubmit = (formData: EditProfileFormDataType) => {
+    auth.currentUser &&
+      updateEmail(auth.currentUser, formData.email)
+        .then(() => {
+          handleClick();
+          props.account && props.updateAccountThunk({ ...props.account, ...formData });
+        })
+        .catch((error) => {
+          setError(error);
+          handleClick();
+        });
+  };
 
   return (
     <div className={styles.edit_profile}>
@@ -46,9 +60,7 @@ const EditProfile = (props: EditProfilePropsType) => {
       <EditProfileReduxForm authError={props.authError} loading={props.loading} onSubmit={onSubmit} />
 
       {/* toggle show snackBar */}
-      <Snackbar open={open} autoHideDuration={7000} onClose={() => setOpen(false)}>
-        <Alert severity="success">You were able to successfully edit the data!</Alert>
-      </Snackbar>
+      <CustomSnackbar open={open} message={error ? error?.message : "You were able to successfully edit the data!"} severity={error ? "error" : "success"} setOpen={setOpen} />
 
       {/* toggle modal for change picture */}
       {openModalAvatarProfile ? <ChangeProfilePictureContainer account={props.account} openModalAvatarProfile={openModalAvatarProfile} setOpenModalAvatarProfile={setOpenModalAvatarProfile} updateAccountThunk={props.updateAccountThunk} /> : undefined}

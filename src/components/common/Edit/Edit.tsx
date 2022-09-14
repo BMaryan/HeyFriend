@@ -60,7 +60,7 @@ const Edit = (props: EditPropsType) => {
       {/* content */}
       <div className={styles.edit_content}>
         <Route exact path={`${editConstant.path}${path.profile}`} render={() => <EditProfile account={props.account} authError={props.authError} loading={props.loading} updateAccountThunk={props.updateAccountThunk} />} />
-        <Route exact path={`${editConstant.path}${path.password}`} render={() => <ChangePassword account={props.account} authError={props.authError} loading={props.loading} />} />
+        <Route exact path={`${editConstant.path}${path.password}`} render={() => <ChangePassword account={props.account} authError={props.authError} loading={props.loading} updateAccountThunk={props.updateAccountThunk} />} />
         <Route exact path={`${editConstant.path}`} render={() => <Default />} />
       </div>
     </div>
