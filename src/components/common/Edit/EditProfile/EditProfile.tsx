@@ -42,7 +42,7 @@ const EditProfile = (props: EditProfilePropsType) => {
             updateEmail(auth.currentUser, formData.email)
               .then(() => {
                 handleClick();
-                props.account && props.updateAccountThunk({ ...props.account, ...formData });
+                props.account && props.updateAccountThunk({ id: props.account?.id, ...formData });
               })
               .catch((error) => {
                 setError(error);

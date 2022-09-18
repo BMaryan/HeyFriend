@@ -18,8 +18,11 @@ export const authAPI = {
   },
 
   async signOut(account: AccountType) {
-    await updateDoc(doc(db, "accounts", account.id), { ...account, isOnline: null });
-
-    await signOut(auth);
+    try {
+      await updateDoc(doc(db, "accounts", account.id), { ...account, isOnline: null });
+      await signOut(auth);
+    } catch (error) {
+      await signOut(auth);
+    }
   },
 };
