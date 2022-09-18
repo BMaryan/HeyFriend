@@ -1,12 +1,11 @@
 import React from "react";
+import { EmailAuthProvider, getAuth, reauthenticateWithCredential, updateEmail } from "firebase/auth";
 import { ChangeProfilePictureContainer } from "../../../../utils/helperForProfile/helperForProfile";
 import CustomSnackbar from "../../../molecules/Snackbar/Snackbar";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import { AccountType } from "../../../../types/types";
 import EditProfileReduxForm from "./EditProfileForm";
 import styles from "./EditProfile.module.scss";
-import { auth } from "../../../../firebase";
-import { updateEmail } from "firebase/auth";
 
 interface EditProfilePropsType {
   account: AccountType | null;
@@ -33,11 +32,22 @@ const EditProfile = (props: EditProfilePropsType) => {
   };
 
   const onSubmit = (formData: EditProfileFormDataType) => {
-    auth.currentUser &&
-      updateEmail(auth.currentUser, formData.email)
+    const auth = getAuth();
+    const credential = EmailAuthProvider.credential(props.account?.email as string, props.account?.password as string);
+
+    auth?.currentUser &&
+      reauthenticateWithCredential(auth.currentUser, credential)
         .then(() => {
-          handleClick();
-          props.account && props.updateAccountThunk({ ...props.account, ...formData });
+          auth.currentUser &&
+            updateEmail(auth.currentUser, formData.email)
+              .then(() => {
+                handleClick();
+                props.account && props.updateAccountThunk({ ...props.account, ...formData });
+              })
+              .catch((error) => {
+                setError(error);
+                handleClick();
+              });
         })
         .catch((error) => {
           setError(error);
@@ -48,7 +58,7 @@ const EditProfile = (props: EditProfilePropsType) => {
   return (
     <div className={styles.edit_profile}>
       <div className={styles.wrapper_profile_contact}>
-        <div className={styles.wrapper_picture}>{props?.account?.avatar && <CustomAvatar avatarData={props.account} title="Change photo" onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} />}</div>
+        <div className={styles.wrapper_picture}>{props?.account && <CustomAvatar avatarData={props.account} title="Change photo" onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))} />}</div>
         <div className={styles.wrapper_info}>
           <div className={styles.fullName}>{props?.account ? props.account.surname + " " + props.account.name : undefined}</div>
           <div className={styles.change_picture} onClick={() => (openModalAvatarProfile ? setOpenModalAvatarProfile(false) : setOpenModalAvatarProfile(true))}>
