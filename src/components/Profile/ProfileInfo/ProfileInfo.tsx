@@ -5,7 +5,6 @@ import { chatConstant, editConstant, profileConstant } from "../../../core/const
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { getTextOfStatusOnline } from "../../../core/methods/methods";
 import CustomAvatarBadge from "../../atoms/AvatarBadge/AvatarBadge";
-import betaVershion from "../../../assets/images/betaVershion.png";
 import styles from "./ProfileInfo.module.scss";
 import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -39,8 +38,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
 
   const lastSignInDate = currentAccount?.data()?.metadata?.lastSignInTime?.toDate();
   const isOnline = props?.account?.id !== props?.id ? Boolean(currentAccount?.data()?.isOnline) : undefined;
-
-  console.log(moment(lastSignInDate).fromNow());
 
   return (
     <div className={styles.profile_info}>
@@ -119,7 +116,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                   }}
                   variant="contained">
                   Message
-                  <img className={styles.beta_vershion_picture} src={betaVershion} alt="" />
                 </Button>
 
                 {isCheckFollowing ? (

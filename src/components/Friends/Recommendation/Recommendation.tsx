@@ -16,13 +16,12 @@ interface RecommendationPropsType {
 }
 
 const Recommendation = (props: RecommendationPropsType) => {
-  // const unFollowingAccounts: Array<FollowingOfAccountType> = props?.account?.following ? props?.account?.following?.map((following: FollowingOfAccountType) => (props?.account?.followers ? props?.account?.followers?.filter((followers: FollowersOfAccountType) => following.id !== followers.id) : [])).flat() : [];
-  // const recommendation: Array<FirebaseType<AccountType>> = props?.accounts ? props?.accounts?.filter((account: FirebaseType<AccountType>) => unFollowingAccounts.find((unFollowing: FollowingOfAccountType) => account.id === unFollowing.id)) : [];
+  const recommendation: Array<FirebaseType<AccountType>> = props?.accounts?.filter((account: FirebaseType<AccountType>) => props?.account?.id !== account?.id);
 
   return (
     <React.Fragment>
       <div className={styles.content}>
-        {props.accounts?.map(
+        {recommendation?.map(
           (recommendationAccount: FirebaseType<AccountType>) =>
             props?.account?.id !== recommendationAccount?.id && (
               <Card key={recommendationAccount.id} className={styles.card}>
@@ -41,7 +40,7 @@ const Recommendation = (props: RecommendationPropsType) => {
         )}
       </div>
 
-      {props.accounts.length < 1 || !props.accounts ? (
+      {recommendation.length < 1 || !props.accounts ? (
         <div className={styles.content_default}>
           <div className={styles.title}>Recommendation</div>
           <div className={styles.subtitle}>Here are the people you may know</div>

@@ -4,17 +4,13 @@ import { User } from "firebase/auth";
 import { db } from "../firebase";
 
 export const accountAPI = {
-  // async setAccounts() {
-  //   return await onSnapshot(collection(db, "accounts"), (snapshot) => snapshot.docs);
-  // },
-
+  // set
   async setAccount(user: User) {
     return await getDoc(doc(db, "accounts", user.uid));
   },
 
+  // update
   async updateAccount(account: AccountType) {
-    console.log(account);
-
     return await updateDoc(doc(db, "accounts", account.id), { ...account });
   },
 };

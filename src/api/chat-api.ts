@@ -3,10 +3,7 @@ import { ChatType, CreateChatType, MessageType } from "../types/types";
 import { db } from "../firebase";
 
 export const chatAPI = {
-  // async setAccounts() {
-  //   return await onSnapshot(collection(db, "accounts"), (snapshot) => snapshot.docs);
-  // },
-
+  // create
   async createChat(data: CreateChatType) {
     const chat = await addDoc(collection(db, "chats"), data);
 
@@ -21,6 +18,7 @@ export const chatAPI = {
     await updateDoc(doc(db, "messages", res.id), { ...message, id: res.id });
   },
 
+  // update
   async updateChat(chat: ChatType) {
     await updateDoc(doc(db, "chats", chat.id), { ...chat });
   },
@@ -29,6 +27,7 @@ export const chatAPI = {
     await updateDoc(doc(db, "messages", message.id), { ...message });
   },
 
+  // delete
   async deleteChat(chat: ChatType) {
     await deleteDoc(doc(db, "chats", chat.id));
   },
