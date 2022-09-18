@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { AccountType } from "./../types/types";
 import { User } from "firebase/auth";
 import { db } from "../firebase";

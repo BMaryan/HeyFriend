@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { StateType } from "./redux/store";
 import { connect } from "react-redux";
-import { auth } from "./firebase";
+import { auth, fb } from "./firebase";
 import App from "./App";
 
 type OwnPropsType = {};
@@ -44,8 +44,6 @@ type MapDispatchToPropsType = {
   updateAccountThunk: (account: AccountType) => void;
 };
 
-// setChatsThunk
-
 export type AppContainerPropsType = OwnPropsType & MapStateToPropsType & MapDispatchToPropsType;
 
 const AppContainer = (props: AppContainerPropsType) => {
@@ -67,14 +65,6 @@ const AppContainer = (props: AppContainerPropsType) => {
       }
     });
   }, [props.auth]);
-
-  // React.useEffect(() => {
-  //   if ((!props.auth || !props.account || (!props.auth && !props.account)) && history.location.pathname === signUpConstant.path) {
-  //     history.push(signUpConstant.path);
-  //   } else if ((!props.auth || !props.account || (!props.auth && !props.account)) && history.location.pathname !== signInConstant.path) {
-  //     history.push(signInConstant.path);
-  //   }
-  // }, [props.auth, props.account]);
 
   // set accounts data
   React.useEffect(() => {
@@ -111,15 +101,6 @@ const AppContainer = (props: AppContainerPropsType) => {
     }
   }, [props.chats.length]);
 
-  // React.useEffect(() => {
-  //   if (!props.auth || !props.account) {
-  //     props.setAuth(null);
-  //     props.setAccount(null);
-
-  //     history.push(signInConstant.path);
-  //   }
-  // }, [props.auth, props.account]);
-
   // name of page in title
   React.useEffect(() => {
     const test = history.location.pathname.split("/");
@@ -138,94 +119,28 @@ const AppContainer = (props: AppContainerPropsType) => {
     }
   }, [history.location.pathname]);
 
-  // first visitthe site
+  // func that updates data of account
+  const updateDataOfAccount = (value: boolean) => {
+    props.account &&
+      props.updateAccountThunk({
+        ...props.account,
+        isOnline: value,
+        metadata: {
+          lastSignInTime: fb.Timestamp.now(),
+        },
+      });
+  };
 
-  // React.useEffect(() => {
-  //   if (props.account) {
-  //     props.account && props.updateAccountThunk({ ...props?.account, isOnline: online });
-  //   }
-  // }, []);
+  // set status of online and set the last visit
+  React.useEffect(() => {
+    updateDataOfAccount(true);
 
-  // React.useEffect(() => {
-  //   window.addEventListener("onload", function () {
-  //     setIsOnlineToSessionStorage({ value: "online" });
-  //     props.account && props.updateAccountThunk({ ...props?.account, isOnline: getOnlineInSessionStorage() });
-  //   });
+    window.addEventListener("beforeunload", () => updateDataOfAccount(false));
 
-  //   return () => {
-  //     window.addEventListener("beforeunload", function () {
-  //       removeOnlineInSessionStorage();
-  //       props.account && props.updateAccountThunk({ ...props?.account, isOnline: getOnlineInSessionStorage() });
-  //     });
-  //   };
-  // }, [getOnlineInSessionStorage()]);
-
-  // const setOnline = () => {
-  //   // alert("We are online!");
-  //   setOnlineStatus(true);
-  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: onlineStatus });
-  // };
-  // const setOffline = () => {
-  //   // alert("We are offline!");
-  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: onlineStatus });
-  //   setOnlineStatus(false);
-  // };
-
-  // console.log(navigator);
-
-  // React.useEffect(() => {
-  //   props.account && props.updateAccountThunk({ ...props?.account, isOnline: navigator.onLine });
-  //   // window.addEventListener("offline", setOffline);
-  //   // window.addEventListener("online", setOnline);
-
-  //   // cleanup if we unmount
-  //   // return () => {
-  //   //   window.removeEventListener("offline", setOffline);
-  //   //   window.removeEventListener("online", setOnline);
-  //   // };
-
-  //   return () => {
-  //     window.addEventListener("beforeunload", function () {
-  //       props.account && props.updateAccountThunk({ ...props?.account, isOnline: navigator.onLine });
-  //     });
-  //   };
-  // }, [navigator.onLine]);
-
-  // console.log(navigator);
-
-  // React.useEffect(() => {
-  //   navigator. .addEventListener("disconnect", (event: any) => {
-  //     console.log(`HID disconnected: ${event.device.productName}`);
-  //     console.dir(event);
-  //   });
-  // });
-
-  // React.useEffect(() => {
-  //   // props.account && props.updateAccountThunk({ ...props?.account, isOnline: isOnline });
-
-  //   // window.addEventListener("onload", updateMethodTrue);
-  //   // window.addEventListener("beforeunload", updateMethodFalse);
-  //   console.log("yes");
-  //   setIsOnline(true);
-
-  //   return () => {
-  //     console.log("false");
-  //     // props.account && props.updateAccountThunk({ ...props?.account, isOnline: isOnline });
-
-  //     setIsOnline(false);
-
-  //     // window.removeEventListener("onload", updateMethodTrue);
-  //     // window.removeEventListener("beforeunload", updateMethodFalse);
-  //   };
-  // });
-
-  // React.useEffect(() => {
-  //   test && props.updateAccountThunk({ ...test.data(), isOnline: true });
-
-  //   return () => {
-  //     test && props.updateAccountThunk({ ...test.data(), isOnline: false });
-  //   };
-  // }, [navigator.onLine]);
+    return () => {
+      window.removeEventListener("beforeunload", () => updateDataOfAccount(false));
+    };
+  }, [props.account?.isOnline]);
 
   // to show progress when account doesn't have
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
