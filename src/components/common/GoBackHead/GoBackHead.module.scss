@@ -6,7 +6,6 @@
   background: $white;
   border-bottom: 1px solid $grey400;
   @include ds-position(unset, center);
-  padding: 0 $pd-content;
   margin-bottom: $pd-content;
 }
 
@@ -20,5 +19,12 @@
 }
 
 .wrapper_icon {
-  @include position(absolute, unset, unset, unset, 0);
+}
+
+.wrapper_icon__start {
+  @include position(absolute, unset, unset, unset, $pd-content);
+}
+
+.wrapper_icon__end {
+  @include position(absolute, unset, $pd-content, unset, unset);
 }
