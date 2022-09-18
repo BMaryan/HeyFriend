@@ -1,5 +1,6 @@
 import React from "react";
 import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType } from "../../../../types/types";
+import { getTextOfStatusOnline } from "../../../../core/methods/methods";
 import CustomAvatarBadge from "../../../atoms/AvatarBadge/AvatarBadge";
 import CustomAvatarGroup from "../../../atoms/AvatarGroup/AvatarGroup";
 import { chatConstant } from "../../../../core/constants/constants";
@@ -29,9 +30,8 @@ const Dialog = (props: DialogPropsType) => {
   const lengthChatOfAccounts = messageWithAccounts.length < 2;
   const currentMessages: Array<FirebaseType<MessageType>> = props?.messages?.length > 0 ? props?.messages?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime())?.filter((message: FirebaseType<MessageType>) => message?.data()?.chatId === props?.chat?.id) : [];
 
-  // const lastSignInDate = messageWithAccount?.data()?.metadata?.lastSignInTime?.toDate();
-  const lastLoginAt = lengthChatOfAccounts ? messageWithAccounts[0]?.data()?.metadata?.lastSignInTime?.toDate() : "test";
-  const isOnline = lengthChatOfAccounts ? Boolean(messageWithAccounts[0]?.data()?.isOnline) : "test";
+  const lastLoginAt = lengthChatOfAccounts && messageWithAccounts[0]?.data()?.metadata?.lastSignInTime?.toDate();
+  const isOnline = lengthChatOfAccounts && Boolean(messageWithAccounts[0]?.data()?.isOnline);
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
   const checkMessage = currentMessages?.length > 0 && lastMessage !== "" && (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...");
 
@@ -63,7 +63,7 @@ const Dialog = (props: DialogPropsType) => {
               <Skeleton animation="wave" height={10} width="40%" />
             ) : (
               <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
-                {props?.chat?.data()?.participants.length >= 3 ? checkMessage || "Send a message..." : checkMessage || (!isOnline ? "In the network " + moment(lastLoginAt).fromNow() : "Now in the network")}
+                {props?.chat?.data()?.participants.length >= 3 ? checkMessage || "Send a message..." : checkMessage || (!isOnline ? getTextOfStatusOnline(!isOnline) + moment(lastLoginAt || "").fromNow() : getTextOfStatusOnline(isOnline))}
               </Typography>
             )
           }

@@ -1,7 +1,6 @@
 import React from "react";
 import { profileConstant, editConstant, savedConstant } from "../../../../core/constants/constants";
 import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
-// import { removeOnlineInSessionStorage } from "../../../../core/methods/methods";
 import Settings from "@mui/icons-material/SettingsOutlined";
 import CustomAvatar from "../../../atoms/Avatar/Avatar";
 import Person from "@mui/icons-material/PersonOutline";
@@ -94,7 +93,6 @@ const NavbarList = (props: NavbarListPropsType) => {
         <MenuItem
           onClick={() => {
             props.account && props.signOut(props.account);
-            // removeOnlineInSessionStorage();
           }}
           sx={{ borderTop: "1px solid var(--bgWhite233)" }}
           className={styles.menu_item}>

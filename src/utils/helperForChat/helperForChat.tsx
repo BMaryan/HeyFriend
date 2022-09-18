@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
-import { Button, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Typography } from "@mui/material";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import { Button, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Typography } from "@mui/material";
+import { copyToClipboard, getPictureBase64, getTextOfStatusOnline } from "../../core/methods/methods";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
-import { copyToClipboard, getPictureBase64 } from "../../core/methods/methods";
 import { MessagesFormDataType } from "../../components/Chat/Messages/Messages";
 import CustomAvatarBadge from "../../components/atoms/AvatarBadge/AvatarBadge";
 import CustomAvatarGroup from "../../components/atoms/AvatarGroup/AvatarGroup";
@@ -90,7 +89,7 @@ export const Head = (props: HeadPropsType) => {
             <div>{lengthChatOfAccounts ? <CustomAvatarBadge color="success" avatarData={props?.chatWithAccounts[0]?.data()} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" /> : <CustomAvatarGroup avatars={props.chatWithAccounts} max={3} />}</div>
             <div>
               <div className={styles.login}>{lengthChatOfAccounts ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : props.currentChat?.data().title}</div>
-              <div className={styles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
+              <div className={styles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `${getTextOfStatusOnline(!isOnline)} ${moment(lastSignInDate).fromNow()}` : getTextOfStatusOnline(isOnline)) : undefined}</div>
             </div>
           </Box>
         ) : (

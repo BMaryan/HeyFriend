@@ -3,6 +3,7 @@ import { AccountType, ChatType, CreateChatType, FirebaseType, FollowersOfAccount
 import { ChangeProfilePictureContainer, ContainerCoverProfile } from "../../../utils/helperForProfile/helperForProfile";
 import { chatConstant, editConstant, profileConstant } from "../../../core/constants/constants";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
+import { getTextOfStatusOnline } from "../../../core/methods/methods";
 import CustomAvatarBadge from "../../atoms/AvatarBadge/AvatarBadge";
 import betaVershion from "../../../assets/images/betaVershion.png";
 import styles from "./ProfileInfo.module.scss";
@@ -52,7 +53,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
           <div className={styles.profile_status}>{currentAccount ? <div>{currentAccount?.data()?.status}</div> : undefined}</div>
 
           {/* last sign in date */}
-          <div className={styles.profile_status}>{props?.account?.id !== props?.id ? (!isOnline ? `In the network ${moment(lastSignInDate).fromNow()}` : "Now in the network") : undefined}</div>
+          <div className={styles.profile_status}>{props?.account?.id !== props?.id ? (!isOnline ? `${getTextOfStatusOnline(!isOnline)} ${moment(lastSignInDate).fromNow()}` : getTextOfStatusOnline(isOnline)) : undefined}</div>
         </div>
 
         {/* wrapper picture */}

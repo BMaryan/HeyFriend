@@ -1,5 +1,6 @@
 import React from "react";
 import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType, PostType } from "../../../types/types";
+import { getTextOfStatusOnline } from "../../../core/methods/methods";
 import styles from "./ListSecondaryItem.module.scss";
 import Typography from "@mui/material/Typography";
 import moment from "moment";
@@ -31,7 +32,7 @@ const ListSecondaryItem = (props: ListSecondaryItemPropsType) => {
     </Typography>
   ) : props?.chat ? (
     <Typography className={styles.secondary} variant="body2" component="span">
-      {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? "In the network " + moment(lastLoginAt).fromNow() : "Now in the network"}
+      {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? getTextOfStatusOnline(!isOnline) + moment(lastLoginAt).fromNow() : getTextOfStatusOnline(isOnline)}
     </Typography>
   ) : (
     <></>
