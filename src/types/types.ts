@@ -27,10 +27,10 @@ export interface FollowingOfAccountType {
 }
 
 export interface MetadataOfAccountType {
-  createdAt?: string;
-  lastLoginAt?: string;
   creationTime?: string;
-  lastSignInTime?: string;
+  lastSignInTime?: Timestamp;
+  // createdAt?: string;
+  // lastLoginAt?: string;
 }
 
 export interface AccountType {

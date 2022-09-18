@@ -66,7 +66,7 @@ interface HeadPropsType {
 export const Head = (props: HeadPropsType) => {
   const [openCreateGroup, setOpenCreateGroup] = React.useState(false);
   const lengthChatOfAccounts = props.chatWithAccounts.length < 2;
-  const lastSignInDate = lengthChatOfAccounts ? new Date(props.chatWithAccounts[0]?.data()?.metadata?.lastSignInTime as string) : "";
+  const lastSignInDate = lengthChatOfAccounts ? props.chatWithAccounts[0]?.data()?.metadata?.lastSignInTime?.toDate() : "";
   const isOnline = lengthChatOfAccounts ? Boolean(props?.chatWithAccounts[0]?.data()?.isOnline) : "";
 
   return props.toggleShowContent ? (

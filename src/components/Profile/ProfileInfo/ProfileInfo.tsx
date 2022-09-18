@@ -36,8 +36,10 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
   const isMyAccount = props?.account && props?.id === props?.account?.id;
   const isOtherAccount = props?.id !== props?.account?.id;
 
-  const lastSignInDate = new Date(currentAccount?.data()?.metadata?.lastSignInTime as string);
+  const lastSignInDate = currentAccount?.data()?.metadata?.lastSignInTime?.toDate();
   const isOnline = props?.account?.id !== props?.id ? Boolean(currentAccount?.data()?.isOnline) : undefined;
+
+  console.log(moment(lastSignInDate).fromNow());
 
   return (
     <div className={styles.profile_info}>

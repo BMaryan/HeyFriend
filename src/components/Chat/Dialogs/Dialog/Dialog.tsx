@@ -29,8 +29,8 @@ const Dialog = (props: DialogPropsType) => {
   const lengthChatOfAccounts = messageWithAccounts.length < 2;
   const currentMessages: Array<FirebaseType<MessageType>> = props?.messages?.length > 0 ? props?.messages?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime())?.filter((message: FirebaseType<MessageType>) => message?.data()?.chatId === props?.chat?.id) : [];
 
-  // const lastSignInDate = new Date(messageWithAccount?.data()?.metadata?.lastSignInTime as string);
-  const lastLoginAt = lengthChatOfAccounts ? new Date(Number(messageWithAccounts[0]?.data()?.metadata?.lastLoginAt)) : "test";
+  // const lastSignInDate = messageWithAccount?.data()?.metadata?.lastSignInTime?.toDate();
+  const lastLoginAt = lengthChatOfAccounts ? messageWithAccounts[0]?.data()?.metadata?.lastSignInTime?.toDate() : "test";
   const isOnline = lengthChatOfAccounts ? Boolean(messageWithAccounts[0]?.data()?.isOnline) : "test";
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
   const checkMessage = currentMessages?.length > 0 && lastMessage !== "" && (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...");

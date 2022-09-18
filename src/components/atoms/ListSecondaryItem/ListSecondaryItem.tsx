@@ -21,7 +21,7 @@ const ListSecondaryItem = (props: ListSecondaryItemPropsType) => {
   const lengthChatOfAccounts = messageWithAccounts.length < 2;
   const currentMessages: Array<FirebaseType<MessageType>> = props?.chat && props?.chat?.messages?.length > 0 ? props?.chat?.messages?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime())?.filter((message: FirebaseType<MessageType>) => message?.data()?.chatId === props?.chat?.chat?.id) : [];
 
-  const lastLoginAt = lengthChatOfAccounts ? new Date(Number(messageWithAccounts[0]?.data()?.metadata?.lastLoginAt)) : undefined;
+  const lastLoginAt = lengthChatOfAccounts ? messageWithAccounts[0]?.data()?.metadata?.lastSignInTime?.toDate() : undefined;
   const isOnline = lengthChatOfAccounts ? Boolean(messageWithAccounts[0]?.data()?.isOnline) : undefined;
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
 
