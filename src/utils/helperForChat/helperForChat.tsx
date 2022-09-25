@@ -68,6 +68,8 @@ export const Head = (props: HeadPropsType) => {
   const lastSignInDate = lengthChatOfAccounts ? props.chatWithAccounts[0]?.data()?.metadata?.lastSignInTime?.toDate() : "";
   const isOnline = lengthChatOfAccounts ? Boolean(props?.chatWithAccounts[0]?.data()?.isOnline) : "";
 
+  // const accountsWhoAreOnline = props.chatWithAccounts.filter((account: FirebaseType<AccountType>) => account.data().isOnline);
+
   return props.toggleShowContent ? (
     <div className={styles.head + " " + styles.head_dialogs}>
       <div className={styles.head_dialogs_title}>Chats</div>
