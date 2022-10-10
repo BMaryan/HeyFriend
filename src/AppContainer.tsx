@@ -126,6 +126,7 @@ const AppContainer = (props: AppContainerPropsType) => {
         ...props.account,
         isOnline: value,
         metadata: {
+          ...props.account.metadata,
           lastSignInTime: fb.Timestamp.now(),
         },
       });
@@ -138,6 +139,9 @@ const AppContainer = (props: AppContainerPropsType) => {
     window.addEventListener("beforeunload", () => updateDataOfAccount(false));
 
     return () => {
+      // if (props.account?.isOnline) {
+      // updateDataOfAccount(false);
+      // }
       window.removeEventListener("beforeunload", () => updateDataOfAccount(false));
     };
   }, [props.account?.isOnline]);
