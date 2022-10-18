@@ -467,21 +467,7 @@ export const ContainerOfMessageAndMedia = (props: ContainerOfMessageAndMediaProp
             />
           )}
 
-          <OutlinedInput
-            name="test"
-            type="text"
-            placeholder="Search contact"
-            fullWidth={true}
-            value={valueOfMassage}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValueOfMassage(e.target.value)}
-            // startAdornment={
-            //   <InputAdornment position="start">
-            //     <IconButton edge="start">
-            //       <SentimentSatisfiedAltIcon />
-            //     </IconButton>
-            //   </InputAdornment>
-            // }
-          />
+          <OutlinedInput name="test" type="text" placeholder="Search contact" fullWidth={true} value={valueOfMassage} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValueOfMassage(e.target.value)} />
         </Box>
       </DialogContent>
 
