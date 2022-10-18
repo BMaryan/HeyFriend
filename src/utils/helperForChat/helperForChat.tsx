@@ -537,8 +537,11 @@ export const ContainerOfCreatingGroup = (props: ContainerOfCreatingGroupPropsTyp
   // search accounts by surname & name
   const foundAccounts: Array<FirebaseType<AccountType>> = props.accounts.filter((account: FirebaseType<AccountType>) => (account.data().surname + " " + account.data().name).toLocaleLowerCase().trim().includes(searchValue.toLocaleLowerCase().trim(), 0) && account.id !== props.account?.id);
 
+  // get chats one by one
+  const getMyChatsOneByOne: Array<FirebaseType<ChatType>> = props.chats?.filter((chat: FirebaseType<ChatType>) => selectedAccounts.length < 2 && chat?.data()?.participants.length < 3 && chat?.data()?.participants?.find((participant: ParticipantsOfChatType) => props.account?.id === participant.id));
+
   // if in group is one by one and a person wants to create a group with the same person than redirect to this chat
-  const checkCreatingOfGroup: FirebaseType<ChatType> | undefined = props.chats?.find((chat: FirebaseType<ChatType>) => chat?.data()?.participants.length === 2 && selectedAccounts.length === 1 && chat?.data()?.participants?.find((participants: ParticipantsOfChatType) => selectedAccounts[0].data().id === participants?.id && selectedAccounts[0].data().id !== props?.account?.id));
+  const checkCreatingOfGroup = getMyChatsOneByOne.find((chat: FirebaseType<ChatType>) => chat?.data()?.participants?.find((participant: ParticipantsOfChatType) => selectedAccounts[0]?.id === participant.id));
 
   const handleCancel = () => {
     props.setOpen(false);
