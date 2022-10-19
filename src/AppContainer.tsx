@@ -9,16 +9,15 @@ import { getAccountSelector, getAccountsSelector } from "./redux/account-selecto
 import { getChatsSelector, getMessagesSelector } from "./redux/chat-selectors";
 import { setAuthSelector } from "./redux/auth-selectors";
 import { onAuthStateChanged, User } from "firebase/auth";
-import Loader from "./components/atoms/Loader/Loader";
 import { setChatsThunk } from "./redux/chat-reducer";
 import { authActions } from "./redux/auth-reducer";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Logo from "./assets/images/Logo.png";
 import { StateType } from "./redux/store";
 import { connect } from "react-redux";
 import { auth, fb } from "./firebase";
 import App from "./App";
-import Logo from "./assets/images/Logo.png";
 
 type OwnPropsType = {};
 
@@ -152,7 +151,6 @@ const AppContainer = (props: AppContainerPropsType) => {
     if (!props.account) {
       return (
         <div style={{ height: "100vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-          {/* <Loader /> */}
           <img src={Logo} alt="" style={{ height: "50px", width: "50px", objectFit: "contain" }} />
         </div>
       );
