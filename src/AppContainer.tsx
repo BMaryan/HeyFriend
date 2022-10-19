@@ -18,6 +18,7 @@ import { StateType } from "./redux/store";
 import { connect } from "react-redux";
 import { auth, fb } from "./firebase";
 import App from "./App";
+import Logo from "./assets/images/Logo.png";
 
 type OwnPropsType = {};
 
@@ -150,8 +151,9 @@ const AppContainer = (props: AppContainerPropsType) => {
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
     if (!props.account) {
       return (
-        <div style={{ height: "100vh" }}>
-          <Loader />
+        <div style={{ height: "100vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          {/* <Loader /> */}
+          <img src={Logo} alt="" style={{ height: "50px", width: "50px", objectFit: "contain" }} />
         </div>
       );
     }

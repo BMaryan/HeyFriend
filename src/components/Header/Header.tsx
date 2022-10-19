@@ -4,7 +4,7 @@ import { HeaderContainerPropsType } from "./HeaderContainer";
 import NavbarList from "./Navbar/NavbarList/NavbarList";
 import NavbarRow from "./Navbar/NavbarRow/NavbarRow";
 import { LocationType } from "../../types/types";
-import Logo from "../../assets/images/insta.png";
+import Logo from "../../assets/images/Logo.png";
 import HeaderReduxForm from "./HeaderForm";
 import styles from "./Header.module.scss";
 
