@@ -1,0 +1,7 @@
+@import "../../../core/styles/main.scss";
+
+.title {
+  font-size: calc(16px + (28 - 20) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+  margin-bottom: 15px;
+}

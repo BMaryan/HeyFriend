@@ -11,10 +11,16 @@
 
 /* content */
 .content {
+  width: 100%;
   @include ds-position(unset, unset, column);
   flex: 1;
   row-gap: $pd-content;
   box-sizing: border-box;
+}
+
+.stepper_performance {
+  background: $white;
+  padding: $pd-content;
 }
 
 .navigation {
