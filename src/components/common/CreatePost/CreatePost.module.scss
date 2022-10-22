@@ -92,8 +92,8 @@
 }
 
 .content_media_icon svg {
-  color: $grey800;
-  font-size: 70px;
+  width: 100%;
+  height: min-content;
 }
 
 .content_subtitle {

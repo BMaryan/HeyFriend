@@ -115,7 +115,6 @@
 
 /* default content images list */
 .default_content_images_list {
-  /* background: $red500; */
   @include ds-position(center, center, column);
   margin-bottom: $mg-from-header;
 }
@@ -125,13 +124,11 @@
 }
 
 .default_content_wrapper_icon {
-  border: 2px solid $black;
-  border-radius: 50%;
-  padding: 30px 35px;
-}
-
-.default_content_wrapper_icon svg {
-  font-size: calc(20px + (30 - 10) * ((100vw - 300px) / (1600 - 300)));
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .default_content_title {
@@ -187,5 +184,10 @@
   /* title */
   .title {
     text-align: center;
+  }
+
+  /* default content images list */
+  .default_content_wrapper_icon {
+    height: 300px;
   }
 }
