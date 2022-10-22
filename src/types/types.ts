@@ -153,3 +153,11 @@ export interface NavigationType {
   path: string;
   title: string;
 }
+
+// illustration
+export interface IllustrationType {
+  height: string;
+  width?: string;
+  mainColor?: string;
+  minorColor?: string;
+}
