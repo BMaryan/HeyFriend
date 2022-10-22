@@ -1,4 +1,6 @@
 import React from "react";
+import { RecommendationIllustration } from "../../../assets/illustrations/RecommendationIllustration";
+import { heyFriendStyleConstant } from "../../../core/constants/constantsStyles";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
 import { AccountType, FirebaseType } from "../../../types/types";
@@ -43,6 +45,7 @@ const Recommendation = (props: RecommendationPropsType) => {
       {recommendation.length < 1 || !props.accounts ? (
         <div className={styles.content_default}>
           <div className={styles.title}>Recommendation</div>
+          <RecommendationIllustration height="40%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
           <div className={styles.subtitle}>Here are the people you may know</div>
         </div>
       ) : undefined}

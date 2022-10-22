@@ -3,10 +3,12 @@ import React from "react";
 import { AccountType, ChatType, CreateChatType, FirebaseType, HistoryType, MediaOfMessageType, MessageType, ParticipantsOfChatType } from "../../types/types";
 import { Button, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Typography } from "@mui/material";
 import { copyToClipboard, getPictureBase64, getTextOfStatusOnline } from "../../core/methods/methods";
+import { WorldOnlineIllustration } from "../../assets/illustrations/WorldOnlineIllustration";
 import { chatConstant, profileConstant } from "../../core/constants/constants";
 import { MessagesFormDataType } from "../../components/Chat/Messages/Messages";
 import CustomAvatarBadge from "../../components/atoms/AvatarBadge/AvatarBadge";
 import CustomAvatarGroup from "../../components/atoms/AvatarGroup/AvatarGroup";
+import { heyFriendStyleConstant } from "../../core/constants/constantsStyles";
 import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -240,9 +242,10 @@ interface DefaultViewMessagesPropsType {}
 export const DefaultViewMessages = (props: DefaultViewMessagesPropsType) => {
   return (
     <div className={styles.default_view_messages}>
-      <div className={styles.wrapper_icon}>{/* <FontAwesomeIcon className={styles.icon} icon={faPaperPlane} /> */}</div>
-      <div className={styles.title}>Your Messages</div>
-      <div className={styles.subtitle}>Send private photos and messages to a friend or group</div>
+      {/* <div className={styles.wrapper_icon}><FontAwesomeIcon className={styles.icon} icon={faPaperPlane} /></div> */}
+      <div className={styles.title}>Choose chat</div>
+      <WorldOnlineIllustration height="40%" width="40%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
+      <div className={styles.subtitle}>Send private messages to a friend or group</div>
     </div>
   );
 };

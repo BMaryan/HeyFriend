@@ -2,6 +2,8 @@
 import React from "react";
 import { AccountType, ChatType, FirebaseType, MediaOfMessageType, MessageType } from "../../../types/types";
 import { ContainerOfMessageAndMedia } from "../../../utils/helperForChat/helperForChat";
+import { ShareIllustration } from "../../../assets/illustrations/ShareIllustration";
+import { heyFriendStyleConstant } from "../../../core/constants/constantsStyles";
 import { CircularProgress } from "@mui/material";
 import MessagesReduxForm from "./MessagesForm";
 import styles from "./Messages.module.scss";
@@ -99,7 +101,7 @@ const Messages = (props: MessagesPropsType) => {
           {currentMessagesOfChat?.sort((a: FirebaseType<MessageType>, b: FirebaseType<MessageType>) => a?.data()?.date.toDate().getTime() - b?.data()?.date.toDate().getTime()).map((message: FirebaseType<MessageType>, index: number) => (message?.data() ? message?.data()?.chatId === props?.currentChat?.id ? <Message key={message?.id} account={props.account} currentChat={props.currentChat} message={message} messageValue={props.messageValue} setMessageValue={props.setMessageValue} prevMessage={currentMessagesOfChat[index - 1]} chatWithAccounts={props.chatWithAccounts} setEditMessage={setEditMessage} deleteMessageThunk={props.deleteMessageThunk} /> : undefined : undefined))}
         </div>
       ) : (
-        <div className={styles.default_content}>{!props.loading && "Default content"}</div>
+        <div className={styles.default_content}>{!props.loading && <ShareIllustration height="50%" width="50%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />}</div>
       )}
 
       <MessagesReduxForm account={props.account} currentChat={props.currentChat} messageValue={props.messageValue} medias={medias} editMessage={editMessage} setMessageValue={props.setMessageValue} setMedias={setMedias} setSticker={setSticker} onSubmit={onSubmit} onChange={onChange} setEditMessage={setEditMessage} />

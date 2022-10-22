@@ -1,5 +1,6 @@
 import React from "react";
 import { AccountType, MediaOfMessageType, MediaOfPostType, PostType } from "../../../types/types";
+import { ChooseIllustration } from "../../../assets/illustrations/ChooseIllustration";
 import PermMediaOutlinedIcon from "@mui/icons-material/PermMediaOutlined";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -283,7 +284,7 @@ const CreatePost = (props: CreatePostPropsType) => {
 
               <div className={styles.create_post_content + " " + styles.create_post_content__default}>
                 <div className={styles.content_media_icon}>
-                  <PermMediaOutlinedIcon />
+                  <ChooseIllustration height="100%" />
                 </div>
                 <div className={styles.content_subtitle}>Drag photos and videos here</div>
                 <div className={styles.content_wrapper_button}>

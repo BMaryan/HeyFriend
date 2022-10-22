@@ -1,5 +1,7 @@
 import React from "react";
+import { FollowerIllustration } from "../../../assets/illustrations/FollowerIllustration";
 import { AccountType, FirebaseType, FollowersOfAccountType } from "../../../types/types";
+import { heyFriendStyleConstant } from "../../../core/constants/constantsStyles";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
 import CardContent from "@mui/material/CardContent";
@@ -49,6 +51,7 @@ const Followers = (props: FollowersPropsType) => {
       {(checkFollowerAccount && checkFollowerAccount.length === 0) || !checkFollowerAccount ? (
         <div className={styles.content_default}>
           <div className={styles.title}>Followers</div>
+          <FollowerIllustration height="40%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
           <div className={styles.subtitle}>People who are watching you will be displayed here</div>
         </div>
       ) : undefined}

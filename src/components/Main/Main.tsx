@@ -1,5 +1,7 @@
 import React from "react";
 import { AccountType, FirebaseType, FollowersOfAccountType, FollowingOfAccountType, PostType } from "../../types/types";
+import { FeedIllustration } from "../../assets/illustrations/FeedIllustration";
+import { heyFriendStyleConstant } from "../../core/constants/constantsStyles";
 import { defaultPostConstant } from "../../core/constants/constantsPost";
 import defaultAvatar from "../../assets/images/DefaultAvatar.png";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -61,6 +63,7 @@ const Main = (props: MainPropsType) => {
               <div className={styles.default_content}>
                 <div className={styles.default_content__wrapper_icon}>{}</div>
                 <div className={styles.default_content__title}>News Feed</div>
+                <FeedIllustration height="70%" width="70%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
                 <div className={styles.default_content__subtitle}>Get started by adding friends. You'll see their posts here.</div>
               </div>
             )
@@ -141,6 +144,7 @@ const Main = (props: MainPropsType) => {
             <div className={styles.default_content}>
               <div className={styles.default_content__wrapper_icon}>
                 <PeopleOutlineIcon />
+                {/* <RecommendationIllustration height="10%" width="50%" /> */}
               </div>
               <div className={styles.default_content__subtitle}>No suggestions found</div>
             </div>

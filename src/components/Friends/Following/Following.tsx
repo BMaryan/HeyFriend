@@ -1,5 +1,7 @@
 import React from "react";
+import { FollowingIllustration } from "../../../assets/illustrations/FollowingIllustration";
 import { AccountType, FirebaseType, FollowingOfAccountType } from "../../../types/types";
+import { heyFriendStyleConstant } from "../../../core/constants/constantsStyles";
 import defaultAvatar from "../../../assets/images/DefaultAvatar.png";
 import { profileConstant } from "../../../core/constants/constants";
 import CardContent from "@mui/material/CardContent";
@@ -49,6 +51,7 @@ const Following = (props: FollowingPropsType) => {
       {(checkFollowingAccount && checkFollowingAccount.length === 0) || !checkFollowingAccount ? (
         <div className={styles.content_default}>
           <div className={styles.title}>Following</div>
+          <FollowingIllustration height="40%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
           <div className={styles.subtitle}>The people you are following will be displayed here</div>
         </div>
       ) : undefined}
