@@ -1,6 +1,6 @@
 import { IllustrationType } from "../../types/types";
 
-export const ChooseIllustration: React.FunctionComponent<IllustrationType> = ({ height, width, mainColor }) => (
+export const ChooseIllustration: React.FunctionComponent<IllustrationType> = ({ height, width, mainColor, minorColor }) => (
   <svg className="animated" id="freepik_stories-photos" xmlns="http://www.w3.org/2000/svg" height={height} width={width} viewBox="0 0 500 500">
     <style>{"@keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes slideLeft{0%{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}@keyframes lightSpeedRight{60%{transform:skewX(10deg);opacity:1}80%{transform:skewX(-2deg)}}@keyframes slideDown{0%{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}@keyframes zoomIn{0%{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}@keyframes slideUp{0%{opacity:0;transform:translateY(30px)}to{opacity:1;transform:inherit}}svg#freepik_stories-photos:not(.animated) .animable{opacity:0}"}</style>
     <g
@@ -4991,7 +4991,7 @@ export const ChooseIllustration: React.FunctionComponent<IllustrationType> = ({ 
         }}
         id="eliofth8vw2i"
         className="animable"
-        fill={mainColor}
+        fill={minorColor}
       />
       <circle
         cx={250}
@@ -5001,7 +5001,7 @@ export const ChooseIllustration: React.FunctionComponent<IllustrationType> = ({ 
           transformOrigin: "250px 390.05px",
         }}
         className="animable"
-        fill={mainColor}
+        fill={minorColor}
         transform="rotate(-12.65)"
         id="el4h8erzj37t8"
       />

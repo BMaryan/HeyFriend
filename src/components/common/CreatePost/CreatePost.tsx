@@ -23,6 +23,7 @@ import Step from "@mui/material/Step";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Media from "react-media";
+import { heyFriendStyleConstant } from "../../../core/constants/constantsStyles";
 
 interface CreatePostPropsType {
   account: AccountType | null;
@@ -284,7 +285,7 @@ const CreatePost = (props: CreatePostPropsType) => {
 
               <div className={styles.create_post_content + " " + styles.create_post_content__default}>
                 <div className={styles.content_media_icon}>
-                  <ChooseIllustration height="100%" />
+                  <ChooseIllustration height="100%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
                 </div>
                 <div className={styles.content_subtitle}>Drag photos and videos here</div>
                 <div className={styles.content_wrapper_button}>
