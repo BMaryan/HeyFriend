@@ -3,7 +3,6 @@ import { AccountType, FirebaseType, HistoryType, PostType, SavedOfPostType } fro
 import { ShareMediaIllustration } from "../../assets/illustrations/ShareMediaIllustration";
 import { CollectIllustration } from "../../assets/illustrations/CollectIllustration";
 import { heyFriendStyleConstant } from "../../core/constants/constantsStyles";
-import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { getPictureBase64, removePicture } from "../../core/methods/methods";
 import { onlyBodyPostConstant } from "../../core/constants/constantsPost";
 import PostContainer from "../../components/common/Post/PostContainer";
@@ -211,7 +210,7 @@ export let ReturnImageList = (props: ReturnImageListType) => {
       {isPosts && props?.logicOfPagePost && <div className={styles.posts}>{props?.posts?.sort((a: FirebaseType<PostType>, b: FirebaseType<PostType>) => b?.data()?.dateCreated?.toDate().getTime() - a?.data()?.dateCreated?.toDate().getTime()).map((post: FirebaseType<PostType>, index: number) => post?.data()?.accountId === props?.id && <DuplicateCodeReturnImageList key={post.id + index} post={post} openModalCurrentPost={props.openModalCurrentPost} setOpenModalCurrentPost={props.setOpenModalCurrentPost} />)}</div>}
 
       {/* return default content if posts don't have */}
-      {!isPosts && !props.isSaved ? props?.logicOfPagePost && props?.id === props?.account?.id ? <ReturnDefaultContentForImageList title={"Share Photos and Videos"} subtitle={"When you share photos and videos, they'll appear on your profile."} icon={<ShareMediaIllustration height="100%" width="100%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />} /> : <ReturnDefaultContentForImageList title={"No posts yet"} icon={<PhotoCameraOutlinedIcon />} /> : undefined}
+      {!isPosts && !props.isSaved ? props?.logicOfPagePost && props?.id === props?.account?.id ? <ReturnDefaultContentForImageList title={"Share Photos and Videos"} subtitle={"When you share photos and videos, they'll appear on your profile."} icon={<ShareMediaIllustration height="100%" width="100%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />} /> : <ReturnDefaultContentForImageList title={"No posts yet"} icon={<ShareMediaIllustration height="100%" width="100%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />} /> : undefined}
 
       {/* return saved posts list */}
       {props.isSaved ? (
