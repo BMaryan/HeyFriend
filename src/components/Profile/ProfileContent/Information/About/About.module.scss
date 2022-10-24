@@ -11,3 +11,8 @@
   font-weight: 500;
   margin-bottom: 10px;
 }
+
+// default content
+.default_content {
+  @include ds-position(center, center);
+}

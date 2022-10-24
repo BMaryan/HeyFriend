@@ -25,3 +25,8 @@
 
 .value {
 }
+
+// default content
+.default_content {
+  @include ds-position(center, center);
+}
