@@ -1,6 +1,6 @@
 import React from "react";
 import { AccountType, CommentType, FirebaseType, HistoryType, LikedOfPostType, PostType, ReplyType, SavedOfPostType } from "../../../../types/types";
-import { photoConstant } from "../../../../core/constants/constants";
+import { pahtOfWebsiteConstant, photoConstant } from "../../../../core/constants/constants";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -96,7 +96,9 @@ const FooterPost = (props: FooterPostPropsType) => {
           <div className={styles.features_left}>
             <Checkbox onClick={() => (!props.checkClickFavoriteBorder ? props?.post && props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? [...(props?.post?.data()?.liked as Array<any>), { id: props?.account?.id }] : [{ id: props?.account?.id }] }) : props?.post && props?.updatePostThunk({ ...props?.post?.data(), liked: props?.post?.data()?.liked ? props?.post?.data()?.liked?.filter((liked: LikedOfPostType) => liked?.id !== props?.account?.id) : [] }))} className={styles.icon} color="default" icon={!props.checkClickFavoriteBorder ? <FavoriteBorder /> : <Favorite sx={{ color: red[600] }} />} checkedIcon={props.checkClickFavoriteBorder ? <Favorite sx={{ color: red[600] }} /> : <FavoriteBorder />} />
             <Checkbox onClick={() => props.history.push(`${photoConstant.path}/${props?.post?.id}`)} className={styles.icon} color="default" size="medium" icon={<Comment />} checkedIcon={<Comment />} />
-            <Checkbox className={styles.icon} color="default" size="medium" icon={<ShareOutlinedIcon />} checkedIcon={<ShareOutlinedIcon />} />
+            <Button className={styles.icon} style={{ minWidth: "unset", borderRadius: "50%" }} color="inherit" size="small" variant={undefined} href={`https://telegram.me/share/url?url=${`${pahtOfWebsiteConstant}/${photoConstant.path}/${props?.post?.data().id}`}`} target="_blank" rel="noopener noreferrer">
+              <ShareOutlinedIcon />
+            </Button>
           </div>
 
           <div className={styles.features_right}>
@@ -119,29 +121,11 @@ const FooterPost = (props: FooterPostPropsType) => {
             {(matches) =>
               matches && (
                 <div className={styles.footer_comments}>
-                  <Global
-                    styles={{
-                      ".MuiDrawer-root > .MuiPaper-root": {
-                        height: `80%`,
-                        overflow: "visible",
-                        borderRadius: "10px 10px 0 0",
-                      },
-                    }}
-                  />
+                  <Global styles={{ ".MuiDrawer-root > .MuiPaper-root": { height: `80%`, overflow: "visible", borderRadius: "10px 10px 0 0" } }} />
                   <Button color="secondary" variant="outlined" onClick={toggleDrawer(true)}>
                     <ExpandLessIcon />
                   </Button>
-                  <SwipeableDrawer
-                    container={container}
-                    anchor="bottom"
-                    open={open}
-                    onClose={toggleDrawer(false)}
-                    onOpen={toggleDrawer(true)}
-                    swipeAreaWidth={undefined}
-                    disableSwipeToOpen={true}
-                    ModalProps={{
-                      keepMounted: true,
-                    }}>
+                  <SwipeableDrawer container={container} anchor="bottom" open={open} onClose={toggleDrawer(false)} onOpen={toggleDrawer(true)} swipeAreaWidth={undefined} disableSwipeToOpen={true} ModalProps={{ keepMounted: true }}>
                     <div className={styles.footer_drawer_content}>
                       <Puller className={styles.footer_drawer__puller} />
                       <Typography className={styles.footer_drawer__title}>Comments</Typography>

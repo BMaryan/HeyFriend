@@ -1,5 +1,7 @@
 import React from "react";
 import { AccountType, CommentType, FirebaseType, HistoryType, PostType, ReplyType } from "../../../../types/types";
+import { CommentIllustration } from "../../../../assets/illustrations/CommentIllustration";
+import { heyFriendStyleConstant } from "../../../../core/constants/constantsStyles";
 import { photoConstant } from "../../../../core/constants/constants";
 import styles from "./Comments.module.scss";
 import styleDes from "../Post.module.scss";
@@ -44,7 +46,7 @@ const Comments = (props: CommentsPropsType) => {
       )}
       {/* </div> */}
 
-      {areComments?.length > 0 ? (
+      {areComments?.length > 0 && (
         <div className={styles.comments}>
           {/* comments when is modal */}
           {areComments && props.modal && areComments?.map((comment: FirebaseType<CommentType>) => <Comment key={comment.id} {...destPropsComment} comment={comment} />)}
@@ -66,8 +68,13 @@ const Comments = (props: CommentsPropsType) => {
             </button>
           ) : undefined}
         </div>
-      ) : (
-        <></>
+      )}
+
+      {/* default content */}
+      {areComments.length === 0 && props.modal && (
+        <div className={styles.default_content}>
+          <CommentIllustration height="60%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
+        </div>
       )}
     </div>
   );
