@@ -12,7 +12,6 @@ import { Route } from "react-router-dom";
 import Saved from "./Saved/Saved";
 import Posts from "./Posts/Posts";
 import Media from "react-media";
-// import StepperPerformance from "../../molecules/StepperPerformance/StepperPerformance";
 
 interface ProfileContentPropsType {
   accounts: Array<FirebaseType<AccountType>>;
@@ -39,10 +38,6 @@ const ProfileContent = (props: ProfileContentPropsType) => {
   return (
     <div className={styles.profile_content}>
       <div className={styles.content}>
-        {/* <div className={styles.stepper_performance}>
-          <StepperPerformance account={props.account} />
-        </div> */}
-
         <div className={styles.navigation}>
           <NavLink exact to={`${profileConstant.path}/${props?.id}`} className={styles.item} activeClassName={styles.item_active}>
             <Media queries={{ small: "(max-width: 480px)" }}>
