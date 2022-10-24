@@ -1,16 +1,12 @@
 import React from "react";
 import { AccountType, ChatType, FirebaseType, MessageType, ParticipantsOfChatType } from "../../../../types/types";
+import { Skeleton, Tooltip, Chip, ListItemText, Typography, ListItem, ListItemAvatar } from "@mui/material";
 import { getTextOfStatusOnline } from "../../../../core/methods/methods";
 import CustomAvatarBadge from "../../../atoms/AvatarBadge/AvatarBadge";
 import CustomAvatarGroup from "../../../atoms/AvatarGroup/AvatarGroup";
 import { chatConstant } from "../../../../core/constants/constants";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import ListItem from "@mui/material/ListItem";
 import { NavLink } from "react-router-dom";
 import styles from "./Dialog.module.scss";
-import { Skeleton } from "@mui/material";
 import moment from "moment";
 
 interface DialogPropsType {
@@ -18,6 +14,7 @@ interface DialogPropsType {
   account: AccountType | null;
   chat: FirebaseType<ChatType>;
   messages: Array<FirebaseType<MessageType>>;
+  getSearchedGroups: Array<FirebaseType<ChatType>>;
   loading: boolean;
   messageValue: string;
   searchValue: string;
@@ -34,6 +31,9 @@ const Dialog = (props: DialogPropsType) => {
   const isOnline = lengthChatOfAccounts && Boolean(messageWithAccounts[0]?.data()?.isOnline);
   const lastMessage = currentMessages[currentMessages?.length - 1]?.data()?.message;
   const checkMessage = currentMessages?.length > 0 && lastMessage !== "" && (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...");
+
+  // get group from searching
+  const getSearchedGroup: FirebaseType<ChatType> | undefined = props.searchValue ? props.getSearchedGroups.find((chat: FirebaseType<ChatType>) => chat.id === props.chat.id) : undefined;
 
   return (
     <NavLink to={!props.loading ? `${chatConstant.path}/` + props?.chat?.data()?.id : "#"} className={styles.chat + " " + styles.chat_forHead} activeClassName={`${!props.loading && styles.chat_active}`}>
@@ -53,7 +53,15 @@ const Dialog = (props: DialogPropsType) => {
                   {lengthChatOfAccounts ? messageWithAccounts[0]?.data()?.surname + " " + messageWithAccounts[0]?.data()?.name : props.chat.data().title}
                 </Typography>
                 <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
-                  {currentMessages?.length > 0 ? moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow() : undefined}
+                  {!getSearchedGroup ? (
+                    currentMessages?.length > 0 ? (
+                      moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow()
+                    ) : undefined
+                  ) : (
+                    <Tooltip title={`There is an account in this group with initial ${props.searchValue}`}>
+                      <Chip color="primary" label={props.searchValue.length < 20 ? props.searchValue : props.searchValue.slice(0, 20)} />
+                    </Tooltip>
+                  )}
                 </Typography>
               </Typography>
             )
