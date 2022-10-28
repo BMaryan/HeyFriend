@@ -146,7 +146,7 @@ const AppContainer = (props: AppContainerPropsType) => {
     };
   }, [props.account?.isOnline]);
 
-  // to show progress when account doesn't have
+  // show progress when account doesn't have
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
     if (!props.account) {
       return (
