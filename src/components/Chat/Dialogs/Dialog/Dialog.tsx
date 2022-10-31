@@ -71,7 +71,7 @@ const Dialog = (props: DialogPropsType) => {
               <Skeleton animation="wave" height={10} width="40%" />
             ) : (
               <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
-                {props?.chat?.data()?.participants.length >= 3 ? checkMessage || "Send a message..." : checkMessage || (!isOnline ? getTextOfStatusOnline(!isOnline) + moment(lastLoginAt || "").fromNow() : getTextOfStatusOnline(isOnline))}
+                {props?.chat?.data()?.participants.length >= 3 ? checkMessage || "Send a message..." : checkMessage || (!isOnline ? getTextOfStatusOnline(false) + moment(lastLoginAt || "").fromNow() : getTextOfStatusOnline(true))}
               </Typography>
             )
           }

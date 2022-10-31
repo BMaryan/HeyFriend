@@ -50,7 +50,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
           <div className={styles.profile_status}>{currentAccount ? <div>{currentAccount?.data()?.status}</div> : undefined}</div>
 
           {/* last sign in date */}
-          <div className={styles.profile_status}>{props?.account?.id !== props?.id ? (!isOnline ? `${getTextOfStatusOnline(!isOnline)} ${moment(lastSignInDate).fromNow()}` : getTextOfStatusOnline(isOnline)) : undefined}</div>
+          <div className={styles.profile_status}>{props?.account?.id !== props?.id ? (!isOnline ? `${getTextOfStatusOnline(false)} ${moment(lastSignInDate).fromNow()}` : getTextOfStatusOnline(true)) : undefined}</div>
         </div>
 
         {/* wrapper picture */}

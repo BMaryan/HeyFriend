@@ -93,7 +93,7 @@ export const Head = (props: HeadPropsType) => {
             <div>{lengthChatOfAccounts ? <CustomAvatarBadge color="success" avatarData={props?.chatWithAccounts[0]?.data()} overlap="circular" invisible={!isOnline} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" /> : <CustomAvatarGroup avatars={props.chatWithAccounts} max={3} />}</div>
             <div>
               <div className={styles.login}>{lengthChatOfAccounts ? props?.chatWithAccounts[0]?.data()?.surname + " " + props?.chatWithAccounts[0]?.data()?.name : props.currentChat?.data().title}</div>
-              <div className={styles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `${getTextOfStatusOnline(!isOnline)} ${moment(lastSignInDate).fromNow()}` : getTextOfStatusOnline(isOnline)) : undefined}</div>
+              <div className={styles.date}>{props.typingOfAccount ? `${props.typingOfAccount?.data().surname} ${props.typingOfAccount?.data().name} is typing ...` : lengthChatOfAccounts ? (!isOnline ? `${getTextOfStatusOnline(false)} ${moment(lastSignInDate).fromNow()}` : getTextOfStatusOnline(true)) : undefined}</div>
             </div>
           </Box>
         ) : (

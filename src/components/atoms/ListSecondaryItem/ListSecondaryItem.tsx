@@ -32,7 +32,7 @@ const ListSecondaryItem = (props: ListSecondaryItemPropsType) => {
     </Typography>
   ) : props?.chat ? (
     <Typography className={styles.secondary} variant="body2" component="span">
-      {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? getTextOfStatusOnline(!isOnline) + moment(lastLoginAt).fromNow() : getTextOfStatusOnline(isOnline)}
+      {currentMessages?.length > 0 && lastMessage !== "" ? (lastMessage?.length < 20 ? lastMessage : lastMessage?.slice(0, 20) + "...") : !isOnline ? getTextOfStatusOnline(false) + moment(lastLoginAt).fromNow() : getTextOfStatusOnline(true)}
     </Typography>
   ) : (
     <></>
