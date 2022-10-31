@@ -10,6 +10,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import { withSuspense } from "./hoc/withSuspense/withSuspense";
 import NotFound from "./components/common/NotFound/NotFound";
 import MainContainer from "./components/Main/MainContainer";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { Route, Switch } from "react-router-dom";
 import "./App.scss";
 
@@ -25,20 +26,24 @@ type AppPropsType = {
 };
 
 function App(props: AppPropsType) {
+  const matches = useMediaQuery("(max-width:575px)");
   const checkMain = props.history.location.pathname === mainConstant.path;
   const checkProfile = "/" + props.history.location.pathname.split("/")[1] === profileConstant.path;
   const checkSignIn = props.history.location.pathname.includes(signInConstant.path);
   const checkSignUp = props.history.location.pathname.includes(signUpConstant.path);
 
+  // if breakpoint is lower than sm, remove class container_height
+  const isDownSm = matches ? checkSignIn || checkSignUp : undefined;
+
   return (
-    <div className="app">
+    <div className={`${isDownSm ? "" : "app"}`}>
       {props.auth ? (
         <div className="container_fluid container_fluid__position">
           <HeaderContainer />
         </div>
       ) : undefined}
 
-      <div className={`${!checkMain && !checkProfile ? "container_heigth" : ""} container_width container_space`}>
+      <div className={`${!checkMain && !checkProfile && !isDownSm ? "container_heigth" : ""} container_width ${checkSignIn || checkSignUp ? "" : "container_space"}`}>
         <Switch>
           <Route exact path={`${mainConstant.path}`} render={() => <MainContainer />} />
           <Route exact path={`${photoConstant.path}/:id`} render={() => <CurrentPostContainer />} />
