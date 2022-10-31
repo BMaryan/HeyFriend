@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { authErrorSelector, authLoadingSelector } from "../../../redux/auth-selectors";
-import { getAccountSelector } from "../../../redux/account-selectors";
+import { getAccountSelector, getAccountsSelector } from "../../../redux/account-selectors";
+import { AccountType, FirebaseType, SignType } from "../../../types/types";
 import { authActions, signIn } from "../../../redux/auth-reducer";
-import { AccountType, SignType } from "../../../types/types";
 import { onAuthStateChanged } from "firebase/auth";
 import { StateType } from "../../../redux/store";
 import { useHistory } from "react-router-dom";
@@ -14,6 +14,7 @@ import SignIn from "./SignIn";
 type OwnPropsType = {};
 
 type MapStateToPropsType = {
+  accounts: Array<FirebaseType<AccountType>>;
   account: AccountType | null;
   authError: string | null;
   loading: boolean;
@@ -40,6 +41,6 @@ const SignInContainer = (props: SignInContainerPropsType) => {
   return <SignIn {...props} />;
 };
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({ account: getAccountSelector(state), authError: authErrorSelector(state), loading: authLoadingSelector(state) });
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({ accounts: getAccountsSelector(state), account: getAccountSelector(state), authError: authErrorSelector(state), loading: authLoadingSelector(state) });
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, StateType>(mapStateToProps, { signIn, authSuccess: authActions.authSuccess })(SignInContainer);

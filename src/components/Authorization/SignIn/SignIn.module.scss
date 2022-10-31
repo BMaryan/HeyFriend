@@ -19,3 +19,20 @@
     cursor: pointer;
   }
 }
+
+// modal of default accounts
+.modal_of_default_accounts {
+  width: 40vw;
+  background: $white;
+  border: 1px solid $grey400;
+  border-radius: $bd-radius;
+  outline: none;
+  @include position(absolute, 50%, unset, unset, 50%);
+  transform: translate(-50%, -50%);
+}
+
+@include media-breakpoint-down("sm") {
+  .modal_of_default_accounts {
+    width: 80vw;
+  }
+}
