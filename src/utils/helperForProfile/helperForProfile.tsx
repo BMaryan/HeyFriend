@@ -23,7 +23,7 @@ interface DuplicateCodeFuncType {
   close: () => void;
 }
 
-const DuplicateCodeFunc = (props: DuplicateCodeFuncType) => {
+export const DuplicateCodeFunc = (props: DuplicateCodeFuncType) => {
   return (
     <Modal
       aria-labelledby="transition-modal-title"

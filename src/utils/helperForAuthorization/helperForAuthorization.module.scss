@@ -120,6 +120,12 @@
   }
 }
 
+@include media-breakpoint-down("sm") {
+  .authorization_content {
+    background: transparent;
+  }
+}
+
 @include media-breakpoint-down("m") {
   /* modal autocomplete default accounts */
   .modal_autocomplete_default_accounts {

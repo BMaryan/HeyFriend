@@ -68,7 +68,6 @@ export const WrapperCreateField = (props: WrapperCreateFieldPropsType) => {
     <div className={styles.wrapper_field}>
       {props.type === "password" ? (
         <Field
-          id="outlined-adornment-password"
           className={styles.field}
           name={props.name}
           type={values.showPassword ? "text" : "password"}
@@ -114,7 +113,7 @@ export const WrapperButton = (props: WrapperButtonPropsType) => {
       {props.authError ? <div className={styles.form_error}>{props.authError}</div> : null}
 
       <div className={styles.wrapper_button}>
-        <LoadingButton className={styles.button} type="submit" loading={props.loading} disabled={((props.invalid || props.submitting) && !props.anyTouched) || !props.dirty} variant="contained" loadingPosition="center">
+        <LoadingButton className={styles.button} size="large" type="submit" loading={props.loading} disabled={((props.invalid || props.submitting) && !props.anyTouched) || !props.dirty} variant="contained" loadingPosition="center">
           {props.button_text}
         </LoadingButton>
       </div>

@@ -29,5 +29,6 @@
   .authorization_container {
     width: 100%;
     @include ds-position(unset, unset, column);
+    box-shadow: unset;
   }
 }

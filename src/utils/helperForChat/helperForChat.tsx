@@ -244,7 +244,7 @@ export const DefaultViewMessages = (props: DefaultViewMessagesPropsType) => {
     <div className={styles.default_view_messages}>
       {/* <div className={styles.wrapper_icon}><FontAwesomeIcon className={styles.icon} icon={faPaperPlane} /></div> */}
       <div className={styles.title}>Choose chat</div>
-      <WorldOnlineIllustration height="40%" width="40%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
+      <WorldOnlineIllustration height="40%" width="100%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />
       <div className={styles.subtitle}>Send private messages to a friend or group</div>
     </div>
   );
