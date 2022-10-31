@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "react-error-overlay": "6.0.9",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-swipeable-views": "^0.13.1",
     "@types/react-swipeable-views-utils": "^0.13.3"
