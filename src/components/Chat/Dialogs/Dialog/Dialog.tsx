@@ -41,7 +41,7 @@ const Dialog = (props: DialogPropsType) => {
         classes={{
           root: styles.chat_list_item,
         }}>
-        <ListItemAvatar>{props.loading ? <Skeleton animation="wave" variant="circular" width={40} height={40} /> : lengthChatOfAccounts ? <CustomAvatarBadge color="success" avatarData={messageWithAccounts[0]?.data()} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" invisible={!isOnline} /> : <CustomAvatarGroup avatars={messageWithAccounts} max={2} />}</ListItemAvatar>
+        <ListItemAvatar>{props.loading ? <Skeleton animation="wave" variant="circular" width={40} height={40} /> : lengthChatOfAccounts ? <CustomAvatarBadge color="success" avatarData={messageWithAccounts[0]?.data()} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot" invisible={!isOnline} badgePosition={{ right: 5, bottom: 5 }} /> : <CustomAvatarGroup avatars={messageWithAccounts} max={2} />}</ListItemAvatar>
         <ListItemText
           className={styles.wrapper_list_item_text}
           primary={

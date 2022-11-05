@@ -14,6 +14,12 @@ interface AvatarBadgePropsType {
   size?: "small" | "medium" | "large" | "full";
   overlap?: "circular" | "rectangular";
   badgeContent?: React.ReactNode;
+  badgePosition?: {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+  };
   variant: "dot" | "standard";
   invisible?: boolean;
   onClick?: () => void;
@@ -31,14 +37,19 @@ const CustomAvatarBadge = (props: AvatarBadgePropsType) => {
       background: theme.palette[props.color],
       borderRadius: "50%",
       boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      top: props.badgePosition?.top,
+      right: props.badgePosition?.right,
+      bottom: props.badgePosition?.bottom,
+      left: props.badgePosition?.left,
+
       "&::after": {
         position: "absolute",
         top: 0,
-        left: 0,
+        bottom: 0,
         width: "100%",
         height: "100%",
         borderRadius: "50%",
-        animation: "ripple 1.2s infinite ease-in-out",
+        animation: "ripple 1.5s infinite ease-in-out",
         border: "1px solid currentColor",
         content: '""',
       },
