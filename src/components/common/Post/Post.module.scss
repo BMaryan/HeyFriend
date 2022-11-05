@@ -247,7 +247,6 @@
 }
 
 /* modal post actions */
-
 .modalPostActions button {
   height: 100%;
   width: 100%;
@@ -352,10 +351,6 @@
 @include media-breakpoint-down("l") {
   .wrapper_post {
   }
-
-  .modalPostActions {
-    width: 50vw;
-  }
 }
 
 @include media-breakpoint-down("md") {
@@ -367,10 +362,6 @@
 @include media-breakpoint-down("m") {
   .wrapper_post {
     height: 700px;
-  }
-
-  .modalPostActions {
-    width: 70vw;
   }
 }
 

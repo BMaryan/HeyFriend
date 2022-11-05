@@ -1,6 +1,8 @@
 import React from "react";
 import { AccountType, CommentType, FirebaseType, HistoryType, LikedOfPostType, PostType, ReplyType, SavedOfPostType } from "../../../../types/types";
 import { pahtOfWebsiteConstant, photoConstant } from "../../../../core/constants/constants";
+import { CommentIllustration } from "../../../../assets/illustrations/CommentIllustration";
+import { heyFriendStyleConstant } from "../../../../core/constants/constantsStyles";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -83,8 +85,11 @@ const FooterPost = (props: FooterPostPropsType) => {
 
   const checkClickBookmarkIcon: SavedOfPostType | undefined = props?.post?.data()?.saved ? props?.post?.data()?.saved?.find((saved: SavedOfPostType) => (saved?.id && props?.account?.id && saved?.id === props?.account?.id ? saved : undefined)) : undefined;
 
+  // are there any comments length of post
+  const areComments: Array<FirebaseType<CommentType>> = props.comments?.filter((comment: FirebaseType<CommentType>) => (comment?.data()?.postId === props?.post?.id ? comment : undefined)).sort((a: FirebaseType<CommentType>, b: FirebaseType<CommentType>) => b?.data()?.dateCreated.toDate().getTime() - a?.data()?.dateCreated.toDate().getTime());
+
   // destructuring props
-  const destPropsComments = { accounts: props.accounts, account: props.account, currentAccount: props.currentAccount, comments: props.comments, replies: props.replies, post: props.post, modal: props.modal, history: props.history, isPathOfPost, replyOfComment, answerComment, toggleDrawer, setReplyOfComment, setAnswerComment, deleteCommentThunk: props.deleteCommentThunk, updateCommentThunk: props.updateCommentThunk, updateReplyThunk: props.updateReplyThunk, deleteReplyThunk: props.deleteReplyThunk };
+  const destPropsComments = { accounts: props.accounts, account: props.account, currentAccount: props.currentAccount, comments: props.comments, replies: props.replies, post: props.post, modal: props.modal, history: props.history, isPathOfPost, replyOfComment, answerComment, areComments, toggleDrawer, setReplyOfComment, setAnswerComment, deleteCommentThunk: props.deleteCommentThunk, updateCommentThunk: props.updateCommentThunk, updateReplyThunk: props.updateReplyThunk, deleteReplyThunk: props.deleteReplyThunk };
   const destPropsFooterPostReduxForm = { replyOfComment, answerComment, setReplyOfComment, onSubmit: onSubmit, createReplyThunk: props.createReplyThunk, updateCommentThunk: props.updateCommentThunk };
 
   return (
@@ -129,9 +134,7 @@ const FooterPost = (props: FooterPostPropsType) => {
                     <div className={styles.footer_drawer_content}>
                       <Puller className={styles.footer_drawer__puller} />
                       <Typography className={styles.footer_drawer__title}>Comments</Typography>
-                      <div className={styles.footer_comments_content}>
-                        <Comments {...destPropsComments} />
-                      </div>
+                      <div className={styles.footer_comments_content}>{areComments.length > 0 ? <Comments {...destPropsComments} /> : <CommentIllustration height="100%" mainColor={heyFriendStyleConstant.first} minorColor={heyFriendStyleConstant.second} />}</div>
 
                       <div className={styles.footer_comments_form}>
                         <FooterPostReduxForm {...destPropsFooterPostReduxForm} />

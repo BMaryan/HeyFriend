@@ -11,5 +11,17 @@
     border-radius: $bd-radius;
     @include position(absolute, 50%, unset, unset, 50%);
     transform: translate(-50%, -50%);
+
+    @include media-breakpoint-down("l") {
+      width: 45vw;
+    }
+
+    @include media-breakpoint-down("m") {
+      width: 60vw;
+    }
+
+    @include media-breakpoint-down("s") {
+      width: 80vw;
+    }
   }
 }
