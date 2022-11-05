@@ -3,7 +3,7 @@
 $ht-media: 300px;
 
 .head {
-  height: 70px;
+  height: 56px;
   max-height: 100%;
   border-bottom: 1px solid $grey300;
   @include ds-position(unset, center);
@@ -34,6 +34,10 @@ $ht-media: 300px;
 
 .head_dialogs_title {
   font-size: 25px;
+}
+
+.head_dialogs_title,
+.head_dialogs_icon {
   padding: 0 $pd-content;
 }
 
@@ -356,5 +360,15 @@ $ht-media: 300px;
 
   & > li {
     padding: $pd-content !important;
+  }
+}
+
+@include media-breakpoint-between("s", "sm") {
+  .head_dialogs {
+    @include ds-position(center, center);
+  }
+
+  .head_dialogs_title {
+    display: none;
   }
 }

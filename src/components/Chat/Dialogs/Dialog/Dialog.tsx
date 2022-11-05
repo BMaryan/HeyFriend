@@ -55,7 +55,7 @@ const Dialog = (props: DialogPropsType) => {
                 <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.secondary">
                   {!getSearchedGroup ? (
                     currentMessages?.length > 0 ? (
-                      moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow()
+                      <Typography className={styles.date_of_dialog} component="span" variant="body2" color="text.secondary">{`${moment(currentMessages[currentMessages?.length - 1]?.data()?.date?.toDate()).fromNow()}`}</Typography>
                     ) : undefined
                   ) : (
                     <Tooltip title={`There is an account in this group with initial ${props.searchValue}`}>

@@ -76,7 +76,7 @@ export const Head = (props: HeadPropsType) => {
     <div className={styles.head + " " + styles.head_dialogs}>
       <div className={styles.head_dialogs_title}>Chats</div>
 
-      <div className={styles.head_dialogs_title}>
+      <div className={styles.head_dialogs_icon}>
         <IconButton className={styles.icon} onClick={() => setOpenCreateGroup(!openCreateGroup)}>
           <GroupAddOutlinedIcon fontSize="medium" />
         </IconButton>

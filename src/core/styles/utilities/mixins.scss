@@ -87,7 +87,7 @@
   }
 }
 
-@mixin media-breakpoint-between($breakpoint-start: "xs", $breakpoint-end) {
+@mixin media-breakpoint-between($breakpoint-start: "xs", $breakpoint-end: "s") {
   @if map_has_key($breakpoints, $breakpoint-end) {
     $value-start: map-get($breakpoints, $breakpoint-start);
     $value-end: map-get($breakpoints, $breakpoint-end);

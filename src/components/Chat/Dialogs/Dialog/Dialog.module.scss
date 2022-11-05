@@ -27,6 +27,12 @@
   }
 }
 
+@include media-breakpoint-between("sm", "smd") {
+  .date_of_dialog {
+    display: none;
+  }
+}
+
 @include media-breakpoint-down("sm") {
   .wrapper_list_item_text {
     display: none;
