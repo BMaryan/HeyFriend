@@ -9,7 +9,6 @@
   display: flex;
   flex: 1;
   padding: $pd-content;
-  margin-bottom: $mg-between-contaner;
 }
 
 /* menu */
@@ -49,12 +48,6 @@
 }
 
 /* media */
-@include media-breakpoint-down("sm") {
-  .information_container {
-    margin-bottom: 0;
-  }
-}
-
 @include media-breakpoint-down("s") {
   .information_container {
     @include ds-position(unset, unset, column);
