@@ -120,31 +120,43 @@ const AppContainer = (props: AppContainerPropsType) => {
   }, [history.location.pathname]);
 
   // func that updates data of account
-  const updateDataOfAccount = (value: boolean) => {
-    props.account &&
-      props.updateAccountThunk({
-        ...props.account,
-        isOnline: value,
-        metadata: {
-          ...props.account.metadata,
-          lastSignInTime: fb.Timestamp.now(),
-        },
-      });
-  };
+  // const updateDataOfAccountYEs = React.useCallback(() => {
+  //   props.account &&
+  //     props.updateAccountThunk({
+  //       ...props.account,
+  //       isOnline: true,
+  //       metadata: {
+  //         ...props.account.metadata,
+  //         lastSignInTime: fb.Timestamp.now(),
+  //       },
+  //     });
+  // }, [props.account?.isOnline, props.account?.metadata]);
+
+  // const updateDataOfAccount = React.useCallback(() => {
+  //   props.account &&
+  //     props.updateAccountThunk({
+  //       ...props.account,
+  //       isOnline: !props.account.isOnline,
+  //       metadata: {
+  //         ...props.account.metadata,
+  //         lastSignInTime: fb.Timestamp.now(),
+  //       },
+  //     });
+  // }, [props.account?.isOnline, props.account?.metadata]);
 
   // set status of online and set the last visit
-  React.useEffect(() => {
-    updateDataOfAccount(true);
+  // React.useEffect(() => {
+  //   // console.log("HEllo");
+  //   if (props.account) {
+  //     updateDataOfAccountYEs();
+  //   }
 
-    window.addEventListener("beforeunload", () => updateDataOfAccount(false));
+  //   window.addEventListener("beforeunload", updateDataOfAccount);
 
-    return () => {
-      // if (props.account?.isOnline) {
-      // updateDataOfAccount(false);
-      // }
-      window.removeEventListener("beforeunload", () => updateDataOfAccount(false));
-    };
-  }, [props.account?.isOnline]);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", updateDataOfAccount);
+  //   };
+  // }, [props.account?.isOnline]);
 
   // show progress when account doesn't have
   if (history.location.pathname !== signInConstant.path && history.location.pathname !== signUpConstant.path) {
